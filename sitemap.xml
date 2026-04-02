@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Landing principal -->
+  <url>
+    <loc>https://TUDOMINIO.com/</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://TUDOMINIO.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://TUDOMINIO.com/?lang=en"/>
+  </url>
+
+  <!-- Blog index -->
+  <url>
+    <loc>https://TUDOMINIO.com/blog/</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog artículos -->
+  <url>
+    <loc>https://TUDOMINIO.com/blog/natrue-x-tuko.html</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://TUDOMINIO.com/blog/gran-paso-tuko.html</loc>
+    <lastmod>2026-02-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://TUDOMINIO.com/blog/new-formulas-shanghai.html</loc>
+    <lastmod>2025-11-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://TUDOMINIO.com/blog/ocea-hub-shanghai.html</loc>
+    <lastmod>2025-10-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://TUDOMINIO.com/blog/spain-innovation-day.html</loc>
+    <lastmod>2025-09-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://TUDOMINIO.com/blog/stron-tech-trek.html</loc>
+    <lastmod>2025-09-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://TUDOMINIO.com/blog/shiji-incubator.html</loc>
+    <lastmod>2025-09-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Legales -->
+  <url>
+    <loc>https://TUDOMINIO.com/pages/privacidad.html</loc>
+    <lastmod>2025-12-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://TUDOMINIO.com/pages/terminos.html</loc>
+    <lastmod>2025-12-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>

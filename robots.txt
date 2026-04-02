@@ -1,0 +1,9 @@
+# robots.txt — Tuko
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://TUDOMINIO.com/sitemap.xml
+
+# Bloquear archivos innecesarios
+Disallow: /assets/js/

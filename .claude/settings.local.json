@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3:*)",
+      "Bash(pkill -f \"python3 -m http.server\")",
+      "Bash(xargs kill:*)",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Read(//Users/joandezavalaprats/Desktop/tuko-landing/blog/**)",
+      "Bash(done)",
+      "Bash(head -60 grep -n \"data-i18n\\\\|<h1\\\\|<h2\\\\|<h3\\\\|<h4\\\\|<p>\\\\|<p \\\\|<span\\\\|<button\\\\|<a \\\\|<label\\\\|<li>\" /Users/joandezavalaprats/Desktop/tuko-landing/pages/terminos.html)",
+      "Bash(ls:*)",
+      "Bash(sed -n '14,30p' /Users/joandezavalaprats/Desktop/tuko-landing/index.html)",
+      "Bash(sed -n '144,160p' /Users/joandezavalaprats/Desktop/tuko-landing/blog/index.html)",
+      "Bash(sed -n '25,35p' /Users/joandezavalaprats/Desktop/tuko-landing/blog/gran-paso-tuko.html)",
+      "Bash(sed -n '25,35p' /Users/joandezavalaprats/Desktop/tuko-landing/blog/new-formulas-shanghai.html)",
+      "Bash(node:*)",
+      "Bash(git config:*)"
+    ]
+  }
+}
