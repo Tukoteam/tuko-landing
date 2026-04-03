@@ -1000,17 +1000,30 @@
      RESPONSIVE
   ══════════════════════════════ */
   @media (max-width: 960px) {
-    /* ── Carrusel logos: más rápido, logos más pequeños, menos gap ── */
+    /* ── Carrusel logos móvil: fluido, sin parpadeo ── */
     .logos-track {
       gap: 32px;
       animation-duration: 18s;
+      will-change: transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transform: translate3d(0, 0, 0);
+      -webkit-transform: translate3d(0, 0, 0);
     }
     .logo-pill img {
       height: 58px;
       max-width: 160px;
     }
+    .logos-overflow {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
     .logos-overflow::before,
     .logos-overflow::after { width: 60px; }
+    @keyframes logos-scroll {
+      from { transform: translate3d(0, 0, 0); }
+      to   { transform: translate3d(-50%, 0, 0); }
+    }
 
     nav { padding: 0 24px; }
     .nav-links { display: none; }
