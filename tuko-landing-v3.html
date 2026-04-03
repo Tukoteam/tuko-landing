@@ -2089,6 +2089,79 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+/* ── CARRUSEL LOGOS MÓVIL (JS — evita parpadeo iOS/Android) ── */
+(function() {
+  function isMobile() { return window.innerWidth < 960; }
+
+  function initCarousel() {
+    const track = document.querySelector('.logos-track');
+    if (!track) return;
+
+    if (!isMobile()) {
+      // Desktop: CSS animation, asegurar que está activa
+      track.style.animation = '';
+      track.style.transform = '';
+      return;
+    }
+
+    // Móvil: desactivar CSS y usar JS
+    track.style.animation = 'none';
+    track.style.willChange = 'transform';
+
+    let pos = 0;
+    let lastTs = null;
+    let rafId = null;
+    const SPEED = 45; // px/segundo
+
+    function halfWidth() {
+      return track.scrollWidth / 2;
+    }
+
+    function tick(ts) {
+      if (lastTs === null) lastTs = ts;
+      const dt = Math.min(ts - lastTs, 50); // cap 50ms para evitar saltos tras pausa
+      lastTs = ts;
+      pos += SPEED * dt / 1000;
+      const half = halfWidth();
+      if (pos >= half) pos -= half;
+      track.style.transform = 'translate3d(-' + pos + 'px, 0, 0)';
+      rafId = requestAnimationFrame(tick);
+    }
+
+    // Reanudar sin salto al volver de otra pestaña
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) {
+        lastTs = null;
+      }
+    });
+
+    // Arrancar cuando las imágenes estén cargadas para que scrollWidth sea correcto
+    if (document.readyState === 'complete') {
+      rafId = requestAnimationFrame(tick);
+    } else {
+      window.addEventListener('load', function() {
+        rafId = requestAnimationFrame(tick);
+      }, { once: true });
+    }
+  }
+
+  // Reinicializar si se redimensiona cruzando el breakpoint
+  let wasMobile = isMobile();
+  window.addEventListener('resize', function() {
+    const nowMobile = isMobile();
+    if (nowMobile !== wasMobile) {
+      wasMobile = nowMobile;
+      initCarousel();
+    }
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousel);
+  } else {
+    initCarousel();
+  }
+})();
+
 /* ── HAMBURGER MENU ── */
 document.addEventListener('DOMContentLoaded', () => {
   const hamburger  = document.getElementById('navHamburger');
