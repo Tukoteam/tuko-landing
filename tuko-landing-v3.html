@@ -1000,6 +1000,18 @@
      RESPONSIVE
   ══════════════════════════════ */
   @media (max-width: 960px) {
+    /* ── Carrusel logos: más rápido, logos más pequeños, menos gap ── */
+    .logos-track {
+      gap: 48px;
+      animation-duration: 18s;
+    }
+    .logo-pill img {
+      height: 58px;
+      max-width: 160px;
+    }
+    .logos-overflow::before,
+    .logos-overflow::after { width: 60px; }
+
     nav { padding: 0 24px; }
     .nav-links { display: none; }
     .nav-hamburger {
