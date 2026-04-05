@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <!-- Landing principal -->
   <url>
     <loc>https://tukoteam.com/</loc>
-    <lastmod>2026-04-02</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="es" href="https://tukoteam.com/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://tukoteam.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tukoteam.com/"/>
   </url>
 
   <!-- Blog index -->
   <url>
     <loc>https://tukoteam.com/blog/</loc>
-    <lastmod>2026-04-02</lastmod>
+    <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tukoteam.com/blog/"/>
   </url>
 
   <!-- Blog artículos -->
@@ -66,14 +69,14 @@
 
   <!-- Legales -->
   <url>
-    <loc>https://tukoteam.com/pages/privacidad.html</loc>
-    <lastmod>2025-12-09</lastmod>
+    <loc>https://tukoteam.com/privacidad.html</loc>
+    <lastmod>2026-04-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://tukoteam.com/pages/terminos.html</loc>
-    <lastmod>2025-12-09</lastmod>
+    <loc>https://tukoteam.com/terminos.html</loc>
+    <lastmod>2026-04-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

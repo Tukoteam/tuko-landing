@@ -53,9 +53,47 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
+<!-- ═══ SEO: Geo ICBM (España) ═══ -->
+<meta name="geo.region" content="ES">
+<meta name="geo.placename" content="España">
+<meta name="geo.position" content="40.416775;-3.703790">
+<meta name="ICBM" content="40.416775, -3.703790">
+
+<!-- ═══ SEO: Clasificación y cobertura ═══ -->
+<meta name="classification" content="Ecommerce Software, Shopify Plugin, WooCommerce Plugin">
+<meta name="category" content="Compras colectivas, Group Buying, Ecommerce España">
+<meta name="coverage" content="España, Latinoamérica">
+<meta name="distribution" content="Global">
+<meta name="rating" content="General">
+<meta name="revisit-after" content="7 days">
+<meta name="target" content="Tiendas online Shopify, Tiendas online WooCommerce, Ecommerce España">
+
+<!-- ═══ SEO: Dublin Core ═══ -->
+<meta name="DC.title" content="Tuko — Plugin de Compras Colectivas para Shopify y WooCommerce España">
+<meta name="DC.creator" content="Tuko">
+<meta name="DC.subject" content="compras colectivas, group buying, shopify españa, woocommerce españa, plugin ecommerce">
+<meta name="DC.description" content="Plugin B2B de compras colectivas para tiendas Shopify y WooCommerce en España. Descuentos escalonados que se desbloquean por grupo y generan viralidad orgánica.">
+<meta name="DC.publisher" content="Tuko">
+<meta name="DC.language" content="es">
+<meta name="DC.coverage" content="España">
+<meta name="DC.type" content="Software">
+<meta name="DC.format" content="text/html">
+<meta name="DC.identifier" content="https://tukoteam.com/">
+
+<!-- ═══ PWA & Theme ═══ -->
+<meta name="theme-color" content="#3D50F2">
+<meta name="msapplication-TileColor" content="#3D50F2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Tuko">
+<meta name="application-name" content="Tuko — Group Buying para Shopify">
+<meta name="mobile-web-app-capable" content="yes">
+
 <!-- ═══ Performance: Preconnect & Font ═══ -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap" rel="stylesheet">
 
 <!-- ═══ SEO: JSON-LD Structured Data ═══ -->
@@ -125,6 +163,50 @@
         "availability": "https://schema.org/PreOrder"
       },
       "publisher": { "@id": "https://tukoteam.com/#organization" },
+      "inLanguage": "es-ES"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://tukoteam.com/#service",
+      "name": "Tuko — Plugin de Compras Colectivas",
+      "alternateName": ["Group Buying Shopify España", "Plugin Group Buying WooCommerce", "Compra Colectiva Shopify"],
+      "serviceType": "Plugin de Ecommerce / Group Buying",
+      "description": "Plugin B2B de compras colectivas para tiendas Shopify y WooCommerce en España. Activa descuentos escalonados por grupo, genera viralidad orgánica y aumenta ventas sin invertir más en publicidad.",
+      "url": "https://tukoteam.com/",
+      "provider": { "@id": "https://tukoteam.com/#organization" },
+      "areaServed": [
+        { "@type": "Country", "name": "España" },
+        { "@type": "City", "name": "Madrid" },
+        { "@type": "City", "name": "Barcelona" },
+        { "@type": "City", "name": "Valencia" },
+        { "@type": "City", "name": "Sevilla" },
+        { "@type": "City", "name": "Bilbao" },
+        { "@type": "City", "name": "Zaragoza" },
+        { "@type": "City", "name": "Málaga" },
+        { "@type": "City", "name": "Murcia" },
+        { "@type": "City", "name": "Palma" },
+        { "@type": "City", "name": "Alicante" }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Tuko — Planes",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "Acceso Anticipado Tuko",
+            "description": "Regístrate en la lista de espera y sé de los primeros en activar compras colectivas en tu tienda Shopify o WooCommerce en España.",
+            "url": "https://tukoteam.com/#cta",
+            "availability": "https://schema.org/PreOrder",
+            "priceCurrency": "EUR"
+          }
+        ]
+      },
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Propietarios de tiendas online Shopify y WooCommerce en España",
+        "geographicArea": { "@type": "Country", "name": "España" }
+      },
+      "category": ["Ecommerce", "Shopify Plugin", "WooCommerce Plugin", "Group Buying", "Compras Colectivas"],
       "inLanguage": "es-ES"
     },
     {
@@ -225,6 +307,30 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Sí. Tuko reduce el CAC porque el crecimiento de los grupos de compra es orgánico: cada comprador que se une invita a otros para completar el grupo y obtener el descuento. Esto crea un bucle de adquisición viral sin depender de campañas de pago en Meta Ads o Google Ads. Las tiendas que activan Tuko ven cómo una parte creciente de sus nuevos clientes llegan por recomendación directa, no por publicidad."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Tuko está disponible para tiendas en Madrid, Barcelona y otras ciudades españolas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Tuko es un plugin digital que funciona en cualquier tienda Shopify o WooCommerce independientemente de su ubicación geográfica. Tiendas en Madrid, Barcelona, Valencia, Sevilla, Bilbao, Zaragoza, Málaga, Alicante y cualquier otra ciudad española pueden activar Tuko sin restricciones. Al ser un plugin de software, la ubicación física de la tienda no tiene ninguna limitación."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué diferencia a Tuko de otras aplicaciones de descuentos en Shopify?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La mayoría de aplicaciones de descuentos en Shopify aplican descuentos de forma pasiva (cupones, códigos, rebajas). Tuko es diferente porque los descuentos se activan de forma colectiva: se desbloquean únicamente cuando un grupo de compradores alcanza el mínimo necesario. Esto convierte cada compra en una acción social, incentiva compartir y genera adquisición orgánica de nuevos clientes sin coste publicitario adicional."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo ayuda Tuko a mejorar la rotación de stock en ecommerce?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tuko permite configurar descuentos escalonados vinculados a grupos de compradores. Esto crea picos de demanda controlados que permiten mover stock inmovilizado sin necesidad de rebajas públicas que dañen el posicionamiento de precio de la marca. El comerciante decide qué productos, qué descuento y cuántos compradores necesita el grupo, manteniendo el control total del margen."
           }
         }
       ]
