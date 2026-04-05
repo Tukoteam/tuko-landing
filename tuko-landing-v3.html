@@ -1196,6 +1196,14 @@
 
 <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:4px;z-index:9999;padding:8px 16px;background:#3D50F2;color:#fff;font-weight:600;border-radius:6px;text-decoration:none;" onfocus="this.style.left='4px'" onblur="this.style.left='-9999px'" data-i18n="skip_link">Ir al contenido principal</a>
 <!-- NAV -->
+<!-- Formulario oculto para que Netlify lo detecte en el deploy -->
+<form name="contacto-tuko" netlify netlify-honeypot="bot-field" hidden>
+  <input type="text" name="bot-field">
+  <input type="email" name="email">
+  <input type="text" name="name">
+  <input type="text" name="business">
+</form>
+
 <header role="banner">
 <nav aria-label="Navegación principal">
   <a href="#" class="nav-logo">
@@ -2406,17 +2414,17 @@ document.addEventListener('DOMContentLoaded', () => {
     lastSubmit = Date.now();
 
     try {
-      const res = await fetch('https://formsubmit.co/ajax/team.tukoo@gmail.com', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          email, name, business,
-          _subject: 'Nueva solicitud de contacto — Tuko',
-          _template: 'table'
-        })
+      const body = new URLSearchParams({
+        'form-name': 'contacto-tuko',
+        'bot-field': honeypot ? honeypot.value : '',
+        email, name, business
       });
 
-      const data = await res.json().catch(() => ({}));
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString()
+      });
 
       if (res.ok) {
         success.style.display = 'block';
@@ -2424,8 +2432,7 @@ document.addEventListener('DOMContentLoaded', () => {
         nameInput.value  = '';
         bizInput.value   = '';
       } else {
-        const msg = data.error || data.errors?.[0]?.message || 'Error ' + res.status;
-        errorDiv.textContent = msg;
+        errorDiv.textContent = 'Error ' + res.status + '. Por favor escríbenos a team.tukoo@gmail.com';
         errorDiv.style.display = 'block';
       }
     } catch (e) {
