@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://TUDOMINIO.com/sitemap.xml
+Sitemap: https://tukoteam.com/sitemap.xml
 
 # Bloquear archivos innecesarios
 Disallow: /assets/js/
