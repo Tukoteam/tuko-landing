@@ -83,8 +83,8 @@
 <meta name="DC.identifier" content="https://tukoteam.com/">
 
 <!-- ═══ PWA & Theme ═══ -->
-<meta name="theme-color" content="#3D50F2">
-<meta name="msapplication-TileColor" content="#3D50F2">
+<meta name="theme-color" content="#4257ff">
+<meta name="msapplication-TileColor" content="#4257ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Tuko">
@@ -342,7 +342,7 @@
 </script>
 <style>
   :root {
-    --blue: #3D50F2;
+    --blue: #4257ff;
     /* Unified heading typography */
     --title-size: clamp(36px, 4.0vw, 50px);        /* hero h1 */
     --section-title-size: clamp(24px, 2.6vw, 34px); /* todas las demás secciones */
@@ -362,7 +362,11 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
 
   body {
     font-family: 'Mona Sans', sans-serif;
@@ -591,8 +595,8 @@
   .logos-track {
     display: flex;
     align-items: center;
-    gap: 80px;
-    animation: logos-scroll 32s linear infinite;
+    gap: 12px;
+    animation: logos-scroll 34s linear infinite;
     width: max-content;
   }
   @keyframes logos-scroll {
@@ -606,17 +610,43 @@
   .logo-pill {
     display: flex;
     align-items: center;
-    opacity: 0.90;
-    filter: grayscale(1);
+    justify-content: center;
+    opacity: 0.95;
     flex-shrink: 0;
     transition: opacity 0.2s;
+    filter: none;
+    -webkit-filter: none;
   }
   .logo-pill:hover { opacity: 1; }
+  /* Misma distancia entre logos: columnas de ancho fijo + gap uniforme */
+  .logos-section .logo-pill {
+    flex: 0 0 252px;
+    width: 252px;
+    max-width: 252px;
+    box-sizing: border-box;
+  }
   .logo-pill img {
-    height: 84px;
+    height: 88px;
     width: auto;
-    max-width: 260px;
+    max-width: 272px;
     object-fit: contain;
+    filter: none;
+    -webkit-filter: none;
+  }
+  .logos-section .logo-pill img {
+    max-width: min(272px, 100%);
+  }
+  /* PNG colaboradores exportados en escala de grises: tinte por marca (sustituir por PNG/SVG a color cuando los tengáis) */
+  .logos-section .logo-pill img[src*="Xiji Incubator"],
+  .hero .badge-x img[src*="Xiji Incubator"] {
+    filter: sepia(0.4) saturate(2.7) hue-rotate(168deg) brightness(1.03);
+    -webkit-filter: sepia(0.4) saturate(2.7) hue-rotate(168deg) brightness(1.03);
+  }
+  .logos-section .logo-pill img[src*="Saper - Logo"] {
+    height: 110px;
+    max-width: min(322px, 100%);
+    filter: sepia(0.48) saturate(2.4) hue-rotate(32deg) brightness(1.01);
+    -webkit-filter: sepia(0.48) saturate(2.4) hue-rotate(32deg) brightness(1.01);
   }
 
   /* ══════════════════════════════
@@ -686,33 +716,44 @@
     z-index: 1;
   }
   .card {
-    background: linear-gradient(165deg, #4a6274 0%, #3d5466 48%, #425c70 100%);
-    border: 1.5px solid rgba(15, 23, 42, 0.38);
+    background: #fff;
+    border: 2px solid var(--blue);
     border-radius: 20px;
     padding: 36px 28px 32px;
     text-align: center;
     transition:
-      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-      border-color 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 1.15s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .cards-grid .card:first-child {
+    border-color: var(--blue);
+    box-shadow:
+      0 8px 24px rgba(66, 87, 255, 0.08),
+      0 16px 40px rgba(66, 87, 255, 0.05);
   }
   .card:hover {
     transform: translateY(-6px);
-    border-color: rgba(125, 211, 252, 0.55);
+    border-color: #2c3de0;
     box-shadow:
-      0 0 0 1px rgba(34, 211, 238, 0.35),
-      0 0 40px rgba(34, 211, 238, 0.18),
-      0 0 72px rgba(125, 211, 252, 0.12),
-      0 22px 48px rgba(0, 0, 0, 0.22);
+      0 10px 28px rgba(66, 87, 255, 0.12),
+      0 20px 48px rgba(66, 87, 255, 0.08);
+  }
+  .cards-grid .card:first-child:hover {
+    border-color: #2c3de0;
+    box-shadow:
+      0 10px 30px rgba(66, 87, 255, 0.14),
+      0 22px 50px rgba(66, 87, 255, 0.09);
   }
   .card-ico {
     width: 54px; height: 54px;
-    background: linear-gradient(145deg, #2f3f4d 0%, #263440 100%);
+    background: var(--blue-light);
+    border: 1.5px solid rgba(66, 87, 255, 0.25);
     border-radius: 15px;
     display: grid;
     place-items: center;
     margin: 0 auto 22px;
-    color: #e8f4fc;
+    color: var(--blue);
   }
   .card-ico svg { width: 26px; height: 26px; }
   .card h3 {
@@ -721,13 +762,13 @@
     font-stretch: semi-expanded;
     letter-spacing: -0.022em;
     margin-bottom: 12px;
-    color: #f8fafc;
+    color: var(--black);
   }
   .card p {
     font-size: 14px;
     font-weight: 300;
     font-stretch: normal;
-    color: rgba(226, 237, 245, 0.88);
+    color: var(--gray-4);
     line-height: 1.72;
   }
 
@@ -830,6 +871,37 @@
     aspect-ratio: 9 / 10;
   }
 
+  /* Demo «Unirse al grupo» (paso 2): KPI + cantidad + Continuar dentro del marco */
+  .how-steps > .how-step:nth-child(2) .how-anim-box--embed {
+    aspect-ratio: 9 / 13.2;
+    min-height: 620px;
+  }
+  .how-steps > .how-step:nth-child(2) .how-step-iframe {
+    min-height: 600px;
+  }
+
+  /* Demo «Niveles de descuento»: un poco más ancha (2 tarjetas) + alto sin scroll */
+  .how-steps > .how-step:nth-child(3) .how-anim-box {
+    width: min(528px, 94vw);
+    max-width: 528px;
+  }
+  .how-steps > .how-step:nth-child(3) .how-anim-box--embed {
+    aspect-ratio: 9 / 11.5;
+    min-height: 520px;
+  }
+  .how-steps > .how-step:nth-child(3) .how-step-iframe {
+    min-height: 500px;
+  }
+
+  /* Demo «Estadísticas»: altura extra para las 4 KPI sin scroll en el iframe */
+  .how-steps > .how-step:nth-child(4) .how-anim-box--embed {
+    aspect-ratio: 9 / 12.8;
+    min-height: 580px;
+  }
+  .how-steps > .how-step:nth-child(4) .how-step-iframe {
+    min-height: 560px;
+  }
+
   .how-step-iframe {
     display: block;
     width: 100%;
@@ -864,17 +936,6 @@
   .how-icon-bars span:nth-child(1) { width: 100%; }
   .how-icon-bars span:nth-child(2) { width: 70%; }
   .how-icon-bars span:nth-child(3) { width: 45%; }
-
-  /* Mobile */
-  @media (max-width: 768px) {
-    .how-step { grid-template-columns: 1fr; min-height: unset; }
-    .how-step.reversed > .how-step-text  { order: unset; }
-    .how-step.reversed > .how-step-visual { order: unset; }
-    .how-step-text { padding: 56px 24px; }
-    .how-step-visual { min-height: 280px; padding: 32px 24px; }
-    .how-anim-box { min-height: 220px; }
-    .how-step-iframe { min-height: 300px; }
-  }
 
   /* Lang switcher */
   .lang-switcher {
@@ -1042,6 +1103,20 @@
   }
   .cta-input::placeholder { color: rgba(0,0,0,0.25); font-weight: 300; }
   .cta-input:focus { box-shadow: 0 0 0 2px rgba(255,255,255,0.6); }
+  textarea.cta-input {
+    min-height: 72px;
+    max-height: 140px;
+    resize: vertical;
+    line-height: 1.45;
+  }
+  .cta-char-count {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.55);
+    text-align: right;
+    margin-top: 4px;
+  }
   .btn-submit {
     width: 100%;
     background: var(--black); color: white;
@@ -1062,8 +1137,8 @@
     background: #1c1c1c;
     position: relative;
     overflow: hidden;
-    min-height: 580px;
-    padding: 48px 64px;
+    min-height: 460px;
+    padding: 64px 64px 72px;
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
@@ -1077,8 +1152,9 @@
     pointer-events: none;
   }
   .footer-svg-logo {
-    width: 92%;
-    opacity: 0.13;
+    width: min(78%, 640px);
+    max-height: 58%;
+    opacity: 0.16;
     -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.75) 40%, rgba(0,0,0,0.3) 75%, transparent 100%);
     mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.75) 40%, rgba(0,0,0,0.3) 75%, transparent 100%);
   }
@@ -1098,21 +1174,22 @@
     color: var(--gray-4);
   }
   .footer-col h4 {
-    font-size: 13px; font-weight: 700;
+    font-size: 15px; font-weight: 700;
     font-stretch: semi-expanded;
-    color: white; margin-bottom: 16px;
+    color: white; margin-bottom: 14px;
     letter-spacing: -0.01em;
   }
   .footer-col a {
-    display: block; font-size: 13px;
+    display: block; font-size: 15px;
     font-stretch: semi-expanded;
     color: var(--gray-3); text-decoration: none;
-    margin-bottom: 9px; transition: color 0.18s;
+    line-height: 1.45;
+    margin-bottom: 10px; transition: color 0.18s;
   }
   .footer-col a:hover { color: white; }
   .footer-bottom {
     background: #111;
-    padding: 16px 48px;
+    padding: 22px 48px;
     font-size: 12px;
     font-stretch: semi-expanded;
     color: var(--gray-4);
@@ -1206,20 +1283,79 @@
      RESPONSIVE
   ══════════════════════════════ */
   @media (max-width: 960px) {
+    :root {
+      --section-title-size: clamp(22px, 5.2vw, 30px);
+    }
+
+    /* Cómo funciona: una columna + iframes usables en tablet/móvil */
+    .how-step { grid-template-columns: 1fr; min-height: unset; }
+    .how-step.reversed > .how-step-text  { order: unset; }
+    .how-step.reversed > .how-step-visual { order: unset; }
+    .how-step-text { padding: 48px 20px 40px; }
+    .how-step.reversed > .how-step-text { padding: 48px 20px 40px; }
+    .how-step-visual { min-height: 260px; padding: 24px 16px; }
+    .how-anim-box { min-height: 200px; width: min(100%, 400px); }
+    .how-step-iframe { min-height: 280px; }
+    .how-steps > .how-step:nth-child(2) .how-anim-box--embed {
+      min-height: 520px;
+      aspect-ratio: auto;
+    }
+    .how-steps > .how-step:nth-child(2) .how-step-iframe {
+      min-height: 500px;
+    }
+    .how-steps > .how-step:nth-child(3) .how-anim-box {
+      width: 100%;
+      max-width: none;
+    }
+    .how-steps > .how-step:nth-child(3) .how-anim-box--embed {
+      min-height: 420px;
+      aspect-ratio: auto;
+    }
+    .how-steps > .how-step:nth-child(3) .how-step-iframe {
+      min-height: 400px;
+    }
+    .how-steps > .how-step:nth-child(4) .how-anim-box--embed {
+      min-height: 480px;
+      aspect-ratio: auto;
+    }
+    .how-steps > .how-step:nth-child(4) .how-step-iframe {
+      min-height: 460px;
+    }
+
     /* ── Carrusel logos móvil: fluido, sin parpadeo ── */
     .logos-track {
-      gap: 32px;
+      gap: 4px;
       animation-name: logos-scroll-mobile;
-      animation-duration: 18s;
+      animation-duration: 26s;
+    }
+    .logos-section .logo-pill {
+      flex: 0 0 180px;
+      width: 180px;
+      max-width: 180px;
     }
     .logo-pill img {
-      height: 58px;
-      max-width: 160px;
+      height: 62px;
+      max-width: 170px;
+    }
+    .logos-section .logo-pill img {
+      max-width: min(170px, 100%);
+    }
+    .logos-section .logo-pill img[src*="Saper - Logo"] {
+      height: 84px;
+      max-width: min(232px, 100%);
     }
     .logos-overflow::before,
     .logos-overflow::after { width: 60px; }
 
-    nav { padding: 0 24px; }
+    nav { padding: 0 16px 0 12px; }
+    .nav-logo img { height: 36px; }
+    .lang-switcher {
+      margin-left: 6px;
+      padding: 2px;
+      flex-shrink: 0;
+    }
+    .lang-opt { padding: 5px 8px; gap: 4px; }
+    .lang-opt-label { font-size: 11px; }
     .nav-links { display: none; }
     .nav-hamburger {
       display: flex;
@@ -1227,14 +1363,74 @@
       left: 50%;
       transform: translateX(-50%);
     }
+
+    .hero {
+      height: auto;
+      min-height: 100svh;
+      min-height: 100dvh;
+      padding: calc(64px + env(safe-area-inset-top, 0px)) 0 max(28px, env(safe-area-inset-bottom, 0px));
+    }
+    .hero-content {
+      padding: 0 16px;
+      width: 100%;
+      max-width: 100%;
+    }
+    .hero h1 {
+      font-size: clamp(26px, 7.5vw, 48px);
+      overflow-wrap: anywhere;
+    }
+    .hero p {
+      overflow-wrap: anywhere;
+      margin-bottom: 28px;
+    }
+    .badge {
+      max-width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+      row-gap: 8px;
+      padding: 6px 14px 6px 6px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn-blue {
+      width: 100%;
+      max-width: 300px;
+      justify-content: center;
+      padding: 12px 22px;
+      box-sizing: border-box;
+    }
     .hero-deco { display: none; }
+
     .problem .side-deco, .benefits .side-deco-l { display: none; }
-    .logos-section, .problem, .benefits, .how-intro, .cta-wrap { padding: 80px 24px; }
-    .cards-grid, .ben-grid { grid-template-columns: 1fr; max-width: 440px; }
-    
-    .cta-inner { padding: 60px 24px; }
-    footer { padding: 40px 24px; flex-direction: column; }
-    .footer-bottom { padding: 16px 24px; }
+    .logos-section, .problem, .benefits, .how-intro, .cta-wrap { padding: 72px 16px; }
+    .how-intro { padding-bottom: 56px; }
+    .s-title, .s-sub { overflow-wrap: anywhere; }
+    .cards-grid, .ben-grid { grid-template-columns: 1fr; max-width: 100%; }
+    .card { padding: 28px 20px 24px; }
+
+    .cta-inner { padding: 48px 16px; }
+    .cta-inner h2 { margin-bottom: 36px; }
+    .cta-form { max-width: 100%; }
+
+    footer {
+      padding: 40px 20px 88px;
+      flex-direction: column;
+      min-height: 0;
+      align-items: stretch;
+    }
+    .footer-cols {
+      flex-direction: column;
+      gap: 32px;
+      width: 100%;
+    }
+    .footer-svg-logo { width: min(92%, 400px); max-height: 45%; }
+    .footer-bottom { padding: 18px 16px; }
+  }
+
+  @media (max-width: 380px) {
+    nav { padding: 0 10px 0 8px; }
+    .lang-opt-label { display: none; }
+    .lang-opt { padding: 6px 7px; }
   }
 </style>
 </head>
@@ -1322,26 +1518,26 @@
   <p data-i18n="logos_label">Con el apoyo de</p>
   <div class="logos-overflow">
     <div class="logos-track">
-      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/UPM - Logo.png" alt="Universidad Politécnica de Madrid"></div>
+      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/UPM-color.svg" alt="Universidad Politécnica de Madrid"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Xiji Incubator - Logo.png" alt="Xiji Incubator"></div>
-      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Ocea Hub - Logo.png" alt="OCEA HUB"></div>
-      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Bio Vida Sana - Logo.png" alt="Bio Vida Sana"></div>
+      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Ocea-Hub-color.png" alt="OCEA HUB"></div>
+      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Bio-Vida-Sana-color.png" alt="Bio Vida Sana"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Saper - Logo.png" alt="Sáper Organic"></div>
-      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/UPM - Logo.png" alt="Universidad Politécnica de Madrid"></div>
+      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/UPM-color.svg" alt="Universidad Politécnica de Madrid"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Xiji Incubator - Logo.png" alt="Xiji Incubator"></div>
-      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Ocea Hub - Logo.png" alt="OCEA HUB"></div>
-      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Bio Vida Sana - Logo.png" alt="Bio Vida Sana"></div>
+      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Ocea-Hub-color.png" alt="OCEA HUB"></div>
+      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Bio-Vida-Sana-color.png" alt="Bio Vida Sana"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Saper - Logo.png" alt="Sáper Organic"></div>
       <!-- duplicate set 2 (para loop infinito sin huecos) -->
-      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/UPM - Logo.png" alt="Universidad Politécnica de Madrid"></div>
+      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/UPM-color.svg" alt="Universidad Politécnica de Madrid"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Xiji Incubator - Logo.png" alt="Xiji Incubator"></div>
-      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Ocea Hub - Logo.png" alt="OCEA HUB"></div>
-      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Bio Vida Sana - Logo.png" alt="Bio Vida Sana"></div>
+      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Ocea-Hub-color.png" alt="OCEA HUB"></div>
+      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Bio-Vida-Sana-color.png" alt="Bio Vida Sana"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Saper - Logo.png" alt="Sáper Organic"></div>
-      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/UPM - Logo.png" alt="Universidad Politécnica de Madrid"></div>
+      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/UPM-color.svg" alt="Universidad Politécnica de Madrid"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Xiji Incubator - Logo.png" alt="Xiji Incubator"></div>
-      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Ocea Hub - Logo.png" alt="OCEA HUB"></div>
-      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Bio Vida Sana - Logo.png" alt="Bio Vida Sana"></div>
+      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Ocea-Hub-color.png" alt="OCEA HUB"></div>
+      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Bio-Vida-Sana-color.png" alt="Bio Vida Sana"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Saper - Logo.png" alt="Sáper Organic"></div>
     </div>
   </div>
@@ -1506,6 +1702,16 @@
       <div class="cta-field">
         <label for="cta-business" data-i18n="cta_label_business">Nombre de negocio</label>
         <input type="text" name="business" id="cta-business" class="cta-input" data-i18n="cta_placeholder_business" placeholder="Nombre de tu negocio" autocomplete="organization">
+      </div>
+      <div class="cta-field">
+        <label for="cta-phone" data-i18n="cta_label_phone">Teléfono móvil (opcional)</label>
+        <input type="tel" name="phone" id="cta-phone" class="cta-input" maxlength="20" data-i18n="cta_placeholder_phone" placeholder="Tu móvil (máx. 20 caracteres)" autocomplete="tel">
+        <span class="cta-char-count" id="cta-phone-count" aria-live="polite">0/20</span>
+      </div>
+      <div class="cta-field">
+        <label for="cta-details" data-i18n="cta_label_details">Descripción o detalles (opcional)</label>
+        <textarea name="details" id="cta-details" class="cta-input" rows="3" maxlength="100" data-i18n="cta_placeholder_details" placeholder="Breve mensaje (máx. 100 caracteres)" autocomplete="off"></textarea>
+        <span class="cta-char-count" id="cta-details-count" aria-live="polite">0/100</span>
       </div>
       <button class="btn-submit" id="cta-submit-btn" data-i18n="cta_submit">Contactar</button>
       <div id="cta-success" style="display:none;margin-top:16px;padding:14px 20px;background:rgba(20,196,146,0.15);border:1px solid #14C492;border-radius:10px;color:#fff;font-size:14px;font-weight:500;text-align:center;" data-i18n="cta_success">¡Mensaje enviado! Te contactaremos pronto.</div>
@@ -1757,6 +1963,10 @@ const translations = {
     cta_placeholder_name: 'Tu nombre',
     cta_label_business: 'Nombre de negocio',
     cta_placeholder_business: 'Nombre de tu negocio',
+    cta_label_phone: 'Teléfono móvil (opcional)',
+    cta_placeholder_phone: 'Tu móvil (máx. 20 caracteres)',
+    cta_label_details: 'Descripción o detalles (opcional)',
+    cta_placeholder_details: 'Breve mensaje (máx. 100 caracteres)',
     cta_submit: 'Contactar',
     cta_success: '¡Mensaje enviado! Te contactaremos pronto.',
     cta_error: 'Ha ocurrido un error. Por favor escríbenos a team.tukoo@gmail.com',
@@ -2061,6 +2271,10 @@ const translations = {
     cta_placeholder_name: 'Your name',
     cta_label_business: 'Business name',
     cta_placeholder_business: 'Your business name',
+    cta_label_phone: 'Mobile phone (optional)',
+    cta_placeholder_phone: 'Your mobile (max 20 characters)',
+    cta_label_details: 'Description or details (optional)',
+    cta_placeholder_details: 'Short message (max 100 characters)',
     cta_submit: 'Contact us',
     cta_success: 'Message sent! We\'ll be in touch soon.',
     cta_error: 'Something went wrong. Please write to us at team.tukoo@gmail.com',
@@ -2311,35 +2525,62 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ── CARRUSEL LOGOS MÓVIL (JS — evita parpadeo iOS/Android) ── */
 (function() {
+  let rafId = null;
+  let visAbort = null;
+
   function isMobile() { return window.innerWidth < 960; }
+
+  function stopCarousel() {
+    if (rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+    if (visAbort) {
+      visAbort.abort();
+      visAbort = null;
+    }
+  }
 
   function initCarousel() {
     const track = document.querySelector('.logos-track');
     if (!track) return;
 
+    stopCarousel();
+
     if (!isMobile()) {
-      // Desktop: CSS animation, asegurar que está activa
+      track.style.willChange = '';
       track.style.animation = '';
       track.style.transform = '';
       return;
     }
 
-    // Móvil: desactivar CSS y usar JS
     track.style.animation = 'none';
     track.style.willChange = 'transform';
 
     let pos = 0;
     let lastTs = null;
-    let rafId = null;
-    const SPEED = 45; // px/segundo
+    const SPEED = 58;
+
+    visAbort = new AbortController();
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) lastTs = null;
+    }, { signal: visAbort.signal });
 
     function halfWidth() {
-      return track.scrollWidth / 2;
+      const w = track.scrollWidth / 2;
+      return w > 0 ? w : 1;
     }
 
     function tick(ts) {
+      if (!isMobile()) {
+        stopCarousel();
+        track.style.willChange = '';
+        track.style.animation = '';
+        track.style.transform = '';
+        return;
+      }
       if (lastTs === null) lastTs = ts;
-      const dt = Math.min(ts - lastTs, 50); // cap 50ms para evitar saltos tras pausa
+      const dt = Math.min(ts - lastTs, 50);
       lastTs = ts;
       pos += SPEED * dt / 1000;
       const half = halfWidth();
@@ -2348,24 +2589,17 @@ document.addEventListener('DOMContentLoaded', () => {
       rafId = requestAnimationFrame(tick);
     }
 
-    // Reanudar sin salto al volver de otra pestaña
-    document.addEventListener('visibilitychange', function() {
-      if (document.hidden) {
-        lastTs = null;
-      }
-    });
-
-    // Arrancar cuando las imágenes estén cargadas para que scrollWidth sea correcto
-    if (document.readyState === 'complete') {
+    function start() {
       rafId = requestAnimationFrame(tick);
+    }
+
+    if (document.readyState === 'complete') {
+      start();
     } else {
-      window.addEventListener('load', function() {
-        rafId = requestAnimationFrame(tick);
-      }, { once: true });
+      window.addEventListener('load', start, { once: true });
     }
   }
 
-  // Reinicializar si se redimensiona cruzando el breakpoint
   let wasMobile = isMobile();
   window.addEventListener('resize', function() {
     const nowMobile = isMobile();
@@ -2416,15 +2650,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ── CTA FORM SUBMISSION ── */
 document.addEventListener('DOMContentLoaded', () => {
+  const CTA_PHONE_MAX = 20;
   const btn         = document.getElementById('cta-submit-btn');
   const success     = document.getElementById('cta-success');
   const errorDiv    = document.getElementById('cta-error');
-  const emailInput  = document.getElementById('cta-email');
-  const nameInput   = document.getElementById('cta-name');
-  const bizInput    = document.getElementById('cta-business');
-  const honeypot    = document.getElementById('cta-honey');
+  const emailInput   = document.getElementById('cta-email');
+  const nameInput    = document.getElementById('cta-name');
+  const bizInput     = document.getElementById('cta-business');
+  const phoneInput   = document.getElementById('cta-phone');
+  const phoneCount   = document.getElementById('cta-phone-count');
+  const detailsInput = document.getElementById('cta-details');
+  const detailsCount = document.getElementById('cta-details-count');
+  const honeypot     = document.getElementById('cta-honey');
 
   if (!btn) return;
+
+  function updatePhoneCount() {
+    if (!phoneInput || !phoneCount) return;
+    phoneCount.textContent = phoneInput.value.length + '/' + CTA_PHONE_MAX;
+  }
+  if (phoneInput) {
+    phoneInput.addEventListener('input', updatePhoneCount);
+    updatePhoneCount();
+  }
+
+  function updateDetailsCount() {
+    if (!detailsInput || !detailsCount) return;
+    const n = detailsInput.value.length;
+    detailsCount.textContent = n + '/100';
+  }
+  if (detailsInput) {
+    detailsInput.addEventListener('input', updateDetailsCount);
+    updateDetailsCount();
+  }
 
   // Marca el momento en que la página cargó (los bots envían en milisegundos)
   const loadTime = Date.now();
@@ -2443,6 +2701,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const email    = emailInput.value.trim();
     const name     = nameInput.value.trim();
     const business = bizInput.value.trim();
+    const phone    = phoneInput ? phoneInput.value.trim().slice(0, CTA_PHONE_MAX) : '';
+    const details  = detailsInput ? detailsInput.value.trim().slice(0, 100) : '';
 
     // ── 1. HONEYPOT: si el bot rellenó el campo oculto, descartamos silenciosamente
     if (honeypot && honeypot.value) {
@@ -2473,7 +2733,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const body = new URLSearchParams({
         'form-name': 'contacto-tuko',
         'bot-field': honeypot ? honeypot.value : '',
-        email, name, business
+        email, name, business, phone, details
       });
 
       const res = await fetch('/', {
@@ -2487,6 +2747,14 @@ document.addEventListener('DOMContentLoaded', () => {
         emailInput.value = '';
         nameInput.value  = '';
         bizInput.value   = '';
+        if (phoneInput) {
+          phoneInput.value = '';
+          updatePhoneCount();
+        }
+        if (detailsInput) {
+          detailsInput.value = '';
+          updateDetailsCount();
+        }
       } else {
         errorDiv.textContent = 'Error ' + res.status + '. Por favor escríbenos a team.tukoo@gmail.com';
         errorDiv.style.display = 'block';
