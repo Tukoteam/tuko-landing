@@ -884,7 +884,25 @@
     justify-content: center;
   }
 
-  /* Placeholder icons — will be replaced by animations */
+  .how-anim-box--embed {
+    padding: 0;
+    background: #f0f0f0;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(15, 23, 42, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    aspect-ratio: 9 / 10;
+  }
+
+  .how-step-iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 360px;
+    border: 0;
+    background: #f5f5f5;
+  }
+
+  /* Placeholder icons — legacy fallback */
   .how-icon-rect {
     width: 28%; padding-top: 22%;
     background: white; border-radius: 8px; opacity: 0.75;
@@ -918,6 +936,7 @@
     .how-step-text { padding: 56px 24px; }
     .how-step-visual { min-height: 280px; padding: 32px 24px; }
     .how-anim-box { min-height: 220px; }
+    .how-step-iframe { min-height: 300px; }
   }
 
   /* Lang switcher */
@@ -1426,8 +1445,8 @@
       <p class="how-step-desc" data-i18n="step1_desc">Activa Tuko en cualquier producto de tu tienda.</p>
     </div>
     <div class="how-step-visual">
-      <div class="how-anim-box">
-        <div class="how-icon-rect"></div>
+      <div class="how-anim-box how-anim-box--embed">
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/01-activar-compra/index.html" title="Demo: activar compra colectiva en el producto" loading="lazy"></iframe>
       </div>
     </div>
   </div>
@@ -1439,8 +1458,8 @@
       <p class="how-step-desc" data-i18n="step2_desc">Los compradores invitan a otros clientes para desbloquear el descuento.</p>
     </div>
     <div class="how-step-visual">
-      <div class="how-anim-box">
-        <div class="how-icon-circle"></div>
+      <div class="how-anim-box how-anim-box--embed">
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/02-unirse-al-grupo/index.html" title="Demo: unirse al grupo y ver el ahorro" loading="lazy"></iframe>
       </div>
     </div>
   </div>
@@ -1452,8 +1471,8 @@
       <p class="how-step-desc" data-i18n="step3_desc">Cuando el grupo alcanza el objetivo, todos obtienen el descuento.</p>
     </div>
     <div class="how-step-visual">
-      <div class="how-anim-box">
-        <div class="how-icon-triangle"></div>
+      <div class="how-anim-box how-anim-box--embed">
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/03-grupo-crece/index.html" title="Demo: el grupo crece hacia el precio objetivo" loading="lazy"></iframe>
       </div>
     </div>
   </div>
@@ -1465,8 +1484,8 @@
       <p class="how-step-desc" data-i18n="step4_desc">Más ventas, mejor rotación de stock y viralidad orgánica real.</p>
     </div>
     <div class="how-step-visual">
-      <div class="how-anim-box">
-        <div class="how-icon-bars"><span></span><span></span><span></span></div>
+      <div class="how-anim-box how-anim-box--embed">
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/04-estadisticas-cimentacion/index.html" title="Demo: estadísticas y confianza" loading="lazy"></iframe>
       </div>
     </div>
   </div>
