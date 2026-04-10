@@ -555,36 +555,6 @@
     box-shadow: 0 8px 32px rgba(61,80,242,0.48);
   }
 
-  .hero-cta-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-  }
-
-  .btn-outline {
-    display: inline-flex;
-    align-items: center;
-    background: transparent;
-    color: var(--blue);
-    font-family: 'Mona Sans', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    font-stretch: semi-expanded;
-    padding: 6px 28px;
-    border-radius: 12px;
-    border: 2px solid var(--blue);
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.2s, color 0.2s, transform 0.15s;
-    letter-spacing: -0.02em;
-  }
-  .btn-outline:hover {
-    background: rgba(61, 80, 242, 0.08);
-    transform: translateY(-2px);
-  }
-
   .how-demo-banner {
     display: flex;
     flex-wrap: wrap;
@@ -1349,10 +1319,7 @@
     </div>
     <h1 class="fade-up d1" data-i18n="hero_title">Convierte tu tráfico<br>en ventas colectivas.</h1>
     <p class="fade-up d2" data-i18n="hero_subtitle">Tuko permite que tus clientes se unan para comprar juntos y desbloquear descuentos directamente en tu tienda.</p>
-    <div class="hero-cta-row fade-up d3">
-      <a href="#cta" class="btn-blue" data-i18n="hero_cta">Habla con los Fundadores</a>
-      <a href="landing-demo/index.html" class="btn-outline" data-i18n="hero_demo_cta">Ver demo interactiva</a>
-    </div>
+    <a href="#cta" class="btn-blue fade-up d3" data-i18n="hero_cta">Habla con los Fundadores</a>
   </div>
 </section>
 
@@ -1728,7 +1695,6 @@ const translations = {
     hero_title: 'Convierte tu tráfico<br>en ventas colectivas.',
     hero_subtitle: 'Tuko permite que tus clientes se unan para comprar juntos y desbloquear descuentos directamente en tu tienda.',
     hero_cta: 'Habla con los Fundadores',
-    hero_demo_cta: 'Ver demo interactiva',
     how_demo_kicker: 'Interactivo',
     how_demo_text: 'Mira el flujo completo con animaciones: activar, unirse al grupo, crecer y estadísticas.',
     how_demo_cta: 'Abrir demo →',
@@ -2037,7 +2003,6 @@ const translations = {
     hero_title: 'Turn your traffic<br>into collective sales.',
     hero_subtitle: 'Tuko lets your customers join together to buy and unlock discounts directly in your store.',
     hero_cta: 'Talk to the Founders',
-    hero_demo_cta: 'View interactive demo',
     how_demo_kicker: 'Interactive',
     how_demo_text: 'See the full flow with animations: activate, join the group, grow, and stats.',
     how_demo_cta: 'Open demo →',
