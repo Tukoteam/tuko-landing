@@ -27,7 +27,8 @@
       --tier-card-w: 200px;
       --tier-card-h: calc(var(--tier-card-w) * 434 / 558);
       --tier-progress-h: 5px;
-      --viewport-max: 472px;
+      /* Un poco más ancho para que entren ~2 tarjetas del carrusel a la vez */
+      --viewport-max: 512px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -968,7 +969,9 @@
           const lastI = TIERS.length - 1;
           const peekNext =
             idx >= lastI ? 0 : idx >= lastI - 1 ? 5 : 12;
-          let target = innerW / 2 - cardCenter - peekNext;
+          /* Ligeramente a la derecha del centro para enseñar más la tarjeta anterior (2 visibles) */
+          const focusX = innerW * 0.54;
+          let target = focusX - cardCenter - peekNext;
           let min = innerW - carouselTrack.scrollWidth;
           let x = Math.max(min, Math.min(0, target));
           carouselTrack.style.transform = 'translateX(' + x + 'px)';

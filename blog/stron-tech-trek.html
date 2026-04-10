@@ -88,11 +88,20 @@
     <li><a href="index.html" class="nav-link-active">Blog</a></li>
     <li><a href="../index.html#cta" class="nav-cta">Habla con los Fundadores</a></li>
   </ul>
-<div class="lang-switch">
-  <span class="lang-opt" data-lang="es">ES</span>
-  <span class="lang-sep">|</span>
-  <span class="lang-opt" data-lang="en">EN</span>
-</div>
+  <div class="lang-switcher" role="group" aria-label="Selector de idioma">
+    <button type="button" class="lang-opt active" data-lang="es" aria-label="Cambiar idioma a Español">
+      <span class="lang-opt-flag" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" width="22" height="15"><rect width="3" height="2" fill="#c60b1e"/><rect width="3" height="1" y="0.5" fill="#ffc400"/></svg>
+      </span>
+      <span class="lang-opt-label">ES</span>
+    </button>
+    <button type="button" class="lang-opt" data-lang="en" aria-label="Switch language to English">
+      <span class="lang-opt-flag" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="22" height="15"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg>
+      </span>
+      <span class="lang-opt-label">EN</span>
+    </button>
+  </div>
 </nav>
 
 <main>

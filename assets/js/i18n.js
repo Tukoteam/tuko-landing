@@ -86,6 +86,10 @@ const translations = {
     cta_placeholder_name: 'Tu nombre',
     cta_label_business: 'Nombre de negocio',
     cta_placeholder_business: 'Nombre de tu negocio',
+    cta_label_phone: 'Teléfono móvil (opcional)',
+    cta_placeholder_phone: 'Tu teléfono móvil',
+    cta_label_details: 'Descripción o detalles (opcional)',
+    cta_placeholder_details: 'Breve mensaje (máx. 100 caracteres)',
     cta_submit: 'Habla con los Fundadores',
 
     /* FOOTER */
@@ -388,6 +392,10 @@ const translations = {
     cta_placeholder_name: 'Your name',
     cta_label_business: 'Business name',
     cta_placeholder_business: 'Your business name',
+    cta_label_phone: 'Mobile phone (optional)',
+    cta_placeholder_phone: 'Your mobile number',
+    cta_label_details: 'Description or details (optional)',
+    cta_placeholder_details: 'Short message (max 100 characters)',
     cta_submit: 'Talk to the Founders',
 
     /* FOOTER */

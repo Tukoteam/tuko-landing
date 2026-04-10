@@ -17,7 +17,7 @@
       --n-900: #222222;
       --azul-light: #e0e7ff;
       --azul-mid: #a4b3f2;
-      --azul-primario: #3d50f2;
+      --azul-primario: #4257ff;
       --azul-oscuro: #141826;
       --menta-light: #c3f5e7;
       --menta-mid: #74e0c2;
@@ -26,7 +26,7 @@
       --rojo-persa: #ce3333;
       --rojo-persa-oscuro: #5e1e27;
       --shadow: 0 10px 40px rgba(20, 24, 38, 0.08);
-      --shadow-cta: 0 4px 24px rgba(61, 80, 242, 0.22);
+      --shadow-cta: 0 6px 22px rgba(66, 87, 255, 0.2);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -40,29 +40,534 @@
       justify-content: center;
       padding: 24px;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     .animation-viewport {
       width: 100%;
       max-width: 360px;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
       border-radius: 24px;
       background: var(--n-white);
       box-shadow: var(--shadow);
-      aspect-ratio: 9 / 10;
+      aspect-ratio: 9 / 11.85;
     }
 
     .scene {
       width: 100%;
       height: 100%;
-      padding: 32px 28px 28px;
+      padding: 32px 28px 36px;
       display: flex;
       flex-direction: column;
       align-items: stretch;
       justify-content: center;
       transform-origin: 50% 58%;
       transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Fase 1: ficha de producto → fase 2: demo del botón (existente) */
+    .scene-stack {
+      position: relative;
+      flex: 1;
+      display: grid;
+      align-items: center;
+      align-content: center;
+      min-height: 0;
+    }
+
+    .phase-intro {
+      width: 100%;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100%;
+    }
+
+    .intro-card {
+      text-align: center;
+      width: 100%;
+    }
+
+    .intro-flow-step {
+      display: none;
+      animation: introFlowIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .intro-flow-step.is-active {
+      display: block;
+    }
+
+    @keyframes introFlowIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .intro-primary-btn {
+      width: 100%;
+      min-height: 52px;
+      margin-top: 8px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: none;
+      background: var(--azul-primario);
+      color: #fff;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: var(--shadow-cta);
+      position: relative;
+      overflow: hidden;
+      transition:
+        transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.32s ease,
+        background 0.32s ease;
+    }
+
+    .intro-primary-btn.hover {
+      transform: scale(1.03);
+      background: #5366ff;
+    }
+
+    .intro-primary-btn.pressed {
+      transform: scale(0.96);
+    }
+
+    .intro-continue-btn {
+      width: 100%;
+      margin-top: 18px;
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: none;
+      background: var(--n-900);
+      color: #fff;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+    }
+
+    .intro-continue-btn:hover:not(:disabled) {
+      background: #333;
+    }
+
+    .intro-continue-btn:disabled {
+      opacity: 0.36;
+      cursor: not-allowed;
+    }
+
+    .intro-continue-btn.pressed {
+      transform: scale(0.96);
+    }
+
+    .intro-success-box {
+      margin-bottom: 6px;
+    }
+
+    .intro-success-icon {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 14px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--menta) 0%, #0d9b7a 100%);
+      box-shadow: 0 8px 24px rgba(20, 196, 146, 0.35);
+    }
+
+    .intro-success-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .intro-success-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--n-900);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .intro-share-block {
+      margin-top: 18px;
+    }
+
+    .intro-product-visual {
+      width: 100%;
+      max-width: 200px;
+      height: 132px;
+      margin: 0 auto 14px;
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 28px rgba(20, 24, 38, 0.12);
+      background: var(--n-50);
+    }
+
+    .intro-cream-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .intro-qty-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-top: 2px;
+    }
+
+    .intro-qty-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      border: 1px solid var(--n-200);
+      background: var(--n-white);
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1;
+      color: var(--n-900);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-family: inherit;
+      transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.12s ease;
+    }
+
+    .intro-qty-btn:hover:not(:disabled) {
+      border-color: var(--azul-mid);
+      background: var(--azul-light);
+    }
+
+    .intro-qty-btn:active:not(:disabled),
+    .intro-qty-btn.pressed {
+      transform: scale(0.9);
+    }
+
+    .intro-qty-btn:disabled {
+      opacity: 0.32;
+      cursor: not-allowed;
+    }
+
+    .intro-qty-btn--plus {
+      background: var(--azul-primario);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: var(--shadow-cta);
+    }
+
+    .intro-qty-btn--plus:hover:not(:disabled) {
+      background: #5366ff;
+    }
+
+    .intro-qty-val {
+      min-width: 56px;
+      padding: 0 10px;
+      font-size: 22px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      color: var(--n-900);
+      letter-spacing: -0.02em;
+    }
+
+    .intro-product-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--n-400);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .intro-product-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--n-900);
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+
+    .intro-product-price {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--n-900);
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+    }
+
+    .intro-qty-hint {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--n-400);
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+
+    /* Mini bloque «Niveles de descuento» (paso cantidad) */
+    .intro-discount-mini {
+      text-align: left;
+      margin: 0 0 14px;
+      padding: 12px 14px 16px;
+      background: var(--n-white);
+      border-radius: 16px;
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      box-shadow: 0 4px 18px rgba(20, 24, 38, 0.06);
+      overflow: hidden;
+      max-width: 100%;
+    }
+
+    .intro-discount-mini__title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--n-900);
+      letter-spacing: -0.03em;
+      margin-bottom: 2px;
+      text-align: center;
+    }
+
+    .intro-discount-mini__sub {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--n-600);
+      line-height: 1.35;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .intro-discount-mini__status {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 10px 10px;
+      margin-bottom: 10px;
+      background: var(--n-white);
+      border: 1px solid var(--n-200);
+      border-radius: 12px;
+    }
+
+    .intro-discount-mini__status-num {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--n-900);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .intro-discount-mini__status-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--n-400);
+    }
+
+    .intro-discount-mini__carousel {
+      display: flex;
+      gap: 8px;
+      align-items: stretch;
+      margin-bottom: 8px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 100%;
+      justify-content: center;
+    }
+
+    .intro-discount-mini__card {
+      position: relative;
+      flex: 1 1 auto;
+      min-width: 0;
+      max-width: 100%;
+      padding: 10px 8px 8px;
+      border-radius: 14px;
+      background: var(--n-white);
+      border: 1.5px solid var(--n-200);
+    }
+
+    .intro-discount-mini__card--active {
+      border-color: #a78bfa;
+      flex: 1 1 100%;
+      box-shadow:
+        0 0 0 1px rgba(139, 92, 246, 0.12),
+        0 6px 16px rgba(124, 58, 237, 0.12);
+    }
+
+    .intro-discount-mini__badge {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      font-size: 7px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: #fff;
+      background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+      padding: 3px 6px;
+      border-radius: 6px;
+    }
+
+    .intro-discount-mini__ico {
+      width: 32px;
+      height: 32px;
+      margin: 0 auto 6px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #ede9fe;
+      border: 1px solid #c4b5fd;
+      color: #7c3aed;
+    }
+
+    .intro-discount-mini__ico svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    .intro-discount-mini__ahead {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--n-900);
+      text-align: center;
+      margin-bottom: 2px;
+    }
+
+    .intro-discount-mini__pct {
+      font-size: 15px;
+      font-weight: 800;
+      color: #7c3aed;
+      text-align: center;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .intro-discount-mini__pct span {
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .intro-discount-mini__foot {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 8px;
+      font-weight: 600;
+      color: var(--n-400);
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+
+    .intro-discount-mini__foot span:last-child {
+      text-align: right;
+    }
+
+    .intro-discount-mini__bar {
+      height: 3px;
+      border-radius: 99px;
+      background: var(--n-50);
+      overflow: hidden;
+    }
+
+    .intro-discount-mini__bar > span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #8b5cf6 0%, #7c3aed 100%);
+    }
+
+    /* Vista previa del siguiente escalón: fuera del carrusel para no “romper” el recuadro */
+    .intro-discount-mini__card--next {
+      display: none;
+    }
+
+    .intro-discount-mini__card--next small {
+      display: block;
+      font-size: 7px;
+      font-weight: 600;
+      color: var(--n-400);
+      margin-top: 4px;
+      line-height: 1.2;
+    }
+
+    .intro-discount-mini__dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 0 4px;
+    }
+
+    .intro-discount-mini__dots span {
+      width: 5px;
+      height: 5px;
+      border-radius: 99px;
+      background: var(--n-200);
+    }
+
+    .intro-discount-mini__dots span.is-active {
+      width: 18px;
+      height: 4px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+    }
+
+    #flowStep2 .scene-sub {
+      margin-bottom: 12px;
+    }
+
+    /* Paso «Cantidad»: más alto + alineación arriba para que nada se salga del marco blanco */
+    #viewport:has(#flowStep2.is-active) {
+      aspect-ratio: 9 / 15.1;
+      min-height: 618px;
+      overflow: hidden;
+    }
+
+    #viewport:has(#flowStep2.is-active) .scene {
+      justify-content: flex-start;
+      padding: 26px 24px 32px;
+    }
+
+    #viewport:has(#flowStep2.is-active) .scene-stack {
+      align-items: start;
+      align-content: start;
+    }
+
+    #viewport:has(#flowStep2.is-active) .phase-intro {
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    #viewport:has(#flowStep2.is-active) .intro-discount-mini {
+      margin-bottom: 12px;
+    }
+
+    #viewport:has(#flowStep2.is-active) .intro-continue-btn {
+      margin-top: 14px;
     }
 
     .scene.zoomed {
@@ -110,8 +615,8 @@
 
     .tuko-cta.hover {
       transform: scale(1.03);
-      background: #4d5ff5;
-      box-shadow: 0 8px 32px rgba(61, 80, 242, 0.35);
+      background: #5366ff;
+      box-shadow: 0 8px 28px rgba(66, 87, 255, 0.32);
     }
 
     .tuko-cta.pressed {
@@ -230,9 +735,16 @@
     }
 
     /* Secundario: compartir (Rojo Persa — distinto del azul / verde menta) */
-    .share-btn {
+    .share-wrap {
       position: relative;
       margin-top: 14px;
+      width: 100%;
+      z-index: 40;
+    }
+
+    .share-btn {
+      position: relative;
+      margin-top: 0;
       width: 100%;
       min-height: 44px;
       padding: 0 20px;
@@ -286,46 +798,247 @@
       stroke-linecap: round;
       stroke-linejoin: round;
     }
+
+    .share-dropdown {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: auto;
+      bottom: calc(100% + 10px);
+      z-index: 50;
+      padding: 14px 12px 12px;
+      background: var(--n-white);
+      border-radius: 16px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      box-shadow: 0 18px 48px rgba(20, 24, 38, 0.18);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px) scale(0.98);
+      transform-origin: 50% 100%;
+      transition:
+        opacity 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0.28s;
+      pointer-events: none;
+    }
+
+    .share-wrap.is-open .share-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .share-dropdown-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--n-400);
+      text-align: center;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .share-dropdown-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      gap: 6px;
+    }
+
+    .share-opt {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 8px 2px;
+      border: none;
+      border-radius: 12px;
+      background: transparent;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--n-600);
+      transition: background 0.15s ease;
+    }
+
+    .share-opt:hover {
+      background: var(--n-50);
+    }
+
+    .share-opt:active {
+      transform: scale(0.96);
+    }
+
+    .share-opt-ic {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+    }
+
+    .share-opt-ic svg {
+      width: 26px;
+      height: 26px;
+      display: block;
+    }
   </style>
 </head>
 <body>
 
   <div class="animation-viewport" id="viewport">
     <div class="scene" id="scene">
-      <p class="scene-hint">Cómo te unes al grupo</p>
-      <p class="scene-sub">Pulsa el botón para entrar en la compra colectiva.</p>
+      <div class="scene-stack">
+        <div class="phase-intro" id="phaseIntro" aria-hidden="false">
+          <div class="intro-card">
+            <div id="flowStep1" class="intro-flow-step is-active">
+              <p class="intro-product-label">Producto</p>
+              <div class="intro-product-visual">
+                <img
+                  class="intro-cream-photo"
+                  src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&amp;fit=crop&amp;w=560&amp;q=80"
+                  width="280"
+                  height="280"
+                  alt="Crema hidratante en envase"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <p class="scene-hint">Cómo te unes al grupo</p>
+              <p class="scene-sub">Pulsa el botón para entrar en la compra colectiva.</p>
+              <h3 class="intro-product-title">Crema hidratante</h3>
+              <p class="intro-product-price">24,90&nbsp;€</p>
+              <button type="button" class="intro-primary-btn" id="introJoinBtn" aria-label="Únete al grupo">
+                <svg class="cta-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                Únete al grupo
+              </button>
+            </div>
 
-      <div class="tuko-cta" id="cta" role="img" aria-label="Demostración: unirse al grupo">
-        <div class="cta-row" id="ctaContent">
-          <svg class="cta-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-            <circle cx="9" cy="7" r="4"/>
-            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-          </svg>
-          <span class="cta-label" id="ctaLabel">Únete al grupo</span>
-        </div>
-        <div class="cta-row hidden" id="ctaSuccessRow">
-          <svg class="cta-check" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M20 6L9 17l-5-5"/>
-          </svg>
-          <span class="cta-label" id="ctaSuccessLabel">Dentro del grupo</span>
-        </div>
-        <div class="cta-progress-track" aria-hidden="true">
-          <div class="cta-progress-fill" id="ctaProgressFill"></div>
+            <div id="flowStep2" class="intro-flow-step">
+              <p class="scene-hint">Cantidad</p>
+              <p class="scene-sub">Pulsa <strong>+</strong> para añadir otra unidad y luego <strong>Continuar</strong>.</p>
+              <div class="intro-discount-mini" aria-hidden="true">
+                <p class="intro-discount-mini__title">Niveles de descuento</p>
+                <p class="intro-discount-mini__sub">Más personas unidas, más ahorro para todas</p>
+                <div class="intro-discount-mini__status">
+                  <span class="intro-discount-mini__status-num">0</span>
+                  <span class="intro-discount-mini__status-label">Personas en el grupo</span>
+                </div>
+                <div class="intro-discount-mini__carousel">
+                  <div class="intro-discount-mini__card intro-discount-mini__card--active">
+                    <span class="intro-discount-mini__badge">ACTUAL</span>
+                    <div class="intro-discount-mini__ico" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 18V8M9 11l3-3 3 3"/>
+                      </svg>
+                    </div>
+                    <p class="intro-discount-mini__ahead">Por delante</p>
+                    <p class="intro-discount-mini__pct">5% <span>OFF</span></p>
+                    <div class="intro-discount-mini__foot">
+                      <span>0/5 personas unidas</span>
+                      <span>Faltan 5 plazas</span>
+                    </div>
+                    <div class="intro-discount-mini__bar"><span></span></div>
+                  </div>
+                  <div class="intro-discount-mini__card intro-discount-mini__card--next">
+                    10%
+                    <small>15 personas</small>
+                  </div>
+                </div>
+                <div class="intro-discount-mini__dots" aria-hidden="true">
+                  <span class="is-active"></span><span></span><span></span>
+                </div>
+              </div>
+              <div class="intro-qty-row" role="group" aria-label="Cantidad">
+                <button type="button" class="intro-qty-btn" id="introQtyMinus" aria-label="Menos unidades">−</button>
+                <span class="intro-qty-val" id="introQtyVal">1</span>
+                <button type="button" class="intro-qty-btn intro-qty-btn--plus" id="introQtyPlus" aria-label="Más unidades">+</button>
+              </div>
+              <button type="button" class="intro-continue-btn" id="introContinueBtn" disabled>Continuar</button>
+            </div>
+
+            <div id="flowStep3" class="intro-flow-step">
+              <div class="intro-success-box">
+                <div class="intro-success-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+                </div>
+                <p class="intro-success-title">Te uniste al grupo</p>
+                <p class="scene-sub" style="margin-bottom: 0;">Invita a más personas compartiendo el enlace.</p>
+              </div>
+              <div class="share-wrap intro-share-block" id="shareWrap">
+            <button type="button" class="share-btn" id="shareBtn" aria-expanded="false" aria-haspopup="true" aria-controls="shareDropdown" aria-label="Compartir el grupo">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="18" cy="5" r="3"/>
+                <circle cx="6" cy="12" r="3"/>
+                <circle cx="18" cy="19" r="3"/>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+              </svg>
+              Compartir
+            </button>
+            <div class="share-dropdown" id="shareDropdown" role="menu" aria-hidden="true">
+              <p class="share-dropdown-label">Compartir en</p>
+              <div class="share-dropdown-row" role="none">
+                <button type="button" class="share-opt" role="menuitem" data-share="instagram" aria-label="Instagram">
+                  <span class="share-opt-ic" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="tukoShareIg" x1="0%" y1="100%" x2="100%" y2="0%">
+                          <stop offset="0%" stop-color="#f58529"/>
+                          <stop offset="45%" stop-color="#dd2a7b"/>
+                          <stop offset="100%" stop-color="#515bd4"/>
+                        </linearGradient>
+                      </defs>
+                      <rect width="24" height="24" rx="6" fill="url(#tukoShareIg)"/>
+                      <circle cx="12" cy="12" r="3.5" fill="none" stroke="#fff" stroke-width="1.5"/>
+                      <circle cx="17.5" cy="6.5" r="1.1" fill="#fff"/>
+                    </svg>
+                  </span>
+                  Instagram
+                </button>
+                <button type="button" class="share-opt" role="menuitem" data-share="telegram" aria-label="Telegram">
+                  <span class="share-opt-ic" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <circle cx="12" cy="12" r="11" fill="#26A5E4"/>
+                      <path fill="#fff" d="M5.5 11.8c4.2-1.8 7-3 8.4-3.6 4-1.7 4.8-2 5.3-2 .1 0 .4 0 .5.3.1.2 0 .4 0 .5-.4 2-2.2 6.8-3.1 9-.4 1.3-1.2 1.7-1.9 1.7-.5 0-1-.3-1.4-.6-.8-.5-1.2-.8-2-1.3-.9-.5-1.6-1-1.5-1.9 0-.3.2-.6.4-.9.4-.6 3.5-3.4 3.6-3.7 0-.1 0-.2-.1-.3-.1-.1-.2-.1-.3 0-.4.2-6.3 3.7-7.4 4.4-.6.3-1.2.5-1.7.5-.5 0-1.5-.3-2.1-.5-.8-.3-1.4-.5-1.4-1 0-.3.3-.5.8-.8z"/>
+                    </svg>
+                  </span>
+                  Telegram
+                </button>
+                <button type="button" class="share-opt" role="menuitem" data-share="whatsapp" aria-label="WhatsApp">
+                  <span class="share-opt-ic" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <circle cx="12" cy="12" r="11" fill="#25D366"/>
+                      <path fill="#fff" d="M12.04 5.5c-3.55 0-6.44 2.89-6.43 6.45 0 1.14.3 2.25.87 3.23L5.5 18.5l3.4-.9c.94.51 2 .78 3.09.79h.01c3.55 0 6.44-2.9 6.43-6.46 0-1.72-.67-3.34-1.89-4.55a6.38 6.38 0 0 0-4.5-1.88zm-.02 1.73c2.6 0 4.72 2.1 4.72 4.7a4.71 4.71 0 0 1-4.72 4.71c-.84 0-1.66-.22-2.38-.64l-.17-.1-2.05.55.55-2-.11-.18a4.69 4.69 0 0 1-.56-2.28c0-2.6 2.12-4.7 4.72-4.7zm2.45 5.63c.12-.04 1.23-.57 1.42-.67.13-.07.22-.1.32.1.1.2.38.67.43.76.06.1.1.11.02.18-.08.07-.3.36-.41.49-.11.12-.22.14-.4.04-.18-.1-.68-.25-1.3-.8-.48-.43-.8-.96-.9-1.12-.1-.16-.01-.25.08-.33.08-.08.18-.2.27-.3.09-.1.12-.17.18-.29.06-.12.03-.22-.01-.31-.04-.09-.36-.87-.5-1.19-.13-.3-.27-.26-.37-.27l-.32-.01c-.11 0-.29.04-.44.22-.15.18-.58.57-.58 1.39 0 .82.6 1.61.68 1.72.08.12 1.17 1.79 2.84 2.51.4.17.71.27.95.35.4.13.76.11 1.05.07.32-.05 1.23-.5 1.4-.99.18-.48.18-.9.13-.99-.05-.09-.18-.14-.38-.24z"/>
+                    </svg>
+                  </span>
+                  WhatsApp
+                </button>
+                <button type="button" class="share-opt" role="menuitem" data-share="x" aria-label="X (Twitter)">
+                  <span class="share-opt-ic" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <rect width="24" height="24" rx="6" fill="#0f1419"/>
+                      <path fill="#fff" d="M13.9 10.5 19.3 4h-1.28l-4.7 5.4L9.5 4H5l5.65 8.2L5 20h1.28l4.97-5.7 4 5.7H19l-5.1-7.5z"/>
+                    </svg>
+                  </span>
+                  X
+                </button>
+              </div>
+            </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <button type="button" class="share-btn" id="shareBtn" aria-label="Compartir el grupo">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="18" cy="5" r="3"/>
-          <circle cx="6" cy="12" r="3"/>
-          <circle cx="18" cy="19" r="3"/>
-          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-        </svg>
-        Compartir
-      </button>
     </div>
 
     <svg class="cursor" id="cursor" viewBox="0 0 24 24" aria-hidden="true">
@@ -335,57 +1048,128 @@
 
   <script>
     (function () {
-      const TIMING = {
-        cursorAppear: 300,
-        zoomStart: 550,
-        cursorMove: 1200,
-        hoverBtn: 1650,
-        clickDown: 2050,
-        clickUp: 2180,
-        loadStart: 2240,
-        progressEnd: 3000,
-        showSuccess: 3100,
-        celebrate: 4000,
-        shareCursorShow: 4560,
+      /**
+       * Flujo: 1) Únete al grupo → 2) +/− y Continuar (≥2 uds) → 3) Te uniste + Compartir
+       */
+      const FLOW = {
+        cursorShow: 350,
+        joinMoveEnd: 1500,
+        joinHover: 1750,
+        joinDown: 1950,
+        joinUp: 2140,
+        step2At: 2320,
+        plusMoveStart: 3200,
+        plusDown: 3600,
+        plusUp: 3780,
+        contMoveStart: 4400,
+        contHover: 4650,
+        contDown: 4850,
+        contUp: 5030,
+        step3At: 5180,
+        shareReveal: 5480,
+        shareCursorShow: 6000,
         shareMoveMs: 900,
-        shareHover: 5580,
-        shareClickDown: 5880,
-        shareClickUp: 6020,
-        resetFade: 6900,
-        resetDone: 7550,
-        loopDelay: 8000,
+        shareHover: 7000,
+        shareClickDown: 7280,
+        shareClickUp: 7420,
+        resetFade: 9000,
+        resetDone: 9680,
+        loopDelay: 10400,
       };
 
       const $ = (id) => document.getElementById(id);
+      let introQty = 1;
+      const INTRO_QTY_MIN = 1;
+      const INTRO_QTY_MAX = 99;
       let loopTimer = null;
       let cursorRaf = null;
-      let progressRaf = null;
+
+      function setFlowStep(step) {
+        for (let n = 1; n <= 3; n += 1) {
+          const el = $('flowStep' + n);
+          if (el) el.classList.toggle('is-active', n === step);
+        }
+      }
+
+      function updateQtyUI() {
+        const v = $('introQtyVal');
+        const minus = $('introQtyMinus');
+        const plus = $('introQtyPlus');
+        const cont = $('introContinueBtn');
+        if (v) v.textContent = String(introQty);
+        if (minus) minus.disabled = introQty <= INTRO_QTY_MIN;
+        if (plus) plus.disabled = introQty >= INTRO_QTY_MAX;
+        if (cont) cont.disabled = introQty < 2;
+      }
+
+      function elCenter(el, viewport) {
+        if (!el || !viewport) return { x: 0, y: 0 };
+        const r = el.getBoundingClientRect();
+        const vr = viewport.getBoundingClientRect();
+        return {
+          x: r.left - vr.left + r.width / 2 - 13,
+          y: r.top - vr.top + r.height / 2 - 13,
+        };
+      }
+
+      function bindFlowUi() {
+        const join = $('introJoinBtn');
+        if (join && !join.dataset.flowBound) {
+          join.dataset.flowBound = '1';
+          join.addEventListener('click', function (e) {
+            e.stopPropagation();
+            setFlowStep(2);
+            introQty = 1;
+            updateQtyUI();
+          });
+        }
+        const plus = $('introQtyPlus');
+        if (plus && !plus.dataset.flowBound) {
+          plus.dataset.flowBound = '1';
+          plus.addEventListener('click', function () {
+            if (introQty >= INTRO_QTY_MAX) return;
+            introQty += 1;
+            updateQtyUI();
+          });
+        }
+        const minus = $('introQtyMinus');
+        if (minus && !minus.dataset.flowBound) {
+          minus.dataset.flowBound = '1';
+          minus.addEventListener('click', function () {
+            if (introQty <= INTRO_QTY_MIN) return;
+            introQty -= 1;
+            updateQtyUI();
+          });
+        }
+        const cont = $('introContinueBtn');
+        if (cont && !cont.dataset.flowBound) {
+          cont.dataset.flowBound = '1';
+          cont.addEventListener('click', function () {
+            if (introQty < 2) return;
+            setFlowStep(3);
+            const sb = $('shareBtn');
+            if (sb) sb.classList.add('visible');
+          });
+        }
+        updateQtyUI();
+      }
+
+      bindFlowUi();
 
       function runAnimation() {
         resetState();
 
         const cursor = $('cursor');
-        const scene = $('scene');
-        const cta = $('cta');
-        const ctaContent = $('ctaContent');
-        const ctaSuccessRow = $('ctaSuccessRow');
-        const ctaProgressFill = $('ctaProgressFill');
         const shareBtn = $('shareBtn');
         const viewport = $('viewport');
+        const joinBtn = $('introJoinBtn');
+        const plusBtn = $('introQtyPlus');
+        const contBtn = $('introContinueBtn');
 
         const vpRect = viewport.getBoundingClientRect();
-        let curX = vpRect.width * 0.78;
-        let curY = vpRect.height * 0.2;
+        let curX = vpRect.width * 0.82;
+        let curY = vpRect.height * 0.12;
         setCursorPos(curX, curY);
-
-        const ctaCenter = () => {
-          const r = cta.getBoundingClientRect();
-          const vr = viewport.getBoundingClientRect();
-          return {
-            x: r.left - vr.left + r.width / 2 - 13,
-            y: r.top - vr.top + r.height / 2 - 13,
-          };
-        };
 
         const shareBtnCenter = () => {
           const r = shareBtn.getBoundingClientRect();
@@ -396,79 +1180,126 @@
           };
         };
 
-        at(TIMING.cursorAppear, () => cursor.classList.add('visible'));
-        at(TIMING.zoomStart, () => scene.classList.add('zoomed'));
+        at(FLOW.cursorShow, () => cursor.classList.add('visible'));
 
-        const end = ctaCenter();
-        animateCursor(curX, curY, end.x, end.y, TIMING.cursorAppear + 120, TIMING.cursorMove);
+        const j0 = elCenter(joinBtn, viewport);
+        animateCursor(
+          curX,
+          curY,
+          j0.x,
+          j0.y,
+          FLOW.cursorShow + 80,
+          FLOW.joinMoveEnd - FLOW.cursorShow - 80
+        );
 
-        at(TIMING.hoverBtn, () => cta.classList.add('hover'));
+        at(FLOW.joinHover, () => joinBtn && joinBtn.classList.add('hover'));
 
-        at(TIMING.clickDown, () => {
-          cta.classList.remove('hover');
-          cta.classList.add('pressed');
+        at(FLOW.joinDown, () => {
+          if (joinBtn) {
+            joinBtn.classList.remove('hover');
+            joinBtn.classList.add('pressed');
+          }
           cursor.classList.add('clicking');
-          const ripple = document.createElement('div');
-          ripple.className = 'click-ripple';
-          ripple.style.left = '50%';
-          ripple.style.top = '50%';
-          ripple.style.marginLeft = '-24px';
-          ripple.style.marginTop = '-24px';
-          cta.appendChild(ripple);
-          requestAnimationFrame(() => ripple.classList.add('active'));
-          setTimeout(() => ripple.remove(), 600);
+          if (joinBtn) {
+            const ripple = document.createElement('div');
+            ripple.className = 'click-ripple';
+            ripple.style.left = '50%';
+            ripple.style.top = '50%';
+            ripple.style.marginLeft = '-24px';
+            ripple.style.marginTop = '-24px';
+            joinBtn.appendChild(ripple);
+            requestAnimationFrame(() => ripple.classList.add('active'));
+            setTimeout(() => ripple.remove(), 600);
+          }
         });
 
-        at(TIMING.clickUp, () => {
-          cta.classList.remove('pressed');
+        at(FLOW.joinUp, () => {
+          if (joinBtn) joinBtn.classList.remove('pressed');
           cursor.classList.remove('clicking');
         });
 
-        at(TIMING.loadStart, () => {
-          cta.classList.add('joining');
-          cursor.style.opacity = '0.35';
-          runButtonProgress(ctaProgressFill, TIMING.progressEnd - TIMING.loadStart);
+        at(FLOW.step2At, () => {
+          setFlowStep(2);
+          introQty = 1;
+          updateQtyUI();
         });
 
-        at(TIMING.showSuccess, () => {
-          if (progressRaf) {
-            cancelAnimationFrame(progressRaf);
-            progressRaf = null;
+        at(FLOW.plusMoveStart, () => {
+          const p = elCenter(plusBtn, viewport);
+          animateCursor(j0.x, j0.y, p.x, p.y, 40, 420);
+        });
+
+        at(FLOW.plusDown, () => {
+          if (plusBtn) plusBtn.classList.add('pressed');
+          cursor.classList.add('clicking');
+        });
+
+        at(FLOW.plusUp, () => {
+          if (plusBtn) plusBtn.classList.remove('pressed');
+          cursor.classList.remove('clicking');
+          introQty = 2;
+          updateQtyUI();
+        });
+
+        at(FLOW.contMoveStart, () => {
+          const c = elCenter(contBtn, viewport);
+          const p = elCenter(plusBtn, viewport);
+          animateCursor(p.x, p.y, c.x, c.y, 40, 420);
+        });
+
+        at(FLOW.contHover, () => contBtn && contBtn.classList.add('hover'));
+
+        at(FLOW.contDown, () => {
+          if (contBtn) {
+            contBtn.classList.remove('hover');
+            contBtn.classList.add('pressed');
           }
-          ctaProgressFill.style.width = '100%';
-          cta.classList.remove('joining');
-          cta.classList.add('success');
-          ctaContent.classList.add('hidden');
-          ctaSuccessRow.classList.remove('hidden');
-          cursor.style.opacity = '0';
+          cursor.classList.add('clicking');
+          if (contBtn) {
+            const ripple = document.createElement('div');
+            ripple.className = 'click-ripple';
+            ripple.style.left = '50%';
+            ripple.style.top = '50%';
+            ripple.style.marginLeft = '-24px';
+            ripple.style.marginTop = '-24px';
+            ripple.style.background = 'rgba(255, 255, 255, 0.35)';
+            contBtn.appendChild(ripple);
+            requestAnimationFrame(() => ripple.classList.add('active'));
+            setTimeout(() => ripple.remove(), 600);
+          }
         });
 
-        at(TIMING.celebrate, () => {
-          scene.classList.remove('zoomed');
+        at(FLOW.contUp, () => {
+          if (contBtn) contBtn.classList.remove('pressed');
+          cursor.classList.remove('clicking');
+        });
+
+        at(FLOW.step3At, () => {
+          setFlowStep(3);
+        });
+
+        at(FLOW.shareReveal, () => {
           shareBtn.classList.add('visible');
         });
 
-        at(TIMING.shareCursorShow, () => {
+        at(FLOW.shareCursorShow, () => {
           requestAnimationFrame(() => {
-            const from = ctaCenter();
+            const vr = viewport.getBoundingClientRect();
+            const from = {
+              x: vr.width * 0.52 - 13,
+              y: vr.height * 0.3 - 13,
+            };
             const to = shareBtnCenter();
             cursor.style.opacity = '1';
             cursor.classList.add('visible');
             setCursorPos(from.x, from.y);
-            animateCursor(
-              from.x,
-              from.y,
-              to.x,
-              to.y,
-              80,
-              TIMING.shareMoveMs
-            );
+            animateCursor(from.x, from.y, to.x, to.y, 60, FLOW.shareMoveMs);
           });
         });
 
-        at(TIMING.shareHover, () => shareBtn.classList.add('hover'));
+        at(FLOW.shareHover, () => shareBtn.classList.add('hover'));
 
-        at(TIMING.shareClickDown, () => {
+        at(FLOW.shareClickDown, () => {
           shareBtn.classList.remove('hover');
           shareBtn.classList.add('pressed');
           cursor.classList.add('clicking');
@@ -484,22 +1315,36 @@
           setTimeout(() => ripple.remove(), 600);
         });
 
-        at(TIMING.shareClickUp, () => {
+        at(FLOW.shareClickUp, () => {
           shareBtn.classList.remove('pressed');
           cursor.classList.remove('clicking');
           cursor.style.opacity = '0';
+          const wrap = $('shareWrap');
+          const dd = $('shareDropdown');
+          if (wrap && dd) {
+            wrap.classList.add('is-open');
+            shareBtn.setAttribute('aria-expanded', 'true');
+            dd.setAttribute('aria-hidden', 'false');
+          }
         });
 
-        at(TIMING.resetFade, () => {
+        at(FLOW.resetFade, () => {
+          const wrap = $('shareWrap');
+          const dd = $('shareDropdown');
+          if (wrap && dd) {
+            wrap.classList.remove('is-open');
+            shareBtn.setAttribute('aria-expanded', 'false');
+            dd.setAttribute('aria-hidden', 'true');
+          }
           viewport.style.transition = 'opacity 0.5s ease';
           viewport.style.opacity = '0';
         });
 
-        at(TIMING.resetDone, () => {
+        at(FLOW.resetDone, () => {
           viewport.style.opacity = '1';
         });
 
-        loopTimer = setTimeout(runAnimation, TIMING.loopDelay);
+        loopTimer = setTimeout(runAnimation, FLOW.loopDelay);
       }
 
       function at(ms, fn) {
@@ -512,6 +1357,7 @@
       }
 
       function animateCursor(fromX, fromY, toX, toY, startAt, duration) {
+        if (cursorRaf) cancelAnimationFrame(cursorRaf);
         const startTime = performance.now() + startAt;
         function step(now) {
           const elapsed = now - startTime;
@@ -531,61 +1377,88 @@
         cursorRaf = requestAnimationFrame(step);
       }
 
-      function runButtonProgress(el, totalMs) {
-        const start = performance.now();
-        function tick(now) {
-          const p = Math.min((now - start) / totalMs, 1);
-          el.style.width = p * 92 + '%';
-          if (p < 1) progressRaf = requestAnimationFrame(tick);
-          else progressRaf = null;
-        }
-        el.style.width = '0%';
-        progressRaf = requestAnimationFrame(tick);
-      }
-
       function resetState() {
         if (loopTimer) clearTimeout(loopTimer);
         if (cursorRaf) cancelAnimationFrame(cursorRaf);
-        if (progressRaf) cancelAnimationFrame(progressRaf);
         cursorRaf = null;
-        progressRaf = null;
 
         const viewport = $('viewport');
         const cursor = $('cursor');
         const scene = $('scene');
-        const cta = $('cta');
-        const ctaContent = $('ctaContent');
-        const ctaSuccessRow = $('ctaSuccessRow');
-        const ctaProgressFill = $('ctaProgressFill');
         const shareBtn = $('shareBtn');
+        const shareWrap = $('shareWrap');
+        const shareDropdown = $('shareDropdown');
+        const phaseIntro = $('phaseIntro');
+        const joinBtn = $('introJoinBtn');
+        const plusBtn = $('introQtyPlus');
+        const contBtn = $('introContinueBtn');
 
-        viewport.style.opacity = '1';
-        viewport.style.transition = 'none';
-        cursor.classList.remove('visible', 'clicking');
-        cursor.style.opacity = '';
-        scene.classList.remove('zoomed');
-        cta.className = 'tuko-cta';
-        ctaContent.classList.remove('hidden');
-        ctaSuccessRow.classList.add('hidden');
-        ctaSuccessRow.querySelector('.cta-label').textContent = 'Dentro del grupo';
-        $('ctaLabel').textContent = 'Únete al grupo';
-        ctaProgressFill.style.width = '0%';
-        shareBtn.classList.remove('visible', 'hover', 'pressed');
+        if (viewport) {
+          viewport.style.opacity = '1';
+          viewport.style.transition = 'none';
+        }
+        if (cursor) {
+          cursor.classList.remove('visible', 'clicking');
+          cursor.style.opacity = '';
+        }
+        if (scene) scene.classList.remove('zoomed', 'show-demo');
+        if (phaseIntro) phaseIntro.setAttribute('aria-hidden', 'false');
+
+        if (joinBtn) joinBtn.classList.remove('hover', 'pressed');
+        if (plusBtn) plusBtn.classList.remove('pressed');
+        if (contBtn) contBtn.classList.remove('hover', 'pressed');
+
+        if (shareBtn) shareBtn.classList.remove('visible', 'hover', 'pressed');
+        if (shareWrap) shareWrap.classList.remove('is-open');
+        if (shareBtn) shareBtn.setAttribute('aria-expanded', 'false');
+        if (shareDropdown) shareDropdown.setAttribute('aria-hidden', 'true');
+
+        setFlowStep(1);
+        introQty = 1;
+        updateQtyUI();
+      }
+
+      function setShareMenuOpen(open) {
+        const wrap = $('shareWrap');
+        const btn = $('shareBtn');
+        const dd = $('shareDropdown');
+        if (!wrap || !btn || !dd) return;
+        wrap.classList.toggle('is-open', open);
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        dd.setAttribute('aria-hidden', open ? 'false' : 'true');
       }
 
       const shareBtnEl = $('shareBtn');
-      if (shareBtnEl && !shareBtnEl.dataset.shareBound) {
-        shareBtnEl.dataset.shareBound = '1';
-        shareBtnEl.addEventListener('click', () => {
-          if (navigator.share) {
-            navigator
-              .share({
-                title: 'Tuko',
-                text: '¡Mira esta compra grupal!',
-                url: window.location.href,
-              })
-              .catch(() => {});
+      const shareWrapEl = $('shareWrap');
+      if (shareBtnEl && shareWrapEl && !shareBtnEl.dataset.shareUiBound) {
+        shareBtnEl.dataset.shareUiBound = '1';
+        shareBtnEl.addEventListener('click', function (e) {
+          e.stopPropagation();
+          const open = !shareWrapEl.classList.contains('is-open');
+          setShareMenuOpen(open);
+        });
+        document.addEventListener('click', function (e) {
+          if (shareWrapEl.contains(e.target)) return;
+          setShareMenuOpen(false);
+        });
+        shareWrapEl.addEventListener('click', function (e) {
+          const opt = e.target.closest('.share-opt');
+          if (!opt) return;
+          e.stopPropagation();
+          const kind = opt.getAttribute('data-share');
+          const pageUrl = window.location.href || 'https://tukoteam.com/';
+          const encUrl = encodeURIComponent(pageUrl);
+          const encText = encodeURIComponent('¡Mira esta compra grupal!');
+          const urls = {
+            instagram: 'https://www.instagram.com/',
+            telegram: 'https://t.me/share/url?url=' + encUrl + '&text=' + encText,
+            whatsapp: 'https://wa.me/?text=' + encText + '%20' + encUrl,
+            x: 'https://twitter.com/intent/tweet?text=' + encText + '&url=' + encUrl,
+          };
+          if (urls[kind]) {
+            window.open(urls[kind], '_blank', 'noopener,noreferrer');
           }
+          setShareMenuOpen(false);
         });
       }
 
