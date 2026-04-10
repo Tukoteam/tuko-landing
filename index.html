@@ -686,20 +686,24 @@
     z-index: 1;
   }
   .card {
-    background: linear-gradient(165deg, #fafbff 0%, #eef2ff 48%, #f6f8fc 100%);
-    border: 1.5px solid rgba(61, 80, 242, 0.14);
+    background: linear-gradient(165deg, #fafdff 0%, #eefaff 48%, #f4fcfc 100%);
+    border: 1.5px solid rgba(34, 211, 238, 0.16);
     border-radius: 20px;
     padding: 36px 28px 32px;
     text-align: center;
-    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    transition:
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.65s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .card:hover {
     transform: translateY(-6px);
-    border-color: rgba(61, 80, 242, 0.65);
+    border-color: rgba(56, 189, 248, 0.42);
     box-shadow:
-      0 0 0 1px rgba(61, 80, 242, 0.25),
-      0 0 28px rgba(61, 80, 242, 0.18),
-      0 20px 48px rgba(20, 24, 38, 0.08);
+      0 0 0 1px rgba(125, 211, 252, 0.35),
+      0 0 40px rgba(34, 211, 238, 0.2),
+      0 0 72px rgba(165, 243, 252, 0.18),
+      0 20px 48px rgba(15, 23, 42, 0.06);
   }
   .card-ico {
     width: 54px; height: 54px;
