@@ -686,16 +686,20 @@
     z-index: 1;
   }
   .card {
-    background: var(--gray-1);
-    border: 1.5px solid var(--gray-2);
+    background: linear-gradient(165deg, #fafbff 0%, #eef2ff 48%, #f6f8fc 100%);
+    border: 1.5px solid rgba(61, 80, 242, 0.14);
     border-radius: 20px;
     padding: 36px 28px 32px;
     text-align: center;
-    transition: transform 0.22s ease, box-shadow 0.22s ease;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
   }
   .card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 20px 48px rgba(0,0,0,0.08);
+    border-color: rgba(61, 80, 242, 0.65);
+    box-shadow:
+      0 0 0 1px rgba(61, 80, 242, 0.25),
+      0 0 28px rgba(61, 80, 242, 0.18),
+      0 20px 48px rgba(20, 24, 38, 0.08);
   }
   .card-ico {
     width: 54px; height: 54px;
