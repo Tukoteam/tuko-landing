@@ -555,6 +555,77 @@
     box-shadow: 0 8px 32px rgba(61,80,242,0.48);
   }
 
+  .hero-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    color: var(--blue);
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: semi-expanded;
+    padding: 6px 28px;
+    border-radius: 12px;
+    border: 2px solid var(--blue);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+    letter-spacing: -0.02em;
+  }
+  .btn-outline:hover {
+    background: rgba(61, 80, 242, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .how-demo-banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px 20px;
+    margin-top: 28px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 16px 22px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--blue-light) 0%, #fff 55%, var(--blue-light) 100%);
+    border: 1px solid rgba(61, 80, 242, 0.22);
+    text-decoration: none;
+    color: var(--black);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.45;
+    transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .how-demo-banner:hover {
+    box-shadow: 0 12px 36px rgba(61, 80, 242, 0.18);
+    transform: translateY(-2px);
+  }
+  .how-demo-banner__label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(61, 80, 242, 0.12);
+  }
+  .how-demo-banner__go {
+    font-weight: 600;
+    color: var(--blue);
+    white-space: nowrap;
+  }
+
   /* ══════════════════════════════
      LOGOS
   ══════════════════════════════ */
@@ -1213,6 +1284,7 @@
     <li><a href="#problema" data-i18n="nav_link_problema">¿Cuál es el problema?</a></li>
     <li><a href="#como-funciona" data-i18n="nav_link_como_funciona">Solución</a></li>
     <li><a href="#beneficios" data-i18n="nav_link_beneficios">Beneficios Clave</a></li>
+    <li><a href="landing-demo/index.html" data-i18n="nav_link_demo">Demo interactiva</a></li>
     <li><a href="blog/index.html" data-i18n="nav_link_blog">Blog</a></li>
     <li><a href="#cta" class="nav-cta" data-i18n="nav_cta">Habla con los Fundadores</a></li>
   </ul>
@@ -1231,6 +1303,7 @@
   <a href="#problema" data-i18n="nav_link_problema">¿Cuál es el problema?</a>
   <a href="#como-funciona" data-i18n="nav_link_como_funciona">Solución</a>
   <a href="#beneficios" data-i18n="nav_link_beneficios">Beneficios Clave</a>
+  <a href="landing-demo/index.html" data-i18n="nav_link_demo">Demo interactiva</a>
   <a href="blog/index.html" data-i18n="nav_link_blog">Blog</a>
   <a href="#cta" class="mobile-cta" data-i18n="nav_cta">Habla con los Fundadores</a>
 </div>
@@ -1257,7 +1330,10 @@
     </div>
     <h1 class="fade-up d1" data-i18n="hero_title">Convierte tu tráfico<br>en ventas colectivas.</h1>
     <p class="fade-up d2" data-i18n="hero_subtitle">Tuko permite que tus clientes se unan para comprar juntos y desbloquear descuentos directamente en tu tienda.</p>
-    <a href="#cta" class="btn-blue fade-up d3" data-i18n="hero_cta">Habla con los Fundadores</a>
+    <div class="hero-cta-row fade-up d3">
+      <a href="#cta" class="btn-blue" data-i18n="hero_cta">Habla con los Fundadores</a>
+      <a href="landing-demo/index.html" class="btn-outline" data-i18n="hero_demo_cta">Ver demo interactiva</a>
+    </div>
   </div>
 </section>
 
@@ -1333,6 +1409,11 @@
   <div class="fade-up"><span class="s-badge" data-i18n="how_badge">Solución</span></div>
   <h2 class="s-title fade-up d1" data-i18n="how_title">La solución: Compras colectivas.</h2>
   <p class="s-sub fade-up d2" data-i18n="how_sub">Tuko transforma cada producto de tu tienda en una experiencia de compra colectiva integrada directamente en tu eCommerce.</p>
+  <a href="landing-demo/index.html" class="how-demo-banner fade-up d3">
+    <span class="how-demo-banner__label" data-i18n="how_demo_kicker">Interactivo</span>
+    <span data-i18n="how_demo_text">Mira el flujo completo con animaciones: activar, unirse al grupo, crecer y estadísticas.</span>
+    <span class="how-demo-banner__go" data-i18n="how_demo_cta">Abrir demo →</span>
+  </a>
 </section>
 
 <!-- HOW IT WORKS — STEPS -->
@@ -1619,6 +1700,7 @@ const translations = {
     nav_link_problema: '¿Cuál es el problema?',
     nav_link_como_funciona: 'Solución',
     nav_link_beneficios: 'Beneficios Clave',
+    nav_link_demo: 'Demo interactiva',
     nav_link_blog: 'Blog',
     nav_cta: 'Habla con los Fundadores',
 
@@ -1627,6 +1709,10 @@ const translations = {
     hero_title: 'Convierte tu tráfico<br>en ventas colectivas.',
     hero_subtitle: 'Tuko permite que tus clientes se unan para comprar juntos y desbloquear descuentos directamente en tu tienda.',
     hero_cta: 'Habla con los Fundadores',
+    hero_demo_cta: 'Ver demo interactiva',
+    how_demo_kicker: 'Interactivo',
+    how_demo_text: 'Mira el flujo completo con animaciones: activar, unirse al grupo, crecer y estadísticas.',
+    how_demo_cta: 'Abrir demo →',
 
     /* LOGOS */
     logos_label: 'Con el apoyo de',
@@ -1923,6 +2009,7 @@ const translations = {
     nav_link_problema: "What's the problem?",
     nav_link_como_funciona: 'Solution',
     nav_link_beneficios: 'Key Benefits',
+    nav_link_demo: 'Interactive demo',
     nav_link_blog: 'Blog',
     nav_cta: 'Talk to the Founders',
 
@@ -1931,6 +2018,10 @@ const translations = {
     hero_title: 'Turn your traffic<br>into collective sales.',
     hero_subtitle: 'Tuko lets your customers join together to buy and unlock discounts directly in your store.',
     hero_cta: 'Talk to the Founders',
+    hero_demo_cta: 'View interactive demo',
+    how_demo_kicker: 'Interactive',
+    how_demo_text: 'See the full flow with animations: activate, join the group, grow, and stats.',
+    how_demo_cta: 'Open demo →',
 
     /* LOGOS */
     logos_label: 'Supported by',
