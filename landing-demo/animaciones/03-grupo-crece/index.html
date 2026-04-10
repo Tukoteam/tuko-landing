@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tuko — Niveles de descuento</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;800&display=swap');
+
+    :root {
+      --n-white: #ffffff;
+      --n-50: #f8f8f8;
+      --n-200: #e5e5e5;
+      --n-400: #9ca3af;
+      --n-600: #737373;
+      --n-900: #171717;
+      /* PNG referencia tarjeta (asset): 558×434 px → misma proporción en --tier-card-w / height */
+      --purple: #8b5cf6;
+      --purple-dark: #7c3aed;
+      --purple-soft: #f5f3ff;
+      --purple-track: #ede9fe;
+      --purple-glow: rgba(139, 92, 246, 0.22);
+      --menta: #10b981;
+      --menta-dark: #059669;
+      --menta-bg: #ecfdf5;
+      --shadow: 0 12px 48px rgba(15, 23, 42, 0.07);
+      --tier-card-w: 200px;
+      --tier-card-h: calc(var(--tier-card-w) * 434 / 558);
+      --tier-progress-h: 5px;
+      --viewport-max: 472px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--n-50);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .animation-viewport {
+      width: 100%;
+      max-width: var(--viewport-max);
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      background: var(--n-white);
+      box-shadow: var(--shadow);
+    }
+
+    .vignette {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.025);
+      z-index: 30;
+    }
+
+    .scene {
+      position: relative;
+      padding: 14px 0 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      justify-content: flex-start;
+    }
+
+    .scene-head {
+      padding: 0 22px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .scene-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--n-900);
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+
+    .scene-sub {
+      margin-top: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--n-600);
+      line-height: 1.35;
+    }
+
+    .counter-panel {
+      margin: 0 22px;
+      background: var(--n-white);
+      border: 1px solid #ececec;
+      border-radius: 14px;
+      padding: 11px 12px 11px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .counter-main {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .counter-num {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--n-900);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .counter-num.pulse {
+      animation: numPop 0.7s cubic-bezier(0.2, 0.95, 0.15, 1);
+    }
+
+    @keyframes numPop {
+      0% { transform: scale(1); }
+      28% { transform: scale(1.055); color: var(--purple); }
+      100% { transform: scale(1); }
+    }
+
+    .counter-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--n-600);
+      display: inline-block;
+    }
+
+    .counter-label.outro-reveal {
+      animation: outroLabelIn 0.72s cubic-bezier(0.22, 1, 0.32, 1) both;
+    }
+
+    @keyframes outroLabelIn {
+      from {
+        opacity: 0;
+        transform: translateY(7px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .avatar-stack {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      flex-shrink: 0;
+      max-width: 100%;
+      padding-right: 2px;
+    }
+
+    .stack-slot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2.5px solid var(--n-white);
+      margin-left: -11px;
+      background: linear-gradient(145deg, #c4b5fd 0%, var(--purple) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.42) translateX(28px);
+      transition:
+        opacity 0.58s cubic-bezier(0.2, 0.92, 0.2, 1),
+        transform 0.8s cubic-bezier(0.2, 0.92, 0.15, 1);
+    }
+
+    .stack-slot.visible {
+      opacity: 1;
+      transform: scale(1) translateX(0);
+    }
+
+    .stack-slot.visible.land-pop {
+      animation: stackLandPop 0.5s cubic-bezier(0.34, 1.45, 0.36, 1) both;
+    }
+
+    @keyframes stackLandPop {
+      0% {
+        transform: scale(1) translateX(0);
+      }
+      45% {
+        transform: scale(1.16) translateX(0);
+      }
+      100% {
+        transform: scale(1) translateX(0);
+      }
+    }
+
+    .stack-slot svg {
+      width: 17px;
+      height: 17px;
+      stroke: #fff;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .fly-person {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #c4b5fd 0%, var(--purple) 100%);
+      border: 2px solid #fff;
+      box-shadow: 0 6px 18px var(--purple-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 18;
+      opacity: 0.92;
+      animation: flyHorizontal 1.48s cubic-bezier(0.15, 0.75, 0.08, 1) forwards;
+    }
+
+    .fly-person svg {
+      width: 15px;
+      height: 15px;
+      stroke: #fff;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    @keyframes flyHorizontal {
+      0% {
+        opacity: 0;
+        transform: translate(var(--from-x), var(--from-y)) scale(0.4);
+      }
+      12% { opacity: 1; }
+      40% {
+        transform: translate(var(--mid-x), var(--mid-y)) scale(1.05);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--to-x), var(--to-y)) scale(0.76);
+      }
+    }
+
+    .carousel-shell {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      gap: 8px;
+    }
+
+    .carousel-window {
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: calc(var(--tier-card-h) + 108px);
+      overflow: hidden;
+      position: relative;
+      padding: 22px 20px 32px;
+      background: var(--n-white);
+    }
+
+    .carousel-track {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0;
+      flex: 0 0 auto;
+      margin: 0 auto 0 0;
+      padding: 12px 12px;
+      background: var(--n-white);
+      will-change: transform;
+      transform: translateZ(0);
+      transition:
+        transform 0.95s cubic-bezier(0.28, 0.9, 0.22, 1);
+    }
+
+    .carousel-track.pan-new-tier {
+      transition-duration: 1.78s;
+      transition-timing-function: cubic-bezier(0.14, 0.82, 0.06, 1);
+    }
+
+    .carousel-track.pan-outro {
+      transition-duration: 2s;
+      transition-timing-function: cubic-bezier(0.17, 0.86, 0.1, 1);
+    }
+
+    .carousel-arrow {
+      flex-shrink: 0;
+      width: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--n-200);
+      padding: 0;
+    }
+
+    .carousel-arrow svg {
+      width: 10px;
+      height: 10px;
+      stroke: #c4c4c4;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .tier-card {
+      position: relative;
+      box-sizing: border-box;
+      flex: 0 0 var(--tier-card-w);
+      width: var(--tier-card-w);
+      height: var(--tier-card-h);
+      min-height: var(--tier-card-h);
+      max-height: var(--tier-card-h);
+      background: var(--n-white);
+      border-radius: 17px;
+      border: 1px solid #e8e8e8;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+      overflow: hidden;
+      gap: 0;
+      transition:
+        transform 0.85s cubic-bezier(0.22, 0.92, 0.18, 1),
+        border-color 0.55s cubic-bezier(0.33, 1, 0.2, 1),
+        border-width 0.55s cubic-bezier(0.33, 1, 0.2, 1),
+        background 0.55s cubic-bezier(0.33, 1, 0.2, 1),
+        box-shadow 0.85s cubic-bezier(0.22, 0.92, 0.18, 1),
+        opacity 0.5s cubic-bezier(0.33, 1, 0.2, 1);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+    }
+
+    .tier-card-body {
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* Espacio para la barra (absolute) + aire mínimo sobre ella */
+      padding: 12px 11px calc(6px + var(--tier-progress-h));
+    }
+
+    .tier-badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      z-index: 4;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--n-white);
+      background: var(--purple);
+      padding: 4px 8px;
+      border-radius: 6px;
+      line-height: 1;
+      opacity: 0;
+      transform: scale(0.96);
+      transition:
+        opacity 0.4s ease,
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+      box-shadow: 0 2px 10px rgba(139, 92, 246, 0.35);
+    }
+
+    .tier-card.current .tier-badge {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .tier-card.future {
+      opacity: 0.94;
+      transform: scale(1);
+      border-color: #ececec;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    .tier-card.done {
+      border: 1.5px solid rgba(16, 185, 129, 0.45);
+      background: var(--menta-bg);
+      box-shadow: 0 4px 18px rgba(16, 185, 129, 0.11);
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .tier-card.current {
+      opacity: 1;
+      transform: translateZ(0);
+      z-index: 3;
+      border: 2px solid var(--purple);
+      background: var(--purple-soft);
+      /* Sombra más contenida para que no la coma overflow-x del carrusel */
+      box-shadow:
+        0 6px 22px var(--purple-glow),
+        0 3px 12px rgba(139, 92, 246, 0.11),
+        0 1px 4px rgba(139, 92, 246, 0.05);
+    }
+
+    .tier-card.current .tier-card-body {
+      padding-top: 27px;
+    }
+
+    .tier-ic {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 9px;
+      transition: background 0.5s ease, border 0.5s ease;
+    }
+
+    .tier-card.done .tier-ic {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1.5px solid var(--menta);
+    }
+
+    .tier-card.current .tier-ic {
+      background: var(--n-white);
+      border: 1.5px solid var(--purple);
+    }
+
+    .tier-card.future .tier-ic {
+      background: #fafafa;
+      border: 1px dashed #d4d4d4;
+    }
+
+    .tier-ic svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .tier-card.done .tier-ic svg { stroke: var(--menta-dark); }
+    .tier-card.current .tier-ic svg { stroke: var(--purple); }
+    .tier-card.future .tier-ic svg { stroke: var(--n-400); }
+
+    .tier-tag {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--n-600);
+      margin-bottom: 5px;
+      letter-spacing: -0.015em;
+      width: 100%;
+    }
+
+    .tier-card.done .tier-tag { color: var(--n-900); font-weight: 700; }
+    .tier-card.current .tier-tag { color: var(--n-900); font-weight: 700; }
+    .tier-card.future .tier-tag { color: #9ca3af; font-weight: 500; }
+
+    .tier-pct {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 7px;
+      white-space: nowrap;
+    }
+
+    .tier-pct small {
+      font-size: 0.5em;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .tier-card.done .tier-pct { color: var(--menta-dark); }
+    .tier-card.current .tier-pct { color: var(--purple); }
+    .tier-card.future .tier-pct { color: #4b5563; }
+
+    .tier-meta-host {
+      width: 100%;
+      flex: 1;
+      min-height: 0;
+      flex-shrink: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+    }
+
+    .tier-meta-single {
+      font-size: 10.5px;
+      font-weight: 500;
+      color: var(--n-600);
+      line-height: 1.4;
+      text-align: center;
+      width: 100%;
+    }
+
+    .tier-card.future .tier-meta-single { color: #9ca3af; }
+
+    .tier-meta-split {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 6px;
+      width: 100%;
+      padding: 0 2px;
+    }
+
+    .tier-meta-left,
+    .tier-meta-right {
+      font-size: 9.5px;
+      font-weight: 500;
+      line-height: 1.35;
+      max-width: 50%;
+      color: var(--n-600);
+    }
+
+    .tier-meta-left {
+      text-align: left;
+    }
+
+    .tier-meta-right {
+      text-align: right;
+    }
+
+    .tier-card.current .tier-meta-left,
+    .tier-card.current .tier-meta-right {
+      color: var(--n-600);
+      font-weight: 500;
+    }
+
+    /* Pegada al borde inferior de la tarjeta: evita franja clara entre cuerpo y borde */
+    .tier-progress {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: var(--tier-progress-h);
+      margin: 0;
+      border-radius: 0;
+      background: rgba(15, 23, 42, 0.08);
+      overflow: hidden;
+      z-index: 1;
+      transform: translateZ(0);
+    }
+
+    .tier-card.done .tier-progress {
+      background: rgba(5, 150, 105, 0.2);
+    }
+
+    .tier-card.current .tier-progress {
+      background: var(--purple-track);
+    }
+
+    .tier-card.future .tier-progress {
+      background: #ebebeb;
+    }
+
+    .tier-progress > span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      border-radius: 0;
+      transition: width 1.05s cubic-bezier(0.18, 0.88, 0.12, 1);
+    }
+
+    .tier-progress > span.progress-pop {
+      animation: progressBarPop 0.58s cubic-bezier(0.34, 1.2, 0.3, 1);
+    }
+
+    @keyframes progressBarPop {
+      0%, 100% {
+        filter: brightness(1);
+      }
+      40% {
+        filter: brightness(1.18);
+        box-shadow: 0 0 14px rgba(139, 92, 246, 0.35);
+      }
+    }
+
+    .tier-card.done .tier-progress > span.progress-pop {
+      animation-name: progressBarPopDone;
+    }
+
+    @keyframes progressBarPopDone {
+      0%, 100% {
+        filter: brightness(1);
+      }
+      40% {
+        filter: brightness(1.12);
+        box-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
+      }
+    }
+
+    .tier-card.done .tier-progress > span {
+      width: 100%;
+      background: linear-gradient(90deg, var(--menta-dark), var(--menta));
+    }
+
+    .tier-card.current .tier-progress > span {
+      background: linear-gradient(90deg, var(--purple-dark), var(--purple));
+    }
+
+    .tier-card.future .tier-progress > span {
+      width: 10%;
+      background: rgba(100, 116, 139, 0.45);
+      opacity: 1;
+    }
+
+    .tier-card.flash-done {
+      animation: tierFlash 0.48s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes tierFlash {
+      0%, 100% { filter: brightness(1); }
+      45% {
+        filter: brightness(1.05);
+        box-shadow: 0 0 0 4px rgba(20, 196, 146, 0.2);
+      }
+    }
+
+    .step-dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 0 22px 2px;
+      flex-shrink: 0;
+      margin-top: 0;
+    }
+
+    .step-dot {
+      height: 6px;
+      border-radius: 99px;
+      background: var(--n-200);
+      transform-origin: center center;
+      transition:
+        width 0.55s cubic-bezier(0.33, 1, 0.25, 1),
+        background 0.45s ease,
+        opacity 0.45s ease,
+        transform 0.5s cubic-bezier(0.34, 1.2, 0.2, 1);
+      width: 6px;
+      transform: scaleY(1);
+    }
+
+    .step-dot.passed {
+      background: var(--menta);
+      opacity: 0.85;
+    }
+
+    .step-dot.active {
+      width: 26px;
+      background: var(--purple);
+      opacity: 1;
+      transform: scaleY(1.2);
+    }
+
+    .step-dot.upcoming {
+      opacity: 0.55;
+    }
+
+    .fx-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 16;
+      overflow: visible;
+    }
+
+    .counter-num.outro-glow {
+      animation: outroPulse 1.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes outroPulse {
+      0%, 100% { transform: scale(1); color: var(--n-900); }
+      40% {
+        transform: scale(1.04);
+        color: var(--menta-dark);
+      }
+    }
+
+    .tier-card.done-outro-pulse {
+      animation: cardOutroPulse 0.88s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes cardOutroPulse {
+      0%, 100% {
+        box-shadow: 0 4px 18px rgba(16, 185, 129, 0.11);
+        filter: brightness(1);
+      }
+      50% {
+        box-shadow: 0 10px 28px rgba(16, 185, 129, 0.22);
+        filter: brightness(1.04);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .carousel-track,
+      .carousel-track.pan-new-tier,
+      .carousel-track.pan-outro {
+        transition-duration: 0.05s !important;
+      }
+
+      .tier-card,
+      .tier-progress > span,
+      .stack-slot,
+      .counter-num.pulse {
+        transition-duration: 0.05s !important;
+      }
+
+      .fly-person {
+        animation: none !important;
+        opacity: 0 !important;
+      }
+
+      .tier-card.flash-done {
+        animation: none !important;
+      }
+
+      .counter-num.outro-glow {
+        animation: none !important;
+      }
+
+      .tier-card.done-outro-pulse {
+        animation: none !important;
+      }
+
+      .stack-slot.visible.land-pop {
+        animation: none !important;
+      }
+
+      .counter-label.outro-reveal {
+        animation: none !important;
+      }
+
+      .tier-progress > span.progress-pop {
+        animation: none !important;
+      }
+
+      .step-dot.active {
+        transform: scaleY(1) !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="animation-viewport" id="viewport">
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="scene">
+      <div class="scene-head">
+        <p class="scene-title">Niveles de descuento</p>
+        <p class="scene-sub">Más personas unidas, más ahorro para todas</p>
+      </div>
+
+      <div class="counter-panel">
+        <div class="counter-main">
+          <span class="counter-num" id="counterNum">0</span>
+          <span class="counter-label" id="counterSub">Personas en el grupo</span>
+        </div>
+        <div class="avatar-stack" id="avatarStack" aria-hidden="true"></div>
+      </div>
+
+      <div class="carousel-shell">
+        <div class="carousel-window" id="carouselWindow">
+          <div class="carousel-track" id="carouselTrack"></div>
+        </div>
+        <div class="step-dots" id="stepDots" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="fx-layer" id="fxLayer"></div>
+  </div>
+
+  <script>
+    (function () {
+      const TIERS = [
+        { people: 5, pct: 5 },
+        { people: 15, pct: 10 },
+        { people: 40, pct: 15 },
+        { people: 90, pct: 20 },
+      ];
+
+      const arrowBetween =
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6L8 12l6 6"/></svg>';
+
+      const userPath =
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20.5c0-4 3-7 6.5-7s6.5 3 6.5 7"/></svg>';
+
+      const checkPath =
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>';
+
+      const arrowPath =
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12l7-7 7 7"/></svg>';
+
+      const spinnerPath =
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-width="1.75"><path d="M12 3.5v2M12 18.5v2M3.5 12H5.5M18.5 12h2M6 6l1.4 1.4M16.6 16.6l1.4 1.4M18 6l-1.4 1.4M7.4 16.6L6 18"/></g></svg>';
+
+      const viewport = document.getElementById('viewport');
+      const counterNum = document.getElementById('counterNum');
+      const counterSub = document.getElementById('counterSub');
+      const avatarStack = document.getElementById('avatarStack');
+      const carouselWindow = document.getElementById('carouselWindow');
+      const carouselTrack = document.getElementById('carouselTrack');
+      const stepDots = document.getElementById('stepDots');
+      const fxLayer = document.getElementById('fxLayer');
+
+      const reduceMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches;
+
+      const TIMING = {
+        carouselFocusDelayMs: reduceMotion ? 0 : 140,
+        initialPause: reduceMotion ? 200 : 380,
+        afterInitialSync: reduceMotion ? 220 : 420,
+        afterOutroPan: reduceMotion ? 200 : 540,
+        afterOutroMessage: reduceMotion ? 500 : 1000,
+        outroGlowHold: reduceMotion ? 0 : 1180,
+        outroDonePulse: reduceMotion ? 0 : 640,
+        /* Tras el outro: tiempo para “leer” el final antes de reiniciar */
+        loopEndHold: reduceMotion ? 700 : 3200,
+        /* Tras volver a 0 / estado inicial: pausa antes de que arranque otra vez la intro */
+        afterResetPause: reduceMotion ? 320 : 1100,
+        milestoneFlashMs: reduceMotion ? 0 : 420,
+      };
+
+      let lastFocus = -1;
+      let syncGen = 0;
+      let counterTweenGen = 0;
+
+      function animateCounterNumber(target, durationMs) {
+        if (reduceMotion || durationMs <= 0) {
+          counterNum.textContent = String(target);
+          return Promise.resolve();
+        }
+        const gen = ++counterTweenGen;
+        const start = parseInt(counterNum.textContent, 10) || 0;
+        if (start === target) {
+          return Promise.resolve();
+        }
+        const dur = durationMs;
+        const t0 = performance.now();
+        return new Promise(function (resolve) {
+          function frame(now) {
+            if (gen !== counterTweenGen) {
+              counterNum.textContent = String(target);
+              resolve();
+              return;
+            }
+            const u = Math.min(1, (now - t0) / dur);
+            const e = 1 - (1 - u) * (1 - u);
+            counterNum.textContent = String(
+              Math.round(start + (target - start) * e)
+            );
+            if (u < 1) {
+              requestAnimationFrame(frame);
+            } else {
+              counterNum.textContent = String(target);
+              resolve();
+            }
+          }
+          requestAnimationFrame(frame);
+        });
+      }
+
+      function tierState(count, index) {
+        const t = TIERS[index];
+        const prev = index === 0 ? 0 : TIERS[index - 1].people;
+        if (count >= t.people) return 'done';
+        if (count >= prev) return 'current';
+        return 'future';
+      }
+
+      function focusTierIndex(count) {
+        for (let i = 0; i < TIERS.length; i++) {
+          if (tierState(count, i) === 'current') return i;
+        }
+        for (let i = TIERS.length - 1; i >= 0; i--) {
+          if (tierState(count, i) === 'done') return i;
+        }
+        return 0;
+      }
+
+      function buildCards() {
+        carouselTrack.innerHTML = '';
+        TIERS.forEach((t, i) => {
+          const div = document.createElement('div');
+          div.className = 'tier-card future';
+          div.dataset.index = String(i);
+          div.innerHTML =
+            '<span class="tier-badge">Actual</span>' +
+            '<div class="tier-card-body">' +
+            '<div class="tier-ic">' +
+            spinnerPath +
+            '</div>' +
+            '<div class="tier-tag">—</div>' +
+            '<div class="tier-pct">' +
+            t.pct +
+            '<small> % OFF</small></div>' +
+            '<div class="tier-meta-host"></div>' +
+            '</div>' +
+            '<div class="tier-progress"><span></span></div>';
+          carouselTrack.appendChild(div);
+
+          if (i < TIERS.length - 1) {
+            const ar = document.createElement('div');
+            ar.className = 'carousel-arrow';
+            ar.setAttribute('aria-hidden', 'true');
+            ar.innerHTML = arrowBetween;
+            carouselTrack.appendChild(ar);
+          }
+        });
+
+        stepDots.innerHTML = '';
+        TIERS.forEach(() => {
+          const d = document.createElement('div');
+          d.className = 'step-dot upcoming';
+          stepDots.appendChild(d);
+        });
+      }
+
+      function syncCarouselFocus(count, force, options) {
+        options = options || {};
+        const idx =
+          typeof options.focusIndex === 'number'
+            ? options.focusIndex
+            : focusTierIndex(count);
+        if (!force && idx === lastFocus) return;
+
+        const prev = lastFocus;
+        const shouldDelay =
+          !reduceMotion &&
+          !force &&
+          prev !== -1 &&
+          idx !== prev &&
+          typeof options.focusIndex !== 'number';
+
+        const myGen = ++syncGen;
+
+        function applyTransform() {
+          if (myGen !== syncGen) return;
+          lastFocus = idx;
+
+          const cards = carouselTrack.querySelectorAll('.tier-card');
+          const card = cards[idx];
+          if (!card || !carouselWindow) return;
+
+          carouselTrack.classList.remove('pan-new-tier', 'pan-outro');
+          if (!reduceMotion) {
+            if (options.outroPan) {
+              carouselTrack.classList.add('pan-outro');
+            } else if (prev >= 0 && prev !== idx) {
+              carouselTrack.classList.add('pan-new-tier');
+            }
+          }
+
+          const csw = window.getComputedStyle(carouselWindow);
+          const padL = parseFloat(csw.paddingLeft) || 0;
+          const padR = parseFloat(csw.paddingRight) || 0;
+          /* Área útil del carrusel (sin padding): antes usábamos clientWidth entero y el min era demasiado poco negativo → última tarjeta cortada */
+          const innerW = carouselWindow.clientWidth - padL - padR;
+          const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+          const lastI = TIERS.length - 1;
+          const peekNext =
+            idx >= lastI ? 0 : idx >= lastI - 1 ? 5 : 12;
+          let target = innerW / 2 - cardCenter - peekNext;
+          let min = innerW - carouselTrack.scrollWidth;
+          let x = Math.max(min, Math.min(0, target));
+          carouselTrack.style.transform = 'translateX(' + x + 'px)';
+
+          requestAnimationFrame(function () {
+            if (myGen !== syncGen) return;
+            const winR = carouselWindow.getBoundingClientRect();
+            const cardR = card.getBoundingClientRect();
+            const innerRight = winR.right - padR;
+            const innerLeft = winR.left + padL;
+            let nudge = 0;
+            if (cardR.right > innerRight - 1) {
+              nudge = innerRight - 1 - cardR.right;
+            } else if (cardR.left < innerLeft + 1) {
+              nudge = innerLeft + 1 - cardR.left;
+            }
+            if (nudge !== 0) {
+              x = Math.max(min, Math.min(0, x + nudge));
+              carouselTrack.style.transform = 'translateX(' + x + 'px)';
+            }
+          });
+        }
+
+        if (shouldDelay) {
+          setTimeout(applyTransform, TIMING.carouselFocusDelayMs);
+        } else {
+          applyTransform();
+        }
+      }
+
+      function updateStepDots(count) {
+        const dots = stepDots.querySelectorAll('.step-dot');
+        dots.forEach((dot, i) => {
+          dot.classList.remove('passed', 'active', 'upcoming');
+          const st = tierState(count, i);
+          if (st === 'done') dot.classList.add('passed');
+          else if (st === 'current') dot.classList.add('active');
+          else dot.classList.add('upcoming');
+        });
+      }
+
+      function updateCards(count) {
+        const cards = carouselTrack.querySelectorAll('.tier-card');
+        cards.forEach((card, i) => {
+          const t = TIERS[i];
+          const prev = i === 0 ? 0 : TIERS[i - 1].people;
+          const st = tierState(count, i);
+          card.classList.remove('done', 'current', 'future');
+          card.classList.add(st === 'done' ? 'done' : st === 'current' ? 'current' : 'future');
+
+          const ic = card.querySelector('.tier-ic');
+          const tag = card.querySelector('.tier-tag');
+          const pct = card.querySelector('.tier-pct');
+          const metaHost = card.querySelector('.tier-meta-host');
+          const bar = card.querySelector('.tier-progress span');
+
+          pct.innerHTML = t.pct + '<small> % OFF</small>';
+
+          if (st === 'done') {
+            ic.innerHTML = checkPath;
+            tag.textContent = 'Alcanzado';
+            metaHost.innerHTML =
+              '<div class="tier-meta-single">' + t.people + ' personas</div>';
+            bar.style.width = '100%';
+          } else if (st === 'current') {
+            ic.innerHTML = arrowPath;
+            tag.textContent = 'Por delante';
+            const need = t.people - count;
+            const plazasLine =
+              need === 1
+                ? 'Falta 1 plaza'
+                : 'Faltan ' + need + ' plazas';
+            metaHost.innerHTML =
+              '<div class="tier-meta-split">' +
+              '<span class="tier-meta-left">' +
+              count +
+              '/' +
+              t.people +
+              ' personas unidas</span>' +
+              '<span class="tier-meta-right">' +
+              plazasLine +
+              '</span></div>';
+            bar.style.width =
+              ((count - prev) / (t.people - prev)) * 100 + '%';
+          } else {
+            ic.innerHTML = spinnerPath;
+            tag.textContent = 'Por alcanzar';
+            metaHost.innerHTML =
+              '<div class="tier-meta-single">' + t.people + ' personas</div>';
+            bar.style.removeProperty('width');
+          }
+        });
+
+        updateStepDots(count);
+        requestAnimationFrame(() => syncCarouselFocus(count, false));
+      }
+
+      function setCounter(n, sub) {
+        counterTweenGen += 1;
+        counterNum.textContent = String(n);
+        if (sub) counterSub.textContent = sub;
+      }
+
+      function pulseCounter() {
+        counterNum.classList.remove('pulse');
+        void counterNum.offsetWidth;
+        counterNum.classList.add('pulse');
+      }
+
+      const MAX_STACK = 6;
+      function refreshStack(n) {
+        avatarStack.innerHTML = '';
+        const show = Math.min(n, MAX_STACK);
+        for (let i = 0; i < show; i++) {
+          const slot = document.createElement('div');
+          slot.className = 'stack-slot visible';
+          slot.style.transitionDelay = i * 0.05 + 's';
+          if (!reduceMotion && show > 0 && i === show - 1) {
+            slot.classList.add('land-pop');
+            slot.style.animationDelay = i * 0.05 + 0.76 + 's';
+          }
+          slot.innerHTML = userPath;
+          avatarStack.appendChild(slot);
+        }
+      }
+
+      function pulseProgressPop(tierIndex) {
+        if (reduceMotion) return;
+        const cards = carouselTrack.querySelectorAll('.tier-card');
+        const span =
+          cards[tierIndex] &&
+          cards[tierIndex].querySelector('.tier-progress span');
+        if (!span) return;
+        span.classList.remove('progress-pop');
+        void span.offsetWidth;
+        span.classList.add('progress-pop');
+        setTimeout(function () {
+          span.classList.remove('progress-pop');
+        }, 620);
+      }
+
+      function spawnFlyingPerson(count, fromCardIndex) {
+        const r = viewport.getBoundingClientRect();
+        const stackR = avatarStack.getBoundingClientRect();
+        const half = 15;
+        const toX = stackR.left - r.left + stackR.width / 2 - half;
+        const toY = stackR.top - r.top + stackR.height / 2 - half;
+        const margin = 18;
+
+        function clamp(v, lo, hi) {
+          return Math.max(lo, Math.min(hi, v));
+        }
+
+        const cards = carouselTrack.querySelectorAll('.tier-card');
+        const idx =
+          typeof fromCardIndex === 'number'
+            ? fromCardIndex
+            : focusTierIndex(count);
+        const card = cards[idx];
+        let fromX;
+        let fromY;
+        let midX;
+        let midY;
+
+        if (card) {
+          const ic = card.querySelector('.tier-ic');
+          const box = ic ? ic.getBoundingClientRect() : card.getBoundingClientRect();
+          fromX = box.left + box.width / 2 - r.left - half;
+          fromY = box.top + box.height / 2 - r.top - half;
+          midX = (fromX + toX) / 2 + (Math.random() * 28 - 14);
+          /* Arco más bajo: menos solape con la tarjeta y menos clip del viewport */
+          midY = Math.min(fromY, toY) - (14 + Math.random() * 12);
+        } else {
+          fromX = 10 + Math.random() * 22;
+          fromY = toY + (Math.random() * 8 - 4);
+          midX = toX - (toX - fromX) * 0.4;
+          midY = Math.min(fromY, toY) - 12 - Math.random() * 5;
+        }
+
+        fromX = clamp(fromX, margin + half, r.width - margin - half);
+        fromY = clamp(fromY, margin + half, r.height - margin - half);
+        midX = clamp(midX, margin + half, r.width - margin - half);
+        midY = clamp(midY, margin + half, r.height - margin - half);
+
+        const el = document.createElement('div');
+        el.className = 'fly-person';
+        el.style.left = '0';
+        el.style.top = '0';
+        el.style.setProperty('--from-x', fromX + 'px');
+        el.style.setProperty('--from-y', fromY + 'px');
+        el.style.setProperty('--mid-x', midX + 'px');
+        el.style.setProperty('--mid-y', midY + 'px');
+        el.style.setProperty('--to-x', toX + 'px');
+        el.style.setProperty('--to-y', toY + 'px');
+        el.innerHTML = userPath;
+        fxLayer.appendChild(el);
+        setTimeout(() => el.remove(), 1600);
+      }
+
+      function wait(ms) {
+        return new Promise((res) => setTimeout(res, ms));
+      }
+
+      function flashTierNonBlocking(tierIndex) {
+        if (reduceMotion || TIMING.milestoneFlashMs <= 0) return;
+        const cards = carouselTrack.querySelectorAll('.tier-card');
+        const card = cards[tierIndex];
+        if (!card) return;
+        card.classList.add('flash-done');
+        setTimeout(function () {
+          card.classList.remove('flash-done');
+        }, TIMING.milestoneFlashMs);
+      }
+
+      async function runPhase(from, to, stepMs, burstEvery) {
+        let prevCount = from;
+        for (let n = from + 1; n <= to; n++) {
+          counterSub.textContent = 'Personas en el grupo';
+          const stepDelta = n - prevCount;
+          const animMs = reduceMotion
+            ? 0
+            : Math.min(260, 52 + stepDelta * 28);
+          await animateCounterNumber(n, animMs);
+          prevCount = n;
+
+          updateCards(n);
+          refreshStack(n);
+
+          if (!reduceMotion) {
+            pulseCounter();
+            requestAnimationFrame(function () {
+              requestAnimationFrame(function () {
+                spawnFlyingPerson(n);
+              });
+            });
+            for (let ti = 0; ti < TIERS.length; ti++) {
+              if (n === TIERS[ti].people) {
+                flashTierNonBlocking(ti);
+                pulseProgressPop(ti);
+                setTimeout(function () {
+                  spawnFlyingPerson(n, ti);
+                }, 55);
+                setTimeout(function () {
+                  spawnFlyingPerson(n, ti);
+                }, 130);
+                break;
+              }
+            }
+          }
+
+          let delay =
+            n < 12 ? stepMs : n < 35 ? Math.max(92, stepMs - 35) : Math.max(52, stepMs - 62);
+          if (reduceMotion) {
+            delay = Math.max(32, Math.round(delay * 0.38));
+          }
+          await wait(burstEvery && n % burstEvery === 0 ? delay * 0.58 : delay);
+        }
+      }
+
+      async function loop() {
+        lastFocus = -1;
+        counterTweenGen += 1;
+        counterSub.classList.remove('outro-reveal');
+        buildCards();
+        setCounter(0, 'Personas en el grupo');
+        updateCards(0);
+        refreshStack(0);
+        carouselTrack.classList.remove('pan-new-tier', 'pan-outro');
+        carouselTrack.style.transition = 'none';
+        carouselTrack.style.transform = 'translateX(0px)';
+        void carouselTrack.offsetWidth;
+        carouselTrack.style.transition = '';
+        await wait(TIMING.afterResetPause);
+        await wait(TIMING.initialPause);
+        syncCarouselFocus(0, true);
+        await wait(TIMING.afterInitialSync);
+
+        await runPhase(0, 5, 430, null);
+        await runPhase(5, 15, 250, 2);
+        await runPhase(15, 40, 110, 3);
+        await runPhase(40, 90, 62, 5);
+
+        lastFocus = -1;
+        syncCarouselFocus(90, true, {
+          focusIndex: 1,
+          outroPan: true,
+        });
+        await wait(TIMING.afterOutroPan);
+
+        counterSub.textContent = 'Todos los hitos desbloqueados';
+        counterSub.classList.remove('outro-reveal');
+        void counterSub.offsetWidth;
+        if (!reduceMotion) {
+          counterSub.classList.add('outro-reveal');
+        }
+        await wait(TIMING.afterOutroMessage);
+
+        if (!reduceMotion) {
+          counterNum.classList.remove('outro-glow');
+          void counterNum.offsetWidth;
+          counterNum.classList.add('outro-glow');
+          await wait(TIMING.outroGlowHold);
+          counterNum.classList.remove('outro-glow');
+
+          const dones = carouselTrack.querySelectorAll('.tier-card.done');
+          dones.forEach((c) => c.classList.add('done-outro-pulse'));
+          await wait(TIMING.outroDonePulse);
+          dones.forEach((c) => c.classList.remove('done-outro-pulse'));
+        }
+
+        await wait(TIMING.loopEndHold);
+
+        loop();
+      }
+
+      loop();
+    })();
+  </script>
+</body>
+</html>
