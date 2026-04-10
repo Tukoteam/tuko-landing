@@ -877,14 +877,33 @@
     margin-left: 14px;
   }
   .lang-opt {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     background: none; border: none; cursor: pointer;
     font-family: 'Mona Sans', sans-serif;
     font-size: 12px; font-weight: 700; font-stretch: semi-expanded;
     color: var(--gray-3); border-radius: 6px;
-    padding: 4px 9px; transition: all 0.15s;
+    padding: 5px 10px; transition: all 0.15s;
     letter-spacing: 0.02em;
   }
+  .lang-opt-flag {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    line-height: 0;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
+  }
+  .lang-opt-flag svg {
+    display: block;
+    width: 22px;
+    height: 15px;
+  }
   .lang-opt.active { background: white; color: var(--blue); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .lang-opt.active .lang-opt-flag { box-shadow: 0 0 0 1px rgba(61,80,242,0.2); }
   .lang-opt:hover:not(.active) { color: var(--black); }
 
     /* ══════════════════════════════
@@ -1238,9 +1257,19 @@
   <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
-  <div class="lang-switcher">
-    <button class="lang-opt active" data-lang="es" aria-label="Cambiar idioma a Español">ES</button>
-    <button class="lang-opt" data-lang="en" aria-label="Switch language to English">EN</button>
+  <div class="lang-switcher" role="group" aria-label="Selector de idioma">
+    <button type="button" class="lang-opt active" data-lang="es" aria-label="Cambiar idioma a Español">
+      <span class="lang-opt-flag" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" width="22" height="15"><rect width="3" height="2" fill="#c60b1e"/><rect width="3" height="1" y="0.5" fill="#ffc400"/></svg>
+      </span>
+      <span class="lang-opt-label">ES</span>
+    </button>
+    <button type="button" class="lang-opt" data-lang="en" aria-label="Switch language to English">
+      <span class="lang-opt-flag" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="22" height="15"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg>
+      </span>
+      <span class="lang-opt-label">EN</span>
+    </button>
   </div>
 </nav>
 </header>
