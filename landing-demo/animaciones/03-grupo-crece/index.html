@@ -891,6 +891,7 @@
       let lastFocus = -1;
       let syncGen = 0;
       let counterTweenGen = 0;
+      let demoLangAppliedOnce = false;
 
       function animateCounterNumber(target, durationMs) {
         target = clampPeople(target);
@@ -1161,7 +1162,13 @@
       }
 
       function applyDemoLang(lang) {
-        demoLang = lang === 'en' ? 'en' : 'es';
+        const next = lang === 'en' ? 'en' : 'es';
+        /* Evita postMessage duplicado (carga padre + iframes) que refresca el contador en móvil */
+        if (demoLangAppliedOnce && next === demoLang) {
+          return;
+        }
+        demoLangAppliedOnce = true;
+        demoLang = next;
         document.documentElement.lang = demoLang;
         const st = document.querySelector('.scene-title');
         if (st) st.textContent = t('sceneTitle');

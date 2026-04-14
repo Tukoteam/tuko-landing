@@ -872,9 +872,14 @@
   /* separación entre pasos */
   .how-step + .how-step { margin-top: 40px; }
 
+  /* Mismo ancho tope en los 4 pasos (alineado con demo «Niveles»); evita marco blanco enorme */
+  .how-steps > .how-step .how-anim-box {
+    width: min(440px, min(92vw, calc(100vw - 28px)));
+    max-width: 440px;
+    margin-inline: auto;
+  }
+
   .how-anim-box {
-    width: min(300px, min(76%, calc(100vw - 28px)));
-    max-width: 100%;
     aspect-ratio: 1 / 1;
     background: #ffffff;
     border-radius: 14px;
@@ -901,35 +906,24 @@
     transform: translateZ(0);
   }
 
-  /* Demo «Unirse al grupo» (paso 2): KPI + cantidad + Continuar dentro del marco */
-  .how-steps > .how-step:nth-child(2) .how-anim-box--embed {
-    aspect-ratio: 9 / 13.2;
-    min-height: 500px;
-  }
-  .how-steps > .how-step:nth-child(2) .how-step-iframe {
-    min-height: 480px;
+  /* Paso 1 — ratio como la demo interna (~9/10) */
+  .how-steps > .how-step:nth-child(1) .how-anim-box--embed {
+    aspect-ratio: 9 / 10;
   }
 
-  /* Demo «Niveles de descuento»: un poco más ancha (2 tarjetas) + alto sin scroll */
-  .how-steps > .how-step:nth-child(3) .how-anim-box {
-    width: min(440px, min(92vw, calc(100vw - 28px)));
-    max-width: 440px;
+  /* Paso 2 — escena más alta (cantidad + KPI) */
+  .how-steps > .how-step:nth-child(2) .how-anim-box--embed {
+    aspect-ratio: 9 / 11.65;
   }
+
+  /* Paso 3 — niveles / carrusel */
   .how-steps > .how-step:nth-child(3) .how-anim-box--embed {
     aspect-ratio: 9 / 12.5;
-    min-height: 500px;
-  }
-  .how-steps > .how-step:nth-child(3) .how-step-iframe {
-    min-height: 420px;
   }
 
-  /* Demo «Estadísticas»: altura extra para las 4 KPI sin scroll en el iframe */
+  /* Paso 4 — estadísticas */
   .how-steps > .how-step:nth-child(4) .how-anim-box--embed {
     aspect-ratio: 9 / 12.8;
-    min-height: 500px;
-  }
-  .how-steps > .how-step:nth-child(4) .how-step-iframe {
-    min-height: 480px;
   }
 
   /* Iframe a relleno estable (Safari / iOS: height 100% en flex) */
@@ -1330,45 +1324,16 @@
     .how-step.reversed > .how-step-visual { order: unset; }
     .how-step-text { padding: 48px 20px 40px; }
     .how-step.reversed > .how-step-text { padding: 48px 20px 40px; }
-    .how-step-visual { min-height: 200px; padding: 14px 10px; }
+    .how-step-visual { min-height: 0; padding: 14px 10px; }
+    .how-steps > .how-step .how-anim-box {
+      width: min(440px, calc(100vw - 24px));
+      max-width: 440px;
+      margin-inline: auto;
+    }
     .how-anim-box {
-      min-height: 200px;
-      width: min(100%, calc(100vw - 24px));
-      max-width: 100%;
+      min-height: 0;
     }
     .how-step-iframe { min-height: 0; }
-    .how-steps > .how-step:nth-child(1) .how-anim-box--embed {
-      min-height: min(380px, 72dvh);
-      min-height: min(380px, 72vh);
-    }
-    .how-steps > .how-step:nth-child(2) .how-anim-box--embed {
-      min-height: min(520px, 84dvh);
-      min-height: min(520px, 84vh);
-      aspect-ratio: 9 / 14;
-    }
-    .how-steps > .how-step:nth-child(2) .how-step-iframe {
-      min-height: 0;
-    }
-    .how-steps > .how-step:nth-child(3) .how-anim-box {
-      width: 100%;
-      max-width: none;
-    }
-    .how-steps > .how-step:nth-child(3) .how-anim-box--embed {
-      min-height: min(520px, 84dvh);
-      min-height: min(520px, 84vh);
-      aspect-ratio: 9 / 14;
-    }
-    .how-steps > .how-step:nth-child(3) .how-step-iframe {
-      min-height: 0;
-    }
-    .how-steps > .how-step:nth-child(4) .how-anim-box--embed {
-      min-height: min(480px, 82dvh);
-      min-height: min(480px, 82vh);
-      aspect-ratio: 9 / 13;
-    }
-    .how-steps > .how-step:nth-child(4) .how-step-iframe {
-      min-height: 0;
-    }
 
     /* ── Carrusel logos móvil: fluido, sin parpadeo ── */
     .logos-track {
@@ -1646,7 +1611,7 @@
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/01-activar-compra/index.html" title="Demo: activar compra colectiva en el producto" loading="lazy"></iframe>
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/01-activar-compra/index.html" title="Demo: activar compra colectiva en el producto" loading="eager"></iframe>
       </div>
     </div>
   </div>
@@ -1659,7 +1624,7 @@
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/02-unirse-al-grupo/index.html" title="Demo: unirse al grupo y ver el ahorro" loading="lazy"></iframe>
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/02-unirse-al-grupo/index.html" title="Demo: unirse al grupo y ver el ahorro" loading="eager"></iframe>
       </div>
     </div>
   </div>
@@ -1672,7 +1637,7 @@
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/03-grupo-crece/index.html" title="Demo: el grupo crece hacia el precio objetivo" loading="lazy"></iframe>
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/03-grupo-crece/index.html" title="Demo: el grupo crece hacia el precio objetivo" loading="eager"></iframe>
       </div>
     </div>
   </div>
@@ -1685,7 +1650,7 @@
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/04-estadisticas-cimentacion/index.html" title="Demo: estadísticas y confianza" loading="lazy"></iframe>
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/04-estadisticas-cimentacion/index.html" title="Demo: estadísticas y confianza" loading="eager"></iframe>
       </div>
     </div>
   </div>
