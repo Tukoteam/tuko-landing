@@ -56,7 +56,7 @@
     text-decoration: none;
   }
   .nav-logo img {
-    height: 26px;
+    height: 44px;
     width: auto;
     display: block;
   }
@@ -87,6 +87,74 @@
     transition: background 0.18s !important;
   }
   .nav-cta:hover { background: var(--blue) !important; color: white !important; }
+
+  /* ══════════════════════════════
+     HAMBURGER + MOBILE MENU (blog + páginas con main.css)
+  ══════════════════════════════ */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 210;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--black);
+    border-radius: 2px;
+    transition: transform 0.25s, opacity 0.25s;
+    transform-origin: center;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: calc(64px + env(safe-area-inset-top, 0px));
+    left: 0; right: 0;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    z-index: 199;
+    flex-direction: column;
+    padding: 16px 24px 24px;
+    gap: 4px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: semi-expanded;
+    color: var(--black);
+    text-decoration: none;
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    transition: color 0.18s;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { color: var(--blue); }
+  .mobile-menu .mobile-cta {
+    margin-top: 12px;
+    background: var(--black);
+    color: white !important;
+    text-align: center;
+    padding: 13px 20px !important;
+    border-radius: 8px;
+    font-weight: 600 !important;
+    border-bottom: none !important;
+  }
+  .mobile-menu .mobile-cta:hover { background: var(--blue); }
 
   /* ══════════════════════════════
      HERO — full screen animated grid
@@ -747,8 +815,22 @@
      RESPONSIVE
   ══════════════════════════════ */
   @media (max-width: 960px) {
-    nav { padding: 0 24px; }
+    nav { padding: 0 16px 0 12px; }
+    .nav-logo img { height: 36px; }
+    .lang-switcher {
+      margin-left: 6px;
+      padding: 2px;
+      flex-shrink: 0;
+    }
+    .lang-opt { padding: 5px 8px; gap: 4px; }
+    .lang-opt-label { font-size: 11px; }
     .nav-links { display: none; }
+    .nav-hamburger {
+      display: flex;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
     .hero-deco { display: none; }
     .problem .side-deco, .benefits .side-deco-l { display: none; }
     .logos-section, .problem, .benefits, .how-wrap, .cta-wrap { padding: 80px 24px; }
@@ -758,6 +840,12 @@
     footer { padding: 48px 24px 60px; flex-direction: column; min-height: 400px; }
     .footer-svg-logo { width: min(88%, 440px); max-height: 50%; }
     .footer-bottom { padding: 20px 24px; }
+  }
+
+  @media (max-width: 380px) {
+    nav { padding: 0 10px 0 8px; }
+    .lang-opt-label { display: none; }
+    .lang-opt { padding: 6px 7px; }
   }
 
   /* ══════════════════════════════
