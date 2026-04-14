@@ -124,35 +124,3 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
-
-/* ── Hamburger (blog y páginas que incluyen #navHamburger / #mobileMenu) ── */
-document.addEventListener('DOMContentLoaded', () => {
-  const hamburger = document.getElementById('navHamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-  if (!hamburger || !mobileMenu) return;
-
-  function toggleMenu(open) {
-    hamburger.classList.toggle('open', open);
-    mobileMenu.classList.toggle('open', open);
-    hamburger.setAttribute('aria-expanded', open);
-    document.body.style.overflow = open ? 'hidden' : '';
-  }
-
-  hamburger.addEventListener('click', () => {
-    toggleMenu(!hamburger.classList.contains('open'));
-  });
-
-  mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => toggleMenu(false));
-  });
-
-  document.addEventListener('click', e => {
-    if (
-      mobileMenu.classList.contains('open') &&
-      !mobileMenu.contains(e.target) &&
-      !hamburger.contains(e.target)
-    ) {
-      toggleMenu(false);
-    }
-  });
-});

@@ -643,11 +643,11 @@
   .logos-section .logo-pill img {
     max-width: min(272px, 100%);
   }
-  /* Marca colaborador (SVG partner-mark): sin filtro */
-  .logos-section .logo-pill img[src*="partner-mark"],
-  .hero .badge-x img[src*="partner-mark"] {
-    filter: none;
-    -webkit-filter: none;
+  /* PNG colaboradores exportados en escala de grises: tinte por marca (sustituir por PNG/SVG a color cuando los tengáis) */
+  .logos-section .logo-pill img[src*="Xiji Incubator"],
+  .hero .badge-x img[src*="Xiji Incubator"] {
+    filter: sepia(0.4) saturate(2.7) hue-rotate(168deg) brightness(1.03);
+    -webkit-filter: sepia(0.4) saturate(2.7) hue-rotate(168deg) brightness(1.03);
   }
   .logos-section .logo-pill img[src*="Saper - Logo"] {
     height: 110px;
@@ -900,13 +900,17 @@
     min-height: 480px;
   }
 
-  /* Demo «Niveles de descuento»: mismo marco/tamaño base que el paso 2 (rectángulo grande coherente) */
+  /* Demo «Niveles de descuento»: un poco más ancha (2 tarjetas) + alto sin scroll */
+  .how-steps > .how-step:nth-child(3) .how-anim-box {
+    width: min(440px, min(92vw, calc(100vw - 28px)));
+    max-width: 440px;
+  }
   .how-steps > .how-step:nth-child(3) .how-anim-box--embed {
-    aspect-ratio: 9 / 13.2;
-    min-height: 500px;
+    aspect-ratio: 9 / 11.5;
+    min-height: 450px;
   }
   .how-steps > .how-step:nth-child(3) .how-step-iframe {
-    min-height: 480px;
+    min-height: 420px;
   }
 
   /* Demo «Estadísticas»: altura extra para las 4 KPI sin scroll en el iframe */
@@ -1335,10 +1339,14 @@
     .how-steps > .how-step:nth-child(2) .how-step-iframe {
       min-height: 0;
     }
+    .how-steps > .how-step:nth-child(3) .how-anim-box {
+      width: 100%;
+      max-width: none;
+    }
     .how-steps > .how-step:nth-child(3) .how-anim-box--embed {
-      min-height: min(520px, 84dvh);
-      min-height: min(520px, 84vh);
-      aspect-ratio: 9 / 14;
+      min-height: min(440px, 78dvh);
+      min-height: min(440px, 78vh);
+      aspect-ratio: 9 / 12;
     }
     .how-steps > .how-step:nth-child(3) .how-step-iframe {
       min-height: 0;
@@ -1533,7 +1541,7 @@
   <div class="hero-content">
     <div class="badge fade-up">
       <div class="badge-x">
-        <img loading="lazy" src="assets/images/partner-mark.svg" alt="Xiji Incubator">
+        <img loading="lazy" src="assets/logos colaboradores/Xiji Incubator - Logo.png" alt="Xiji Incubator">
       </div>
       <span data-i18n="hero_badge">Con el respaldo de Xiji Incubator</span>
     </div>
@@ -1549,23 +1557,23 @@
   <div class="logos-overflow">
     <div class="logos-track">
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/UPM-color.svg" alt="Universidad Politécnica de Madrid"></div>
-      <div class="logo-pill"><img loading="lazy" src="assets/images/partner-mark.svg" alt="Xiji Incubator"></div>
+      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Xiji Incubator - Logo.png" alt="Xiji Incubator"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Ocea-Hub-color.png" alt="OCEA HUB"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Bio-Vida-Sana-color.png" alt="Bio Vida Sana"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Saper - Logo.png" alt="Sáper Organic"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/UPM-color.svg" alt="Universidad Politécnica de Madrid"></div>
-      <div class="logo-pill"><img loading="lazy" src="assets/images/partner-mark.svg" alt="Xiji Incubator"></div>
+      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Xiji Incubator - Logo.png" alt="Xiji Incubator"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Ocea-Hub-color.png" alt="OCEA HUB"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Bio-Vida-Sana-color.png" alt="Bio Vida Sana"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Saper - Logo.png" alt="Sáper Organic"></div>
       <!-- duplicate set 2 (para loop infinito sin huecos) -->
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/UPM-color.svg" alt="Universidad Politécnica de Madrid"></div>
-      <div class="logo-pill"><img loading="lazy" src="assets/images/partner-mark.svg" alt="Xiji Incubator"></div>
+      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Xiji Incubator - Logo.png" alt="Xiji Incubator"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Ocea-Hub-color.png" alt="OCEA HUB"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Bio-Vida-Sana-color.png" alt="Bio Vida Sana"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Saper - Logo.png" alt="Sáper Organic"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/UPM-color.svg" alt="Universidad Politécnica de Madrid"></div>
-      <div class="logo-pill"><img loading="lazy" src="assets/images/partner-mark.svg" alt="Xiji Incubator"></div>
+      <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Xiji Incubator - Logo.png" alt="Xiji Incubator"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Ocea-Hub-color.png" alt="OCEA HUB"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Bio-Vida-Sana-color.png" alt="Bio Vida Sana"></div>
       <div class="logo-pill"><img loading="lazy" src="assets/logos colaboradores/Saper - Logo.png" alt="Sáper Organic"></div>

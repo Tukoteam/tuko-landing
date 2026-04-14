@@ -24,40 +24,32 @@
       --menta-dark: #059669;
       --menta-bg: #ecfdf5;
       --shadow: 0 12px 48px rgba(15, 23, 42, 0.07);
-      --tier-progress-h: 5px;
-      /* Tarjetas: escala con el iframe (mismo marco grande que pasos 1–2–4) */
-      --tier-card-w: clamp(176px, 19vmin, 292px);
+      --tier-card-w: 200px;
       --tier-card-h: calc(var(--tier-card-w) * 434 / 558);
+      --tier-progress-h: 5px;
+      /* Un poco más ancho para que entren ~2 tarjetas del carrusel a la vez */
+      --viewport-max: 512px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-    }
-
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--n-50);
-      min-height: 100%;
+      min-height: 100vh;
       display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      justify-content: stretch;
-      padding: 8px;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
       -webkit-font-smoothing: antialiased;
     }
 
     .animation-viewport {
-      flex: 1 1 auto;
       width: 100%;
-      max-width: none;
-      min-height: 0;
+      max-width: var(--viewport-max);
       position: relative;
       overflow: hidden;
-      border-radius: 20px;
+      border-radius: 24px;
       background: var(--n-white);
       box-shadow: var(--shadow);
     }
@@ -919,10 +911,8 @@
         return new Promise(function (resolve) {
           function frame(now) {
             if (gen !== counterTweenGen) {
-              const shown = parseInt(String(counterNum.textContent).trim(), 10);
-              if (Number.isFinite(shown)) {
-                committedPeople = clampPeople(shown);
-              }
+              committedPeople = target;
+              counterNum.textContent = String(target);
               resolve();
               return;
             }
@@ -1178,6 +1168,14 @@
         }
       }
 
+      function setCounter(n, withGroupLabel) {
+        counterTweenGen += 1;
+        const v = clampPeople(n);
+        committedPeople = v;
+        counterNum.textContent = String(v);
+        if (withGroupLabel) counterSub.textContent = t('counterLabel');
+      }
+
       function pulseCounter() {
         counterNum.classList.remove('pulse');
         void counterNum.offsetWidth;
@@ -1296,7 +1294,7 @@
           const stepDelta = n - prevCount;
           const animMs = reduceMotion
             ? 0
-            : Math.min(480, 140 + stepDelta * 38);
+            : Math.min(260, 52 + stepDelta * 28);
           await animateCounterNumber(n, animMs);
           prevCount = n;
 
@@ -1340,23 +1338,9 @@
         showOutroLabel = false;
         counterSub.classList.remove('outro-reveal');
         buildCards();
+        setCounter(0, true);
         updateCards(0);
         refreshStack(0);
-        const rawShown = parseInt(String(counterNum.textContent).trim(), 10);
-        const dropFrom = clampPeople(
-          Number.isFinite(rawShown) ? rawShown : committedPeople
-        );
-        committedPeople = dropFrom;
-        if (reduceMotion || dropFrom <= 0) {
-          committedPeople = 0;
-          counterNum.textContent = '0';
-        } else {
-          await animateCounterNumber(
-            0,
-            Math.min(1500, 300 + dropFrom * 12)
-          );
-        }
-        counterSub.textContent = t('counterLabel');
         carouselTrack.classList.remove('pan-new-tier', 'pan-outro');
         carouselTrack.style.transition = 'none';
         carouselTrack.style.transform = 'translateX(0px)';
