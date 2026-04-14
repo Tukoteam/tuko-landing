@@ -3,7 +3,7 @@
 <head>
 <!-- ═══ SEO: Charset & Viewport ═══ -->
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <!-- ═══ SEO: Title & Description ═══ -->
 <title>Tuko — Plugin de Compras Colectivas para Shopify y WooCommerce España</title>
@@ -373,7 +373,12 @@
     background: var(--white);
     color: var(--black);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    min-height: 100dvh;
   }
+
+  img, video { max-width: 100%; height: auto; }
 
   /* ══════════════════════════════
      NAV
@@ -385,8 +390,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 48px;
-    height: 64px;
+    padding: env(safe-area-inset-top, 0px) 48px 0;
+    min-height: calc(64px + env(safe-area-inset-top, 0px));
+    height: auto;
     background: rgba(255,255,255,0.92);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
@@ -437,8 +443,9 @@
   .hero {
     position: relative;
     width: 100%;
-    height: 100vh;
     min-height: 700px;
+    min-height: max(700px, 100svh);
+    min-height: max(700px, 100dvh);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -841,8 +848,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 40px;
+    padding: clamp(10px, 2.5vw, 24px);
     background: white;
+    overflow-x: hidden;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   /* padding-right grande empuja el bloque hacia el centro (izquierda de la columna dcha) */
@@ -853,62 +863,79 @@
   .how-step + .how-step { margin-top: 40px; }
 
   .how-anim-box {
-    width: min(380px, 80%);
+    width: min(300px, min(76%, calc(100vw - 28px)));
+    max-width: 100%;
     aspect-ratio: 1 / 1;
     background: #e5e5e5;
-    border-radius: 24px;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
+    min-width: 0;
   }
 
   .how-anim-box--embed {
     padding: 0;
     background: #f0f0f0;
     overflow: hidden;
-    box-shadow: 0 16px 48px rgba(15, 23, 42, 0.1);
+    box-shadow: 0 8px 28px rgba(15, 23, 42, 0.07);
     border: 1px solid rgba(0, 0, 0, 0.06);
     aspect-ratio: 9 / 10;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    touch-action: manipulation;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
   }
 
   /* Demo «Unirse al grupo» (paso 2): KPI + cantidad + Continuar dentro del marco */
   .how-steps > .how-step:nth-child(2) .how-anim-box--embed {
     aspect-ratio: 9 / 13.2;
-    min-height: 620px;
+    min-height: 500px;
   }
   .how-steps > .how-step:nth-child(2) .how-step-iframe {
-    min-height: 600px;
+    min-height: 480px;
   }
 
   /* Demo «Niveles de descuento»: un poco más ancha (2 tarjetas) + alto sin scroll */
   .how-steps > .how-step:nth-child(3) .how-anim-box {
-    width: min(528px, 94vw);
-    max-width: 528px;
+    width: min(440px, min(92vw, calc(100vw - 28px)));
+    max-width: 440px;
   }
   .how-steps > .how-step:nth-child(3) .how-anim-box--embed {
     aspect-ratio: 9 / 11.5;
-    min-height: 520px;
+    min-height: 450px;
   }
   .how-steps > .how-step:nth-child(3) .how-step-iframe {
-    min-height: 500px;
+    min-height: 420px;
   }
 
   /* Demo «Estadísticas»: altura extra para las 4 KPI sin scroll en el iframe */
   .how-steps > .how-step:nth-child(4) .how-anim-box--embed {
     aspect-ratio: 9 / 12.8;
-    min-height: 580px;
+    min-height: 500px;
   }
   .how-steps > .how-step:nth-child(4) .how-step-iframe {
-    min-height: 560px;
+    min-height: 480px;
   }
 
+  /* Iframe a relleno estable (Safari / iOS: height 100% en flex) */
   .how-step-iframe {
-    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
-    min-height: 360px;
+    min-height: 0;
     border: 0;
     background: #f5f5f5;
+    pointer-events: none;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   /* Placeholder icons — legacy fallback */
@@ -1243,7 +1270,7 @@
   .mobile-menu {
     display: none;
     position: fixed;
-    top: 64px;
+    top: calc(64px + env(safe-area-inset-top, 0px));
     left: 0; right: 0;
     background: rgba(255,255,255,0.97);
     backdrop-filter: blur(16px);
@@ -1293,33 +1320,44 @@
     .how-step.reversed > .how-step-visual { order: unset; }
     .how-step-text { padding: 48px 20px 40px; }
     .how-step.reversed > .how-step-text { padding: 48px 20px 40px; }
-    .how-step-visual { min-height: 260px; padding: 24px 16px; }
-    .how-anim-box { min-height: 200px; width: min(100%, 400px); }
-    .how-step-iframe { min-height: 280px; }
+    .how-step-visual { min-height: 200px; padding: 14px 10px; }
+    .how-anim-box {
+      min-height: 200px;
+      width: min(100%, calc(100vw - 24px));
+      max-width: 100%;
+    }
+    .how-step-iframe { min-height: 0; }
+    .how-steps > .how-step:nth-child(1) .how-anim-box--embed {
+      min-height: min(380px, 72dvh);
+      min-height: min(380px, 72vh);
+    }
     .how-steps > .how-step:nth-child(2) .how-anim-box--embed {
-      min-height: 520px;
-      aspect-ratio: auto;
+      min-height: min(520px, 84dvh);
+      min-height: min(520px, 84vh);
+      aspect-ratio: 9 / 14;
     }
     .how-steps > .how-step:nth-child(2) .how-step-iframe {
-      min-height: 500px;
+      min-height: 0;
     }
     .how-steps > .how-step:nth-child(3) .how-anim-box {
       width: 100%;
       max-width: none;
     }
     .how-steps > .how-step:nth-child(3) .how-anim-box--embed {
-      min-height: 420px;
-      aspect-ratio: auto;
+      min-height: min(440px, 78dvh);
+      min-height: min(440px, 78vh);
+      aspect-ratio: 9 / 12;
     }
     .how-steps > .how-step:nth-child(3) .how-step-iframe {
-      min-height: 400px;
+      min-height: 0;
     }
     .how-steps > .how-step:nth-child(4) .how-anim-box--embed {
-      min-height: 480px;
-      aspect-ratio: auto;
+      min-height: min(480px, 82dvh);
+      min-height: min(480px, 82vh);
+      aspect-ratio: 9 / 13;
     }
     .how-steps > .how-step:nth-child(4) .how-step-iframe {
-      min-height: 460px;
+      min-height: 0;
     }
 
     /* ── Carrusel logos móvil: fluido, sin parpadeo ── */
@@ -2493,6 +2531,28 @@ const translations = {
   }
 };
 
+function broadcastDemoLang(lang) {
+  document.querySelectorAll('iframe.how-step-iframe').forEach((iframe) => {
+    try {
+      const w = iframe.contentWindow;
+      if (w) w.postMessage({ type: 'tuko-demo-lang', lang: lang }, '*');
+    } catch (e) {
+      /* cross-origin u otro */
+    }
+  });
+}
+
+function initDemoIframeLangSync() {
+  document.querySelectorAll('iframe.how-step-iframe').forEach((iframe) => {
+    iframe.addEventListener('load', () => {
+      try {
+        const current = localStorage.getItem('tuko_lang') || 'es';
+        iframe.contentWindow.postMessage({ type: 'tuko-demo-lang', lang: current }, '*');
+      } catch (e) {}
+    });
+  });
+}
+
 function setLanguage(lang) {
   if (!translations[lang]) return;
   const t = translations[lang];
@@ -2512,10 +2572,13 @@ function setLanguage(lang) {
   document.querySelectorAll('.lang-opt').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
+
+  broadcastDemoLang(lang);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   const lang = localStorage.getItem('tuko_lang') || 'es';
+  initDemoIframeLangSync();
   setLanguage(lang);
 
   document.querySelectorAll('.lang-opt').forEach(btn => {

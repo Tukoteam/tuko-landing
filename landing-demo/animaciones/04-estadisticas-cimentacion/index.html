@@ -187,7 +187,7 @@
 
     <div class="period-row">
       <span class="period-label">Período:</span>
-      <div class="period-pills" role="tablist" aria-label="Período">
+      <div class="period-pills" role="tablist" aria-label="Período" id="demoPeriodTablist">
         <span class="period-pill">Diario</span>
         <span class="period-pill">Semanal</span>
         <span class="period-pill">Mensual</span>
@@ -245,13 +245,29 @@
 
   <script>
     (function () {
-      const fmtInt = new Intl.NumberFormat('es-ES');
-      const fmtEur = new Intl.NumberFormat('es-ES', {
-        style: 'currency',
-        currency: 'EUR',
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0,
-      });
+      let demoLang = 'es';
+
+      function getStoredDemoLang() {
+        try {
+          return localStorage.getItem('tuko_lang') === 'en' ? 'en' : 'es';
+        } catch (e) {
+          return 'es';
+        }
+      }
+
+      let fmtInt;
+      let fmtEur;
+
+      function rebuildFormatters() {
+        const loc = demoLang === 'en' ? 'en-US' : 'es-ES';
+        fmtInt = new Intl.NumberFormat(loc);
+        fmtEur = new Intl.NumberFormat(loc, {
+          style: 'currency',
+          currency: 'EUR',
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        });
+      }
 
       const target = {
         activos: 8,
@@ -284,14 +300,72 @@
       function render(key, val) {
         const node = el[key];
         if (!node) return;
-        const t = node.dataset.type;
+        const dtype = node.dataset.type;
         let s;
-        if (t === 'int') s = fmtInt.format(Math.round(val));
-        else if (t === 'eur') s = fmtEur.format(val);
+        if (dtype === 'int') s = fmtInt.format(Math.round(val));
+        else if (dtype === 'eur') s = fmtEur.format(val);
         if (s === lastText[key]) return;
         lastText[key] = s;
         node.textContent = s;
       }
+
+      function applyDemoLang(lang) {
+        demoLang = lang === 'en' ? 'en' : 'es';
+        document.documentElement.lang = demoLang;
+        const en = demoLang === 'en';
+        rebuildFormatters();
+        lastText.activos = '';
+        lastText.exitosos = '';
+        lastText.participantes = '';
+        lastText.ingresos = '';
+
+        const ht = document.querySelector('.head-title');
+        if (ht) ht.textContent = en ? 'Statistics' : 'Estadísticas';
+        const hs = document.querySelector('.head-sub');
+        if (hs) {
+          hs.textContent = en
+            ? 'See how your group buys are performing.'
+            : 'Visualiza el rendimiento de tus grupos de compra colectiva';
+        }
+        const plab = document.querySelector('.period-label');
+        if (plab) plab.textContent = en ? 'Period:' : 'Período:';
+        const tablist = document.getElementById('demoPeriodTablist');
+        if (tablist) tablist.setAttribute('aria-label', en ? 'Period' : 'Período');
+
+        const pills = document.querySelectorAll('.period-pill');
+        const pillEs = ['Diario', 'Semanal', 'Mensual', 'Todo'];
+        const pillEn = ['Daily', 'Weekly', 'Monthly', 'All'];
+        const pillTxt = en ? pillEn : pillEs;
+        pills.forEach((p, i) => {
+          if (pillTxt[i]) p.textContent = pillTxt[i];
+        });
+
+        const labs = document.querySelectorAll('.stat-label');
+        const labEs = [
+          'Grupos activos',
+          'Grupos exitosos',
+          'Participantes totales',
+          'Ingresos generados',
+        ];
+        const labEn = [
+          'Active groups',
+          'Successful groups',
+          'Total participants',
+          'Revenue generated',
+        ];
+        const labTxt = en ? labEn : labEs;
+        labs.forEach((p, i) => {
+          if (labTxt[i]) p.textContent = labTxt[i];
+        });
+      }
+
+      window.addEventListener('message', function (ev) {
+        if (!ev.data || ev.data.type !== 'tuko-demo-lang') return;
+        applyDemoLang(ev.data.lang);
+      });
+
+      rebuildFormatters();
+      applyDemoLang(getStoredDemoLang());
 
       /** 20 s de subida 0 → cifra (los cuatro en paralelo), pausa, reset a 0 y bucle. */
       const COUNT_UP_MS = 20000;

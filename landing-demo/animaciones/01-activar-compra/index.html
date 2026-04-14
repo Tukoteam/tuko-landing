@@ -888,6 +888,101 @@
       const $ = (id) => document.getElementById(id);
       let loopTimer = null;
       let cursorRaf = null;
+      let demoLang = 'es';
+
+      function getStoredDemoLang() {
+        try {
+          return localStorage.getItem('tuko_lang') === 'en' ? 'en' : 'es';
+        } catch (e) {
+          return 'es';
+        }
+      }
+
+      function applyDemoLang(lang) {
+        demoLang = lang === 'en' ? 'en' : 'es';
+        document.documentElement.lang = demoLang;
+        const en = demoLang === 'en';
+        const loc = en ? 'en-US' : 'es-ES';
+        const eur = function (amount) {
+          return new Intl.NumberFormat(loc, {
+            style: 'currency',
+            currency: 'EUR',
+          }).format(amount);
+        };
+
+        const dashTitle = document.querySelector('.dash-title');
+        const dashSub = document.querySelector('.dash-sub');
+        if (dashTitle) dashTitle.textContent = en ? 'Enable group buying' : 'Activar compra colectiva';
+        if (dashSub) {
+          dashSub.textContent = en
+            ? 'Turn on group buying for this product.'
+            : 'Habilita la funcionalidad de grupo para este producto';
+        }
+
+        const toggle = $('toggle');
+        if (toggle) toggle.setAttribute('aria-label', en ? 'Group buying switch' : 'Interruptor compra colectiva');
+
+        const mt = $('modalTitle');
+        if (mt) mt.textContent = en ? 'Confirm activation' : 'Confirmar activación';
+        const msub = document.querySelector('.modal-head .modal-sub');
+        if (msub) {
+          msub.textContent = en
+            ? 'Review the settings before you activate.'
+            : 'Revisa la configuración antes de activar';
+        }
+
+        const secPLab = document.querySelector('#secProduct .section-label');
+        if (secPLab) secPLab.textContent = en ? 'PRODUCT' : 'PRODUCTO';
+        const pname = document.querySelector('.product-name');
+        if (pname) pname.textContent = en ? 'Natural shampoo' : 'Champú Natural';
+        const lines = document.querySelectorAll('.product-card .product-line');
+        if (lines[0]) lines[0].textContent = en ? 'Base price: ' + eur(28) : 'Precio base: 28,00 €';
+        if (lines[1]) lines[1].textContent = en ? 'Shipping: ' + eur(3.99) : 'Gasto de envío: 3,99 €';
+
+        const secCLab = document.querySelector('#secConfig .section-label');
+        if (secCLab) secCLab.textContent = en ? 'GROUP SETTINGS' : 'CONFIGURACIÓN DEL GRUPO';
+        const cfgLabs = document.querySelectorAll('#secConfig .config-label');
+        if (cfgLabs[0]) cfgLabs[0].textContent = en ? 'Max people' : 'Máx personas';
+        if (cfgLabs[1]) cfgLabs[1].textContent = en ? 'Time limit' : 'Tiempo límite';
+        const cfgTime = document.querySelector('#secConfig .config-val-sm');
+        if (cfgTime) {
+          cfgTime.textContent = en
+            ? '1 day, 5 hours and 30 minutes'
+            : '1 día y 5 horas y 30 minutos';
+        }
+
+        const secM1Lab = document.querySelector('#secM1 .section-label');
+        if (secM1Lab) secM1Lab.textContent = en ? 'DISCOUNT MILESTONES' : 'HITOS DE DESCUENTO';
+
+        const rows = [
+          { people: 5, disc: 5, saveEs: '1,40 €', saveNum: 1.4 },
+          { people: 15, disc: 10, saveEs: '2,80 €', saveNum: 2.8 },
+          { people: 40, disc: 15, saveEs: '4,20 €', saveNum: 4.2 },
+          { people: 90, disc: 20, saveEs: '5,60 €', saveNum: 5.6 },
+        ];
+        for (let i = 0; i < rows.length; i += 1) {
+          const sec = $('secM' + (i + 1));
+          if (!sec) continue;
+          const row = rows[i];
+          const people = sec.querySelector('.milestone-people');
+          const disc = sec.querySelector('.milestone-disc');
+          const save = sec.querySelector('.price-save');
+          if (people) people.textContent = en ? row.people + ' people' : row.people + ' personas';
+          if (disc) disc.textContent = en ? 'Discount: ' + row.disc + '%' : 'Descuento: ' + row.disc + '%';
+          if (save) save.textContent = en ? 'Save: ' + eur(row.saveNum) : 'Ahorro: ' + row.saveEs;
+        }
+
+        const cancel = document.querySelector('.btn-cancel');
+        const act = $('btnActivate');
+        if (cancel) cancel.textContent = en ? 'Cancel' : 'Cancelar';
+        if (act) act.textContent = en ? 'Enable group buying' : 'Activar compra colectiva';
+      }
+
+      window.addEventListener('message', function (ev) {
+        if (!ev.data || ev.data.type !== 'tuko-demo-lang') return;
+        applyDemoLang(ev.data.lang);
+      });
+      applyDemoLang(getStoredDemoLang());
 
       function toggleCenter() {
         const el = $('toggle');

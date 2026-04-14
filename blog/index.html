@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Blog — Tuko</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,22 +13,23 @@
 <style>
   .blog-hero {
     position: relative;
-    height: 380px;
+    min-height: 260px;
     overflow: hidden;
-    background: #3D50F2;
+    background: #fafafa;
+    border-bottom: 1px solid #e8e8e8;
     display: flex;
     align-items: center;
-    padding: 0 0 0 80px;
+    padding: calc(72px + env(safe-area-inset-top, 0px)) 48px 48px 80px;
   }
   .blog-hero-content {
     position: relative;
     z-index: 2;
-    max-width: 55%;
+    max-width: min(55%, 640px);
   }
   .bh-badge {
     display: inline-block;
-    background: rgba(255,255,255,0.15);
-    color: white;
+    background: rgba(61, 80, 242, 0.1);
+    color: #3D50F2;
     font-size: 13px;
     font-weight: 600;
     font-stretch: semi-expanded;
@@ -38,22 +39,22 @@
     letter-spacing: 0.005em;
   }
   .blog-hero h1 {
-    font-size: clamp(56px, 8vw, 96px);
+    font-size: clamp(40px, 7vw, 88px);
     font-weight: 800;
     font-stretch: semi-expanded;
     line-height: 1.0;
     letter-spacing: -0.03em;
-    color: white;
+    color: #1a1a1a;
     margin-bottom: 16px;
   }
   .blog-hero p {
     font-size: 16px;
     font-weight: 300;
     font-stretch: normal;
-    color: white;
-    opacity: 0.85;
+    color: #4d4d4d;
     line-height: 1.6;
     margin: 0;
+    max-width: 36em;
   }
   .bh-deco-right {
     position: absolute;
@@ -63,6 +64,7 @@
     width: auto;
     display: block;
     pointer-events: none;
+    opacity: 0.22;
   }
 
   /* ── Article list ── */
@@ -131,10 +133,15 @@
   }
 
   @media (max-width: 840px) {
-    .blog-hero { padding: 0 0 0 32px; }
+    .blog-hero {
+      padding: calc(64px + env(safe-area-inset-top, 0px)) 24px 40px 24px;
+      min-height: 0;
+    }
+    .blog-hero-content { max-width: 100%; }
+    .bh-deco-right { opacity: 0.12; max-width: 55%; object-fit: contain; object-position: right top; }
     .blog-list-section { padding: 48px 24px 72px; }
-    .blog-post-link { flex-direction: column; gap: 16px; }
-    .blog-post-image-wrap { width: 100%; }
+    .blog-post-link { flex-direction: column; gap: 16px; align-items: stretch; }
+    .blog-post-image-wrap { width: 100%; max-width: 100%; }
   }
 </style>
 </head>

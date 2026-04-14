@@ -919,7 +919,7 @@
                   <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
                   <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                 </svg>
-                Únete al grupo
+                <span id="demoJoinLabel">Únete al grupo</span>
               </button>
             </div>
 
@@ -944,14 +944,14 @@
                     <p class="intro-discount-mini__ahead">Por delante</p>
                     <p class="intro-discount-mini__pct">5% <span>OFF</span></p>
                     <div class="intro-discount-mini__foot">
-                      <span>0/5 personas unidas</span>
-                      <span>Faltan 5 plazas</span>
+                      <span id="demoMiniFootA">0/5 personas unidas</span>
+                      <span id="demoMiniFootB">Faltan 5 plazas</span>
                     </div>
                     <div class="intro-discount-mini__bar"><span></span></div>
                   </div>
                   <div class="intro-discount-mini__card intro-discount-mini__card--next">
                     10%
-                    <small>15 personas</small>
+                    <small id="demoMiniNextLbl">15 personas</small>
                   </div>
                 </div>
                 <div class="intro-discount-mini__dots" aria-hidden="true">
@@ -983,7 +983,7 @@
                 <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
                 <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
               </svg>
-              Compartir
+              <span id="demoShareBtnText">Compartir</span>
             </button>
             <div class="share-dropdown" id="shareDropdown" role="menu" aria-hidden="true">
               <p class="share-dropdown-label">Compartir en</p>
@@ -1083,6 +1083,114 @@
       const INTRO_QTY_MAX = 99;
       let loopTimer = null;
       let cursorRaf = null;
+      let demoLang = 'es';
+
+      function getStoredDemoLang() {
+        try {
+          return localStorage.getItem('tuko_lang') === 'en' ? 'en' : 'es';
+        } catch (e) {
+          return 'es';
+        }
+      }
+
+      function applyDemoLang(lang) {
+        demoLang = lang === 'en' ? 'en' : 'es';
+        document.documentElement.lang = demoLang;
+        const en = demoLang === 'en';
+
+        const join = $('introJoinBtn');
+        if (join) {
+          join.setAttribute('aria-label', en ? 'Join the group' : 'Únete al grupo');
+          const jl = $('demoJoinLabel');
+          if (jl) jl.textContent = en ? 'Join the group' : 'Únete al grupo';
+        }
+
+        const s1 = document.querySelector('#flowStep1');
+        if (s1) {
+          const plab = s1.querySelector('.intro-product-label');
+          if (plab) plab.textContent = en ? 'Product' : 'Producto';
+          const hints = s1.querySelectorAll('.scene-hint');
+          const subs = s1.querySelectorAll('.scene-sub');
+          if (hints[0]) hints[0].textContent = en ? 'How you join' : 'Cómo te unes al grupo';
+          if (subs[0]) {
+            subs[0].textContent = en
+              ? 'Tap the button to enter the group buy.'
+              : 'Pulsa el botón para entrar en la compra colectiva.';
+          }
+          const title = s1.querySelector('.intro-product-title');
+          if (title) title.textContent = en ? 'Moisturizing cream' : 'Crema hidratante';
+          const price = s1.querySelector('.intro-product-price');
+          if (price) price.innerHTML = en ? '24.90&nbsp;€' : '24,90&nbsp;€';
+          const img = s1.querySelector('.intro-cream-photo');
+          if (img) img.setAttribute('alt', en ? 'Moisturizing cream pack' : 'Crema hidratante en envase');
+        }
+
+        const s2 = document.querySelector('#flowStep2');
+        if (s2) {
+          const h = s2.querySelector('.scene-hint');
+          if (h) h.textContent = en ? 'Quantity' : 'Cantidad';
+          const sub = s2.querySelector('.scene-sub');
+          if (sub) {
+            sub.innerHTML = en
+              ? 'Tap <strong>+</strong> to add another unit, then <strong>Continue</strong>.'
+              : 'Pulsa <strong>+</strong> para añadir otra unidad y luego <strong>Continuar</strong>.';
+          }
+          const mt = s2.querySelector('.intro-discount-mini__title');
+          const ms = s2.querySelector('.intro-discount-mini__sub');
+          const ml = s2.querySelector('.intro-discount-mini__status-label');
+          const badge = s2.querySelector('.intro-discount-mini__badge');
+          const ahead = s2.querySelector('.intro-discount-mini__ahead');
+          const fa = $('demoMiniFootA');
+          const fb = $('demoMiniFootB');
+          const nl = $('demoMiniNextLbl');
+          if (mt) mt.textContent = en ? 'Discount tiers' : 'Niveles de descuento';
+          if (ms) {
+            ms.textContent = en
+              ? 'More people in the group, more savings for everyone'
+              : 'Más personas unidas, más ahorro para todas';
+          }
+          if (ml) ml.textContent = en ? 'People in the group' : 'Personas en el grupo';
+          if (badge) badge.textContent = en ? 'CURRENT' : 'ACTUAL';
+          if (ahead) ahead.textContent = en ? 'Up next' : 'Por delante';
+          if (fa) fa.textContent = en ? '0/5 people joined' : '0/5 personas unidas';
+          if (fb) fb.textContent = en ? '5 spots left' : 'Faltan 5 plazas';
+          if (nl) nl.textContent = en ? '15 people' : '15 personas';
+          const qtyRow = s2.querySelector('.intro-qty-row');
+          if (qtyRow) qtyRow.setAttribute('aria-label', en ? 'Quantity' : 'Cantidad');
+        }
+
+        const minus = $('introQtyMinus');
+        const plus = $('introQtyPlus');
+        const cont = $('introContinueBtn');
+        if (minus) minus.setAttribute('aria-label', en ? 'Remove unit' : 'Menos unidades');
+        if (plus) plus.setAttribute('aria-label', en ? 'Add unit' : 'Más unidades');
+        if (cont) cont.textContent = en ? 'Continue' : 'Continuar';
+
+        const s3 = document.querySelector('#flowStep3');
+        if (s3) {
+          const suc = s3.querySelector('.intro-success-title');
+          if (suc) suc.textContent = en ? "You're in the group" : 'Te uniste al grupo';
+          const sub3 = s3.querySelector('.intro-success-box .scene-sub');
+          if (sub3) {
+            sub3.textContent = en
+              ? 'Invite more people by sharing the link.'
+              : 'Invita a más personas compartiendo el enlace.';
+          }
+        }
+
+        const shareBtn = $('shareBtn');
+        if (shareBtn) shareBtn.setAttribute('aria-label', en ? 'Share the group' : 'Compartir el grupo');
+        const shareTxt = $('demoShareBtnText');
+        if (shareTxt) shareTxt.textContent = en ? 'Share' : 'Compartir';
+        const ddl = document.querySelector('.share-dropdown-label');
+        if (ddl) ddl.textContent = en ? 'Share on' : 'Compartir en';
+      }
+
+      window.addEventListener('message', function (ev) {
+        if (!ev.data || ev.data.type !== 'tuko-demo-lang') return;
+        applyDemoLang(ev.data.lang);
+      });
+      applyDemoLang(getStoredDemoLang());
 
       function setFlowStep(step) {
         for (let n = 1; n <= 3; n += 1) {
@@ -1448,7 +1556,9 @@
           const kind = opt.getAttribute('data-share');
           const pageUrl = window.location.href || 'https://tukoteam.com/';
           const encUrl = encodeURIComponent(pageUrl);
-          const encText = encodeURIComponent('¡Mira esta compra grupal!');
+          const encText = encodeURIComponent(
+            demoLang === 'en' ? 'Check out this group buy!' : '¡Mira esta compra grupal!'
+          );
           const urls = {
             instagram: 'https://www.instagram.com/',
             telegram: 'https://t.me/share/url?url=' + encUrl + '&text=' + encText,

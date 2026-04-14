@@ -815,6 +815,53 @@
         '(prefers-reduced-motion: reduce)'
       ).matches;
 
+      let demoLang = 'es';
+      let showOutroLabel = false;
+
+      function getStoredDemoLang() {
+        try {
+          return localStorage.getItem('tuko_lang') === 'en' ? 'en' : 'es';
+        } catch (e) {
+          return 'es';
+        }
+      }
+
+      const TSTR = {
+        es: {
+          sceneTitle: 'Niveles de descuento',
+          sceneSub: 'Más personas unidas, más ahorro para todas',
+          counterLabel: 'Personas en el grupo',
+          outroAll: 'Todos los hitos desbloqueados',
+          tierBadge: 'Actual',
+          reached: 'Alcanzado',
+          ahead: 'Por delante',
+          upcoming: 'Por alcanzar',
+          people: 'personas',
+          peopleJoined: 'personas unidas',
+          spotsLeft: 'Faltan {n} plazas',
+          spotLeft: 'Falta 1 plaza',
+        },
+        en: {
+          sceneTitle: 'Discount tiers',
+          sceneSub: 'More people in the group, more savings for everyone',
+          counterLabel: 'People in the group',
+          outroAll: 'All milestones unlocked',
+          tierBadge: 'Current',
+          reached: 'Unlocked',
+          ahead: 'Up next',
+          upcoming: 'Next',
+          people: 'people',
+          peopleJoined: 'people joined',
+          spotsLeft: '{n} spots left',
+          spotLeft: '1 spot left',
+        },
+      };
+
+      function t(key) {
+        const pack = TSTR[demoLang] || TSTR.es;
+        return pack[key] != null ? pack[key] : key;
+      }
+
       const TIMING = {
         carouselFocusDelayMs: reduceMotion ? 0 : 140,
         initialPause: reduceMotion ? 200 : 380,
@@ -870,9 +917,9 @@
       }
 
       function tierState(count, index) {
-        const t = TIERS[index];
+        const tier = TIERS[index];
         const prev = index === 0 ? 0 : TIERS[index - 1].people;
-        if (count >= t.people) return 'done';
+        if (count >= tier.people) return 'done';
         if (count >= prev) return 'current';
         return 'future';
       }
@@ -889,19 +936,21 @@
 
       function buildCards() {
         carouselTrack.innerHTML = '';
-        TIERS.forEach((t, i) => {
+        TIERS.forEach((tier, i) => {
           const div = document.createElement('div');
           div.className = 'tier-card future';
           div.dataset.index = String(i);
           div.innerHTML =
-            '<span class="tier-badge">Actual</span>' +
+            '<span class="tier-badge">' +
+            t('tierBadge') +
+            '</span>' +
             '<div class="tier-card-body">' +
             '<div class="tier-ic">' +
             spinnerPath +
             '</div>' +
             '<div class="tier-tag">—</div>' +
             '<div class="tier-pct">' +
-            t.pct +
+            tier.pct +
             '<small> % OFF</small></div>' +
             '<div class="tier-meta-host"></div>' +
             '</div>' +
@@ -1016,7 +1065,7 @@
       function updateCards(count) {
         const cards = carouselTrack.querySelectorAll('.tier-card');
         cards.forEach((card, i) => {
-          const t = TIERS[i];
+          const tier = TIERS[i];
           const prev = i === 0 ? 0 : TIERS[i - 1].people;
           const st = tierState(count, i);
           card.classList.remove('done', 'current', 'future');
@@ -1028,51 +1077,77 @@
           const metaHost = card.querySelector('.tier-meta-host');
           const bar = card.querySelector('.tier-progress span');
 
-          pct.innerHTML = t.pct + '<small> % OFF</small>';
+          pct.innerHTML = tier.pct + '<small> % OFF</small>';
 
           if (st === 'done') {
             ic.innerHTML = checkPath;
-            tag.textContent = 'Alcanzado';
+            tag.textContent = t('reached');
             metaHost.innerHTML =
-              '<div class="tier-meta-single">' + t.people + ' personas</div>';
+              '<div class="tier-meta-single">' +
+              tier.people +
+              ' ' +
+              t('people') +
+              '</div>';
             bar.style.width = '100%';
           } else if (st === 'current') {
             ic.innerHTML = arrowPath;
-            tag.textContent = 'Por delante';
-            const need = t.people - count;
+            tag.textContent = t('ahead');
+            const need = tier.people - count;
             const plazasLine =
-              need === 1
-                ? 'Falta 1 plaza'
-                : 'Faltan ' + need + ' plazas';
+              need === 1 ? t('spotLeft') : t('spotsLeft').replace('{n}', String(need));
             metaHost.innerHTML =
               '<div class="tier-meta-split">' +
               '<span class="tier-meta-left">' +
               count +
               '/' +
-              t.people +
-              ' personas unidas</span>' +
+              tier.people +
+              ' ' +
+              t('peopleJoined') +
+              '</span>' +
               '<span class="tier-meta-right">' +
               plazasLine +
               '</span></div>';
             bar.style.width =
-              ((count - prev) / (t.people - prev)) * 100 + '%';
+              ((count - prev) / (tier.people - prev)) * 100 + '%';
           } else {
             ic.innerHTML = spinnerPath;
-            tag.textContent = 'Por alcanzar';
+            tag.textContent = t('upcoming');
             metaHost.innerHTML =
-              '<div class="tier-meta-single">' + t.people + ' personas</div>';
+              '<div class="tier-meta-single">' +
+              tier.people +
+              ' ' +
+              t('people') +
+              '</div>';
             bar.style.removeProperty('width');
           }
         });
 
         updateStepDots(count);
-        requestAnimationFrame(() => syncCarouselFocus(count, false));
+        if (carouselTrack.querySelectorAll('.tier-card').length > 0) {
+          requestAnimationFrame(() => syncCarouselFocus(count, false));
+        }
       }
 
-      function setCounter(n, sub) {
+      function applyDemoLang(lang) {
+        demoLang = lang === 'en' ? 'en' : 'es';
+        document.documentElement.lang = demoLang;
+        const st = document.querySelector('.scene-title');
+        if (st) st.textContent = t('sceneTitle');
+        const ss = document.querySelector('.scene-sub');
+        if (ss) ss.textContent = t('sceneSub');
+        const n = parseInt(counterNum.textContent, 10) || 0;
+        updateCards(n);
+        if (showOutroLabel) {
+          counterSub.textContent = t('outroAll');
+        } else {
+          counterSub.textContent = t('counterLabel');
+        }
+      }
+
+      function setCounter(n, withGroupLabel) {
         counterTweenGen += 1;
         counterNum.textContent = String(n);
-        if (sub) counterSub.textContent = sub;
+        if (withGroupLabel) counterSub.textContent = t('counterLabel');
       }
 
       function pulseCounter() {
@@ -1189,7 +1264,7 @@
       async function runPhase(from, to, stepMs, burstEvery) {
         let prevCount = from;
         for (let n = from + 1; n <= to; n++) {
-          counterSub.textContent = 'Personas en el grupo';
+          counterSub.textContent = t('counterLabel');
           const stepDelta = n - prevCount;
           const animMs = reduceMotion
             ? 0
@@ -1234,9 +1309,10 @@
       async function loop() {
         lastFocus = -1;
         counterTweenGen += 1;
+        showOutroLabel = false;
         counterSub.classList.remove('outro-reveal');
         buildCards();
-        setCounter(0, 'Personas en el grupo');
+        setCounter(0, true);
         updateCards(0);
         refreshStack(0);
         carouselTrack.classList.remove('pan-new-tier', 'pan-outro');
@@ -1261,7 +1337,8 @@
         });
         await wait(TIMING.afterOutroPan);
 
-        counterSub.textContent = 'Todos los hitos desbloqueados';
+        showOutroLabel = true;
+        counterSub.textContent = t('outroAll');
         counterSub.classList.remove('outro-reveal');
         void counterSub.offsetWidth;
         if (!reduceMotion) {
@@ -1286,6 +1363,12 @@
 
         loop();
       }
+
+      window.addEventListener('message', function (ev) {
+        if (!ev.data || ev.data.type !== 'tuko-demo-lang') return;
+        applyDemoLang(ev.data.lang);
+      });
+      applyDemoLang(getStoredDemoLang());
 
       loop();
     })();
