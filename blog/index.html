@@ -13,13 +13,12 @@
 <style>
   .blog-hero {
     position: relative;
-    min-height: 260px;
+    min-height: 280px;
     overflow: hidden;
-    background: #fafafa;
-    border-bottom: 1px solid #e8e8e8;
+    background: #3D50F2;
     display: flex;
     align-items: center;
-    padding: calc(72px + env(safe-area-inset-top, 0px)) 48px 48px 80px;
+    padding: calc(72px + env(safe-area-inset-top, 0px)) 48px 56px 80px;
   }
   .blog-hero-content {
     position: relative;
@@ -28,8 +27,8 @@
   }
   .bh-badge {
     display: inline-block;
-    background: rgba(61, 80, 242, 0.1);
-    color: #3D50F2;
+    background: rgba(255,255,255,0.15);
+    color: white;
     font-size: 13px;
     font-weight: 600;
     font-stretch: semi-expanded;
@@ -44,14 +43,14 @@
     font-stretch: semi-expanded;
     line-height: 1.0;
     letter-spacing: -0.03em;
-    color: #1a1a1a;
+    color: white;
     margin-bottom: 16px;
   }
   .blog-hero p {
     font-size: 16px;
     font-weight: 300;
     font-stretch: normal;
-    color: #4d4d4d;
+    color: rgba(255,255,255,0.85);
     line-height: 1.6;
     margin: 0;
     max-width: 36em;
@@ -64,7 +63,7 @@
     width: auto;
     display: block;
     pointer-events: none;
-    opacity: 0.22;
+    opacity: 1;
   }
 
   /* ── Article list ── */
@@ -138,7 +137,7 @@
       min-height: 0;
     }
     .blog-hero-content { max-width: 100%; }
-    .bh-deco-right { opacity: 0.12; max-width: 55%; object-fit: contain; object-position: right top; }
+    .bh-deco-right { opacity: 0.9; max-width: 55%; object-fit: contain; object-position: right top; }
     .blog-list-section { padding: 48px 24px 72px; }
     .blog-post-link { flex-direction: column; gap: 16px; align-items: stretch; }
     .blog-post-image-wrap { width: 100%; max-width: 100%; }

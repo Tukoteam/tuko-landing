@@ -894,10 +894,9 @@
     font-weight: 600;
   }
 
-  /* Blog hero (fondo claro; coherente con blog/index.html) */
+  /* Blog hero */
   .blog-hero {
-    background: #fafafa;
-    border-bottom: 1px solid var(--gray-2);
+    background: var(--blue);
     padding: calc(120px + env(safe-area-inset-top, 0px)) 48px 72px;
     text-align: center;
   }
@@ -906,8 +905,8 @@
     margin: 0 auto;
   }
   .blog-hero .legal-badge {
-    background: rgba(61, 80, 242, 0.1);
-    color: var(--blue);
+    background: rgba(255,255,255,0.18);
+    color: white;
     margin-bottom: 24px;
   }
   .blog-hero h1 {
@@ -916,14 +915,14 @@
     font-stretch: semi-expanded;
     line-height: 1.0;
     letter-spacing: -0.03em;
-    color: var(--black);
+    color: white;
     margin-bottom: 18px;
   }
   .blog-hero p {
     font-size: 17px;
     font-weight: 300;
     font-stretch: normal;
-    color: var(--gray-4);
+    color: rgba(255,255,255,0.75);
     line-height: 1.65;
   }
 
