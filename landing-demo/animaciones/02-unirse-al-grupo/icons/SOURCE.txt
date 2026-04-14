@@ -1,0 +1,1 @@
+Iconos vectoriales procedentes del proyecto Simple Icons (https://github.com/simple-icons/simple-icons), versión referenciada en el repositorio al añadirlos. Licencia CC0 1.0. Colores de marca añadidos en el atributo fill donde el SVG original no los incluía.
