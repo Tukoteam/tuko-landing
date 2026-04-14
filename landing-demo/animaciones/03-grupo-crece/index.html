@@ -325,7 +325,7 @@
       max-height: var(--tier-card-h);
       background: var(--n-white);
       border-radius: 17px;
-      border: 1px solid #e8e8e8;
+      border: 2px solid #e8e8e8;
       padding: 0;
       display: flex;
       flex-direction: column;
@@ -384,12 +384,12 @@
     .tier-card.future {
       opacity: 0.94;
       transform: scale(1);
-      border-color: #ececec;
+      border: 2px solid #e0e0e0;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     }
 
     .tier-card.done {
-      border: 1.5px solid rgba(16, 185, 129, 0.45);
+      border: 2px solid rgba(16, 185, 129, 0.45);
       background: var(--menta-bg);
       box-shadow: 0 4px 18px rgba(16, 185, 129, 0.11);
       opacity: 1;
@@ -894,7 +894,7 @@
 
       function animateCounterNumber(target, durationMs) {
         target = clampPeople(target);
-        if (reduceMotion || durationMs <= 0) {
+        if (durationMs <= 0) {
           committedPeople = target;
           counterNum.textContent = String(target);
           return Promise.resolve();
@@ -906,7 +906,14 @@
           counterNum.textContent = String(target);
           return Promise.resolve();
         }
-        const dur = durationMs;
+        if (reduceMotion) {
+          committedPeople = target;
+          counterNum.textContent = String(target);
+          return Promise.resolve();
+        }
+        const dir = target > start ? 1 : -1;
+        const span = Math.abs(target - start);
+        const dur = Math.max(1, durationMs);
         const t0 = performance.now();
         return new Promise(function (resolve) {
           function frame(now) {
@@ -916,17 +923,18 @@
               resolve();
               return;
             }
-            const u = Math.min(1, (now - t0) / dur);
-            const e = 1 - (1 - u) * (1 - u);
-            const v = clampPeople(Math.round(start + (target - start) * e));
+            const progress = Math.min(1, (now - t0) / dur);
+            const eased = 1 - (1 - progress) * (1 - progress);
+            const step = Math.min(span, Math.floor(eased * span + 1e-9));
+            const v = clampPeople(start + dir * step);
             counterNum.textContent = String(v);
-            if (u < 1) {
-              requestAnimationFrame(frame);
-            } else {
+            if (progress >= 1) {
               committedPeople = target;
               counterNum.textContent = String(target);
               resolve();
+              return;
             }
+            requestAnimationFrame(frame);
           }
           requestAnimationFrame(frame);
         });
