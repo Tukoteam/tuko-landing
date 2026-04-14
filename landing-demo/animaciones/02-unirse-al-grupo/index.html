@@ -875,26 +875,25 @@
       transform: scale(0.96);
     }
 
+    /* Caja cuadrada fija + SVG centrado por posición: evita estiramientos en flex/iframes */
     .share-opt-ic {
-      width: 32px;
-      height: 32px;
-      min-width: 32px;
-      min-height: 32px;
-      aspect-ratio: 1 / 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative;
+      width: 36px;
+      height: 36px;
+      flex: 0 0 36px;
       flex-shrink: 0;
+      overflow: hidden;
     }
 
-    .share-opt-ic svg {
-      width: 28px;
-      height: 28px;
-      min-width: 28px;
-      min-height: 28px;
-      flex-shrink: 0;
+    .share-opt-ic svg.share-svg {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 30px;
+      height: 30px;
+      margin: -15px 0 0 -15px;
       display: block;
-      overflow: visible;
+      box-sizing: border-box;
     }
   </style>
 </head>
@@ -1000,7 +999,7 @@
               <div class="share-dropdown-row" role="none">
                 <button type="button" class="share-opt" role="menuitem" data-share="instagram" aria-label="Instagram">
                   <span class="share-opt-ic" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <svg class="share-svg" viewBox="0 0 24 24" width="30" height="30" preserveAspectRatio="xMidYMid meet" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
                       <defs>
                         <linearGradient id="tukoShareIg" x1="0%" y1="100%" x2="100%" y2="0%">
                           <stop offset="0%" stop-color="#f58529"/>
@@ -1008,36 +1007,36 @@
                           <stop offset="100%" stop-color="#515bd4"/>
                         </linearGradient>
                       </defs>
-                      <rect width="24" height="24" rx="6" fill="url(#tukoShareIg)"/>
-                      <circle cx="12" cy="12" r="3.5" fill="none" stroke="#fff" stroke-width="1.5"/>
-                      <circle cx="17.5" cy="6.5" r="1.1" fill="#fff"/>
+                      <rect x="2" y="2" width="20" height="20" rx="5.5" fill="url(#tukoShareIg)"/>
+                      <rect x="7.25" y="7.25" width="9.5" height="9.5" rx="2.25" fill="none" stroke="#fff" stroke-width="1.35"/>
+                      <circle cx="17.25" cy="6.75" r="1.2" fill="#fff"/>
                     </svg>
                   </span>
                   Instagram
                 </button>
                 <button type="button" class="share-opt" role="menuitem" data-share="telegram" aria-label="Telegram">
                   <span class="share-opt-ic" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <circle cx="12" cy="12" r="11" fill="#26A5E4"/>
-                      <path fill="#fff" d="M5.5 11.8c4.2-1.8 7-3 8.4-3.6 4-1.7 4.8-2 5.3-2 .1 0 .4 0 .5.3.1.2 0 .4 0 .5-.4 2-2.2 6.8-3.1 9-.4 1.3-1.2 1.7-1.9 1.7-.5 0-1-.3-1.4-.6-.8-.5-1.2-.8-2-1.3-.9-.5-1.6-1-1.5-1.9 0-.3.2-.6.4-.9.4-.6 3.5-3.4 3.6-3.7 0-.1 0-.2-.1-.3-.1-.1-.2-.1-.3 0-.4.2-6.3 3.7-7.4 4.4-.6.3-1.2.5-1.7.5-.5 0-1.5-.3-2.1-.5-.8-.3-1.4-.5-1.4-1 0-.3.3-.5.8-.8z"/>
+                    <svg class="share-svg" viewBox="0 0 24 24" width="30" height="30" preserveAspectRatio="xMidYMid meet" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="12" r="10" fill="#26A5E4"/>
+                      <path fill="#fff" fill-rule="evenodd" d="M17.27 6.45c.35-.12.66.08.6.45l-1.35 6.32c-.08.35-.28.44-.57.28l-1.78-1.31-1.1 1.06c-.12.12-.22.22-.45.22l.16-2.28 4.1-3.7c.18-.16-.04-.25-.28-.1l-5.08 3.2-2.19-.68c-.48-.15-.49-.48.1-.72l8.64-3.34z"/>
                     </svg>
                   </span>
                   Telegram
                 </button>
                 <button type="button" class="share-opt" role="menuitem" data-share="whatsapp" aria-label="WhatsApp">
                   <span class="share-opt-ic" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <circle cx="12" cy="12" r="11" fill="#25D366"/>
-                      <path fill="#fff" d="M12.04 5.5c-3.55 0-6.44 2.89-6.43 6.45 0 1.14.3 2.25.87 3.23L5.5 18.5l3.4-.9c.94.51 2 .78 3.09.79h.01c3.55 0 6.44-2.9 6.43-6.46 0-1.72-.67-3.34-1.89-4.55a6.38 6.38 0 0 0-4.5-1.88zm-.02 1.73c2.6 0 4.72 2.1 4.72 4.7a4.71 4.71 0 0 1-4.72 4.71c-.84 0-1.66-.22-2.38-.64l-.17-.1-2.05.55.55-2-.11-.18a4.69 4.69 0 0 1-.56-2.28c0-2.6 2.12-4.7 4.72-4.7zm2.45 5.63c.12-.04 1.23-.57 1.42-.67.13-.07.22-.1.32.1.1.2.38.67.43.76.06.1.1.11.02.18-.08.07-.3.36-.41.49-.11.12-.22.14-.4.04-.18-.1-.68-.25-1.3-.8-.48-.43-.8-.96-.9-1.12-.1-.16-.01-.25.08-.33.08-.08.18-.2.27-.3.09-.1.12-.17.18-.29.06-.12.03-.22-.01-.31-.04-.09-.36-.87-.5-1.19-.13-.3-.27-.26-.37-.27l-.32-.01c-.11 0-.29.04-.44.22-.15.18-.58.57-.58 1.39 0 .82.6 1.61.68 1.72.08.12 1.17 1.79 2.84 2.51.4.17.71.27.95.35.4.13.76.11 1.05.07.32-.05 1.23-.5 1.4-.99.18-.48.18-.9.13-.99-.05-.09-.18-.14-.38-.24z"/>
+                    <svg class="share-svg" viewBox="0 0 24 24" width="30" height="30" preserveAspectRatio="xMidYMid meet" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="12" r="10" fill="#25D366"/>
+                      <path fill="#fff" d="M12.02 6.75c-2.87 0-5.2 2.33-5.2 5.2 0 .92.24 1.8.7 2.58l-.75 2.18 2.24-.73c.75.41 1.6.64 2.5.64 2.87 0 5.2-2.33 5.2-5.2s-2.33-5.2-5.2-5.2zm0 1.4c2.1 0 3.8 1.7 3.8 3.8s-1.7 3.8-3.8 3.8c-.68 0-1.32-.18-1.87-.5l-.13-.08-1.66.54.53-1.6-.09-.14a3.78 3.78 0 0 1-.58-2c0-2.1 1.7-3.8 3.8-3.8zm2.05 4.78c.03-.08-.03-.12-.22-.18-.19-.06-1.1-.54-1.27-.6-.17-.06-.3-.09-.42.09-.12.18-.48.6-.59.72-.11.12-.21.14-.39.05-.18-.1-.75-.28-1.43-.9-.53-.47-.89-1.05-.99-1.23-.1-.18-.01-.28.08-.37.08-.08.18-.21.27-.32.09-.11.12-.18.18-.3.06-.12.03-.22-.02-.31-.04-.09-.42-1.02-.57-1.37-.15-.35-.3-.3-.42-.31h-.36c-.12 0-.32.05-.49.22-.17.18-.64.62-.64 1.52s.66 1.76.75 1.88c.1.12 1.28 1.95 3.1 2.74.43.19.77.3 1.03.38.43.14.82.12 1.13.07.34-.06 1.1-.45 1.26-.88.15-.44.15-.82.1-.9z"/>
                     </svg>
                   </span>
                   WhatsApp
                 </button>
                 <button type="button" class="share-opt" role="menuitem" data-share="x" aria-label="X (Twitter)">
                   <span class="share-opt-ic" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <rect width="24" height="24" rx="6" fill="#0f1419"/>
-                      <path fill="#fff" d="M13.9 10.5 19.3 4h-1.28l-4.7 5.4L9.5 4H5l5.65 8.2L5 20h1.28l4.97-5.7 4 5.7H19l-5.1-7.5z"/>
+                    <svg class="share-svg" viewBox="0 0 24 24" width="30" height="30" preserveAspectRatio="xMidYMid meet" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="2" y="2" width="20" height="20" rx="5" fill="#0f1419"/>
+                      <path fill="#fff" d="M14.52 11.23 17.9 7h-1.55l-2.95 3.42L11.4 7H8.1l3.78 5.5L8.1 17h1.55l3.12-3.62 2.48 3.62H18.9l-4.38-6.38z"/>
                     </svg>
                   </span>
                   X
