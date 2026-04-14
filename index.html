@@ -494,11 +494,11 @@
   .badge {
     display: inline-flex;
     align-items: center;
-    gap: 9px;
+    gap: 5px;
     background: white;
     border: 1.5px solid rgba(0,0,0,0.12);
     border-radius: 999px;
-    padding: 0px 18px 0px 4px;
+    padding: 0px 16px 0px 2px;
     line-height: 1;
     font-size: 13px;
     font-weight: 500;
@@ -508,25 +508,26 @@
     box-shadow: 0 2px 12px rgba(0,0,0,0.07);
     letter-spacing: -0.01em;
   }
-  /* Solo marca X (sin texto del PNG); el carrusel sigue con logo completo */
   .badge-x {
-    width: 34px;
     height: 34px;
-    min-width: 34px;
-    max-width: 34px;
+    min-width: 28px;
+    max-width: 136px;
     border-radius: 5px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-shrink: 0;
     overflow: hidden;
   }
   .badge-x img {
-    width: 28px;
-    height: 28px;
+    height: 34px;
+    width: auto;
+    max-width: 132px;
     object-fit: contain;
     display: block;
     flex-shrink: 0;
+    filter: sepia(0.4) saturate(2.7) hue-rotate(168deg) brightness(1.03);
+    -webkit-filter: sepia(0.4) saturate(2.7) hue-rotate(168deg) brightness(1.03);
   }
 
   .hero h1 {
@@ -1398,8 +1399,9 @@
       max-width: 100%;
       flex-wrap: wrap;
       justify-content: center;
-      row-gap: 8px;
-      padding: 6px 14px 6px 6px;
+      row-gap: 6px;
+      column-gap: 5px;
+      padding: 6px 12px 6px 4px;
       margin-left: auto;
       margin-right: auto;
     }
@@ -1514,7 +1516,7 @@
   <div class="hero-content">
     <div class="badge fade-up">
       <div class="badge-x">
-        <img loading="lazy" src="assets/images/xiji-hero-mark.svg" alt="Xiji Incubator">
+        <img loading="lazy" src="assets/logos colaboradores/Xiji Incubator - Logo.png" alt="Xiji Incubator">
       </div>
       <span data-i18n="hero_badge">Con el respaldo de Xiji Incubator</span>
     </div>
