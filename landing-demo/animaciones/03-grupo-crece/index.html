@@ -928,6 +928,9 @@
             const step = Math.min(span, Math.floor(eased * span + 1e-9));
             const v = clampPeople(start + dir * step);
             counterNum.textContent = String(v);
+            /* Mantiene committedPeople al valor mostrado: si el padre envía postMessage (idioma)
+               durante el tween, applyDemoLang no debe volver atrás el número (móvil). */
+            committedPeople = v;
             if (progress >= 1) {
               committedPeople = target;
               counterNum.textContent = String(target);
