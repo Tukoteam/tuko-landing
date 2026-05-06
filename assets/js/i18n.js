@@ -34,7 +34,7 @@ const translations = {
 
     /* HOW IT WORKS */
     how_badge: '¿Cómo funciona?',
-    how_title: 'La solución: Compras colectivas.',
+    how_title: 'La solución: <span class="how-title-underline">Compras colectivas</span>.',
     how_sub: 'Tuko transforma cada producto de tu tienda en una experiencia de compra colectiva integrada directamente en tu eCommerce.',
     how_step1: 'Activa Tuko en el producto que desees.',
     how_step2: 'El cliente ve dos opciones: comprar o unirse al grupo.',
