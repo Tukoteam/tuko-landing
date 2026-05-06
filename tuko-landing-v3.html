@@ -644,6 +644,24 @@
     margin-bottom: 28px;
     letter-spacing: 0.005em;
   }
+  .problem .s-badge {
+    background: #CE3333;
+  }
+  .how-title-underline {
+    position: relative;
+    display: inline;
+  }
+  .how-title-underline::after {
+    content: '';
+    position: absolute;
+    left: -0.06em;
+    right: -0.06em;
+    bottom: 0.04em;
+    height: 0.4em;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 16' preserveAspectRatio='none'%3E%3Cpath d='M4 12 Q60 2.5 116 12' stroke='%23CE3333' stroke-width='6.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
+      center bottom / 100% 100% no-repeat;
+    pointer-events: none;
+  }
   .s-title {
     font-size: var(--section-title-size);
     font-weight: var(--title-weight);
@@ -1954,16 +1972,16 @@ const translations = {
     problem_badge: "There's a big problem\u2026",
     problem_title: 'eCommerce needs<br>new ways to sell.',
     problem_sub: 'Brands compete with the same strategies while costs rise and margins shrink.',
-    card1_title: 'Expensive traffic',
+    card1_title: 'Customer acquisition',
     card1_text: "The cost of paid traffic increases every year and ROI drops, making it hard to scale sales profitably.",
-    card2_title: 'Stagnant inventory',
+    card2_title: 'Dead stock',
     card2_text: 'Many brands accumulate stock that expires or moves slowly, generating costs and an urgent need for turnover.',
     card3_title: 'Thin margins',
     card3_text: "Standard discounts cut margins too deeply and still don't generate enough volume to compensate.",
 
     /* HOW IT WORKS */
     how_badge: 'Solution',
-    how_title: 'The solution: Group buying.',
+    how_title: 'The solution: <span class="how-title-underline">Group buying</span>.',
     how_sub: 'Tuko transforms every product in your store into a collective buying experience integrated directly in your eCommerce.',
     how_step1: 'Activate Tuko on any product you choose.',
     how_step2: 'The customer sees two options: buy or join the group.',
