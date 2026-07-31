@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tuko — Cómo unirte al grupo</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap');
 
     /* Colores de marca — Colores de Marca.pdf */
     :root {
@@ -32,7 +32,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Mona Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--n-50);
       min-height: 100vh;
       display: flex;
@@ -64,6 +64,42 @@
       justify-content: center;
       transform-origin: 50% 58%;
       transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Móvil / iframe estrecho: menos padding, sin hueco gris vacío */
+    @media (max-width: 520px) {
+      html, body {
+        height: 100%;
+        min-height: 100%;
+      }
+
+      body {
+        padding: 0;
+        background: var(--n-white);
+        align-items: stretch;
+        justify-content: stretch;
+      }
+
+      .animation-viewport {
+        max-width: none;
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
+        aspect-ratio: auto;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .scene {
+        padding: 14px 14px 16px;
+        justify-content: center;
+      }
+
+      .intro-product-visual {
+        max-width: 160px;
+        height: 108px;
+        margin-bottom: 10px;
+      }
     }
 
     /* Fase 1: ficha de producto → fase 2: demo del botón (existente) */
@@ -402,7 +438,7 @@
 
     .intro-discount-mini__card {
       position: relative;
-      flex: 1 1 auto;
+      flex: 0 1 auto;
       min-width: 0;
       max-width: 100%;
       padding: 10px 8px 8px;
@@ -412,75 +448,107 @@
     }
 
     .intro-discount-mini__card--active {
-      border-color: #a78bfa;
-      flex: 1 1 100%;
+      border: 2.5px solid #8b5cf6;
+      background: #f5f3ff;
+      flex: 0 1 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      width: 78%;
+      max-width: 220px;
+      min-height: 128px;
+      margin-inline: auto;
+      padding: 14px 12px 12px;
       box-shadow:
-        0 0 0 1px rgba(139, 92, 246, 0.12),
-        0 6px 16px rgba(124, 58, 237, 0.12);
+        0 4px 16px rgba(139, 92, 246, 0.22),
+        0 2px 8px rgba(139, 92, 246, 0.1);
     }
 
     .intro-discount-mini__badge {
       position: absolute;
-      top: 6px;
-      right: 6px;
-      font-size: 7px;
+      top: 2px;
+      right: 2px;
+      z-index: 4;
+      font-size: 7.5px;
       font-weight: 800;
       letter-spacing: 0.06em;
+      text-transform: uppercase;
       color: #fff;
-      background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-      padding: 3px 6px;
-      border-radius: 6px;
+      background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 48%, #7c3aed 100%);
+      padding: 3.5px 8px;
+      border-radius: 999px;
+      line-height: 1.15;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.28) inset,
+        0 2px 6px rgba(124, 58, 237, 0.28),
+        0 6px 14px rgba(139, 92, 246, 0.18);
+      white-space: nowrap;
+      pointer-events: none;
     }
 
     .intro-discount-mini__ico {
-      width: 32px;
-      height: 32px;
-      margin: 0 auto 6px;
-      display: grid;
-      place-items: center;
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      min-height: 28px;
+      margin: 4px auto 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       border-radius: 50%;
-      background: #ede9fe;
-      border: 1px solid #c4b5fd;
-      color: #7c3aed;
+      background: #ffffff;
+      border: 1.5px solid #8b5cf6;
+      color: #8b5cf6;
+      flex-shrink: 0;
+      box-sizing: border-box;
     }
 
     .intro-discount-mini__ico svg {
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
       display: block;
+      stroke: #8b5cf6;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .intro-discount-mini__ahead {
-      font-size: 10px;
+      font-size: 13px;
       font-weight: 800;
       color: var(--n-900);
       text-align: center;
-      margin-bottom: 2px;
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
     }
 
     .intro-discount-mini__pct {
-      font-size: 15px;
+      font-size: 22px;
       font-weight: 800;
-      color: #7c3aed;
+      color: #8b5cf6;
       text-align: center;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 6px;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 10px;
     }
 
     .intro-discount-mini__pct span {
-      font-size: 11px;
-      font-weight: 700;
+      font-size: 0.82em;
+      font-weight: 800;
+      margin-left: 0.12em;
     }
 
     .intro-discount-mini__foot {
       display: flex;
       justify-content: space-between;
       gap: 6px;
-      font-size: 8px;
-      font-weight: 600;
-      color: var(--n-400);
-      margin-bottom: 6px;
+      font-size: 9.5px;
+      font-weight: 650;
+      color: #525252;
+      margin-bottom: 8px;
+      margin-top: auto;
       line-height: 1.25;
     }
 
@@ -553,6 +621,19 @@
     #viewport:has(#flowStep2.is-active) .scene {
       justify-content: flex-start;
       padding: 26px 24px 32px;
+    }
+
+    @media (max-width: 520px) {
+      #viewport:has(#flowStep2.is-active) {
+        aspect-ratio: auto;
+        min-height: 0;
+        height: 100%;
+      }
+
+      #viewport:has(#flowStep2.is-active) .scene {
+        padding: 12px 12px 14px;
+        justify-content: flex-start;
+      }
     }
 
     #viewport:has(#flowStep2.is-active) .scene-stack {
@@ -757,7 +838,7 @@
       color: #fff;
       font-family: inherit;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 0.02em;
       display: flex;
       align-items: center;
@@ -834,8 +915,8 @@
 
     .share-dropdown-label {
       font-size: 11px;
-      font-weight: 600;
-      color: var(--n-400);
+      font-weight: 700;
+      color: var(--n-900);
       text-align: center;
       letter-spacing: 0.04em;
       text-transform: uppercase;
@@ -949,8 +1030,8 @@
                   <div class="intro-discount-mini__card intro-discount-mini__card--active">
                     <span class="intro-discount-mini__badge">ACTUAL</span>
                     <div class="intro-discount-mini__ico" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 18V8M9 11l3-3 3 3"/>
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 5v14M5 12l7-7 7 7"/>
                       </svg>
                     </div>
                     <p class="intro-discount-mini__ahead">Por delante</p>

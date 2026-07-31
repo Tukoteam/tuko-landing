@@ -111,7 +111,7 @@ document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
 // Trigger hero immediately
 setTimeout(() => {
-  document.querySelectorAll('.hero .fade-up').forEach(el => el.classList.add('visible'));
+  document.querySelectorAll('.hero .fade-up, .ia-hero .fade-up').forEach(el => el.classList.add('visible'));
 }, 80);
 
 /* ── SMOOTH SCROLL for nav ── */
@@ -131,11 +131,23 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   const mobileMenu = document.getElementById('mobileMenu');
   if (!hamburger || !mobileMenu) return;
 
+  let scrim = document.getElementById('mobileMenuScrim');
+  if (!scrim) {
+    scrim = document.createElement('div');
+    scrim.id = 'mobileMenuScrim';
+    scrim.className = 'mobile-menu-scrim';
+    scrim.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(scrim);
+  }
+
   function setOpen(open) {
     hamburger.classList.toggle('open', open);
     hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
     hamburger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
     mobileMenu.classList.toggle('open', open);
+    mobileMenu.setAttribute('aria-hidden', open ? 'false' : 'true');
+    scrim.classList.toggle('open', open);
+    scrim.setAttribute('aria-hidden', open ? 'false' : 'true');
     document.body.style.overflow = open ? 'hidden' : '';
   }
 
@@ -147,11 +159,14 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     link.addEventListener('click', () => setOpen(false));
   });
 
+  scrim.addEventListener('click', () => setOpen(false));
+
   document.addEventListener('click', e => {
     if (
       mobileMenu.classList.contains('open') &&
       !mobileMenu.contains(e.target) &&
-      !hamburger.contains(e.target)
+      !hamburger.contains(e.target) &&
+      e.target !== scrim
     ) {
       setOpen(false);
     }

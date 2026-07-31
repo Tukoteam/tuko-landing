@@ -2,8 +2,42 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://tukoteam.com/sitemap.xml
+# El contenido y los idiomas se renderizan con JS y CSS: los buscadores
+# necesitan poder cargarlos para ver la página completa.
+Allow: /assets/js/
+Allow: /assets/css/
+Allow: /assets/images/
 
-# Bloquear archivos innecesarios
-Disallow: /assets/js/
+# Rastreadores de IA: permitidos para aparecer en ChatGPT, Perplexity, Claude y Gemini
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Sin valor de rastreo
+Disallow: /_versiones/
+Disallow: /_originales-png/
+
+Sitemap: https://tukoteam.com/sitemap.xml

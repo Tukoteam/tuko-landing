@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tuko — Estadísticas (cimentación)</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap');
 
     :root {
       --bg: #f0f2f5;
@@ -24,18 +24,20 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html {
-      overflow-x: hidden;
+    html, body {
+      overflow: hidden;
+      height: 100%;
+      width: 100%;
     }
 
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Mona Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
-      min-height: 100vh;
+      min-height: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 12px;
+      padding: 10px;
       margin: 0;
       -webkit-font-smoothing: antialiased;
     }
@@ -48,7 +50,7 @@
       border-radius: 24px;
       background: var(--bg);
       box-shadow: 0 10px 40px rgba(20, 24, 38, 0.1);
-      padding: 18px 16px 20px;
+      padding: 14px 14px 16px;
     }
 
     .head-title {
@@ -332,11 +334,11 @@
         const tablist = document.getElementById('demoPeriodTablist');
         if (tablist) tablist.setAttribute('aria-label', en ? 'Period' : 'Período');
 
-        const pills = document.querySelectorAll('.period-pill');
+        const pillNodes = document.querySelectorAll('.period-pill');
         const pillEs = ['Diario', 'Semanal', 'Mensual', 'Todo'];
         const pillEn = ['Daily', 'Weekly', 'Monthly', 'All'];
         const pillTxt = en ? pillEn : pillEs;
-        pills.forEach((p, i) => {
+        pillNodes.forEach((p, i) => {
           if (pillTxt[i]) p.textContent = pillTxt[i];
         });
 
@@ -357,60 +359,62 @@
         labs.forEach((p, i) => {
           if (labTxt[i]) p.textContent = labTxt[i];
         });
-      }
 
-      window.addEventListener('message', function (ev) {
-        if (!ev.data || ev.data.type !== 'tuko-demo-lang') return;
-        applyDemoLang(ev.data.lang);
-      });
+        // Re-pinta cifras actuales con el locale nuevo
+        render('activos', display.activos);
+        render('exitosos', display.exitosos);
+        render('participantes', display.participantes);
+        render('ingresos', display.ingresos);
+      }
 
       rebuildFormatters();
       applyDemoLang(getStoredDemoLang());
 
-      /** 20 s de subida 0 → cifra (los cuatro en paralelo), pausa, reset a 0 y bucle. */
-      const COUNT_UP_MS = 20000;
-      const HOLD_TOP_MS = 2800;
-      const HOLD_BOTTOM_MS = 1400;
+      const COUNT_UP_MS = 2200;
+      const HOLD_TOP_MS = 1800;
+      const HOLD_BOTTOM_MS = 500;
       const CYCLE_MS = COUNT_UP_MS + HOLD_TOP_MS + HOLD_BOTTOM_MS;
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      const t0 = performance.now();
+      let t0 = 0;
+      let running = false;
+      let rafId = 0;
+      let wasVisible = false;
 
-      function easeInOutCubic(t) {
-        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      const pills = Array.from(document.querySelectorAll('.period-pill'));
+
+      function setActivePill(index) {
+        pills.forEach((p, i) => p.classList.toggle('active', i === index));
+      }
+
+      function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
       }
 
       function tickDisplay(now) {
-        if (reduceMotion) {
-          display.activos = target.activos;
-          display.exitosos = target.exitosos;
-          display.participantes = target.participantes;
-          display.ingresos = target.ingresos;
-          render('activos', display.activos);
-          render('exitosos', display.exitosos);
-          render('participantes', display.participantes);
-          render('ingresos', display.ingresos);
-          return;
-        }
+        if (!running) return;
 
+        if (!t0) t0 = now;
         const elapsed = (now - t0) % CYCLE_MS;
 
         if (elapsed < COUNT_UP_MS) {
-          const u = easeInOutCubic(elapsed / COUNT_UP_MS);
+          const u = easeOutCubic(elapsed / COUNT_UP_MS);
           display.activos = Math.round(target.activos * u);
           display.exitosos = Math.round(target.exitosos * u);
           display.participantes = Math.round(target.participantes * u);
           display.ingresos = target.ingresos * u;
+          setActivePill(Math.min(3, Math.floor(u * 4)));
         } else if (elapsed < COUNT_UP_MS + HOLD_TOP_MS) {
           display.activos = target.activos;
           display.exitosos = target.exitosos;
           display.participantes = target.participantes;
           display.ingresos = target.ingresos;
+          setActivePill(3);
         } else {
           display.activos = 0;
           display.exitosos = 0;
           display.participantes = 0;
           display.ingresos = 0;
+          setActivePill(0);
         }
 
         render('activos', display.activos);
@@ -418,10 +422,88 @@
         render('participantes', display.participantes);
         render('ingresos', display.ingresos);
 
-        requestAnimationFrame(tickDisplay);
+        rafId = requestAnimationFrame(tickDisplay);
       }
 
-      requestAnimationFrame(tickDisplay);
+      function stopLoop() {
+        running = false;
+        cancelAnimationFrame(rafId);
+        rafId = 0;
+      }
+
+      function startLoop(restart) {
+        if (restart) {
+          stopLoop();
+          t0 = 0;
+          display.activos = 0;
+          display.exitosos = 0;
+          display.participantes = 0;
+          display.ingresos = 0;
+          lastText.activos = '';
+          lastText.exitosos = '';
+          lastText.participantes = '';
+          lastText.ingresos = '';
+          setActivePill(0);
+          render('activos', 0);
+          render('exitosos', 0);
+          render('participantes', 0);
+          render('ingresos', 0);
+        }
+        if (running) return;
+        running = true;
+        rafId = requestAnimationFrame(tickDisplay);
+      }
+
+      /** Visibilidad del iframe en la página padre (same-origin). */
+      function frameVisibleRatio() {
+        try {
+          const fe = window.frameElement;
+          if (!fe) return 1;
+          const r = fe.getBoundingClientRect();
+          const vh = window.parent.innerHeight || document.documentElement.clientHeight || 800;
+          const visible = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+          return Math.max(0, visible) / Math.max(r.height, 1);
+        } catch (e) {
+          return -1;
+        }
+      }
+
+      function syncVisibility(forceRestart) {
+        const ratio = frameVisibleRatio();
+        const visible = ratio < 0 ? true : ratio >= 0.28;
+        if (visible && (!wasVisible || forceRestart)) {
+          startLoop(true);
+        } else if (!visible && wasVisible) {
+          stopLoop();
+        } else if (visible && !running) {
+          startLoop(true);
+        }
+        wasVisible = visible;
+      }
+
+      window.addEventListener('message', function (ev) {
+        if (!ev.data || typeof ev.data !== 'object') return;
+        if (ev.data.type === 'tuko-demo-lang') applyDemoLang(ev.data.lang);
+        if (ev.data.type === 'tuko-demo-play') {
+          wasVisible = true;
+          startLoop(true);
+        }
+        if (ev.data.type === 'tuko-demo-pause') {
+          wasVisible = false;
+          stopLoop();
+        }
+      });
+
+      // Arranque inmediato (no depende del padre) + re-sync por scroll del padre
+      startLoop(true);
+      syncVisibility(false);
+
+      try {
+        window.parent.addEventListener('scroll', function () { syncVisibility(false); }, { passive: true });
+        window.parent.addEventListener('resize', function () { syncVisibility(false); }, { passive: true });
+      } catch (e) { /* cross-origin */ }
+
+      setInterval(function () { syncVisibility(false); }, 400);
     })();
   </script>
 </body>

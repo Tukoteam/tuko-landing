@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tuko — Niveles de descuento</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap');
 
     :root {
       --n-white: #ffffff;
@@ -14,7 +14,6 @@
       --n-400: #9ca3af;
       --n-600: #737373;
       --n-900: #171717;
-      /* PNG referencia tarjeta (asset): 558×434 px → misma proporción en --tier-card-w / height */
       --purple: #8b5cf6;
       --purple-dark: #7c3aed;
       --purple-soft: #f5f3ff;
@@ -24,34 +23,42 @@
       --menta-dark: #059669;
       --menta-bg: #ecfdf5;
       --shadow: 0 12px 48px rgba(15, 23, 42, 0.07);
-      --tier-card-w: 200px;
-      --tier-card-h: calc(var(--tier-card-w) * 434 / 558);
       --tier-progress-h: 5px;
-      /* Un poco más ancho para que entren ~2 tarjetas del carrusel a la vez */
-      --viewport-max: 512px;
+      --viewport-max: 560px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html, body {
+      height: 100%;
+    }
+
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Mona Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--n-50);
-      min-height: 100vh;
+      min-height: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 20px 16px;
+      box-sizing: border-box;
       -webkit-font-smoothing: antialiased;
     }
 
     .animation-viewport {
       width: 100%;
       max-width: var(--viewport-max);
+      height: auto;
+      max-height: 100%;
       position: relative;
       overflow: hidden;
-      border-radius: 24px;
+      border-radius: 18px;
       background: var(--n-white);
       box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
     }
 
     .vignette {
@@ -65,266 +72,250 @@
 
     .scene {
       position: relative;
-      padding: 14px 0 12px;
+      padding: 12px 14px 14px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
+      flex: 0 0 auto;
       justify-content: flex-start;
+      box-sizing: border-box;
     }
 
     .scene-head {
-      padding: 0 22px;
       text-align: center;
       flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      padding-top: 0;
     }
 
-    .scene-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--n-900);
-      letter-spacing: -0.03em;
+    .scene-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #f3e8ff;
+      color: #6d28d9;
+      border-radius: 999px;
+      padding: 6px 14px 6px 10px;
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
       line-height: 1.2;
     }
 
-    .scene-sub {
-      margin-top: 4px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--n-600);
-      line-height: 1.35;
-    }
-
-    .counter-panel {
-      margin: 0 22px;
-      background: var(--n-white);
-      border: 1px solid #ececec;
-      border-radius: 14px;
-      padding: 11px 12px 11px 15px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    .scene-badge svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
       flex-shrink: 0;
-      overflow: hidden;
     }
 
-    .counter-main {
+    /* ── Progress top ── */
+    .progress-top {
+      position: relative;
+      padding: 0 2px;
+    }
+
+    .progress-meta {
       display: flex;
-      flex-direction: column;
-      gap: 2px;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 5px;
     }
 
-    .counter-num {
-      font-size: 28px;
-      font-weight: 800;
-      /* Evita que “14” se lea como “-24” con tracking muy negativo */
-      letter-spacing: -0.01em;
+    .progress-left {
+      font-size: 11.5px;
+      font-weight: 600;
       color: var(--n-900);
+      letter-spacing: -0.02em;
       font-variant-numeric: tabular-nums;
     }
 
-    .counter-num.pulse {
-      animation: numPop 0.7s cubic-bezier(0.2, 0.95, 0.15, 1);
+    .progress-left .progress-count {
+      font-weight: 800;
+      font-size: 12.5px;
     }
 
-    @keyframes numPop {
-      0% { transform: scale(1); }
-      28% { transform: scale(1.055); color: var(--purple); }
-      100% { transform: scale(1); }
-    }
-
-    .counter-label {
-      font-size: 11px;
-      font-weight: 600;
+    .progress-left .progress-joined {
+      font-weight: 500;
       color: var(--n-600);
-      display: inline-block;
     }
 
-    .counter-label.outro-reveal {
-      animation: outroLabelIn 0.72s cubic-bezier(0.22, 1, 0.32, 1) both;
+    .progress-right {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--n-600);
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
     }
 
-    @keyframes outroLabelIn {
-      from {
-        opacity: 0;
-        transform: translateY(7px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .avatar-stack {
-      display: flex;
-      flex-direction: row-reverse;
-      align-items: center;
-      flex-shrink: 0;
-      max-width: 100%;
-      padding-right: 2px;
-    }
-
-    .stack-slot {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 2.5px solid var(--n-white);
-      margin-left: -11px;
-      background: linear-gradient(145deg, #c4b5fd 0%, var(--purple) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transform: scale(0.42) translateX(28px);
-      transition:
-        opacity 0.58s cubic-bezier(0.2, 0.92, 0.2, 1),
-        transform 0.8s cubic-bezier(0.2, 0.92, 0.15, 1);
-    }
-
-    .stack-slot.visible {
-      opacity: 1;
-      transform: scale(1) translateX(0);
-    }
-
-    .stack-slot.visible.land-pop {
-      animation: stackLandPop 0.5s cubic-bezier(0.34, 1.45, 0.36, 1) both;
-    }
-
-    @keyframes stackLandPop {
-      0% {
-        transform: scale(1) translateX(0);
-      }
-      45% {
-        transform: scale(1.16) translateX(0);
-      }
-      100% {
-        transform: scale(1) translateX(0);
-      }
-    }
-
-    .stack-slot svg {
-      width: 17px;
-      height: 17px;
-      stroke: #fff;
-      stroke-width: 2;
-      fill: none;
-    }
-
-    .fly-person {
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: linear-gradient(145deg, #c4b5fd 0%, var(--purple) 100%);
-      border: 2px solid #fff;
-      box-shadow: 0 6px 18px var(--purple-glow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-      z-index: 18;
-      opacity: 0.92;
-      animation: flyHorizontal 1.48s cubic-bezier(0.15, 0.75, 0.08, 1) forwards;
-    }
-
-    .fly-person svg {
-      width: 15px;
-      height: 15px;
-      stroke: #fff;
-      stroke-width: 2;
-      fill: none;
-    }
-
-    @keyframes flyHorizontal {
-      0% {
-        opacity: 0;
-        transform: translate(var(--from-x), var(--from-y)) scale(0.4);
-      }
-      12% { opacity: 1; }
-      40% {
-        transform: translate(var(--mid-x), var(--mid-y)) scale(1.05);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(var(--to-x), var(--to-y)) scale(0.76);
-      }
-    }
-
-    .carousel-shell {
-      flex: 0 0 auto;
-      display: flex;
-      flex-direction: column;
+    .progress-track {
       position: relative;
+      flex: 1 1 auto;
+      min-width: 0;
+      height: 6px;
+      border-radius: 99px;
+      background: #ebebeb;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--purple-dark), var(--purple));
+      transition: width 0.55s cubic-bezier(0.18, 0.88, 0.12, 1);
+    }
+
+    .progress-bar-row {
+      display: flex;
+      align-items: center;
       gap: 8px;
     }
 
-    .carousel-window {
-      flex: none;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: calc(var(--tier-card-h) + 108px);
-      overflow: hidden;
-      position: relative;
-      padding: 22px 20px 32px;
-      background: var(--n-white);
+    .progress-pct {
+      position: static;
+      flex: 0 0 auto;
+      min-width: 2.4em;
+      text-align: right;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--n-600);
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+      z-index: 1;
+      pointer-events: none;
     }
 
-    .carousel-track {
+    .progress-top.has-pct {
+      padding-bottom: 0;
+    }
+
+    .progress-fill.is-done {
+      background: linear-gradient(90deg, var(--menta-dark), var(--menta));
+    }
+
+    .progress-fill.pulse {
+      animation: progressBarPop 0.58s cubic-bezier(0.34, 1.2, 0.3, 1);
+    }
+
+    /* ── Timer ── */
+    .timer-block {
+      text-align: center;
+    }
+
+    .timer-label {
+      font-size: 12.5px;
+      font-weight: 650;
+      color: var(--n-900);
+      margin-bottom: 7px;
+      letter-spacing: -0.01em;
+    }
+
+    .timer-card {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      gap: 0;
+      width: min(92%, 400px);
+      margin-inline: auto;
+      background: var(--n-white);
+      border: 1px solid #ececec;
+      border-radius: 14px;
+      padding: 11px 12px 10px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .timer-unit {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      position: relative;
+      padding: 0 6px;
+    }
+
+    .timer-unit + .timer-unit::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 5px;
+      bottom: 16px;
+      width: 1px;
+      background: #eee;
+    }
+
+    .timer-val {
+      font-size: 23px;
+      font-weight: 700;
+      color: var(--n-900);
+      letter-spacing: -0.03em;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.1;
+      transition: color 0.25s ease;
+    }
+
+    .timer-val.tick {
+      color: var(--purple);
+    }
+
+    .timer-unit-label {
+      font-size: 11px;
+      font-weight: 650;
+      color: var(--n-900);
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Tiers row: compactas, sin estirar ── */
+    .tiers-row {
       display: flex;
       flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
+      align-items: stretch;
+      justify-content: center;
       gap: 0;
+      padding: 0;
       flex: 0 0 auto;
-      margin: 0 auto 0 0;
-      padding: 12px 12px;
-      background: var(--n-white);
-      will-change: transform;
-      transform: translateZ(0);
-      transition:
-        transform 0.95s cubic-bezier(0.28, 0.9, 0.22, 1);
+      margin-top: 8px;
     }
 
-    .carousel-track.pan-new-tier {
-      transition-duration: 1.78s;
-      transition-timing-function: cubic-bezier(0.14, 0.82, 0.06, 1);
-    }
-
-    .carousel-track.pan-outro {
-      transition-duration: 2s;
-      transition-timing-function: cubic-bezier(0.17, 0.86, 0.1, 1);
-    }
-
-    .carousel-arrow {
-      flex-shrink: 0;
-      width: 8px;
+    .tier-arrow {
+      flex: 0 0 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--n-200);
-      padding: 0;
+      color: var(--n-600);
+      align-self: center;
     }
 
-    .carousel-arrow svg {
-      width: 10px;
-      height: 10px;
-      stroke: #c4c4c4;
-      stroke-width: 2;
+    .tier-arrow svg {
+      width: 14px;
+      height: 14px;
+      stroke: #525252;
+      stroke-width: 2.25;
+      stroke-linecap: round;
+      stroke-linejoin: round;
       fill: none;
+      /* Base: flecha ↓; en fila horizontal apunta a la derecha */
+      transform: rotate(-90deg);
     }
 
     .tier-card {
       position: relative;
       box-sizing: border-box;
-      flex: 0 0 var(--tier-card-w);
-      width: var(--tier-card-w);
-      height: var(--tier-card-h);
-      min-height: var(--tier-card-h);
-      max-height: var(--tier-card-h);
+      flex: 1 1 0;
+      min-width: 0;
+      max-width: 156px;
+      height: 128px;
+      min-height: 128px;
+      max-height: 128px;
       background: var(--n-white);
-      border-radius: 17px;
+      border-radius: 12px;
       border: 2px solid #e8e8e8;
       padding: 0;
       display: flex;
@@ -332,14 +323,11 @@
       align-items: stretch;
       text-align: center;
       overflow: hidden;
-      gap: 0;
       transition:
-        transform 0.85s cubic-bezier(0.22, 0.92, 0.18, 1),
         border-color 0.55s cubic-bezier(0.33, 1, 0.2, 1),
-        border-width 0.55s cubic-bezier(0.33, 1, 0.2, 1),
         background 0.55s cubic-bezier(0.33, 1, 0.2, 1),
-        box-shadow 0.85s cubic-bezier(0.22, 0.92, 0.18, 1),
-        opacity 0.5s cubic-bezier(0.33, 1, 0.2, 1);
+        box-shadow 0.55s cubic-bezier(0.22, 0.92, 0.18, 1),
+        opacity 0.45s ease;
       box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
     }
 
@@ -349,79 +337,98 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      /* Espacio para la barra (absolute) + aire mínimo sobre ella */
-      padding: 12px 11px calc(6px + var(--tier-progress-h));
+      justify-content: flex-start;
+      padding: 14px 6px calc(5px + var(--tier-progress-h));
+      gap: 0;
+      box-sizing: border-box;
     }
 
     .tier-badge {
       position: absolute;
-      top: 8px;
-      right: 8px;
+      top: 2px;
+      right: 2px;
       z-index: 4;
-      font-size: 8px;
+      font-size: 7.5px;
       font-weight: 800;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--n-white);
-      background: var(--purple);
-      padding: 4px 8px;
-      border-radius: 6px;
-      line-height: 1;
+      color: #fff;
+      background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 48%, #7c3aed 100%);
+      padding: 3.5px 8px;
+      border-radius: 999px;
+      line-height: 1.15;
       opacity: 0;
-      transform: scale(0.96);
+      transform: scale(0.92) translateY(-1px);
       transition:
-        opacity 0.4s ease,
-        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        opacity 0.35s ease,
+        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.35s ease;
       pointer-events: none;
-      box-shadow: 0 2px 10px rgba(139, 92, 246, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.28) inset,
+        0 2px 6px rgba(124, 58, 237, 0.28),
+        0 6px 14px rgba(139, 92, 246, 0.18);
+      white-space: nowrap;
     }
 
     .tier-card.current .tier-badge {
       opacity: 1;
-      transform: scale(1);
+      transform: scale(1) translateY(0);
     }
 
     .tier-card.future {
       opacity: 0.94;
-      transform: scale(1);
       border: 2px solid #e0e0e0;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     }
 
     .tier-card.done {
       border: 2px solid rgba(16, 185, 129, 0.45);
       background: var(--menta-bg);
-      box-shadow: 0 4px 18px rgba(16, 185, 129, 0.11);
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.1);
       opacity: 1;
-      transform: scale(1);
     }
 
     .tier-card.current {
       opacity: 1;
-      transform: translateZ(0);
-      z-index: 3;
+      z-index: 2;
       border: 2px solid var(--purple);
       background: var(--purple-soft);
-      /* Sombra más contenida para que no la coma overflow-x del carrusel */
       box-shadow:
-        0 6px 22px var(--purple-glow),
-        0 3px 12px rgba(139, 92, 246, 0.11),
-        0 1px 4px rgba(139, 92, 246, 0.05);
+        0 4px 16px var(--purple-glow),
+        0 2px 8px rgba(139, 92, 246, 0.1);
     }
 
-    .tier-card.current .tier-card-body {
-      padding-top: 27px;
+    .tier-card.done .tier-card-body,
+    .tier-card.current .tier-card-body,
+    .tier-card.future .tier-card-body {
+      padding-top: 16px;
     }
 
     .tier-ic {
-      width: 44px;
-      height: 44px;
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      min-height: 32px;
+      flex-shrink: 0;
+      aspect-ratio: 1 / 1;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 9px;
-      transition: background 0.5s ease, border 0.5s ease;
+      margin-bottom: 6px;
+      transition: background 0.45s ease, border 0.45s ease;
+      box-sizing: border-box;
+    }
+
+    .tier-card.done .tier-ic,
+    .tier-card.current .tier-ic,
+    .tier-card.future .tier-ic {
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
+      min-height: 24px;
+      margin-bottom: 4px;
     }
 
     .tier-card.done .tier-ic {
@@ -440,10 +447,23 @@
     }
 
     .tier-ic svg {
-      width: 20px;
-      height: 20px;
+      width: 15px;
+      height: 15px;
+      min-width: 15px;
+      min-height: 15px;
+      flex-shrink: 0;
       stroke-width: 2;
       fill: none;
+      overflow: visible;
+    }
+
+    .tier-card.done .tier-ic svg,
+    .tier-card.current .tier-ic svg,
+    .tier-card.future .tier-ic svg {
+      width: 13px;
+      height: 13px;
+      min-width: 13px;
+      min-height: 13px;
     }
 
     .tier-card.done .tier-ic svg { stroke: var(--menta-dark); }
@@ -451,93 +471,126 @@
     .tier-card.future .tier-ic svg { stroke: var(--n-400); }
 
     .tier-tag {
-      font-size: 12px;
+      font-size: 10px;
       font-weight: 600;
       color: var(--n-600);
-      margin-bottom: 5px;
+      margin-bottom: 2px;
       letter-spacing: -0.015em;
       width: 100%;
     }
 
-    .tier-card.done .tier-tag { color: var(--n-900); font-weight: 700; }
-    .tier-card.current .tier-tag { color: var(--n-900); font-weight: 700; }
-    .tier-card.future .tier-tag { color: #9ca3af; font-weight: 500; }
+    .tier-card.done .tier-tag,
+    .tier-card.current .tier-tag {
+      color: var(--n-900);
+      font-weight: 700;
+    }
+
+    .tier-card.future .tier-tag {
+      color: #9ca3af;
+      font-weight: 500;
+    }
 
     .tier-pct {
-      font-size: 24px;
-      font-weight: 800;
+      font-size: 20px;
+      font-weight: 700;
       letter-spacing: -0.04em;
       line-height: 1.05;
-      margin-bottom: 7px;
+      margin-bottom: 4px;
       white-space: nowrap;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 0;
+      flex-shrink: 0;
     }
 
-    .tier-pct small {
-      font-size: 0.5em;
-      font-weight: 800;
-      letter-spacing: 0.04em;
+    .tier-pct .tier-pct-sym {
+      font-size: 0.72em;
+      font-weight: 700;
+      letter-spacing: -0.06em;
+      margin-left: 0;
     }
 
-    .tier-card.done .tier-pct { color: var(--menta-dark); }
-    .tier-card.current .tier-pct { color: var(--purple); }
-    .tier-card.future .tier-pct { color: #4b5563; }
+    .tier-pct .tier-pct-off {
+      font-size: 0.82em;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      margin-left: 0.18em;
+    }
+
+    .tier-card.done .tier-pct { color: var(--menta-dark); margin-bottom: 4px; }
+    .tier-card.current .tier-pct { color: var(--purple); margin-bottom: 4px; flex-shrink: 0; }
+
+    .tier-card.future .tier-pct {
+      color: #4b5563;
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
 
     .tier-meta-host {
       width: 100%;
-      flex: 1;
-      min-height: 0;
-      flex-shrink: 1;
+      flex: 1 1 auto;
+      min-height: 22px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: stretch;
+      margin-top: 0;
+    }
+
+    .tier-card.done .tier-meta-host,
+    .tier-card.current .tier-meta-host {
+      flex: 1 1 auto;
+      justify-content: flex-end;
+      margin-top: 0;
+      min-height: 22px;
+    }
+
+    /* Por alcanzar: «X personas» un poco bajo el % OFF, sin pegarlo al fondo */
+    .tier-card.future .tier-meta-host {
+      flex: 0 0 auto;
+      justify-content: flex-start;
+      margin-top: 2px;
+      min-height: 0;
+      padding-bottom: 0;
+    }
+
+    .tier-card.done .tier-meta-host {
+      padding-bottom: 10px;
     }
 
     .tier-meta-single {
-      font-size: 10.5px;
-      font-weight: 500;
+      font-size: 9.5px;
+      font-weight: 550;
       color: var(--n-600);
-      line-height: 1.4;
+      line-height: 1.3;
       text-align: center;
-      width: 100%;
+    }
+
+    .tier-card.done .tier-meta-single {
+      color: #3f3f46;
+      font-weight: 600;
     }
 
     .tier-card.future .tier-meta-single { color: #9ca3af; }
 
     .tier-meta-split {
       display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 6px;
+      flex-direction: column;
+      gap: 2px;
       width: 100%;
-      padding: 0 2px;
+      padding: 0 1px;
     }
 
     .tier-meta-left,
     .tier-meta-right {
-      font-size: 9.5px;
+      font-size: 8.5px;
       font-weight: 500;
-      line-height: 1.35;
-      max-width: 50%;
+      line-height: 1.3;
       color: var(--n-600);
+      text-align: center;
     }
 
-    .tier-meta-left {
-      text-align: left;
-    }
-
-    .tier-meta-right {
-      text-align: right;
-    }
-
-    .tier-card.current .tier-meta-left,
-    .tier-card.current .tier-meta-right {
-      color: var(--n-600);
-      font-weight: 500;
-    }
-
-    /* Pegada al borde inferior de la tarjeta: evita franja clara entre cuerpo y borde */
     .tier-progress {
       position: absolute;
       left: 0;
@@ -550,7 +603,6 @@
       background: rgba(15, 23, 42, 0.08);
       overflow: hidden;
       z-index: 1;
-      transform: translateZ(0);
     }
 
     .tier-card.done .tier-progress {
@@ -562,7 +614,9 @@
     }
 
     .tier-card.future .tier-progress {
-      background: #ebebeb;
+      opacity: 0;
+      visibility: hidden;
+      background: transparent;
     }
 
     .tier-progress > span {
@@ -570,7 +624,7 @@
       height: 100%;
       width: 0%;
       border-radius: 0;
-      transition: width 1.05s cubic-bezier(0.18, 0.88, 0.12, 1);
+      transition: width 0.7s cubic-bezier(0.18, 0.88, 0.12, 1);
     }
 
     .tier-progress > span.progress-pop {
@@ -578,9 +632,7 @@
     }
 
     @keyframes progressBarPop {
-      0%, 100% {
-        filter: brightness(1);
-      }
+      0%, 100% { filter: brightness(1); }
       40% {
         filter: brightness(1.18);
         box-shadow: 0 0 14px rgba(139, 92, 246, 0.35);
@@ -592,9 +644,7 @@
     }
 
     @keyframes progressBarPopDone {
-      0%, 100% {
-        filter: brightness(1);
-      }
+      0%, 100% { filter: brightness(1); }
       40% {
         filter: brightness(1.12);
         box-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
@@ -611,9 +661,8 @@
     }
 
     .tier-card.future .tier-progress > span {
-      width: 10%;
-      background: rgba(100, 116, 139, 0.45);
-      opacity: 1;
+      width: 0%;
+      background: transparent;
     }
 
     .tier-card.flash-done {
@@ -628,126 +677,329 @@
       }
     }
 
-    .step-dots {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      padding: 0 22px 2px;
-      flex-shrink: 0;
-      margin-top: 0;
-    }
-
-    .step-dot {
-      height: 6px;
-      border-radius: 99px;
-      background: var(--n-200);
-      transform-origin: center center;
-      transition:
-        width 0.55s cubic-bezier(0.33, 1, 0.25, 1),
-        background 0.45s ease,
-        opacity 0.45s ease,
-        transform 0.5s cubic-bezier(0.34, 1.2, 0.2, 1);
-      width: 6px;
-      transform: scaleY(1);
-    }
-
-    .step-dot.passed {
-      background: var(--menta);
-      opacity: 0.85;
-    }
-
-    .step-dot.active {
-      width: 26px;
-      background: var(--purple);
-      opacity: 1;
-      transform: scaleY(1.2);
-    }
-
-    .step-dot.upcoming {
-      opacity: 0.55;
-    }
-
-    .fx-layer {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 16;
-      overflow: visible;
-    }
-
-    .counter-num.outro-glow {
-      animation: outroPulse 1.15s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    @keyframes outroPulse {
-      0%, 100% { transform: scale(1); color: var(--n-900); }
-      40% {
-        transform: scale(1.04);
-        color: var(--menta-dark);
-      }
-    }
-
     .tier-card.done-outro-pulse {
       animation: cardOutroPulse 0.88s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     @keyframes cardOutroPulse {
       0%, 100% {
-        box-shadow: 0 4px 18px rgba(16, 185, 129, 0.11);
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.1);
         filter: brightness(1);
       }
       50% {
-        box-shadow: 0 10px 28px rgba(16, 185, 129, 0.22);
+        box-shadow: 0 8px 22px rgba(16, 185, 129, 0.22);
         filter: brightness(1.04);
       }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .carousel-track,
-      .carousel-track.pan-new-tier,
-      .carousel-track.pan-outro {
-        transition-duration: 0.05s !important;
-      }
+    .outro-banner {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 650;
+      color: var(--menta-dark);
+      min-height: 0;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+      pointer-events: none;
+    }
 
+    .outro-banner.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Action buttons (decorativos) ── */
+    .demo-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      padding: 2px 2px 0;
+      pointer-events: none;
+      user-select: none;
+      flex-shrink: 0;
+      margin-top: 16px;
+    }
+
+    .demo-actions-row {
+      display: flex;
+      align-items: stretch;
+      gap: 6px;
+    }
+
+    .demo-qty {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: var(--n-white);
+      border: 1.5px solid #e5e5e5;
+      border-radius: 10px;
+      padding: 3px;
+      min-width: 88px;
+    }
+
+    .demo-qty-btn {
+      width: 24px;
+      height: 24px;
+      border: none;
+      background: transparent;
+      border-radius: 7px;
+      color: var(--n-900);
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .demo-qty-val {
+      flex: 1;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--n-900);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .demo-btn-join {
+      flex: 1 1 auto;
+      min-width: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      background: #0f172a;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 9px 12px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
+    }
+
+    .demo-btn-join svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .demo-btn-share {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      width: 100%;
+      background: linear-gradient(90deg, #7c3aed 0%, #6366f1 55%, #3b82f6 100%);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 9px 12px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      box-shadow: 0 6px 18px rgba(99, 102, 241, 0.28);
+    }
+
+    .demo-btn-share svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .demo-actions-foot {
+      text-align: center;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--n-600);
+      line-height: 1.3;
+      padding-top: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
       .tier-card,
       .tier-progress > span,
-      .stack-slot,
-      .counter-num.pulse {
+      .progress-fill,
+      .timer-val {
         transition-duration: 0.05s !important;
       }
 
-      .fly-person {
-        animation: none !important;
-        opacity: 0 !important;
-      }
-
-      .tier-card.flash-done {
+      .tier-card.flash-done,
+      .tier-card.done-outro-pulse,
+      .tier-progress > span.progress-pop,
+      .progress-fill.pulse {
         animation: none !important;
       }
+    }
 
-      .counter-num.outro-glow {
-        animation: none !important;
+    /* Título de niveles (desktop + móvil) */
+    .tiers-heading {
+      display: block;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 750;
+      color: var(--n-900);
+      letter-spacing: -0.02em;
+      margin: 12px 0 0;
+    }
+
+    @media (max-width: 520px) {
+      html, body {
+        height: auto;
+        min-height: 0;
       }
 
-      .tier-card.done-outro-pulse {
-        animation: none !important;
+      body {
+        padding: 0;
+        align-items: flex-start;
+        justify-content: flex-start;
+        background: var(--n-white);
       }
 
-      .stack-slot.visible.land-pop {
-        animation: none !important;
+      .animation-viewport {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+        max-height: none;
+        border-radius: 0;
+        box-shadow: none;
+        overflow: visible;
+        display: flex;
+        flex-direction: column;
       }
 
-      .counter-label.outro-reveal {
-        animation: none !important;
+      /* Ritmo fijo: sin space-between (evita huecos que crecen/encogen) */
+      .scene {
+        padding: 12px 12px 14px;
+        gap: 10px;
+        flex: 0 0 auto;
+        min-height: 0;
+        justify-content: flex-start;
+        width: 100%;
       }
 
-      .tier-progress > span.progress-pop {
-        animation: none !important;
+      .scene-head,
+      .progress-top,
+      .timer-block,
+      .tiers-heading,
+      .tiers-row,
+      .demo-actions {
+        flex-shrink: 0;
+        margin-top: 0;
+        margin-bottom: 0;
       }
 
-      .step-dot.active {
-        transform: scaleY(1) !important;
+      .timer-block {
+        margin-bottom: 0;
+      }
+
+      .timer-label {
+        font-size: 11px;
+        margin-bottom: 5px;
+      }
+
+      .timer-card {
+        width: min(92%, 360px);
+        border-radius: 12px;
+        padding: 8px 8px 7px;
+      }
+
+      .timer-unit {
+        gap: 1px;
+        padding: 0 4px;
+      }
+
+      .timer-unit + .timer-unit::before {
+        top: 4px;
+        bottom: 14px;
+      }
+
+      .timer-val {
+        font-size: 18px;
+      }
+
+      .timer-unit-label {
+        font-size: 9.5px;
+      }
+
+      .tiers-heading {
+        font-size: 12.5px;
+        margin: 10px 0 0;
+      }
+
+      .tiers-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        margin-top: 6px;
+      }
+
+      .tier-arrow {
+        flex: 0 0 auto;
+        height: 18px;
+        width: auto;
+        padding: 0;
+        color: var(--n-600);
+      }
+
+      .tier-arrow svg {
+        width: 14px;
+        height: 14px;
+        transform: none;
+      }
+
+      .tier-card {
+        flex: 0 0 auto;
+        width: 62%;
+        max-width: 236px;
+        height: 124px;
+        min-height: 124px;
+        max-height: 124px;
+      }
+
+      .tier-card-body {
+        padding: 10px 8px calc(4px + var(--tier-progress-h));
+        flex-shrink: 0;
+      }
+
+      .tier-ic,
+      .tier-card.done .tier-ic,
+      .tier-card.current .tier-ic,
+      .tier-card.future .tier-ic {
+        flex-shrink: 0;
+        aspect-ratio: 1 / 1;
+      }
+
+      .tier-badge {
+        top: 2px;
+        right: 2px;
+        font-size: 8px;
+        padding: 4px 9px;
+        letter-spacing: 0.07em;
+      }
+
+      .demo-actions {
+        margin-top: 14px;
+        padding-bottom: 0;
+      }
+
+      .outro-banner {
+        display: none;
       }
     }
   </style>
@@ -757,35 +1009,92 @@
     <div class="vignette" aria-hidden="true"></div>
     <div class="scene">
       <div class="scene-head">
-        <p class="scene-title">Niveles de descuento</p>
-        <p class="scene-sub">Más personas unidas, más ahorro para todas</p>
+        <span class="scene-badge">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+          </svg>
+          <span data-demo-i18n="sceneBadge">Oferta colectiva</span>
+        </span>
       </div>
 
-      <div class="counter-panel">
-        <div class="counter-main">
-          <span class="counter-num" id="counterNum">0</span>
-          <span class="counter-label" id="counterSub">Personas en el grupo</span>
+      <div class="progress-top has-pct" id="progressTop">
+        <div class="progress-meta">
+          <p class="progress-left">
+            <span class="progress-count" id="progressCount">0/50</span>
+            <span class="progress-joined" id="progressJoined"> personas unidas</span>
+          </p>
+          <p class="progress-right" id="progressSpots">Quedan 50 plazas</p>
         </div>
-        <div class="avatar-stack" id="avatarStack" aria-hidden="true"></div>
+        <div class="progress-bar-row">
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <span class="progress-pct" id="progressPct">0%</span>
+        </div>
       </div>
 
-      <div class="carousel-shell">
-        <div class="carousel-window" id="carouselWindow">
-          <div class="carousel-track" id="carouselTrack"></div>
+      <div class="timer-block">
+        <p class="timer-label" id="timerLabel">Cierra en</p>
+        <div class="timer-card" aria-hidden="true">
+          <div class="timer-unit">
+            <span class="timer-val" data-unit="d">00</span>
+            <span class="timer-unit-label" data-ulabel="d">Días</span>
+          </div>
+          <div class="timer-unit">
+            <span class="timer-val" data-unit="h">00</span>
+            <span class="timer-unit-label" data-ulabel="h">Horas</span>
+          </div>
+          <div class="timer-unit">
+            <span class="timer-val" data-unit="m">21</span>
+            <span class="timer-unit-label" data-ulabel="m">Minutos</span>
+          </div>
+          <div class="timer-unit">
+            <span class="timer-val" data-unit="s">00</span>
+            <span class="timer-unit-label" data-ulabel="s">Segundos</span>
+          </div>
         </div>
-        <div class="step-dots" id="stepDots" aria-hidden="true"></div>
       </div>
+
+      <p class="tiers-heading" data-demo-i18n="tiersHeading">Niveles de descuento</p>
+      <div class="tiers-row" id="tiersRow"></div>
+
+      <div class="demo-actions" aria-hidden="true">
+        <div class="demo-actions-row">
+          <div class="demo-qty">
+            <span class="demo-qty-btn">−</span>
+            <span class="demo-qty-val">1</span>
+            <span class="demo-qty-btn">+</span>
+          </div>
+          <div class="demo-btn-join">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M19 8v6M22 11h-6"/>
+            </svg>
+            <span data-demo-i18n="joinGroup">Únete al grupo</span>
+          </div>
+        </div>
+        <div class="demo-btn-share">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M19 8v6M22 11h-6"/>
+          </svg>
+          <span data-demo-i18n="share">Compartir</span>
+        </div>
+        <p class="demo-actions-foot" data-demo-i18n="actionsFoot">¡Cuánta más gente se una, mejor precio! ¡Entra y súmate! ✨</p>
+      </div>
+
+      <p class="outro-banner" id="outroBanner" aria-live="polite"></p>
     </div>
-    <div class="fx-layer" id="fxLayer"></div>
   </div>
 
   <script>
     (function () {
       const TIERS = [
         { people: 5, pct: 5 },
-        { people: 15, pct: 10 },
-        { people: 40, pct: 15 },
-        { people: 90, pct: 20 },
+        { people: 30, pct: 15 },
+        { people: 50, pct: 30 },
       ];
       const MAX_PEOPLE = TIERS[TIERS.length - 1].people;
 
@@ -795,39 +1104,48 @@
         return Math.max(0, Math.min(MAX_PEOPLE, Math.round(x)));
       }
 
-      /** Contador lógico (no depender de parseInt del DOM: evita glitches al cambiar idioma). */
       let committedPeople = 0;
 
       const arrowBetween =
-        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6L8 12l6 6"/></svg>';
-
-      const userPath =
-        '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20.5c0-4 3-7 6.5-7s6.5 3 6.5 7"/></svg>';
-
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>';
       const checkPath =
         '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>';
-
       const arrowPath =
         '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12l7-7 7 7"/></svg>';
-
       const spinnerPath =
         '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-width="1.75"><path d="M12 3.5v2M12 18.5v2M3.5 12H5.5M18.5 12h2M6 6l1.4 1.4M16.6 16.6l1.4 1.4M18 6l-1.4 1.4M7.4 16.6L6 18"/></g></svg>';
 
-      const viewport = document.getElementById('viewport');
-      const counterNum = document.getElementById('counterNum');
-      const counterSub = document.getElementById('counterSub');
-      const avatarStack = document.getElementById('avatarStack');
-      const carouselWindow = document.getElementById('carouselWindow');
-      const carouselTrack = document.getElementById('carouselTrack');
-      const stepDots = document.getElementById('stepDots');
-      const fxLayer = document.getElementById('fxLayer');
+      const tiersRow = document.getElementById('tiersRow');
+      const progressCount = document.getElementById('progressCount');
+      const progressJoined = document.getElementById('progressJoined');
+      const progressSpots = document.getElementById('progressSpots');
+      const progressFill = document.getElementById('progressFill');
+      const progressPct = document.getElementById('progressPct');
+      const timerLabel = document.getElementById('timerLabel');
+      const outroBanner = document.getElementById('outroBanner');
+      const timerVals = {
+        d: document.querySelector('.timer-val[data-unit="d"]'),
+        h: document.querySelector('.timer-val[data-unit="h"]'),
+        m: document.querySelector('.timer-val[data-unit="m"]'),
+        s: document.querySelector('.timer-val[data-unit="s"]'),
+      };
+      const timerULabels = {
+        d: document.querySelector('[data-ulabel="d"]'),
+        h: document.querySelector('[data-ulabel="h"]'),
+        m: document.querySelector('[data-ulabel="m"]'),
+        s: document.querySelector('[data-ulabel="s"]'),
+      };
 
       const reduceMotion = window.matchMedia(
         '(prefers-reduced-motion: reduce)'
       ).matches;
 
       let demoLang = 'es';
-      let showOutroLabel = false;
+      let demoLangAppliedOnce = false;
+      let counterTweenGen = 0;
+      let timerLeft = 0;
+      let timerInterval = null;
+      let showOutro = false;
 
       function getStoredDemoLang() {
         try {
@@ -839,32 +1157,54 @@
 
       const TSTR = {
         es: {
-          sceneTitle: 'Niveles de descuento',
-          sceneSub: 'Más personas unidas, más ahorro para todas',
-          counterLabel: 'Personas en el grupo',
+          sceneBadge: 'Oferta colectiva',
+          peopleJoined: 'personas unidas',
+          spotsLeftTop: 'Quedan {n} plazas',
+          spotLeftTop: 'Queda 1 plaza',
+          spotsNone: 'Grupo completo',
+          closesIn: 'Cierra en',
+          days: 'Días',
+          hours: 'Horas',
+          minutes: 'Minutos',
+          seconds: 'Segundos',
           outroAll: 'Todos los hitos desbloqueados',
           tierBadge: 'Actual',
           reached: 'Alcanzado',
           ahead: 'Por delante',
           upcoming: 'Por alcanzar',
           people: 'personas',
-          peopleJoined: 'personas unidas',
+          peopleJoinedShort: 'personas unidas',
           spotsLeft: 'Faltan {n} plazas',
           spotLeft: 'Falta 1 plaza',
+          tiersHeading: 'Niveles de descuento',
+          joinGroup: 'Únete al grupo',
+          share: 'Compartir',
+          actionsFoot: '¡Cuánta más gente se una, mejor precio! ¡Entra y súmate! ✨',
         },
         en: {
-          sceneTitle: 'Discount tiers',
-          sceneSub: 'More people in the group, more savings for everyone',
-          counterLabel: 'People in the group',
+          sceneBadge: 'Group offer',
+          peopleJoined: 'people joined',
+          spotsLeftTop: '{n} spots left',
+          spotLeftTop: '1 spot left',
+          spotsNone: 'Group complete',
+          closesIn: 'Closes in',
+          days: 'Days',
+          hours: 'Hours',
+          minutes: 'Minutes',
+          seconds: 'Seconds',
           outroAll: 'All milestones unlocked',
           tierBadge: 'Current',
           reached: 'Unlocked',
           ahead: 'Up next',
           upcoming: 'Next',
           people: 'people',
-          peopleJoined: 'people joined',
+          peopleJoinedShort: 'people joined',
           spotsLeft: '{n} spots left',
           spotLeft: '1 spot left',
+          tiersHeading: 'Discount levels',
+          joinGroup: 'Join the group',
+          share: 'Share',
+          actionsFoot: 'The more people join, the better the price! Jump in! ✨',
         },
       };
 
@@ -874,97 +1214,80 @@
       }
 
       const TIMING = {
-        carouselFocusDelayMs: reduceMotion ? 0 : 140,
         initialPause: reduceMotion ? 200 : 380,
-        afterInitialSync: reduceMotion ? 220 : 420,
-        afterOutroPan: reduceMotion ? 200 : 540,
+        afterResetPause: reduceMotion ? 320 : 900,
         afterOutroMessage: reduceMotion ? 500 : 1000,
-        outroGlowHold: reduceMotion ? 0 : 1180,
         outroDonePulse: reduceMotion ? 0 : 640,
-        /* Tras el outro: tiempo para “leer” el final antes de reiniciar */
-        loopEndHold: reduceMotion ? 700 : 3200,
-        /* Tras volver a 0 / estado inicial: pausa antes de que arranque otra vez la intro */
-        afterResetPause: reduceMotion ? 320 : 1100,
+        loopEndHold: reduceMotion ? 700 : 2800,
         milestoneFlashMs: reduceMotion ? 0 : 420,
       };
 
-      let lastFocus = -1;
-      let syncGen = 0;
-      let counterTweenGen = 0;
-      let demoLangAppliedOnce = false;
+      const TIMER_START = 21 * 3600 + 45 * 60 + 18;
 
-      function animateCounterNumber(target, durationMs) {
-        target = clampPeople(target);
-        if (durationMs <= 0) {
-          committedPeople = target;
-          counterNum.textContent = String(target);
-          return Promise.resolve();
-        }
-        const gen = ++counterTweenGen;
-        const start = clampPeople(committedPeople);
-        if (start === target) {
-          committedPeople = target;
-          counterNum.textContent = String(target);
-          return Promise.resolve();
-        }
-        if (reduceMotion) {
-          committedPeople = target;
-          counterNum.textContent = String(target);
-          return Promise.resolve();
-        }
-        const dir = target > start ? 1 : -1;
-        const span = Math.abs(target - start);
-        const dur = Math.max(1, durationMs);
-        const t0 = performance.now();
-        return new Promise(function (resolve) {
-          function frame(now) {
-            if (gen !== counterTweenGen) {
-              committedPeople = target;
-              counterNum.textContent = String(target);
-              resolve();
-              return;
+      function pad2(n) {
+        return String(n).padStart(2, '0');
+      }
+
+      function renderTimer() {
+        const total = Math.max(0, timerLeft);
+        const d = Math.floor(total / 86400);
+        const h = Math.floor((total % 86400) / 3600);
+        const m = Math.floor((total % 3600) / 60);
+        const s = total % 60;
+        const next = { d: pad2(d), h: pad2(h), m: pad2(m), s: pad2(s) };
+        Object.keys(next).forEach(function (k) {
+          const el = timerVals[k];
+          if (!el) return;
+          if (el.textContent !== next[k]) {
+            el.textContent = next[k];
+            if (!reduceMotion) {
+              el.classList.remove('tick');
+              void el.offsetWidth;
+              el.classList.add('tick');
+              setTimeout(function () {
+                el.classList.remove('tick');
+              }, 280);
             }
-            const progress = Math.min(1, (now - t0) / dur);
-            const eased = 1 - (1 - progress) * (1 - progress);
-            const step = Math.min(span, Math.floor(eased * span + 1e-9));
-            const v = clampPeople(start + dir * step);
-            counterNum.textContent = String(v);
-            /* Mantiene committedPeople al valor mostrado: si el padre envía postMessage (idioma)
-               durante el tween, applyDemoLang no debe volver atrás el número (móvil). */
-            committedPeople = v;
-            if (progress >= 1) {
-              committedPeople = target;
-              counterNum.textContent = String(target);
-              resolve();
-              return;
-            }
-            requestAnimationFrame(frame);
           }
-          requestAnimationFrame(frame);
         });
+      }
+
+      function startTimer() {
+        stopTimer();
+        timerLeft = TIMER_START;
+        renderTimer();
+        /* Siempre marca segundos (también con reduce-motion de Windows) */
+        timerInterval = setInterval(function () {
+          timerLeft = Math.max(0, timerLeft - 1);
+          renderTimer();
+        }, 1000);
+      }
+
+      function stopTimer() {
+        if (timerInterval) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
       }
 
       function tierState(count, index) {
         const tier = TIERS[index];
-        const prev = index === 0 ? 0 : TIERS[index - 1].people;
         if (count >= tier.people) return 'done';
+        const prev = index === 0 ? 0 : TIERS[index - 1].people;
         if (count >= prev) return 'current';
         return 'future';
       }
 
-      function focusTierIndex(count) {
-        for (let i = 0; i < TIERS.length; i++) {
-          if (tierState(count, i) === 'current') return i;
-        }
-        for (let i = TIERS.length - 1; i >= 0; i--) {
-          if (tierState(count, i) === 'done') return i;
-        }
-        return 0;
-      }
-
       function buildCards() {
-        carouselTrack.innerHTML = '';
-        TIERS.forEach((tier, i) => {
+        tiersRow.innerHTML = '';
+        TIERS.forEach(function (tier, i) {
+          if (i > 0) {
+            const ar = document.createElement('div');
+            ar.className = 'tier-arrow';
+            ar.setAttribute('aria-hidden', 'true');
+            ar.innerHTML = arrowBetween;
+            tiersRow.appendChild(ar);
+          }
           const div = document.createElement('div');
           div.className = 'tier-card future';
           div.dataset.index = String(i);
@@ -979,134 +1302,50 @@
             '<div class="tier-tag">—</div>' +
             '<div class="tier-pct">' +
             tier.pct +
-            '<small> % OFF</small></div>' +
+            '<span class="tier-pct-sym">%</span><span class="tier-pct-off">OFF</span></div>' +
             '<div class="tier-meta-host"></div>' +
             '</div>' +
             '<div class="tier-progress"><span></span></div>';
-          carouselTrack.appendChild(div);
-
-          if (i < TIERS.length - 1) {
-            const ar = document.createElement('div');
-            ar.className = 'carousel-arrow';
-            ar.setAttribute('aria-hidden', 'true');
-            ar.innerHTML = arrowBetween;
-            carouselTrack.appendChild(ar);
-          }
-        });
-
-        stepDots.innerHTML = '';
-        TIERS.forEach(() => {
-          const d = document.createElement('div');
-          d.className = 'step-dot upcoming';
-          stepDots.appendChild(d);
+          tiersRow.appendChild(div);
         });
       }
 
-      function syncCarouselFocus(count, force, options) {
-        options = options || {};
-        const idx =
-          typeof options.focusIndex === 'number'
-            ? options.focusIndex
-            : focusTierIndex(count);
-        if (!force && idx === lastFocus) return;
-
-        const prev = lastFocus;
-        const shouldDelay =
-          !reduceMotion &&
-          !force &&
-          prev !== -1 &&
-          idx !== prev &&
-          typeof options.focusIndex !== 'number';
-
-        const myGen = ++syncGen;
-
-        function applyTransform() {
-          if (myGen !== syncGen) return;
-          lastFocus = idx;
-
-          const cards = carouselTrack.querySelectorAll('.tier-card');
-          const card = cards[idx];
-          if (!card || !carouselWindow) return;
-
-          carouselTrack.classList.remove('pan-new-tier', 'pan-outro');
-          if (!reduceMotion) {
-            if (options.outroPan) {
-              carouselTrack.classList.add('pan-outro');
-            } else if (prev >= 0 && prev !== idx) {
-              carouselTrack.classList.add('pan-new-tier');
-            }
-          }
-
-          const csw = window.getComputedStyle(carouselWindow);
-          const padL = parseFloat(csw.paddingLeft) || 0;
-          const padR = parseFloat(csw.paddingRight) || 0;
-          /* Área útil del carrusel (sin padding): antes usábamos clientWidth entero y el min era demasiado poco negativo → última tarjeta cortada */
-          const innerW = carouselWindow.clientWidth - padL - padR;
-          const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-          const lastI = TIERS.length - 1;
-          const peekNext =
-            idx >= lastI ? 0 : idx >= lastI - 1 ? 5 : 12;
-          /* Ligeramente a la derecha del centro para enseñar más la tarjeta anterior (2 visibles) */
-          const focusX = innerW * 0.54;
-          let target = focusX - cardCenter - peekNext;
-          let min = innerW - carouselTrack.scrollWidth;
-          let x = Math.max(min, Math.min(0, target));
-          carouselTrack.style.transform = 'translateX(' + x + 'px)';
-
-          requestAnimationFrame(function () {
-            if (myGen !== syncGen) return;
-            const winR = carouselWindow.getBoundingClientRect();
-            const cardR = card.getBoundingClientRect();
-            const innerRight = winR.right - padR;
-            const innerLeft = winR.left + padL;
-            let nudge = 0;
-            if (cardR.right > innerRight - 1) {
-              nudge = innerRight - 1 - cardR.right;
-            } else if (cardR.left < innerLeft + 1) {
-              nudge = innerLeft + 1 - cardR.left;
-            }
-            if (nudge !== 0) {
-              x = Math.max(min, Math.min(0, x + nudge));
-              carouselTrack.style.transform = 'translateX(' + x + 'px)';
-            }
-          });
-        }
-
-        if (shouldDelay) {
-          setTimeout(applyTransform, TIMING.carouselFocusDelayMs);
-        } else {
-          applyTransform();
-        }
-      }
-
-      function updateStepDots(count) {
-        const dots = stepDots.querySelectorAll('.step-dot');
-        dots.forEach((dot, i) => {
-          dot.classList.remove('passed', 'active', 'upcoming');
-          const st = tierState(count, i);
-          if (st === 'done') dot.classList.add('passed');
-          else if (st === 'current') dot.classList.add('active');
-          else dot.classList.add('upcoming');
-        });
+      function updateProgressTop(count) {
+        count = clampPeople(count);
+        const left = Math.max(0, MAX_PEOPLE - count);
+        const pct = Math.round((count / MAX_PEOPLE) * 100);
+        progressCount.textContent = count + '/' + MAX_PEOPLE;
+        progressJoined.textContent = ' ' + t('peopleJoined');
+        if (left <= 0) progressSpots.textContent = t('spotsNone');
+        else if (left === 1) progressSpots.textContent = t('spotLeftTop');
+        else progressSpots.textContent = t('spotsLeftTop').replace('{n}', String(left));
+        progressPct.textContent = pct + '%';
+        progressFill.style.width = pct + '%';
+        progressFill.classList.toggle('is-done', count >= MAX_PEOPLE);
       }
 
       function updateCards(count) {
         count = clampPeople(count);
-        const cards = carouselTrack.querySelectorAll('.tier-card');
-        cards.forEach((card, i) => {
+        updateProgressTop(count);
+        const cards = tiersRow.querySelectorAll('.tier-card');
+        cards.forEach(function (card, i) {
           const tier = TIERS[i];
           const prev = i === 0 ? 0 : TIERS[i - 1].people;
           const st = tierState(count, i);
           card.classList.remove('done', 'current', 'future');
           card.classList.add(st === 'done' ? 'done' : st === 'current' ? 'current' : 'future');
 
+          const badge = card.querySelector('.tier-badge');
           const ic = card.querySelector('.tier-ic');
           const tag = card.querySelector('.tier-tag');
           const pct = card.querySelector('.tier-pct');
           const metaHost = card.querySelector('.tier-meta-host');
           const bar = card.querySelector('.tier-progress span');
 
-          pct.innerHTML = tier.pct + '<small> % OFF</small>';
+          if (badge) badge.textContent = t('tierBadge');
+          pct.innerHTML =
+            tier.pct +
+            '<span class="tier-pct-sym">%</span><span class="tier-pct-off">OFF</span>';
 
           if (st === 'done') {
             ic.innerHTML = checkPath;
@@ -1131,7 +1370,7 @@
               '/' +
               tier.people +
               ' ' +
-              t('peopleJoined') +
+              t('peopleJoinedShort') +
               '</span>' +
               '<span class="tier-meta-right">' +
               plazasLine +
@@ -1154,72 +1393,83 @@
             bar.style.removeProperty('width');
           }
         });
-
-        updateStepDots(count);
-        if (carouselTrack.querySelectorAll('.tier-card').length > 0) {
-          requestAnimationFrame(() => syncCarouselFocus(count, false));
-        }
       }
 
       function applyDemoLang(lang) {
         const next = lang === 'en' ? 'en' : 'es';
-        /* Evita postMessage duplicado (carga padre + iframes) que refresca el contador en móvil */
-        if (demoLangAppliedOnce && next === demoLang) {
-          return;
-        }
+        if (demoLangAppliedOnce && next === demoLang) return;
         demoLangAppliedOnce = true;
         demoLang = next;
         document.documentElement.lang = demoLang;
-        const st = document.querySelector('.scene-title');
-        if (st) st.textContent = t('sceneTitle');
-        const ss = document.querySelector('.scene-sub');
-        if (ss) ss.textContent = t('sceneSub');
+        document.querySelectorAll('[data-demo-i18n]').forEach(function (el) {
+          const key = el.getAttribute('data-demo-i18n');
+          if (key) el.textContent = t(key);
+        });
+        if (timerLabel) timerLabel.textContent = t('closesIn');
+        if (timerULabels.d) timerULabels.d.textContent = t('days');
+        if (timerULabels.h) timerULabels.h.textContent = t('hours');
+        if (timerULabels.m) timerULabels.m.textContent = t('minutes');
+        if (timerULabels.s) timerULabels.s.textContent = t('seconds');
         const n = clampPeople(committedPeople);
         committedPeople = n;
-        counterNum.textContent = String(n);
         updateCards(n);
-        refreshStack(n);
-        if (showOutroLabel) {
-          counterSub.textContent = t('outroAll');
-        } else {
-          counterSub.textContent = t('counterLabel');
+        if (showOutro) {
+          outroBanner.textContent = t('outroAll');
+          outroBanner.classList.add('show');
         }
       }
 
-      function setCounter(n, withGroupLabel) {
+      function setCounter(n) {
         counterTweenGen += 1;
         const v = clampPeople(n);
         committedPeople = v;
-        counterNum.textContent = String(v);
-        if (withGroupLabel) counterSub.textContent = t('counterLabel');
+        updateCards(v);
       }
 
-      function pulseCounter() {
-        counterNum.classList.remove('pulse');
-        void counterNum.offsetWidth;
-        counterNum.classList.add('pulse');
-      }
-
-      const MAX_STACK = 6;
-      function refreshStack(n) {
-        avatarStack.innerHTML = '';
-        const show = Math.min(n, MAX_STACK);
-        for (let i = 0; i < show; i++) {
-          const slot = document.createElement('div');
-          slot.className = 'stack-slot visible';
-          slot.style.transitionDelay = i * 0.05 + 's';
-          if (!reduceMotion && show > 0 && i === show - 1) {
-            slot.classList.add('land-pop');
-            slot.style.animationDelay = i * 0.05 + 0.76 + 's';
-          }
-          slot.innerHTML = userPath;
-          avatarStack.appendChild(slot);
+      function animateCounterNumber(target, durationMs) {
+        target = clampPeople(target);
+        if (durationMs <= 0 || reduceMotion) {
+          committedPeople = target;
+          updateCards(target);
+          return Promise.resolve();
         }
+        const gen = ++counterTweenGen;
+        const start = clampPeople(committedPeople);
+        if (start === target) {
+          committedPeople = target;
+          updateCards(target);
+          return Promise.resolve();
+        }
+        const dir = target > start ? 1 : -1;
+        const span = Math.abs(target - start);
+        const dur = Math.max(1, durationMs);
+        const t0 = performance.now();
+        return new Promise(function (resolve) {
+          function frame(now) {
+            if (gen !== counterTweenGen) {
+              resolve();
+              return;
+            }
+            const p = Math.min(1, (now - t0) / dur);
+            const eased = 1 - Math.pow(1 - p, 2.2);
+            const step = Math.min(span, Math.floor(eased * span + 1e-9));
+            const v = clampPeople(start + dir * step);
+            committedPeople = v;
+            updateCards(v);
+            if (p < 1) requestAnimationFrame(frame);
+            else {
+              committedPeople = target;
+              updateCards(target);
+              resolve();
+            }
+          }
+          requestAnimationFrame(frame);
+        });
       }
 
       function pulseProgressPop(tierIndex) {
         if (reduceMotion) return;
-        const cards = carouselTrack.querySelectorAll('.tier-card');
+        const cards = tiersRow.querySelectorAll('.tier-card');
         const span =
           cards[tierIndex] &&
           cards[tierIndex].querySelector('.tier-progress span');
@@ -1230,73 +1480,18 @@
         setTimeout(function () {
           span.classList.remove('progress-pop');
         }, 620);
-      }
 
-      function spawnFlyingPerson(count, fromCardIndex) {
-        const r = viewport.getBoundingClientRect();
-        const stackR = avatarStack.getBoundingClientRect();
-        const half = 15;
-        const toX = stackR.left - r.left + stackR.width / 2 - half;
-        const toY = stackR.top - r.top + stackR.height / 2 - half;
-        const margin = 18;
-
-        function clamp(v, lo, hi) {
-          return Math.max(lo, Math.min(hi, v));
-        }
-
-        const cards = carouselTrack.querySelectorAll('.tier-card');
-        const idx =
-          typeof fromCardIndex === 'number'
-            ? fromCardIndex
-            : focusTierIndex(count);
-        const card = cards[idx];
-        let fromX;
-        let fromY;
-        let midX;
-        let midY;
-
-        if (card) {
-          const ic = card.querySelector('.tier-ic');
-          const box = ic ? ic.getBoundingClientRect() : card.getBoundingClientRect();
-          fromX = box.left + box.width / 2 - r.left - half;
-          fromY = box.top + box.height / 2 - r.top - half;
-          midX = (fromX + toX) / 2 + (Math.random() * 28 - 14);
-          /* Arco más bajo: menos solape con la tarjeta y menos clip del viewport */
-          midY = Math.min(fromY, toY) - (14 + Math.random() * 12);
-        } else {
-          fromX = 10 + Math.random() * 22;
-          fromY = toY + (Math.random() * 8 - 4);
-          midX = toX - (toX - fromX) * 0.4;
-          midY = Math.min(fromY, toY) - 12 - Math.random() * 5;
-        }
-
-        fromX = clamp(fromX, margin + half, r.width - margin - half);
-        fromY = clamp(fromY, margin + half, r.height - margin - half);
-        midX = clamp(midX, margin + half, r.width - margin - half);
-        midY = clamp(midY, margin + half, r.height - margin - half);
-
-        const el = document.createElement('div');
-        el.className = 'fly-person';
-        el.style.left = '0';
-        el.style.top = '0';
-        el.style.setProperty('--from-x', fromX + 'px');
-        el.style.setProperty('--from-y', fromY + 'px');
-        el.style.setProperty('--mid-x', midX + 'px');
-        el.style.setProperty('--mid-y', midY + 'px');
-        el.style.setProperty('--to-x', toX + 'px');
-        el.style.setProperty('--to-y', toY + 'px');
-        el.innerHTML = userPath;
-        fxLayer.appendChild(el);
-        setTimeout(() => el.remove(), 1600);
-      }
-
-      function wait(ms) {
-        return new Promise((res) => setTimeout(res, ms));
+        progressFill.classList.remove('pulse');
+        void progressFill.offsetWidth;
+        progressFill.classList.add('pulse');
+        setTimeout(function () {
+          progressFill.classList.remove('pulse');
+        }, 620);
       }
 
       function flashTierNonBlocking(tierIndex) {
         if (reduceMotion || TIMING.milestoneFlashMs <= 0) return;
-        const cards = carouselTrack.querySelectorAll('.tier-card');
+        const cards = tiersRow.querySelectorAll('.tier-card');
         const card = cards[tierIndex];
         if (!card) return;
         card.classList.add('flash-done');
@@ -1305,114 +1500,115 @@
         }, TIMING.milestoneFlashMs);
       }
 
+      function wait(ms) {
+        return new Promise(function (res) {
+          setTimeout(res, ms);
+        });
+      }
+
       async function runPhase(from, to, stepMs, burstEvery) {
         let prevCount = from;
         for (let n = from + 1; n <= to; n++) {
-          counterSub.textContent = t('counterLabel');
           const stepDelta = n - prevCount;
           const animMs = reduceMotion
             ? 0
-            : Math.min(260, 52 + stepDelta * 28);
+            : Math.min(320, 70 + stepDelta * 32);
           await animateCounterNumber(n, animMs);
           prevCount = n;
 
-          updateCards(n);
-          refreshStack(n);
-
           if (!reduceMotion) {
-            pulseCounter();
-            requestAnimationFrame(function () {
-              requestAnimationFrame(function () {
-                spawnFlyingPerson(n);
-              });
-            });
             for (let ti = 0; ti < TIERS.length; ti++) {
               if (n === TIERS[ti].people) {
                 flashTierNonBlocking(ti);
                 pulseProgressPop(ti);
-                setTimeout(function () {
-                  spawnFlyingPerson(n, ti);
-                }, 55);
-                setTimeout(function () {
-                  spawnFlyingPerson(n, ti);
-                }, 130);
                 break;
               }
             }
           }
 
           let delay =
-            n < 12 ? stepMs : n < 35 ? Math.max(92, stepMs - 35) : Math.max(52, stepMs - 62);
-          if (reduceMotion) {
-            delay = Math.max(32, Math.round(delay * 0.38));
-          }
-          await wait(burstEvery && n % burstEvery === 0 ? delay * 0.58 : delay);
+            n < 8
+              ? stepMs
+              : n < 25
+                ? Math.max(140, stepMs - 30)
+                : Math.max(95, stepMs - 50);
+          if (reduceMotion) delay = Math.max(40, Math.round(delay * 0.45));
+          await wait(
+            burstEvery && n % burstEvery === 0 ? delay * 0.7 : delay
+          );
         }
       }
 
       async function loop() {
-        lastFocus = -1;
-        counterTweenGen += 1;
-        showOutroLabel = false;
-        counterSub.classList.remove('outro-reveal');
+        showOutro = false;
+        outroBanner.classList.remove('show');
+        outroBanner.textContent = '';
         buildCards();
-        setCounter(0, true);
-        updateCards(0);
-        refreshStack(0);
-        carouselTrack.classList.remove('pan-new-tier', 'pan-outro');
-        carouselTrack.style.transition = 'none';
-        carouselTrack.style.transform = 'translateX(0px)';
-        void carouselTrack.offsetWidth;
-        carouselTrack.style.transition = '';
+        setCounter(0);
+        startTimer();
         await wait(TIMING.afterResetPause);
         await wait(TIMING.initialPause);
-        syncCarouselFocus(0, true);
-        await wait(TIMING.afterInitialSync);
 
-        await runPhase(0, 5, 430, null);
-        await runPhase(5, 15, 250, 2);
-        await runPhase(15, 40, 110, 3);
-        await runPhase(40, 90, 62, 5);
+        await runPhase(0, 5, 620, null);
+        await runPhase(5, 30, 210, 3);
+        await runPhase(30, 50, 140, 2);
 
-        lastFocus = -1;
-        syncCarouselFocus(90, true, {
-          focusIndex: 1,
-          outroPan: true,
-        });
-        await wait(TIMING.afterOutroPan);
-
-        showOutroLabel = true;
-        counterSub.textContent = t('outroAll');
-        counterSub.classList.remove('outro-reveal');
-        void counterSub.offsetWidth;
-        if (!reduceMotion) {
-          counterSub.classList.add('outro-reveal');
-        }
+        showOutro = true;
+        outroBanner.textContent = t('outroAll');
+        outroBanner.classList.add('show');
         await wait(TIMING.afterOutroMessage);
 
         if (!reduceMotion) {
-          counterNum.classList.remove('outro-glow');
-          void counterNum.offsetWidth;
-          counterNum.classList.add('outro-glow');
-          await wait(TIMING.outroGlowHold);
-          counterNum.classList.remove('outro-glow');
-
-          const dones = carouselTrack.querySelectorAll('.tier-card.done');
-          dones.forEach((c) => c.classList.add('done-outro-pulse'));
+          const dones = tiersRow.querySelectorAll('.tier-card.done');
+          dones.forEach(function (c) {
+            c.classList.add('done-outro-pulse');
+          });
           await wait(TIMING.outroDonePulse);
-          dones.forEach((c) => c.classList.remove('done-outro-pulse'));
+          dones.forEach(function (c) {
+            c.classList.remove('done-outro-pulse');
+          });
         }
 
         await wait(TIMING.loopEndHold);
-
         loop();
       }
 
       window.addEventListener('message', function (ev) {
         if (!ev.data || ev.data.type !== 'tuko-demo-lang') return;
         applyDemoLang(ev.data.lang);
+        scheduleHugHeight();
       });
       applyDemoLang(getStoredDemoLang());
+
+      function reportHugHeight() {
+        if (window.parent === window) return;
+        const scene = document.querySelector('.scene');
+        if (!scene) return;
+        const h = Math.ceil(scene.getBoundingClientRect().height);
+        if (!Number.isFinite(h) || h < 120) return;
+        try {
+          window.parent.postMessage({ type: 'tuko-demo-resize', height: h }, '*');
+        } catch (e) {}
+      }
+
+      let hugRaf = 0;
+      function scheduleHugHeight() {
+        if (hugRaf) cancelAnimationFrame(hugRaf);
+        hugRaf = requestAnimationFrame(function () {
+          hugRaf = 0;
+          reportHugHeight();
+        });
+      }
+
+      scheduleHugHeight();
+      window.addEventListener('resize', scheduleHugHeight);
+      if (typeof ResizeObserver !== 'undefined') {
+        const sceneEl = document.querySelector('.scene');
+        if (sceneEl) {
+          const ro = new ResizeObserver(scheduleHugHeight);
+          ro.observe(sceneEl);
+        }
+      }
 
       loop();
     })();
