@@ -1,6 +1,6 @@
-// Configuración de despliegue de Tuko.
-// Netlify sirve Brotli y Gzip automáticamente y habla HTTP/2 y HTTP/3;
-// aquí se define el cacheado, la seguridad y las redirecciones canónicas.
+# Configuración de despliegue de Tuko.
+# Netlify sirve Brotli y Gzip automáticamente y habla HTTP/2 y HTTP/3;
+# aquí se define el cacheado, la seguridad y las redirecciones canónicas.
 
 [build]
   publish = "."
