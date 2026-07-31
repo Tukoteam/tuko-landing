@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>tuko IA — Compras colectivas automatizadas con IA</title>
-<meta name="tuko-ia-build" content="20260731-panel-speed-60">
+<meta name="tuko-ia-build" content="20260731-panel-ready-1s">
 <meta name="description" content="tuko IA analiza tu mercado, tu competencia, tu calendario y tus propias ventas para generar grupos y campañas de compra colectiva automáticamente. En desarrollo.">
 <link rel="icon" href="assets/favicon.png?v=5" sizes="32x32" type="image/png">
 <link rel="icon" href="assets/favicon.svg?v=5" type="image/svg+xml">
@@ -2816,13 +2816,16 @@
     var barEl = document.getElementById('ia-panel-bar');
     if (!panel) return;
     var rows = Array.prototype.slice.call(panel.querySelectorAll('.ia-sig-row'));
-    /* Velocidad del ciclo: 0.6 = 60% del ritmo original (más lento) */
-    var SPEED = 0.6;
+    /* Velocidad del ciclo: 0.4 = 40% del ritmo original (más lento) */
+    var SPEED = 0.4;
     var STEP = Math.round(720 / SPEED);
     var START_DELAY = Math.round(380 / SPEED);
+    /* Tras llegar al 100%: como máximo 1s y pasa a Listo (verde) */
+    var READY_AFTER_100_MS = 1000;
     var timers = [];
     var rafId = null;
     var lastChecked = -1;
+    var readyArmed = false;
 
     function tKey(key) {
       var lang = document.documentElement.lang || 'es';
@@ -2905,12 +2908,24 @@
     function run() {
       clearAll();
       lastChecked = -1;
+      readyArmed = false;
       setReady(false);
       setCheckedVisual(0);
       paintPct(0);
 
       var analysisMs = START_DELAY + rows.length * STEP;
       var startAt = performance.now();
+
+      function goReady() {
+        if (readyArmed) return;
+        readyArmed = true;
+        paintPct(100);
+        setCheckedVisual(rows.length);
+        timers.push(setTimeout(function () {
+          setReady(true);
+          /* Una sola pasada: se queda en Listo, sin repetir ni empujar la página */
+        }, READY_AFTER_100_MS));
+      }
 
       function tick(now) {
         var elapsed = now - startAt;
@@ -2921,19 +2936,16 @@
         paintPct(pct);
 
         var n = Math.min(rows.length, Math.floor((pct / 100) * rows.length + 0.001));
-        if (t >= 1) n = rows.length;
+        if (t >= 1 || Math.round(pct) >= 100) n = rows.length;
         setCheckedVisual(n);
 
-        if (t < 1) {
-          rafId = requestAnimationFrame(tick);
-        } else {
-          paintPct(100);
-          setCheckedVisual(rows.length);
-          timers.push(setTimeout(function () {
-            setReady(true);
-            /* Una sola pasada: se queda en Listo, sin repetir ni empujar la página */
-          }, Math.round(420 / SPEED)));
+        /* En cuanto se ve 100%, espera ≤1s y efecto verde (no alargar con SPEED) */
+        if (t >= 1 || Math.round(pct) >= 100) {
+          goReady();
+          return;
         }
+
+        rafId = requestAnimationFrame(tick);
       }
 
       rafId = requestAnimationFrame(tick);
