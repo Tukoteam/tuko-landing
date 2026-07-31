@@ -369,6 +369,7 @@
     text-size-adjust: 100%;
     /* Compensa el header fijo al saltar a #anclas (nav + un poco de aire) */
     scroll-padding-top: calc(80px + env(safe-area-inset-top, 0px));
+    overflow-x: hidden;
   }
 
   section[id] {
@@ -2853,6 +2854,8 @@
       gap: 12px;
       padding: 24px 18px 22px;
       border-radius: 24px;
+      /* Evita scroll horizontal: glow ::after y demos no deben salirse */
+      overflow: hidden;
     }
     .how-step::before {
       top: 14px;
@@ -2866,10 +2869,10 @@
       border-radius: 0 5px 5px 0;
     }
     .how-step::after {
-      width: 260px;
-      height: 260px;
-      top: -20%;
-      left: 40%;
+      width: 220px;
+      height: 220px;
+      top: -18%;
+      left: 28%;
       opacity: 0.85;
     }
     /* Texto arriba, demo abajo — también en pasos reversed (2 y 4) */
@@ -2888,12 +2891,13 @@
     .how-step-desc { max-width: none; font-size: 15.5px; }
     .how-step-visual { min-height: 0; padding: 6px 0 0; }
     .how-steps > .how-step .how-anim-box {
-      width: min(420px, calc(100vw - 52px));
+      /* 100% del contenedor (no 100vw): 100vw en móvil provoca scroll lateral */
+      width: 100%;
       max-width: 420px;
       margin-inline: auto;
     }
     .how-steps > .how-step:nth-child(3) .how-anim-box {
-      width: min(100%, calc(100vw - 40px));
+      width: 100%;
       max-width: 520px;
     }
     .how-anim-box {
