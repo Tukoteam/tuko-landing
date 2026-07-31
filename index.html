@@ -2026,10 +2026,9 @@
     aspect-ratio: 9 / 10;
   }
 
-  /* Paso 2 — escena más alta (cantidad + KPI) */
+  /* Paso 2 — altura cercana al paso 1 (fase cantidad cabe compacta) */
   .how-steps > .how-step:nth-child(2) .how-anim-box--embed {
-    /* Más alto para la fase «Cantidad» + botón Continuar */
-    aspect-ratio: 9 / 15.2;
+    aspect-ratio: 9 / 11.85;
   }
 
   /* Paso 3 — gris uniforme alrededor del blanco */
@@ -2904,9 +2903,8 @@
       border-radius: 18px;
     }
     .how-step-iframe { min-height: 0; }
-    /* En móvil: ratios justos al contenido (sin letterbox gris).
-       Paso 2 más alto: cantidad + Continuar no deben cortarse. */
-    .how-steps > .how-step:nth-child(2) .how-anim-box--embed { aspect-ratio: 9 / 16; }
+    /* En móvil: paso 2 más alto para que Continuar no se corte */
+    .how-steps > .how-step:nth-child(2) .how-anim-box--embed { aspect-ratio: 9 / 15.2; }
     /* Paso 3 móvil: la altura la fija el contenido (postMessage), sin hueco vacío */
     .how-steps > .how-step:nth-child(3) .how-anim-box--embed {
       aspect-ratio: auto;
@@ -3507,7 +3505,7 @@
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/01-activar-compra/index.html?v=20260731q" title="Demo: activar compra colectiva en el producto" loading="eager"></iframe>
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/01-activar-compra/index.html?v=20260731t" title="Demo: activar compra colectiva en el producto" loading="eager"></iframe>
       </div>
     </div>
   </div>
@@ -3523,7 +3521,7 @@
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/02-unirse-al-grupo/index.html?v=20260731c3" title="Demo: unirse al grupo y ver el ahorro" loading="eager"></iframe>
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/02-unirse-al-grupo/index.html?v=20260731c12" title="Demo: unirse al grupo y ver el ahorro" loading="eager"></iframe>
       </div>
     </div>
   </div>
@@ -3555,7 +3553,7 @@
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/04-estadisticas-cimentacion/index.html?v=20260731q" title="Demo: estadísticas y confianza" loading="eager"></iframe>
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/04-estadisticas-cimentacion/index.html?v=20260731r" title="Demo: estadísticas y confianza" loading="eager"></iframe>
       </div>
     </div>
   </div>

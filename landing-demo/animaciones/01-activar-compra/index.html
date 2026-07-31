@@ -990,7 +990,8 @@
         const r = el.getBoundingClientRect();
         return {
           x: r.left - vr.left + r.width / 2 - 13,
-          y: r.top - vr.top + r.height / 2 - 13,
+          /* Un poco más abajo: la punta del cursor cae en el centro del toggle */
+          y: r.top - vr.top + r.height / 2 - 13 + 8,
         };
       }
 
@@ -1091,12 +1092,34 @@
         at(TIMING.successBadge, () => successBadge.classList.add('visible'));
 
         at(TIMING.resetFade, () => {
+          cursor.classList.remove('visible', 'clicking');
+          cursor.style.opacity = '0';
           viewport.style.transition = 'opacity 0.5s ease';
           viewport.style.opacity = '0';
         });
 
         at(TIMING.resetDone, () => {
-          viewport.style.opacity = '1';
+          /* Reset limpio mientras está invisible → el fade-in ya no enseña el tick otra vez */
+          stage.classList.remove('parallax', 'cta-zoom');
+          toggle.className = 'toggle';
+          modalBackdrop.classList.remove('visible');
+          modalSheet.classList.remove('visible', 'product-stage');
+          const sc = $('modalScroll');
+          if (sc) sc.scrollTop = 0;
+          btnActivate.className = 'btn-activate';
+          successBadge.classList.remove('visible');
+          ['secProduct', 'secConfig', 'secM1', 'secM2', 'secM3', 'secM4', 'secFooter'].forEach(function (id) {
+            const el = $(id);
+            if (el) el.classList.remove('visible');
+          });
+          viewport.style.transition = 'none';
+          viewport.style.opacity = '0';
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              viewport.style.transition = 'opacity 0.5s ease';
+              viewport.style.opacity = '1';
+            });
+          });
         });
 
         loopTimer = setTimeout(runAnimation, TIMING.loopDelay);
@@ -1191,6 +1214,7 @@
         viewport.style.transition = 'none';
 
         cursor.classList.remove('visible', 'clicking');
+        cursor.style.opacity = '';
         stage.classList.remove('parallax', 'cta-zoom');
         toggle.className = 'toggle';
         modalBackdrop.classList.remove('visible');

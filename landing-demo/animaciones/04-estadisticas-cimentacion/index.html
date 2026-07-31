@@ -370,9 +370,9 @@
       rebuildFormatters();
       applyDemoLang(getStoredDemoLang());
 
-      const COUNT_UP_MS = 2200;
-      const HOLD_TOP_MS = 1800;
-      const HOLD_BOTTOM_MS = 500;
+      const COUNT_UP_MS = 4000;
+      const HOLD_TOP_MS = 2200;
+      const HOLD_BOTTOM_MS = 600;
       const CYCLE_MS = COUNT_UP_MS + HOLD_TOP_MS + HOLD_BOTTOM_MS;
 
       let t0 = 0;
@@ -402,7 +402,8 @@
           display.exitosos = Math.round(target.exitosos * u);
           display.participantes = Math.round(target.participantes * u);
           display.ingresos = target.ingresos * u;
-          setActivePill(Math.min(3, Math.floor(u * 4)));
+          /* Pills a ritmo lineal (no ease): cada período dura lo mismo */
+          setActivePill(Math.min(3, Math.floor((elapsed / COUNT_UP_MS) * 4)));
         } else if (elapsed < COUNT_UP_MS + HOLD_TOP_MS) {
           display.activos = target.activos;
           display.exitosos = target.exitosos;

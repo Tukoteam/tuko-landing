@@ -97,8 +97,8 @@
       }
 
       .intro-product-visual {
-        max-width: 160px;
-        height: 108px;
+        max-width: 132px;
+        height: 198px;
         margin-bottom: 10px;
       }
     }
@@ -254,8 +254,8 @@
 
     .intro-product-visual {
       width: 100%;
-      max-width: 200px;
-      height: 132px;
+      max-width: 148px;
+      height: 222px;
       margin: 0 auto 14px;
       position: relative;
       border-radius: 16px;
@@ -268,6 +268,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
       display: block;
     }
 
@@ -338,7 +339,7 @@
     .intro-product-label {
       font-size: 11px;
       font-weight: 600;
-      color: var(--n-400);
+      color: var(--n-600);
       text-transform: uppercase;
       letter-spacing: 0.06em;
       margin-bottom: 6px;
@@ -404,8 +405,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 8px 10px 10px;
-      margin-bottom: 10px;
+      width: fit-content;
+      max-width: 100%;
+      margin: 0 auto 10px;
+      padding: 8px 20px 10px;
       background: var(--n-white);
       border: 1px solid var(--n-200);
       border-radius: 12px;
@@ -612,16 +615,16 @@
       margin-bottom: 12px;
     }
 
-    /* Paso «Cantidad»: marco alto + contenido centrado en vertical */
+    /* Paso «Cantidad»: mismo marco; contenido compacto y centrado */
     #viewport:has(#flowStep2.is-active) {
-      aspect-ratio: 9 / 15.1;
-      min-height: 618px;
+      aspect-ratio: 9 / 12.4;
+      min-height: 0;
       overflow: hidden;
     }
 
     #viewport:has(#flowStep2.is-active) .scene {
       justify-content: center;
-      padding: 26px 24px 32px;
+      padding: 18px 20px 20px;
     }
 
     @media (max-width: 520px) {
@@ -633,12 +636,12 @@
       }
 
       #viewport:has(#flowStep2.is-active) .scene {
-        padding: 10px 12px 14px;
+        padding: 14px 12px 18px;
         justify-content: center;
       }
 
       #viewport:has(#flowStep2.is-active) .scene-hint {
-        margin-bottom: 2px;
+        margin-bottom: 4px;
       }
 
       #viewport:has(#flowStep2.is-active) .scene-sub {
@@ -653,8 +656,8 @@
 
       #viewport:has(#flowStep2.is-active) .intro-continue-btn {
         margin-top: 12px;
-        margin-bottom: 0;
-        min-height: 44px;
+        margin-bottom: 2px;
+        min-height: 46px;
       }
     }
 
@@ -907,19 +910,21 @@
 
     .share-dropdown {
       position: absolute;
-      left: 0;
-      right: 0;
+      left: 50%;
+      right: auto;
       top: auto;
       bottom: calc(100% + 10px);
       z-index: 50;
-      padding: 14px 12px 12px;
+      width: max-content;
+      max-width: calc(100% - 8px);
+      padding: 14px 16px 12px;
       background: var(--n-white);
       border-radius: 16px;
       border: 1px solid rgba(15, 23, 42, 0.08);
       box-shadow: 0 18px 48px rgba(20, 24, 38, 0.18);
       opacity: 0;
       visibility: hidden;
-      transform: translateY(10px) scale(0.98);
+      transform: translateX(-50%) translateY(10px) scale(0.98);
       transform-origin: 50% 100%;
       transition:
         opacity 0.28s cubic-bezier(0.22, 1, 0.36, 1),
@@ -931,7 +936,7 @@
     .share-wrap.is-open .share-dropdown {
       opacity: 1;
       visibility: visible;
-      transform: translateY(0) scale(1);
+      transform: translateX(-50%) translateY(0) scale(1);
       pointer-events: auto;
     }
 
@@ -947,21 +952,20 @@
 
     .share-dropdown-row {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: flex-start;
-      gap: 6px;
+      gap: 14px;
     }
 
     .share-opt {
-      flex: 1 1 0;
-      min-width: 48px;
-      flex-shrink: 0;
+      flex: 0 0 auto;
+      min-width: 52px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
       gap: 5px;
-      padding: 8px 2px;
+      padding: 8px 4px;
       border: none;
       border-radius: 12px;
       background: transparent;
@@ -1163,10 +1167,10 @@
         step3At: 5180,
         shareReveal: 5480,
         shareCursorShow: 6000,
-        shareMoveMs: 900,
-        shareHover: 7000,
-        shareClickDown: 7280,
-        shareClickUp: 7420,
+        shareMoveMs: 1100,
+        shareHover: 7200,
+        shareClickDown: 7480,
+        shareClickUp: 7620,
         resetFade: 9000,
         resetDone: 9680,
         loopDelay: 10400,
@@ -1382,6 +1386,9 @@
           };
         };
 
+        /* Posición del cursor en Continuar → desde ahí sube a Compartir (sin teletransporte) */
+        let contCursorPos = null;
+
         at(FLOW.cursorShow, () => cursor.classList.add('visible'));
 
         const j0 = elCenter(joinBtn, viewport);
@@ -1474,6 +1481,7 @@
         at(FLOW.contUp, () => {
           if (contBtn) contBtn.classList.remove('pressed');
           cursor.classList.remove('clicking');
+          contCursorPos = elCenter(contBtn, viewport);
         });
 
         at(FLOW.step3At, () => {
@@ -1486,16 +1494,15 @@
 
         at(FLOW.shareCursorShow, () => {
           requestAnimationFrame(() => {
-            const vr = viewport.getBoundingClientRect();
-            const from = {
-              x: vr.width * 0.52 - 13,
-              y: vr.height * 0.3 - 13,
+            const from = contCursorPos || {
+              x: parseFloat(cursor.style.left) || 0,
+              y: parseFloat(cursor.style.top) || 0,
             };
             const to = shareBtnCenter();
             cursor.style.opacity = '1';
             cursor.classList.add('visible');
             setCursorPos(from.x, from.y);
-            animateCursor(from.x, from.y, to.x, to.y, 60, FLOW.shareMoveMs);
+            animateCursor(from.x, from.y, to.x, to.y, 40, FLOW.shareMoveMs);
           });
         });
 
@@ -1538,12 +1545,29 @@
             shareBtn.setAttribute('aria-expanded', 'false');
             dd.setAttribute('aria-hidden', 'true');
           }
+          cursor.classList.remove('visible', 'clicking');
+          cursor.style.opacity = '0';
           viewport.style.transition = 'opacity 0.5s ease';
           viewport.style.opacity = '0';
         });
 
         at(FLOW.resetDone, () => {
-          viewport.style.opacity = '1';
+          /* Reset al paso 1 mientras está invisible → el fade-in ya no enseña el tick otra vez */
+          if (shareBtn) shareBtn.classList.remove('visible', 'hover', 'pressed');
+          if (joinBtn) joinBtn.classList.remove('hover', 'pressed');
+          if (plusBtn) plusBtn.classList.remove('pressed');
+          if (contBtn) contBtn.classList.remove('hover', 'pressed');
+          setFlowStep(1);
+          introQty = 1;
+          updateQtyUI();
+          viewport.style.transition = 'none';
+          viewport.style.opacity = '0';
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              viewport.style.transition = 'opacity 0.5s ease';
+              viewport.style.opacity = '1';
+            });
+          });
         });
 
         loopTimer = setTimeout(runAnimation, FLOW.loopDelay);
