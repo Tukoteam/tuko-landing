@@ -612,7 +612,7 @@
       margin-bottom: 12px;
     }
 
-    /* Paso «Cantidad»: más alto + alineación arriba para que nada se salga del marco blanco */
+    /* Paso «Cantidad»: marco alto + contenido centrado en vertical */
     #viewport:has(#flowStep2.is-active) {
       aspect-ratio: 9 / 15.1;
       min-height: 618px;
@@ -620,7 +620,7 @@
     }
 
     #viewport:has(#flowStep2.is-active) .scene {
-      justify-content: flex-start;
+      justify-content: center;
       padding: 26px 24px 32px;
     }
 
@@ -634,7 +634,7 @@
 
       #viewport:has(#flowStep2.is-active) .scene {
         padding: 10px 12px 14px;
-        justify-content: flex-start;
+        justify-content: center;
       }
 
       #viewport:has(#flowStep2.is-active) .scene-hint {
@@ -659,13 +659,13 @@
     }
 
     #viewport:has(#flowStep2.is-active) .scene-stack {
-      align-items: start;
-      align-content: start;
+      align-items: center;
+      align-content: center;
     }
 
     #viewport:has(#flowStep2.is-active) .phase-intro {
-      align-items: flex-start;
-      justify-content: flex-start;
+      align-items: center;
+      justify-content: center;
     }
 
     #viewport:has(#flowStep2.is-active) .intro-discount-mini {
