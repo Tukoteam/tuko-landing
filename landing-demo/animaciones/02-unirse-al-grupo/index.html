@@ -71,6 +71,7 @@
       html, body {
         height: 100%;
         min-height: 100%;
+        overflow: hidden; /* sin barra de scroll dentro del iframe */
       }
 
       body {
@@ -626,19 +627,34 @@
     @media (max-width: 520px) {
       #viewport:has(#flowStep2.is-active) {
         aspect-ratio: auto;
-        min-height: 640px;
-        height: auto;
-        overflow: visible;
+        min-height: 0;
+        height: 100%;
+        overflow: hidden;
       }
 
       #viewport:has(#flowStep2.is-active) .scene {
-        padding: 12px 12px 22px;
+        padding: 10px 12px 14px;
         justify-content: flex-start;
       }
 
+      #viewport:has(#flowStep2.is-active) .scene-hint {
+        margin-bottom: 2px;
+      }
+
+      #viewport:has(#flowStep2.is-active) .scene-sub {
+        margin-bottom: 8px;
+        font-size: 12px;
+        line-height: 1.35;
+      }
+
+      #viewport:has(#flowStep2.is-active) .intro-discount-mini {
+        margin-bottom: 8px;
+      }
+
       #viewport:has(#flowStep2.is-active) .intro-continue-btn {
-        margin-top: 16px;
-        margin-bottom: 4px;
+        margin-top: 12px;
+        margin-bottom: 0;
+        min-height: 44px;
       }
     }
 
