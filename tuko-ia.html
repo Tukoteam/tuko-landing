@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>tuko IA — Compras colectivas automatizadas con IA</title>
-<meta name="tuko-ia-build" content="20260731-hero-cta-enter">
+<meta name="tuko-ia-build" content="20260731-panel-speed-60">
 <meta name="description" content="tuko IA analiza tu mercado, tu competencia, tu calendario y tus propias ventas para generar grupos y campañas de compra colectiva automáticamente. En desarrollo.">
 <link rel="icon" href="assets/favicon.png?v=5" sizes="32x32" type="image/png">
 <link rel="icon" href="assets/favicon.svg?v=5" type="image/svg+xml">
@@ -2816,8 +2816,10 @@
     var barEl = document.getElementById('ia-panel-bar');
     if (!panel) return;
     var rows = Array.prototype.slice.call(panel.querySelectorAll('.ia-sig-row'));
-    var STEP = 720;
-    var START_DELAY = 380;
+    /* Velocidad del ciclo: 0.6 = 60% del ritmo original (más lento) */
+    var SPEED = 0.6;
+    var STEP = Math.round(720 / SPEED);
+    var START_DELAY = Math.round(380 / SPEED);
     var timers = [];
     var rafId = null;
     var lastChecked = -1;
@@ -2876,7 +2878,7 @@
     function animateProposalMetrics() {
       var vals = panel.querySelectorAll('.ia-metric-val');
       var disc = panel.querySelector('.ia-discount-pct');
-      var duration = 1100;
+      var duration = Math.round(1100 / SPEED);
 
       function animateEl(el, to, formatter) {
         var t0 = performance.now();
@@ -2930,7 +2932,7 @@
           timers.push(setTimeout(function () {
             setReady(true);
             /* Una sola pasada: se queda en Listo, sin repetir ni empujar la página */
-          }, 420));
+          }, Math.round(420 / SPEED)));
         }
       }
 

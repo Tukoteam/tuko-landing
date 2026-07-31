@@ -2028,7 +2028,8 @@
 
   /* Paso 2 — escena más alta (cantidad + KPI) */
   .how-steps > .how-step:nth-child(2) .how-anim-box--embed {
-    aspect-ratio: 9 / 11.65;
+    /* Más alto para la fase «Cantidad» + botón Continuar */
+    aspect-ratio: 9 / 15.2;
   }
 
   /* Paso 3 — gris uniforme alrededor del blanco */
@@ -2903,8 +2904,9 @@
       border-radius: 18px;
     }
     .how-step-iframe { min-height: 0; }
-    /* En móvil: ratios justos al contenido (sin letterbox gris). */
-    .how-steps > .how-step:nth-child(2) .how-anim-box--embed { aspect-ratio: 9 / 12.8; }
+    /* En móvil: ratios justos al contenido (sin letterbox gris).
+       Paso 2 más alto: cantidad + Continuar no deben cortarse. */
+    .how-steps > .how-step:nth-child(2) .how-anim-box--embed { aspect-ratio: 9 / 15.6; }
     /* Paso 3 móvil: la altura la fija el contenido (postMessage), sin hueco vacío */
     .how-steps > .how-step:nth-child(3) .how-anim-box--embed {
       aspect-ratio: auto;
@@ -3521,7 +3523,7 @@
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/02-unirse-al-grupo/index.html?v=20260731bz" title="Demo: unirse al grupo y ver el ahorro" loading="eager"></iframe>
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/02-unirse-al-grupo/index.html?v=20260731c1" title="Demo: unirse al grupo y ver el ahorro" loading="eager"></iframe>
       </div>
     </div>
   </div>

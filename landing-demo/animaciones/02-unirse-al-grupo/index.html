@@ -626,13 +626,19 @@
     @media (max-width: 520px) {
       #viewport:has(#flowStep2.is-active) {
         aspect-ratio: auto;
-        min-height: 0;
-        height: 100%;
+        min-height: 640px;
+        height: auto;
+        overflow: visible;
       }
 
       #viewport:has(#flowStep2.is-active) .scene {
-        padding: 12px 12px 14px;
+        padding: 12px 12px 22px;
         justify-content: flex-start;
+      }
+
+      #viewport:has(#flowStep2.is-active) .intro-continue-btn {
+        margin-top: 16px;
+        margin-bottom: 4px;
       }
     }
 
