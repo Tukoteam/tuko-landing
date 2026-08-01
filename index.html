@@ -1389,6 +1389,9 @@
     /* 22px = alto del círculo: el número queda alineado con la primera línea */
     line-height: 22px;
     margin: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+    text-align: left; /* no heredar center del hero móvil */
   }
   .tk-step p b { font-weight: 600; color: var(--black); }
 
@@ -3017,10 +3020,11 @@
     .tk-back-sub { font-size: 11.5px; margin-bottom: 10px; }
     .tk-tiers { padding: 9px 11px; margin-bottom: 10px; }
     .tk-tier + .tk-tier { margin-top: 6px; }
-    .tk-steps { gap: 8px; margin-bottom: 10px; }
-    .tk-step { gap: 9px; }
+    .tk-steps { gap: 8px; margin-bottom: 10px; text-align: left; }
+    .tk-step { gap: 9px; width: 100%; text-align: left; }
     .tk-step-n { width: 20px; height: 20px; font-size: 11px; }
-    .tk-step p { font-size: 12px; line-height: 20px; }
+    .tk-step p { font-size: 12px; line-height: 20px; text-align: left; }
+    .tk-back-inner { text-align: left; }
     .tk-back-foot { padding-top: 9px; font-size: 11px; }
 
     .video-section { padding: 64px 16px 36px; }
