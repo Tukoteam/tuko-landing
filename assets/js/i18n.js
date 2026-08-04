@@ -8,7 +8,7 @@ const translations = {
     nav_link_blog: 'Blog',
     nav_cta: 'Descárgala en Shopify',
     nav_lang_label: 'Idioma',
-    /* TUKO.IA */
+    /* TUKO AI */
     nav_link_ia: 'tuko AI',
     ia_status: 'En desarrollo',
     ia_lead: 'La IA que monta tus campañas de <span class="ia-lead-key">compra colectiva</span> <em>por ti</em>: analiza tu tienda y tu mercado, y decide qué vender en grupo, a <span class="ia-lead-key">qué precio</span> y <span class="ia-lead-key">cuándo</span>.',
@@ -428,7 +428,7 @@ const translations = {
     nav_link_blog: 'Blog',
     nav_cta: 'Get it on Shopify',
     nav_lang_label: 'Language',
-    /* TUKO.IA */
+    /* TUKO AI */
     nav_link_ia: 'tuko AI',
     ia_status: 'In development',
     ia_lead: 'The AI that builds your <span class="ia-lead-key">group buying</span> campaigns <em>for you</em>: it reads your store and your market, and decides what to group, at <span class="ia-lead-key">what price</span> and <span class="ia-lead-key">when</span>.',
