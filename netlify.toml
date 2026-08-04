@@ -91,6 +91,18 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "/tuko-ia.html"
+  to = "/tuko-ai.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tuko-ia"
+  to = "/tuko-ai.html"
+  status = 301
+  force = true
+
 # Nunca indexar las carpetas de trabajo
 [[redirects]]
   from = "/_versiones/*"

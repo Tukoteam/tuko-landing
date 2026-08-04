@@ -158,7 +158,7 @@
       },
       "offers": {
         "@type": "Offer",
-        "url": "https://tukoteam.com/tuko-ia.html#cta",
+        "url": "https://tukoteam.com/tuko-ai.html#cta",
         "priceCurrency": "EUR",
         "description": "Plugin de compras colectivas para tiendas Shopify",
         "availability": "https://schema.org/PreOrder"
@@ -196,7 +196,7 @@
             "@type": "Offer",
             "name": "Acceso Anticipado Tuko",
             "description": "Regístrate en la lista de espera y sé de los primeros en activar compras colectivas en tu tienda Shopify en España.",
-            "url": "https://tukoteam.com/tuko-ia.html#cta",
+            "url": "https://tukoteam.com/tuko-ai.html#cta",
             "availability": "https://schema.org/PreOrder",
             "priceCurrency": "EUR"
           }
@@ -230,7 +230,7 @@
           "@type": "ListItem",
           "position": 3,
           "name": "Registrarse en Tuko",
-          "item": "https://tukoteam.com/tuko-ia.html#cta"
+          "item": "https://tukoteam.com/tuko-ai.html#cta"
         }
       ]
     },
@@ -3133,7 +3133,7 @@
   }
 </style>
 <link rel="prefetch" href="blog/" as="document">
-<link rel="prefetch" href="tuko-ia.html" as="document">
+<link rel="prefetch" href="tuko-ai.html" as="document">
 </head>
 <body>
 
@@ -3157,7 +3157,7 @@
     <li><a href="#como-funciona" data-i18n="nav_link_como_funciona">Solución</a></li>
     <li><a href="#beneficios" data-i18n="nav_link_beneficios">Beneficios Clave</a></li>
     <li><a href="blog/index.html" data-i18n="nav_link_blog">Blog</a></li>
-    <li><a href="tuko-ia.html" data-i18n="nav_link_ia">tuko IA</a></li>
+    <li><a href="tuko-ai.html" data-i18n="nav_link_ia">tuko AI</a></li>
     <li><a href="https://apps.shopify.com/tuko?locale=es&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="nav-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Descárgala en Shopify</a></li>
   </ul>
   <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false">
@@ -3187,7 +3187,7 @@
   <a href="#como-funciona" data-i18n="nav_link_como_funciona">Solución</a>
   <a href="#beneficios" data-i18n="nav_link_beneficios">Beneficios Clave</a>
   <a href="blog/index.html" data-i18n="nav_link_blog">Blog</a>
-  <a href="tuko-ia.html" data-i18n="nav_link_ia">tuko IA</a>
+  <a href="tuko-ai.html" data-i18n="nav_link_ia">tuko AI</a>
   <div class="mobile-lang">
     <p class="mobile-lang-label" data-i18n="nav_lang_label">Idioma</p>
     <div class="lang-switcher mobile-lang-switcher" role="group" aria-label="Selector de idioma" data-active="es">
@@ -3276,7 +3276,7 @@
                 <span class="tk-close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></span>
               </div>
 
-              <div class="tk-title">¡Faltan solo <b id="tkNeedN">20</b> <span data-i18n="pop_title_people">personas</span> para un <em data-i18n="pop_title_deal">precio mejor!</em></div>
+              <div class="tk-title"><span data-i18n="pop_title_before">¡Faltan solo </span><b id="tkNeedN">20</b> <span data-i18n="pop_title_people">personas</span><span data-i18n="pop_title_mid"> para un </span><em data-i18n="pop_title_deal">precio mejor!</em></div>
 
               <p class="tk-timer-label" data-i18n="pop_timer">Tiempo restante</p>
               <div class="tk-timer" id="tkTimer">
@@ -3758,7 +3758,7 @@ initGrid(heroCanvas, {
   maxAlpha: 0.17, baseColor: '90,90,90', vpX: 0.50, lateral: 0.04
 });
 
-// CTA grid (el formulario vive ahora en tuko-ia.html: aquí puede no existir)
+// CTA grid (el formulario vive ahora en tuko-ai.html: aquí puede no existir)
 const ctaCanvas = document.getElementById('ctaCanvas');
 if (ctaCanvas) initGrid(ctaCanvas, {
   speed: 0.62, horizonY: 0.50, lineWidth: 1.3,
@@ -4270,7 +4270,7 @@ const translations = {
     nav_cta: 'Descárgala en Shopify',
     nav_lang_label: 'Idioma',
     /* TUKO.IA */
-    nav_link_ia: 'tuko IA',
+    nav_link_ia: 'tuko AI',
     ia_status: 'En desarrollo',
     ia_lead: 'La IA que monta tus campañas de <span class="ia-lead-key">compra colectiva</span> <em>por ti</em>: analiza tu tienda y tu mercado, y decide qué vender en grupo, a <span class="ia-lead-key">qué precio</span> y <span class="ia-lead-key">cuándo</span>.',
     ia_note: 'En desarrollo. Llegará dentro de Tuko.',
@@ -4278,7 +4278,7 @@ const translations = {
     ia_cta_secondary: 'Ver cómo funciona Tuko',
     ia_signals_eyebrow: 'Qué analiza',
     ia_signals_title: 'Seis señales. Una campaña lista.',
-    ia_signals_sub: 'tuko IA cruza los datos de tu tienda con los de tu mercado para decidir qué producto agrupar, a qué precio y en qué momento.',
+    ia_signals_sub: 'tuko AI cruza los datos de tu tienda con los de tu mercado para decidir qué producto agrupar, a qué precio y en qué momento.',
     ia_sig1_title: 'Tu mercado',
     ia_sig1_text: 'Demanda real de tu categoría, estacionalidad y hacia dónde se mueven los precios.',
     ia_sig2_title: 'Tu competencia',
@@ -4293,17 +4293,17 @@ const translations = {
     ia_sig6_text: 'Tu histórico y tus datos: qué se compra junto, cada cuánto y a qué precio convierte.',
     ia_flow_eyebrow: 'Cómo funcionará',
     ia_flow_title: 'De cero a campaña, sin estudio previo.',
-    ia_flow_sub: 'Hoy montar una compra colectiva exige elegir producto, descuentos y mínimos a mano. tuko IA lo resuelve entero.',
+    ia_flow_sub: 'Hoy montar una compra colectiva exige elegir producto, descuentos y mínimos a mano. tuko AI lo resuelve entero.',
     ia_step1_title: 'Conecta',
-    ia_step1_text: 'Instalas Tuko en tu Shopify. tuko IA lee tu catálogo y tu histórico de ventas. No rellenas nada.',
+    ia_step1_text: 'Instalas Tuko en tu Shopify. tuko AI lee tu catálogo y tu histórico de ventas. No rellenas nada.',
     ia_step2_title: 'Propone',
     ia_step2_text: 'Recibes la campaña ya montada: qué producto, qué descuentos, cuánta gente hace falta y cuánto dura.',
     ia_step3_title: 'Aprende',
     ia_step3_text: 'Cada grupo completado la hace mejor: aprende del comportamiento de tus compradores y afina sola la siguiente campaña.',
     ia_final_title: 'Sé de los primeros en probarlo.',
-    ia_final_sub: 'tuko IA está en desarrollo. Déjanos tu correo y te avisamos en cuanto abramos el acceso anticipado.',
+    ia_final_sub: 'tuko AI está en desarrollo. Déjanos tu correo y te avisamos en cuanto abramos el acceso anticipado.',
     ia_final_btn: 'Quiero acceso anticipado',
-    ia_form_title: 'Únete a la lista de espera de tuko <span>IA</span>',
+    ia_form_title: 'Únete a la lista de espera de tuko <span>AI</span>',
     ia_form_intro: 'Te avisamos en cuanto abramos el acceso anticipado. Sin spam.',
     ia_form_submit: 'Unirme a la lista de espera',
     ia_soon_tag: 'Pronto',
@@ -4333,7 +4333,9 @@ const translations = {
     /* POPUP DEL PLUGIN */
     pop_chip: 'COMPRA COLECTIVA ACTIVA',
     pop_title: '¡Faltan solo <b>3 personas</b> para un <em>precio mejor!</em>',
+    pop_title_before: '¡Faltan solo ',
     pop_title_people: 'personas',
+    pop_title_mid: ' para un ',
     pop_title_deal: 'precio mejor!',
     pop_timer: 'Tiempo restante',
     pop_days: 'Días',
@@ -4683,7 +4685,7 @@ const translations = {
     nav_cta: 'Get it on Shopify',
     nav_lang_label: 'Language',
     /* TUKO.IA */
-    nav_link_ia: 'tuko IA',
+    nav_link_ia: 'tuko AI',
     ia_status: 'In development',
     ia_lead: 'The AI that builds your <span class="ia-lead-key">group buying</span> campaigns <em>for you</em>: it reads your store and your market, and decides what to group, at <span class="ia-lead-key">what price</span> and <span class="ia-lead-key">when</span>.',
     ia_note: 'In development. Coming inside Tuko.',
@@ -4691,7 +4693,7 @@ const translations = {
     ia_cta_secondary: 'See how Tuko works',
     ia_signals_eyebrow: 'What it reads',
     ia_signals_title: 'Six signals. One campaign, ready.',
-    ia_signals_sub: 'tuko IA combines your store data with your market data to decide which product to group, at what price and when.',
+    ia_signals_sub: 'tuko AI combines your store data with your market data to decide which product to group, at what price and when.',
     ia_sig1_title: 'Your market',
     ia_sig1_text: 'Real demand in your category, seasonality and where prices are heading.',
     ia_sig2_title: 'Your competitors',
@@ -4706,17 +4708,17 @@ const translations = {
     ia_sig6_text: 'Your history and your data: what sells together, how often, and at what price it converts.',
     ia_flow_eyebrow: 'How it will work',
     ia_flow_title: 'From zero to campaign, with no research.',
-    ia_flow_sub: 'Setting up a group buy today means choosing product, discounts and minimums by hand. tuko IA handles all of it.',
+    ia_flow_sub: 'Setting up a group buy today means choosing product, discounts and minimums by hand. tuko AI handles all of it.',
     ia_step1_title: 'Connect',
-    ia_step1_text: 'You install Tuko on your Shopify. tuko IA reads your catalogue and sales history. Nothing to fill in.',
+    ia_step1_text: 'You install Tuko on your Shopify. tuko AI reads your catalogue and sales history. Nothing to fill in.',
     ia_step2_title: 'Propose',
     ia_step2_text: 'You get the campaign ready-made: which product, which discounts, how many people are needed and how long it runs.',
     ia_step3_title: 'Learns',
     ia_step3_text: 'Every completed group makes it sharper: it learns from how your buyers behave and tunes the next campaign on its own.',
     ia_final_title: 'Be among the first to try it.',
-    ia_final_sub: 'tuko IA is in development. Leave your email and we will tell you as soon as early access opens.',
+    ia_final_sub: 'tuko AI is in development. Leave your email and we will tell you as soon as early access opens.',
     ia_final_btn: 'I want early access',
-    ia_form_title: 'Join the tuko <span>IA</span> waitlist',
+    ia_form_title: 'Join the tuko <span>AI</span> waitlist',
     ia_form_intro: 'We will let you know as soon as early access opens. No spam.',
     ia_form_submit: 'Join the waitlist',
     ia_soon_tag: 'Soon',
@@ -4746,7 +4748,9 @@ const translations = {
     /* POPUP DEL PLUGIN */
     pop_chip: 'GROUP BUY ACTIVE',
     pop_title: 'Just <b>3 more people</b> for a <em>better price!</em>',
-    pop_title_people: 'people',
+    pop_title_before: 'Just ',
+    pop_title_people: 'more people',
+    pop_title_mid: ' for a ',
     pop_title_deal: 'better price!',
     pop_timer: 'Time remaining',
     pop_days: 'Days',
