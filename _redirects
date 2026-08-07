@@ -1,7 +1,15 @@
 # Netlify — force (!) aunque el fichero .html exista
-/blog/:slug.html          /blog/:slug     301!
-/tuko-ai.html             /tuko-ai        301!
-/privacidad.html          /privacidad     301!
-/terminos.html            /terminos       301!
-/pages/privacidad.html    /privacidad     301!
-/pages/terminos.html      /terminos       301!
+/blog/natrue-x-tuko.html                    /blog/natrue-x-tuko                    301!
+/blog/gran-paso-tuko.html                   /blog/gran-paso-tuko                   301!
+/blog/new-formulas-shanghai.html            /blog/new-formulas-shanghai            301!
+/blog/ocea-hub-shanghai.html                /blog/ocea-hub-shanghai                301!
+/blog/spain-innovation-day.html             /blog/spain-innovation-day             301!
+/blog/stron-tech-trek.html                  /blog/stron-tech-trek                  301!
+/blog/shiji-incubator.html                  /blog/shiji-incubator                  301!
+/blog/primer-articulo.html                  /blog/primer-articulo                  301!
+/blog/como-reducir-cac-ecommerce.html       /blog/como-reducir-cac-ecommerce       301!
+/blog/optimizacion-conversion-shopify.html  /blog/optimizacion-conversion-shopify  301!
+/blog/que-es-compra-colectiva-ecommerce.html /blog/que-es-compra-colectiva-ecommerce 301!
+/blog/descuentos-sin-destruir-margen.html  /blog/descuentos-sin-destruir-margen  301!
+/pages/privacidad.html                      /privacidad                            301!
+/pages/terminos.html                        /terminos                              301!
