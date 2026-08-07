@@ -32,7 +32,7 @@ function b64url(buf) {
 function appJwt(appId, pem) {
   const now = Math.floor(Date.now() / 1000);
   const header = b64url(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));
-  const payload = b64url(JSON.stringify({ iat: now - 60, exp: now + 9 * 60, iss: appId }));
+  const payload = b64url(JSON.stringify({ iat: now - 60, exp: now + 9 * 60, iss: Number(appId) || appId }));
   const data = `${header}.${payload}`;
   const sign = crypto.createSign('RSA-SHA256');
   sign.update(data);

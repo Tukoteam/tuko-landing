@@ -154,14 +154,32 @@
   force = true
 
 [[redirects]]
+  from = "/blog/bajar-cpa-shopify-viralidad-organica.html"
+  to = "/blog/bajar-cpa-shopify-viralidad-organica"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/compra-colectiva-vs-cupones-shopify.html"
+  to = "/blog/compra-colectiva-vs-cupones-shopify"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tuko-ai.html"
+  to = "/tuko-ai"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/tuko-ia.html"
-  to = "/tuko-ai.html"
+  to = "/tuko-ai"
   status = 301
   force = true
 
 [[redirects]]
   from = "/tuko-ia"
-  to = "/tuko-ai.html"
+  to = "/tuko-ai"
   status = 301
   force = true
 

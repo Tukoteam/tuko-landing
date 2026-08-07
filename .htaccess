@@ -34,7 +34,8 @@
   RewriteCond %{HTTPS} off
   RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
-  # tuko IA → tuko AI (URL canónica)
-  RewriteRule ^tuko-ia\.html$ /tuko-ai.html [R=301,L]
-  RewriteRule ^tuko-ia/?$ /tuko-ai.html [R=301,L]
+  # tuko AI: URL limpia + alias histórico
+  RewriteRule ^tuko-ai\.html$ /tuko-ai [R=301,L]
+  RewriteRule ^tuko-ia\.html$ /tuko-ai [R=301,L]
+  RewriteRule ^tuko-ia/?$ /tuko-ai [R=301,L]
 </IfModule>
