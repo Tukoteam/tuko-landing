@@ -3,7 +3,7 @@
  * or edit MEASUREMENT_ID below after connecting Analytics (Documento 4).
  */
 (function () {
-  var MEASUREMENT_ID = window.TUKO_GA4_ID || '';
+  var MEASUREMENT_ID = window.TUKO_GA4_ID || 'G-W751M44D2X';
   if (!MEASUREMENT_ID || MEASUREMENT_ID.indexOf('G-') !== 0) return;
   if (typeof window.gtag === 'function') return;
 
