@@ -1,0 +1,18 @@
+{
+    "slug":  "stron-tech-trek",
+    "status":  "published",
+    "title":  "S-Tron Tech Trek Experience Shanghai 🇨🇳",
+    "description":  "Tuko participa en S-Tron Tech Trek Experience en Shanghai.",
+    "canonical":  "https://tukoteam.com/blog/stron-tech-trek",
+    "locale":  "es",
+    "datePublished":  "2025-09-23",
+    "dateModified":  "2025-09-23",
+    "author":  {
+                   "name":  "Tuko",
+                   "type":  "Organization"
+               },
+    "seo":  {
+                "noFakeHreflang":  true,
+                "canonicalClean":  true
+            }
+}

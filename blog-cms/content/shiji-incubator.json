@@ -1,0 +1,18 @@
+{
+    "slug":  "shiji-incubator",
+    "status":  "published",
+    "title":  "Starting Our Journey at Xiji Incubator Shanghai 🇨🇳",
+    "description":  "Tuko arranca su recorrido en Xiji Incubator Shanghai.",
+    "canonical":  "https://tukoteam.com/blog/shiji-incubator",
+    "locale":  "es",
+    "datePublished":  "2025-09-10",
+    "dateModified":  "2025-09-10",
+    "author":  {
+                   "name":  "Tuko",
+                   "type":  "Organization"
+               },
+    "seo":  {
+                "noFakeHreflang":  true,
+                "canonicalClean":  true
+            }
+}

@@ -1,0 +1,18 @@
+{
+    "slug":  "gran-paso-tuko",
+    "status":  "published",
+    "title":  "Un gran paso para Tuko 🇪🇸🇨🇭",
+    "description":  "Un hito importante en el camino de Tuko hacia las compras colectivas en Shopify.",
+    "canonical":  "https://tukoteam.com/blog/gran-paso-tuko",
+    "locale":  "es",
+    "datePublished":  "2026-02-19",
+    "dateModified":  "2026-02-19",
+    "author":  {
+                   "name":  "Tuko",
+                   "type":  "Organization"
+               },
+    "seo":  {
+                "noFakeHreflang":  true,
+                "canonicalClean":  true
+            }
+}

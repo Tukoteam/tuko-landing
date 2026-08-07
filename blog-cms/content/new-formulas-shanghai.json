@@ -1,0 +1,18 @@
+{
+    "slug":  "new-formulas-shanghai",
+    "status":  "published",
+    "title":  "New Formulas. Pitching Tuko in Shanghai 🇨🇳",
+    "description":  "Tuko presenta su modelo de compra colectiva en New Formulas Shanghai.",
+    "canonical":  "https://tukoteam.com/blog/new-formulas-shanghai",
+    "locale":  "es",
+    "datePublished":  "2025-11-14",
+    "dateModified":  "2025-11-14",
+    "author":  {
+                   "name":  "Tuko",
+                   "type":  "Organization"
+               },
+    "seo":  {
+                "noFakeHreflang":  true,
+                "canonicalClean":  true
+            }
+}

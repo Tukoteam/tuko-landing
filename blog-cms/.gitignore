@@ -1,0 +1,7 @@
+.env
+secrets/*
+!secrets/.gitkeep
+node_modules/
+.local-store/
+*.pem
+*-service-account.json

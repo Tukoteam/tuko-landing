@@ -1,0 +1,18 @@
+{
+    "slug":  "que-es-compra-colectiva-ecommerce",
+    "status":  "published",
+    "title":  "Qué es la compra colectiva y cómo funciona en ecommerce",
+    "description":  "Explicación clara de la compra colectiva (group buying) en tiendas online: hitos, descuentos y por qué genera viralidad.",
+    "canonical":  "https://tukoteam.com/blog/que-es-compra-colectiva-ecommerce",
+    "locale":  "es",
+    "datePublished":  "2026-08-07",
+    "dateModified":  "2026-08-07",
+    "author":  {
+                   "name":  "Tuko",
+                   "type":  "Organization"
+               },
+    "seo":  {
+                "noFakeHreflang":  true,
+                "canonicalClean":  true
+            }
+}

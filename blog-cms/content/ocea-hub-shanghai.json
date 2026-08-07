@@ -1,0 +1,18 @@
+{
+    "slug":  "ocea-hub-shanghai",
+    "status":  "published",
+    "title":  "OCEA HUB Presenting Tuko in Shanghai 🇨🇳",
+    "description":  "Presentación de Tuko en OCEA HUB Shanghai: group buying para ecommerce.",
+    "canonical":  "https://tukoteam.com/blog/ocea-hub-shanghai",
+    "locale":  "es",
+    "datePublished":  "2025-10-20",
+    "dateModified":  "2025-10-20",
+    "author":  {
+                   "name":  "Tuko",
+                   "type":  "Organization"
+               },
+    "seo":  {
+                "noFakeHreflang":  true,
+                "canonicalClean":  true
+            }
+}

@@ -1,0 +1,18 @@
+{
+    "slug":  "spain-innovation-day",
+    "status":  "published",
+    "title":  "Spain Innovation Day Shanghai 🇪🇸🇨🇳",
+    "description":  "Tuko en Spain Innovation Day Shanghai: innovación y compras colectivas.",
+    "canonical":  "https://tukoteam.com/blog/spain-innovation-day",
+    "locale":  "es",
+    "datePublished":  "2025-09-30",
+    "dateModified":  "2025-09-30",
+    "author":  {
+                   "name":  "Tuko",
+                   "type":  "Organization"
+               },
+    "seo":  {
+                "noFakeHreflang":  true,
+                "canonicalClean":  true
+            }
+}

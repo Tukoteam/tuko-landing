@@ -1,112 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Landing principal — sin hreflang EN hasta que exista /en/ real (Doc 2 · Acción 3) -->
   <url>
     <loc>https://tukoteam.com/</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tukoteam.com/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tukoteam.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tukoteam.com/"/>
   </url>
-  <url>
-    <loc>https://tukoteam.com/tuko-ai.html</loc>
-    <lastmod>2026-07-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tukoteam.com/tuko-ai.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tukoteam.com/tuko-ai.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tukoteam.com/tuko-ai.html"/>
-  </url>
+
+  <!-- Blog index -->
   <url>
     <loc>https://tukoteam.com/blog/</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tukoteam.com/blog/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tukoteam.com/blog/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tukoteam.com/blog/"/>
   </url>
+
+  <!-- Blog artículos — URL limpia (sin .html) -->
   <url>
-    <loc>https://tukoteam.com/blog/natrue-x-tuko.html</loc>
+    <loc>https://tukoteam.com/blog/natrue-x-tuko</loc>
     <lastmod>2026-03-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tukoteam.com/blog/natrue-x-tuko.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tukoteam.com/blog/natrue-x-tuko.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tukoteam.com/blog/natrue-x-tuko.html"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://tukoteam.com/blog/gran-paso-tuko.html</loc>
+    <loc>https://tukoteam.com/blog/gran-paso-tuko</loc>
     <lastmod>2026-02-19</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>yearly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tukoteam.com/blog/gran-paso-tuko.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tukoteam.com/blog/gran-paso-tuko.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tukoteam.com/blog/gran-paso-tuko.html"/>
   </url>
   <url>
-    <loc>https://tukoteam.com/blog/new-formulas-shanghai.html</loc>
+    <loc>https://tukoteam.com/blog/new-formulas-shanghai</loc>
     <lastmod>2025-11-14</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>yearly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tukoteam.com/blog/new-formulas-shanghai.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tukoteam.com/blog/new-formulas-shanghai.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tukoteam.com/blog/new-formulas-shanghai.html"/>
   </url>
   <url>
-    <loc>https://tukoteam.com/blog/ocea-hub-shanghai.html</loc>
+    <loc>https://tukoteam.com/blog/ocea-hub-shanghai</loc>
     <lastmod>2025-10-20</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>yearly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tukoteam.com/blog/ocea-hub-shanghai.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tukoteam.com/blog/ocea-hub-shanghai.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tukoteam.com/blog/ocea-hub-shanghai.html"/>
   </url>
   <url>
-    <loc>https://tukoteam.com/blog/spain-innovation-day.html</loc>
+    <loc>https://tukoteam.com/blog/spain-innovation-day</loc>
     <lastmod>2025-09-30</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>yearly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tukoteam.com/blog/spain-innovation-day.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tukoteam.com/blog/spain-innovation-day.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tukoteam.com/blog/spain-innovation-day.html"/>
   </url>
   <url>
-    <loc>https://tukoteam.com/blog/stron-tech-trek.html</loc>
+    <loc>https://tukoteam.com/blog/stron-tech-trek</loc>
     <lastmod>2025-09-23</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>yearly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tukoteam.com/blog/stron-tech-trek.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tukoteam.com/blog/stron-tech-trek.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tukoteam.com/blog/stron-tech-trek.html"/>
   </url>
   <url>
-    <loc>https://tukoteam.com/blog/shiji-incubator.html</loc>
+    <loc>https://tukoteam.com/blog/shiji-incubator</loc>
     <lastmod>2025-09-10</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>yearly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tukoteam.com/blog/shiji-incubator.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tukoteam.com/blog/shiji-incubator.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tukoteam.com/blog/shiji-incubator.html"/>
+  </url>
+
+  <!-- Pilares comerciales (fase 3) -->
+  <url>
+    <loc>https://tukoteam.com/blog/como-reducir-cac-ecommerce</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://tukoteam.com/pages/privacidad.html</loc>
-    <lastmod>2026-07-29</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tukoteam.com/pages/privacidad.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tukoteam.com/pages/privacidad.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tukoteam.com/pages/privacidad.html"/>
+    <loc>https://tukoteam.com/blog/optimizacion-conversion-shopify</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://tukoteam.com/pages/terminos.html</loc>
-    <lastmod>2026-07-29</lastmod>
+    <loc>https://tukoteam.com/blog/que-es-compra-colectiva-ecommerce</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tukoteam.com/blog/descuentos-sin-destruir-margen</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Legales — URL limpia -->
+  <url>
+    <loc>https://tukoteam.com/privacidad</loc>
+    <lastmod>2026-04-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tukoteam.com/pages/terminos.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tukoteam.com/pages/terminos.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tukoteam.com/pages/terminos.html"/>
   </url>
+  <url>
+    <loc>https://tukoteam.com/terminos</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
 </urlset>

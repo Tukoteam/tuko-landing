@@ -1,0 +1,18 @@
+{
+    "slug":  "descuentos-sin-destruir-margen",
+    "status":  "published",
+    "title":  "Descuentos que no destruyen tu margen",
+    "description":  "Cómo diseñar descuentos escalonados y compras colectivas que muevan stock sin entrenar al cliente a comprar solo en rebajas.",
+    "canonical":  "https://tukoteam.com/blog/descuentos-sin-destruir-margen",
+    "locale":  "es",
+    "datePublished":  "2026-08-07",
+    "dateModified":  "2026-08-07",
+    "author":  {
+                   "name":  "Tuko",
+                   "type":  "Organization"
+               },
+    "seo":  {
+                "noFakeHreflang":  true,
+                "canonicalClean":  true
+            }
+}

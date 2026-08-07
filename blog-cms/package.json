@@ -1,0 +1,16 @@
+{
+  "name": "tuko-blog-cms",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Publish Tuko blog posts to desarollotuko/pre-landing via GitHub App",
+  "scripts": {
+    "import": "node scripts/import-from-repo.mjs",
+    "simulate": "node scripts/simulate-publish.mjs",
+    "publish": "node scripts/publish.mjs",
+    "verify-seo": "node scripts/verify-seo.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
