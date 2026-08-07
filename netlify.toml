@@ -93,8 +93,8 @@
 
 # Blog: .html → URL limpia (force aunque exista el fichero)
 [[redirects]]
-  from = "/blog/*.html"
-  to = "/blog/:splat"
+  from = "/blog/:slug.html"
+  to = "/blog/:slug"
   status = 301
   force = true
 

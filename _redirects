@@ -1,7 +1,7 @@
 # Netlify — force (!) aunque el fichero .html exista
-/blog/*.html   /blog/:splat   301!
-/tuko-ai.html  /tuko-ai       301!
-/privacidad.html  /privacidad  301!
-/terminos.html    /terminos    301!
-/pages/privacidad.html  /privacidad  301!
-/pages/terminos.html    /terminos    301!
+/blog/:slug.html          /blog/:slug     301!
+/tuko-ai.html             /tuko-ai        301!
+/privacidad.html          /privacidad     301!
+/terminos.html            /terminos       301!
+/pages/privacidad.html    /privacidad     301!
+/pages/terminos.html      /terminos       301!
