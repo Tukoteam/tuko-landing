@@ -19,12 +19,21 @@ Publicar = **un commit atómico** en [`Tukoteam/tuko-landing`](https://github.co
 5. Generar private key → guardar como `blog-cms/secrets/github-app.pem`
 6. Anotar **App ID** y **Installation ID** (en la URL tras instalar: `.../installations/NNNN`)
 
-### 4–5 · Google (opcional para dashboard)
+### 4–5 · Google (dashboard del Hub CMS)
 
-- Habilitar: Search Console API, Analytics Data API, Web Search Indexing API
-- Service account JSON → `secrets/google-service-account.json`
-- Dar acceso Completo en Search Console + Lector en GA4
-- `GA4_PROPERTY_ID` = ID numérico de propiedad (no `G-XXXX`)
+El Hub (`api.tukoteam.com/tuko-blog-cms`) lee métricas con la misma cuenta de servicio.
+
+1. Google Cloud → habilitar **Search Console API** + **Analytics Data API**
+2. Crear service account → bajar JSON → en el servidor:  
+   `/opt/tuko-backend/backend/secrets/google-service-account.json`  
+   (local opcional: `blog-cms/secrets/google-service-account.json`)
+3. Search Console (`sc-domain:tukoteam.com` o URL-prefix): añadir el email de la SA (acceso Completo o Restringido)
+4. GA4 → Admin → Property access → **Lector** para esa SA
+5. Env en el servidor (`/opt/tuko-backend/.env` y `backend/.env`):
+   - `GSC_SITE_URL=sc-domain:tukoteam.com`
+   - `GA4_PROPERTY_ID=` ID numérico de propiedad (no `G-XXXX`)
+   - `GOOGLE_SERVICE_ACCOUNT_PATH=/app/secrets/google-service-account.json`
+6. Recrear contenedor + en el CMS pulsar **Sincronizar**
 
 ### Arranque local
 
