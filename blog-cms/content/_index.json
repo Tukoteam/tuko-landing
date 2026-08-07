@@ -1,71 +1,47 @@
 {
-    "importedAt":  "2026-08-07T21:22:05.1921388+02:00",
-    "articles":  [
-                     {
-                         "title":  "Cómo reducir el CAC en ecommerce sin recortar publicidad",
-                         "status":  "published",
-                         "slug":  "como-reducir-cac-ecommerce",
-                         "datePublished":  "2026-08-07"
-                     },
-                     {
-                         "title":  "Descuentos que no destruyen tu margen",
-                         "status":  "published",
-                         "slug":  "descuentos-sin-destruir-margen",
-                         "datePublished":  "2026-08-07"
-                     },
-                     {
-                         "title":  "Un gran paso para Tuko 🇪🇸🇨🇭",
-                         "status":  "published",
-                         "slug":  "gran-paso-tuko",
-                         "datePublished":  "2026-02-19"
-                     },
-                     {
-                         "title":  "New synergies: Natrue x Tuko",
-                         "status":  "published",
-                         "slug":  "natrue-x-tuko",
-                         "datePublished":  "2026-03-17"
-                     },
-                     {
-                         "title":  "New Formulas. Pitching Tuko in Shanghai 🇨🇳",
-                         "status":  "published",
-                         "slug":  "new-formulas-shanghai",
-                         "datePublished":  "2025-11-14"
-                     },
-                     {
-                         "title":  "OCEA HUB Presenting Tuko in Shanghai 🇨🇳",
-                         "status":  "published",
-                         "slug":  "ocea-hub-shanghai",
-                         "datePublished":  "2025-10-20"
-                     },
-                     {
-                         "title":  "Guía de optimización de conversión para tiendas Shopify",
-                         "status":  "published",
-                         "slug":  "optimizacion-conversion-shopify",
-                         "datePublished":  "2026-08-07"
-                     },
-                     {
-                         "title":  "Qué es la compra colectiva y cómo funciona en ecommerce",
-                         "status":  "published",
-                         "slug":  "que-es-compra-colectiva-ecommerce",
-                         "datePublished":  "2026-08-07"
-                     },
-                     {
-                         "title":  "Starting Our Journey at Xiji Incubator Shanghai 🇨🇳",
-                         "status":  "published",
-                         "slug":  "shiji-incubator",
-                         "datePublished":  "2025-09-10"
-                     },
-                     {
-                         "title":  "Spain Innovation Day Shanghai 🇪🇸🇨🇳",
-                         "status":  "published",
-                         "slug":  "spain-innovation-day",
-                         "datePublished":  "2025-09-30"
-                     },
-                     {
-                         "title":  "S-Tron Tech Trek Experience Shanghai 🇨🇳",
-                         "status":  "published",
-                         "slug":  "stron-tech-trek",
-                         "datePublished":  "2025-09-23"
-                     }
-                 ]
+  "importedAt": "2026-08-07T23:20:00.0000000+02:00",
+  "articles": [
+    {
+      "title": "New synergies: Natrue x Tuko",
+      "status": "published",
+      "slug": "natrue-x-tuko",
+      "datePublished": "2026-03-17"
+    },
+    {
+      "title": "Un gran paso para Tuko 🇪🇸🇨🇭",
+      "status": "published",
+      "slug": "gran-paso-tuko",
+      "datePublished": "2026-02-19"
+    },
+    {
+      "title": "New Formulas. Pitching Tuko in Shanghai 🇨🇳",
+      "status": "published",
+      "slug": "new-formulas-shanghai",
+      "datePublished": "2025-11-14"
+    },
+    {
+      "title": "OCEA HUB Presenting Tuko in Shanghai 🇨🇳",
+      "status": "published",
+      "slug": "ocea-hub-shanghai",
+      "datePublished": "2025-10-20"
+    },
+    {
+      "title": "Spain Innovation Day Shanghai 🇪🇸🇨🇳",
+      "status": "published",
+      "slug": "spain-innovation-day",
+      "datePublished": "2025-09-30"
+    },
+    {
+      "title": "S-Tron Tech Trek Experience Shanghai 🇨🇳",
+      "status": "published",
+      "slug": "stron-tech-trek",
+      "datePublished": "2025-09-23"
+    },
+    {
+      "title": "Starting Our Journey at Xiji Incubator Shanghai 🇨🇳",
+      "status": "published",
+      "slug": "shiji-incubator",
+      "datePublished": "2025-09-10"
+    }
+  ]
 }

@@ -62,44 +62,6 @@
     <priority>0.6</priority>
   </url>
 
-  <!-- Pilares comerciales (fase 3) -->
-  <url>
-    <loc>https://tukoteam.com/blog/como-reducir-cac-ecommerce</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tukoteam.com/blog/optimizacion-conversion-shopify</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tukoteam.com/blog/que-es-compra-colectiva-ecommerce</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tukoteam.com/blog/descuentos-sin-destruir-margen</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tukoteam.com/blog/bajar-cpa-shopify-viralidad-organica</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://tukoteam.com/blog/compra-colectiva-vs-cupones-shopify</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-
   <!-- Producto -->
   <url>
     <loc>https://tukoteam.com/tuko-ai</loc>

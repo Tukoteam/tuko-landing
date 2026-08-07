@@ -132,36 +132,65 @@
   to = "/blog/primer-articulo"
   status = 301
   force = true
+# Posts comerciales retirados → /blog/
+[[redirects]]
+  from = "/blog/como-reducir-cac-ecommerce"
+  to = "/blog/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/blog/como-reducir-cac-ecommerce.html"
-  to = "/blog/como-reducir-cac-ecommerce"
+  to = "/blog/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/blog/optimizacion-conversion-shopify"
+  to = "/blog/"
   status = 301
   force = true
 [[redirects]]
   from = "/blog/optimizacion-conversion-shopify.html"
-  to = "/blog/optimizacion-conversion-shopify"
+  to = "/blog/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/blog/que-es-compra-colectiva-ecommerce"
+  to = "/blog/"
   status = 301
   force = true
 [[redirects]]
   from = "/blog/que-es-compra-colectiva-ecommerce.html"
-  to = "/blog/que-es-compra-colectiva-ecommerce"
+  to = "/blog/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/blog/descuentos-sin-destruir-margen"
+  to = "/blog/"
   status = 301
   force = true
 [[redirects]]
   from = "/blog/descuentos-sin-destruir-margen.html"
-  to = "/blog/descuentos-sin-destruir-margen"
+  to = "/blog/"
   status = 301
   force = true
-
+[[redirects]]
+  from = "/blog/bajar-cpa-shopify-viralidad-organica"
+  to = "/blog/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/blog/bajar-cpa-shopify-viralidad-organica.html"
-  to = "/blog/bajar-cpa-shopify-viralidad-organica"
+  to = "/blog/"
   status = 301
   force = true
-
+[[redirects]]
+  from = "/blog/compra-colectiva-vs-cupones-shopify"
+  to = "/blog/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/blog/compra-colectiva-vs-cupones-shopify.html"
-  to = "/blog/compra-colectiva-vs-cupones-shopify"
+  to = "/blog/"
   status = 301
   force = true
 
