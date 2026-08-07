@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Publish Tuko blog posts to desarollotuko/pre-landing via GitHub App",
+  "description": "Publish Tuko blog posts to Tukoteam/tuko-landing via GitHub App",
   "scripts": {
     "import": "node scripts/import-from-repo.mjs",
     "simulate": "node scripts/simulate-publish.mjs",

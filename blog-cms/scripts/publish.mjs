@@ -82,8 +82,8 @@ const inst = await gh(`/app/installations/${env.GITHUB_INSTALLATION_ID}/access_t
   body: JSON.stringify({}),
 });
 const token = inst.token;
-const owner = env.GITHUB_OWNER || 'desarollotuko';
-const repo = env.GITHUB_REPO || 'pre-landing';
+const owner = env.GITHUB_OWNER || 'Tukoteam';
+const repo = env.GITHUB_REPO || 'tuko-landing';
 const branch = env.GITHUB_BRANCH || 'main';
 
 const ref = await gh(`/repos/${owner}/${repo}/git/ref/heads/${branch}`, token);
@@ -94,6 +94,7 @@ const paths = [
   'sitemap.xml',
   'blog/index.html',
   '_redirects',
+  'netlify.toml',
   'vercel.json',
 ];
 for (const f of fs.readdirSync(path.join(repoRoot, 'blog')).filter((x) => x.endsWith('.html'))) {

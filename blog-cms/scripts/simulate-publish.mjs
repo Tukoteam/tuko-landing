@@ -14,7 +14,7 @@ const articles = fs.readdirSync(contentDir)
   .map((f) => f.replace(/\.json$/, ''));
 
 console.log('tuko · CMS simulate-publish\n');
-console.log('Repo: desarollotuko/pre-landing@main');
+console.log('Repo: Tukoteam/tuko-landing@main');
 console.log(`Artículos en content/: ${articles.length}\n`);
 console.log('Ficheros que tocaría un republish completo (commit atómico):\n');
 
