@@ -294,3 +294,9 @@
   to = "/en/blog/stron-tech-trek"
   status = 301
   force = true
+
+[[redirects]]
+  from = "/en/index.html"
+  to = "/en/"
+  status = 301
+  force = true

@@ -30,8 +30,26 @@ if (fs.existsSync(path.join(root, 'en/blog/index.html'))) {
 }
 
 const index = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-if (/hreflang="en"/.test(index)) fail('index.html aún tiene hreflang en (landing EN real pendiente)');
-else ok('index.html: sin hreflang EN (correcto hasta /en/ home)');
+if (fs.existsSync(path.join(root, 'en/index.html'))) {
+  if (!/hreflang="en"[^>]*href="https:\/\/tukoteam\.com\/en\/"/.test(index)) {
+    fail('index.html: falta hreflang EN → /en/');
+  } else ok('index.html: hreflang ES↔EN (/en/)');
+  if (!sitemap.includes('https://tukoteam.com/en/</loc>') && !sitemap.includes('https://tukoteam.com/en/\n')) {
+    // loc is on its own line usually
+  }
+  if (!/<loc>https:\/\/tukoteam\.com\/en\/<\/loc>/.test(sitemap)) {
+    fail('sitemap falta home EN /en/');
+  } else ok('sitemap: incluye /en/');
+  const enHome = fs.readFileSync(path.join(root, 'en/index.html'), 'utf8');
+  if (!/lang="en"/.test(enHome)) fail('en/index.html: falta lang=en');
+  if (!/canonical" href="https:\/\/tukoteam\.com\/en\/"/.test(enHome)) fail('en/index.html: canonical incorrecto');
+  if (!/Turn your traffic/.test(enHome)) fail('en/index.html: contenido EN no horneado');
+  else ok('en/index.html: home EN real');
+} else if (/hreflang="en"/.test(index)) {
+  fail('index.html aún tiene hreflang en (landing EN real pendiente)');
+} else {
+  ok('index.html: sin hreflang EN (correcto hasta /en/ home)');
+}
 
 const redirects = fs.readFileSync(path.join(root, '_redirects'), 'utf8');
 if (!/blog\/:slug\.html/.test(redirects) && !/natrue-x-tuko\.html/.test(redirects)) {
