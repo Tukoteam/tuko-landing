@@ -300,3 +300,9 @@
   to = "/en/"
   status = 301
   force = true
+
+[[redirects]]
+  from = "/en/tuko-ai.html"
+  to = "/en/tuko-ai"
+  status = 301
+  force = true

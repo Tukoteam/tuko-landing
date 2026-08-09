@@ -45,6 +45,19 @@ if (fs.existsSync(path.join(root, 'en/index.html'))) {
   if (!/canonical" href="https:\/\/tukoteam\.com\/en\/"/.test(enHome)) fail('en/index.html: canonical incorrecto');
   if (!/Turn your traffic/.test(enHome)) fail('en/index.html: contenido EN no horneado');
   else ok('en/index.html: home EN real');
+  if (fs.existsSync(path.join(root, 'en/tuko-ai.html'))) {
+    const enAi = fs.readFileSync(path.join(root, 'en/tuko-ai.html'), 'utf8');
+    if (!/canonical" href="https:\/\/tukoteam\.com\/en\/tuko-ai"/.test(enAi)) {
+      fail('en/tuko-ai.html: canonical incorrecto');
+    } else if (!/hreflang="es"[^>]*href="https:\/\/tukoteam\.com\/tuko-ai"/.test(enAi)) {
+      fail('en/tuko-ai.html: hreflang ES incorrecto');
+    } else if (!/builds your/.test(enAi)) {
+      fail('en/tuko-ai.html: contenido EN no horneado');
+    } else ok('en/tuko-ai.html: página EN real');
+    if (!/<loc>https:\/\/tukoteam\.com\/en\/tuko-ai<\/loc>/.test(sitemap)) {
+      fail('sitemap falta /en/tuko-ai');
+    } else ok('sitemap: incluye /en/tuko-ai');
+  }
 } else if (/hreflang="en"/.test(index)) {
   fail('index.html aún tiene hreflang en (landing EN real pendiente)');
 } else {

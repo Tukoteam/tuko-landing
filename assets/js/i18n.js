@@ -173,6 +173,8 @@ const translations = {
     cta_label_details: 'Descripción o detalles (opcional)',
     cta_placeholder_details: 'Breve mensaje (máx. 100 caracteres)',
     cta_submit: 'Contactar',
+    cta_success: '¡Mensaje enviado! Te contactaremos pronto.',
+    cta_error: 'Ha ocurrido un error. Por favor escríbenos a team.tukoo@gmail.com',
 
     /* FOOTER */
     footer_col1_title: 'Contacto',
@@ -593,6 +595,8 @@ const translations = {
     cta_label_details: 'Description or details (optional)',
     cta_placeholder_details: 'Short message (max 100 characters)',
     cta_submit: 'Contact us',
+    cta_success: 'Message sent! We will contact you soon.',
+    cta_error: 'Something went wrong. Please email us at team.tukoo@gmail.com',
 
     /* FOOTER */
     footer_col1_title: 'Contact',
