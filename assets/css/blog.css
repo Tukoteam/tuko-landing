@@ -144,6 +144,10 @@
     margin: 0 auto;
     align-items: start;
   }
+  /* EN index (and any page without filters) has only .bp-main */
+  .bp-layout:not(:has(> .bp-side)) {
+    grid-template-columns: minmax(0, 1fr);
+  }
 
   /* ── Lateral ── */
   .bp-side-inner { position: sticky; top: 96px; }
