@@ -1475,12 +1475,23 @@
     .blog-post-image { width: 100%; }
     .article-page { padding: 96px 20px 72px; }
     .article-main { padding: 96px 20px 72px; }
+    .article-wrap { padding-left: 20px; padding-right: 20px; }
     .article-related-grid { grid-template-columns: 1fr; gap: 20px; }
+    /* Posts legacy con padding inline 80px (antes de .article-main) */
+    main[style*="80px"] {
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+    }
   }
 
   @media (max-width: 480px) {
     .article-page,
     .article-main { padding: 88px 16px 64px; }
+    .article-wrap { padding-left: 16px; padding-right: 16px; }
+    main[style*="80px"] {
+      padding-left: 16px !important;
+      padding-right: 16px !important;
+    }
   }
 
   @media (min-width: 481px) and (max-width: 720px) {
