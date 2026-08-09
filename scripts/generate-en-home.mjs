@@ -11,11 +11,11 @@ const landing = path.resolve(__dirname, '..');
 const srcPath = path.join(landing, 'index.html');
 const outPath = path.join(landing, 'en', 'index.html');
 
-const EN_TITLE = 'Tuko — Group Buying Plugin for Shopify';
+const EN_TITLE = 'Tuko — Group Buying for Shopify Stores';
 const EN_DESC =
-  'Activate group buying in your Shopify store. Tiered group discounts that drive organic virality and boost sales without more ad spend. Ideal for cosmetics, fashion, food and more.';
+  'Let shoppers buy together and unlock better prices inside your Shopify store. Tiered group discounts that grow sales through word of mouth—not bigger ad budgets.';
 const EN_OG_DESC =
-  'Activate group buying in your Shopify store. Group discounts that unlock themselves, drive real organic virality and grow sales without more ad spend.';
+  'Group buying for Shopify: shoppers join together, unlock better prices, and grow your store through word of mouth—without pouring more money into ads.';
 
 function extractTranslations(html) {
   const start = html.indexOf('const translations = {');
@@ -53,7 +53,10 @@ function bakeI18n(html, dict) {
 
 function patchSeoHead(html) {
   let h = html;
-  h = h.replace(/<html lang="es">/, '<html lang="en" data-url-es="https://tukoteam.com/" data-url-en="https://tukoteam.com/en/">');
+  h = h.replace(
+    /<html\b[^>]*>/,
+    '<html lang="en" data-url-es="https://tukoteam.com/" data-url-en="https://tukoteam.com/en/">'
+  );
   h = h.replace(
     /<title>[^<]*<\/title>/,
     `<title>${EN_TITLE}</title>`
@@ -142,6 +145,11 @@ function rewritePaths(html) {
   // Blog nav: prefer clean /en/blog/
   h = h.replace(/href="\.\.\/blog\/index\.html"/g, 'href="blog/"');
   h = h.replace(/href="\.\.\/blog\/"/g, 'href="blog/"');
+  // tuko AI EN sibling
+  h = h.replace(/href="\.\.\/tuko-ai"/g, 'href="tuko-ai"');
+  h = h.replace(/href="\.\.\/tuko-ai#/g, 'href="tuko-ai#');
+  h = h.replace(/https:\/\/tukoteam\.com\/tuko-ai/g, 'https://tukoteam.com/en/tuko-ai');
+  h = h.replace(/https:\/\/tukoteam\.com\/en\/en\/tuko-ai/g, 'https://tukoteam.com/en/tuko-ai');
   // Shopify locale
   h = h.replace(/locale=es/g, 'locale=en');
   // Video default EN
@@ -240,25 +248,20 @@ function patchEsHome(html) {
   let h = html;
   if (!/data-url-en=/.test(h)) {
     h = h.replace(
-      /<html lang="es">/,
+      /<html\b([^>]*)>/,
       '<html lang="es" data-url-es="https://tukoteam.com/" data-url-en="https://tukoteam.com/en/">'
     );
   }
-  h = h.replace(
-    /<!-- hreflang EN retirado[\s\S]*?-->/,
-    [
-      '<link rel="alternate" hreflang="es" href="https://tukoteam.com/">',
-      '<link rel="alternate" hreflang="en" href="https://tukoteam.com/en/">',
-      '<link rel="alternate" hreflang="x-default" href="https://tukoteam.com/">',
-    ].join('\n')
-  );
-  // Remove duplicate hreflang if re-run
-  const seen = new Set();
-  h = h.replace(/<link rel="alternate" hreflang="[^"]+" href="[^"]+">\n?/g, (m) => {
-    if (seen.has(m.trim())) return '';
-    seen.add(m.trim());
-    return m.endsWith('\n') ? m : m + '\n';
-  });
+  if (!/hreflang="en"[^>]*\/en\//.test(h)) {
+    h = h.replace(
+      /<!-- hreflang EN retirado[\s\S]*?-->/,
+      [
+        '<link rel="alternate" hreflang="es" href="https://tukoteam.com/">',
+        '<link rel="alternate" hreflang="en" href="https://tukoteam.com/en/">',
+        '<link rel="alternate" hreflang="x-default" href="https://tukoteam.com/">',
+      ].join('\n')
+    );
+  }
   return patchLocaleJs(h);
 }
 

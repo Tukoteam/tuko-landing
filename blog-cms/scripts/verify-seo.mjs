@@ -43,8 +43,9 @@ if (fs.existsSync(path.join(root, 'en/index.html'))) {
   const enHome = fs.readFileSync(path.join(root, 'en/index.html'), 'utf8');
   if (!/lang="en"/.test(enHome)) fail('en/index.html: falta lang=en');
   if (!/canonical" href="https:\/\/tukoteam\.com\/en\/"/.test(enHome)) fail('en/index.html: canonical incorrecto');
-  if (!/Turn your traffic/.test(enHome)) fail('en/index.html: contenido EN no horneado');
-  else ok('en/index.html: home EN real');
+  if (!/Turn your traffic/.test(enHome) || !/group sales/.test(enHome)) {
+    fail('en/index.html: contenido EN no horneado');
+  } else ok('en/index.html: home EN real');
   if (fs.existsSync(path.join(root, 'en/tuko-ai.html'))) {
     const enAi = fs.readFileSync(path.join(root, 'en/tuko-ai.html'), 'utf8');
     if (!/canonical" href="https:\/\/tukoteam\.com\/en\/tuko-ai"/.test(enAi)) {
