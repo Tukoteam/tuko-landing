@@ -147,11 +147,27 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
+  <url>
+    <loc>https://tukoteam.com/en/privacidad</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
   <url>
     <loc>https://tukoteam.com/terminos</loc>
     <lastmod>2026-04-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
+  <url>
+    <loc>https://tukoteam.com/en/terminos</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
 
 </urlset>

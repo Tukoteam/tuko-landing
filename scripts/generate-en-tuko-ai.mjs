@@ -73,7 +73,7 @@ function bakeI18n(html, dict) {
 function patchSeo(html) {
   let h = html;
   h = h.replace(
-    /<html lang="es">/,
+    /<html\b[^>]*>/,
     '<html lang="en" data-url-es="https://tukoteam.com/tuko-ai" data-url-en="https://tukoteam.com/en/tuko-ai">'
   );
   h = h.replace(/<title>[^<]*<\/title>/, `<title>${EN_TITLE}</title>`);
@@ -135,8 +135,12 @@ function rewritePaths(html) {
   // Self link stays tuko-ai (pretty under /en/)
   h = h.replace(/href="tuko-ai"/g, 'href="tuko-ai"');
   h = h.replace(/locale=es/g, 'locale=en');
-  h = h.replace(/i18n\.js\?v=[^"]+/g, 'i18n.js?v=20260809c');
+  h = h.replace(/i18n\.js\?v=[^"]+/g, 'i18n.js?v=20260809d');
   h = h.replace(/main\.js\?v=[^"]+/g, (m) => m); // leave
+  h = h.replace(/href="pages\/privacidad\.html"/g, 'href="privacidad"');
+  h = h.replace(/href="pages\/terminos\.html"/g, 'href="terminos"');
+  h = h.replace(/href="\.\.\/pages\/privacidad\.html"/g, 'href="privacidad"');
+  h = h.replace(/href="\.\.\/pages\/terminos\.html"/g, 'href="terminos"');
   // Lang switcher EN active
   h = h.replace(
     /(<button type="button" class="lang-opt) active(" data-lang="es")/g,

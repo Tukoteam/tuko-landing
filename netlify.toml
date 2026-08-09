@@ -306,3 +306,15 @@
   to = "/en/tuko-ai"
   status = 301
   force = true
+
+[[redirects]]
+  from = "/en/privacidad.html"
+  to = "/en/privacidad"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/terminos.html"
+  to = "/en/terminos"
+  status = 301
+  force = true
