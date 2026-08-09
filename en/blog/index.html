@@ -33,33 +33,38 @@
   }
 }
 </script>
-<link rel="stylesheet" href="../../assets/css/main.css">
-<script src="../../assets/js/ga4-loader.js" defer></script>
-<script src="../../assets/js/blog-analytics.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="/assets/css/main.css?v=20260731o">
+<link rel="stylesheet" href="/assets/css/blog.css?v=20260809a">
+<script src="/assets/js/ga4-loader.js" defer></script>
+<script src="/assets/js/blog-analytics.js" defer></script>
 </head>
 <body>
 <header role="banner">
-<nav aria-label="Navegación principal">
-  <a href="../" class="nav-logo">
-    <img src="../../assets/tuko-nav-logo.png" alt="tuko" width="120" height="40" decoding="async">
+<nav aria-label="Main navigation">
+  <a href="/en/" class="nav-logo">
+    <img src="/assets/tuko-nav-logo.png" alt="tuko" width="120" height="40" decoding="async">
   </a>
   <ul class="nav-links">
-    <li><a href="../" data-i18n="nav_link_inicio">Inicio</a></li>
-    <li><a href="index" class="nav-link-active" data-i18n="nav_link_blog">Blog</a></li>
-    <li><a href="../tuko-ai" data-i18n="nav_link_ia">tuko AI</a></li>
-    <li><a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="nav-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Descárgala en Shopify</a></li>
+    <li><a href="/en/" data-i18n="nav_link_inicio">Home</a></li>
+    <li><a href="/en/blog/" class="nav-link-active" data-i18n="nav_link_blog">Blog</a></li>
+    <li><a href="/en/tuko-ai" data-i18n="nav_link_ia">tuko AI</a></li>
+    <li><a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="nav-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Get it on Shopify</a></li>
   </ul>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false">
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
-  <div class="lang-switcher" role="group" aria-label="Selector de idioma">
-    <button type="button" class="lang-opt active" data-lang="es" aria-label="Cambiar idioma a Español">
+  <div class="lang-switcher" role="group" aria-label="Language selector">
+    <button type="button" class="lang-opt" data-lang="es" aria-label="Cambiar idioma a Español">
       <span class="lang-opt-flag" aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" width="22" height="15"><rect width="3" height="2" fill="#c60b1e"/><rect width="3" height="1" y="0.5" fill="#ffc400"/></svg>
       </span>
       <span class="lang-opt-label">ES</span>
     </button>
-    <button type="button" class="lang-opt" data-lang="en" aria-label="Switch language to English">
+    <button type="button" class="lang-opt active" data-lang="en" aria-label="Switch language to English">
       <span class="lang-opt-flag" aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="22" height="15"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg>
       </span>
@@ -69,21 +74,21 @@
 </nav>
 </header>
 
-<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Menú de navegación">
-  <a href="../" data-i18n="nav_link_inicio">Inicio</a>
-  <a href="index" class="nav-link-active" data-i18n="nav_link_blog">Blog</a>
-  <a href="../tuko-ai" data-i18n="nav_link_ia">tuko AI</a>
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu">
+  <a href="/en/" data-i18n="nav_link_inicio">Home</a>
+  <a href="/en/blog/" class="nav-link-active" data-i18n="nav_link_blog">Blog</a>
+  <a href="/en/tuko-ai" data-i18n="nav_link_ia">tuko AI</a>
   <div class="mobile-lang">
-    <p class="mobile-lang-label" data-i18n="nav_lang_label">Idioma</p>
-    <div class="lang-switcher mobile-lang-switcher" role="group" aria-label="Selector de idioma" data-active="es">
+    <p class="mobile-lang-label" data-i18n="nav_lang_label">Language</p>
+    <div class="lang-switcher mobile-lang-switcher" role="group" aria-label="Language selector" data-active="en">
       <span class="lang-thumb" aria-hidden="true"></span>
-      <button type="button" class="lang-opt active" data-lang="es" aria-label="Cambiar idioma a Español">
+      <button type="button" class="lang-opt" data-lang="es" aria-label="Cambiar idioma a Español">
         <span class="lang-opt-flag" aria-hidden="true">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" width="22" height="15"><rect width="3" height="2" fill="#c60b1e"/><rect width="3" height="1" y="0.5" fill="#ffc400"/></svg>
         </span>
         <span class="lang-opt-label">ES</span>
       </button>
-      <button type="button" class="lang-opt" data-lang="en" aria-label="Switch language to English">
+      <button type="button" class="lang-opt active" data-lang="en" aria-label="Switch language to English">
         <span class="lang-opt-flag" aria-hidden="true">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="22" height="15"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg>
         </span>
@@ -93,7 +98,7 @@
   </div>
   <a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="mobile-cta" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-    <span data-i18n="nav_cta">Descárgala en Shopify</span>
+    <span data-i18n="nav_cta">Get it on Shopify</span>
   </a>
 </div>
 
@@ -112,7 +117,7 @@
       <div class="bp-grid" id="bp-grid">
 <article class="bp-card" data-cat="eventos" data-date="2025-09-10" data-mins="1" data-cms-slug="shiji-incubator" data-locale="en">
         <a class="bp-media" href="shiji-incubator" tabindex="-1" aria-hidden="true">
-          <img src="https://tukoteam.com/assets/og-image.png" alt="Starting Our Journey at Xiji Incubator Shanghai 🇨🇳" width="1600" height="1067" loading="lazy" decoding="async">
+          <img src="/assets/images/banners-blog/ChatGPT Image 11 mar 2026, 16_21_45.webp" alt="Starting Our Journey at Xiji Incubator Shanghai 🇨🇳" width="1600" height="1067" loading="lazy" decoding="async">
         </a>
         <div class="bp-body">
           <p class="bp-meta">
@@ -131,7 +136,7 @@
 
 <article class="bp-card" data-cat="eventos" data-date="2025-09-23" data-mins="1" data-cms-slug="stron-tech-trek" data-locale="en">
         <a class="bp-media" href="stron-tech-trek" tabindex="-1" aria-hidden="true">
-          <img src="https://tukoteam.com/assets/og-image.png" alt="S-Tron Tech Trek Experience Shanghai 🇨🇳" width="1600" height="1067" loading="lazy" decoding="async">
+          <img src="/assets/images/banners-blog/ChatGPT Image 11 mar 2026, 16_29_29.webp" alt="S-Tron Tech Trek Experience Shanghai 🇨🇳" width="1600" height="1067" loading="lazy" decoding="async">
         </a>
         <div class="bp-body">
           <p class="bp-meta">
@@ -150,7 +155,7 @@
 
 <article class="bp-card" data-cat="eventos" data-date="2025-09-30" data-mins="1" data-cms-slug="spain-innovation-day" data-locale="en">
         <a class="bp-media" href="spain-innovation-day" tabindex="-1" aria-hidden="true">
-          <img src="https://tukoteam.com/assets/og-image.png" alt="Spain Innovation Day Shanghai 🇪🇸🇨🇳" width="1600" height="1067" loading="lazy" decoding="async">
+          <img src="/assets/images/banners-blog/ChatGPT Image 11 mar 2026, 17_59_56.webp" alt="Spain Innovation Day Shanghai 🇪🇸🇨🇳" width="1600" height="1067" loading="lazy" decoding="async">
         </a>
         <div class="bp-body">
           <p class="bp-meta">
@@ -169,7 +174,7 @@
 
 <article class="bp-card" data-cat="eventos" data-date="2025-10-20" data-mins="1" data-cms-slug="ocea-hub-shanghai" data-locale="en">
         <a class="bp-media" href="ocea-hub-shanghai" tabindex="-1" aria-hidden="true">
-          <img src="https://tukoteam.com/assets/og-image.png" alt="OCEA HUB Presenting Tuko in Shanghai 🇨🇳" width="1600" height="1067" loading="lazy" decoding="async">
+          <img src="/assets/images/banners-blog/Esta la mejorare con claude.webp" alt="OCEA HUB Presenting Tuko in Shanghai 🇨🇳" width="1600" height="1067" loading="lazy" decoding="async">
         </a>
         <div class="bp-body">
           <p class="bp-meta">
@@ -188,7 +193,7 @@
 
 <article class="bp-card" data-cat="eventos" data-date="2025-11-14" data-mins="1" data-cms-slug="new-formulas-shanghai" data-locale="en">
         <a class="bp-media" href="new-formulas-shanghai" tabindex="-1" aria-hidden="true">
-          <img src="https://tukoteam.com/assets/og-image.png" alt="New Formulas. Pitching Tuko in Shanghai 🇨🇳" width="1600" height="1067" loading="lazy" decoding="async">
+          <img src="/assets/images/banners-blog/ChatGPT Image 11 mar 2026, 18_03_24.webp" alt="New Formulas. Pitching Tuko in Shanghai 🇨🇳" width="1600" height="1067" loading="lazy" decoding="async">
         </a>
         <div class="bp-body">
           <p class="bp-meta">
@@ -207,7 +212,7 @@
 
 <article class="bp-card" data-cat="novedades" data-date="2026-02-19" data-mins="1" data-cms-slug="gran-paso-tuko" data-locale="en">
         <a class="bp-media" href="gran-paso-tuko" tabindex="-1" aria-hidden="true">
-          <img src="https://tukoteam.com/assets/og-image.png" alt="A big step for Tuko 🇪🇸🇨🇭" width="1600" height="1067" loading="lazy" decoding="async">
+          <img src="/assets/images/banners-blog/ChatGPT Image 11 mar 2026, 18_44_43.webp" alt="A big step for Tuko 🇪🇸🇨🇭" width="1600" height="1067" loading="lazy" decoding="async">
         </a>
         <div class="bp-body">
           <p class="bp-meta">
@@ -226,7 +231,7 @@
 
 <article class="bp-card" data-cat="novedades" data-date="2026-03-17" data-mins="3" data-cms-slug="natrue-x-tuko" data-locale="en">
         <a class="bp-media" href="natrue-x-tuko" tabindex="-1" aria-hidden="true">
-          <img src="https://tukoteam.com/assets/og-image.png" alt="NATRUE and the future of collaborative commerce" width="1600" height="1067" loading="lazy" decoding="async">
+          <img src="/assets/images/banners-blog/ChatGPT Image 11 mar 2026, 18_23_16.webp" alt="NATRUE and the future of collaborative commerce" width="1600" height="1067" loading="lazy" decoding="async">
         </a>
         <div class="bp-body">
           <p class="bp-meta">
@@ -260,23 +265,23 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="../" class="footer-brand-mark">tuko</a>
-        <p class="footer-brand-text" data-i18n="footer_tagline">Compras colectivas para tiendas Shopify. Más ventas, menos dependencia de anuncios.</p>
+        <a href="/en/" class="footer-brand-mark">tuko</a>
+        <p class="footer-brand-text" data-i18n="footer_tagline">Group buying for Shopify stores. More sales. Less ad dependency.</p>
       </div>
       <div class="footer-col">
-        <p class="footer-col-title" data-i18n="footer_col1_title">Contacto</p>
+        <p class="footer-col-title" data-i18n="footer_col1_title">Contact</p>
         <a href="mailto:team.tukoo@gmail.com" data-i18n="footer_email">team.tukoo@gmail.com</a>
       </div>
       <div class="footer-col">
-        <p class="footer-col-title" data-i18n="footer_col2_title">Legales</p>
-        <a href="../privacidad" data-i18n="footer_privacy">Política de privacidad</a>
-        <a href="../terminos" data-i18n="footer_terms">Términos y condiciones</a>
+        <p class="footer-col-title" data-i18n="footer_col2_title">Legal</p>
+        <a href="/en/pages/privacidad.html" data-i18n="footer_privacy">Privacy policy</a>
+        <a href="/en/pages/terminos.html" data-i18n="footer_terms">Terms and conditions</a>
       </div>
     </div>
   </div>
-  <div class="footer-bottom-inner" data-i18n="footer_copy">© 2026 Tuko. Todos los derechos reservados.</div>
+  <div class="footer-bottom-inner" data-i18n="footer_copy">© 2026 Tuko. All rights reserved.</div>
 </footer>
-<script src="../../assets/js/main.js?v=20260731o" defer></script>
-<script src="../../assets/js/i18n.js?v=20260809c" defer></script>
+<script src="/assets/js/main.js?v=20260731o" defer></script>
+<script src="/assets/js/i18n.js?v=20260809c" defer></script>
 </body>
 </html>

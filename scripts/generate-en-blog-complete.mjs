@@ -208,11 +208,24 @@ fs.mkdirSync(contentDir, { recursive: true });
 const articles = [];
 for (const p of posts) {
   let cover = null;
-  const esHtmlPath = path.join(landing, 'blog', `${p.slug}.html`);
-  if (fs.existsSync(esHtmlPath)) {
-    const h = fs.readFileSync(esHtmlPath, 'utf8');
-    const og = h.match(/property=["']og:image["']\s+content=["']([^"']+)["']/i);
-    if (og) cover = og[1];
+  // Prefer the real card banner from the ES index (og:image is often the site-wide marketing PNG).
+  const esIndexPath = path.join(landing, 'blog', 'index.html');
+  if (fs.existsSync(esIndexPath)) {
+    const idx = fs.readFileSync(esIndexPath, 'utf8');
+    const cardRe = new RegExp(
+      `<a class="bp-media" href="${p.slug}"[\\s\\S]*?<img[^>]+src="([^"]+)"`,
+      'i'
+    );
+    const card = idx.match(cardRe);
+    if (card) cover = card[1];
+  }
+  if (!cover) {
+    const esHtmlPath = path.join(landing, 'blog', `${p.slug}.html`);
+    if (fs.existsSync(esHtmlPath)) {
+      const h = fs.readFileSync(esHtmlPath, 'utf8');
+      const og = h.match(/property=["']og:image["']\s+content=["']([^"']+)["']/i);
+      if (og && !/\/assets\/og-image\.png$/i.test(og[1])) cover = og[1];
+    }
   }
   const bodyHtml = bodyFromKeys(p.keys);
   const title = grab(p.titleKey);
