@@ -1,0 +1,27 @@
+{
+  "id": "stron-tech-trek.en",
+  "slug": "stron-tech-trek",
+  "status": "published",
+  "title": "S-Tron Tech Trek Experience Shanghai 🇨🇳",
+  "metaTitle": "S-Tron Tech Trek Experience Shanghai 🇨🇳",
+  "description": "Inside China's tech ecosystem with Xiji Incubator.",
+  "bodyHtml": "<p>Last week we were invited to attend S-Tron Shanghai Tech Trek at the West Bund Art Center, an innovation event connected to the Xiji Incubator ecosystem that brings together founders, investors and technology companies.</p>\n<h2>Building Connections</h2>\n<p>Beyond the talks and startup demos, the most valuable part was the opportunity to meet venture capital investors, founders and innovation leaders from different industries. Events like this create the perfect environment to exchange ideas, explore collaborations and build relationships within the Shanghai tech ecosystem.</p>\n<h2>What are we building?</h2>\n<p>Tuko is based on a simple idea: when people buy together, everyone should pay less. Our platform allows users to join group purchases that unlock better discounts as more people participate.</p>\n<p>At the same time, brands benefit by selling larger volumes while reducing customer acquisition costs.</p>\n<h2>What we take away?</h2>\n<p>Experiences like S-Tron show how powerful the innovation ecosystem in Shanghai is. Being able to connect with people building and investing in technology is incredibly valuable as we continue developing Tuko.</p>\n<p>Let's keep building.</p>",
+  "category": "eventos",
+  "mins": 1,
+  "tags": [],
+  "coverImage": "https://tukoteam.com/assets/og-image.png",
+  "canonical": "https://tukoteam.com/en/blog/stron-tech-trek",
+  "locale": "en",
+  "translationOf": "stron-tech-trek",
+  "datePublished": "2025-09-23",
+  "dateModified": "2026-08-09",
+  "author": {
+    "name": "Tuko Team",
+    "type": "Organization"
+  },
+  "seo": {
+    "noFakeHreflang": true,
+    "canonicalClean": true,
+    "hreflangWhenPaired": true
+  }
+}

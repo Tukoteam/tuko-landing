@@ -1,0 +1,27 @@
+{
+  "id": "spain-innovation-day.en",
+  "slug": "spain-innovation-day",
+  "status": "published",
+  "title": "Spain Innovation Day Shanghai 🇪🇸🇨🇳",
+  "metaTitle": "Spain Innovation Day Shanghai 🇪🇸🇨🇳",
+  "description": "Spanish startups, ICEX and connections across Asia.",
+  "bodyHtml": "<p>Last week we had the opportunity to attend Spain Innovation Day in Shanghai, an event organized by the Spanish Chamber of Commerce and ICEX that brought together Spanish startups and companies operating in China.</p>\n<h2>Spanish Startups in China</h2>\n<p>The event showcased several innovative startups working in different sectors, including AI, travel tech, agriculture technology and digital services. Founders presented their projects and shared insights about building companies between Europe and China.</p>\n<p>It was a great opportunity to see how Spanish entrepreneurs are expanding internationally and developing technology-driven solutions in global markets.</p>\n<h2>Building connections</h2>\n<p>Beyond the presentations, the event created a space to meet entrepreneurs, investors and members of the Spanish innovation ecosystem in Shanghai. Conversations with founders and ecosystem leaders offered valuable perspectives on scaling startups and building bridges between Spain and China.</p>\n<h2>A strong ecosystem abroad</h2>\n<p>Spain Innovation Day highlighted the growing presence of Spanish innovation in Asia. Being part of this community in Shanghai is both inspiring and motivating as we continue building Tuko and exploring global opportunities.</p>\n<p>Let's keep building.</p>",
+  "category": "eventos",
+  "mins": 1,
+  "tags": [],
+  "coverImage": "https://tukoteam.com/assets/og-image.png",
+  "canonical": "https://tukoteam.com/en/blog/spain-innovation-day",
+  "locale": "en",
+  "translationOf": "spain-innovation-day",
+  "datePublished": "2025-09-30",
+  "dateModified": "2026-08-09",
+  "author": {
+    "name": "Tuko Team",
+    "type": "Organization"
+  },
+  "seo": {
+    "noFakeHreflang": true,
+    "canonicalClean": true,
+    "hreflangWhenPaired": true
+  }
+}

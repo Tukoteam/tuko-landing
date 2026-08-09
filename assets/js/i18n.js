@@ -840,16 +840,25 @@ const translations = {
   }
 };
 
-/* El idioma puede venir en la URL (?lang=en). Así la versión inglesa tiene URL
-   propia e indexable, y el hreflang del <head> deja de apuntar a un sitio falso. */
+/* Idioma: path /en/... gana; si no, ?lang=en (landing); si no, localStorage. */
 function resolveLang() {
+  var path = (location.pathname || '').replace(/\/$/, '') || '/';
+  if (path === '/en' || path.indexOf('/en/') === 0) return 'en';
   var q = new URLSearchParams(location.search).get('lang');
   if (q === 'es' || q === 'en') return q;
   return localStorage.getItem('tuko_lang') || 'es';
 }
 
-/* Mantiene canonical, og:url y hreflang coherentes con el idioma mostrado */
+function hasRealLocaleUrls() {
+  var root = document.documentElement;
+  return !!(root.getAttribute('data-url-es') && root.getAttribute('data-url-en'));
+}
+
+/* Solo para páginas sin URL EN real (swap JS + ?lang=en). No tocar /en/blog. */
 function syncSeoLang(lang) {
+  if (hasRealLocaleUrls()) return;
+  var path = (location.pathname || '').replace(/\/$/, '') || '/';
+  if (path === '/en' || path.indexOf('/en/') === 0) return;
   var base = location.origin + location.pathname;
   var url  = lang === 'en' ? base + '?lang=en' : base;
   var can = document.querySelector('link[rel="canonical"]');

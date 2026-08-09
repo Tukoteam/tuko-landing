@@ -264,3 +264,33 @@
   from = "/_originales-png/*"
   to = "/"
   status = 301
+
+[[redirects]]
+  from = "/en/blog/gran-paso-tuko.html"
+  to = "/en/blog/gran-paso-tuko"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/blog/new-formulas-shanghai.html"
+  to = "/en/blog/new-formulas-shanghai"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/blog/ocea-hub-shanghai.html"
+  to = "/en/blog/ocea-hub-shanghai"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/blog/spain-innovation-day.html"
+  to = "/en/blog/spain-innovation-day"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/blog/stron-tech-trek.html"
+  to = "/en/blog/stron-tech-trek"
+  status = 301
+  force = true
