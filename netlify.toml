@@ -91,6 +91,24 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "/en/blog/index.html"
+  to = "/en/blog/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/blog/natrue-x-tuko.html"
+  to = "/en/blog/natrue-x-tuko"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/blog/shiji-incubator.html"
+  to = "/en/blog/shiji-incubator"
+  status = 301
+  force = true
+
 # Blog: .html → URL limpia (explícitos: Netlify no sustituye bien :slug.html)
 [[redirects]]
   from = "/blog/natrue-x-tuko.html"

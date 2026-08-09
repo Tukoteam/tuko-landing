@@ -1,0 +1,27 @@
+{
+  "id": "shiji-incubator.en",
+  "slug": "shiji-incubator",
+  "status": "published",
+  "title": "Starting Our Journey at Xiji Incubator Shanghai 🇨🇳",
+  "metaTitle": "Starting Our Journey at Xiji Incubator Shanghai 🇨🇳",
+  "description": "We start our journey at Xiji Incubator Shanghai.",
+  "bodyHtml": "<p>A few weeks ago we arrived in Shanghai to start a new chapter for Tuko.</p>\n<p>For the next months we will be part of Xiji Incubator, an international startup program based at Tongji University, designed to help early-stage founders build and scale global startups.</p>\n<p>This opportunity allows us to work from one of the most dynamic entrepreneurial ecosystems in the world while continuing to develop the vision behind Tuko.</p>\n<p>And honestly, it feels like the perfect place to do it.</p>\n<h2>Why Shanghai?</h2>\n<p>Shanghai is one of the most exciting places on the planet to build technology.</p>\n<p>Everywhere you look there are startups, investors, new products and ambitious people trying to build something big. The speed at which companies are created here is something you immediately notice.</p>\n<p>China has already shown the world how powerful group buying models can be. Platforms like Pinduoduo have transformed how millions of people buy products online by turning shopping into a social experience.</p>\n<p>Being here gives us the opportunity to understand these models much deeper and learn directly from the ecosystem where many of them were born.</p>\n<h2>What are we building?</h2>\n<p>Tuko is based on a simple idea: when people buy together, everyone should pay less. Our platform allows users to join group purchases that unlock better discounts as more people participate.</p>\n<p>At the same time, brands benefit by selling larger volumes while reducing customer acquisition costs.</p>\n<h2>What comes next?</h2>\n<p>During the program we will focus on improving our MVP, testing the concept with users and brands, and learning as much as possible from the ecosystem around us.</p>\n<p>LET'S DO IT</p>",
+  "category": "eventos",
+  "mins": 1,
+  "tags": [],
+  "coverImage": "https://tukoteam.com/assets/og-image.png",
+  "canonical": "https://tukoteam.com/en/blog/shiji-incubator",
+  "locale": "en",
+  "translationOf": "shiji-incubator",
+  "datePublished": "2025-09-10",
+  "dateModified": "2026-08-09",
+  "author": {
+    "name": "Tuko Team",
+    "type": "Organization"
+  },
+  "seo": {
+    "noFakeHreflang": true,
+    "canonicalClean": true,
+    "hreflangWhenPaired": true
+  }
+}

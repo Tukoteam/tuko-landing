@@ -862,8 +862,35 @@ function syncSeoLang(lang) {
   if (alt) alt.setAttribute('content', lang === 'en' ? 'es_ES' : 'en_US');
 }
 
+function localeNavUrl(lang) {
+  var root = document.documentElement;
+  var attr = lang === 'en' ? 'data-url-en' : 'data-url-es';
+  var url = root.getAttribute(attr);
+  if (!url) return null;
+  try {
+    return new URL(url, location.origin);
+  } catch (e) {
+    return null;
+  }
+}
+
 function setLanguage(lang) {
   if (!translations[lang]) return;
+
+  /* En posts con URL /en/blog/... real: navegar en lugar de solo swap JS del body */
+  var dest = localeNavUrl(lang);
+  if (dest) {
+    var herePath = location.pathname.replace(/\/$/, '') || '/';
+    var destPath = dest.pathname.replace(/\/$/, '') || '/';
+    var onLocaleTree =
+      herePath.indexOf('/blog') !== -1 || herePath.indexOf('/en/blog') !== -1;
+    if (onLocaleTree && destPath !== herePath) {
+      localStorage.setItem('tuko_lang', lang);
+      location.href = dest.href;
+      return;
+    }
+  }
+
   const t = translations[lang];
   document.documentElement.lang = lang;
   localStorage.setItem('tuko_lang', lang);
