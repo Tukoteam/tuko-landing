@@ -26,6 +26,11 @@
 /blog/compra-colectiva-vs-cupones-shopify.html /blog/                              301!
 /pages/privacidad.html                      /privacidad                            301!
 /pages/terminos.html                        /terminos                              301!
+/privacidad.html                            /privacidad                            301!
+/terminos.html                              /terminos                              301!
+# Pretty URL → fichero en raíz (por si el hosting no aplica pretty URLs)
+/privacidad                                 /privacidad.html                       200!
+/terminos                                   /terminos.html                         200!
 /tuko-ai.html                               /tuko-ai                               301!
 /tuko-ia.html                               /tuko-ai                               301!
 /tuko-ia                                    /tuko-ai                               301!

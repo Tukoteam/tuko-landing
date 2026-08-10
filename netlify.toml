@@ -232,6 +232,18 @@
   force = true
 
 [[redirects]]
+  from = "/pages/privacidad.html"
+  to = "/privacidad"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pages/terminos.html"
+  to = "/terminos"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/privacidad.html"
   to = "/privacidad"
   status = 301
@@ -243,16 +255,17 @@
   status = 301
   force = true
 
+# Sirve el HTML de raíz en la URL limpia del sitemap
 [[redirects]]
-  from = "/pages/privacidad.html"
-  to = "/privacidad"
-  status = 301
+  from = "/privacidad"
+  to = "/privacidad.html"
+  status = 200
   force = true
 
 [[redirects]]
-  from = "/pages/terminos.html"
-  to = "/terminos"
-  status = 301
+  from = "/terminos"
+  to = "/terminos.html"
+  status = 200
   force = true
 
 # Nunca indexar las carpetas de trabajo
