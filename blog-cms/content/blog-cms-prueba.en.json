@@ -1,0 +1,27 @@
+{
+  "id": "blog-cms-prueba.en",
+  "slug": "blog-cms-prueba",
+  "status": "published",
+  "title": "Testing CMS Hub — please do not delete, testing",
+  "metaTitle": "Testing CMS Hub — please do not delete, testing",
+  "description": "Test article published from Tuko Hub Blog CMS. End-to-end validation of the publish → Netlify flow.",
+  "bodyHtml": "This is a test post for the blog's CMS within Tuko Hub.<p></p><div><br></div><div>If you view it on tukoteam.com, the MVP flow (draft → GitHub App → Netlify) is working.</div><div><br></div><div>Clean canonical tag, no .html in the URL.</div><div><br></div><div>We are testing</div>",
+  "category": "guias",
+  "mins": 1,
+  "tags": [],
+  "coverImage": "https://tukoteam.com/assets/images/banners-blog/ChatGPT Image 11 mar 2026, 18_44_43.webp",
+  "canonical": "https://tukoteam.com/en/blog/blog-cms-prueba",
+  "locale": "en",
+  "translationOf": "blog-cms-prueba",
+  "datePublished": "2026-08-10",
+  "dateModified": "2026-08-10",
+  "author": {
+    "name": "Tuko Team",
+    "type": "Organization"
+  },
+  "seo": {
+    "noFakeHreflang": true,
+    "canonicalClean": true,
+    "hreflangWhenPaired": true
+  }
+}
