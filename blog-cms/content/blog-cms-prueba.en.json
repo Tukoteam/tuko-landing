@@ -1,11 +1,11 @@
 {
   "id": "blog-cms-prueba.en",
   "slug": "blog-cms-prueba",
-  "status": "published",
+  "status": "unpublished",
   "title": "Testing CMS Hub — please do not delete, testing",
   "metaTitle": "Testing CMS Hub — please do not delete, testing",
   "description": "Test article published from Tuko Hub Blog CMS. End-to-end validation of the publish → Netlify flow.",
-  "bodyHtml": "This is a test post for the blog's CMS within Tuko Hub.<p></p><div><br></div><div>If you view it on tukoteam.com, the MVP flow (draft → GitHub App → Netlify) is working.</div><div><br></div><div>Clean canonical tag, no .html in the URL.</div><div><br></div><div>We are testing</div>",
+  "bodyHtml": "This is a test post for the blog's CMS within Tuko Hub.<p>If you view it on tukoteam.com, the MVP flow (draft → GitHub App → Netlify) is working.</p><p>Clean canonical tag, no .html in the URL.</p><p>We are testing</p>",
   "category": "guias",
   "mins": 1,
   "tags": [],
