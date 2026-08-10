@@ -1,7 +1,7 @@
 {
   "id": "blog-cms-prueba",
   "slug": "blog-cms-prueba",
-  "status": "published",
+  "status": "unpublished",
   "title": "Prueba CMS Hub — no borrar por favor, probando",
   "metaTitle": "Prueba CMS Hub — no borrar aún",
   "description": "Artículo de prueba publicado desde Tuko Hub Blog CMS. Validación end-to-end del flujo publicar → Netlify.",
