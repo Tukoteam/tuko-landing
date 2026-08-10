@@ -1,0 +1,27 @@
+{
+  "id": "joan-tuko-ia-prueba",
+  "slug": "joan-tuko-ia-prueba",
+  "status": "published",
+  "title": "joan tuko ia prueba",
+  "metaTitle": "",
+  "description": "no te lo pierdas",
+  "bodyHtml": "<p>hola que ta, esto es una prueba,</p>",
+  "category": "guias",
+  "mins": 1,
+  "tags": [],
+  "coverImage": "https://tukoteam.com/assets/images/banners-blog/tuko-miniatura-es-msnmkecf.webp",
+  "canonical": "https://tukoteam.com/blog/joan-tuko-ia-prueba",
+  "locale": "es",
+  "translationOf": null,
+  "datePublished": "2026-08-10",
+  "dateModified": "2026-08-10",
+  "author": {
+    "name": "Equipo Tuko",
+    "type": "Organization"
+  },
+  "seo": {
+    "noFakeHreflang": true,
+    "canonicalClean": true,
+    "hreflangWhenPaired": false
+  }
+}
