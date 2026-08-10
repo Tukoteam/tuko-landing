@@ -1,11 +1,11 @@
 {
   "id": "blog-cms-prueba",
   "slug": "blog-cms-prueba",
-  "status": "unpublished",
+  "status": "published",
   "title": "Prueba CMS Hub — no borrar por favor, probando",
   "metaTitle": "Prueba CMS Hub — no borrar aún",
   "description": "Artículo de prueba publicado desde Tuko Hub Blog CMS. Validación end-to-end del flujo publicar → Netlify.",
-  "bodyHtml": "<p>Este es un <strong>post de prueba</strong> del CMS del blog dentro de Tuko Hub.</p>\n<p>Si lo ves en <a href=\"https://tukoteam.com/blog/blog-cms-prueba\">tukoteam.com</a>, el flujo MVP (borrador → GitHub App → Netlify) funciona.</p>\n<p>Canonical limpio, sin <code>.html</code> en la URL.</p><p>Estamos probando</p><p><span style=\"font-size: 14px;\">​<span style=\"font-size: 18px;\">​<span style=\"font-size: 28px;\">​<span style=\"font-size: 16px;\">​</span></span></span></span><br></p>",
+  "bodyHtml": "<p>Este es un <strong>post de prueba</strong> del CMS del blog dentro de Tuko Hub.</p>\n<p>Si lo ves en <a href=\"https://tukoteam.com/blog/blog-cms-prueba\">tukoteam.com</a>, el flujo MVP (borrador → GitHub App → Netlify) funciona.</p>\n<p>Canonical limpio, sin <code>.html</code> en la URL.</p><p>Estamos probando</p><p><span style=\"font-size: 11px;\">​Probando</span><br></p><p><span style=\"font-size: 11px;\"><span style=\"font-size: 12px;\">​Probando</span><br></span></p><p><span style=\"font-size: 11px;\"><span style=\"font-size: 12px;\"><span style=\"font-size: 14px;\">​Probando<span style=\"font-size: 14px;\">​</span></span><br></span></span></p><p><span style=\"font-size: 14px;\">​<span style=\"font-size: 16px;\">​Probando</span></span></p><p><span style=\"font-size: 14px;\"><span style=\"font-size: 18px;\"><span style=\"font-size: 20px;\">​<span style=\"font-size: 18px;\">​Probando</span></span></span></span></p><p><span style=\"font-size: 14px;\"><span style=\"font-size: 18px;\"><span style=\"font-size: 20px;\"></span><span style=\"font-size: 20px;\">​Probando</span></span></span></p><p><span style=\"font-size: 14px;\"><span style=\"font-size: 18px;\"><span style=\"font-size: 24px;\">​Probando</span></span></span></p><p><span style=\"font-size: 14px;\"><span style=\"font-size: 18px;\"><span style=\"font-size: 28px;\">​Probando</span></span></span></p><p><span style=\"font-size: 14px;\"><span style=\"font-size: 18px;\"><span style=\"font-size: 36px;\">​Probando</span></span></span></p><p><span style=\"font-size: 14px;\"><span style=\"font-size: 18px;\"><span style=\"font-weight: bold;\">Probando</span></span></span></p><p><span style=\"font-size: 14px;\"><span style=\"font-size: 18px;\"><span style=\"font-style: italic;\">Probando</span></span></span></p><p><span style=\"font-size: 14px;\"><span style=\"font-size: 18px;\"><span style=\"text-decoration-line: underline;\">Probando</span></span></span></p><p><span style=\"font-size: 14px;\"><span style=\"font-size: 18px;\"><span style=\"text-decoration-line: line-through;\">Probando</span></span></span></p><h3><span style=\"font-size: 14px;\"><span style=\"font-size: 18px;\"><span style=\"font-size: 28px;\"><span style=\"font-size: 16px;\">​Probando</span></span></span></span></h3><h2>Probando</h2><h1>Probando</h1><p><ul><li>Probando</li><li>Probando</li></ul><p><img src=\"https://webcatalog.io/es/apps/tuko\" alt=\"\"><img src=\"https://webcatalog.io/es/apps/tuko\" alt=\"Prueba\"></p><p><ol><li>Probando</li><li>Probando</li></ol><p><a href=\"https://youtu.be/jVCZzMbC-Ek?si=vqsr4QBp-y_A8PSm\">https://youtu.be/jVCZzMbC-Ek?si=vqsr4QBp-y_A8PSm</a><br></p><blockquote><p><ol><li>Probando</li></ol></p></blockquote></p>",
   "category": "guias",
   "mins": 1,
   "tags": [],
@@ -22,6 +22,6 @@
   "seo": {
     "noFakeHreflang": true,
     "canonicalClean": true,
-    "hreflangWhenPaired": true
+    "hreflangWhenPaired": false
   }
 }
