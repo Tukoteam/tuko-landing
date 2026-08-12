@@ -1,7 +1,7 @@
 {
   "id": "blog-cms-prueba.en",
   "slug": "blog-cms-prueba",
-  "status": "published",
+  "status": "unpublished",
   "title": "Testing CMS Hub — please do not delete, testing",
   "metaTitle": "Testing CMS Hub — please do not delete, testing",
   "description": "Test article published from Tuko Hub Blog CMS. End-to-end validation of the publish → Netlify flow.",
@@ -14,7 +14,7 @@
   "locale": "en",
   "translationOf": "blog-cms-prueba",
   "datePublished": "2026-08-10",
-  "dateModified": "2026-08-10",
+  "dateModified": "2026-08-12",
   "author": {
     "name": "Tuko Team",
     "type": "Organization"
