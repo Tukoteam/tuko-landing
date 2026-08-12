@@ -1,7 +1,7 @@
 {
   "id": "blog-cms-prueba",
   "slug": "blog-cms-prueba",
-  "status": "published",
+  "status": "unpublished",
   "title": "Prueba CMS Hub — no borrar por favor, probando",
   "metaTitle": "Prueba CMS Hub — no borrar aún",
   "description": "Artículo de prueba publicado desde Tuko Hub Blog CMS. Validación end-to-end del flujo publicar → Netlify.",
@@ -14,7 +14,7 @@
   "locale": "es",
   "translationOf": null,
   "datePublished": "2026-08-07",
-  "dateModified": "2026-08-10",
+  "dateModified": "2026-08-12",
   "author": {
     "name": "Equipo Tuko",
     "type": "Organization"
@@ -22,6 +22,6 @@
   "seo": {
     "noFakeHreflang": true,
     "canonicalClean": true,
-    "hreflangWhenPaired": false
+    "hreflangWhenPaired": true
   }
 }

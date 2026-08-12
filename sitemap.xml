@@ -118,12 +118,6 @@
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://tukoteam.com/blog/blog-cms-prueba</loc>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
 
     <url>
     <loc>https://tukoteam.com/en/blog/blog-cms-prueba</loc>
