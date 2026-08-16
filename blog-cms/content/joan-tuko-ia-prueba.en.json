@@ -1,0 +1,27 @@
+{
+  "id": "joan-tuko-ia-prueba.en",
+  "slug": "joan-tuko-ia-prueba",
+  "status": "published",
+  "title": "joan tuko ia test",
+  "metaTitle": "joan tuko ia test",
+  "description": "don't lose it",
+  "bodyHtml": "<p>Hello how are you, this is a test</p>",
+  "category": "guias",
+  "mins": 1,
+  "tags": [],
+  "coverImage": "https://tukoteam.com/assets/images/banners-blog/tuko-miniatura-es-msnmkecf.webp",
+  "canonical": "https://tukoteam.com/en/blog/joan-tuko-ia-prueba",
+  "locale": "en",
+  "translationOf": "joan-tuko-ia-prueba",
+  "datePublished": "2026-08-16",
+  "dateModified": "2026-08-16",
+  "author": {
+    "name": "Tuko Team",
+    "type": "Organization"
+  },
+  "seo": {
+    "noFakeHreflang": true,
+    "canonicalClean": true,
+    "hreflangWhenPaired": true
+  }
+}
