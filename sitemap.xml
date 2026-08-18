@@ -119,6 +119,13 @@
     <priority>0.6</priority>
   </url>
 
+    <url>
+    <loc>https://tukoteam.com/blog/compra-colectiva-ecommerce</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <!-- Producto -->
   <url>
     <loc>https://tukoteam.com/tuko-ai</loc>
