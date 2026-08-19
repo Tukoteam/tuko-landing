@@ -1,7 +1,7 @@
 {
   "id": "joan-tuko-ia-prueba",
   "slug": "joan-tuko-ia-prueba",
-  "status": "unpublished",
+  "status": "published",
   "title": "joan tuko ia prueba",
   "metaTitle": "",
   "description": "no te lo pierdas",
@@ -14,7 +14,7 @@
   "locale": "es",
   "translationOf": null,
   "datePublished": "2026-08-10",
-  "dateModified": "2026-08-10",
+  "dateModified": "2026-08-19",
   "author": {
     "name": "Equipo Tuko",
     "type": "Organization"
