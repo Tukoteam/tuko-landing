@@ -126,6 +126,13 @@
     <priority>0.6</priority>
   </url>
 
+    <url>
+    <loc>https://tukoteam.com/blog/joan-tuko-ia-prueba</loc>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <!-- Producto -->
   <url>
     <loc>https://tukoteam.com/tuko-ai</loc>
