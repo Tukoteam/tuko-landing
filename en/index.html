@@ -861,11 +861,12 @@
     font-size: 19px;
     font-weight: 600;
     font-stretch: semi-expanded;
-    line-height: 1.28;
+    line-height: 1.35;
     letter-spacing: -0.025em;
     color: var(--black);
     margin-bottom: 18px;
-    text-wrap: balance;
+    text-align: left;
+    text-wrap: pretty;
   }
   .tk-title b { color: var(--blue); font-weight: 600; }
   .tk-title em {
@@ -888,8 +889,6 @@
       center bottom / 100% 100% no-repeat;
     pointer-events: none;
   }
-  .tk-title-br { display: none; }
-  .tk-title-space { white-space: pre; }
 
   .tk-timer-label {
     font-size: 12px;
@@ -3443,7 +3442,8 @@
     .tk-pinfo { text-align: left; }
     .tk-title {
       font-size: clamp(16px, 4.4vw, 18px);
-      line-height: 1.42;
+      line-height: 1.45;
+      text-align: left;
       text-wrap: pretty;
     }
     .tk-cta-wrap {
@@ -3594,17 +3594,15 @@
     nav { padding: 0 10px 0 8px; }
     .lang-opt-label { display: none; }
     .lang-opt { padding: 6px 7px; }
-    /* Título del widget: corte limpio + aire para el subrayado del precio */
+    /* Título del widget: wrap natural, alineado a la izquierda */
     .tk-title {
-      text-align: center;
+      text-align: left;
       font-size: 15.5px;
-      line-height: 1.55;
+      line-height: 1.5;
       letter-spacing: -0.02em;
       margin-bottom: 16px;
-      text-wrap: unset;
+      text-wrap: pretty;
     }
-    .tk-title-br { display: block; }
-    .tk-title-space { display: none; }
     .tk-title em {
       display: inline-block;
       padding-bottom: 0.12em;
@@ -3761,7 +3759,7 @@
                 <span class="tk-close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></span>
               </div>
 
-              <div class="tk-title"><span data-i18n="pop_title_before">Need </span><b id="tkNeedN">10</b> <span data-i18n="pop_title_people">more units</span><span class="tk-title-space"> </span><br class="tk-title-br" aria-hidden="true"><span data-i18n="pop_title_mid"> to unlock </span><em id="tkDealPrice" data-i18n="pop_title_deal">€25.20</em></div>
+              <div class="tk-title"><span data-i18n="pop_title_before">Need </span><b id="tkNeedN">10</b> <span data-i18n="pop_title_people">more units</span><span data-i18n="pop_title_mid"> to unlock </span><em id="tkDealPrice" data-i18n="pop_title_deal">€25.20</em></div>
 
               <p class="tk-timer-label" data-i18n="pop_timer">Ends in</p>
               <div class="tk-timer" id="tkTimer">
@@ -5155,7 +5153,7 @@ const translations = {
     pop_title: 'Faltan <b>10</b> unidades para bajar a <em>25,20 €</em>',
     pop_title_before: 'Faltan ',
     pop_title_people: 'unidades',
-    pop_title_mid: 'para bajar a ',
+    pop_title_mid: ' para bajar a ',
     pop_title_deal: '25,20 €',
     pop_timer: 'Termina en',
     pop_days: 'Días',
