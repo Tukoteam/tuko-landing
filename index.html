@@ -3808,7 +3808,7 @@
                   <span class="tk-av tk-av-4" data-tk-av><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span>
                   <span class="tk-av tk-av-more" id="tkAvMore">+0</span>
                 </div>
-                <div class="tk-joined"><b id="tkJoinedN">0</b><span id="tkJoinedLabel" data-i18n="pop_joined"> de 10 unidades reservadas</span></div>
+                <div class="tk-joined"><b id="tkJoinedN">0</b><span id="tkJoinedLabel" data-i18n="pop_joined"> de 20 unidades reservadas</span></div>
                 <div class="tk-pct" id="tkPct">0%</div>
               </div>
               <div class="tk-bar"><span class="tk-bar-fill" id="tkBarFill" style="width:0%"></span></div>
@@ -4618,6 +4618,7 @@ document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
     { at: 10, priceEs: '25,20 €', priceEn: '€25.20', off: '–10%' },
     { at: 20, priceEs: '22,96 €', priceEn: '€22.96', off: '–18%' }
   ];
+  const CAP = TIERS[TIERS.length - 1].at; /* tope fijo de la barra: siempre /20 */
   let joined = 0;
   let barFrom = 0;
   let barAnim = null;
@@ -4687,8 +4688,8 @@ document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
     }
     if (joinedLabelEl) {
       joinedLabelEl.textContent = isEn()
-        ? (' of ' + goal + ' units reserved')
-        : (' de ' + goal + ' unidades reservadas');
+        ? (' of ' + CAP + ' units reserved')
+        : (' de ' + CAP + ' unidades reservadas');
     }
     return { goal, price };
   };
@@ -4755,8 +4756,8 @@ document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
     }
 
     joinedEl.textContent = String(joined);
-    const { goal } = syncGoalCopy();
-    const pct = Math.round((joined / goal) * 100);
+    syncGoalCopy();
+    const pct = Math.round((joined / CAP) * 100);
     pctEl.textContent = pct + '%';
     drawBarTo(pct);
     syncProductDiscount();
@@ -5170,7 +5171,7 @@ const translations = {
     pop_minutes: 'Minutos',
     pop_seconds: 'Segundos',
     pop_product: 'Champú Natural',
-    pop_joined: ' de 10 unidades reservadas',
+    pop_joined: ' de 20 unidades reservadas',
     pop_cta: 'Bájalo a 25,20 €',
     pop_no_charge: 'No se te cobra nada hasta que termine la campaña.',
     pop_back_title: 'Así funciona una <em>campaña Tuko</em>',
@@ -5660,7 +5661,7 @@ const translations = {
     pop_minutes: 'Minutes',
     pop_seconds: 'Seconds',
     pop_product: 'Natural Shampoo',
-    pop_joined: ' of 10 units reserved',
+    pop_joined: ' of 20 units reserved',
     pop_cta: 'Drop it to €25.20',
     pop_no_charge: 'Nothing is charged until the campaign ends.',
     pop_back_title: 'How a <em>Tuko campaign</em> works',
