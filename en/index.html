@@ -3395,7 +3395,7 @@
                 <span class="tk-close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></span>
               </div>
 
-              <div class="tk-title"><span data-i18n="pop_title_before">Need </span><b id="tkNeedN">20</b> <span data-i18n="pop_title_people">more units</span><span data-i18n="pop_title_mid"> to unlock </span><em data-i18n="pop_title_deal">€22.96</em></div>
+              <div class="tk-title"><span data-i18n="pop_title_before">Need </span><b id="tkNeedN">10</b> <span data-i18n="pop_title_people">more units</span><span data-i18n="pop_title_mid"> to unlock </span><em id="tkDealPrice" data-i18n="pop_title_deal">€25.20</em></div>
 
               <p class="tk-timer-label" data-i18n="pop_timer">Ends in</p>
               <div class="tk-timer" id="tkTimer">
@@ -3435,14 +3435,14 @@
                   <span class="tk-av tk-av-4" data-tk-av><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span>
                   <span class="tk-av tk-av-more" id="tkAvMore">+0</span>
                 </div>
-                <div class="tk-joined"><b id="tkJoinedN">0</b><span data-i18n="pop_joined">of 20 units reserved</span></div>
+                <div class="tk-joined"><b id="tkJoinedN">0</b><span id="tkJoinedLabel" data-i18n="pop_joined"> of 10 units reserved</span></div>
                 <div class="tk-pct" id="tkPct">0%</div>
               </div>
               <div class="tk-bar"><span class="tk-bar-fill" id="tkBarFill" style="width:0%"></span></div>
 
               <div class="tk-cta">
                 <span class="tk-cta-ico"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M20 8v6M23 11h-6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                <span data-i18n="pop_cta">Drop it to €22.96</span>
+                <span id="tkCtaLabel" data-i18n="pop_cta">Drop it to €25.20</span>
                 <span class="tk-cta-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </div>
               <p class="tk-no-charge" data-i18n="pop_no_charge">Nothing is charged until the campaign ends.</p>
@@ -4141,20 +4141,31 @@ document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
   const productEl = document.getElementById('tkProduct');
   const newPriceEl = document.getElementById('tkNewPrice');
   const offEl = document.getElementById('tkOff');
+  const dealEl = document.getElementById('tkDealPrice');
+  const ctaEl = document.getElementById('tkCtaLabel');
+  const joinedLabelEl = document.getElementById('tkJoinedLabel');
   const tierEls = Array.from(document.querySelectorAll('#tkTiers [data-tk-tier]'));
-  const GOAL = 20;
   const END = 16;
   const MAX_FACES = 4;
   const BAR_MS = 640;
   const TIERS = [
-    { at: 10, price: '25,20 €', off: '–10%' },
-    { at: 20, price: '22,96 €', off: '–18%' }
+    { at: 10, priceEs: '25,20 €', priceEn: '€25.20', off: '–10%' },
+    { at: 20, priceEs: '22,96 €', priceEn: '€22.96', off: '–18%' }
   ];
   let joined = 0;
   let barFrom = 0;
   let barAnim = null;
   let lastWasBurst = false;
   let discountAt = 0;
+
+  const isEn = () => document.documentElement.lang === 'en';
+  const tierPrice = (t) => (isEn() ? t.priceEn : t.priceEs);
+  const nextTier = () => {
+    for (let i = 0; i < TIERS.length; i++) {
+      if (joined < TIERS[i].at) return TIERS[i];
+    }
+    return TIERS[TIERS.length - 1];
+  };
 
   const easeOut = (t) => 1 - Math.pow(1 - t, 3);
 
@@ -4198,6 +4209,24 @@ document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
     });
   };
 
+  const syncGoalCopy = () => {
+    const next = nextTier();
+    const goal = next.at;
+    const price = tierPrice(next);
+    const need = Math.max(0, goal - joined);
+    if (needEl) needEl.textContent = String(need);
+    if (dealEl) dealEl.textContent = price;
+    if (ctaEl) {
+      ctaEl.textContent = isEn() ? ('Drop it to ' + price) : ('Bájalo a ' + price);
+    }
+    if (joinedLabelEl) {
+      joinedLabelEl.textContent = isEn()
+        ? (' of ' + goal + ' units reserved')
+        : (' de ' + goal + ' unidades reservadas');
+    }
+    return { goal, price };
+  };
+
   const syncProductDiscount = () => {
     if (!productEl || !newPriceEl || !offEl) return;
     let next = 0;
@@ -4205,13 +4234,17 @@ document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
       if (joined >= TIERS[i].at) next = TIERS[i].at;
     }
     if (next <= discountAt) {
+      if (discountAt > 0) {
+        const cur = TIERS.find((t) => t.at === discountAt);
+        if (cur) newPriceEl.textContent = tierPrice(cur);
+      }
       syncBackTiers();
       return;
     }
     const tier = TIERS.find((t) => t.at === next);
     const upgrading = discountAt > 0;
     discountAt = next;
-    newPriceEl.textContent = tier.price;
+    newPriceEl.textContent = tierPrice(tier);
     offEl.textContent = tier.off;
 
     if (!upgrading) {
@@ -4256,14 +4289,15 @@ document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
     }
 
     joinedEl.textContent = String(joined);
-    if (needEl) needEl.textContent = String(GOAL - joined);
-    const pct = Math.round((joined / GOAL) * 100);
+    const { goal } = syncGoalCopy();
+    const pct = Math.round((joined / goal) * 100);
     pctEl.textContent = pct + '%';
     drawBarTo(pct);
     syncProductDiscount();
   };
 
   paint();
+  window.tukoSyncWidgetGoals = paint;
 
   const joinNext = () => {
     if (joined >= END) return;
@@ -4658,19 +4692,19 @@ const translations = {
 
     /* POPUP DEL PLUGIN */
     pop_chip: 'CAMPAÑA ACTIVA',
-    pop_title: 'Faltan <b>20</b> unidades para bajar a <em>22,96 €</em>',
+    pop_title: 'Faltan <b>10</b> unidades para bajar a <em>25,20 €</em>',
     pop_title_before: 'Faltan ',
     pop_title_people: 'unidades',
     pop_title_mid: ' para bajar a ',
-    pop_title_deal: '22,96 €',
+    pop_title_deal: '25,20 €',
     pop_timer: 'Termina en',
     pop_days: 'Días',
     pop_hours: 'Horas',
     pop_minutes: 'Minutos',
     pop_seconds: 'Segundos',
     pop_product: 'Champú Natural',
-    pop_joined: 'de 20 unidades reservadas',
-    pop_cta: 'Bájalo a 22,96 €',
+    pop_joined: ' de 10 unidades reservadas',
+    pop_cta: 'Bájalo a 25,20 €',
     pop_no_charge: 'No se te cobra nada hasta que termine la campaña.',
     pop_back_title: 'Así funciona una <em>campaña Tuko</em>',
     pop_back_sub: 'Cuantas más unidades se reservan, mayor es el descuento para todos.',
@@ -5096,19 +5130,19 @@ const translations = {
 
     /* POPUP DEL PLUGIN */
     pop_chip: 'CAMPAIGN LIVE',
-    pop_title: 'Need <b>20</b> more units to unlock <em>€22.96</em>',
+    pop_title: 'Need <b>10</b> more units to unlock <em>€25.20</em>',
     pop_title_before: 'Need ',
     pop_title_people: 'more units',
     pop_title_mid: ' to unlock ',
-    pop_title_deal: '€22.96',
+    pop_title_deal: '€25.20',
     pop_timer: 'Ends in',
     pop_days: 'Days',
     pop_hours: 'Hours',
     pop_minutes: 'Minutes',
     pop_seconds: 'Seconds',
     pop_product: 'Natural Shampoo',
-    pop_joined: 'of 20 units reserved',
-    pop_cta: 'Drop it to €22.96',
+    pop_joined: ' of 10 units reserved',
+    pop_cta: 'Drop it to €25.20',
     pop_no_charge: 'Nothing is charged until the campaign ends.',
     pop_back_title: 'How a <em>Tuko campaign</em> works',
     pop_back_sub: 'The more units reserved, the bigger the discount for everyone.',
@@ -5662,6 +5696,7 @@ function setLanguage(lang, opts) {
     broadcastDemoLang(lang);
     if (typeof window.tukoEnsureHeroEmArc === 'function') window.tukoEnsureHeroEmArc();
     if (typeof window.tukoRefreshHeroStats === 'function') window.tukoRefreshHeroStats();
+    if (typeof window.tukoSyncWidgetGoals === 'function') window.tukoSyncWidgetGoals();
   };
 
   if (!shouldMotion) {
