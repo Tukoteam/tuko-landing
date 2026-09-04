@@ -1585,6 +1585,281 @@
     margin: 0 auto 64px;
   }
 
+
+/* ══════════════════════════════
+     PRECIOS
+  ══════════════════════════════ */
+  .pricing {
+    position: relative;
+    padding: 96px 48px 100px;
+    text-align: center;
+    overflow: hidden;
+    background:
+      radial-gradient(110% 70% at 50% -5%, rgba(66, 87, 255, 0.1), transparent 55%),
+      radial-gradient(80% 50% at 0% 100%, rgba(66, 87, 255, 0.05), transparent 45%),
+      linear-gradient(180deg, #ffffff 0%, #f7f8fc 45%, #fafbff 100%);
+  }
+  .pricing::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.28;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+    mix-blend-mode: multiply;
+  }
+  .pricing-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .pricing .s-sub {
+    margin-bottom: 48px;
+    max-width: 640px;
+  }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    align-items: stretch;
+    text-align: left;
+  }
+  .pricing-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background:
+      linear-gradient(165deg, rgba(224, 231, 255, 0.4) 0%, rgba(255, 255, 255, 0.98) 38%, #fff 100%);
+    border: 1px solid rgba(61, 80, 242, 0.12);
+    border-radius: 22px;
+    padding: 28px 22px 24px;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.85) inset,
+      0 10px 28px rgba(20, 24, 38, 0.05);
+    transition:
+      transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.4s ease;
+  }
+  .pricing-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(61, 80, 242, 0.22);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.9) inset,
+      0 16px 36px rgba(20, 24, 38, 0.08);
+  }
+  .pricing-card.is-featured {
+    border-color: rgba(61, 80, 242, 0.45);
+    background:
+      linear-gradient(165deg, rgba(66, 87, 255, 0.1) 0%, rgba(255, 255, 255, 0.98) 42%, #fff 100%);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.9) inset,
+      0 18px 44px rgba(66, 87, 255, 0.16);
+    transform: scale(1.02);
+    z-index: 2;
+  }
+  .pricing-card.is-featured:hover {
+    transform: scale(1.02) translateY(-3px);
+  }
+  .pricing-rec {
+    display: inline-flex;
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 600;
+    font-stretch: semi-expanded;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--blue);
+    border-radius: 999px;
+    padding: 5px 11px;
+    margin-bottom: 14px;
+  }
+  .pricing-name {
+    margin: 0 0 14px;
+    font-size: 18px;
+    font-weight: 600;
+    font-stretch: semi-expanded;
+    letter-spacing: -0.02em;
+    color: var(--black);
+  }
+  .pricing-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+  .pricing-amount {
+    font-size: clamp(28px, 2.4vw, 34px);
+    font-weight: 700;
+    font-stretch: semi-expanded;
+    letter-spacing: -0.03em;
+    color: var(--black);
+    line-height: 1;
+  }
+  .pricing-amount--custom {
+    font-size: clamp(22px, 2vw, 28px);
+  }
+  .pricing-cap--empty {
+    visibility: hidden;
+  }
+  .pricing-period {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray-4);
+  }
+  .pricing-comm {
+    margin: 0 0 20px;
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--blue);
+  }
+  .pricing-features {
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+  .pricing-features li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 13.5px;
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--gray-4);
+  }
+  .pricing-features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.35em;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: rgba(66, 87, 255, 0.12);
+    box-shadow: inset 0 0 0 1px rgba(66, 87, 255, 0.25);
+  }
+  .pricing-features li::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 0.55em;
+    width: 6px;
+    height: 3.5px;
+    border-left: 1.6px solid var(--blue);
+    border-bottom: 1.6px solid var(--blue);
+    transform: rotate(-45deg);
+  }
+  .pricing-cap {
+    margin: 0 0 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    font-stretch: semi-expanded;
+    color: var(--black);
+  }
+  .pricing-foot {
+    margin: 0 0 22px;
+    font-size: 12.5px;
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--gray-4);
+  }
+  .pricing-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 13px 16px;
+    border-radius: 12px;
+    font-size: 14.5px;
+    font-weight: 700;
+    font-stretch: semi-expanded;
+    letter-spacing: -0.015em;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .pricing-cta.is-primary {
+    background: var(--blue);
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(66, 87, 255, 0.28);
+  }
+  .pricing-cta.is-primary:hover {
+    background: #3346e0;
+    transform: translateY(-1px);
+  }
+  .pricing-cta.is-secondary {
+    background: transparent;
+    color: var(--blue);
+    border: 1.5px solid rgba(66, 87, 255, 0.35);
+  }
+  .pricing-cta.is-secondary:hover {
+    background: rgba(66, 87, 255, 0.06);
+    border-color: var(--blue);
+  }
+  .pricing-legal {
+    margin: 36px auto 28px;
+    max-width: 720px;
+    font-size: 13.5px;
+    font-weight: 400;
+    line-height: 1.65;
+    color: var(--gray-4);
+  }
+  .pricing-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 28px;
+  }
+  .pricing-links a {
+    font-size: 14.5px;
+    font-weight: 600;
+    font-stretch: semi-expanded;
+    color: var(--blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(66, 87, 255, 0.35);
+    padding-bottom: 1px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .pricing-links a:hover {
+    border-bottom-color: var(--blue);
+  }
+  @media (max-width: 1100px) {
+    .pricing-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .pricing-card.is-featured {
+      transform: none;
+    }
+    .pricing-card.is-featured:hover {
+      transform: translateY(-3px);
+    }
+  }
+  @media (max-width: 720px) {
+    .pricing {
+      padding: 72px 20px 80px;
+    }
+    .pricing-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .pricing-card {
+      padding: 24px 20px 22px;
+      border-radius: 18px;
+    }
+    .pricing-links {
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+  }
+
 /* ══════════════════════════════
      FAQ
   ══════════════════════════════ */
@@ -3275,6 +3550,7 @@
     <li><a href="#problema" data-i18n="nav_link_problema">The problem</a></li>
     <li><a href="#beneficios" data-i18n="nav_link_beneficios">What you get</a></li>
     <li><a href="#como-funciona" data-i18n="nav_link_como_funciona">How it works</a></li>
+    <li><a href="#precios" data-i18n="nav_link_precios">Pricing</a></li>
     <li><a href="blog/" data-i18n="nav_link_blog">Blog</a></li>
     <li><a href="tuko-ai" data-i18n="nav_link_ia">tuko AI</a></li>
     <li><a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="nav-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Install free</a></li>
@@ -3305,6 +3581,7 @@
   <a href="#problema" data-i18n="nav_link_problema">The problem</a>
   <a href="#beneficios" data-i18n="nav_link_beneficios">What you get</a>
   <a href="#como-funciona" data-i18n="nav_link_como_funciona">How it works</a>
+  <a href="#precios" data-i18n="nav_link_precios">Pricing</a>
   <a href="blog/" data-i18n="nav_link_blog">Blog</a>
   <a href="tuko-ai" data-i18n="nav_link_ia">tuko AI</a>
   <div class="mobile-lang">
@@ -3725,6 +4002,98 @@
 </section>
 <!-- CTA -->
 
+
+
+<!-- PRECIOS -->
+<section class="pricing" id="precios">
+  <div class="pricing-inner">
+    <div class="fade-up"><span class="s-badge" data-i18n="pricing_badge">Pricing</span></div>
+    <h2 class="s-title fade-up d1" data-i18n="pricing_title">We only win if you <em class="title-accent-em">sell</em></h2>
+    <p class="s-sub fade-up d2" data-i18n="pricing_sub">No entry fee and no lock-in. We take a percentage of what you sell in Tuko campaigns, with a monthly cap you approve before anything is charged. If you don't run a campaign that month, your bill is zero.</p>
+
+    <div class="pricing-grid">
+      <article class="pricing-card fade-up d1">
+        <h3 class="pricing-name" data-i18n="pricing_p1_name">Start</h3>
+        <div class="pricing-price-row">
+          <span class="pricing-amount" data-i18n="pricing_p1_price">€0</span>
+          <span class="pricing-period" data-i18n="pricing_per_month">/mo</span>
+        </div>
+        <p class="pricing-comm" data-i18n="pricing_p1_comm">+ 5% of what you sell with Tuko</p>
+        <ul class="pricing-features">
+          <li data-i18n="pricing_p1_f1">1 active campaign at a time</li>
+          <li data-i18n="pricing_p1_f2">Ladder of up to 3 tiers</li>
+          <li data-i18n="pricing_p1_f3">Widget on the product page</li>
+          <li data-i18n="pricing_p1_f4">Campaign analytics</li>
+        </ul>
+        <p class="pricing-cap" data-i18n="pricing_p1_cap">Cap: €300/mo</p>
+        <p class="pricing-foot" data-i18n="pricing_p1_foot">If you don't sell, you pay €0.</p>
+        <a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="pricing-cta is-secondary" target="_blank" rel="noopener" data-i18n="pricing_p1_cta">Start free</a>
+      </article>
+
+      <article class="pricing-card is-featured fade-up d2">
+        <span class="pricing-rec" data-i18n="pricing_recommended">Recommended</span>
+        <h3 class="pricing-name" data-i18n="pricing_p2_name">Growth</h3>
+        <div class="pricing-price-row">
+          <span class="pricing-amount" data-i18n="pricing_p2_price">€49</span>
+          <span class="pricing-period" data-i18n="pricing_per_month">/mo</span>
+        </div>
+        <p class="pricing-comm" data-i18n="pricing_p2_comm">+ 2.5% of what you sell with Tuko</p>
+        <ul class="pricing-features">
+          <li data-i18n="pricing_p2_f1">Unlimited simultaneous campaigns</li>
+          <li data-i18n="pricing_p2_f2">Smart pop-up</li>
+          <li data-i18n="pricing_p2_f3">A/B tests for ladders and copy</li>
+          <li data-i18n="pricing_p2_f4">Goals in units or people</li>
+          <li data-i18n="pricing_p2_f5">Support within 24h</li>
+        </ul>
+        <p class="pricing-cap" data-i18n="pricing_p2_cap">Cap: €700/mo</p>
+        <p class="pricing-foot" data-i18n="pricing_p2_foot">Worth it from €1,960/mo sold with Tuko.</p>
+        <a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="pricing-cta is-primary" target="_blank" rel="noopener" data-i18n="pricing_p2_cta">Choose plan</a>
+      </article>
+
+      <article class="pricing-card fade-up d3">
+        <h3 class="pricing-name" data-i18n="pricing_p3_name">Scale</h3>
+        <div class="pricing-price-row">
+          <span class="pricing-amount" data-i18n="pricing_p3_price">€149</span>
+          <span class="pricing-period" data-i18n="pricing_per_month">/mo</span>
+        </div>
+        <p class="pricing-comm" data-i18n="pricing_p3_comm">+ 1.2% of what you sell with Tuko</p>
+        <ul class="pricing-features">
+          <li data-i18n="pricing_p3_f1">Everything in Growth</li>
+          <li data-i18n="pricing_p3_f2">Tuko AI: suggested goals and ladders</li>
+          <li data-i18n="pricing_p3_f3">Multi-store and multi-language</li>
+          <li data-i18n="pricing_p3_f4">Monthly margin report</li>
+          <li data-i18n="pricing_p3_f5">Account manager</li>
+        </ul>
+        <p class="pricing-cap" data-i18n="pricing_p3_cap">Cap: €1,800/mo</p>
+        <p class="pricing-foot" data-i18n="pricing_p3_foot">Worth it from €7,700/mo sold with Tuko.</p>
+        <a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="pricing-cta is-secondary" target="_blank" rel="noopener" data-i18n="pricing_p3_cta">Choose plan</a>
+      </article>
+
+      <article class="pricing-card fade-up d4">
+        <h3 class="pricing-name" data-i18n="pricing_p4_name">Enterprise</h3>
+        <div class="pricing-price-row">
+          <span class="pricing-amount pricing-amount--custom" data-i18n="pricing_p4_price">Custom</span>
+        </div>
+        <p class="pricing-comm" data-i18n="pricing_p4_comm">Negotiated commission and cap</p>
+        <ul class="pricing-features">
+          <li data-i18n="pricing_p4_f1">Multiple stores or markets</li>
+          <li data-i18n="pricing_p4_f2">Custom integrations</li>
+          <li data-i18n="pricing_p4_f3">Service-level agreement</li>
+          <li data-i18n="pricing_p4_f4">Support on every campaign</li>
+        </ul>
+        <p class="pricing-cap pricing-cap--empty" aria-hidden="true">&nbsp;</p>
+        <p class="pricing-foot" data-i18n="pricing_p4_foot">We’ll talk and fit it to your volume.</p>
+        <a href="mailto:team.tukoo@gmail.com" class="pricing-cta is-secondary" data-i18n="pricing_p4_cta">Let’s talk</a>
+      </article>
+    </div>
+
+    <p class="pricing-legal fade-up" data-i18n="pricing_legal">The percentage is calculated only on what you sell in Tuko campaigns—never on the rest of your revenue. The cap is the most you can pay in a month, and you approve it in Shopify before any charge applies.</p>
+    <div class="pricing-links fade-up d1">
+      <a href="calculadora" data-i18n="pricing_link_calc">How much would you need to sell for it to pay off? Run the numbers →</a>
+      <a href="#faq" data-i18n="pricing_link_faq">Still have questions? See the FAQ →</a>
+    </div>
+  </div>
+</section>
 
 <!-- FAQ -->
 <section class="faq" id="faq">
@@ -4624,6 +4993,7 @@ const translations = {
     /* NAV */
     nav_link_problema: 'El problema',
     nav_link_como_funciona: 'Cómo funciona',
+    nav_link_precios: 'Precios',
     nav_link_faq: 'Preguntas',
     nav_link_beneficios: 'Qué ganas',
     nav_link_blog: 'Blog',
@@ -4762,6 +5132,57 @@ const translations = {
     step3_desc: 'A quien ya ha reservado le interesa que se llegue al objetivo, así que lo comparte. Ese tráfico no lo has pagado tú.',
     step4_title: 'Se cierra la campaña y se cobra',
     step4_desc: 'Cuando termina el plazo, se cobra a todos el precio del escalón alcanzado. Si no se alcanza ninguno, cada cliente paga el precio normal y la venta sigue siendo tuya. Nunca pierdes una venta por intentarlo.',
+
+    /* PRECIOS */
+    pricing_badge: 'Precios',
+    pricing_title: 'Solo ganamos si tú <em class="title-accent-em">vendes</em>',
+    pricing_sub: 'Sin cuota de entrada y sin permanencia. Cobramos un porcentaje de lo que vendas en campañas de Tuko, con un tope máximo al mes que apruebas tú antes de que se aplique nada. Si un mes no lanzas ninguna campaña, tu factura es de cero euros.',
+    pricing_per_month: '/mes',
+    pricing_recommended: 'Recomendado',
+    pricing_p1_name: 'Arranque',
+    pricing_p1_price: '0 €',
+    pricing_p1_comm: '+ 5 % de lo que vendas con Tuko',
+    pricing_p1_f1: '1 campaña activa a la vez',
+    pricing_p1_f2: 'Escalera de hasta 3 escalones',
+    pricing_p1_f3: 'Widget en la ficha de producto',
+    pricing_p1_f4: 'Analítica de campaña',
+    pricing_p1_cap: 'Tope: 300 €/mes',
+    pricing_p1_foot: 'Si no vendes, pagas 0 €.',
+    pricing_p1_cta: 'Empezar gratis',
+    pricing_p2_name: 'Crecimiento',
+    pricing_p2_price: '49 €',
+    pricing_p2_comm: '+ 2,5 % de lo que vendas con Tuko',
+    pricing_p2_f1: 'Campañas ilimitadas y simultáneas',
+    pricing_p2_f2: 'Pop-up inteligente',
+    pricing_p2_f3: 'Test A/B de escaleras y textos',
+    pricing_p2_f4: 'Objetivo en unidades o en personas',
+    pricing_p2_f5: 'Soporte en 24 h',
+    pricing_p2_cap: 'Tope: 700 €/mes',
+    pricing_p2_foot: 'Te sale a cuenta a partir de 1.960 €/mes vendidos con Tuko.',
+    pricing_p2_cta: 'Elegir plan',
+    pricing_p3_name: 'Escala',
+    pricing_p3_price: '149 €',
+    pricing_p3_comm: '+ 1,2 % de lo que vendas con Tuko',
+    pricing_p3_f1: 'Todo lo de Crecimiento',
+    pricing_p3_f2: 'Tuko AI: objetivo y escalera sugeridos',
+    pricing_p3_f3: 'Multitienda y multiidioma',
+    pricing_p3_f4: 'Informe mensual de margen',
+    pricing_p3_f5: 'Gestor de cuenta',
+    pricing_p3_cap: 'Tope: 1.800 €/mes',
+    pricing_p3_foot: 'Te sale a cuenta a partir de 7.700 €/mes vendidos con Tuko.',
+    pricing_p3_cta: 'Elegir plan',
+    pricing_p4_name: 'Enterprise',
+    pricing_p4_price: 'A medida',
+    pricing_p4_comm: 'Comisión y tope negociados',
+    pricing_p4_f1: 'Varias tiendas o varios mercados',
+    pricing_p4_f2: 'Integraciones a medida',
+    pricing_p4_f3: 'Acuerdo de nivel de servicio',
+    pricing_p4_f4: 'Acompañamiento en cada campaña',
+    pricing_p4_foot: 'Hablamos y lo ajustamos a tu volumen.',
+    pricing_p4_cta: 'Hablamos',
+    pricing_legal: 'El porcentaje se calcula solo sobre lo vendido en campañas de Tuko, nunca sobre el resto de tu facturación. El tope es el máximo que puedes pagar en un mes y lo apruebas tú desde Shopify antes de que se aplique ningún cargo.',
+    pricing_link_calc: '¿Cuánto tendrías que vender para que te compense? Haz el cálculo →',
+    pricing_link_faq: '¿Te quedan dudas? Mira las preguntas frecuentes →',
 
     /* FAQ */
     faq_badge: 'Preguntas frecuentes',
@@ -5062,6 +5483,7 @@ const translations = {
     /* NAV */
     nav_link_problema: 'The problem',
     nav_link_como_funciona: 'How it works',
+    nav_link_precios: 'Pricing',
     nav_link_faq: 'FAQ',
     nav_link_beneficios: 'What you get',
     nav_link_blog: 'Blog',
@@ -5200,6 +5622,57 @@ const translations = {
     step3_desc: 'Anyone who already reserved wants the goal to be hit, so they share it. That traffic didn\'t cost you a thing.',
     step4_title: 'The campaign closes and everyone is charged',
     step4_desc: 'When the deadline ends, everyone is charged the price of the tier reached. If none is reached, each customer pays the regular price and the sale is still yours. You never lose a sale for trying.',
+
+    /* PRICING */
+    pricing_badge: 'Pricing',
+    pricing_title: 'We only win if you <em class="title-accent-em">sell</em>',
+    pricing_sub: 'No entry fee and no lock-in. We take a percentage of what you sell in Tuko campaigns, with a monthly cap you approve before anything is charged. If you don\'t run a campaign that month, your bill is zero.',
+    pricing_per_month: '/mo',
+    pricing_recommended: 'Recommended',
+    pricing_p1_name: 'Start',
+    pricing_p1_price: '€0',
+    pricing_p1_comm: '+ 5% of what you sell with Tuko',
+    pricing_p1_f1: '1 active campaign at a time',
+    pricing_p1_f2: 'Ladder of up to 3 tiers',
+    pricing_p1_f3: 'Widget on the product page',
+    pricing_p1_f4: 'Campaign analytics',
+    pricing_p1_cap: 'Cap: €300/mo',
+    pricing_p1_foot: 'If you don\'t sell, you pay €0.',
+    pricing_p1_cta: 'Start free',
+    pricing_p2_name: 'Growth',
+    pricing_p2_price: '€49',
+    pricing_p2_comm: '+ 2.5% of what you sell with Tuko',
+    pricing_p2_f1: 'Unlimited simultaneous campaigns',
+    pricing_p2_f2: 'Smart pop-up',
+    pricing_p2_f3: 'A/B tests for ladders and copy',
+    pricing_p2_f4: 'Goals in units or people',
+    pricing_p2_f5: 'Support within 24h',
+    pricing_p2_cap: 'Cap: €700/mo',
+    pricing_p2_foot: 'Worth it from €1,960/mo sold with Tuko.',
+    pricing_p2_cta: 'Choose plan',
+    pricing_p3_name: 'Scale',
+    pricing_p3_price: '€149',
+    pricing_p3_comm: '+ 1.2% of what you sell with Tuko',
+    pricing_p3_f1: 'Everything in Growth',
+    pricing_p3_f2: 'Tuko AI: suggested goals and ladders',
+    pricing_p3_f3: 'Multi-store and multi-language',
+    pricing_p3_f4: 'Monthly margin report',
+    pricing_p3_f5: 'Account manager',
+    pricing_p3_cap: 'Cap: €1,800/mo',
+    pricing_p3_foot: 'Worth it from €7,700/mo sold with Tuko.',
+    pricing_p3_cta: 'Choose plan',
+    pricing_p4_name: 'Enterprise',
+    pricing_p4_price: 'Custom',
+    pricing_p4_comm: 'Negotiated commission and cap',
+    pricing_p4_f1: 'Multiple stores or markets',
+    pricing_p4_f2: 'Custom integrations',
+    pricing_p4_f3: 'Service-level agreement',
+    pricing_p4_f4: 'Support on every campaign',
+    pricing_p4_foot: 'We’ll talk and fit it to your volume.',
+    pricing_p4_cta: 'Let’s talk',
+    pricing_legal: 'The percentage is calculated only on what you sell in Tuko campaigns—never on the rest of your revenue. The cap is the most you can pay in a month, and you approve it in Shopify before any charge applies.',
+    pricing_link_calc: 'How much would you need to sell for it to pay off? Run the numbers →',
+    pricing_link_faq: 'Still have questions? See the FAQ →',
 
     /* FAQ */
     faq_badge: 'FAQ',

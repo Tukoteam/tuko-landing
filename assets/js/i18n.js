@@ -3,6 +3,7 @@ const translations = {
     /* NAV */
     nav_link_problema: 'El problema',
     nav_link_como_funciona: 'Cómo funciona',
+    nav_link_precios: 'Precios',
     nav_link_beneficios: 'Qué ganas',
     nav_link_inicio: 'Inicio',
     nav_link_blog: 'Blog',
@@ -426,6 +427,7 @@ const translations = {
     /* NAV */
     nav_link_problema: 'The problem',
     nav_link_como_funciona: 'How it works',
+    nav_link_precios: 'Pricing',
     nav_link_beneficios: 'What you get',
     nav_link_inicio: 'Home',
     nav_link_blog: 'Blog',
