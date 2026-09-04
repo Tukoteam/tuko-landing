@@ -859,6 +859,7 @@
     letter-spacing: -0.025em;
     color: var(--black);
     margin-bottom: 18px;
+    text-wrap: balance;
   }
   .tk-title b { color: var(--blue); font-weight: 600; }
   .tk-title em {
@@ -868,6 +869,7 @@
     font-stretch: normal;
     position: relative;
     display: inline;
+    white-space: nowrap;
   }
   .tk-title em::after {
     content: '';
@@ -1183,7 +1185,7 @@
 
   /* Pista visible en la cara frontal: indica que la tarjeta gira */
   .tk-no-charge {
-    margin-top: 8px;
+    margin-top: 14px;
     font-size: 12px;
     text-align: center;
     color: #666;
@@ -3366,23 +3368,60 @@
     }
     .hero-left { display: flex; flex-direction: column; align-items: center; }
     .hero h1 {
-      font-size: clamp(26px, 7.5vw, 48px);
-      overflow-wrap: anywhere;
+      font-size: clamp(26px, 7.2vw, 44px);
+      overflow-wrap: normal;
+      word-break: normal;
+      text-wrap: balance;
+      hyphens: none;
     }
     .hero p {
-      overflow-wrap: anywhere;
+      overflow-wrap: break-word;
       margin: 0 auto 18px;
     }
     .hero-actions {
       flex-direction: column;
-      gap: 18px;
+      gap: 12px;
       width: 100%;
       margin-bottom: 32px;
+      align-items: center;
+    }
+    .hero-official {
+      width: 100%;
+      max-width: 300px;
+      justify-content: center;
+      box-sizing: border-box;
+      background: rgba(20, 196, 146, 0.1);
+      color: #0a8f6a;
+      border: 1px solid rgba(20, 196, 146, 0.28);
+      box-shadow: none;
+      padding: 9px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      border-radius: 999px;
+      line-height: 1.35;
+      text-align: center;
+    }
+    .hero-official::after { display: none; }
+    .hero-official svg {
+      width: 15px;
+      height: 15px;
+      stroke: #0a8f6a;
+    }
+    .hero-official:active {
+      transform: none;
+      box-shadow: none;
     }
     .hero-stats { justify-content: center; gap: 32px; }
     .hero-stat span { margin-inline: auto; }
     .tk-popup { max-width: 400px; text-align: left; }
     .tk-pinfo { text-align: left; }
+    .tk-title {
+      font-size: clamp(16px, 4.4vw, 18px);
+      text-wrap: balance;
+    }
+    .tk-no-charge {
+      margin-top: 16px;
+    }
     /* Capas simétricas: mismo paso (~5px) y media más legible */
     .tk-flip-plate {
       inset: 14px -10px -10px 10px;
