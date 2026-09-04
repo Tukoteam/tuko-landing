@@ -1627,6 +1627,7 @@
     gap: 18px;
     align-items: stretch;
     text-align: left;
+    padding: 14px 6px 18px;
   }
   .pricing-card {
     position: relative;
@@ -1660,12 +1661,14 @@
     box-shadow:
       0 1px 0 rgba(255, 255, 255, 0.9) inset,
       0 18px 44px rgba(66, 87, 255, 0.16);
-    transform: scale(1.02);
     z-index: 2;
   }
   .pricing-card.is-featured:hover {
-    transform: translateY(-4px) scale(1.04);
+    transform: translateY(-4px) scale(1.03);
     z-index: 3;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.9) inset,
+      0 22px 48px rgba(66, 87, 255, 0.22);
   }
   .pricing-rec {
     display: inline-flex;
@@ -1843,7 +1846,7 @@
     }
     .pricing-card:hover,
     .pricing-card.is-featured:hover {
-      transform: translateY(-3px) scale(1.02);
+      transform: translateY(-4px) scale(1.03);
       z-index: 3;
     }
   }
