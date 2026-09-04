@@ -1,12 +1,12 @@
 const translations = {
   es: {
     /* NAV */
-    nav_link_problema: '¿Cuál es el problema?',
-    nav_link_como_funciona: 'Solución',
-    nav_link_beneficios: 'Beneficios Clave',
+    nav_link_problema: 'El problema',
+    nav_link_como_funciona: 'Cómo funciona',
+    nav_link_beneficios: 'Qué ganas',
     nav_link_inicio: 'Inicio',
     nav_link_blog: 'Blog',
-    nav_cta: 'Descárgala en Shopify',
+    nav_cta: 'Instalar gratis',
     nav_lang_label: 'Idioma',
     /* TUKO AI */
     nav_link_ia: 'tuko AI',
@@ -425,10 +425,10 @@ const translations = {
     /* NAV */
     nav_link_problema: 'The problem',
     nav_link_como_funciona: 'How it works',
-    nav_link_beneficios: 'Benefits',
+    nav_link_beneficios: 'What you get',
     nav_link_inicio: 'Home',
     nav_link_blog: 'Blog',
-    nav_cta: 'Get it on Shopify',
+    nav_cta: 'Install free',
     nav_lang_label: 'Language',
     /* TUKO AI */
     nav_link_ia: 'tuko AI',
