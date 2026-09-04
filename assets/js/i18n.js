@@ -181,6 +181,8 @@ const translations = {
     /* FOOTER */
     footer_col1_title: 'Contacto',
     footer_email: 'team.tukoo@gmail.com',
+    footer_col_product: 'Producto',
+    footer_pricing: 'Precios',
     footer_col2_title: 'Legales',
     footer_privacy: 'Política de privacidad',
     footer_terms: 'Términos y condiciones',
@@ -608,6 +610,8 @@ const translations = {
     /* FOOTER */
     footer_col1_title: 'Contact',
     footer_email: 'team.tukoo@gmail.com',
+    footer_col_product: 'Product',
+    footer_pricing: 'Pricing',
     footer_col2_title: 'Legal',
     footer_privacy: 'Privacy policy',
     footer_terms: 'Terms and conditions',
