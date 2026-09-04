@@ -82,12 +82,13 @@ const translations = {
     ia_wl_count: '<b>39 marcas</b> ya están esperando su acceso',
     ia_wl_foot: 'Solo 50 tiendas entran en la beta privada.',
     fcta_eyebrow: 'Empieza hoy',
-    fcta_title: 'Tus clientes ya quieren comprar juntos.<br>Solo falta <em>permitírselo</em>.',
-    fcta_sub: 'Instala Tuko en tu tienda y convierte a cada comprador en el canal que te trae al siguiente. Sin anuncios y sin tocar tus márgenes.',
-    fcta_btn: 'Instálalo ahora',
+    fcta_title: 'Prueba una campaña.<br><em>Si no vendes, no pagas.</em>',
+    fcta_sub: 'Instalar es gratis y el plan de entrada no tiene cuota: solo cobramos un porcentaje de lo que vendas con Tuko, con un tope máximo al mes. Si un mes no lanzas ninguna campaña, pagas cero.',
+    fcta_btn: 'Instalar gratis en Shopify',
     fcta_trust1: '5,0 en Shopify App Store',
-    fcta_trust2: 'Instalación en minutos',
-    fcta_trust3: '+25 tiendas ya lo usan',
+    fcta_trust2: 'Sin cuota mensual',
+    fcta_trust3: '+50 tiendas ya lo usan',
+    fcta_shopify: 'Disponible en Shopify',
 
     /* HERO */
     hero_badge: 'Con el respaldo de Xiji Incubator',
@@ -182,7 +183,7 @@ const translations = {
     footer_col2_title: 'Legales',
     footer_privacy: 'Política de privacidad',
     footer_terms: 'Términos y condiciones',
-    footer_tagline: 'Compras colectivas para tiendas Shopify. Más ventas, menos dependencia de anuncios.',
+    footer_tagline: 'Descuentos por objetivo para tiendas Shopify. Vende más unidades sin regalar margen.',
     footer_copy: '© 2026 Tuko. Todos los derechos reservados.',
 
     /* BLOG INDEX */
@@ -504,12 +505,13 @@ const translations = {
     ia_wl_count: '<b>39 brands</b> are already waiting for access',
     ia_wl_foot: 'Only 50 stores get into the private beta.',
     fcta_eyebrow: 'Start today',
-    fcta_title: 'Your customers already want to buy together.<br>They just need you to <em>let them</em>',
-    fcta_sub: 'Install Tuko and turn every buyer into the channel that brings the next one—without ads, and without giving away your margin.',
-    fcta_btn: 'Install Tuko',
+    fcta_title: 'Try a campaign.<br><em>If you don\'t sell, you don\'t pay.</em>',
+    fcta_sub: 'Install is free and the entry plan has no monthly fee: we only take a percentage of what you sell with Tuko, with a monthly cap. If you don\'t run a campaign that month, you pay zero.',
+    fcta_btn: 'Install free on Shopify',
     fcta_trust1: '5.0 on the Shopify App Store',
-    fcta_trust2: 'Live in minutes',
+    fcta_trust2: 'No monthly fee',
     fcta_trust3: '+50 stores already using it',
+    fcta_shopify: 'Available on Shopify',
 
     /* HERO */
     hero_badge: 'Backed by Xiji Incubator',
@@ -607,7 +609,7 @@ const translations = {
     footer_col2_title: 'Legal',
     footer_privacy: 'Privacy policy',
     footer_terms: 'Terms and conditions',
-    footer_tagline: 'Group buying for Shopify stores. More sales. Less ad dependency.',
+    footer_tagline: 'Goal-based discounts for Shopify stores. Sell more units without giving away margin.',
     footer_copy: '© 2026 Tuko. All rights reserved.',
 
     /* BLOG INDEX */
