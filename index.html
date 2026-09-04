@@ -3399,11 +3399,11 @@
 
               <p class="tk-timer-label" data-i18n="pop_timer">Termina en</p>
               <div class="tk-timer" id="tkTimer">
-                <div class="tk-unit"><span class="tk-num" data-tk="d">00</span><span class="tk-lab" data-i18n="pop_days">Días</span></div>
+                <div class="tk-unit"><span class="tk-num" data-tk="d">02</span><span class="tk-lab" data-i18n="pop_days">Días</span></div>
                 <span class="tk-sep">:</span>
                 <div class="tk-unit"><span class="tk-num" data-tk="h">00</span><span class="tk-lab" data-i18n="pop_hours">Horas</span></div>
                 <span class="tk-sep">:</span>
-                <div class="tk-unit"><span class="tk-num" data-tk="m">05</span><span class="tk-lab" data-i18n="pop_minutes">Minutos</span></div>
+                <div class="tk-unit"><span class="tk-num" data-tk="m">00</span><span class="tk-lab" data-i18n="pop_minutes">Minutos</span></div>
                 <span class="tk-sep">:</span>
                 <div class="tk-unit"><span class="tk-num" data-tk="s">00</span><span class="tk-lab" data-i18n="pop_seconds">Segundos</span></div>
               </div>
@@ -4113,7 +4113,7 @@ document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
     s: timer.querySelector('[data-tk="s"]')
   };
   if (!out.d || !out.h || !out.m || !out.s) return;
-  const START = 300; /* 5 minutos */
+  const START = 2 * 24 * 60 * 60; /* 2 días — plazo de campaña más realista */
   let left = START;
   const pad = n => String(n).padStart(2, '0');
   const tick = () => {
