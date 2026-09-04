@@ -3397,17 +3397,21 @@
       margin-bottom: 32px;
       align-items: center;
     }
+    .hero-actions .btn-blue,
     .hero-official {
       width: 100%;
       max-width: 300px;
-      justify-content: center;
+      min-width: 0;
       box-sizing: border-box;
+    }
+    .hero-official {
+      justify-content: center;
       background: var(--green);
       color: #fff;
       border: 0;
       box-shadow: 0 4px 18px rgba(20, 196, 146, 0.3);
       padding: 12px 22px;
-      font-size: 16px;
+      font-size: 13px;
       font-weight: 700;
       border-radius: 12px;
       line-height: 1.2;
@@ -3417,8 +3421,8 @@
     }
     .hero-official::after { display: none; }
     .hero-official svg {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
       stroke: #fff;
     }
     .hero-official:active {
