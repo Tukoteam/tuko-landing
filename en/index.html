@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <!-- ═══ SEO: Title & Description ═══ -->
-<title>Tuko — Group Buying for Shopify Stores</title>
-<meta name="description" content="Let shoppers buy together and unlock better prices inside your Shopify store. Tiered group discounts that grow sales through word of mouth—not bigger ad budgets.">
+<title>Tuko · Goal-based discounts for Shopify stores</title>
+<meta name="description" content="Set a unit goal on a product: when it's hit, the price drops for everyone. Sell more without giving away margin. Group buying app for Shopify.">
 
 <!-- ═══ SEO: Canonical & Robots ═══ -->
 <link rel="canonical" href="https://tukoteam.com/en/">
@@ -30,12 +30,12 @@
 <!-- ═══ SEO: Open Graph ═══ -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tukoteam.com/en/">
-<meta property="og:title" content="Tuko — Group Buying for Shopify Stores">
-<meta property="og:description" content="Group buying for Shopify: shoppers join together, unlock better prices, and grow your store through word of mouth—without pouring more money into ads.">
+<meta property="og:title" content="Tuko · Goal-based discounts for Shopify stores">
+<meta property="og:description" content="Set a unit goal on a product and a deadline. Customers reserve with nothing charged yet—if the goal is hit, everyone pays less; if not, they pay full price and you keep your margin.">
 <meta property="og:image" content="https://tukoteam.com/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Tuko — Plugin de compras colectivas para Shopify">
+<meta property="og:image:alt" content="Tuko · Descuentos por objetivo para tiendas Shopify">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="es_ES">
 <meta property="og:site_name" content="Tuko">
@@ -44,10 +44,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@tuko_app">
 <meta name="twitter:creator" content="@tuko_app">
-<meta name="twitter:title" content="Tuko — Group Buying for Shopify Stores">
-<meta name="twitter:description" content="Group buying for Shopify: shoppers join together, unlock better prices, and grow your store through word of mouth—without pouring more money into ads.">
+<meta name="twitter:title" content="Tuko · Goal-based discounts for Shopify stores">
+<meta name="twitter:description" content="Set a unit goal on a product and a deadline. Customers reserve with nothing charged yet—if the goal is hit, everyone pays less; if not, they pay full price and you keep your margin.">
 <meta name="twitter:image" content="https://tukoteam.com/assets/og-image.png">
-<meta name="twitter:image:alt" content="Tuko — Plugin group buying para ecommerce España">
+<meta name="twitter:image:alt" content="Tuko · Descuentos por objetivo para tiendas Shopify">
 
 <!-- ═══ SEO: Favicon (SVG+PNG barras azules; apple-touch aparte para iOS) ═══ -->
 <link rel="icon" href="../assets/favicon.png?v=5" sizes="32x32" type="image/png">
@@ -68,7 +68,7 @@
 <meta name="target" content="Tiendas online Shopify, Ecommerce España">
 
 <!-- ═══ SEO: Dublin Core ═══ -->
-<meta name="DC.title" content="Tuko — Group Buying for Shopify Stores">
+<meta name="DC.title" content="Tuko · Goal-based discounts for Shopify stores">
 <meta name="DC.creator" content="Tuko">
 <meta name="DC.subject" content="compras colectivas, group buying, shopify españa, plugin ecommerce">
 <meta name="DC.description" content="Plugin B2B de compras colectivas para tiendas Shopify en España. Descuentos escalonados que se desbloquean por grupo y generan viralidad orgánica.">
@@ -751,6 +751,25 @@
     font-weight: 700;
     font-stretch: semi-expanded;
   }
+  .video-section h2 .video-title-em {
+    font-family: 'Roboto Serif', Georgia, serif;
+    font-style: italic;
+    font-weight: 600;
+    font-stretch: normal;
+    position: relative;
+    display: inline;
+  }
+  .video-section h2 .video-title-em::after {
+    content: '';
+    position: absolute;
+    left: -0.04em;
+    right: -0.04em;
+    bottom: -0.08em;
+    height: 0.36em;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 16' preserveAspectRatio='none'%3E%3Cpath d='M3 13 Q60 1.5 117 13' stroke='%233D50F2' stroke-width='3.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
+      center bottom / 100% 100% no-repeat;
+    pointer-events: none;
+  }
   .video-section > p {
     font-size: clamp(14px, 1.15vw, 16px);
     font-weight: 400;
@@ -949,7 +968,19 @@
     font-style: italic;
     font-weight: 500;
     font-stretch: normal;
-    border-bottom: 2.5px solid var(--blue);
+    position: relative;
+    display: inline;
+  }
+  .tk-title em::after {
+    content: '';
+    position: absolute;
+    left: -0.05em;
+    right: -0.05em;
+    bottom: -0.1em;
+    height: 0.38em;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 16' preserveAspectRatio='none'%3E%3Cpath d='M3 13 Q60 1 117 13' stroke='%233D50F2' stroke-width='3.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
+      center bottom / 100% 100% no-repeat;
+    pointer-events: none;
   }
 
   .tk-timer-label {
@@ -1253,6 +1284,13 @@
   .tk-cta svg { width: 15px; height: 15px; fill: none; stroke: var(--white); stroke-width: 2; }
 
   /* Pista visible en la cara frontal: indica que la tarjeta gira */
+  .tk-no-charge {
+    margin-top: 8px;
+    font-size: 12px;
+    text-align: center;
+    color: #666;
+    line-height: 1.35;
+  }
   .tk-face-front .tk-front-hint {
     display: flex;
     align-items: center;
@@ -1608,7 +1646,7 @@
     right: -0.06em;
     bottom: -0.06em;
     height: 0.4em;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 16' preserveAspectRatio='none'%3E%3Cpath d='M4 12 Q60 2.5 116 12' stroke='%23CE3333' stroke-width='6.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 16' preserveAspectRatio='none'%3E%3Cpath d='M4 12 Q60 2.5 116 12' stroke='%23CE3333' stroke-width='4.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
       center bottom / 100% 100% no-repeat;
     pointer-events: none;
   }
@@ -3154,11 +3192,11 @@
   </a>
   <ul class="nav-links">
     <li><a href="#problema" data-i18n="nav_link_problema">The problem</a></li>
+    <li><a href="#beneficios" data-i18n="nav_link_beneficios">What you get</a></li>
     <li><a href="#como-funciona" data-i18n="nav_link_como_funciona">How it works</a></li>
-    <li><a href="#beneficios" data-i18n="nav_link_beneficios">Benefits</a></li>
     <li><a href="blog/" data-i18n="nav_link_blog">Blog</a></li>
     <li><a href="tuko-ai" data-i18n="nav_link_ia">tuko AI</a></li>
-    <li><a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="nav-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Get it on Shopify</a></li>
+    <li><a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="nav-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Install free</a></li>
   </ul>
   <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false">
     <span></span><span></span><span></span>
@@ -3184,8 +3222,8 @@
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Menú de navegación" aria-hidden="true">
   <a href="#problema" data-i18n="nav_link_problema">The problem</a>
+  <a href="#beneficios" data-i18n="nav_link_beneficios">What you get</a>
   <a href="#como-funciona" data-i18n="nav_link_como_funciona">How it works</a>
-  <a href="#beneficios" data-i18n="nav_link_beneficios">Benefits</a>
   <a href="blog/" data-i18n="nav_link_blog">Blog</a>
   <a href="tuko-ai" data-i18n="nav_link_ia">tuko AI</a>
   <div class="mobile-lang">
@@ -3208,7 +3246,7 @@
   </div>
   <a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="mobile-cta" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-    <span data-i18n="nav_cta">Get it on Shopify</span>
+    <span data-i18n="nav_cta">Install free</span>
   </a>
 </div>
 
@@ -3233,28 +3271,28 @@
         </div>
         <span data-i18n="hero_badge">Backed by Xiji Incubator</span>
       </div>
-      <h1 class="fade-up d1" data-i18n="hero_title">Turn your traffic<br>into <em>group sales</em></h1>
-      <p class="fade-up d2" data-i18n="hero_subtitle">Tuko lets shoppers buy together and unlock better prices—right inside your Shopify store</p>
+      <h1 class="fade-up d1" data-i18n="hero_title">The discount that<br>brings you <em>customers</em>, instead of taking them away</h1>
+      <p class="fade-up d2" data-i18n="hero_subtitle">You set a unit goal on a product and a deadline. Your customers reserve with nothing charged yet. If the goal is hit, everyone pays the lower price; if not, they pay the regular price and you haven't given away a euro of margin.</p>
 
       <div class="hero-actions fade-up d3">
         <a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="btn-blue" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 19h14"/></svg>
-          <span data-i18n="hero_cta">Install Tuko</span>
+          <span data-i18n="hero_cta">Install free on Shopify</span>
         </a>
         <span class="hero-official">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12.5l2.2 2.2L15.5 10"/><path d="M12 3l7.5 3v5.5c0 4.3-3.1 8-7.5 9.5-4.4-1.5-7.5-5.2-7.5-9.5V6z"/></svg>
-          <span data-i18n="hero_official">Verified app on <i>Shopify</i></span>
+          <span data-i18n="hero_official">No monthly fee · We only charge if you sell</span>
         </span>
       </div>
 
       <div class="hero-stats fade-up d4">
         <div class="hero-stat">
           <strong class="hero-stat-num" data-count="50" data-count-type="stores">+0</strong>
-          <span data-i18n="hero_stat1_lab">Active stores</span>
+          <span data-i18n="hero_stat1_lab">Stores using Tuko</span>
         </div>
         <div class="hero-stat">
           <strong class="hero-stat-num" data-count="30000" data-count-type="money">+0 €</strong>
-          <span data-i18n="hero_stat2_lab">Sales driven for stores</span>
+          <span data-i18n="hero_stat2_lab">Billed through Tuko campaigns</span>
         </div>
       </div>
     </div>
@@ -3272,13 +3310,13 @@
             <div class="tk-popup-bar"></div>
             <div class="tk-popup-inner">
               <div class="tk-popup-head">
-                <span class="tk-chip"><i></i><span data-i18n="pop_chip">GROUP BUY LIVE</span></span>
+                <span class="tk-chip"><i></i><span data-i18n="pop_chip">CAMPAIGN LIVE</span></span>
                 <span class="tk-close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></span>
               </div>
 
-              <div class="tk-title"><span data-i18n="pop_title_before">Just </span><b id="tkNeedN">20</b> <span data-i18n="pop_title_people">more people</span><span data-i18n="pop_title_mid"> for a </span><em data-i18n="pop_title_deal">better price!</em></div>
+              <div class="tk-title"><span data-i18n="pop_title_before">Need </span><b id="tkNeedN">20</b> <span data-i18n="pop_title_people">more units</span><span data-i18n="pop_title_mid"> to unlock </span><em data-i18n="pop_title_deal">€22.96</em></div>
 
-              <p class="tk-timer-label" data-i18n="pop_timer">Time left</p>
+              <p class="tk-timer-label" data-i18n="pop_timer">Ends in</p>
               <div class="tk-timer" id="tkTimer">
                 <div class="tk-unit"><span class="tk-num" data-tk="d">00</span><span class="tk-lab" data-i18n="pop_days">Days</span></div>
                 <span class="tk-sep">:</span>
@@ -3303,9 +3341,9 @@
                 </div>
                 <div class="tk-pinfo">
                   <span class="tk-pname" data-i18n="pop_product">Natural Shampoo</span>
-                  <span class="tk-old">28,00 €</span><span class="tk-new" id="tkNewPrice">26,60 €</span>
+                  <span class="tk-old">28,00 €</span><span class="tk-new" id="tkNewPrice">25,20 €</span>
                 </div>
-                <span class="tk-off" id="tkOff">–5%</span>
+                <span class="tk-off" id="tkOff">–10%</span>
               </div>
 
               <div class="tk-progress-row">
@@ -3316,16 +3354,17 @@
                   <span class="tk-av tk-av-4" data-tk-av><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span>
                   <span class="tk-av tk-av-more" id="tkAvMore">+0</span>
                 </div>
-                <div class="tk-joined"><b id="tkJoinedN">0</b><span data-i18n="pop_joined">of 20 people joined</span></div>
+                <div class="tk-joined"><b id="tkJoinedN">0</b><span data-i18n="pop_joined">of 20 units reserved</span></div>
                 <div class="tk-pct" id="tkPct">0%</div>
               </div>
               <div class="tk-bar"><span class="tk-bar-fill" id="tkBarFill" style="width:0%"></span></div>
 
               <div class="tk-cta">
                 <span class="tk-cta-ico"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M20 8v6M23 11h-6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                <span data-i18n="pop_cta">Join now</span>
+                <span data-i18n="pop_cta">Drop it to €22.96</span>
                 <span class="tk-cta-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </div>
+              <p class="tk-no-charge" data-i18n="pop_no_charge">Nothing is charged until the campaign ends.</p>
               <p class="tk-front-hint" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><path d="M9 11V6.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V12m0-1a1.5 1.5 0 0 1 3 0v4.5a5.5 5.5 0 0 1-5.5 5.5h-1.6a5 5 0 0 1-3.9-1.9l-2.6-3.3a1.5 1.5 0 0 1 2.2-2l1.4 1.3V9.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 <span data-i18n="pop_front_hint">Click to flip</span>
@@ -3337,47 +3376,47 @@
           <div class="tk-popup tk-face tk-face-back">
             <div class="tk-popup-bar"></div>
             <div class="tk-popup-inner tk-back-inner">
-              <div class="tk-back-title" data-i18n="pop_back_title">How <em>group buying</em> works</div>
-              <p class="tk-back-sub" data-i18n="pop_back_sub">The more people join, the bigger the discount for everyone.</p>
+              <div class="tk-back-title" data-i18n="pop_back_title">How a <em>Tuko campaign</em> works</div>
+              <p class="tk-back-sub" data-i18n="pop_back_sub">The more units reserved, the bigger the discount for everyone.</p>
 
               <div class="tk-tiers" id="tkTiers">
-                <div class="tk-tier" data-tk-tier="5">
-                  <div class="tk-tier-people"><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span></div>
-                  <span class="tk-tier-count" data-i18n="pop_tier1">5 people</span>
-                  <span class="tk-tier-off">–5%</span>
-                </div>
                 <div class="tk-tier" data-tk-tier="10">
-                  <div class="tk-tier-people"><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span></div>
-                  <span class="tk-tier-count" data-i18n="pop_tier2">10 people</span>
+                  <div class="tk-tier-people"><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span></div>
+                  <span class="tk-tier-count" data-i18n="pop_tier1">10 units</span>
                   <span class="tk-tier-off">–10%</span>
                 </div>
                 <div class="tk-tier" data-tk-tier="20">
+                  <div class="tk-tier-people"><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span></div>
+                  <span class="tk-tier-count" data-i18n="pop_tier2">20 units</span>
+                  <span class="tk-tier-off">–18%</span>
+                </div>
+                <div class="tk-tier" data-tk-tier="35">
                   <div class="tk-tier-people"><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span></div>
-                  <span class="tk-tier-count" data-i18n="pop_tier3">20 people</span>
-                  <span class="tk-tier-off">–15%</span>
+                  <span class="tk-tier-count" data-i18n="pop_tier3">35 units</span>
+                  <span class="tk-tier-off">–25%</span>
                 </div>
               </div>
 
               <div class="tk-steps">
                 <div class="tk-step">
                   <span class="tk-step-n">1</span>
-                  <p data-i18n="pop_step1">The store launches a <b>group buy</b> on a product.</p>
+                  <p data-i18n="pop_step1">You pick a product, a unit goal and a deadline.</p>
                 </div>
                 <div class="tk-step">
                   <span class="tk-step-n">2</span>
-                  <p data-i18n="pop_step2">Each buyer <b>invites friends</b> to fill the group.</p>
+                  <p data-i18n="pop_step2">Your customers reserve at your checkout; the amount is held, with nothing charged yet.</p>
                 </div>
                 <div class="tk-step">
                   <span class="tk-step-n">3</span>
-                  <p data-i18n="pop_step3">When time is up, <b>everyone pays the unlocked price</b> automatically.</p>
+                  <p data-i18n="pop_step3">Anyone who already reserved shares to help hit the goal.</p>
                 </div>
                 <div class="tk-step">
                   <span class="tk-step-n">4</span>
-                  <p data-i18n="pop_step4">The store sells <b>without buying more ads</b>.</p>
+                  <p data-i18n="pop_step4">When it closes, everyone is charged the price of the tier reached.</p>
                 </div>
                 <div class="tk-step">
                   <span class="tk-step-n">5</span>
-                  <p data-i18n="pop_step5">Your store <b>grows through word of mouth</b>.</p>
+                  <p data-i18n="pop_step5">If no tier is reached, they pay the regular price.</p>
                 </div>
               </div>
 
@@ -3427,8 +3466,8 @@
 
 <!-- VIDEO -->
 <section class="video-section" id="video">
-  <h2 class="fade-up" data-i18n="video_title">See how <span class="video-brand">Tuko</span> works</h2>
-  <p class="fade-up d1" data-i18n="video_subtitle">Two minutes on how your buyers become your lowest-cost acquisition channel.</p>
+  <h2 class="fade-up" data-i18n="video_title">A <span class="video-brand">Tuko</span> campaign, <em class="video-title-em">start to finish</em></h2>
+  <p class="fade-up d1" data-i18n="video_subtitle">Two minutes: how you set up the campaign, what your customer sees on the product page, and what happens when the goal is hit.</p>
   <!-- Facade de YouTube: el iframe solo se carga al hacer clic. -->
   <div class="video-embed fade-up d2" id="tukoVideo"
        data-yt-es="jVCZzMbC-Ek" data-yt-en="qdiZLc4M2ik" data-yt-id="qdiZLc4M2ik"
@@ -3445,9 +3484,9 @@
 <!-- PROBLEM -->
 <section class="problem" id="problema">
   <img class="side-deco" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLwAAAL1CAYAAADNWP2kAAAVa0lEQVR4nO3bMW4VMRhGUUAusin2wP6XQZXCBQ1FpEhokjDvn3fnHMm1v/rK/v7z1+9vAAAAAFDxY3oAAAAAAPxPghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwBQtKYHAAAwR/ACAIr29AAAAOYIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAApAheAAAAAKQIXgDAFa3pAQAAPC/BCwC4oj09AACA5yV4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngB/7KmBwAAAMBHCV7Av+zpAQAAAPBRghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghe0rekBAAAA8GiCF7Tt6QEAAADwaIIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCF5NepgcAAAAAPYIXk16nBwAAAAA9ghcAAAAAKYIXAAAAACmCF2da0wMAAACA+xG8ONOeHgAAAADcj+AFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuD1XF6mBwAAAABcneD1XF6nBwAAAABcneAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAwNnWIy8TvAAAAAA4237kZYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApdw1e6+8BAAAAIOau0WdPDwAAAADgHHd94QUAAABAlOAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4PXemh4AAAAAwOcJXu/t6QEAAAAAfJ7gBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAMBXrekBbwleAAAAAHzVnh7wluAFAAAAQIrgBQAAAECK4HWuS/1fBQAAALgDwetcl/q/CgAAAHAHghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmC172s6QEAAAAAZxO87mVPDwAAAAA4m+AFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAx6zpAcAxghcAAAAcs6cHAMcIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAcsaYHABwleAEAAHDEnh4AcJTgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQMof5rAWb19ljwUAAAAASUVORK5CYII=" alt="" decoding="async">
-  <div class="fade-up"><span class="s-badge" data-i18n="problem_badge">Sound familiar?</span></div>
-  <h2 class="s-title fade-up d1" data-i18n="problem_title">Ecommerce needs<br>a better growth engine</h2>
-  <p class="s-sub fade-up d2" data-i18n="problem_sub">Most brands fight with the same playbook—while acquisition costs climb and margins get thinner.</p>
+  <div class="fade-up"><span class="s-badge" data-i18n="problem_badge">The problem</span></div>
+  <h2 class="s-title fade-up d1" data-i18n="problem_title">Cutting the price isn't the problem.<br>Giving it away to people who were<br>going to buy anyway is.</h2>
+  <p class="s-sub fade-up d2" data-i18n="problem_sub">Every flat discount also goes to customers who would have bought at full price. You're paying margin on sales you already had.</p>
   <div class="cards-grid">
     <div class="card fade-up d1">
       <div class="card-top">
@@ -3458,8 +3497,8 @@
         </div>
         <span class="card-n" aria-hidden="true">01</span>
       </div>
-      <h3 data-i18n="card1_title">Paid traffic keeps getting pricier</h3>
-      <p data-i18n="card1_text">Ad costs rise every year while returns fall, so scaling sales without burning cash gets harder.</p>
+      <h3 data-i18n="card1_title">Every new customer costs you more</h3>
+      <p data-i18n="card1_text">The cost of acquiring a customer in ecommerce has risen more than 200% in a decade. Every sale you bring in with ads is more expensive than the last.</p>
     </div>
     <div class="card fade-up d2">
       <div class="card-top">
@@ -3470,8 +3509,8 @@
         </div>
         <span class="card-n" aria-hidden="true">02</span>
       </div>
-      <h3 data-i18n="card2_title">Stock that won’t move</h3>
-      <p data-i18n="card2_text">Slow sellers and aging inventory tie up cash and force uncomfortable discount decisions.</p>
+      <h3 data-i18n="card2_title">Idle stock eats your margin</h3>
+      <p data-i18n="card2_text">Cutting 30% moves it, sure. But it wipes the profit on the whole batch—and customers who were already going to buy take the discount too.</p>
     </div>
     <div class="card fade-up d3">
       <div class="card-top">
@@ -3482,17 +3521,57 @@
         </div>
         <span class="card-n" aria-hidden="true">03</span>
       </div>
-      <h3 data-i18n="card3_title">Discounts that erase margin</h3>
-      <p data-i18n="card3_text">Blanket promotions cut too deep and still rarely create the volume you actually need.</p>
+      <h3 data-i18n="card3_title">A flat discount doesn't pay for itself</h3>
+      <p data-i18n="card3_text">A −20% on a product with 60% margin forces you to sell 67% more units just to stay even. That almost never happens.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits" id="beneficios">
+  <img class="side-deco-l" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLwAAAL1CAYAAADNWP2kAAAVa0lEQVR4nO3bMW4VMRhGUUAusin2wP6XQZXCBQ1FpEhokjDvn3fnHMm1v/rK/v7z1+9vAAAAAFDxY3oAAAAAAPxPghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwBQtKYHAAAwR/ACAIr29AAAAOYIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAApAheAAAAAKQIXgDAFa3pAQAAPC/BCwC4oj09AACA5yV4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngB/7KmBwAAAMBHCV7Av+zpAQAAAPBRghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghe0rekBAAAA8GiCF7Tt6QEAAADwaIIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCF5NepgcAAAAAPYIXk16nBwAAAAA9ghcAAAAAKYIXAAAAACmCF2da0wMAAACA+xG8ONOeHgAAAADcj+AFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuD1XF6mBwAAAABcneD1XF6nBwAAAABcneAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAwNnWIy8TvAAAAAA4237kZYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApdw1e6+8BAAAAIOau0WdPDwAAAADgHHd94QUAAABAlOAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4PXemh4AAAAAwOcJXu/t6QEAAAAAfJ7gBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAMBXrekBbwleAAAAAHzVnh7wluAFAAAAQIrgBQAAAECK4HWuS/1fBQAAALgDwetcl/q/CgAAAHAHghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmC172s6QEAAAAAZxO87mVPDwAAAAA4m+AFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAx6zpAcAxghcAAAAcs6cHAMcIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAcsaYHABwleAEAAHDEnh4AcJTgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQMof5rAWb19ljwUAAAAASUVORK5CYII=" alt="" decoding="async">
+  <div class="fade-up"><span class="s-badge" data-i18n="benefits_badge">What you get</span></div>
+  <h2 class="s-title fade-up d1" data-i18n="benefits_title">A volume discount makes one customer buy three units. Tuko makes three customers buy one.</h2>
+  <p class="s-sub fade-up d2" data-i18n="benefits_sub">It isn't another discount app. It's the only one that uses the discount to bring you buyers you didn't have.</p>
+  <div class="ben-grid">
+    <div class="ben fade-up d1">
+      <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+      <h3 data-i18n="ben1_title">More units per campaign</h3>
+      <p data-i18n="ben1_text">Same product, same week—selling double or triple the units. Without raising your ad budget by a euro.</p>
+    </div>
+    <div class="ben fade-up d2">
+      <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
+      <h3 data-i18n="ben2_title">Idle stock, cleared</h3>
+      <p data-i18n="ben2_text">Turn the markdown you were going to make anyway into a sale conditioned on volume. Free up capital without giving away margin.</p>
+    </div>
+    <div class="ben fade-up d3">
+      <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+      <h3 data-i18n="ben3_title">You set the floor</h3>
+      <p data-i18n="ben3_text">You define the ladder and the maximum discount. Tuko warns you if a tier eats your margin before you publish the campaign.</p>
+    </div>
+    <div class="ben fade-up d1">
+      <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div>
+      <h3 data-i18n="ben4_title">Buyers you didn't pay for</h3>
+      <p data-i18n="ben4_text">Every customer who already reserved has a financial reason to share it. That traffic costs you zero.</p>
+    </div>
+    <div class="ben fade-up d2">
+      <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+      <h3 data-i18n="ben5_title">Live in two minutes</h3>
+      <p data-i18n="ben5_text">Native Shopify app. It adds to the product page without touching your theme or checkout.</p>
+    </div>
+    <div class="ben fade-up d3">
+      <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+      <h3 data-i18n="ben6_title">No refunds or manual adjustments</h3>
+      <p data-i18n="ben6_text">Customers get an authorization hold when they reserve and are charged once when the campaign closes, with the discount already applied. No partial charges or refunds to manage.</p>
     </div>
   </div>
 </section>
 
 <!-- HOW IT WORKS — INTRO -->
 <section class="how-intro" id="como-funciona">
-  <div class="fade-up"><span class="s-badge" data-i18n="how_badge">The fix</span></div>
-  <h2 class="s-title fade-up d1" data-i18n="how_title">Meet <span class="how-title-underline">group buying</span></h2>
-  <p class="s-sub fade-up d2" data-i18n="how_sub">Tuko turns any product into a group buy built into your storefront—not bolted on as an afterthought.</p>
+  <div class="fade-up"><span class="s-badge" data-i18n="how_badge">How it works</span></div>
+  <h2 class="s-title fade-up d1" data-i18n="how_title">A discount with conditions.<br><span class="how-title-underline">Yours</span>.</h2>
+  <p class="s-sub fade-up d2" data-i18n="how_sub">You pick a product, a unit goal and a deadline. The discount doesn't exist until the goal is met. Everything happens inside your store: the customer never leaves your site.</p>
 </section>
 
 <!-- HOW IT WORKS — STEPS -->
@@ -3504,8 +3583,8 @@
       <div class="how-step-meta">
         <span class="how-step-num" aria-hidden="true">01</span>
       </div>
-      <h3 class="how-step-title" data-i18n="step1_title">Turn Tuko on</h3>
-      <p class="how-step-desc" data-i18n="step1_desc">Enable group buying on any product in your store.</p>
+      <h3 class="how-step-title" data-i18n="step1_title">You pick a product and a goal</h3>
+      <p class="how-step-desc" data-i18n="step1_desc">One product, a unit goal and a deadline (72 hours works well). You set the discount ladder: you never give away a point of margin beyond what you decide.</p>
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
@@ -3520,8 +3599,8 @@
       <div class="how-step-meta">
         <span class="how-step-num" aria-hidden="true">02</span>
       </div>
-      <h3 class="how-step-title" data-i18n="step2_title">Shoppers join the group</h3>
-      <p class="how-step-desc" data-i18n="step2_desc">Buyers invite others to unlock the next discount tier.</p>
+      <h3 class="how-step-title" data-i18n="step2_title">Your customers reserve, as usual</h3>
+      <p class="how-step-desc" data-i18n="step2_desc">They see on the product page how many units are left for the next price and go through your usual checkout—no signing up elsewhere, no meeting anyone. The amount is held on their card, but nothing is charged yet.</p>
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
@@ -3536,8 +3615,8 @@
       <div class="how-step-meta">
         <span class="how-step-num" aria-hidden="true">03</span>
       </div>
-      <h3 class="how-step-title" data-i18n="step3_title">The group fills</h3>
-      <p class="how-step-desc" data-i18n="step3_desc">When the target is hit, everyone gets the better price.</p>
+      <h3 class="how-step-title" data-i18n="step3_title">They bring the ones still missing</h3>
+      <p class="how-step-desc" data-i18n="step3_desc">Anyone who already reserved wants the goal to be hit, so they share it. That traffic didn't cost you a thing.</p>
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
@@ -3552,8 +3631,8 @@
       <div class="how-step-meta">
         <span class="how-step-num" aria-hidden="true">04</span>
       </div>
-      <h3 class="how-step-title" data-i18n="step4_title">What changes for your store</h3>
-      <p class="how-step-desc" data-i18n="step4_desc">More sales, faster inventory turns, and growth driven by your buyers.</p>
+      <h3 class="how-step-title" data-i18n="step4_title">The campaign closes and everyone is charged</h3>
+      <p class="how-step-desc" data-i18n="step4_desc">When the deadline ends, everyone is charged the price of the tier reached. If none is reached, each customer pays the regular price and the sale is still yours. You never lose a sale for trying.</p>
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
@@ -3563,46 +3642,6 @@
   </div>
 
 </section>
-<!-- BENEFITS -->
-<section class="benefits" id="beneficios">
-  <img class="side-deco-l" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLwAAAL1CAYAAADNWP2kAAAVa0lEQVR4nO3bMW4VMRhGUUAusin2wP6XQZXCBQ1FpEhokjDvn3fnHMm1v/rK/v7z1+9vAAAAAFDxY3oAAAAAAPxPghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwBQtKYHAAAwR/ACAIr29AAAAOYIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAApAheAAAAAKQIXgDAFa3pAQAAPC/BCwC4oj09AACA5yV4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngB/7KmBwAAAMBHCV7Av+zpAQAAAPBRghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghe0rekBAAAA8GiCF7Tt6QEAAADwaIIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCF5NepgcAAAAAPYIXk16nBwAAAAA9ghcAAAAAKYIXAAAAACmCF2da0wMAAACA+xG8ONOeHgAAAADcj+AFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuD1XF6mBwAAAABcneD1XF6nBwAAAABcneAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAwNnWIy8TvAAAAAA4237kZYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApdw1e6+8BAAAAIOau0WdPDwAAAADgHHd94QUAAABAlOAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4PXemh4AAAAAwOcJXu/t6QEAAAAAfJ7gBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAMBXrekBbwleAAAAAHzVnh7wluAFAAAAQIrgBQAAAECK4HWuS/1fBQAAALgDwetcl/q/CgAAAHAHghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmC172s6QEAAAAAZxO87mVPDwAAAAA4m+AFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAx6zpAcAxghcAAAAcs6cHAMcIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAcsaYHABwleAEAAHDEnh4AcJTgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQMof5rAWb19ljwUAAAAASUVORK5CYII=" alt="" decoding="async">
-  <div class="fade-up"><span class="s-badge" data-i18n="benefits_badge">Why brands choose Tuko</span></div>
-  <h2 class="s-title fade-up d1" data-i18n="benefits_title">Grow through your buyers—<br>not bigger ad budgets</h2>
-  <p class="s-sub fade-up d2" data-i18n="benefits_sub">More sales, healthier inventory, and promotions you stay in control of.</p>
-  <div class="ben-grid">
-    <div class="ben fade-up d1">
-      <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
-      <h3 data-i18n="ben1_title">More sales from the traffic you already have</h3>
-      <p data-i18n="ben1_text">Turn today’s visitors into completed orders—without raising spend or leaning harder on ads.</p>
-    </div>
-    <div class="ben fade-up d2">
-      <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
-      <h3 data-i18n="ben2_title">Move slow stock faster</h3>
-      <p data-i18n="ben2_text">Launch group buys on products that sit still and free up cash tied up in inventory.</p>
-    </div>
-    <div class="ben fade-up d3">
-      <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-      <h3 data-i18n="ben3_title">Protect your margins</h3>
-      <p data-i18n="ben3_text">Set tiered discounts that unlock only when targets are hit—so you never give margin away for free.</p>
-    </div>
-    <div class="ben fade-up d1">
-      <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div>
-      <h3 data-i18n="ben4_title">Built-in word of mouth</h3>
-      <p data-i18n="ben4_text">Every buyer has a reason to share the group, so reach grows from real people—not more media spend.</p>
-    </div>
-    <div class="ben fade-up d2">
-      <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-      <h3 data-i18n="ben5_title">Live in minutes</h3>
-      <p data-i18n="ben5_text">Install on Shopify and launch a campaign quickly—no heavyweight technical project.</p>
-    </div>
-    <div class="ben fade-up d3">
-      <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-      <h3 data-i18n="ben6_title">Operations you can trust</h3>
-      <p data-i18n="ben6_text">Payments, validations, and settlement run automatically so campaigns stay smooth for you and your buyers.</p>
-    </div>
-  </div>
-</section>
-
 <!-- CTA -->
 
 
@@ -3653,8 +3692,8 @@
       </div>
       <div class="footer-col">
         <p class="footer-col-title" data-i18n="footer_col2_title">Legal</p>
-        <a href="privacidad" data-i18n="footer_privacy">Privacy policy</a>
-        <a href="terminos" data-i18n="footer_terms">Terms and conditions</a>
+        <a href="../pages/privacidad.html" data-i18n="footer_privacy">Privacy policy</a>
+        <a href="../pages/terminos.html" data-i18n="footer_terms">Terms and conditions</a>
       </div>
     </div>
   </div>
@@ -3900,12 +3939,12 @@ document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
   const offEl = document.getElementById('tkOff');
   const tierEls = Array.from(document.querySelectorAll('#tkTiers [data-tk-tier]'));
   const GOAL = 20;
-  const END = 13;
+  const END = 16;
   const MAX_FACES = 4;
   const BAR_MS = 640;
   const TIERS = [
-    { at: 5,  price: '26,60 €', off: '–5%' },
-    { at: 10, price: '25,20 €', off: '–10%' }
+    { at: 10, price: '25,20 €', off: '–10%' },
+    { at: 20, price: '22,96 €', off: '–18%' }
   ];
   let joined = 0;
   let barFrom = 0;
@@ -4263,11 +4302,11 @@ setTimeout(() => {
 const translations = {
   es: {
     /* NAV */
-    nav_link_problema: '¿Cuál es el problema?',
-    nav_link_como_funciona: 'Solución',
-    nav_link_beneficios: 'Beneficios Clave',
+    nav_link_problema: 'El problema',
+    nav_link_como_funciona: 'Cómo funciona',
+    nav_link_beneficios: 'Qué ganas',
     nav_link_blog: 'Blog',
-    nav_cta: 'Descárgala en Shopify',
+    nav_cta: 'Instalar gratis',
     nav_lang_label: 'Idioma',
     /* TUKO AI */
     nav_link_ia: 'tuko AI',
@@ -4321,48 +4360,49 @@ const translations = {
 
     /* HERO */
     hero_badge: 'Con el respaldo de Xiji Incubator',
-    hero_title: 'Convierte tu tráfico<br>en <em>ventas colectivas</em>',
-    hero_subtitle: 'Tuko permite que tus clientes se unan para comprar juntos y desbloquear descuentos directamente en tu tienda',
-    hero_cta: 'Instala Tuko',
-    hero_official: 'App verificada en <i>Shopify</i>',
+    hero_title: 'El descuento que<br>te <em>trae clientes</em>, en vez de quitártelos',
+    hero_subtitle: 'Pones un objetivo de unidades sobre un producto y un plazo. Tus clientes reservan sin que se les cobre nada. Si se alcanza el objetivo, todos pagan el precio rebajado; si no, pagan el precio de siempre y tú no has regalado ni un euro de margen.',
+    hero_cta: 'Instalar gratis en Shopify',
+    hero_official: 'Sin cuota mensual · Solo cobramos si vendes',
     hero_stat1_num: '+50',
-    hero_stat1_lab: 'Tiendas activas',
+    hero_stat1_lab: 'Tiendas usando Tuko',
     hero_stat2_num: '+30.000 €',
-    hero_stat2_lab: 'Generados para las tiendas',
+    hero_stat2_lab: 'Facturados en campañas Tuko',
 
     /* POPUP DEL PLUGIN */
-    pop_chip: 'COMPRA COLECTIVA ACTIVA',
-    pop_title: '¡Faltan solo <b>3 personas</b> para un <em>precio mejor!</em>',
-    pop_title_before: '¡Faltan solo ',
-    pop_title_people: 'personas',
-    pop_title_mid: ' para un ',
-    pop_title_deal: 'precio mejor!',
-    pop_timer: 'Tiempo restante',
+    pop_chip: 'CAMPAÑA ACTIVA',
+    pop_title: 'Faltan <b>20</b> unidades para bajar a <em>22,96 €</em>',
+    pop_title_before: 'Faltan ',
+    pop_title_people: 'unidades',
+    pop_title_mid: ' para bajar a ',
+    pop_title_deal: '22,96 €',
+    pop_timer: 'Termina en',
     pop_days: 'Días',
     pop_hours: 'Horas',
     pop_minutes: 'Minutos',
     pop_seconds: 'Segundos',
     pop_product: 'Champú Natural',
-    pop_joined: 'de 20 personas unidas',
-    pop_cta: 'Únete ahora',
-    pop_back_title: 'Así funciona la <em>compra colectiva</em>',
-    pop_back_sub: 'Cuantas más personas se unen al grupo, mayor es el descuento para todos.',
-    pop_tier1: '5 personas',
-    pop_tier2: '10 personas',
-    pop_tier3: '20 personas',
-    pop_step1: 'La tienda activa una <b>compra grupal</b> en un producto.',
-    pop_step2: 'Cada comprador, una vez dentro, <b>comparte el grupo a sus amigos</b>.',
-    pop_step3: 'Al acabarse el tiempo, <b>todos pagan el precio rebajado</b> automáticamente.',
-    pop_step4: 'La tienda vende <b>sin utilizar anuncios</b>.',
-    pop_step5: '<b>Viralización inmediata</b> de tu tienda.',
+    pop_joined: 'de 20 unidades reservadas',
+    pop_cta: 'Bájalo a 22,96 €',
+    pop_no_charge: 'No se te cobra nada hasta que termine la campaña.',
+    pop_back_title: 'Así funciona una <em>campaña Tuko</em>',
+    pop_back_sub: 'Cuantas más unidades se reservan, mayor es el descuento para todos.',
+    pop_tier1: '10 unidades',
+    pop_tier2: '20 unidades',
+    pop_tier3: '35 unidades',
+    pop_step1: 'Eliges un producto, un objetivo de unidades y un plazo.',
+    pop_step2: 'Tus clientes reservan en tu checkout; se retiene el importe, sin cobro todavía.',
+    pop_step3: 'Quien ya reservó comparte para llegar al objetivo.',
+    pop_step4: 'Al cerrar, se cobra el precio del escalón alcanzado.',
+    pop_step5: 'Si no se alcanza ningún escalón, pagan el precio normal.',
     pop_front_hint: 'Haz clic para voltear',
     pop_front_hint_tap: 'Toca para voltear',
     pop_back_foot: 'Haz clic para volver',
     pop_back_foot_tap: 'Toca para volver',
 
     /* VIDEO */
-    video_title: 'Mira cómo funciona <span class="video-brand">Tuko</span>',
-    video_subtitle: 'Dos minutos para entender cómo tus propios compradores se convierten en tu canal de adquisición más barato.',
+    video_title: 'Una campaña de <span class="video-brand">Tuko</span>, <em class="video-title-em">de principio a fin</em>',
+    video_subtitle: 'Dos minutos: cómo se monta la campaña, qué ve tu cliente en la ficha de producto y qué pasa cuando se alcanza el objetivo.',
 
     /* LOGOS */
     logos_label: 'Con el apoyo de',
@@ -4373,34 +4413,34 @@ const translations = {
     logo_saper: 'Sáper Organic',
 
     /* PROBLEM */
-    problem_badge: 'Hay un gran problema…',
-    problem_title: 'El eCommerce necesita<br>nuevas formas de vender',
-    problem_sub: 'Las marcas compiten con las mismas estrategias mientras los costes aumentan y los márgenes se reducen.',
-    card1_title: 'Tráfico caro',
-    card1_text: 'El coste del tráfico pagado aumenta cada año y el retorno de inversión baja, haciendo difícil escalar ventas de forma rentable.',
-    card2_title: 'Stock inmovilizado',
-    card2_text: 'Muchas marcas acumulan stock que caduca o se mueve lento, generando costes y necesidad urgente de rotación.',
-    card3_title: 'Poco margen',
-    card3_text: 'Los descuentos habituales reducen demasiado el margen y aún así no generan suficiente volumen para compensarlo.',
+    problem_badge: 'El problema',
+    problem_title: 'Bajar el precio no es el problema.<br>Regalárselo a quien ya iba a<br>comprar, sí.',
+    problem_sub: 'Cada rebaja plana se la llevan también los clientes que habrían comprado igual. Estás pagando margen por ventas que ya tenías.',
+    card1_title: 'Cada cliente nuevo te cuesta más',
+    card1_text: 'El coste de captar un cliente en e-commerce ha subido más de un 200 % en una década. Cada venta que traes con anuncios es más cara que la anterior.',
+    card2_title: 'El stock parado se come el margen',
+    card2_text: 'Rebajarlo un 30 % lo mueve, sí. Pero se lleva por delante el beneficio de todo el lote, y encima el descuento lo cobran también los clientes que ya lo iban a comprar.',
+    card3_title: 'El descuento plano no se paga solo',
+    card3_text: 'Un −20 % en un producto con 60 % de margen te obliga a vender un 67 % más unidades solo para quedarte igual. Casi nunca pasa.',
 
     /* HOW IT WORKS */
-    how_badge: 'Solución',
-    how_title: 'La solución: <span class="how-title-underline">Compras colectivas</span>',
-    how_sub: 'Tuko transforma cada producto de tu tienda en una experiencia de compra colectiva integrada directamente en tu eCommerce.',
-    how_step1: 'Activa Tuko en el producto que desees.',
-    how_step2: 'El cliente ve dos opciones: comprar o unirse al grupo.',
-    how_step3: 'Tuko gestiona pasos, tiempo y participantes.',
-    how_step4: 'Una vez completado el grupo, todos pagan el precio final con descuento.',
+    how_badge: 'Cómo funciona',
+    how_title: 'Un descuento con condiciones.<br>Las <span class="how-title-underline">tuyas</span>.',
+    how_sub: 'Eliges un producto, un objetivo de unidades y un plazo. El descuento no existe hasta que se cumple el objetivo. Todo pasa dentro de tu tienda: el cliente no sale de tu web en ningún momento.',
+    how_step1: 'Eliges producto y objetivo.',
+    how_step2: 'Tus clientes reservan, como siempre.',
+    how_step3: 'Ellos traen a los que faltan.',
+    how_step4: 'Se cierra la campaña y se cobra.',
 
     /* HOW IT WORKS — STEPS */
-    step1_title: 'Activar Tuko',
-    step1_desc: 'Activa Tuko en cualquier producto de tu tienda.',
-    step2_title: 'Los clientes se unen al grupo',
-    step2_desc: 'Los compradores invitan a otros clientes para desbloquear el descuento.',
-    step3_title: 'El grupo se completa',
-    step3_desc: 'Cuando el grupo alcanza el objetivo, todos obtienen el descuento.',
-    step4_title: 'El impacto de Tuko en tu tienda',
-    step4_desc: 'Más ventas, mejor rotación de stock y viralidad orgánica real.',
+    step1_title: 'Eliges producto y objetivo',
+    step1_desc: 'Un producto, un objetivo de unidades y un plazo (72 horas funciona bien). La escalera de descuentos la pones tú: no cedes ni un punto de margen más del que decidas.',
+    step2_title: 'Tus clientes reservan, como siempre',
+    step2_desc: 'Ven en la ficha cuántas unidades faltan para el siguiente precio y pasan por tu checkout de siempre, sin registrarse en ningún sitio y sin conocer a nadie. Se les retiene el importe en la tarjeta, pero no se les cobra nada todavía.',
+    step3_title: 'Ellos traen a los que faltan',
+    step3_desc: 'A quien ya ha reservado le interesa que se llegue al objetivo, así que lo comparte. Ese tráfico no lo has pagado tú.',
+    step4_title: 'Se cierra la campaña y se cobra',
+    step4_desc: 'Cuando termina el plazo, se cobra a todos el precio del escalón alcanzado. Si no se alcanza ninguno, cada cliente paga el precio normal y la venta sigue siendo tuya. Nunca pierdes una venta por intentarlo.',
 
     /* MOCKUP */
     mockup_product_name: 'Set de cremas',
@@ -4413,21 +4453,21 @@ const translations = {
     mockup_tip_text: 'Permite que los clientes se unan a un grupo',
 
     /* BENEFITS */
-    benefits_badge: 'Estos son los beneficios…',
-    benefits_title: 'Tuko hará viral tu tienda de forma orgánica',
-    benefits_sub: 'Nuestro enfoque mejora significativamente las ventas, la calidad del stock y seguridad.',
-    ben1_title: 'Más ventas',
-    ben1_text: 'Convierte tu tráfico actual en ventas reales sin aumentar su presupuesto ni depender de anuncios.',
-    ben2_title: 'Rotación de stock',
-    ben2_text: 'Activa compras colectivas de productos de lento movimiento y libera rápidamente el capital inmovilizado.',
-    ben3_title: 'Control total del margen',
-    ben3_text: 'Define descuentos escalonados que se activen únicamente al cumplir objetivos; nunca sacrifiques el margen sin motivo.',
-    ben4_title: 'Viralidad orgánica real',
-    ben4_text: 'Cada comprador comparte el grupo para completarlo, generando un alcance auténtico sin coste adicional.',
-    ben5_title: 'Integración rápida',
-    ben5_text: 'Activa Tuko en tu tienda de forma sencilla y en pocos minutos, sin procesos técnicos complejos.',
-    ben6_title: 'Seguridad operacional',
-    ben6_text: 'Gestión de pagos, validaciones y reparto de ingresos automatizados para garantizar operaciones fiables y sin fricciones.',
+    benefits_badge: 'Qué ganas',
+    benefits_title: 'Un descuento por volumen hace que un cliente compre tres unidades. Tuko hace que tres clientes compren una.',
+    benefits_sub: 'No es una app de descuentos más. Es la única que usa el descuento para traerte compradores que no tenías.',
+    ben1_title: 'Más unidades por campaña',
+    ben1_text: 'El mismo producto y la misma semana, vendiendo el doble o el triple de unidades. Sin subir un euro el presupuesto de anuncios.',
+    ben2_title: 'Stock parado, fuera',
+    ben2_text: 'Convierte la rebaja que ibas a hacer de todas formas en una venta condicionada al volumen. Liberas capital sin regalar margen.',
+    ben3_title: 'Tú decides el suelo',
+    ben3_text: 'Defines la escalera y el descuento máximo. Tuko te avisa si un escalón se come tu margen antes de publicar la campaña.',
+    ben4_title: 'Compradores que no has pagado',
+    ben4_text: 'Cada cliente que ya ha reservado tiene un motivo económico para compartirlo. Ese tráfico te cuesta cero.',
+    ben5_title: 'Instalado en dos minutos',
+    ben5_text: 'App nativa de Shopify. Se añade a la ficha de producto sin tocar el tema ni el checkout.',
+    ben6_title: 'Ni devoluciones ni ajustes a mano',
+    ben6_text: 'A tus clientes se les retiene el importe al reservar y se les cobra una sola vez al cerrar la campaña, con el descuento ya aplicado. Sin cobros parciales ni devoluciones que gestionar.',
 
     /* CTA */
     cta_title: 'Activa Tuko en tu tienda y convierte el tráfico en ventas reales.',
@@ -4680,9 +4720,9 @@ const translations = {
     /* NAV */
     nav_link_problema: 'The problem',
     nav_link_como_funciona: 'How it works',
-    nav_link_beneficios: 'Benefits',
+    nav_link_beneficios: 'What you get',
     nav_link_blog: 'Blog',
-    nav_cta: 'Get it on Shopify',
+    nav_cta: 'Install free',
     nav_lang_label: 'Language',
     /* TUKO AI */
     nav_link_ia: 'tuko AI',
@@ -4736,48 +4776,49 @@ const translations = {
 
     /* HERO */
     hero_badge: 'Backed by Xiji Incubator',
-    hero_title: 'Turn your traffic<br>into <em>group sales</em>',
-    hero_subtitle: 'Tuko lets shoppers buy together and unlock better prices—right inside your Shopify store',
-    hero_cta: 'Install Tuko',
-    hero_official: 'Verified app on <i>Shopify</i>',
+    hero_title: 'The discount that<br>brings you <em>customers</em>, instead of taking them away',
+    hero_subtitle: 'You set a unit goal on a product and a deadline. Your customers reserve with nothing charged yet. If the goal is hit, everyone pays the lower price; if not, they pay the regular price and you haven\'t given away a euro of margin.',
+    hero_cta: 'Install free on Shopify',
+    hero_official: 'No monthly fee · We only charge if you sell',
     hero_stat1_num: '+50',
-    hero_stat1_lab: 'Active stores',
+    hero_stat1_lab: 'Stores using Tuko',
     hero_stat2_num: '+€30,000',
-    hero_stat2_lab: 'Sales driven for stores',
+    hero_stat2_lab: 'Billed through Tuko campaigns',
 
     /* POPUP DEL PLUGIN */
-    pop_chip: 'GROUP BUY LIVE',
-    pop_title: 'Just <b>3 more people</b> for a <em>better price!</em>',
-    pop_title_before: 'Just ',
-    pop_title_people: 'more people',
-    pop_title_mid: ' for a ',
-    pop_title_deal: 'better price!',
-    pop_timer: 'Time left',
+    pop_chip: 'CAMPAIGN LIVE',
+    pop_title: 'Need <b>20</b> more units to unlock <em>€22.96</em>',
+    pop_title_before: 'Need ',
+    pop_title_people: 'more units',
+    pop_title_mid: ' to unlock ',
+    pop_title_deal: '€22.96',
+    pop_timer: 'Ends in',
     pop_days: 'Days',
     pop_hours: 'Hours',
     pop_minutes: 'Minutes',
     pop_seconds: 'Seconds',
     pop_product: 'Natural Shampoo',
-    pop_joined: 'of 20 people joined',
-    pop_cta: 'Join now',
-    pop_back_title: 'How <em>group buying</em> works',
-    pop_back_sub: 'The more people join, the bigger the discount for everyone.',
-    pop_tier1: '5 people',
-    pop_tier2: '10 people',
-    pop_tier3: '20 people',
-    pop_step1: 'The store launches a <b>group buy</b> on a product.',
-    pop_step2: 'Each buyer <b>invites friends</b> to fill the group.',
-    pop_step3: 'When time is up, <b>everyone pays the unlocked price</b> automatically.',
-    pop_step4: 'The store sells <b>without buying more ads</b>.',
-    pop_step5: 'Your store <b>grows through word of mouth</b>.',
+    pop_joined: 'of 20 units reserved',
+    pop_cta: 'Drop it to €22.96',
+    pop_no_charge: 'Nothing is charged until the campaign ends.',
+    pop_back_title: 'How a <em>Tuko campaign</em> works',
+    pop_back_sub: 'The more units reserved, the bigger the discount for everyone.',
+    pop_tier1: '10 units',
+    pop_tier2: '20 units',
+    pop_tier3: '35 units',
+    pop_step1: 'You pick a product, a unit goal and a deadline.',
+    pop_step2: 'Your customers reserve at your checkout; the amount is held, with nothing charged yet.',
+    pop_step3: 'Anyone who already reserved shares to help hit the goal.',
+    pop_step4: 'When it closes, everyone is charged the price of the tier reached.',
+    pop_step5: 'If no tier is reached, they pay the regular price.',
     pop_front_hint: 'Click to flip',
     pop_front_hint_tap: 'Tap to flip',
     pop_back_foot: 'Click to go back',
     pop_back_foot_tap: 'Tap to go back',
 
     /* VIDEO */
-    video_title: 'See how <span class="video-brand">Tuko</span> works',
-    video_subtitle: 'Two minutes on how your buyers become your lowest-cost acquisition channel.',
+    video_title: 'A <span class="video-brand">Tuko</span> campaign, <em class="video-title-em">start to finish</em>',
+    video_subtitle: 'Two minutes: how you set up the campaign, what your customer sees on the product page, and what happens when the goal is hit.',
 
     /* LOGOS */
     logos_label: 'Trusted by',
@@ -4788,34 +4829,34 @@ const translations = {
     logo_saper: 'Sáper Organic',
 
     /* PROBLEM */
-    problem_badge: 'Sound familiar?',
-    problem_title: 'Ecommerce needs<br>a better growth engine',
-    problem_sub: 'Most brands fight with the same playbook—while acquisition costs climb and margins get thinner.',
-    card1_title: 'Paid traffic keeps getting pricier',
-    card1_text: 'Ad costs rise every year while returns fall, so scaling sales without burning cash gets harder.',
-    card2_title: 'Stock that won’t move',
-    card2_text: 'Slow sellers and aging inventory tie up cash and force uncomfortable discount decisions.',
-    card3_title: 'Discounts that erase margin',
-    card3_text: 'Blanket promotions cut too deep and still rarely create the volume you actually need.',
+    problem_badge: 'The problem',
+    problem_title: 'Cutting the price isn\'t the problem.<br>Giving it away to people who were<br>going to buy anyway is.',
+    problem_sub: 'Every flat discount also goes to customers who would have bought at full price. You\'re paying margin on sales you already had.',
+    card1_title: 'Every new customer costs you more',
+    card1_text: 'The cost of acquiring a customer in ecommerce has risen more than 200% in a decade. Every sale you bring in with ads is more expensive than the last.',
+    card2_title: 'Idle stock eats your margin',
+    card2_text: 'Cutting 30% moves it, sure. But it wipes the profit on the whole batch—and customers who were already going to buy take the discount too.',
+    card3_title: 'A flat discount doesn\'t pay for itself',
+    card3_text: 'A −20% on a product with 60% margin forces you to sell 67% more units just to stay even. That almost never happens.',
 
     /* HOW IT WORKS */
-    how_badge: 'The fix',
-    how_title: 'Meet <span class="how-title-underline">group buying</span>',
-    how_sub: 'Tuko turns any product into a group buy built into your storefront—not bolted on as an afterthought.',
-    how_step1: 'Turn Tuko on for any product you choose.',
-    how_step2: 'Shoppers can buy now—or join a group for a better price.',
-    how_step3: 'Tuko handles timing, progress, and participants.',
-    how_step4: 'When the group fills, everyone pays the unlocked price.',
+    how_badge: 'How it works',
+    how_title: 'A discount with conditions.<br><span class="how-title-underline">Yours</span>.',
+    how_sub: 'You pick a product, a unit goal and a deadline. The discount doesn\'t exist until the goal is met. Everything happens inside your store: the customer never leaves your site.',
+    how_step1: 'You pick a product and a goal.',
+    how_step2: 'Your customers reserve, as usual.',
+    how_step3: 'They bring the ones still missing.',
+    how_step4: 'The campaign closes and everyone is charged.',
 
     /* HOW IT WORKS — STEPS */
-    step1_title: 'Turn Tuko on',
-    step1_desc: 'Enable group buying on any product in your store.',
-    step2_title: 'Shoppers join the group',
-    step2_desc: 'Buyers invite others to unlock the next discount tier.',
-    step3_title: 'The group fills',
-    step3_desc: 'When the target is hit, everyone gets the better price.',
-    step4_title: 'What changes for your store',
-    step4_desc: 'More sales, faster inventory turns, and growth driven by your buyers.',
+    step1_title: 'You pick a product and a goal',
+    step1_desc: 'One product, a unit goal and a deadline (72 hours works well). You set the discount ladder: you never give away a point of margin beyond what you decide.',
+    step2_title: 'Your customers reserve, as usual',
+    step2_desc: 'They see on the product page how many units are left for the next price and go through your usual checkout—no signing up elsewhere, no meeting anyone. The amount is held on their card, but nothing is charged yet.',
+    step3_title: 'They bring the ones still missing',
+    step3_desc: 'Anyone who already reserved wants the goal to be hit, so they share it. That traffic didn\'t cost you a thing.',
+    step4_title: 'The campaign closes and everyone is charged',
+    step4_desc: 'When the deadline ends, everyone is charged the price of the tier reached. If none is reached, each customer pays the regular price and the sale is still yours. You never lose a sale for trying.',
 
     /* MOCKUP */
     mockup_product_name: 'Cream set',
@@ -4828,21 +4869,21 @@ const translations = {
     mockup_tip_text: 'Lets customers join a group',
 
     /* BENEFITS */
-    benefits_badge: 'Why brands choose Tuko',
-    benefits_title: 'Grow through your buyers—<br>not bigger ad budgets',
-    benefits_sub: 'More sales, healthier inventory, and promotions you stay in control of.',
-    ben1_title: 'More sales from the traffic you already have',
-    ben1_text: 'Turn today’s visitors into completed orders—without raising spend or leaning harder on ads.',
-    ben2_title: 'Move slow stock faster',
-    ben2_text: 'Launch group buys on products that sit still and free up cash tied up in inventory.',
-    ben3_title: 'Protect your margins',
-    ben3_text: 'Set tiered discounts that unlock only when targets are hit—so you never give margin away for free.',
-    ben4_title: 'Built-in word of mouth',
-    ben4_text: 'Every buyer has a reason to share the group, so reach grows from real people—not more media spend.',
-    ben5_title: 'Live in minutes',
-    ben5_text: 'Install on Shopify and launch a campaign quickly—no heavyweight technical project.',
-    ben6_title: 'Operations you can trust',
-    ben6_text: 'Payments, validations, and settlement run automatically so campaigns stay smooth for you and your buyers.',
+    benefits_badge: 'What you get',
+    benefits_title: 'A volume discount makes one customer buy three units. Tuko makes three customers buy one.',
+    benefits_sub: 'It isn\'t another discount app. It\'s the only one that uses the discount to bring you buyers you didn\'t have.',
+    ben1_title: 'More units per campaign',
+    ben1_text: 'Same product, same week—selling double or triple the units. Without raising your ad budget by a euro.',
+    ben2_title: 'Idle stock, cleared',
+    ben2_text: 'Turn the markdown you were going to make anyway into a sale conditioned on volume. Free up capital without giving away margin.',
+    ben3_title: 'You set the floor',
+    ben3_text: 'You define the ladder and the maximum discount. Tuko warns you if a tier eats your margin before you publish the campaign.',
+    ben4_title: 'Buyers you didn\'t pay for',
+    ben4_text: 'Every customer who already reserved has a financial reason to share it. That traffic costs you zero.',
+    ben5_title: 'Live in two minutes',
+    ben5_text: 'Native Shopify app. It adds to the product page without touching your theme or checkout.',
+    ben6_title: 'No refunds or manual adjustments',
+    ben6_text: 'Customers get an authorization hold when they reserve and are charged once when the campaign closes, with the discount already applied. No partial charges or refunds to manage.',
 
     /* CTA */
     cta_title: 'Install Tuko and turn traffic into real sales.',

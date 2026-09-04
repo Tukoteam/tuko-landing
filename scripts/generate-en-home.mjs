@@ -11,11 +11,11 @@ const landing = path.resolve(__dirname, '..');
 const srcPath = path.join(landing, 'index.html');
 const outPath = path.join(landing, 'en', 'index.html');
 
-const EN_TITLE = 'Tuko — Group Buying for Shopify Stores';
+const EN_TITLE = 'Tuko · Goal-based discounts for Shopify stores';
 const EN_DESC =
-  'Let shoppers buy together and unlock better prices inside your Shopify store. Tiered group discounts that grow sales through word of mouth—not bigger ad budgets.';
+  'Set a unit goal on a product: when it\'s hit, the price drops for everyone. Sell more without giving away margin. Group buying app for Shopify.';
 const EN_OG_DESC =
-  'Group buying for Shopify: shoppers join together, unlock better prices, and grow your store through word of mouth—without pouring more money into ads.';
+  'Set a unit goal on a product and a deadline. Customers reserve with nothing charged yet—if the goal is hit, everyone pays less; if not, they pay full price and you keep your margin.';
 
 function extractTranslations(html) {
   const start = html.indexOf('const translations = {');
@@ -334,7 +334,7 @@ enHtml = patchLocaleJs(enHtml);
 
 // Count baked keys
 const baked = (enHtml.match(/data-i18n="/g) || []).length;
-const sample = enHtml.includes('Turn your traffic');
+const sample = enHtml.includes('brings you') || enHtml.includes('Install free');
 if (!sample) console.warn('WARN: hero EN title not found after bake');
 
 fs.mkdirSync(path.dirname(outPath), { recursive: true });

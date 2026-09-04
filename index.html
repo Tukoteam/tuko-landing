@@ -751,6 +751,25 @@
     font-weight: 700;
     font-stretch: semi-expanded;
   }
+  .video-section h2 .video-title-em {
+    font-family: 'Roboto Serif', Georgia, serif;
+    font-style: italic;
+    font-weight: 600;
+    font-stretch: normal;
+    position: relative;
+    display: inline;
+  }
+  .video-section h2 .video-title-em::after {
+    content: '';
+    position: absolute;
+    left: -0.04em;
+    right: -0.04em;
+    bottom: -0.08em;
+    height: 0.36em;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 16' preserveAspectRatio='none'%3E%3Cpath d='M3 13 Q60 1.5 117 13' stroke='%233D50F2' stroke-width='3.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
+      center bottom / 100% 100% no-repeat;
+    pointer-events: none;
+  }
   .video-section > p {
     font-size: clamp(14px, 1.15vw, 16px);
     font-weight: 400;
@@ -949,7 +968,19 @@
     font-style: italic;
     font-weight: 500;
     font-stretch: normal;
-    border-bottom: 2.5px solid var(--blue);
+    position: relative;
+    display: inline;
+  }
+  .tk-title em::after {
+    content: '';
+    position: absolute;
+    left: -0.05em;
+    right: -0.05em;
+    bottom: -0.1em;
+    height: 0.38em;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 16' preserveAspectRatio='none'%3E%3Cpath d='M3 13 Q60 1 117 13' stroke='%233D50F2' stroke-width='3.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
+      center bottom / 100% 100% no-repeat;
+    pointer-events: none;
   }
 
   .tk-timer-label {
@@ -1615,7 +1646,7 @@
     right: -0.06em;
     bottom: -0.06em;
     height: 0.4em;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 16' preserveAspectRatio='none'%3E%3Cpath d='M4 12 Q60 2.5 116 12' stroke='%23CE3333' stroke-width='6.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 16' preserveAspectRatio='none'%3E%3Cpath d='M4 12 Q60 2.5 116 12' stroke='%23CE3333' stroke-width='4.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
       center bottom / 100% 100% no-repeat;
     pointer-events: none;
   }
@@ -3435,7 +3466,7 @@
 
 <!-- VIDEO -->
 <section class="video-section" id="video">
-  <h2 class="fade-up" data-i18n="video_title">Una campaña de <span class="video-brand">Tuko</span>, de principio a fin</h2>
+  <h2 class="fade-up" data-i18n="video_title">Una campaña de <span class="video-brand">Tuko</span>, <em class="video-title-em">de principio a fin</em></h2>
   <p class="fade-up d1" data-i18n="video_subtitle">Dos minutos: cómo se monta la campaña, qué ve tu cliente en la ficha de producto y qué pasa cuando se alcanza el objetivo.</p>
   <!-- Facade de YouTube: el iframe solo se carga al hacer clic. -->
   <div class="video-embed fade-up d2" id="tukoVideo"
@@ -4370,7 +4401,7 @@ const translations = {
     pop_back_foot_tap: 'Toca para volver',
 
     /* VIDEO */
-    video_title: 'Una campaña de <span class="video-brand">Tuko</span>, de principio a fin',
+    video_title: 'Una campaña de <span class="video-brand">Tuko</span>, <em class="video-title-em">de principio a fin</em>',
     video_subtitle: 'Dos minutos: cómo se monta la campaña, qué ve tu cliente en la ficha de producto y qué pasa cuando se alcanza el objetivo.',
 
     /* LOGOS */
@@ -4786,7 +4817,7 @@ const translations = {
     pop_back_foot_tap: 'Tap to go back',
 
     /* VIDEO */
-    video_title: 'A <span class="video-brand">Tuko</span> campaign, start to finish',
+    video_title: 'A <span class="video-brand">Tuko</span> campaign, <em class="video-title-em">start to finish</em>',
     video_subtitle: 'Two minutes: how you set up the campaign, what your customer sees on the product page, and what happens when the goal is hit.',
 
     /* LOGOS */
