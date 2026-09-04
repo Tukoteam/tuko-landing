@@ -1590,7 +1590,7 @@
   ══════════════════════════════ */
   .faq {
     position: relative;
-    padding: 96px 48px 88px;
+    padding: 96px 48px 56px;
     text-align: center;
     overflow: hidden;
     background:
@@ -1719,7 +1719,7 @@
   }
   @media (max-width: 720px) {
     .faq {
-      padding: 72px 20px 72px;
+      padding: 72px 20px 48px;
     }
     .faq-trigger {
       grid-template-columns: auto 1fr auto;
@@ -2360,11 +2360,20 @@
     background: var(--blue);
     border-radius: 28px;
     margin: 0 auto;
+    width: 100%;
     max-width: 1100px;
     padding: 84px 40px 100px;
     text-align: center;
   }
-  .final-cta-wrap { padding: 40px 24px 110px; background: #fff; }
+  .final-cta-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: calc(100svh - 64px);
+    padding: 48px 24px 64px;
+    background: #fff;
+  }
   .final-cta #ctaCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
   .final-cta-inner { position: relative; z-index: 3; max-width: 700px; margin: 0 auto; }
   .final-cta-eyebrow {
@@ -2487,7 +2496,10 @@
   }
 
   @media (max-width: 960px) {
-    .final-cta-wrap { padding: 28px 16px 80px; }
+    .final-cta-wrap {
+      min-height: calc(100svh - 64px);
+      padding: 36px 16px 48px;
+    }
     .final-cta { padding: 60px 20px 76px; border-radius: 22px; }
     .final-cta #ctaCanvas { opacity: 0.4; }
     .final-cta > .final-cta-inner > p { margin-bottom: 40px; }
@@ -3732,9 +3744,9 @@
         <div class="faq-panel" id="faq-panel-1" role="region" aria-labelledby="faq-btn-1">
           <div class="faq-panel-inner">
             <p class="faq-a" data-i18n="faq_a1">Solo al cerrarse la campaña. Al pasar por el checkout se le retiene el importe del precio normal en la tarjeta, pero no hay ningún cargo: el dinero sigue en su cuenta. Cuando termina el plazo o se completa el objetivo, se le cobra una sola vez, con el descuento del escalón alcanzado ya aplicado.</p>
-          </div>
-        </div>
-      </div>
+    </div>
+    </div>
+    </div>
       <div class="faq-item fade-up d2">
         <h3 class="faq-h">
           <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-2" id="faq-btn-2">
@@ -3746,8 +3758,8 @@
         <div class="faq-panel" id="faq-panel-2" role="region" aria-labelledby="faq-btn-2" hidden>
           <div class="faq-panel-inner">
             <p class="faq-a" data-i18n="faq_a2">No. Nadie se une a nada ni conoce a nadie. Cada cliente reserva por su cuenta, en tu checkout de siempre. Lo único que cambia es que ve cuántas unidades faltan para que baje el precio.</p>
-          </div>
-        </div>
+    </div>
+    </div>
       </div>
       <div class="faq-item fade-up d3">
         <h3 class="faq-h">
