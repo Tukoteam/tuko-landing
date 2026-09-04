@@ -824,8 +824,14 @@
 
   .tk-popup-bar { height: 4px; background: var(--blue); flex: 0 0 auto; }
   .tk-popup-inner { padding: 20px 22px 22px; flex: 1 1 auto; display: flex; flex-direction: column; }
-  /* El espacio sobrante se acumula justo encima del botón, no como hueco al final */
-  .tk-face-front .tk-cta { margin-top: auto; }
+  /* El espacio sobrante se acumula justo encima del bloque CTA + nota */
+  .tk-face-front .tk-cta-wrap { margin-top: auto; }
+  .tk-cta-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+  }
   .tk-popup-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
   .tk-chip {
     display: inline-flex;
@@ -1185,7 +1191,7 @@
 
   /* Pista visible en la cara frontal: indica que la tarjeta gira */
   .tk-no-charge {
-    margin-top: 14px;
+    margin: 0;
     font-size: 12px;
     text-align: center;
     color: #666;
@@ -3437,8 +3443,12 @@
       font-size: clamp(16px, 4.4vw, 18px);
       text-wrap: balance;
     }
+    .tk-cta-wrap {
+      gap: 28px;
+    }
     .tk-no-charge {
-      margin-top: 28px;
+      margin: 0;
+      padding-top: 2px;
     }
     /* Capas simétricas: mismo paso (~5px) y media más legible */
     .tk-flip-plate {
@@ -3464,7 +3474,7 @@
       width: 100%;
     }
     .tk-flip.is-flipped .tk-face-back { position: relative; }
-    .tk-face-front .tk-cta { margin-top: 16px; }
+    .tk-face-front .tk-cta-wrap { margin-top: 16px; }
     .tk-bar { margin-bottom: 14px; }
     /* El reverso tiene más texto: se compacta un punto más en pantallas estrechas */
     .tk-back-title { font-size: 17px; }
@@ -3774,12 +3784,14 @@
               </div>
               <div class="tk-bar"><span class="tk-bar-fill" id="tkBarFill" style="width:0%"></span></div>
 
-              <div class="tk-cta">
-                <span class="tk-cta-ico"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M20 8v6M23 11h-6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                <span id="tkCtaLabel" data-i18n="pop_cta">Drop it to €25.20</span>
-                <span class="tk-cta-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <div class="tk-cta-wrap">
+                <div class="tk-cta">
+                  <span class="tk-cta-ico"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M20 8v6M23 11h-6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <span id="tkCtaLabel" data-i18n="pop_cta">Drop it to €25.20</span>
+                  <span class="tk-cta-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </div>
+                <p class="tk-no-charge" data-i18n="pop_no_charge">Nothing is charged until the campaign ends.</p>
               </div>
-              <p class="tk-no-charge" data-i18n="pop_no_charge">Nothing is charged until the campaign ends.</p>
               <p class="tk-front-hint" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><path d="M9 11V6.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V12m0-1a1.5 1.5 0 0 1 3 0v4.5a5.5 5.5 0 0 1-5.5 5.5h-1.6a5 5 0 0 1-3.9-1.9l-2.6-3.3a1.5 1.5 0 0 1 2.2-2l1.4 1.3V9.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 <span data-i18n="pop_front_hint">Click to flip</span>
