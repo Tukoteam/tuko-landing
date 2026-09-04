@@ -1646,7 +1646,10 @@
       box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
       border-color 0.4s ease;
   }
-  .pricing-card:hover {
+  .pricing-card:hover,
+  .pricing-card.fade-up.visible:hover,
+  .pricing-card.is-featured:hover,
+  .pricing-card.is-featured.fade-up.visible:hover {
     transform: translateY(-4px) scale(1.03);
     z-index: 3;
     border-color: rgba(61, 80, 242, 0.22);
@@ -1663,9 +1666,9 @@
       0 18px 44px rgba(66, 87, 255, 0.16);
     z-index: 2;
   }
-  .pricing-card.is-featured:hover {
-    transform: translateY(-4px) scale(1.03);
-    z-index: 3;
+  .pricing-card.is-featured:hover,
+  .pricing-card.is-featured.fade-up.visible:hover {
+    border-color: rgba(61, 80, 242, 0.55);
     box-shadow:
       0 1px 0 rgba(255, 255, 255, 0.9) inset,
       0 22px 48px rgba(66, 87, 255, 0.22);
