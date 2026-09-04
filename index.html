@@ -1731,11 +1731,13 @@
       font-size: 15px;
     }
   }
-  @media (prefers-reduced-motion: reduce) {
-    .faq-panel,
-    .faq-icon {
-      transition: none;
-    }
+  /* FAQ: mantener apertura/cierre animado aunque el SO pida reducir motion
+     (Windows/Chrome “evitar animaciones”); es feedback de interacción, no decoración. */
+  .faq-panel {
+    transition: grid-template-rows 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+  .faq-icon {
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), background 0.2s ease !important;
   }
 
 
