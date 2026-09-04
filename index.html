@@ -1646,11 +1646,12 @@
       border-color 0.4s ease;
   }
   .pricing-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px) scale(1.03);
+    z-index: 3;
     border-color: rgba(61, 80, 242, 0.22);
     box-shadow:
       0 1px 0 rgba(255, 255, 255, 0.9) inset,
-      0 16px 36px rgba(20, 24, 38, 0.08);
+      0 18px 40px rgba(20, 24, 38, 0.1);
   }
   .pricing-card.is-featured {
     border-color: rgba(61, 80, 242, 0.45);
@@ -1663,7 +1664,8 @@
     z-index: 2;
   }
   .pricing-card.is-featured:hover {
-    transform: scale(1.02) translateY(-3px);
+    transform: translateY(-4px) scale(1.04);
+    z-index: 3;
   }
   .pricing-rec {
     display: inline-flex;
@@ -1740,7 +1742,7 @@
     content: '';
     position: absolute;
     left: 0;
-    top: 0.35em;
+    top: 0.2em;
     width: 14px;
     height: 14px;
     border-radius: 50%;
@@ -1751,7 +1753,7 @@
     content: '';
     position: absolute;
     left: 4px;
-    top: 0.55em;
+    top: calc(0.2em + 4.5px);
     width: 6px;
     height: 3.5px;
     border-left: 1.6px solid var(--blue);
@@ -1839,8 +1841,10 @@
     .pricing-card.is-featured {
       transform: none;
     }
+    .pricing-card:hover,
     .pricing-card.is-featured:hover {
-      transform: translateY(-3px);
+      transform: translateY(-3px) scale(1.02);
+      z-index: 3;
     }
   }
   @media (max-width: 720px) {
