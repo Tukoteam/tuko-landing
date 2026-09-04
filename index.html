@@ -868,15 +868,23 @@
     text-align: left;
     text-wrap: pretty;
   }
-  .tk-title b { color: var(--blue); font-weight: 600; }
+  .tk-title b {
+    color: var(--blue);
+    font-weight: 600;
+    display: inline-block;
+    min-width: 1.35em;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
   .tk-title em {
     font-family: 'Roboto Serif', Georgia, serif;
     font-style: italic;
     font-weight: 500;
     font-stretch: normal;
     position: relative;
-    display: inline;
+    display: inline-block;
     white-space: nowrap;
+    font-variant-numeric: tabular-nums;
   }
   .tk-title em::after {
     content: '';
@@ -3445,6 +3453,8 @@
       line-height: 1.45;
       text-align: left;
       text-wrap: pretty;
+      /* Reserva 2 líneas: al cambiar 1↔10 o el precio no salta el layout */
+      min-height: calc(1.45em * 2 + 0.3em);
     }
     .tk-cta-wrap {
       gap: 28px;
@@ -3600,6 +3610,7 @@
       line-height: 1.5;
       margin-bottom: 16px;
       text-wrap: pretty;
+      min-height: calc(1.5em * 2 + 0.3em);
     }
     .tk-title em {
       display: inline-block;
