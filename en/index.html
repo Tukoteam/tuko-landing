@@ -833,7 +833,7 @@
     gap: 18px;
     width: 100%;
   }
-  .tk-popup-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .tk-popup-head { display: flex; align-items: center; justify-content: flex-start; margin-bottom: 16px; }
   .tk-chip {
     display: inline-flex;
     align-items: center;
@@ -849,12 +849,7 @@
   }
   .tk-chip i { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
   .tk-close {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    background: var(--gray-1);
-    color: var(--gray-3);
-    display: flex; align-items: center; justify-content: center;
-    flex: 0 0 auto;
+    display: none;
   }
   .tk-close svg { width: 13px; height: 13px; stroke: currentColor; stroke-width: 2.5; fill: none; }
 
@@ -1605,6 +1600,10 @@
   .s-sub + .s-sub {
     margin-top: -48px;
     margin-bottom: 64px;
+  }
+  .s-para-gap {
+    display: block;
+    height: 0.7em;
   }
 
 
@@ -3417,6 +3416,8 @@
       word-break: normal;
       text-wrap: balance;
       hyphens: none;
+      text-align: center;
+      width: 100%;
     }
     .hero p {
       overflow-wrap: break-word;
@@ -3486,17 +3487,18 @@
       padding: 6px 12px;
       gap: 6px;
     }
-    .tk-close { width: 28px; height: 28px; }
-    .tk-close svg { width: 12px; height: 12px; }
     .tk-pinfo { text-align: left; }
     .tk-title {
       font-size: clamp(16px, 4.4vw, 18px);
       line-height: 1.45;
       text-align: left;
       text-wrap: pretty;
-      margin-bottom: 14px;
-      /* Reserva 2 líneas: al cambiar 1↔10 o el precio no salta el layout */
-      min-height: calc(1.45em * 2 + 0.3em);
+      margin-bottom: 8px;
+      min-height: 0;
+    }
+    .tk-timer-label {
+      text-align: center;
+      margin-bottom: 6px;
     }
     .tk-cta-wrap {
       gap: 28px;
@@ -3589,6 +3591,33 @@
     .problem { padding: 48px 16px 36px; }
     .how-intro { padding: 36px 16px 18px; }
     .s-title, .s-sub { overflow-wrap: anywhere; }
+    /* Títulos: un poco más de aire entre líneas; título→texto > texto→texto */
+    .problem .s-title,
+    .benefits .s-title,
+    .how-intro .s-title,
+    .pricing .s-title,
+    .faq .s-title,
+    .video-section h2 {
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .problem .s-sub,
+    .benefits .s-sub,
+    .how-intro .s-sub,
+    .pricing .s-sub,
+    .faq .s-sub,
+    .video-section > p {
+      margin-bottom: 40px;
+      line-height: 1.65;
+    }
+    .s-sub + .s-sub {
+      margin-top: -28px;
+      margin-bottom: 40px;
+    }
+    .s-para-gap {
+      display: block;
+      height: 0.45em;
+    }
     /* Móvil: títulos y cuerpo a izquierda (mismo ritmo que el hero) */
     .problem,
     .benefits,
@@ -3658,13 +3687,21 @@
     .cta-inner h2 { margin-bottom: 36px; }
     .cta-form { max-width: 100%; }
 
-    /* Footer móvil */
+    /* Footer móvil: sin hueco blanco debajo */
+    html {
+      background-color: #14151a;
+      overscroll-behavior-y: none;
+    }
+    body {
+      overscroll-behavior-y: none;
+    }
     footer {
-      padding: 0;
+      padding: 0 0 env(safe-area-inset-bottom, 0px);
       flex-direction: unset;
       min-height: 0;
       align-items: unset;
       text-align: left;
+      margin-bottom: 0;
     }
     .footer-inner {
       padding: 48px 20px 0;
@@ -3708,13 +3745,13 @@
     nav { padding: 0 10px 0 8px; }
     .lang-opt-label { display: none; }
     .lang-opt { padding: 6px 7px; }
-    /* Título del widget: wrap natural, mismo tamaño que el resto del móvil */
+    /* Título del widget: wrap natural, sin reservar 2 líneas vacías */
     .tk-title {
       text-align: left;
       line-height: 1.5;
-      margin-bottom: 16px;
+      margin-bottom: 8px;
       text-wrap: pretty;
-      min-height: calc(1.5em * 2 + 0.3em);
+      min-height: 0;
     }
     .tk-title em {
       display: inline-block;
@@ -4046,7 +4083,7 @@
   <img class="side-deco" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLwAAAL1CAYAAADNWP2kAAAVa0lEQVR4nO3bMW4VMRhGUUAusin2wP6XQZXCBQ1FpEhokjDvn3fnHMm1v/rK/v7z1+9vAAAAAFDxY3oAAAAAAPxPghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwBQtKYHAAAwR/ACAIr29AAAAOYIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAApAheAAAAAKQIXgDAFa3pAQAAPC/BCwC4oj09AACA5yV4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngB/7KmBwAAAMBHCV7Av+zpAQAAAPBRghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghe0rekBAAAA8GiCF7Tt6QEAAADwaIIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCF5NepgcAAAAAPYIXk16nBwAAAAA9ghcAAAAAKYIXAAAAACmCF2da0wMAAACA+xG8ONOeHgAAAADcj+AFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuD1XF6mBwAAAABcneD1XF6nBwAAAABcneAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAwNnWIy8TvAAAAAA4237kZYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApdw1e6+8BAAAAIOau0WdPDwAAAADgHHd94QUAAABAlOAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4PXemh4AAAAAwOcJXu/t6QEAAAAAfJ7gBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAMBXrekBbwleAAAAAHzVnh7wluAFAAAAQIrgBQAAAECK4HWuS/1fBQAAALgDwetcl/q/CgAAAHAHghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmC172s6QEAAAAAZxO87mVPDwAAAAA4m+AFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAx6zpAcAxghcAAAAcs6cHAMcIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAcsaYHABwleAEAAHDEnh4AcJTgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQMof5rAWb19ljwUAAAAASUVORK5CYII=" alt="" decoding="async">
   <div class="fade-up"><span class="s-badge" data-i18n="problem_badge">The problem</span></div>
   <h2 class="s-title fade-up d1" data-i18n="problem_title">Cutting the price isn't the problem.<br><span class="title-accent">Giving it away</span> to people who were<br>going to buy anyway <em class="title-accent-em">is</em></h2>
-  <p class="s-sub fade-up d2" data-i18n="problem_sub">Every flat discount also goes to customers who would have bought at full price.<br><br>You're paying margin on sales you already had.</p>
+  <p class="s-sub fade-up d2" data-i18n="problem_sub">Every flat discount also goes to customers who would have bought at full price.<span class="s-para-gap" aria-hidden="true"></span>You're paying margin on sales you already had.</p>
   <div class="cards-grid">
     <div class="card fade-up d1">
       <div class="card-top">
@@ -4095,7 +4132,7 @@
   <img class="side-deco-l" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLwAAAL1CAYAAADNWP2kAAAVa0lEQVR4nO3bMW4VMRhGUUAusin2wP6XQZXCBQ1FpEhokjDvn3fnHMm1v/rK/v7z1+9vAAAAAFDxY3oAAAAAAPxPghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwBQtKYHAAAwR/ACAIr29AAAAOYIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAApAheAAAAAKQIXgDAFa3pAQAAPC/BCwC4oj09AACA5yV4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngB/7KmBwAAAMBHCV7Av+zpAQAAAPBRghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghe0rekBAAAA8GiCF7Tt6QEAAADwaIIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCF5NepgcAAAAAPYIXk16nBwAAAAA9ghcAAAAAKYIXAAAAACmCF2da0wMAAACA+xG8ONOeHgAAAADcj+AFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuD1XF6mBwAAAABcneD1XF6nBwAAAABcneAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAwNnWIy8TvAAAAAA4237kZYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApdw1e6+8BAAAAIOau0WdPDwAAAADgHHd94QUAAABAlOAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4PXemh4AAAAAwOcJXu/t6QEAAAAAfJ7gBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAMBXrekBbwleAAAAAHzVnh7wluAFAAAAQIrgBQAAAECK4HWuS/1fBQAAALgDwetcl/q/CgAAAHAHghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmC172s6QEAAAAAZxO87mVPDwAAAAA4m+AFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAx6zpAcAxghcAAAAcs6cHAMcIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAcsaYHABwleAEAAHDEnh4AcJTgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQMof5rAWb19ljwUAAAAASUVORK5CYII=" alt="" decoding="async">
   <div class="fade-up"><span class="s-badge" data-i18n="benefits_badge">What you get</span></div>
   <h2 class="s-title fade-up d1" data-i18n="benefits_title">A volume discount makes one customer buy three units. <span class="title-accent">Tuko</span> makes <em class="title-accent-em">three customers</em> buy one</h2>
-  <p class="s-sub fade-up d2" data-i18n="benefits_sub">It isn't another discount app.<br><br>It's the only one that uses the discount to bring you buyers you didn't have.</p>
+  <p class="s-sub fade-up d2" data-i18n="benefits_sub">It isn't another discount app.<span class="s-para-gap" aria-hidden="true"></span>It's the only one that uses the discount to bring you buyers you didn't have.</p>
   <div class="ben-grid">
     <div class="ben fade-up d1">
       <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
@@ -4134,7 +4171,7 @@
 <section class="how-intro" id="como-funciona">
   <div class="fade-up"><span class="s-badge" data-i18n="how_badge">How it works</span></div>
   <h2 class="s-title fade-up d1" data-i18n="how_title">A discount with conditions.<br><span class="how-title-underline">Yours</span></h2>
-  <p class="s-sub fade-up d2" data-i18n="how_sub">You pick a product, a unit goal and a deadline.<br><br>The discount doesn't exist until the goal is met.<br><br>Everything happens inside your store: the customer never leaves your site.</p>
+  <p class="s-sub fade-up d2" data-i18n="how_sub">You pick a product, a unit goal and a deadline.<span class="s-para-gap" aria-hidden="true"></span>The discount doesn't exist until the goal is met.<span class="s-para-gap" aria-hidden="true"></span>Everything happens inside your store: the customer never leaves your site.</p>
 </section>
 
 <!-- HOW IT WORKS — STEPS -->
@@ -5315,7 +5352,7 @@ const translations = {
     /* PROBLEM */
     problem_badge: 'El problema',
     problem_title: 'Bajar el precio no es el problema.<br><span class="title-accent">Regalárselo</span> a quien ya iba a<br>comprar, <em class="title-accent-em">sí</em>',
-    problem_sub: 'Cada rebaja plana se la llevan también los clientes que habrían comprado igual.<br><br>Estás pagando margen por ventas que ya tenías.',
+    problem_sub: 'Cada rebaja plana se la llevan también los clientes que habrían comprado igual.<span class="s-para-gap" aria-hidden="true"></span>Estás pagando margen por ventas que ya tenías.',
     card1_title: 'Cada cliente nuevo te cuesta más',
     card1_text: 'El coste de captar un cliente en e-commerce ha subido más de un 200 % en una década.<br><br>Cada venta que traes con anuncios es más cara que la anterior.',
     card2_title: 'El stock parado se come el margen',
@@ -5329,7 +5366,7 @@ const translations = {
     /* HOW IT WORKS */
     how_badge: 'Cómo funciona',
     how_title: 'Un descuento con condiciones.<br>Las <span class="how-title-underline">tuyas</span>',
-    how_sub: 'Eliges un producto, un objetivo de unidades y un plazo.<br><br>El descuento no existe hasta que se cumple el objetivo.<br><br>Todo pasa dentro de tu tienda: el cliente no sale de tu web en ningún momento.',
+    how_sub: 'Eliges un producto, un objetivo de unidades y un plazo.<span class="s-para-gap" aria-hidden="true"></span>El descuento no existe hasta que se cumple el objetivo.<span class="s-para-gap" aria-hidden="true"></span>Todo pasa dentro de tu tienda: el cliente no sale de tu web en ningún momento.',
     how_step1: 'Eliges producto y objetivo.',
     how_step2: 'Tus clientes reservan, como siempre.',
     how_step3: 'Ellos traen a los que faltan.',
@@ -5430,7 +5467,7 @@ const translations = {
     /* BENEFITS */
     benefits_badge: 'Qué ganas',
     benefits_title: 'Un descuento por volumen hace que un cliente compre tres unidades. <span class="title-accent">Tuko</span> hace que <em class="title-accent-em">tres clientes</em> compren una',
-    benefits_sub: 'No es una app de descuentos más.<br><br>Es la única que usa el descuento para traerte compradores que no tenías.',
+    benefits_sub: 'No es una app de descuentos más.<span class="s-para-gap" aria-hidden="true"></span>Es la única que usa el descuento para traerte compradores que no tenías.',
     ben1_title: 'Más unidades por campaña',
     ben1_text: 'El mismo producto y la misma semana, vendiendo el doble o el triple de unidades.<br><br>Sin subir un euro el presupuesto de anuncios.',
     ben2_title: 'Stock parado, fuera',
@@ -5810,7 +5847,7 @@ const translations = {
     /* PROBLEM */
     problem_badge: 'The problem',
     problem_title: 'Cutting the price isn\'t the problem.<br><span class="title-accent">Giving it away</span> to people who were<br>going to buy anyway <em class="title-accent-em">is</em>',
-    problem_sub: 'Every flat discount also goes to customers who would have bought at full price.<br><br>You\'re paying margin on sales you already had.',
+    problem_sub: 'Every flat discount also goes to customers who would have bought at full price.<span class="s-para-gap" aria-hidden="true"></span>You\'re paying margin on sales you already had.',
     card1_title: 'Every new customer costs you more',
     card1_text: 'The cost of acquiring a customer in ecommerce has risen more than 200% in a decade.<br><br>Every sale you bring in with ads is more expensive than the last.',
     card2_title: 'Idle stock eats your margin',
@@ -5824,7 +5861,7 @@ const translations = {
     /* HOW IT WORKS */
     how_badge: 'How it works',
     how_title: 'A discount with conditions.<br><span class="how-title-underline">Yours</span>',
-    how_sub: 'You pick a product, a unit goal and a deadline.<br><br>The discount doesn\'t exist until the goal is met.<br><br>Everything happens inside your store: the customer never leaves your site.',
+    how_sub: 'You pick a product, a unit goal and a deadline.<span class="s-para-gap" aria-hidden="true"></span>The discount doesn\'t exist until the goal is met.<span class="s-para-gap" aria-hidden="true"></span>Everything happens inside your store: the customer never leaves your site.',
     how_step1: 'You pick a product and a goal.',
     how_step2: 'Your customers reserve, as usual.',
     how_step3: 'They bring the ones still missing.',
@@ -5925,7 +5962,7 @@ const translations = {
     /* BENEFITS */
     benefits_badge: 'What you get',
     benefits_title: 'A volume discount makes one customer buy three units. <span class="title-accent">Tuko</span> makes <em class="title-accent-em">three customers</em> buy one',
-    benefits_sub: 'It isn\'t another discount app.<br><br>It\'s the only one that uses the discount to bring you buyers you didn\'t have.',
+    benefits_sub: 'It isn\'t another discount app.<span class="s-para-gap" aria-hidden="true"></span>It\'s the only one that uses the discount to bring you buyers you didn\'t have.',
     ben1_title: 'More units per campaign',
     ben1_text: 'Same product, same week—selling double or triple the units.<br><br>Without raising your ad budget by a euro.',
     ben2_title: 'Idle stock, cleared',
