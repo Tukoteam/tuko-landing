@@ -1224,11 +1224,12 @@
   .blog-hero {
     background: var(--blue);
     padding: calc(88px + env(safe-area-inset-top, 0px)) 48px 72px;
-    text-align: left;
+    text-align: center;
   }
   .blog-hero-content {
     max-width: 720px;
     margin: 0 auto;
+    text-align: center;
   }
   .blog-hero .legal-badge {
     background: rgba(255,255,255,0.18);
@@ -1472,12 +1473,13 @@
   @media (max-width: 760px) {
     .blog-hero {
       padding: calc(96px + env(safe-area-inset-top, 0px)) 20px 56px;
-      text-align: left;
+      text-align: center;
     }
     .blog-hero-content {
       max-width: none;
-      margin-left: 0;
-      margin-right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
     }
     .blog-list-section { padding: 48px 20px 72px; }
     .blog-post { flex-direction: column; gap: 20px; }
