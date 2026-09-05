@@ -617,15 +617,18 @@
   }
 
   .hero p {
-    font-size: clamp(14px, 1.15vw, 16px);
+    font-size: clamp(16px, 1.35vw, 18.5px);
     font-weight: 450;
     font-stretch: normal;
     color: #1a1a1a;
-    line-height: 1.65;
+    line-height: 1.6;
     margin-bottom: 18px;
-    max-width: 460px;
+    max-width: 520px;
     margin-left: 0;
     margin-right: 0;
+  }
+  .hero p .s-para-gap {
+    height: 0.45em;
   }
 
   /* Sección de vídeo (facade de YouTube: carga el iframe solo al hacer clic) */
@@ -3443,7 +3446,10 @@
       text-align: left;
       max-width: 560px;
       width: 100%;
+      font-size: clamp(16px, 4.2vw, 18px);
+      line-height: 1.55;
     }
+    .hero p .s-para-gap { height: 0.4em; }
     .hero-actions {
       flex-direction: column;
       gap: 12px;
@@ -3968,7 +3974,7 @@
         <span data-i18n="hero_badge">Backed by Xiji Incubator</span>
       </div>
       <h1 class="fade-up d1" data-i18n="hero_title">The discount that<br>brings you <em>customers</em>, instead of taking them away</h1>
-      <p class="fade-up d2" data-i18n="hero_subtitle">You set a unit goal on a product and a deadline. Your customers reserve with nothing charged yet.<br><br>If the goal is hit, everyone pays the lower price; if not, they pay the regular price and you haven't given away a euro of margin.</p>
+      <p class="fade-up d2" data-i18n="hero_subtitle">You set a unit goal on a product and a deadline. Your customers reserve with nothing charged yet.<span class="s-para-gap" aria-hidden="true"></span>If the goal is hit, everyone pays the lower price; if not, they pay the regular price and you haven't given away a euro of margin.</p>
 
       <div class="hero-actions fade-up d3">
         <a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="btn-blue" target="_blank" rel="noopener">
@@ -5399,7 +5405,7 @@ const translations = {
     /* HERO */
     hero_badge: 'Con el respaldo de Xiji Incubator',
     hero_title: 'El descuento que<br>te <em>trae clientes</em>, en vez de quitártelos',
-    hero_subtitle: 'Pones un objetivo de unidades sobre un producto y un plazo. Tus clientes reservan sin que se les cobre nada.<br><br>Si se alcanza el objetivo, todos pagan el precio rebajado; si no, pagan el precio de siempre y tú no has regalado ni un euro de margen.',
+    hero_subtitle: 'Pones un objetivo de unidades sobre un producto y un plazo. Tus clientes reservan sin que se les cobre nada.<span class="s-para-gap" aria-hidden="true"></span>Si se alcanza el objetivo, todos pagan el precio rebajado; si no, pagan el precio de siempre y tú no has regalado ni un euro de margen.',
     hero_cta: 'Instalar gratis en Shopify',
     hero_official: 'Sin cuota · Solo cobramos si vendes',
     hero_stat1_num: '+50',
@@ -5894,7 +5900,7 @@ const translations = {
     /* HERO */
     hero_badge: 'Backed by Xiji Incubator',
     hero_title: 'The discount that<br>brings you <em>customers</em>, instead of taking them away',
-    hero_subtitle: 'You set a unit goal on a product and a deadline. Your customers reserve with nothing charged yet.<br><br>If the goal is hit, everyone pays the lower price; if not, they pay the regular price and you haven\'t given away a euro of margin.',
+    hero_subtitle: 'You set a unit goal on a product and a deadline. Your customers reserve with nothing charged yet.<span class="s-para-gap" aria-hidden="true"></span>If the goal is hit, everyone pays the lower price; if not, they pay the regular price and you haven\'t given away a euro of margin.',
     hero_cta: 'Install free on Shopify',
     hero_official: 'No fee · We only charge if you sell',
     hero_stat1_num: '+50',
