@@ -895,11 +895,16 @@
   }
 
   .tk-timer-label {
+    display: block;
+    width: 100%;
     font-size: 12px;
     font-weight: 400;
     color: var(--gray-4);
     text-align: center;
-    margin-bottom: 8px;
+    margin: 0 auto 8px;
+  }
+  .tk-popup .tk-timer-label {
+    text-align: center;
   }
   .tk-timer { display: flex; align-items: flex-start; justify-content: center; gap: 5px; margin-bottom: 18px; }
   .tk-unit { display: flex; flex-direction: column; align-items: center; min-width: 50px; }
@@ -3496,8 +3501,13 @@
       margin-bottom: 8px;
       min-height: 0;
     }
-    .tk-timer-label {
+    .tk-timer-label,
+    .tk-popup .tk-timer-label {
+      display: block;
+      width: 100%;
       text-align: center;
+      margin-left: auto;
+      margin-right: auto;
       margin-bottom: 6px;
     }
     .tk-cta-wrap {
