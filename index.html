@@ -3563,12 +3563,27 @@
     .problem { padding: 48px 16px 36px; }
     .how-intro { padding: 36px 16px 18px; }
     .s-title, .s-sub { overflow-wrap: anywhere; }
-    /* Cuerpo a izquierda en móvil; títulos de sección centrados */
+    /* Móvil: títulos y cuerpo a izquierda (mismo ritmo que el hero) */
+    .problem,
+    .benefits,
+    .how-intro,
+    .pricing,
+    .faq,
+    .video-section {
+      text-align: left;
+    }
+    .problem .s-title,
+    .benefits .s-title,
+    .how-intro .s-title,
+    .pricing .s-title,
+    .faq .s-title,
+    .video-section h2,
     .problem .s-sub,
     .benefits .s-sub,
     .how-intro .s-sub,
     .pricing .s-sub,
-    .faq .s-sub {
+    .faq .s-sub,
+    .video-section > p {
       text-align: left;
       margin-left: 0;
       margin-right: 0;
@@ -5160,7 +5175,7 @@ const translations = {
     ia_cta_primary: 'Entrar en la lista de espera',
     ia_cta_secondary: 'Ver cómo funciona Tuko',
     ia_signals_eyebrow: 'Qué analiza',
-    ia_signals_title: 'Seis señales. Una campaña lista.',
+    ia_signals_title: 'Seis señales. Una campaña lista',
     ia_signals_sub: 'tuko AI cruza los datos de tu tienda con los de tu mercado para decidir qué producto poner en campaña, a qué precio y en qué momento.',
     ia_sig1_title: 'Tu mercado',
     ia_sig1_text: 'Demanda real de tu categoría, estacionalidad y hacia dónde se mueven los precios.',
@@ -5655,7 +5670,7 @@ const translations = {
     ia_cta_primary: 'Join the waitlist',
     ia_cta_secondary: 'See how Tuko works',
     ia_signals_eyebrow: 'What it reads',
-    ia_signals_title: 'Six signals. One campaign, ready.',
+    ia_signals_title: 'Six signals. One campaign, ready',
     ia_signals_sub: 'tuko AI combines your store data with your market data to decide which product to put in a campaign, at what price and when.',
     ia_sig1_title: 'Your market',
     ia_sig1_text: 'Real demand in your category, seasonality and where prices are heading.',

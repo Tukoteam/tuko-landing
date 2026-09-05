@@ -1224,7 +1224,7 @@
   .blog-hero {
     background: var(--blue);
     padding: calc(88px + env(safe-area-inset-top, 0px)) 48px 72px;
-    text-align: center;
+    text-align: left;
   }
   .blog-hero-content {
     max-width: 720px;
@@ -1470,7 +1470,15 @@
   }
 
   @media (max-width: 760px) {
-    .blog-hero { padding: calc(96px + env(safe-area-inset-top, 0px)) 20px 56px; }
+    .blog-hero {
+      padding: calc(96px + env(safe-area-inset-top, 0px)) 20px 56px;
+      text-align: left;
+    }
+    .blog-hero-content {
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
+    }
     .blog-list-section { padding: 48px 20px 72px; }
     .blog-post { flex-direction: column; gap: 20px; }
     .blog-post-image { width: 100%; }

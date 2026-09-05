@@ -110,7 +110,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Roboto+Serif:ital,opsz,wght@1,8..144,400..700&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Roboto+Serif:ital,opsz,wght@1,8..144,400..700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Roboto+Serif:ital,opsz,wght@1,8..144,400..700&display=swap" rel="stylesheet"></noscript>
-<link rel="stylesheet" href="../assets/css/main.css?v=20260904a">
+<link rel="stylesheet" href="../assets/css/main.css?v=20260905b">
 <style>
   /* ══════════════════════════════
      tuko AI — página de prelanzamiento
@@ -1916,21 +1916,34 @@
       flex-direction: column;
       gap: 40px;
     }
-    .ia-hero-copy { max-width: none; flex: 1 1 auto; text-align: center; }
+    .ia-hero-copy { max-width: none; flex: 1 1 auto; text-align: left; }
     .ia-hero-visual { flex: 0 1 auto; width: 100%; max-width: none; }
-    .ia-hero h1 { text-align: center; }
-    .ia-lead { margin-left: auto; margin-right: auto; }
-    .ia-status { margin-left: auto; margin-right: auto; }
-    .ia-note { justify-content: center; }
+    .ia-hero h1 { text-align: left; }
+    .ia-lead { margin-left: 0; margin-right: 0; text-align: left; }
+    .ia-status { margin-left: 0; margin-right: 0; }
+    .ia-note { justify-content: flex-start; }
     .ia-hero-cta {
       max-width: 400px;
-      margin-left: auto;
-      margin-right: auto;
+      margin-left: 0;
+      margin-right: 0;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
     }
     .ia-hero-cta .btn-blue { width: 100%; justify-content: center; }
-    .ia-hero-social { justify-content: center; }
+    .ia-hero-social { justify-content: flex-start; }
+    .ia-section-head {
+      text-align: left;
+      margin-left: 0;
+      margin-right: 0;
+      max-width: none;
+    }
+    .ia-cta { text-align: left; }
+    .ia-cta h2 { text-align: left; }
+    .ia-form-intro { text-align: left; margin-left: 0; margin-right: 0; }
+    .ia-wl-card { text-align: left; }
+    .ia-soon {
+      text-align: left;
+    }
     .ia-panel-wrap { max-width: 360px; margin: 0 auto; }
     .ia-panel-plate {
       inset: 14px -10px -10px 10px;
@@ -2018,7 +2031,7 @@
     .ia-soon {
       flex-direction: column;
       gap: 8px;
-      text-align: center;
+      text-align: left;
       margin-top: 28px;
       border-radius: 18px;
       max-width: none;
@@ -2301,7 +2314,7 @@
 <section class="ia-section ia-signals-section">
   <div class="ia-section-head fade-up">
     <span class="ia-eyebrow" data-i18n="ia_signals_eyebrow">What it reads</span>
-    <h2 data-i18n="ia_signals_title">Six signals. <em>One campaign, ready.</em></h2>
+    <h2 data-i18n="ia_signals_title">Six signals. <em>One campaign, ready</em></h2>
     <p data-i18n="ia_signals_sub">tuko AI crosses your store data with market signals to choose the product, the price ladder, and the moment to launch.</p>
   </div>
 
@@ -2363,7 +2376,7 @@
 <section class="ia-section ia-flow-section">
   <div class="ia-section-head fade-up">
     <span class="ia-eyebrow" data-i18n="ia_flow_eyebrow">How it will work</span>
-    <h2 data-i18n="ia_flow_title">From zero to <em>campaign</em>—without the research grind.</h2>
+    <h2 data-i18n="ia_flow_title">From zero to <em>campaign</em>—without the research grind</h2>
     <p data-i18n="ia_flow_sub">Today, launching a group buy means picking products, discounts, and minimums by hand. tuko AI does that work for you.</p>
   </div>
 
@@ -2519,7 +2532,7 @@
 </footer>
 
 <script src="../assets/js/main.js?v=20260904a" defer></script>
-<script src="../assets/js/i18n.js?v=20260809d" defer></script>
+<script src="../assets/js/i18n.js?v=20260905b" defer></script>
 <script>
   /* Entrada del hero: mismo fade-up que el home */
   setTimeout(function () {
