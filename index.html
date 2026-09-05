@@ -3462,15 +3462,39 @@
       transform: none;
       box-shadow: 0 4px 16px rgba(20, 196, 146, 0.28);
     }
-    .hero-stats { justify-content: center; gap: 32px; }
-    .hero-stat span { margin-inline: auto; }
+    .hero-stats {
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+    }
+    .hero-stat {
+      flex: 1 1 0;
+      min-width: 0;
+      max-width: 168px;
+      text-align: center;
+    }
+    .hero-stat span {
+      margin-inline: auto;
+      max-width: none;
+    }
     .tk-popup { max-width: 400px; text-align: left; }
+    .tk-popup-inner { padding: 16px 16px 18px; }
+    .tk-popup-head { margin-bottom: 12px; }
+    .tk-chip {
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      padding: 6px 12px;
+      gap: 6px;
+    }
+    .tk-close { width: 28px; height: 28px; }
+    .tk-close svg { width: 12px; height: 12px; }
     .tk-pinfo { text-align: left; }
     .tk-title {
       font-size: clamp(16px, 4.4vw, 18px);
       line-height: 1.45;
       text-align: left;
       text-wrap: pretty;
+      margin-bottom: 14px;
       /* Reserva 2 líneas: al cambiar 1↔10 o el precio no salta el layout */
       min-height: calc(1.45em * 2 + 0.3em);
     }
@@ -3481,14 +3505,14 @@
       margin: 0;
       padding-top: 2px;
     }
-    /* Capas simétricas: mismo paso (~5px) y media más legible */
+    /* Capas más contenidas en móvil: menos “borde azul” saliente */
     .tk-flip-plate {
-      inset: 14px -10px -10px 10px;
-      border-radius: 22px;
+      inset: 10px -6px -6px 6px;
+      border-radius: 20px;
     }
     .tk-flip-plate-2 {
-      inset: 7px -5px -5px 5px;
-      border-radius: 21px;
+      inset: 5px -3px -3px 3px;
+      border-radius: 19px;
       background: linear-gradient(150deg, rgba(61,80,242,0.08) 0%, rgba(255,255,255,0.88) 100%);
       border-color: rgba(61,80,242,0.12);
     }
@@ -3613,6 +3637,16 @@
       text-align: left;
       margin-left: 0;
       margin-right: 0;
+    }
+    /* CTA + trust + badge: un solo eje centrado bajo el copy a izquierda */
+    .final-cta-btn,
+    .final-cta-shopify {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .final-cta-shopify {
+      display: flex;
+      width: fit-content;
     }
 
     .cta-inner { padding: 48px 16px; }
@@ -4389,7 +4423,7 @@
     <canvas id="ctaCanvas"></canvas>
     <div class="final-cta-inner">
       <span class="final-cta-eyebrow fade-up" data-i18n="fcta_eyebrow">Empieza hoy</span>
-      <h2 class="fade-up d1" data-i18n="fcta_title">Prueba una campaña.<br><em>Si no vendes, no pagas</em></h2>
+      <h2 class="fade-up d1" data-i18n="fcta_title">Prueba una campaña<br><em>Si no vendes, no pagas</em></h2>
       <p class="fade-up d2" data-i18n="fcta_sub">Instalar es gratis y el plan de entrada no tiene cuota: solo cobramos un porcentaje de lo que vendas con Tuko, con un tope máximo al mes.<br><br>Si un mes no lanzas ninguna campaña, pagas cero.</p>
       <a href="https://apps.shopify.com/tuko?locale=es&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="final-cta-btn fade-up d3" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -5212,7 +5246,7 @@ const translations = {
     ia_wl_count: '<b>39 marcas</b> ya están esperando su acceso',
     ia_wl_foot: 'Solo 50 tiendas entran en la beta privada.',
     fcta_eyebrow: 'Empieza hoy',
-    fcta_title: 'Prueba una campaña.<br><em>Si no vendes, no pagas</em>',
+    fcta_title: 'Prueba una campaña<br><em>Si no vendes, no pagas</em>',
     fcta_sub: 'Instalar es gratis y el plan de entrada no tiene cuota: solo cobramos un porcentaje de lo que vendas con Tuko, con un tope máximo al mes.<br><br>Si un mes no lanzas ninguna campaña, pagas cero.',
     fcta_btn: 'Instalar gratis en Shopify',
     fcta_trust2: 'Sin cuota mensual',
@@ -5707,7 +5741,7 @@ const translations = {
     ia_wl_count: '<b>39 brands</b> are already waiting for access',
     ia_wl_foot: 'Only 50 stores get into the private beta.',
     fcta_eyebrow: 'Start today',
-    fcta_title: 'Try a campaign.<br><em>If you don\'t sell, you don\'t pay</em>',
+    fcta_title: 'Try a campaign<br><em>If you don\'t sell, you don\'t pay</em>',
     fcta_sub: 'Install is free and the entry plan has no monthly fee: we only take a percentage of what you sell with Tuko, with a monthly cap.<br><br>If you don\'t run a campaign that month, you pay zero.',
     fcta_btn: 'Install free on Shopify',
     fcta_trust2: 'No monthly fee',
