@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tuko — Activar compra colectiva</title>
+  <title>Tuko — Activar campaña</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap');
 
@@ -675,11 +675,11 @@
       <div class="dashboard-card" id="dashboardCard">
         <div class="dash-row">
           <div>
-            <p class="dash-title">Activar compra colectiva</p>
-            <p class="dash-sub">Habilita la funcionalidad de grupo para este producto</p>
+            <p class="dash-title">Activar campaña</p>
+            <p class="dash-sub">Habilita la campaña de descuento para este producto</p>
           </div>
           <div class="toggle-wrap">
-            <div class="toggle" id="toggle" role="img" aria-label="Interruptor compra colectiva">
+            <div class="toggle" id="toggle" role="img" aria-label="Interruptor de campaña">
               <span class="toggle-track"></span>
               <span class="toggle-knob"></span>
             </div>
@@ -692,7 +692,7 @@
 
     <div class="modal-sheet" id="modalSheet" role="dialog" aria-labelledby="modalTitle">
       <div class="modal-chrome">
-        <span class="modal-brand-pill">TUKO Group Buying</span>
+        <span class="modal-brand-pill">TUKO Campaigns</span>
       </div>
       <div class="modal-close" aria-hidden="true">×</div>
       <div class="modal-scroll" id="modalScroll">
@@ -726,7 +726,7 @@
         </div>
 
         <div class="modal-section" id="secConfig">
-          <div class="section-label">CONFIGURACIÓN DEL GRUPO</div>
+          <div class="section-label">CONFIGURACIÓN DE LA CAMPAÑA</div>
           <div class="config-row">
             <div class="config-cell">
               <div class="config-ic" aria-hidden="true">
@@ -737,7 +737,7 @@
                 </svg>
               </div>
               <div>
-                <div class="config-label">Máx personas</div>
+                <div class="config-label">Máx unidades</div>
                 <div class="config-val">90</div>
               </div>
             </div>
@@ -763,7 +763,7 @@
               <div class="milestone-num">1</div>
               <div>
                 <div class="milestone-line1">
-                  <span class="milestone-people">5 personas</span>
+                  <span class="milestone-people">5 unidades</span>
                   <span class="milestone-disc">Descuento: 5%</span>
                 </div>
               </div>
@@ -782,7 +782,7 @@
               <div class="milestone-num">2</div>
               <div>
                 <div class="milestone-line1">
-                  <span class="milestone-people">15 personas</span>
+                  <span class="milestone-people">15 unidades</span>
                   <span class="milestone-disc">Descuento: 10%</span>
                 </div>
               </div>
@@ -801,7 +801,7 @@
               <div class="milestone-num">3</div>
               <div>
                 <div class="milestone-line1">
-                  <span class="milestone-people">40 personas</span>
+                  <span class="milestone-people">40 unidades</span>
                   <span class="milestone-disc">Descuento: 15%</span>
                 </div>
               </div>
@@ -820,7 +820,7 @@
               <div class="milestone-num">4</div>
               <div>
                 <div class="milestone-line1">
-                  <span class="milestone-people">90 personas</span>
+                  <span class="milestone-people">90 unidades</span>
                   <span class="milestone-disc">Descuento: 20%</span>
                 </div>
               </div>
@@ -839,7 +839,7 @@
             <div class="btn-activate-wrap">
               <div class="success-badge" id="successBadge" aria-hidden="true">✓</div>
               <button type="button" class="btn-activate" id="btnActivate" tabindex="-1">
-                Activar compra colectiva
+                Activar campaña
               </button>
             </div>
           </div>
@@ -912,15 +912,15 @@
 
         const dashTitle = document.querySelector('.dash-title');
         const dashSub = document.querySelector('.dash-sub');
-        if (dashTitle) dashTitle.textContent = en ? 'Enable group buying' : 'Activar compra colectiva';
+        if (dashTitle) dashTitle.textContent = en ? 'Enable campaign' : 'Activar campaña';
         if (dashSub) {
           dashSub.textContent = en
-            ? 'Turn on group buying for this product.'
-            : 'Habilita la funcionalidad de grupo para este producto';
+            ? 'Turn on the discount campaign for this product.'
+            : 'Habilita la campaña de descuento para este producto';
         }
 
         const toggle = $('toggle');
-        if (toggle) toggle.setAttribute('aria-label', en ? 'Group buying switch' : 'Interruptor compra colectiva');
+        if (toggle) toggle.setAttribute('aria-label', en ? 'Campaign switch' : 'Interruptor de campaña');
 
         const mt = $('modalTitle');
         if (mt) mt.textContent = en ? 'Confirm activation' : 'Confirmar activación';
@@ -940,9 +940,9 @@
         if (lines[1]) lines[1].textContent = en ? 'Shipping: ' + eur(3.99) : 'Gasto de envío: 3,99 €';
 
         const secCLab = document.querySelector('#secConfig .section-label');
-        if (secCLab) secCLab.textContent = en ? 'GROUP SETTINGS' : 'CONFIGURACIÓN DEL GRUPO';
+        if (secCLab) secCLab.textContent = en ? 'CAMPAIGN SETTINGS' : 'CONFIGURACIÓN DE LA CAMPAÑA';
         const cfgLabs = document.querySelectorAll('#secConfig .config-label');
-        if (cfgLabs[0]) cfgLabs[0].textContent = en ? 'Max people' : 'Máx personas';
+        if (cfgLabs[0]) cfgLabs[0].textContent = en ? 'Max units' : 'Máx unidades';
         if (cfgLabs[1]) cfgLabs[1].textContent = en ? 'Time limit' : 'Tiempo límite';
         const cfgTime = document.querySelector('#secConfig .config-val-sm');
         if (cfgTime) {
@@ -967,7 +967,7 @@
           const people = sec.querySelector('.milestone-people');
           const disc = sec.querySelector('.milestone-disc');
           const save = sec.querySelector('.price-save');
-          if (people) people.textContent = en ? row.people + ' people' : row.people + ' personas';
+          if (people) people.textContent = en ? row.people + ' units' : row.people + ' unidades';
           if (disc) disc.textContent = en ? 'Discount: ' + row.disc + '%' : 'Descuento: ' + row.disc + '%';
           if (save) save.textContent = en ? 'Save: ' + eur(row.saveNum) : 'Ahorro: ' + row.saveEs;
         }
@@ -975,7 +975,7 @@
         const cancel = document.querySelector('.btn-cancel');
         const act = $('btnActivate');
         if (cancel) cancel.textContent = en ? 'Cancel' : 'Cancelar';
-        if (act) act.textContent = en ? 'Enable group buying' : 'Activar compra colectiva';
+        if (act) act.textContent = en ? 'Enable campaign' : 'Activar campaña';
       }
 
       window.addEventListener('message', function (ev) {

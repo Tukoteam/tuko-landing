@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tuko — Cómo unirte al grupo</title>
+  <title>Tuko — Cómo reservar en la campaña</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap');
 
@@ -1027,18 +1027,18 @@
                   decoding="async"
                 />
               </div>
-              <p class="scene-hint">Cómo te unes al grupo</p>
-              <p class="scene-sub">Pulsa el botón para entrar en la compra colectiva.</p>
+              <p class="scene-hint">Cómo reservas en la campaña</p>
+              <p class="scene-sub">Pulsa el botón para reservar en la campaña.</p>
               <h3 class="intro-product-title">Crema hidratante</h3>
               <p class="intro-product-price">24,90&nbsp;€</p>
-              <button type="button" class="intro-primary-btn" id="introJoinBtn" aria-label="Únete al grupo">
+              <button type="button" class="intro-primary-btn" id="introJoinBtn" aria-label="Reservar">
                 <svg class="cta-icon" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
                   <circle cx="9" cy="7" r="4"/>
                   <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
                   <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                 </svg>
-                <span id="demoJoinLabel">Únete al grupo</span>
+                <span id="demoJoinLabel">Reservar</span>
               </button>
             </div>
 
@@ -1047,10 +1047,10 @@
               <p class="scene-sub">Pulsa <strong>+</strong> para añadir otra unidad y luego <strong>Continuar</strong>.</p>
               <div class="intro-discount-mini" aria-hidden="true">
                 <p class="intro-discount-mini__title">Niveles de descuento</p>
-                <p class="intro-discount-mini__sub">Más personas unidas, más ahorro para todas</p>
+                <p class="intro-discount-mini__sub">Más unidades reservadas, más ahorro para todos</p>
                 <div class="intro-discount-mini__status">
                   <span class="intro-discount-mini__status-num">0</span>
-                  <span class="intro-discount-mini__status-label">Personas en el grupo</span>
+                  <span class="intro-discount-mini__status-label">Unidades reservadas</span>
                 </div>
                 <div class="intro-discount-mini__carousel">
                   <div class="intro-discount-mini__card intro-discount-mini__card--active">
@@ -1063,14 +1063,14 @@
                     <p class="intro-discount-mini__ahead">Por delante</p>
                     <p class="intro-discount-mini__pct">5% <span>OFF</span></p>
                     <div class="intro-discount-mini__foot">
-                      <span id="demoMiniFootA">0/5 personas unidas</span>
-                      <span id="demoMiniFootB">Faltan 5 plazas</span>
+                      <span id="demoMiniFootA">0/5 unidades reservadas</span>
+                      <span id="demoMiniFootB">Faltan 5 unidades</span>
                     </div>
                     <div class="intro-discount-mini__bar"><span></span></div>
                   </div>
                   <div class="intro-discount-mini__card intro-discount-mini__card--next">
                     10%
-                    <small id="demoMiniNextLbl">15 personas</small>
+                    <small id="demoMiniNextLbl">15 unidades</small>
                   </div>
                 </div>
                 <div class="intro-discount-mini__dots" aria-hidden="true">
@@ -1090,11 +1090,11 @@
                 <div class="intro-success-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
                 </div>
-                <p class="intro-success-title">Te uniste al grupo</p>
-                <p class="scene-sub" style="margin-bottom: 0;">Invita a más personas compartiendo el enlace.</p>
+                <p class="intro-success-title">Reserva confirmada</p>
+                <p class="scene-sub" style="margin-bottom: 0;">Invita a más gente compartiendo el enlace.</p>
               </div>
               <div class="share-wrap intro-share-block" id="shareWrap">
-            <button type="button" class="share-btn" id="shareBtn" aria-expanded="false" aria-haspopup="true" aria-controls="shareDropdown" aria-label="Compartir el grupo">
+            <button type="button" class="share-btn" id="shareBtn" aria-expanded="false" aria-haspopup="true" aria-controls="shareDropdown" aria-label="Compartir la campaña">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="18" cy="5" r="3"/>
                 <circle cx="6" cy="12" r="3"/>
@@ -1199,9 +1199,9 @@
 
         const join = $('introJoinBtn');
         if (join) {
-          join.setAttribute('aria-label', en ? 'Join the group' : 'Únete al grupo');
+          join.setAttribute('aria-label', en ? 'Reserve' : 'Reservar');
           const jl = $('demoJoinLabel');
-          if (jl) jl.textContent = en ? 'Join the group' : 'Únete al grupo';
+          if (jl) jl.textContent = en ? 'Reserve' : 'Reservar';
         }
 
         const s1 = document.querySelector('#flowStep1');
@@ -1210,11 +1210,11 @@
           if (plab) plab.textContent = en ? 'Product' : 'Producto';
           const hints = s1.querySelectorAll('.scene-hint');
           const subs = s1.querySelectorAll('.scene-sub');
-          if (hints[0]) hints[0].textContent = en ? 'how to join' : 'Cómo te unes al grupo';
+          if (hints[0]) hints[0].textContent = en ? 'How to reserve' : 'Cómo reservas en la campaña';
           if (subs[0]) {
             subs[0].textContent = en
-              ? 'Tap the button to enter the group buy.'
-              : 'Pulsa el botón para entrar en la compra colectiva.';
+              ? 'Tap the button to reserve in the campaign.'
+              : 'Pulsa el botón para reservar en la campaña.';
           }
           const title = s1.querySelector('.intro-product-title');
           if (title) title.textContent = en ? 'Moisturizing cream' : 'Crema hidratante';
@@ -1245,15 +1245,15 @@
           if (mt) mt.textContent = en ? 'Discount tiers' : 'Niveles de descuento';
           if (ms) {
             ms.textContent = en
-              ? 'More people in the group, more savings for everyone'
-              : 'Más personas unidas, más ahorro para todas';
+              ? 'More units reserved, more savings for everyone'
+              : 'Más unidades reservadas, más ahorro para todos';
           }
-          if (ml) ml.textContent = en ? 'People in the group' : 'Personas en el grupo';
+          if (ml) ml.textContent = en ? 'Units reserved' : 'Unidades reservadas';
           if (badge) badge.textContent = en ? 'CURRENT' : 'ACTUAL';
           if (ahead) ahead.textContent = en ? 'Up next' : 'Por delante';
-          if (fa) fa.textContent = en ? '0/5 people joined' : '0/5 personas unidas';
-          if (fb) fb.textContent = en ? '5 spots left' : 'Faltan 5 plazas';
-          if (nl) nl.textContent = en ? '15 people' : '15 personas';
+          if (fa) fa.textContent = en ? '0/5 units reserved' : '0/5 unidades reservadas';
+          if (fb) fb.textContent = en ? '5 units left' : 'Faltan 5 unidades';
+          if (nl) nl.textContent = en ? '15 units' : '15 unidades';
           const qtyRow = s2.querySelector('.intro-qty-row');
           if (qtyRow) qtyRow.setAttribute('aria-label', en ? 'Quantity' : 'Cantidad');
         }
@@ -1268,17 +1268,17 @@
         const s3 = document.querySelector('#flowStep3');
         if (s3) {
           const suc = s3.querySelector('.intro-success-title');
-          if (suc) suc.textContent = en ? "You're in the group" : 'Te uniste al grupo';
+          if (suc) suc.textContent = en ? 'Reservation confirmed' : 'Reserva confirmada';
           const sub3 = s3.querySelector('.intro-success-box .scene-sub');
           if (sub3) {
             sub3.textContent = en
               ? 'Invite more people by sharing the link.'
-              : 'Invita a más personas compartiendo el enlace.';
+              : 'Invita a más gente compartiendo el enlace.';
           }
         }
 
         const shareBtn = $('shareBtn');
-        if (shareBtn) shareBtn.setAttribute('aria-label', en ? 'Share the group' : 'Compartir el grupo');
+        if (shareBtn) shareBtn.setAttribute('aria-label', en ? 'Share the campaign' : 'Compartir la campaña');
         const shareTxt = $('demoShareBtnText');
         if (shareTxt) shareTxt.textContent = en ? 'Share' : 'Compartir';
         const ddl = document.querySelector('.share-dropdown-label');

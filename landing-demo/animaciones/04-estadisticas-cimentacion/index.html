@@ -185,7 +185,7 @@
 <body>
   <div class="animation-viewport" id="viewport">
     <h1 class="head-title">Estadísticas</h1>
-    <p class="head-sub">Visualiza el rendimiento de tus grupos de compra colectiva</p>
+    <p class="head-sub">Visualiza el rendimiento de tus campañas</p>
 
     <div class="period-row">
       <span class="period-label">Período:</span>
@@ -206,7 +206,7 @@
             <circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/>
           </svg>
         </div>
-        <div class="stat-label">Grupos activos</div>
+        <div class="stat-label">Campañas activas</div>
         <div class="stat-value" id="vActivos" data-type="int">0</div>
       </div>
       <div class="stat-card">
@@ -216,7 +216,7 @@
             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
           </svg>
         </div>
-        <div class="stat-label">Grupos exitosos</div>
+        <div class="stat-label">Campañas exitosas</div>
         <div class="stat-value" id="vExitosos" data-type="int">0</div>
       </div>
       <div class="stat-card">
@@ -227,7 +227,7 @@
             <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
           </svg>
         </div>
-        <div class="stat-label">Participantes totales</div>
+        <div class="stat-label">Unidades totales vendidas</div>
         <div class="stat-value" id="vParticipantes" data-type="int">0</div>
       </div>
       <div class="stat-card">
@@ -326,8 +326,8 @@
         const hs = document.querySelector('.head-sub');
         if (hs) {
           hs.textContent = en
-            ? 'See how your group buys are performing.'
-            : 'Visualiza el rendimiento de tus grupos de compra colectiva';
+            ? 'See how your campaigns are performing.'
+            : 'Visualiza el rendimiento de tus campañas';
         }
         const plab = document.querySelector('.period-label');
         if (plab) plab.textContent = en ? 'Period:' : 'Período:';
@@ -344,15 +344,15 @@
 
         const labs = document.querySelectorAll('.stat-label');
         const labEs = [
-          'Grupos activos',
-          'Grupos exitosos',
-          'Participantes totales',
+          'Campañas activas',
+          'Campañas exitosas',
+          'Unidades totales vendidas',
           'Ingresos generados',
         ];
         const labEn = [
-          'Active groups',
-          'Successful groups',
-          'Total participants',
+          'Active campaigns',
+          'Successful campaigns',
+          'Total units sold',
           'Revenue generated',
         ];
         const labTxt = en ? labEn : labEs;
