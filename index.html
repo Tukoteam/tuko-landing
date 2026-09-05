@@ -3329,11 +3329,21 @@
       text-align: left;
     }
     .how-step.reversed > .how-step-text { padding: 2px 2px 6px; }
-    .how-step-meta { margin-bottom: 10px; gap: 8px; }
+    .how-step-meta { margin-bottom: 6px; gap: 5px; }
     .how-step-num { font-size: 64px; }
     .how-step-meta::after { width: 28px; height: 2.5px; box-shadow: none; }
-    .how-step-title { max-width: none; font-size: clamp(22px, 5.5vw, 28px); }
-    .how-step-desc { max-width: none; font-size: 15.5px; }
+    .how-step-title {
+      max-width: none;
+      font-size: clamp(22px, 5.5vw, 28px);
+      margin-bottom: 8px;
+      line-height: 1.18;
+    }
+    .how-step-desc {
+      max-width: none;
+      font-size: 15.5px;
+      line-height: 1.6;
+    }
+    .how-step-desc .s-para-gap { height: 0.4em; }
     .how-step-visual { min-height: 0; padding: 6px 0 0; }
     .how-steps > .how-step .how-anim-box {
       /* 100% del contenedor (no 100vw): 100vw en móvil provoca scroll lateral */
@@ -4193,7 +4203,7 @@
         <span class="how-step-num" aria-hidden="true">01</span>
       </div>
       <h3 class="how-step-title" data-i18n="step1_title">Eliges producto y objetivo</h3>
-      <p class="how-step-desc" data-i18n="step1_desc">Un producto, un objetivo de unidades y un plazo (72 horas funciona bien).<br><br>La escalera de descuentos la pones tú: no cedes ni un punto de margen más del que decidas.</p>
+      <p class="how-step-desc" data-i18n="step1_desc">Un producto, un objetivo de unidades y un plazo (72 horas funciona bien).<span class="s-para-gap" aria-hidden="true"></span>La escalera de descuentos la pones tú: no cedes ni un punto de margen más del que decidas.</p>
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
@@ -4209,7 +4219,7 @@
         <span class="how-step-num" aria-hidden="true">02</span>
       </div>
       <h3 class="how-step-title" data-i18n="step2_title">Tus clientes reservan, como siempre</h3>
-      <p class="how-step-desc" data-i18n="step2_desc">Ven en la ficha cuántas unidades faltan para el siguiente precio y pasan por tu checkout de siempre, sin registrarse en ningún sitio y sin conocer a nadie.<br><br>Se les retiene el importe en la tarjeta, pero no se les cobra nada todavía.</p>
+      <p class="how-step-desc" data-i18n="step2_desc">Ven en la ficha cuántas unidades faltan para el siguiente precio y pasan por tu checkout de siempre, sin registrarse en ningún sitio y sin conocer a nadie.<span class="s-para-gap" aria-hidden="true"></span>Se les retiene el importe en la tarjeta, pero no se les cobra nada todavía.</p>
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
@@ -4225,7 +4235,7 @@
         <span class="how-step-num" aria-hidden="true">03</span>
       </div>
       <h3 class="how-step-title" data-i18n="step3_title">Ellos traen a los que faltan</h3>
-      <p class="how-step-desc" data-i18n="step3_desc">A quien ya ha reservado le interesa que se llegue al objetivo, así que lo comparte.<br><br>Ese tráfico no lo has pagado tú.</p>
+      <p class="how-step-desc" data-i18n="step3_desc">A quien ya ha reservado le interesa que se llegue al objetivo, así que lo comparte.<span class="s-para-gap" aria-hidden="true"></span>Ese tráfico no lo has pagado tú.</p>
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
@@ -4241,7 +4251,7 @@
         <span class="how-step-num" aria-hidden="true">04</span>
       </div>
       <h3 class="how-step-title" data-i18n="step4_title">Se cierra la campaña y se cobra</h3>
-      <p class="how-step-desc" data-i18n="step4_desc">Cuando termina el plazo, se cobra a todos el precio del escalón alcanzado.<br><br>Si no se alcanza ninguno, cada cliente paga el precio normal y la venta sigue siendo tuya.<br><br>Nunca pierdes una venta por intentarlo.</p>
+      <p class="how-step-desc" data-i18n="step4_desc">Cuando termina el plazo, se cobra a todos el precio del escalón alcanzado.<span class="s-para-gap" aria-hidden="true"></span>Si no se alcanza ninguno, cada cliente paga el precio normal y la venta sigue siendo tuya.<span class="s-para-gap" aria-hidden="true"></span>Nunca pierdes una venta por intentarlo.</p>
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
@@ -5383,13 +5393,13 @@ const translations = {
 
     /* HOW IT WORKS — STEPS */
     step1_title: 'Eliges producto y objetivo',
-    step1_desc: 'Un producto, un objetivo de unidades y un plazo (72 horas funciona bien).<br><br>La escalera de descuentos la pones tú: no cedes ni un punto de margen más del que decidas.',
+    step1_desc: 'Un producto, un objetivo de unidades y un plazo (72 horas funciona bien).<span class="s-para-gap" aria-hidden="true"></span>La escalera de descuentos la pones tú: no cedes ni un punto de margen más del que decidas.',
     step2_title: 'Tus clientes reservan, como siempre',
-    step2_desc: 'Ven en la ficha cuántas unidades faltan para el siguiente precio y pasan por tu checkout de siempre, sin registrarse en ningún sitio y sin conocer a nadie.<br><br>Se les retiene el importe en la tarjeta, pero no se les cobra nada todavía.',
+    step2_desc: 'Ven en la ficha cuántas unidades faltan para el siguiente precio y pasan por tu checkout de siempre, sin registrarse en ningún sitio y sin conocer a nadie.<span class="s-para-gap" aria-hidden="true"></span>Se les retiene el importe en la tarjeta, pero no se les cobra nada todavía.',
     step3_title: 'Ellos traen a los que faltan',
-    step3_desc: 'A quien ya ha reservado le interesa que se llegue al objetivo, así que lo comparte.<br><br>Ese tráfico no lo has pagado tú.',
+    step3_desc: 'A quien ya ha reservado le interesa que se llegue al objetivo, así que lo comparte.<span class="s-para-gap" aria-hidden="true"></span>Ese tráfico no lo has pagado tú.',
     step4_title: 'Se cierra la campaña y se cobra',
-    step4_desc: 'Cuando termina el plazo, se cobra a todos el precio del escalón alcanzado.<br><br>Si no se alcanza ninguno, cada cliente paga el precio normal y la venta sigue siendo tuya.<br><br>Nunca pierdes una venta por intentarlo.',
+    step4_desc: 'Cuando termina el plazo, se cobra a todos el precio del escalón alcanzado.<span class="s-para-gap" aria-hidden="true"></span>Si no se alcanza ninguno, cada cliente paga el precio normal y la venta sigue siendo tuya.<span class="s-para-gap" aria-hidden="true"></span>Nunca pierdes una venta por intentarlo.',
 
     /* PRECIOS */
     pricing_badge: 'Precios',
@@ -5878,13 +5888,13 @@ const translations = {
 
     /* HOW IT WORKS — STEPS */
     step1_title: 'You pick a product and a goal',
-    step1_desc: 'One product, a unit goal and a deadline (72 hours works well).<br><br>You set the discount ladder: you never give away a point of margin beyond what you decide.',
+    step1_desc: 'One product, a unit goal and a deadline (72 hours works well).<span class="s-para-gap" aria-hidden="true"></span>You set the discount ladder: you never give away a point of margin beyond what you decide.',
     step2_title: 'Your customers reserve, as usual',
-    step2_desc: 'They see on the product page how many units are left for the next price and go through your usual checkout—no signing up elsewhere, no meeting anyone.<br><br>The amount is held on their card, but nothing is charged yet.',
+    step2_desc: 'They see on the product page how many units are left for the next price and go through your usual checkout—no signing up elsewhere, no meeting anyone.<span class="s-para-gap" aria-hidden="true"></span>The amount is held on their card, but nothing is charged yet.',
     step3_title: 'They bring the ones still missing',
-    step3_desc: 'Anyone who already reserved wants the goal to be hit, so they share it.<br><br>That traffic didn\'t cost you a thing.',
+    step3_desc: 'Anyone who already reserved wants the goal to be hit, so they share it.<span class="s-para-gap" aria-hidden="true"></span>That traffic didn\'t cost you a thing.',
     step4_title: 'The campaign closes and everyone is charged',
-    step4_desc: 'When the deadline ends, everyone is charged the price of the tier reached.<br><br>If none is reached, each customer pays the regular price and the sale is still yours.<br><br>You never lose a sale for trying.',
+    step4_desc: 'When the deadline ends, everyone is charged the price of the tier reached.<span class="s-para-gap" aria-hidden="true"></span>If none is reached, each customer pays the regular price and the sale is still yours.<span class="s-para-gap" aria-hidden="true"></span>You never lose a sale for trying.',
 
     /* PRICING */
     pricing_badge: 'Pricing',
