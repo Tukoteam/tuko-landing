@@ -3631,18 +3631,30 @@
       line-height: 1.75;
     }
     .final-cta-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       text-align: left;
     }
     .final-cta > .final-cta-inner > p {
       text-align: left;
       margin-left: 0;
       margin-right: 0;
+      align-self: stretch;
     }
-    /* CTA + trust + badge: un solo eje centrado bajo el copy a izquierda */
+    .final-cta h2 { align-self: stretch; }
+    /* Etiqueta, botón, trust y badge Shopify centrados */
+    .final-cta-eyebrow,
     .final-cta-btn,
+    .final-cta-trust,
     .final-cta-shopify {
-      margin-left: auto;
-      margin-right: auto;
+      align-self: center;
+    }
+    .final-cta-btn {
+      display: flex;
+      width: 100%;
+      max-width: 280px;
+      box-sizing: border-box;
     }
     .final-cta-shopify {
       display: flex;
