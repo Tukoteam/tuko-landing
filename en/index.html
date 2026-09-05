@@ -3675,12 +3675,28 @@
       margin-right: auto;
     }
     .cards-grid, .ben-grid { grid-template-columns: 1fr; max-width: 100%; }
-    .card { padding: 24px 20px 22px; }
+    .card { padding: 22px 18px 20px; }
+    .ben { padding: 22px 18px 20px; }
+    .card-top { margin-bottom: 12px; }
+    .ben-ico { margin-bottom: 12px; }
+    .card h3,
+    .ben h3 {
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
     .card p,
-    .ben p,
+    .ben p {
+      line-height: 1.6;
+    }
+    .card-source { margin-top: 12px; }
+    .card .s-para-gap,
+    .ben .s-para-gap,
+    .how-step-desc .s-para-gap {
+      height: 0.4em;
+    }
     .how-step-desc,
     .faq-a {
-      line-height: 1.75;
+      line-height: 1.6;
     }
     .final-cta-inner {
       display: flex;
@@ -4114,7 +4130,7 @@
         <span class="card-n" aria-hidden="true">01</span>
       </div>
       <h3 data-i18n="card1_title">Every new customer costs you more</h3>
-      <p data-i18n="card1_text">The cost of acquiring a customer in ecommerce has risen more than 200% in a decade.<br><br>Every sale you bring in with ads is more expensive than the last.</p>
+      <p data-i18n="card1_text">The cost of acquiring a customer in ecommerce has risen more than 200% in a decade.<span class="s-para-gap" aria-hidden="true"></span>Every sale you bring in with ads is more expensive than the last.</p>
       <p class="card-source" data-i18n="card1_source">Source: SimplicityDX, “The Customer Acquisition Crisis”</p>
     </div>
     <div class="card fade-up d2">
@@ -4127,7 +4143,7 @@
         <span class="card-n" aria-hidden="true">02</span>
       </div>
       <h3 data-i18n="card2_title">Idle stock eats your margin</h3>
-      <p data-i18n="card2_text">Cutting 30% moves it, sure. But it wipes the profit on the whole batch.<br><br>And customers who were already going to buy take the discount too.</p>
+      <p data-i18n="card2_text">Cutting 30% moves it, sure. But it wipes the profit on the whole batch.<span class="s-para-gap" aria-hidden="true"></span>And customers who were already going to buy take the discount too.</p>
       <p class="card-source" data-i18n="card2_source">Illustrative margin example on a 30% markdown</p>
     </div>
     <div class="card fade-up d3">
@@ -4140,7 +4156,7 @@
         <span class="card-n" aria-hidden="true">03</span>
       </div>
       <h3 data-i18n="card3_title">A flat discount doesn't pay for itself</h3>
-      <p data-i18n="card3_text">A −20% on a product with 60% margin forces you to sell 67% more units just to stay even.<br><br>That almost never happens.</p>
+      <p data-i18n="card3_text">A −20% on a product with 60% margin forces you to sell 67% more units just to stay even.<span class="s-para-gap" aria-hidden="true"></span>That almost never happens.</p>
       <p class="card-source" data-i18n="card3_source">Break-even threshold calculation (60% margin, −20% discount)</p>
     </div>
   </div>
@@ -4156,22 +4172,22 @@
     <div class="ben fade-up d1">
       <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
       <h3 data-i18n="ben1_title">More units per campaign</h3>
-      <p data-i18n="ben1_text">Same product, same week—selling double or triple the units.<br><br>Without raising your ad budget by a euro.</p>
+      <p data-i18n="ben1_text">Same product, same week—selling double or triple the units.<span class="s-para-gap" aria-hidden="true"></span>Without raising your ad budget by a euro.</p>
     </div>
     <div class="ben fade-up d2">
       <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
       <h3 data-i18n="ben2_title">Idle stock, cleared</h3>
-      <p data-i18n="ben2_text">Turn the markdown you were going to make anyway into a sale conditioned on volume.<br><br>Free up capital without giving away margin.</p>
+      <p data-i18n="ben2_text">Turn the markdown you were going to make anyway into a sale conditioned on volume.<span class="s-para-gap" aria-hidden="true"></span>Free up capital without giving away margin.</p>
     </div>
     <div class="ben fade-up d3">
       <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
       <h3 data-i18n="ben3_title">You set the floor</h3>
-      <p data-i18n="ben3_text">You define the ladder and the maximum discount.<br><br>Tuko warns you if a tier eats your margin before you publish the campaign.</p>
+      <p data-i18n="ben3_text">You define the ladder and the maximum discount.<span class="s-para-gap" aria-hidden="true"></span>Tuko warns you if a tier eats your margin before you publish the campaign.</p>
     </div>
     <div class="ben fade-up d1">
       <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div>
       <h3 data-i18n="ben4_title">Buyers you didn't pay for</h3>
-      <p data-i18n="ben4_text">Every customer who already reserved has a financial reason to share it.<br><br>That traffic costs you zero.</p>
+      <p data-i18n="ben4_text">Every customer who already reserved has a financial reason to share it.<span class="s-para-gap" aria-hidden="true"></span>That traffic costs you zero.</p>
     </div>
     <div class="ben fade-up d2">
       <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
@@ -4181,7 +4197,7 @@
     <div class="ben fade-up d3">
       <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
       <h3 data-i18n="ben6_title">No refunds or manual adjustments</h3>
-      <p data-i18n="ben6_text">Customers get an authorization hold when they reserve and are charged once when the campaign closes, with the discount already applied.<br><br>No partial charges or refunds to manage.</p>
+      <p data-i18n="ben6_text">Customers get an authorization hold when they reserve and are charged once when the campaign closes, with the discount already applied.<span class="s-para-gap" aria-hidden="true"></span>No partial charges or refunds to manage.</p>
     </div>
   </div>
 </section>
@@ -5373,11 +5389,11 @@ const translations = {
     problem_title: 'Bajar el precio no es el problema.<br><span class="title-accent">Regalárselo</span> a quien ya iba a<br>comprar, <em class="title-accent-em">sí</em>',
     problem_sub: 'Cada rebaja plana se la llevan también los clientes que habrían comprado igual.<span class="s-para-gap" aria-hidden="true"></span>Estás pagando margen por ventas que ya tenías.',
     card1_title: 'Cada cliente nuevo te cuesta más',
-    card1_text: 'El coste de captar un cliente en e-commerce ha subido más de un 200 % en una década.<br><br>Cada venta que traes con anuncios es más cara que la anterior.',
+    card1_text: 'El coste de captar un cliente en e-commerce ha subido más de un 200 % en una década.<span class="s-para-gap" aria-hidden="true"></span>Cada venta que traes con anuncios es más cara que la anterior.',
     card2_title: 'El stock parado se come el margen',
-    card2_text: 'Rebajarlo un 30 % lo mueve, sí. Pero se lleva por delante el beneficio de todo el lote.<br><br>Y encima el descuento lo cobran también los clientes que ya lo iban a comprar.',
+    card2_text: 'Rebajarlo un 30 % lo mueve, sí. Pero se lleva por delante el beneficio de todo el lote.<span class="s-para-gap" aria-hidden="true"></span>Y encima el descuento lo cobran también los clientes que ya lo iban a comprar.',
     card3_title: 'El descuento plano no se paga solo',
-    card3_text: 'Un −20 % en un producto con 60 % de margen te obliga a vender un 67 % más unidades solo para quedarte igual.<br><br>Casi nunca pasa.',
+    card3_text: 'Un −20 % en un producto con 60 % de margen te obliga a vender un 67 % más unidades solo para quedarte igual.<span class="s-para-gap" aria-hidden="true"></span>Casi nunca pasa.',
     card1_source: 'Fuente: SimplicityDX, «The Customer Acquisition Crisis»',
     card2_source: 'Ejemplo ilustrativo de margen sobre una rebaja del 30 %',
     card3_source: 'Cálculo de umbral de rentabilidad (margen 60 %, descuento −20 %)',
@@ -5488,17 +5504,17 @@ const translations = {
     benefits_title: 'Un descuento por volumen hace que un cliente compre tres unidades. <span class="title-accent">Tuko</span> hace que <em class="title-accent-em">tres clientes</em> compren una',
     benefits_sub: 'No es una app de descuentos más.<span class="s-para-gap" aria-hidden="true"></span>Es la única que usa el descuento para traerte compradores que no tenías.',
     ben1_title: 'Más unidades por campaña',
-    ben1_text: 'El mismo producto y la misma semana, vendiendo el doble o el triple de unidades.<br><br>Sin subir un euro el presupuesto de anuncios.',
+    ben1_text: 'El mismo producto y la misma semana, vendiendo el doble o el triple de unidades.<span class="s-para-gap" aria-hidden="true"></span>Sin subir un euro el presupuesto de anuncios.',
     ben2_title: 'Stock parado, fuera',
-    ben2_text: 'Convierte la rebaja que ibas a hacer de todas formas en una venta condicionada al volumen.<br><br>Liberas capital sin regalar margen.',
+    ben2_text: 'Convierte la rebaja que ibas a hacer de todas formas en una venta condicionada al volumen.<span class="s-para-gap" aria-hidden="true"></span>Liberas capital sin regalar margen.',
     ben3_title: 'Tú decides el suelo',
-    ben3_text: 'Defines la escalera y el descuento máximo.<br><br>Tuko te avisa si un escalón se come tu margen antes de publicar la campaña.',
+    ben3_text: 'Defines la escalera y el descuento máximo.<span class="s-para-gap" aria-hidden="true"></span>Tuko te avisa si un escalón se come tu margen antes de publicar la campaña.',
     ben4_title: 'Compradores que no has pagado',
-    ben4_text: 'Cada cliente que ya ha reservado tiene un motivo económico para compartirlo.<br><br>Ese tráfico te cuesta cero.',
+    ben4_text: 'Cada cliente que ya ha reservado tiene un motivo económico para compartirlo.<span class="s-para-gap" aria-hidden="true"></span>Ese tráfico te cuesta cero.',
     ben5_title: 'Instalado en dos minutos',
     ben5_text: 'App nativa de Shopify. Se añade a la ficha de producto sin tocar el tema ni el checkout.',
     ben6_title: 'Ni devoluciones ni ajustes a mano',
-    ben6_text: 'A tus clientes se les retiene el importe al reservar y se les cobra una sola vez al cerrar la campaña, con el descuento ya aplicado.<br><br>Sin cobros parciales ni devoluciones que gestionar.',
+    ben6_text: 'A tus clientes se les retiene el importe al reservar y se les cobra una sola vez al cerrar la campaña, con el descuento ya aplicado.<span class="s-para-gap" aria-hidden="true"></span>Sin cobros parciales ni devoluciones que gestionar.',
 
     /* CTA */
     cta_title: 'Activa Tuko en tu tienda y convierte el tráfico en ventas reales.',
@@ -5868,11 +5884,11 @@ const translations = {
     problem_title: 'Cutting the price isn\'t the problem.<br><span class="title-accent">Giving it away</span> to people who were<br>going to buy anyway <em class="title-accent-em">is</em>',
     problem_sub: 'Every flat discount also goes to customers who would have bought at full price.<span class="s-para-gap" aria-hidden="true"></span>You\'re paying margin on sales you already had.',
     card1_title: 'Every new customer costs you more',
-    card1_text: 'The cost of acquiring a customer in ecommerce has risen more than 200% in a decade.<br><br>Every sale you bring in with ads is more expensive than the last.',
+    card1_text: 'The cost of acquiring a customer in ecommerce has risen more than 200% in a decade.<span class="s-para-gap" aria-hidden="true"></span>Every sale you bring in with ads is more expensive than the last.',
     card2_title: 'Idle stock eats your margin',
-    card2_text: 'Cutting 30% moves it, sure. But it wipes the profit on the whole batch.<br><br>And customers who were already going to buy take the discount too.',
+    card2_text: 'Cutting 30% moves it, sure. But it wipes the profit on the whole batch.<span class="s-para-gap" aria-hidden="true"></span>And customers who were already going to buy take the discount too.',
     card3_title: 'A flat discount doesn\'t pay for itself',
-    card3_text: 'A −20% on a product with 60% margin forces you to sell 67% more units just to stay even.<br><br>That almost never happens.',
+    card3_text: 'A −20% on a product with 60% margin forces you to sell 67% more units just to stay even.<span class="s-para-gap" aria-hidden="true"></span>That almost never happens.',
     card1_source: 'Source: SimplicityDX, “The Customer Acquisition Crisis”',
     card2_source: 'Illustrative margin example on a 30% markdown',
     card3_source: 'Break-even threshold calculation (60% margin, −20% discount)',
@@ -5983,17 +5999,17 @@ const translations = {
     benefits_title: 'A volume discount makes one customer buy three units. <span class="title-accent">Tuko</span> makes <em class="title-accent-em">three customers</em> buy one',
     benefits_sub: 'It isn\'t another discount app.<span class="s-para-gap" aria-hidden="true"></span>It\'s the only one that uses the discount to bring you buyers you didn\'t have.',
     ben1_title: 'More units per campaign',
-    ben1_text: 'Same product, same week—selling double or triple the units.<br><br>Without raising your ad budget by a euro.',
+    ben1_text: 'Same product, same week—selling double or triple the units.<span class="s-para-gap" aria-hidden="true"></span>Without raising your ad budget by a euro.',
     ben2_title: 'Idle stock, cleared',
-    ben2_text: 'Turn the markdown you were going to make anyway into a sale conditioned on volume.<br><br>Free up capital without giving away margin.',
+    ben2_text: 'Turn the markdown you were going to make anyway into a sale conditioned on volume.<span class="s-para-gap" aria-hidden="true"></span>Free up capital without giving away margin.',
     ben3_title: 'You set the floor',
-    ben3_text: 'You define the ladder and the maximum discount.<br><br>Tuko warns you if a tier eats your margin before you publish the campaign.',
+    ben3_text: 'You define the ladder and the maximum discount.<span class="s-para-gap" aria-hidden="true"></span>Tuko warns you if a tier eats your margin before you publish the campaign.',
     ben4_title: 'Buyers you didn\'t pay for',
-    ben4_text: 'Every customer who already reserved has a financial reason to share it.<br><br>That traffic costs you zero.',
+    ben4_text: 'Every customer who already reserved has a financial reason to share it.<span class="s-para-gap" aria-hidden="true"></span>That traffic costs you zero.',
     ben5_title: 'Live in two minutes',
     ben5_text: 'Native Shopify app. It adds to the product page without touching your theme or checkout.',
     ben6_title: 'No refunds or manual adjustments',
-    ben6_text: 'Customers get an authorization hold when they reserve and are charged once when the campaign closes, with the discount already applied.<br><br>No partial charges or refunds to manage.',
+    ben6_text: 'Customers get an authorization hold when they reserve and are charged once when the campaign closes, with the discount already applied.<span class="s-para-gap" aria-hidden="true"></span>No partial charges or refunds to manage.',
 
     /* CTA */
     cta_title: 'Install Tuko and turn traffic into real sales.',
