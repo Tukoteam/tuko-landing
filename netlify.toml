@@ -1,9 +1,11 @@
 # Configuración de despliegue de Tuko.
 # Netlify sirve Brotli y Gzip automáticamente y habla HTTP/2 y HTTP/3;
 # aquí se define el cacheado, la seguridad y las redirecciones canónicas.
+# Redeploy marker: 2026-09-06-source-gap
 
 [build]
   publish = "."
+  # No build command: static site from repo root.
 
 # ── Cabeceras por defecto: seguridad para todo el sitio ──
 [[headers]]
