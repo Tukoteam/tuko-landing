@@ -1028,7 +1028,7 @@
 
   @media (max-width: 960px) {
     nav { padding: 0 16px 0 12px; }
-    .nav-logo img { height: 30px; }
+    .nav-logo img { height: 28px; }
     .hero-deco { display: none; }
     .problem .side-deco, .benefits .side-deco-l { display: none; }
     .logos-section, .problem, .benefits, .how-wrap, .cta-wrap { padding: 80px 24px; }
