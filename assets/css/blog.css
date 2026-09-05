@@ -125,15 +125,32 @@
 
   @media (max-width: 840px) {
     .blog-hero {
-      padding: calc(72px + env(safe-area-inset-top, 0px)) 24px 40px 24px;
-      min-height: 0;
+      padding: calc(72px + env(safe-area-inset-top, 0px)) 24px 48px 24px;
+      min-height: 220px;
       text-align: center;
       justify-content: center;
     }
-    .blog-hero-content { max-width: 100%; margin-left: auto; margin-right: auto; text-align: center; }
+    .blog-hero-content {
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      z-index: 2;
+    }
     .blog-hero h1 { font-size: 52px; text-align: center; }
     .blog-hero p { text-align: center; margin-left: auto; margin-right: auto; }
-    .bh-deco-right { opacity: 0.9; max-width: 55%; object-fit: contain; object-position: right top; }
+    /* Marca Tuko más grande y suave: personalidad sin tapar el título */
+    .bh-deco-right {
+      right: -18%;
+      top: auto;
+      bottom: -22%;
+      height: 135%;
+      width: auto;
+      max-width: none;
+      opacity: 0.26;
+      object-fit: contain;
+      object-position: right bottom;
+    }
     .blog-list-section { padding: 48px 24px 72px; }
     .blog-post-link { flex-direction: column; gap: 16px; align-items: stretch; }
     .blog-post-image-wrap { width: 100%; max-width: 100%; }
