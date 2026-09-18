@@ -515,13 +515,14 @@
     50% { transform: translateY(-10px); }
   }
   @keyframes tkCtaSheen {
-    0% { transform: translateX(-130%); }
-    14% { transform: translateX(130%); }
-    14.01%, 100% { transform: translateX(130%); }
+    /* El brillo cruza despacio (~4s), luego pausa larga */
+    0% { transform: translateX(-140%); }
+    35% { transform: translateX(140%); }
+    35.01%, 100% { transform: translateX(140%); }
   }
   @keyframes tkCtaArrow {
     0% { transform: translateX(0); }
-    8% { transform: translateX(6px); }
+    8% { transform: translateX(5px); }
     16% { transform: translateX(0); }
     22% { transform: translateX(3px); }
     28%, 100% { transform: translateX(0); }
@@ -538,17 +539,21 @@
     .hero-trust,
     .hero-live-avatars,
     .hero-live-avat,
-    .hero-live-line,
-    .hero-cta-arrow,
-    .hero-actions .btn-blue::after {
+    .hero-live-line {
       animation: none !important;
       opacity: 1 !important;
       transform: none !important;
       filter: none !important;
     }
-    .hero-accent-line path.hero-accent-base {
-      stroke-dashoffset: 0 !important;
-      opacity: 0.85 !important;
+    .hero-actions .btn-blue::after {
+      animation: tkCtaSheen 12s linear 1.5s infinite !important;
+      opacity: 1 !important;
+      filter: none !important;
+    }
+    .hero-cta-arrow {
+      animation: tkCtaArrow 12s ease-in-out 1.5s infinite !important;
+      opacity: 1 !important;
+      filter: none !important;
     }
   }
 
@@ -583,12 +588,19 @@
     display: inline-block;
     font-size: 18px;
     line-height: 1;
-    animation: tkCtaArrow 4.6s cubic-bezier(0.22, 1, 0.36, 1) 2.35s infinite;
+    animation: tkCtaArrow 12s ease-in-out 1.5s infinite;
   }
   .hero-actions .btn-blue::after {
-    mix-blend-mode: overlay;
-    background: linear-gradient(105deg, transparent 28%, rgba(255,255,255,0.7) 50%, transparent 72%);
-    animation: tkCtaSheen 4.6s cubic-bezier(0.4, 0, 0.2, 1) 2.35s infinite;
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    mix-blend-mode: soft-light;
+    background: linear-gradient(105deg, transparent 32%, rgba(255,255,255,0.6) 50%, transparent 68%);
+    transform: translateX(-140%);
+    /* ~4s cruzando el botón + ~8s de pausa */
+    animation: tkCtaSheen 12s linear 1.5s infinite;
   }
 
   .badge {
@@ -691,12 +703,7 @@
     opacity: 0.85;
   }
   .hero-accent-line path.hero-accent-glow {
-    fill: none;
-    stroke: url(#tukoHeroShineGrad);
-    stroke-width: 4.2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    opacity: 0;
+    display: none;
   }
   .hero h1 em .hero-em-arc { display: none; }
 
@@ -897,16 +904,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .btn-blue,
-    .btn-blue::after {
-      transition: none !important;
-      animation: none !important;
-    }
     .btn-blue:hover {
       transform: none;
-    }
-    .btn-blue::after {
-      display: none;
     }
     .how-step {
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -949,6 +948,10 @@
     pointer-events: none;
     mix-blend-mode: soft-light;
   }
+  /* El CTA del hero anima solo con keyframes; sin transition que pelee con el shimmer */
+  .hero-actions .btn-blue::after {
+    transition: none;
+  }
   @media (hover: hover) {
     .btn-blue:hover {
       background: #2c3de0;
@@ -957,8 +960,9 @@
     }
     .btn-blue:hover::after { transform: translateX(130%); }
     .hero-actions .btn-blue:hover::after {
-      animation: none;
-      transform: translateX(130%);
+      /* No cortar el shimmer del hero al pasar el ratón */
+      transform: none;
+      animation: tkCtaSheen 12s linear 1.5s infinite;
     }
   }
   .btn-blue:active {
@@ -2579,10 +2583,9 @@
     padding: 22px 22px 22px;
     box-sizing: border-box;
     transform: none;
-    opacity: 0;
-    transition: opacity 0.55s ease 0.1s;
+    /* Visible con el fade-up del row (antes opacity:0 aparte fallaba en desktop/Windows) */
+    opacity: 1;
   }
-  .why-row.visible .why-widget { opacity: 1; transform: none; }
   /* 1 — El reloj (cápsula Horas / Minutos / Segundos) */
   .why-widget:has(> .why-clock) {
     width: min(440px, 100%);
@@ -3171,31 +3174,8 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .why-widget { transition: none; opacity: 1; transform: none; }
-    .why-clock b.is-tick { animation: none; }
-    .why-race .why-goal-flag,
-    .why-race .why-goal-ring,
-    .why-race .why-race-flash,
-    .why-race .why-race-clouds i,
-    .why-race .why-conf i,
-    .why-race-count.is-pop,
-    .why-runner .wr-ring,
-    .why-runner .wr-plus { animation: none !important; }
-    .why-race .why-conf i { opacity: 0; }
-    .why-pack .why-runner { transition: none; }
-    .why-row:not(.visible) .why-group-ppl .avat--face,
-    .why-row:not(.visible) .why-group-chip {
-      opacity: 1;
-      transform: none;
-    }
-    .why-row.visible .why-group-ppl .avat--face,
-    .why-row.visible .why-group-ppl .avat--ghost,
-    .why-row.visible .why-share-btn,
-    .why-row.visible .why-group-chip,
-    .why-row.visible .why-group-chip.is-pop {
-      animation: none !important;
-      opacity: 1;
-      transform: none;
-    }
+    /* Las demos de La meta / El grupo se mantienen a propósito en desktop:
+       Windows suele tener “preferir menos movimiento” y las dejaba congeladas. */
   }
 
 
@@ -4366,7 +4346,7 @@
         </span>
         <span class="hero-line">
           <span class="hero-word">a</span>
-          <span class="hero-accent">vender<span class="hero-accent-line" aria-hidden="true"><svg viewBox="0 0 120 14" preserveAspectRatio="none"><defs><linearGradient id="tukoHeroShineGrad" gradientUnits="userSpaceOnUse" x1="-90" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.22" stop-color="#dbe3ff" stop-opacity="0.08"/><stop offset="0.38" stop-color="#ffffff" stop-opacity="0.35"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0.78"/><stop offset="0.62" stop-color="#ffffff" stop-opacity="0.35"/><stop offset="0.78" stop-color="#dbe3ff" stop-opacity="0.08"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs><path class="hero-accent-base" d="M4 10.5 Q60 3.2 116 10.5"/><path class="hero-accent-glow" d="M4 10.5 Q60 3.2 116 10.5"/></svg></span></span>
+          <span class="hero-accent">vender<span class="hero-accent-line" aria-hidden="true"><svg viewBox="0 0 120 14" preserveAspectRatio="none"><defs><linearGradient id="tukoHeroShineGrad" gradientUnits="userSpaceOnUse" x1="-120" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.28" stop-color="#e8eeff" stop-opacity="0.05"/><stop offset="0.45" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0.42"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="0.72" stop-color="#e8eeff" stop-opacity="0.05"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs><path class="hero-accent-base" d="M4 10.5 Q60 3.2 116 10.5"/><path class="hero-accent-glow" d="M4 10.5 Q60 3.2 116 10.5"/></svg></span></span>
           <span class="hero-word">por</span>
           <span class="hero-word">ti</span>
         </span>
@@ -4437,7 +4417,7 @@
           </svg>
         </div>
         <div class="data-kpi">
-          <p class="data-num" data-i18n="data_num" data-count="68">68 %</p>
+          <p class="data-num" data-count="68" aria-label="68 %">0 %</p>
         </div>
         <p class="data-num-note" data-i18n="data_num_note">de los pedidos con descuento pueden venir de clientes que ya te compraban.</p>
         <h3 class="data-side-title" data-i18n="data_bad_title">Pagas por atraer y rebajas ventas que ya eran tuyas.</h3>
@@ -5031,17 +5011,28 @@ if (ctaCanvas) initGrid(ctaCanvas, {
 /* ── SCROLL FADE-UP ── */
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.08 });
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('visible');
+    e.target.dispatchEvent(new CustomEvent('tuko:visible', { bubbles: true }));
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
 
 document.querySelectorAll('.fade-up').forEach(el => {
-  if (reduceMotion) el.classList.add('visible');
-  else obs.observe(el);
+  if (reduceMotion) {
+    el.classList.add('visible');
+    el.dispatchEvent(new CustomEvent('tuko:visible', { bubbles: true }));
+  } else {
+    obs.observe(el);
+  }
 });
 
 // Trigger hero immediately
 setTimeout(() => {
-  document.querySelectorAll('.hero .fade-up').forEach(el => el.classList.add('visible'));
+  document.querySelectorAll('.hero .fade-up').forEach(el => {
+    el.classList.add('visible');
+    el.dispatchEvent(new CustomEvent('tuko:visible', { bubbles: true }));
+  });
 }, 80);
 
 /* ── Relojes de los mockups (hero y "Por qué compran"): cuentan hacia atrás de verdad ── */
@@ -5089,11 +5080,11 @@ setTimeout(() => {
   if (!chip || !chipTxt || !chipFace) return;
 
   const NAMES = ['Marta', 'Carlos', 'Lucía', 'Sofía', 'Diego', 'Luna'];
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let i = 0, timer = 0;
 
   function render() {
-    const t = translations[document.documentElement.lang] || translations.es;
+    if (typeof translations === 'undefined') return;
+    const t = translations[document.documentElement.lang] || translations.es || {};
     const tpl = t.why3_w_chip_tpl || '{name} <em>acaba de unirse</em>';
     chipTxt.innerHTML = tpl.split('{name}').join(NAMES[i]);
     const src = widget.querySelector('[data-why-face="' + i + '"]');
@@ -5117,14 +5108,32 @@ setTimeout(() => {
   function play(on) {
     clearTimeout(timer);
     timer = 0;
-    if (on && !reduce) timer = setTimeout(tick, 2600);
+    if (on) {
+      pop();
+      timer = setTimeout(tick, 1800);
+    }
   }
 
-  if (reduce) return;
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => play(e.isIntersecting));
-  }, { threshold: 0.45 });
-  io.observe(widget);
+  const row = widget.closest('.why-row');
+  function syncPlay() {
+    if (row) row.classList.add('visible');
+    const r = widget.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    play(r.bottom > vh * 0.05 && r.top < vh * 0.95);
+  }
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting && row) row.classList.add('visible');
+        play(e.isIntersecting);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
+    io.observe(widget);
+  } else {
+    play(true);
+  }
+  if (row) row.addEventListener('tuko:visible', syncPlay);
+  /* No llamar render() aquí: `translations` se define más abajo en el mismo script */
 })();
 
 /* «La meta»: el grupo camina, llega a la bandera y desbloquea el −20 %.
@@ -5663,7 +5672,9 @@ setTimeout(() => {
   var last = 0;
 
   function playing() {
-    return onScreen && !mq.matches;
+    /* No bloquear por prefers-reduced-motion: en Windows suele estar activo
+       y dejaba la demo congelada en 10/10. Solo pausamos fuera de pantalla. */
+    return onScreen;
   }
 
   function tick(now) {
@@ -5683,8 +5694,7 @@ setTimeout(() => {
     } else {
       if (raf) cancelAnimationFrame(raf);
       raf = 0;
-      if (mq.matches) frozenEnd();
-      else for (var j = 0; j < actors.length; j++) apply(actors[j]);
+      for (var j = 0; j < actors.length; j++) apply(actors[j]);
     }
   }
 
@@ -5695,11 +5705,31 @@ setTimeout(() => {
 
   if ('IntersectionObserver' in window) {
     onScreen = false;
+    var row = stage.closest('.why-row');
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { onScreen = e.isIntersecting; });
+      var nowOn = entries.some(function (e) { return e.isIntersecting; });
+      if (nowOn && !onScreen) {
+        if (row) row.classList.add('visible');
+        /* Reinicia al entrar en pantalla para que en desktop siempre se vea la marcha */
+        enter('walk');
+      }
+      onScreen = nowOn;
       sync();
-    }, { threshold: 0.2 });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     io.observe(stage);
+    if (row) {
+      row.addEventListener('tuko:visible', function () {
+        var r = stage.getBoundingClientRect();
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        if (r.bottom > vh * 0.08 && r.top < vh * 0.92 && !onScreen) {
+          onScreen = true;
+          enter('walk');
+          sync();
+        } else if (onScreen) {
+          sync();
+        }
+      });
+    }
   }
   sync();
 
@@ -5768,7 +5798,7 @@ setTimeout(() => {
 
     var third = l3b.map(word);
     var acc = '<span class="hero-accent">' + esc(accent);
-    acc += '<span class="hero-accent-line" aria-hidden="true"><svg viewBox="0 0 120 14" preserveAspectRatio="none"><defs><linearGradient id="tukoHeroShineGrad" gradientUnits="userSpaceOnUse" x1="-90" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.22" stop-color="#dbe3ff" stop-opacity="0.08"/><stop offset="0.38" stop-color="#ffffff" stop-opacity="0.35"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0.78"/><stop offset="0.62" stop-color="#ffffff" stop-opacity="0.35"/><stop offset="0.78" stop-color="#dbe3ff" stop-opacity="0.08"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs><path class="hero-accent-base" d="M4 10.5 Q60 3.2 116 10.5"/><path class="hero-accent-glow" d="M4 10.5 Q60 3.2 116 10.5"/></svg></span>';
+    acc += '<span class="hero-accent-line" aria-hidden="true"><svg viewBox="0 0 120 14" preserveAspectRatio="none"><defs><linearGradient id="tukoHeroShineGrad" gradientUnits="userSpaceOnUse" x1="-120" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.28" stop-color="#e8eeff" stop-opacity="0.05"/><stop offset="0.45" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0.42"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="0.72" stop-color="#e8eeff" stop-opacity="0.05"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs><path class="hero-accent-base" d="M4 10.5 Q60 3.2 116 10.5"/><path class="hero-accent-glow" d="M4 10.5 Q60 3.2 116 10.5"/></svg></span>';
     acc += '</span>';
     third.push(acc);
     third = third.concat(l3a.map(word));
@@ -5786,17 +5816,25 @@ setTimeout(() => {
   var grad = null;
   var start = 0;
   var SWEEP = 2800;
-  var PAUSE = 1800;
-  var BAND = 90;
+  var PAUSE = 2200;
+  var BAND = 110;
 
   function easeInOut(t) {
     return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
   }
 
+  function bind() {
+    var line = document.querySelector('.hero-accent-line');
+    if (!line) return false;
+    glow = line.querySelector('.hero-accent-glow');
+    grad = line.querySelector('#tukoHeroShineGrad') || line.querySelector('linearGradient');
+    return !!(glow && grad);
+  }
+
   function frame(now) {
     if (!glow || !glow.isConnected || !grad || !grad.isConnected) {
-      raf = 0;
-      return;
+      if (!bind()) { raf = 0; return; }
+      start = now;
     }
     if (!start) start = now;
     var t = (now - start) % (SWEEP + PAUSE);
@@ -5807,8 +5845,8 @@ setTimeout(() => {
     } else {
       var p = easeInOut(t / SWEEP);
       var x = -BAND + p * (120 + BAND * 2);
-      var op = p < 0.12 ? p / 0.12 : p > 0.88 ? (1 - p) / 0.12 : 1;
-      glow.style.opacity = String(Math.max(0, Math.min(1, op)));
+      var op = p < 0.2 ? p / 0.2 : p > 0.8 ? (1 - p) / 0.2 : 1;
+      glow.style.opacity = String(0.72 * Math.max(0, Math.min(1, op)));
       grad.setAttribute('x1', String(x));
       grad.setAttribute('x2', String(x + BAND));
     }
@@ -5816,11 +5854,7 @@ setTimeout(() => {
   }
 
   window.tukoHeroAccentShine = function () {
-    var line = document.querySelector('.hero-accent-line');
-    if (!line) return;
-    glow = line.querySelector('.hero-accent-glow');
-    grad = line.querySelector('#tukoHeroShineGrad');
-    if (!glow || !grad) return;
+    if (!bind()) return;
     glow.style.opacity = '0';
     grad.setAttribute('x1', String(-BAND));
     grad.setAttribute('x2', '0');
@@ -5828,10 +5862,15 @@ setTimeout(() => {
     if (!raf) raf = window.requestAnimationFrame(frame);
   };
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', window.tukoHeroAccentShine);
-  } else {
+  /* Arranque + reintento por si el título se re-renderiza después */
+  function boot() {
     window.tukoHeroAccentShine();
+    window.setTimeout(window.tukoHeroAccentShine, 400);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
   }
 })();
 
@@ -7458,6 +7497,7 @@ function setLanguage(lang, opts) {
     if (typeof window.tukoWhyGroupRender === 'function') window.tukoWhyGroupRender();
     if (typeof window.tukoWhyRaceRender === 'function') window.tukoWhyRaceRender();
     if (typeof window.tukoCalcRender === 'function') window.tukoCalcRender();
+    if (typeof window.tukoDataCountSync === 'function') window.tukoDataCountSync();
   };
 
   if (!shouldMotion) {
@@ -7697,36 +7737,76 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ── Cifras del bloque de datos: cuentan desde 0 al entrar en pantalla ── */
 (function () {
-  const nums = document.querySelectorAll('.data-num');
+  const nums = document.querySelectorAll('.data-num[data-count]');
   if (!nums.length) return;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce || !('IntersectionObserver' in window)) return;
   const ease = t => 1 - Math.pow(1 - t, 3);
+  const suffix = () => (document.documentElement.lang === 'en' ? '%' : ' %');
+  const fmt = (v) => String(v) + suffix();
 
   function run(el) {
-    const raw = (el.getAttribute('data-count') || el.textContent || '').trim();
-    const target = parseInt(raw.replace(/[^\d]/g, ''), 10);
+    if (el.dataset.countBusy === '1') return;
+    const target = parseInt(el.getAttribute('data-count') || '0', 10);
     if (!isFinite(target)) return;
-    const suffix = document.documentElement.lang === 'en' ? '%' : ' %';
-    const fmt = v => String(v) + suffix;
-    const dur = 1300, t0 = performance.now();
+    el.dataset.countBusy = '1';
+    el.dataset.countPlayed = '1';
+    const dur = 1400, t0 = performance.now();
     el.textContent = fmt(0);
     const step = now => {
       const p = Math.min(1, (now - t0) / dur);
       el.textContent = fmt(Math.round(target * ease(p)));
       if (p < 1) requestAnimationFrame(step);
+      else {
+        el.setAttribute('aria-label', fmt(target));
+        el.dataset.countBusy = '0';
+      }
     };
     requestAnimationFrame(step);
+  }
+
+  function tryRun(el) {
+    if (el.dataset.countPlayed === '1') return;
+    const host = el.closest('.fade-up') || el.closest('.data-card') || el;
+    if (host.classList.contains('fade-up') && !host.classList.contains('visible')) return;
+    run(el);
+  }
+
+  window.tukoDataCountSync = function () {
+    nums.forEach(el => {
+      const target = parseInt(el.getAttribute('data-count') || '0', 10);
+      if (!isFinite(target)) return;
+      if (el.dataset.countPlayed === '1') {
+        el.textContent = fmt(target);
+        el.setAttribute('aria-label', fmt(target));
+      } else {
+        el.textContent = fmt(0);
+      }
+    });
+  };
+
+  if (!('IntersectionObserver' in window)) {
+    nums.forEach(run);
+    return;
   }
 
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
-      io.unobserve(e.target);
-      run(e.target);
+      const el = e.target.classList.contains('data-num')
+        ? e.target
+        : e.target.querySelector('.data-num[data-count]');
+      if (!el) return;
+      const host = el.closest('.fade-up');
+      if (host) host.classList.add('visible');
+      tryRun(el);
     });
-  }, { threshold: 0.35 });
-  nums.forEach(el => io.observe(el));
+  }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+  nums.forEach(el => {
+    el.textContent = fmt(0);
+    const host = el.closest('.fade-up') || el.closest('.data-card') || el;
+    io.observe(host);
+    host.addEventListener('tuko:visible', () => tryRun(el));
+  });
 })();
 
 /* ── Calculadora de precios: coste mensual por plan según lo vendido con Tuko (tope aplicado) ── */
@@ -7829,7 +7909,7 @@ document.addEventListener('DOMContentLoaded', () => {
   update();
 })();
 </script>
-<script src="/assets/js/ga4-loader.js" defer></script>
-<script src="/assets/js/local-landing-label.js"></script>
+<script src="assets/js/ga4-loader.js" defer></script>
+<script src="assets/js/local-landing-label.js"></script>
 </body>
 </html>
