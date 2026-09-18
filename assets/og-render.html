@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>OG</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Mona+Sans:wght@400;700;800&family=Roboto+Serif:ital,wght@1,700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Mona+Sans:wght@700;800&family=Roboto+Serif:ital,wght@1,700&display=swap');
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 1200px; height: 630px; overflow: hidden; }
   body {
@@ -16,95 +16,91 @@
     justify-content: center;
   }
   .glow-tl {
-    position: absolute; left: 120px; top: -60px; width: 420px; height: 420px;
-    background: radial-gradient(circle, rgba(180,140,255,0.30) 0%, rgba(180,140,255,0) 68%);
+    position: absolute; left: 140px; top: -40px; width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(180,140,255,0.32) 0%, rgba(180,140,255,0) 68%);
     pointer-events: none;
   }
   .glow-tr {
-    position: absolute; right: 140px; top: 40px; width: 360px; height: 360px;
-    background: radial-gradient(circle, rgba(120,210,200,0.24) 0%, rgba(120,210,200,0) 70%);
+    position: absolute; right: 160px; top: 50px; width: 340px; height: 340px;
+    background: radial-gradient(circle, rgba(120,210,200,0.26) 0%, rgba(120,210,200,0) 70%);
     pointer-events: none;
   }
   .grid {
     position: absolute;
     left: 0; right: 0; bottom: 0;
-    height: 38%;
+    height: 34%;
     background:
       linear-gradient(to top, rgba(247,248,252,0.1) 0%, rgba(247,248,252,0.95) 100%),
-      repeating-linear-gradient(90deg, transparent 0, transparent 42px, rgba(90,100,140,0.13) 42px, rgba(90,100,140,0.13) 43px),
-      repeating-linear-gradient(0deg, transparent 0, transparent 24px, rgba(90,100,140,0.11) 24px, rgba(90,100,140,0.11) 25px);
+      repeating-linear-gradient(90deg, transparent 0, transparent 40px, rgba(90,100,140,0.13) 40px, rgba(90,100,140,0.13) 41px),
+      repeating-linear-gradient(0deg, transparent 0, transparent 22px, rgba(90,100,140,0.11) 22px, rgba(90,100,140,0.11) 23px);
     transform: perspective(420px) rotateX(52deg);
     transform-origin: 50% 100%;
-    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%);
-    mask-image: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 100%);
+    mask-image: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 100%);
     pointer-events: none;
   }
-  /*
-    WhatsApp crops a ~630×630 square from the center of 1200×630.
-    Keep all important content inside that square, oversized for readability.
-  */
   .safe {
     position: relative;
     z-index: 2;
-    width: 560px;
+    width: 580px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
   .logo {
-    height: 72px;
+    height: 88px;
     width: auto;
-    margin-bottom: 22px;
+    margin-bottom: 18px;
   }
   h1 {
-    font-size: 44px;
-    line-height: 1.12;
+    font-size: 52px;
+    line-height: 1.08;
     font-weight: 800;
     font-stretch: semi-expanded;
     color: #1a1a1a;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.035em;
     width: 100%;
   }
   .accent {
     font-family: 'Roboto Serif', Georgia, serif;
     font-style: italic;
     font-weight: 700;
-    font-size: 48px;
+    font-size: 56px;
     color: #3D50F2;
     position: relative;
     display: inline-block;
-    padding: 0 4px 6px;
+    padding: 0 4px 8px;
   }
   .accent::after {
     content: '';
     position: absolute;
-    left: 3%;
-    right: 3%;
-    bottom: 4px;
-    height: 4px;
+    left: 2%;
+    right: 2%;
+    bottom: 5px;
+    height: 5px;
     background: #3D50F2;
     border-radius: 99px;
     transform: rotate(-1.2deg);
   }
   .cta {
-    margin-top: 26px;
+    margin-top: 22px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 14px;
     background: #3D50F2;
     color: #fff;
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 700;
     font-stretch: semi-expanded;
-    padding: 18px 34px;
-    border-radius: 16px;
+    padding: 20px 40px;
+    border-radius: 18px;
     letter-spacing: -0.01em;
   }
   .cta svg {
-    width: 22px;
-    height: 22px;
+    width: 26px;
+    height: 26px;
     flex-shrink: 0;
   }
 </style>
@@ -114,7 +110,7 @@
   <div class="glow-tr"></div>
   <div class="grid" aria-hidden="true"></div>
   <div class="safe">
-    <img class="logo" src="logos/3. Negro.svg" alt="tuko" width="260" height="100">
+    <img class="logo" src="logos/3. Negro.svg" alt="tuko" width="300" height="115">
     <h1>
       Un botón y tus<br>
       clientes empiezan<br>
