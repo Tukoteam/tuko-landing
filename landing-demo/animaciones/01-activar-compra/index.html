@@ -3,38 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tuko — Activar campaña</title>
+  <title>Tuko — Publicar grupo</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800&display=swap');
 
     :root {
       --n-white: #ffffff;
       --n-50: #f5f5f5;
-      --n-200: #d9d9d9;
-      --n-400: #a0a0a0;
-      --n-600: #4d4d4d;
-      --n-900: #222222;
-      --azul-light: #e0e7ff;
-      --azul-mid: #a4b3f2;
-      --azul-primario: #3d50f2;
-      --azul-oscuro: #141826;
-      --menta: #14c492;
-      --shadow: 0 10px 40px rgba(20, 24, 38, 0.08);
-      --shadow-cta: 0 4px 24px rgba(61, 80, 242, 0.22);
+      --n-100: #f1f5f9;
+      --n-200: #e2e8f0;
+      --n-300: #cbd5e1;
+      --n-400: #94a3b8;
+      --n-500: #64748b;
+      --n-600: #475569;
+      --n-800: #1e293b;
+      --n-900: #0f172a;
       --indigo: #4f46e5;
-      --violet: #6366f1;
-      --slate-500: #64748b;
-      --blue-500: #3b82f6;
-      --emerald: #059669;
-      --green-ahorro: #10b981;
-      --product-bg: #f3f4ff;
-      --purple-cta: #9333ea;
+      --indigo-2: #6366f1;
+      --violet: #7c3aed;
+      --azul-primario: #3d50f2;
+      --emerald: #10b981;
+      --emerald-2: #059669;
+      --shadow: 0 10px 40px rgba(20, 24, 38, 0.08);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html, body { height: 100%; }
+
     body {
-      font-family: 'Mona Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--n-50);
       min-height: 100vh;
       display: flex;
@@ -44,960 +42,1213 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    html.embedded, html.embedded body {
+      min-height: 0;
+      height: auto;
+    }
+    html.embedded body {
+      padding: 0;
+      overflow: hidden;
+      background: #fff;
+      display: block;
+      min-height: 0;
+    }
+    html.embedded.demo-dark body {
+      background: #0f172a;
+    }
+    html.embedded .animation-viewport {
+      max-width: none;
+      width: 100%;
+      height: auto;
+      aspect-ratio: auto;
+      border-radius: 0;
+      box-shadow: none;
+      background: #fff;
+    }
+    html.embedded .animation-viewport.is-dark {
+      background: #0f172a;
+    }
+    html.embedded .stage {
+      position: relative;
+      inset: auto;
+      padding: 0;
+      height: auto;
+    }
+    html.embedded .wizard {
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+    }
+
     .animation-viewport {
       width: 100%;
-      max-width: 360px;
+      max-width: 380px;
       position: relative;
       overflow: hidden;
       border-radius: 24px;
       background: linear-gradient(165deg, #f8fafc 0%, #eef2ff 45%, #f1f5f9 100%);
       box-shadow: var(--shadow);
-      aspect-ratio: 9 / 10;
+      aspect-ratio: 9 / 16;
     }
 
     .stage {
       position: absolute;
       inset: 0;
-      padding: 22px 18px;
+      padding: 20px 16px;
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      transform-origin: 50% 42%;
-      transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .stage.parallax {
-      transform: translate(-7px, -5px);
-    }
-
-    .stage.cta-zoom {
-      transform: scale(1.09);
-    }
-
-    .stage.parallax.cta-zoom {
-      transform: scale(1.09) translate(-4px, -3px);
-    }
-
-    .dashboard-card {
+    .wizard {
       width: 100%;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.94);
-      border: 1px solid rgba(148, 163, 184, 0.28);
-      box-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.9) inset,
-        0 16px 48px rgba(15, 23, 42, 0.07);
-      padding: 18px 16px;
-    }
-
-    .dash-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .dash-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--n-900);
-      letter-spacing: -0.02em;
-      line-height: 1.25;
-      margin-bottom: 6px;
-    }
-
-    .dash-sub {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--n-600);
-      line-height: 1.4;
-    }
-
-    .toggle-wrap {
-      flex-shrink: 0;
-      padding-top: 2px;
-    }
-
-    .toggle {
-      width: 46px;
-      height: 28px;
-      border-radius: 999px;
-      position: relative;
-      cursor: default;
-    }
-
-    .toggle-track {
-      position: absolute;
-      inset: 0;
-      border-radius: 999px;
-      background: #e2e8f0;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
-      transition:
-        background 0.45s cubic-bezier(0.34, 1.3, 0.64, 1),
-        box-shadow 0.35s ease;
-    }
-
-    .toggle-knob {
-      position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--n-white);
-      box-shadow: 0 2px 5px rgba(15, 23, 42, 0.12);
-      transition: transform 0.5s cubic-bezier(0.34, 1.45, 0.64, 1);
-    }
-
-    .toggle.on .toggle-track {
-      background: linear-gradient(135deg, var(--violet), var(--indigo));
-      border-color: rgba(99, 102, 241, 0.35);
-      box-shadow: 0 4px 16px rgba(79, 70, 229, 0.28);
-    }
-
-    .toggle.on .toggle-knob {
-      transform: translateX(18px);
-    }
-
-    .toggle.glow .toggle-track {
-      box-shadow:
-        0 0 0 6px rgba(99, 102, 241, 0.2),
-        0 4px 16px rgba(79, 70, 229, 0.35);
-    }
-
-    .modal-backdrop {
-      position: absolute;
-      inset: 0;
-      background: rgba(15, 23, 42, 0);
-      backdrop-filter: blur(0px);
-      -webkit-backdrop-filter: blur(0px);
-      pointer-events: none;
-      opacity: 0;
-      transition:
-        opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-        background 0.45s ease,
-        backdrop-filter 0.5s ease,
-        -webkit-backdrop-filter 0.5s ease;
-      z-index: 10;
-    }
-
-    .modal-backdrop.visible {
-      opacity: 1;
-      background: rgba(15, 23, 42, 0.48);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    .modal-sheet {
-      position: absolute;
-      left: 10px;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%) scale(0.95);
-      max-height: 88%;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
       background: var(--n-white);
       border-radius: 20px;
       border: 1px solid rgba(226, 232, 240, 0.98);
       box-shadow:
         0 4px 6px rgba(15, 23, 42, 0.03),
-        0 28px 80px rgba(15, 23, 42, 0.14),
+        0 20px 60px rgba(15, 23, 42, 0.10),
         0 0 0 1px rgba(255, 255, 255, 0.8) inset;
-      opacity: 0;
-      z-index: 11;
-      pointer-events: none;
-      transition:
-        opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .modal-sheet.visible {
-      opacity: 1;
-      transform: translateY(-50%) scale(1);
-      pointer-events: auto;
-    }
-
-    .modal-chrome {
-      flex-shrink: 0;
+      padding: 18px 18px 16px;
       display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 12px 14px 0 16px;
-      min-height: 36px;
+      flex-direction: column;
+      gap: 14px;
     }
 
-    .modal-brand-pill {
-      display: inline-block;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #64748b;
-      background: #f1f5f9;
-      border: 1px solid #e2e8f0;
-      padding: 5px 10px;
-      border-radius: 999px;
-      line-height: 1;
-    }
-
-    .modal-scroll {
-      flex: 1;
-      min-height: 0;
-      overflow-y: auto;
-      padding: 4px 16px 16px;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 10px;
-      right: 12px;
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      border: none;
-      background: transparent;
-      color: #94a3b8;
-      font-size: 20px;
-      font-weight: 300;
-      line-height: 1;
+    .w-header {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2;
-      cursor: default;
-    }
-
-    .modal-head {
-      text-align: center;
-      padding: 0 28px 0 12px;
-      margin-bottom: 18px;
-    }
-
-    .modal-icon-wrap {
-      width: 56px;
-      height: 56px;
-      margin: 0 auto 12px;
-      border-radius: 50%;
-      background: linear-gradient(145deg, #3b82f6 0%, #6366f1 45%, #9333ea 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow:
-        0 0 0 4px rgba(147, 51, 234, 0.12),
-        0 12px 32px rgba(79, 70, 229, 0.35),
-        0 4px 12px rgba(59, 130, 246, 0.25);
-    }
-
-    .modal-icon-inner {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--n-white);
-      border: 1.5px solid rgba(255, 255, 255, 0.95);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
-    }
-
-    .modal-icon-inner svg {
-      width: 14px;
-      height: 14px;
-      stroke: var(--indigo);
-      fill: none;
-      stroke-width: 2.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .modal-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #0f172a;
-      letter-spacing: -0.025em;
-    }
-
-    .modal-sub {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--slate-500);
-      margin-top: 6px;
-      line-height: 1.4;
-    }
-
-    .section-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.09em;
-      color: #94a3b8;
-      margin-bottom: 8px;
-    }
-
-    .modal-section {
-      opacity: 0;
-      transform: translateY(16px);
-      transition:
-        opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-      margin-bottom: 10px;
-    }
-
-    .modal-section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .product-card {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      padding: 14px 14px;
-      border-radius: 14px;
-      background: var(--product-bg);
-      border: 1px solid rgba(99, 102, 241, 0.16);
-      box-shadow: 0 1px 2px rgba(99, 102, 241, 0.04);
-      transition: box-shadow 0.45s ease, transform 0.45s ease;
-    }
-
-    .modal-sheet.product-stage .product-card {
-      box-shadow:
-        0 0 0 1px rgba(99, 102, 241, 0.22),
-        0 14px 40px rgba(79, 70, 229, 0.12);
-      transform: scale(1.01);
-    }
-
-    .product-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: var(--n-white);
-      border: 1px solid rgba(59, 130, 246, 0.28);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-    }
-
-    .product-icon svg {
-      width: 22px;
-      height: 22px;
-      stroke: var(--blue-500);
-      fill: none;
-      stroke-width: 1.65;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .product-name {
-      font-size: 14px;
-      font-weight: 700;
-      color: #0f172a;
-      letter-spacing: -0.02em;
-    }
-
-    .product-line {
-      font-size: 11px;
-      font-weight: 600;
-      color: #2563eb;
-      margin-top: 4px;
-      letter-spacing: -0.01em;
-    }
-
-    .config-row {
-      display: flex;
-      gap: 8px;
-    }
-
-    .config-cell {
-      flex: 1;
-      min-width: 0;
-      padding: 8px 10px;
-      border-radius: 12px;
-      background: #f8fafc;
-      border: 1px solid var(--n-200);
-      display: flex;
-      gap: 8px;
       align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
     }
 
-    .config-ic {
-      width: 32px;
-      height: 32px;
-      border-radius: 9px;
-      background: var(--blue-500);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.35);
+    .w-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--n-900);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
     }
 
-    .config-ic svg {
-      width: 16px;
-      height: 16px;
-      stroke: #fff;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .config-label {
-      font-size: 9px;
-      font-weight: 600;
-      color: #94a3b8;
-    }
-
-    .config-val {
-      font-size: 12px;
-      font-weight: 700;
-      color: #0f172a;
-      line-height: 1.25;
-      margin-top: 2px;
-    }
-
-    .config-val-sm {
-      font-size: 9px;
-      font-weight: 700;
+    .w-sub {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--n-500);
+      margin-top: 3px;
       line-height: 1.35;
     }
 
-    .milestone {
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--n-200);
-      background: var(--n-white);
-      box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
-      margin-bottom: 6px;
-    }
-
-    .milestone-top {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .milestone-num {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: linear-gradient(180deg, var(--blue-500), #2563eb);
-      color: #fff;
-      font-size: 12px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .w-close {
+      width: 22px;
+      height: 22px;
+      color: #cbd5e1;
+      font-size: 22px;
+      line-height: 1;
+      font-weight: 300;
       flex-shrink: 0;
     }
 
-    .milestone-line1 {
+    /* Stepper */
+    .stepper {
       display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      gap: 6px 8px;
-    }
-
-    .milestone-people {
-      font-size: 12px;
-      font-weight: 700;
-      color: #0f172a;
-    }
-
-    .milestone-disc {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--slate-500);
-    }
-
-    .milestone-prices {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px 10px;
-      margin-top: 6px;
-      align-items: baseline;
-    }
-
-    .price-old {
-      font-size: 10px;
-      font-weight: 600;
-      color: #94a3b8;
-      text-decoration: line-through;
-    }
-
-    .price-new {
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--blue-500);
-    }
-
-    .price-save {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--green-ahorro);
-    }
-
-    .modal-footer {
-      display: flex;
-      gap: 8px;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
-      margin-top: 4px;
-      padding-top: 4px;
+      padding: 4px 6px 2px;
+      gap: 4px;
     }
-
-    .btn-cancel {
-      padding: 9px 12px;
-      border-radius: 10px;
-      border: 1px solid var(--n-200);
-      background: var(--n-white);
-      font-family: inherit;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--slate-500);
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+      width: 60px;
     }
-
-    .btn-activate-wrap {
-      position: relative;
-    }
-
-    .btn-activate {
-      padding: 11px 16px;
-      border-radius: 12px;
-      border: none;
-      font-family: inherit;
-      font-size: 11px;
-      font-weight: 700;
-      color: #fff;
-      background: linear-gradient(90deg, #4f46e5 0%, #6366f1 40%, #9333ea 100%);
-      box-shadow:
-        0 4px 14px rgba(79, 70, 229, 0.35),
-        0 10px 28px rgba(147, 51, 234, 0.22);
-      transition:
-        transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
-        box-shadow 0.32s ease;
-    }
-
-    .btn-activate.hover {
-      transform: scale(1.04);
-      box-shadow: 0 12px 32px rgba(79, 70, 229, 0.42);
-    }
-
-    .btn-activate.pressed {
-      transform: scale(0.94);
-      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.25);
-    }
-
-    .success-badge {
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      width: 22px;
-      height: 22px;
+    .step-circle {
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
-      background: #10b981;
-      border: 2px solid #fff;
-      color: #fff;
-      font-size: 11px;
+      background: #e2e8f0;
+      color: #94a3b8;
+      font-size: 12px;
       font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+    }
+    .step-circle svg {
+      width: 14px;
+      height: 14px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
       opacity: 0;
-      transform: scale(0.5);
-      transition:
-        opacity 0.35s ease,
-        transform 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
-    }
-
-    .success-badge.visible {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .click-ripple {
       position: absolute;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      left: 50%;
-      top: 50%;
-      margin-left: -20px;
-      margin-top: -20px;
-      border: 2px solid rgba(255, 255, 255, 0.5);
+      transition: opacity 0.3s ease;
+    }
+    .step-num {
+      transition: opacity 0.2s ease;
+    }
+    .step-item.active .step-circle {
+      background: var(--indigo);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+    }
+    .step-item.done .step-circle {
+      background: var(--emerald);
+    }
+    .step-item.done .step-circle svg { opacity: 1; }
+    .step-item.done .step-num { opacity: 0; }
+    .step-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #cbd5e1;
+      transition: color 0.35s ease;
+    }
+    .step-item.active .step-label { color: var(--indigo); }
+    .step-item.done .step-label { color: var(--emerald-2); }
+
+    .step-bar {
+      flex: 1;
+      height: 3px;
+      border-radius: 2px;
+      background: #e2e8f0;
+      margin-top: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .step-bar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--indigo);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .step-bar.filled::after { transform: scaleX(1); }
+
+    /* Advanced card */
+    .advanced-card {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #fafbff;
+      border: 1px solid #eef2ff;
+      transition: box-shadow 0.4s ease, transform 0.4s ease;
+    }
+    .adv-ic {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: linear-gradient(135deg, #6366f1, #7c3aed);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.28);
+    }
+    .adv-ic svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .adv-title { font-size: 12px; font-weight: 800; color: var(--n-900); letter-spacing: -0.01em; }
+    .adv-sub { font-size: 10px; font-weight: 500; color: var(--n-500); margin-top: 2px; }
+    .adv-arrow { margin-left: auto; color: #cbd5e1; font-size: 18px; font-weight: 300; line-height: 1; }
+
+    /* Info banner */
+    .info-banner {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #f5f3ff 0%, #eff6ff 100%);
+      border: 1px solid rgba(99, 102, 241, 0.12);
+    }
+    .info-ic {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #34d399 0%, #6366f1 55%, #a78bfa 100%);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 3px 10px rgba(99, 102, 241, 0.25);
+    }
+    .info-ic svg { width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .info-title { font-size: 12px; font-weight: 800; color: var(--n-900); letter-spacing: -0.01em; }
+    .info-sub { font-size: 10px; font-weight: 500; color: var(--n-500); margin-top: 2px; line-height: 1.35; }
+
+    /* Panels (steps) */
+    .panels {
+      position: relative;
+      flex: 1;
+      min-height: 300px;
+    }
+    .panel {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      opacity: 0;
+      transform: translateX(32px);
       pointer-events: none;
-      transform: scale(0);
-      opacity: 0.6;
-      z-index: 1;
+      transition: opacity 0.9s ease, transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .panel.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+    .panel.exit-left {
+      opacity: 0;
+      transform: translateX(-32px);
     }
 
-    @keyframes ripple-out {
-      to {
-        transform: scale(2.8);
-        opacity: 0;
-      }
+    .field-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--n-800);
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
     }
 
-    .click-ripple.active {
-      animation: ripple-out 0.55s ease-out forwards;
+    /* Product card */
+    .product-card {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+      border-radius: 14px;
+      background: #fafbff;
+      border: 1.5px dashed rgba(99, 102, 241, 0.35);
+    }
+    .product-thumb {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #eef2ff, #f8fafc);
+      border: 1px solid #e2e8f0;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .product-thumb svg { width: 32px; height: 32px; }
+    .product-name { font-size: 13px; font-weight: 800; color: var(--n-900); letter-spacing: -0.01em; }
+    .product-price { font-size: 11px; font-weight: 600; color: var(--n-500); margin-top: 2px; }
+
+    /* Inputs */
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+    .field { display: flex; flex-direction: column; }
+    .input {
+      padding: 9px 12px;
+      border: 1px solid var(--n-200);
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--n-900);
+      background: var(--n-white);
+      font-family: inherit;
+      min-height: 34px;
+    }
+    .input .caret {
+      display: inline-block;
+      width: 1px;
+      height: 14px;
+      background: var(--indigo);
+      vertical-align: middle;
+      margin-left: 1px;
+      animation: blink 0.9s infinite;
+      opacity: 0;
+    }
+    .input.editing { border-color: var(--indigo); box-shadow: 0 0 0 3px rgba(99,102,241,0.15); }
+    .input.editing .caret { opacity: 1; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hint {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--emerald-2);
+      margin-top: 8px;
+      line-height: 1.35;
     }
 
+    .field-mini-label { font-size: 10px; font-weight: 600; color: var(--n-500); margin-bottom: 3px; }
+
+    /* Step 2 — Appearance */
+    .theme-picker {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .theme-card {
+      padding: 10px;
+      border-radius: 14px;
+      border: 1.5px solid var(--n-200);
+      background: var(--n-white);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .theme-card.selected {
+      border-color: var(--indigo);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+    }
+    .theme-preview {
+      height: 60px;
+      border-radius: 8px;
+      border: 1px solid var(--n-200);
+      display: flex; flex-direction: column; padding: 6px;
+      gap: 4px;
+    }
+    .theme-preview.light { background: #fff; }
+    .theme-preview.dark { background: #0f172a; border-color: #1e293b; }
+    .tp-bar { height: 4px; border-radius: 2px; background: #e2e8f0; width: 60%; }
+    .tp-bar.sm { width: 40%; }
+    .theme-preview.dark .tp-bar { background: #334155; }
+    .theme-preview .tp-btn { height: 8px; border-radius: 3px; background: var(--indigo); width: 40%; margin-top: auto; }
+    .theme-name { font-size: 11px; font-weight: 700; color: var(--n-900); text-align: center; }
+
+    /* Step 3 — Publish */
+    .publish-picker {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .pub-card {
+      display: flex; gap: 10px; align-items: center;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1.5px solid var(--n-200);
+      background: var(--n-white);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .pub-card.selected { border-color: var(--indigo); box-shadow: 0 0 0 3px rgba(99,102,241,0.15); }
+    .pub-ic {
+      width: 30px; height: 30px; border-radius: 8px;
+      background: #eef2ff;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .pub-ic svg { width: 15px; height: 15px; stroke: var(--indigo); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .pub-title { font-size: 11px; font-weight: 800; color: var(--n-900); letter-spacing: -0.01em; }
+    .pub-sub { font-size: 9px; font-weight: 500; color: var(--n-500); margin-top: 1px; line-height: 1.3; }
+
+    .summary {
+      padding: 12px;
+      border-radius: 14px;
+      background: #fafbff;
+      border: 1px solid #eef2ff;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .summary-head { display: flex; gap: 10px; align-items: center; }
+    .summary-name { font-size: 13px; font-weight: 800; color: var(--n-900); }
+    .summary-price { font-size: 12px; font-weight: 800; color: var(--indigo); margin-top: 2px; }
+    .summary-row {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;
+    }
+    .sr-cell {
+      padding: 6px 8px;
+      border-radius: 8px;
+      background: var(--n-white);
+      border: 1px solid #eef2ff;
+    }
+    .sr-lbl { font-size: 8.5px; font-weight: 700; color: #94a3b8; letter-spacing: 0.06em; }
+    .sr-val { font-size: 10.5px; font-weight: 700; color: var(--n-900); margin-top: 2px; }
+
+    .goal-row {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 10px;
+      background: var(--n-white);
+      border: 1px solid #eef2ff;
+      border-radius: 10px;
+    }
+    .goal-tgt {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: #eef2ff;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .goal-tgt svg { width: 14px; height: 14px; stroke: var(--indigo); fill: none; stroke-width: 2; }
+    .goal-txt { flex: 1; }
+    .goal-main { font-size: 11.5px; font-weight: 800; color: var(--n-900); display: flex; align-items: center; gap: 6px; }
+    .badge-disc {
+      background: #d1fae5; color: var(--emerald-2);
+      padding: 2px 6px; border-radius: 999px;
+      font-size: 9px; font-weight: 800;
+    }
+    .goal-hint { font-size: 9px; font-weight: 500; color: var(--n-500); }
+    .goal-price-box {
+      text-align: right;
+    }
+    .goal-price {
+      background: #f8fafc;
+      border: 1px solid var(--n-200);
+      padding: 3px 8px; border-radius: 999px;
+      font-size: 10.5px; font-weight: 800; color: var(--n-900);
+    }
+    .goal-save { font-size: 9.5px; font-weight: 800; color: var(--emerald-2); margin-top: 3px; }
+
+    /* ── Tema oscuro: todo el popup ── */
+    .animation-viewport.is-dark {
+      background: linear-gradient(165deg, #0b1220 0%, #111827 50%, #0f172a 100%);
+    }
+    .animation-viewport.is-dark .wizard {
+      background: #111827;
+      border-color: #1e293b;
+      box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.25),
+        0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+    .animation-viewport.is-dark .w-title { color: #f8fafc; }
+    .animation-viewport.is-dark .w-sub { color: #94a3b8; }
+    .animation-viewport.is-dark .w-close { color: #64748b; }
+    .animation-viewport.is-dark .step-circle:not(.active):not(.done) {
+      background: #334155;
+      color: #94a3b8;
+    }
+    .animation-viewport.is-dark .step-label { color: #94a3b8; }
+    .animation-viewport.is-dark .step-item.active .step-label { color: #a5b4fc; }
+    .animation-viewport.is-dark .step-item.done .step-label { color: #34d399; }
+    .animation-viewport.is-dark .info-banner {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    .animation-viewport.is-dark .info-title { color: #f1f5f9; }
+    .animation-viewport.is-dark .info-sub { color: #94a3b8; }
+    .animation-viewport.is-dark .field-label { color: #cbd5e1; }
+    .animation-viewport.is-dark .field-mini-label { color: #94a3b8; }
+    .animation-viewport.is-dark .theme-card {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    .animation-viewport.is-dark .theme-card.selected {
+      border-color: #818cf8;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+    }
+    .animation-viewport.is-dark .theme-name { color: #e2e8f0; }
+    .animation-viewport.is-dark .advanced-card {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    .animation-viewport.is-dark .adv-title { color: #f1f5f9; }
+    .animation-viewport.is-dark .adv-sub { color: #94a3b8; }
+    .animation-viewport.is-dark .adv-arrow { color: #94a3b8; }
+    .animation-viewport.is-dark .pub-card {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    .animation-viewport.is-dark .pub-card.selected {
+      border-color: #818cf8;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+    .animation-viewport.is-dark .pub-title { color: #f1f5f9; }
+    .animation-viewport.is-dark .pub-sub { color: #94a3b8; }
+    .animation-viewport.is-dark .pub-ic { background: #312e81; }
+    .animation-viewport.is-dark .summary {
+      background: #0f172a;
+      border-color: #1e293b;
+    }
+    .animation-viewport.is-dark .summary-name { color: #f8fafc; }
+    .animation-viewport.is-dark .summary-price { color: #a5b4fc; }
+    .animation-viewport.is-dark .sr-cell,
+    .animation-viewport.is-dark .goal-row {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    .animation-viewport.is-dark .sr-lbl { color: #94a3b8; }
+    .animation-viewport.is-dark .sr-val,
+    .animation-viewport.is-dark .goal-main { color: #f1f5f9; }
+    .animation-viewport.is-dark .goal-hint { color: #94a3b8; }
+    .animation-viewport.is-dark .goal-tgt { background: #312e81; }
+    .animation-viewport.is-dark .goal-tgt svg { stroke: #a5b4fc; }
+    .animation-viewport.is-dark .goal-price {
+      background: #0f172a;
+      border-color: #475569;
+      color: #f8fafc;
+    }
+    .animation-viewport.is-dark .product-thumb {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    .animation-viewport.is-dark .w-footer {
+      background: #111827;
+      border-top-color: #1e293b;
+    }
+    .animation-viewport.is-dark .btn-back { color: #94a3b8; }
+    .animation-viewport.is-dark .success-overlay {
+      background: rgba(15, 23, 42, 0.88);
+    }
+    .animation-viewport.is-dark .success-text { color: #f8fafc; }
+    .animation-viewport.is-dark .success-sub { color: #94a3b8; }
+
+    /* Footer buttons */
+    .w-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin: 8px -18px 0;
+      padding: 14px 18px 4px;
+      border-top: 1px solid #eef2ff;
+      background: #ffffff;
+    }
+    .btn-back {
+      background: transparent; border: none;
+      color: var(--n-500);
+      font-size: 12px; font-weight: 700;
+      font-family: inherit;
+      display: flex; align-items: center; gap: 2px;
+    }
+    .btn-back.hidden { opacity: 0; pointer-events: none; }
+    .btn-primary {
+      padding: 12px 20px;
+      border-radius: 14px;
+      border: none;
+      background: #4f46e5;
+      color: #fff;
+      font-family: inherit;
+      font-size: 13px; font-weight: 800;
+      letter-spacing: -0.01em;
+      display: flex; align-items: center; gap: 6px;
+      box-shadow:
+        0 6px 16px rgba(79, 70, 229, 0.38),
+        0 10px 28px rgba(79, 70, 229, 0.22);
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease, background 0.3s ease;
+    }
+    .btn-primary.solid {
+      background: #4f46e5;
+    }
+    .btn-primary.hover {
+      transform: scale(1.04);
+      box-shadow: 0 12px 28px rgba(79, 70, 229, 0.42);
+    }
+    .btn-primary.pressed {
+      transform: scale(0.94);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.22);
+    }
+    .btn-primary.reveal {
+      animation: btnReveal 0.7s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+    @keyframes btnReveal {
+      0% { transform: scale(0.75); opacity: 0; box-shadow: 0 0 0 rgba(79,70,229,0); }
+      55% { transform: scale(1.08); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .btn-primary.pulse {
+      animation: btnPulse 1s ease-in-out;
+    }
+    @keyframes btnPulse {
+      0%,100% { box-shadow: 0 4px 14px rgba(79,70,229,0.32), 0 8px 24px rgba(124,58,237,0.18); }
+      50% { box-shadow: 0 0 0 8px rgba(99,102,241,0.18), 0 12px 28px rgba(79,70,229,0.42); }
+    }
+
+    /* Success overlay */
+    .success-overlay {
+      position: absolute; inset: 0;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 20;
+      border-radius: 20px;
+    }
+    .success-overlay.visible { opacity: 1; }
+    .success-circle {
+      width: 68px; height: 68px; border-radius: 50%;
+      background: linear-gradient(135deg, #34d399, #10b981);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 32px;
+      box-shadow: 0 12px 32px rgba(16, 185, 129, 0.35);
+      transform: scale(0.5);
+      transition: transform 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+    .success-overlay.visible .success-circle { transform: scale(1); }
+    .success-text {
+      font-size: 14px; font-weight: 800; color: var(--n-900);
+    }
+    .success-sub {
+      font-size: 11px; font-weight: 500; color: var(--n-500);
+      margin-top: -6px;
+    }
+
+    /* Cursor + ripple */
     .cursor {
       position: absolute;
-      width: 26px;
-      height: 26px;
-      z-index: 100;
-      pointer-events: none;
+      width: 26px; height: 26px;
+      z-index: 100; pointer-events: none;
       opacity: 0;
       filter: drop-shadow(0 3px 8px rgba(20, 24, 38, 0.18));
-      transition: opacity 0.45s ease;
+      transition: opacity 0.35s ease;
     }
-
-    .cursor.visible {
-      opacity: 1;
-    }
-
+    .cursor.visible { opacity: 1; }
     .cursor.clicking {
       transform: scale(0.88);
       transition: transform 0.1s ease;
     }
+    .click-ripple {
+      position: absolute;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      left: 50%; top: 50%;
+      margin-left: -20px; margin-top: -20px;
+      border: 2px solid rgba(99, 102, 241, 0.55);
+      pointer-events: none;
+      transform: scale(0);
+      opacity: 0.6;
+    }
+    @keyframes ripple-out {
+      to { transform: scale(2.6); opacity: 0; }
+    }
+    .click-ripple.active { animation: ripple-out 0.55s ease-out forwards; }
   </style>
 </head>
 <body>
 
   <div class="animation-viewport" id="viewport">
-    <div class="stage" id="stage">
-      <div class="dashboard-card" id="dashboardCard">
-        <div class="dash-row">
+    <div class="stage">
+      <div class="wizard">
+        <div class="w-header">
           <div>
-            <p class="dash-title">Activar campaña</p>
-            <p class="dash-sub">Habilita la campaña de descuento para este producto</p>
+            <div class="w-title">Publicar grupo</div>
+            <div class="w-sub">Completa los pasos y publica en tu tienda</div>
           </div>
-          <div class="toggle-wrap">
-            <div class="toggle" id="toggle" role="img" aria-label="Interruptor de campaña">
-              <span class="toggle-track"></span>
-              <span class="toggle-knob"></span>
+          <div class="w-close">×</div>
+        </div>
+
+        <div class="stepper">
+          <div class="step-item active" id="step1">
+            <div class="step-circle">
+              <span class="step-num">1</span>
+              <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <div class="step-label">GRUPO</div>
+          </div>
+          <div class="step-bar" id="bar1"></div>
+          <div class="step-item" id="step2">
+            <div class="step-circle">
+              <span class="step-num">2</span>
+              <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <div class="step-label">APARIENCIA</div>
+          </div>
+          <div class="step-bar" id="bar2"></div>
+          <div class="step-item" id="step3">
+            <div class="step-circle">
+              <span class="step-num">3</span>
+              <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <div class="step-label">PUBLICAR</div>
+          </div>
+        </div>
+
+        <div class="info-banner">
+          <div class="info-ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <div>
+            <div class="info-title" id="bannerTitle">Configura tu grupo de compra</div>
+            <div class="info-sub" id="bannerSub">Elige el producto, las unidades, el descuento y el tiempo.</div>
+          </div>
+        </div>
+
+        <div class="panels" id="panels">
+          <!-- STEP 1 -->
+          <div class="panel active" id="panel1">
+            <div>
+              <div class="field-label">Producto</div>
+              <div class="product-card">
+                <div class="product-thumb">
+                  <!-- Lollipop SVG -->
+                  <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <!-- Stick -->
+                    <rect x="30" y="40" width="4" height="22" fill="#d4a574" stroke="#a0826d" stroke-width="0.5"/>
+                    <!-- Spiral lollipop -->
+                    <circle cx="32" cy="24" r="18" fill="none" stroke="#ff6b35" stroke-width="3.5"/>
+                    <circle cx="32" cy="24" r="14" fill="none" stroke="#ffd700" stroke-width="3"/>
+                    <circle cx="32" cy="24" r="10" fill="none" stroke="#ff4444" stroke-width="2.8"/>
+                    <circle cx="32" cy="24" r="6" fill="none" stroke="#00a8cc" stroke-width="2.5"/>
+                    <circle cx="32" cy="24" r="2.5" fill="#fff8dc"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="product-name">Piruleta Pirulín</div>
+                  <div class="product-price">80,00 €</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row-2">
+              <div class="field">
+                <div class="field-label">Unidades</div>
+                <div class="input" id="inpUnits"><span id="unitsVal">75</span><span class="caret"></span></div>
+              </div>
+              <div class="field">
+                <div class="field-label">Porcentaje de descuento</div>
+                <div class="input" id="inpDisc"><span id="discVal">25</span><span class="caret"></span></div>
+              </div>
+            </div>
+
+            <div class="hint" id="hintLine">Con 75 unidades, el descuento será del 25% · Precio final 60,00 €</div>
+
+            <div>
+              <div class="field-label">Tiempo límite</div>
+              <div class="row-3">
+                <div class="field">
+                  <div class="field-mini-label">Días</div>
+                  <div class="input">3</div>
+                </div>
+                <div class="field">
+                  <div class="field-mini-label">Horas</div>
+                  <div class="input">10</div>
+                </div>
+                <div class="field">
+                  <div class="field-mini-label">Minutos</div>
+                  <div class="input">60</div>
+                </div>
+              </div>
             </div>
           </div>
+
+          <!-- STEP 2 -->
+          <div class="panel" id="panel2">
+            <div>
+              <div class="field-label">Elige la apariencia</div>
+              <div class="theme-picker">
+                <div class="theme-card selected" id="themeLight">
+                  <div class="theme-preview light">
+                    <div class="tp-bar"></div>
+                    <div class="tp-bar sm"></div>
+                    <div class="tp-btn"></div>
+                  </div>
+                  <div class="theme-name">Tema claro</div>
+                </div>
+                <div class="theme-card" id="themeDark">
+                  <div class="theme-preview dark">
+                    <div class="tp-bar"></div>
+                    <div class="tp-bar sm"></div>
+                    <div class="tp-btn"></div>
+                  </div>
+                  <div class="theme-name">Tema oscuro</div>
+                </div>
+              </div>
+            </div>
+            <div class="advanced-card">
+              <div class="adv-ic" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/>
+                  <line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/>
+                  <line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/>
+                  <line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>
+                </svg>
+              </div>
+              <div>
+                <div class="adv-title">Personalización avanzada</div>
+                <div class="adv-sub">Fuente, sombras y más</div>
+              </div>
+              <div class="adv-arrow">›</div>
+            </div>
+          </div>
+
+          <!-- STEP 3 -->
+          <div class="panel" id="panel3">
+            <div>
+              <div class="field-label" style="text-transform: uppercase; font-size: 9px; color: #94a3b8; letter-spacing: 0.08em;">¿Cuándo quieres activarlo?</div>
+              <div class="publish-picker">
+                <div class="pub-card selected">
+                  <div class="pub-ic">
+                    <svg viewBox="0 0 24 24"><path d="M4.5 16.5L3 21l4.5-1.5L20 7 17 4 4.5 16.5z"/><path d="M15 6l3 3"/></svg>
+                  </div>
+                  <div>
+                    <div class="pub-title">Publicar ahora</div>
+                    <div class="pub-sub">Visible al instante</div>
+                  </div>
+                </div>
+                <div class="pub-card">
+                  <div class="pub-ic">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  </div>
+                  <div>
+                    <div class="pub-title">Programar</div>
+                    <div class="pub-sub">Elige fecha</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="summary">
+              <div class="summary-head">
+                <div class="product-thumb" style="width:38px;height:38px;">
+                  <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="30" y="40" width="4" height="22" fill="#d4a574"/>
+                    <circle cx="32" cy="24" r="18" fill="none" stroke="#ff6b35" stroke-width="3.5"/>
+                    <circle cx="32" cy="24" r="14" fill="none" stroke="#ffd700" stroke-width="3"/>
+                    <circle cx="32" cy="24" r="10" fill="none" stroke="#ff4444" stroke-width="2.8"/>
+                    <circle cx="32" cy="24" r="6" fill="none" stroke="#00a8cc" stroke-width="2.5"/>
+                    <circle cx="32" cy="24" r="2.5" fill="#fff8dc"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="summary-name">Piruleta Pirulín</div>
+                  <div class="summary-price">80,00 €</div>
+                </div>
+              </div>
+
+              <div class="summary-row">
+                <div class="sr-cell"><div class="sr-lbl">UNIDADES</div><div class="sr-val">75</div></div>
+                <div class="sr-cell"><div class="sr-lbl">TIEMPO</div><div class="sr-val">3 d · 11 h</div></div>
+                <div class="sr-cell"><div class="sr-lbl">TEMA</div><div class="sr-val">Claro</div></div>
+              </div>
+
+              <div class="goal-row">
+                <div class="goal-tgt">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+                </div>
+                <div class="goal-txt">
+                  <div class="goal-main">75 unidades <span class="badge-disc">−25%</span></div>
+                  <div class="goal-hint">Si se llena</div>
+                </div>
+                <div class="goal-price-box">
+                  <span class="goal-price">60,00 €</span>
+                  <div class="goal-save">−20,00 €</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-footer">
+          <button class="btn-back hidden" id="btnBack" tabindex="-1">‹ Atrás</button>
+          <div style="flex:1"></div>
+          <button class="btn-primary" id="btnNext" tabindex="-1">
+            <span id="btnLabel">Continuar</span>
+            <span>›</span>
+          </button>
         </div>
       </div>
     </div>
 
-    <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true"></div>
-
-    <div class="modal-sheet" id="modalSheet" role="dialog" aria-labelledby="modalTitle">
-      <div class="modal-chrome">
-        <span class="modal-brand-pill">TUKO Campaigns</span>
-      </div>
-      <div class="modal-close" aria-hidden="true">×</div>
-      <div class="modal-scroll" id="modalScroll">
-        <div class="modal-head">
-          <div class="modal-icon-wrap">
-            <div class="modal-icon-inner">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>
-            </div>
-          </div>
-          <h2 class="modal-title" id="modalTitle">Confirmar activación</h2>
-          <p class="modal-sub">Revisa la configuración antes de activar</p>
-        </div>
-
-        <div class="modal-section" id="secProduct">
-          <div class="section-label">PRODUCTO</div>
-          <div class="product-card">
-            <div class="product-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12" />
-              </svg>
-            </div>
-            <div>
-              <div class="product-name">Champú Natural</div>
-              <div class="product-line">Precio base: 28,00 €</div>
-              <div class="product-line">Gasto de envío: 3,99 €</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="modal-section" id="secConfig">
-          <div class="section-label">CONFIGURACIÓN DE LA CAMPAÑA</div>
-          <div class="config-row">
-            <div class="config-cell">
-              <div class="config-ic" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-                </svg>
-              </div>
-              <div>
-                <div class="config-label">Máx unidades</div>
-                <div class="config-val">90</div>
-              </div>
-            </div>
-            <div class="config-cell">
-              <div class="config-ic" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 6v6l4 2" />
-                </svg>
-              </div>
-              <div>
-                <div class="config-label">Tiempo límite</div>
-                <div class="config-val config-val-sm">1 día y 5 horas y 30 minutos</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="modal-section" id="secM1">
-          <div class="section-label">HITOS DE DESCUENTO</div>
-          <div class="milestone">
-            <div class="milestone-top">
-              <div class="milestone-num">1</div>
-              <div>
-                <div class="milestone-line1">
-                  <span class="milestone-people">5 unidades</span>
-                  <span class="milestone-disc">Descuento: 5%</span>
-                </div>
-              </div>
-            </div>
-            <div class="milestone-prices">
-              <span class="price-old">28,00 €</span>
-              <span class="price-new">26,60 €</span>
-              <span class="price-save">Ahorro: 1,40 €</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="modal-section" id="secM2">
-          <div class="milestone">
-            <div class="milestone-top">
-              <div class="milestone-num">2</div>
-              <div>
-                <div class="milestone-line1">
-                  <span class="milestone-people">15 unidades</span>
-                  <span class="milestone-disc">Descuento: 10%</span>
-                </div>
-              </div>
-            </div>
-            <div class="milestone-prices">
-              <span class="price-old">28,00 €</span>
-              <span class="price-new">25,20 €</span>
-              <span class="price-save">Ahorro: 2,80 €</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="modal-section" id="secM3">
-          <div class="milestone">
-            <div class="milestone-top">
-              <div class="milestone-num">3</div>
-              <div>
-                <div class="milestone-line1">
-                  <span class="milestone-people">40 unidades</span>
-                  <span class="milestone-disc">Descuento: 15%</span>
-                </div>
-              </div>
-            </div>
-            <div class="milestone-prices">
-              <span class="price-old">28,00 €</span>
-              <span class="price-new">23,80 €</span>
-              <span class="price-save">Ahorro: 4,20 €</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="modal-section" id="secM4">
-          <div class="milestone">
-            <div class="milestone-top">
-              <div class="milestone-num">4</div>
-              <div>
-                <div class="milestone-line1">
-                  <span class="milestone-people">90 unidades</span>
-                  <span class="milestone-disc">Descuento: 20%</span>
-                </div>
-              </div>
-            </div>
-            <div class="milestone-prices">
-              <span class="price-old">28,00 €</span>
-              <span class="price-new">22,40 €</span>
-              <span class="price-save">Ahorro: 5,60 €</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="modal-section" id="secFooter">
-          <div class="modal-footer">
-            <button type="button" class="btn-cancel" tabindex="-1">Cancelar</button>
-            <div class="btn-activate-wrap">
-              <div class="success-badge" id="successBadge" aria-hidden="true">✓</div>
-              <button type="button" class="btn-activate" id="btnActivate" tabindex="-1">
-                Activar campaña
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="success-overlay" id="successOverlay">
+      <div class="success-circle">✓</div>
+      <div class="success-text">¡Grupo publicado!</div>
+      <div class="success-sub">Visible en tu tienda</div>
     </div>
 
     <svg class="cursor" id="cursor" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M5.5 3.21V20.8a.55.55 0 0 0 .95.39l4.3-4.55h6.05a.55.55 0 0 0 .39-.95L5.89 3.21a.28.28 0 0 0-.39.0z" fill="#fff" stroke="#222222" stroke-width="1"/>
+      <path d="M5.5 3.21V20.8a.55.55 0 0 0 .95.39l4.3-4.55h6.05a.55.55 0 0 0 .39-.95L5.89 3.21a.28.28 0 0 0-.39 0z" fill="#fff" stroke="#222222" stroke-width="1"/>
     </svg>
   </div>
 
   <script>
     (function () {
-      const TIMING = {
-        cursorAppear: 350,
-        parallaxStart: 550,
-        cursorMove1Start: 700,
-        cursorMove1Duration: 1100,
-        toggleHover: 1950,
-        toggleClickDown: 2280,
-        toggleClickUp: 2410,
-        toggleGlowEnd: 2680,
-        modalShow: 2750,
-        revealProduct: 3350,
-        revealConfig: 4200,
-        revealM1: 4580,
-        revealM2: 4980,
-        revealM3: 5380,
-        revealM4: 5780,
-        /** Menos espera arriba (junto a la X) antes de bajar al CTA (−500 ms) */
-        revealFooter: 6020,
-        ctaZoom: 6070,
-        cursorMove2Start: 6130,
-        /** Scroll del modal + cursor, mismo easing (lento hacia el CTA) */
-        cursorMove2Duration: 2600,
-        ctaHover: 9080,
-        ctaClickDown: 9500,
-        ctaClickUp: 9630,
-        successBadge: 9700,
-        resetFade: 11580,
-        resetDone: 12180,
-        loopDelay: 12980,
-      };
+      if (window.parent !== window) document.documentElement.classList.add('embedded');
+
+      function reportHugHeight() {
+        if (window.parent === window) return;
+        const wizard = document.querySelector('.wizard');
+        if (!wizard) return;
+        const h = Math.ceil(wizard.getBoundingClientRect().height);
+        if (!Number.isFinite(h) || h < 160) return;
+        try {
+          window.parent.postMessage({ type: 'tuko-demo-resize', height: h, demo: 'activar' }, '*');
+        } catch (e) {}
+      }
+      let hugRaf = 0;
+      function scheduleHugHeight() {
+        if (hugRaf) cancelAnimationFrame(hugRaf);
+        hugRaf = requestAnimationFrame(function () {
+          hugRaf = 0;
+          reportHugHeight();
+        });
+      }
+      scheduleHugHeight();
+      window.addEventListener('resize', scheduleHugHeight);
+      if (typeof ResizeObserver !== 'undefined') {
+        const wizardEl = document.querySelector('.wizard');
+        if (wizardEl) new ResizeObserver(scheduleHugHeight).observe(wizardEl);
+      }
 
       const $ = (id) => document.getElementById(id);
-      let loopTimer = null;
-      let cursorRaf = null;
+      const viewport = $('viewport');
+      const cursor = $('cursor');
+
+      const COPY = {
+        es: {
+          title: 'Tuko — Publicar grupo',
+          wTitle: 'Publicar grupo',
+          wSub: 'Completa los pasos y publica en tu tienda',
+          step1: 'GRUPO',
+          step2: 'APARIENCIA',
+          step3: 'PUBLICAR',
+          banner1Title: 'Configura tu grupo de compra',
+          banner1Sub: 'Elige el producto, las unidades, el descuento y el tiempo.',
+          banner2Title: 'Personaliza la apariencia',
+          banner2Sub: 'Elige cómo se verá la tarjeta del grupo en tu tienda.',
+          banner3Title: 'Todo listo para publicar',
+          banner3Sub: 'Revisa el resumen y publica tu grupo de compra.',
+          productLabel: 'Producto',
+          productName: 'Piruleta Pirulín',
+          unitsLabel: 'Unidades',
+          discLabel: 'Porcentaje de descuento',
+          hint: 'Con 75 unidades, el descuento será del 25% · Precio final 60,00 €',
+          timeLabel: 'Tiempo límite',
+          days: 'Días',
+          hours: 'Horas',
+          minutes: 'Minutos',
+          appearance: 'Elige la apariencia',
+          themeLight: 'Tema claro',
+          themeDark: 'Tema oscuro',
+          advTitle: 'Personalización avanzada',
+          advSub: 'Fuente, sombras y más',
+          when: '¿Cuándo quieres activarlo?',
+          pubNow: 'Publicar ahora',
+          pubNowSub: 'Visible al instante',
+          schedule: 'Programar',
+          scheduleSub: 'Elige fecha',
+          srUnits: 'UNIDADES',
+          srTime: 'TIEMPO',
+          srTheme: 'TEMA',
+          themeValLight: 'Claro',
+          themeValDark: 'Oscuro',
+          goalMain: '75 unidades',
+          goalHint: 'Si se llena',
+          back: '‹ Atrás',
+          continue: 'Continuar',
+          success: '¡Grupo publicado!',
+          successSub: 'Visible en tu tienda'
+        },
+        en: {
+          title: 'Tuko — Publish Group',
+          wTitle: 'Publish Group',
+          wSub: 'Complete the steps and publish in your store',
+          step1: 'GROUP',
+          step2: 'APPEARANCE',
+          step3: 'PUBLISH',
+          banner1Title: 'Configure your group purchase',
+          banner1Sub: 'Choose the product, units, discount and time.',
+          banner2Title: 'Personalize the appearance',
+          banner2Sub: 'Choose how your group card will look in your store.',
+          banner3Title: 'All set to publish',
+          banner3Sub: 'Review the summary and publish your group purchase.',
+          productLabel: 'Product',
+          productName: 'Lollipop Pirulín',
+          unitsLabel: 'Units',
+          discLabel: 'Discount Percentage',
+          hint: 'With 75 units, the discount will be 25% · Final price 60.00 €',
+          timeLabel: 'Time Limit',
+          days: 'Days',
+          hours: 'Hours',
+          minutes: 'Minutes',
+          appearance: 'Choose appearance',
+          themeLight: 'Light Theme',
+          themeDark: 'Dark Theme',
+          advTitle: 'Advanced Customization',
+          advSub: 'Font, shadows and more',
+          when: 'When do you want to activate it?',
+          pubNow: 'Publish Now',
+          pubNowSub: 'Visible instantly',
+          schedule: 'Schedule',
+          scheduleSub: 'Choose date',
+          srUnits: 'UNITS',
+          srTime: 'TIME',
+          srTheme: 'THEME',
+          themeValLight: 'Light',
+          themeValDark: 'Dark',
+          goalMain: '75 units',
+          goalHint: 'If filled',
+          back: '‹ Back',
+          continue: 'Continue',
+          success: 'Group Published!',
+          successSub: 'Visible in your store'
+        }
+      };
+
       let demoLang = 'es';
+      function t() { return COPY[demoLang] || COPY.es; }
 
       function getStoredDemoLang() {
         try {
+          const q = new URLSearchParams(location.search).get('lang');
+          if (q === 'en' || q === 'es') return q;
+          if (window.parent && window.parent !== window) {
+            const path = (window.parent.location.pathname || '').replace(/\/$/, '') || '/';
+            if (path === '/en' || path.indexOf('/en/') === 0) return 'en';
+          }
           return localStorage.getItem('tuko_lang') === 'en' ? 'en' : 'es';
         } catch (e) {
           return 'es';
         }
       }
 
+      function currentWizardStep() {
+        if ($('panel3') && $('panel3').classList.contains('active')) return 3;
+        if ($('panel2') && $('panel2').classList.contains('active')) return 2;
+        return 1;
+      }
+
       function applyDemoLang(lang) {
         demoLang = lang === 'en' ? 'en' : 'es';
         document.documentElement.lang = demoLang;
-        const en = demoLang === 'en';
-        const loc = en ? 'en-US' : 'es-ES';
-        const eur = function (amount) {
-          return new Intl.NumberFormat(loc, {
-            style: 'currency',
-            currency: 'EUR',
-          }).format(amount);
-        };
+        const c = t();
+        document.title = c.title;
 
-        const dashTitle = document.querySelector('.dash-title');
-        const dashSub = document.querySelector('.dash-sub');
-        if (dashTitle) dashTitle.textContent = en ? 'Enable campaign' : 'Activar campaña';
-        if (dashSub) {
-          dashSub.textContent = en
-            ? 'Turn on the discount campaign for this product.'
-            : 'Habilita la campaña de descuento para este producto';
+        const wTitle = document.querySelector('.w-title');
+        const wSub = document.querySelector('.w-sub');
+        if (wTitle) wTitle.textContent = c.wTitle;
+        if (wSub) wSub.textContent = c.wSub;
+
+        const stepLabs = document.querySelectorAll('.step-label');
+        if (stepLabs[0]) stepLabs[0].textContent = c.step1;
+        if (stepLabs[1]) stepLabs[1].textContent = c.step2;
+        if (stepLabs[2]) stepLabs[2].textContent = c.step3;
+
+        const p1Labs = document.querySelectorAll('#panel1 .field-label');
+        if (p1Labs[0]) p1Labs[0].textContent = c.productLabel;
+        if (p1Labs[1]) p1Labs[1].textContent = c.unitsLabel;
+        if (p1Labs[2]) p1Labs[2].textContent = c.discLabel;
+        if (p1Labs[3]) p1Labs[3].textContent = c.timeLabel;
+
+        const pname = document.querySelector('#panel1 .product-name');
+        if (pname) pname.textContent = c.productName;
+        const sname = document.querySelector('#panel3 .summary-name');
+        if (sname) sname.textContent = c.productName;
+
+        if ($('hintLine')) $('hintLine').textContent = c.hint;
+
+        const minis = document.querySelectorAll('#panel1 .field-mini-label');
+        if (minis[0]) minis[0].textContent = c.days;
+        if (minis[1]) minis[1].textContent = c.hours;
+        if (minis[2]) minis[2].textContent = c.minutes;
+
+        const p2Lab = document.querySelector('#panel2 .field-label');
+        if (p2Lab) p2Lab.textContent = c.appearance;
+        const themes = document.querySelectorAll('#panel2 .theme-name');
+        if (themes[0]) themes[0].textContent = c.themeLight;
+        if (themes[1]) themes[1].textContent = c.themeDark;
+        const advT = document.querySelector('.adv-title');
+        const advS = document.querySelector('.adv-sub');
+        if (advT) advT.textContent = c.advTitle;
+        if (advS) advS.textContent = c.advSub;
+
+        const whenLab = document.querySelector('#panel3 .field-label');
+        if (whenLab) whenLab.textContent = c.when;
+        const pubs = document.querySelectorAll('#panel3 .pub-title');
+        const pubSubs = document.querySelectorAll('#panel3 .pub-sub');
+        if (pubs[0]) pubs[0].textContent = c.pubNow;
+        if (pubs[1]) pubs[1].textContent = c.schedule;
+        if (pubSubs[0]) pubSubs[0].textContent = c.pubNowSub;
+        if (pubSubs[1]) pubSubs[1].textContent = c.scheduleSub;
+
+        const srL = document.querySelectorAll('#panel3 .sr-lbl');
+        if (srL[0]) srL[0].textContent = c.srUnits;
+        if (srL[1]) srL[1].textContent = c.srTime;
+        if (srL[2]) srL[2].textContent = c.srTheme;
+        const srV = document.querySelectorAll('#panel3 .sr-val');
+        if (srV[2]) {
+          srV[2].textContent = $('themeDark').classList.contains('selected') ? c.themeValDark : c.themeValLight;
         }
 
-        const toggle = $('toggle');
-        if (toggle) toggle.setAttribute('aria-label', en ? 'Campaign switch' : 'Interruptor de campaña');
-
-        const mt = $('modalTitle');
-        if (mt) mt.textContent = en ? 'Confirm activation' : 'Confirmar activación';
-        const msub = document.querySelector('.modal-head .modal-sub');
-        if (msub) {
-          msub.textContent = en
-            ? 'Review the settings before you activate.'
-            : 'Revisa la configuración antes de activar';
+        const goalMain = document.querySelector('#panel3 .goal-main');
+        if (goalMain) {
+          const badge = goalMain.querySelector('.badge-disc');
+          goalMain.textContent = c.goalMain + ' ';
+          if (badge) goalMain.appendChild(badge);
+          else {
+            const span = document.createElement('span');
+            span.className = 'badge-disc';
+            span.textContent = '−25%';
+            goalMain.appendChild(span);
+          }
         }
+        const goalHint = document.querySelector('#panel3 .goal-hint');
+        if (goalHint) goalHint.textContent = c.goalHint;
 
-        const secPLab = document.querySelector('#secProduct .section-label');
-        if (secPLab) secPLab.textContent = en ? 'PRODUCT' : 'PRODUCTO';
-        const pname = document.querySelector('.product-name');
-        if (pname) pname.textContent = en ? 'Natural shampoo' : 'Champú Natural';
-        const lines = document.querySelectorAll('.product-card .product-line');
-        if (lines[0]) lines[0].textContent = en ? 'Base price: ' + eur(28) : 'Precio base: 28,00 €';
-        if (lines[1]) lines[1].textContent = en ? 'Shipping: ' + eur(3.99) : 'Gasto de envío: 3,99 €';
+        if ($('btnBack')) $('btnBack').textContent = c.back;
+        const suc = document.querySelector('.success-text');
+        const sucS = document.querySelector('.success-sub');
+        if (suc) suc.textContent = c.success;
+        if (sucS) sucS.textContent = c.successSub;
 
-        const secCLab = document.querySelector('#secConfig .section-label');
-        if (secCLab) secCLab.textContent = en ? 'CAMPAIGN SETTINGS' : 'CONFIGURACIÓN DE LA CAMPAÑA';
-        const cfgLabs = document.querySelectorAll('#secConfig .config-label');
-        if (cfgLabs[0]) cfgLabs[0].textContent = en ? 'Max units' : 'Máx unidades';
-        if (cfgLabs[1]) cfgLabs[1].textContent = en ? 'Time limit' : 'Tiempo límite';
-        const cfgTime = document.querySelector('#secConfig .config-val-sm');
-        if (cfgTime) {
-          cfgTime.textContent = en
-            ? '1 day, 5 hours and 30 minutes'
-            : '1 día y 5 horas y 30 minutos';
+        const step = currentWizardStep();
+        if (step === 3) {
+          $('bannerTitle').textContent = c.banner3Title;
+          $('bannerSub').textContent = c.banner3Sub;
+          $('btnLabel').textContent = c.pubNow;
+        } else if (step === 2) {
+          $('bannerTitle').textContent = c.banner2Title;
+          $('bannerSub').textContent = c.banner2Sub;
+          $('btnLabel').textContent = c.continue;
+        } else {
+          $('bannerTitle').textContent = c.banner1Title;
+          $('bannerSub').textContent = c.banner1Sub;
+          $('btnLabel').textContent = c.continue;
         }
-
-        const secM1Lab = document.querySelector('#secM1 .section-label');
-        if (secM1Lab) secM1Lab.textContent = en ? 'DISCOUNT MILESTONES' : 'HITOS DE DESCUENTO';
-
-        const rows = [
-          { people: 5, disc: 5, saveEs: '1,40 €', saveNum: 1.4 },
-          { people: 15, disc: 10, saveEs: '2,80 €', saveNum: 2.8 },
-          { people: 40, disc: 15, saveEs: '4,20 €', saveNum: 4.2 },
-          { people: 90, disc: 20, saveEs: '5,60 €', saveNum: 5.6 },
-        ];
-        for (let i = 0; i < rows.length; i += 1) {
-          const sec = $('secM' + (i + 1));
-          if (!sec) continue;
-          const row = rows[i];
-          const people = sec.querySelector('.milestone-people');
-          const disc = sec.querySelector('.milestone-disc');
-          const save = sec.querySelector('.price-save');
-          if (people) people.textContent = en ? row.people + ' units' : row.people + ' unidades';
-          if (disc) disc.textContent = en ? 'Discount: ' + row.disc + '%' : 'Descuento: ' + row.disc + '%';
-          if (save) save.textContent = en ? 'Save: ' + eur(row.saveNum) : 'Ahorro: ' + row.saveEs;
-        }
-
-        const cancel = document.querySelector('.btn-cancel');
-        const act = $('btnActivate');
-        if (cancel) cancel.textContent = en ? 'Cancel' : 'Cancelar';
-        if (act) act.textContent = en ? 'Enable campaign' : 'Activar campaña';
+        scheduleHugHeight();
       }
 
       window.addEventListener('message', function (ev) {
         if (!ev.data || ev.data.type !== 'tuko-demo-lang') return;
         applyDemoLang(ev.data.lang);
       });
-      applyDemoLang(getStoredDemoLang());
 
-      function toggleCenter() {
-        const el = $('toggle');
-        const vr = $('viewport').getBoundingClientRect();
-        const r = el.getBoundingClientRect();
-        return {
-          x: r.left - vr.left + r.width / 2 - 13,
-          /* Un poco más abajo: la punta del cursor cae en el centro del toggle */
-          y: r.top - vr.top + r.height / 2 - 13 + 8,
-        };
-      }
+      const TIMING = {
+        cursorAppear: 400,
+        moveToNext1Start: 1000,
+        moveToNext1Dur: 1900,
+        btnHover1: 3000,
+        btnClickDown1: 3350,
+        btnClickUp1: 3500,
+        goStep2: 3600,
 
-      function activateBtnCenter() {
-        const el = $('btnActivate');
-        const vr = $('viewport').getBoundingClientRect();
+        moveToDarkStart: 4900,
+        moveToDarkDur: 1400,
+        darkHover: 6300,
+        darkClickDown: 6600,
+        darkClickUp: 6750,
+        selectDark: 6770,
+
+        moveToNext2Start: 7500,
+        moveToNext2Dur: 1500,
+        btnHover2: 9000,
+        btnClickDown2: 9350,
+        btnClickUp2: 9500,
+        goStep3: 9600,
+
+        pubReveal: 10500,
+        pubPulse: 11400,
+        moveToPublishStart: 12000,
+        moveToPublishDur: 1900,
+        pubHover: 13900,
+        pubClickDown: 14300,
+        pubClickUp: 14450,
+        successShow: 14550,
+
+        resetFade: 16800,
+        resetDone: 17400,
+        loopDelay: 18100,
+      };
+
+      let loopTimer = null;
+      let rafHandle = null;
+
+      function centerOf(el) {
+        const vr = viewport.getBoundingClientRect();
         const r = el.getBoundingClientRect();
         return {
           x: r.left - vr.left + r.width / 2 - 13,
@@ -1005,230 +1256,219 @@
         };
       }
 
-      function runAnimation() {
-        resetState();
-
-        const viewport = $('viewport');
-        const cursor = $('cursor');
-        const stage = $('stage');
-        const toggle = $('toggle');
-        const modalBackdrop = $('modalBackdrop');
-        const modalSheet = $('modalSheet');
-        const btnActivate = $('btnActivate');
-        const successBadge = $('successBadge');
-
-        const vr = viewport.getBoundingClientRect();
-        let curX = vr.width * 0.82;
-        let curY = vr.height * 0.78;
-        setCursorPos(curX, curY);
-
-        at(TIMING.cursorAppear, () => cursor.classList.add('visible'));
-
-        at(TIMING.parallaxStart, () => stage.classList.add('parallax'));
-
-        const t1 = toggleCenter();
-        animateCursor(curX, curY, t1.x, t1.y, TIMING.cursorMove1Start, TIMING.cursorMove1Duration);
-
-        at(TIMING.toggleHover, () => toggle.classList.add('glow'));
-
-        at(TIMING.toggleClickDown, () => {
-          cursor.classList.add('clicking');
-        });
-
-        at(TIMING.toggleClickUp, () => {
-          cursor.classList.remove('clicking');
-          toggle.classList.add('on');
-        });
-
-        at(TIMING.toggleGlowEnd, () => toggle.classList.remove('glow'));
-
-        at(TIMING.modalShow, () => {
-          modalBackdrop.classList.add('visible');
-          modalSheet.classList.add('visible');
-        });
-
-        at(TIMING.revealProduct, () => {
-          $('secProduct').classList.add('visible');
-          modalSheet.classList.add('product-stage');
-          const sc = $('modalScroll');
-          if (sc) sc.scrollTop = 0;
-        });
-        at(TIMING.revealConfig, () => {
-          $('secConfig').classList.add('visible');
-          modalSheet.classList.remove('product-stage');
-        });
-        at(TIMING.revealM1, () => $('secM1').classList.add('visible'));
-        at(TIMING.revealM2, () => $('secM2').classList.add('visible'));
-        at(TIMING.revealM3, () => $('secM3').classList.add('visible'));
-        at(TIMING.revealM4, () => $('secM4').classList.add('visible'));
-        at(TIMING.revealFooter, () => $('secFooter').classList.add('visible'));
-
-        at(TIMING.ctaZoom, () => {
-          stage.classList.add('cta-zoom');
-        });
-
-        at(TIMING.cursorMove2Start, () => {
-          animateCursorWithModalScroll(TIMING.cursorMove2Duration);
-        });
-
-        at(TIMING.ctaHover, () => btnActivate.classList.add('hover'));
-
-        at(TIMING.ctaClickDown, () => {
-          btnActivate.classList.remove('hover');
-          btnActivate.classList.add('pressed');
-          cursor.classList.add('clicking');
-          const ripple = document.createElement('div');
-          ripple.className = 'click-ripple';
-          btnActivate.parentElement.insertBefore(ripple, btnActivate);
-          requestAnimationFrame(() => ripple.classList.add('active'));
-          setTimeout(() => ripple.remove(), 600);
-        });
-
-        at(TIMING.ctaClickUp, () => {
-          btnActivate.classList.remove('pressed');
-          cursor.classList.remove('clicking');
-        });
-
-        at(TIMING.successBadge, () => successBadge.classList.add('visible'));
-
-        at(TIMING.resetFade, () => {
-          cursor.classList.remove('visible', 'clicking');
-          cursor.style.opacity = '0';
-          viewport.style.transition = 'opacity 0.5s ease';
-          viewport.style.opacity = '0';
-        });
-
-        at(TIMING.resetDone, () => {
-          /* Reset limpio mientras está invisible → el fade-in ya no enseña el tick otra vez */
-          stage.classList.remove('parallax', 'cta-zoom');
-          toggle.className = 'toggle';
-          modalBackdrop.classList.remove('visible');
-          modalSheet.classList.remove('visible', 'product-stage');
-          const sc = $('modalScroll');
-          if (sc) sc.scrollTop = 0;
-          btnActivate.className = 'btn-activate';
-          successBadge.classList.remove('visible');
-          ['secProduct', 'secConfig', 'secM1', 'secM2', 'secM3', 'secM4', 'secFooter'].forEach(function (id) {
-            const el = $(id);
-            if (el) el.classList.remove('visible');
-          });
-          viewport.style.transition = 'none';
-          viewport.style.opacity = '0';
-          requestAnimationFrame(function () {
-            requestAnimationFrame(function () {
-              viewport.style.transition = 'opacity 0.5s ease';
-              viewport.style.opacity = '1';
-            });
-          });
-        });
-
-        loopTimer = setTimeout(runAnimation, TIMING.loopDelay);
-      }
-
-      function at(ms, fn) {
-        setTimeout(fn, ms);
-      }
-
       function setCursorPos(x, y) {
-        $('cursor').style.left = x + 'px';
-        $('cursor').style.top = y + 'px';
+        cursor.style.left = x + 'px';
+        cursor.style.top = y + 'px';
       }
 
-      function animateCursor(fromX, fromY, toX, toY, startAt, duration) {
-        const startTime = performance.now() + startAt;
-        function step(now) {
-          const elapsed = now - startTime;
-          if (elapsed < 0) {
-            cursorRaf = requestAnimationFrame(step);
-            return;
+      function animateCursor(fromX, fromY, toX, toY, duration) {
+        return new Promise((resolve) => {
+          const start = performance.now();
+          function step(now) {
+            const t = Math.min((now - start) / duration, 1);
+            const ease = 1 - Math.pow(1 - t, 3);
+            setCursorPos(fromX + (toX - fromX) * ease, fromY + (toY - fromY) * ease);
+            if (t < 1) rafHandle = requestAnimationFrame(step);
+            else { rafHandle = null; resolve(); }
           }
-          const t = Math.min(elapsed / duration, 1);
-          const ease = 1 - Math.pow(1 - t, 3);
-          setCursorPos(
-            fromX + (toX - fromX) * ease,
-            fromY + (toY - fromY) * ease
-          );
-          if (t < 1) cursorRaf = requestAnimationFrame(step);
-          else cursorRaf = null;
-        }
-        cursorRaf = requestAnimationFrame(step);
-      }
-
-      /**
-       * Baja el scroll del modal y mueve el cursor hacia «Activar» a la vez,
-       * con la misma curva ease-out cúbica.
-       */
-      function animateCursorWithModalScroll(duration) {
-        const scrollEl = $('modalScroll');
-        const from = toggleCenter();
-        if (cursorRaf) cancelAnimationFrame(cursorRaf);
-
-        const startTime = performance.now();
-
-        function step(now) {
-          const elapsed = now - startTime;
-          const t = Math.min(elapsed / duration, 1);
-          const ease = 1 - Math.pow(1 - t, 3);
-
-          if (scrollEl) {
-            const maxScroll = Math.max(
-              0,
-              scrollEl.scrollHeight - scrollEl.clientHeight,
-            );
-            scrollEl.scrollTop = maxScroll * ease;
-          }
-
-          const to = activateBtnCenter();
-          setCursorPos(
-            from.x + (to.x - from.x) * ease,
-            from.y + (to.y - from.y) * ease,
-          );
-
-          if (t < 1) {
-            cursorRaf = requestAnimationFrame(step);
-          } else {
-            cursorRaf = null;
-          }
-        }
-
-        cursorRaf = requestAnimationFrame(() => {
-          cursorRaf = requestAnimationFrame(step);
+          rafHandle = requestAnimationFrame(step);
         });
       }
+
+      function moveTo(el, startMs, duration) {
+        setTimeout(() => {
+          const from = { x: parseFloat(cursor.style.left) || 0, y: parseFloat(cursor.style.top) || 0 };
+          const to = centerOf(el);
+          animateCursor(from.x, from.y, to.x, to.y, duration);
+        }, startMs);
+      }
+
+      function ripple(el) {
+        const wrap = el.parentElement;
+        wrap.style.position = wrap.style.position || 'relative';
+        const rip = document.createElement('div');
+        rip.className = 'click-ripple';
+        const r = el.getBoundingClientRect();
+        const wr = wrap.getBoundingClientRect();
+        rip.style.left = (r.left - wr.left + r.width / 2) + 'px';
+        rip.style.top = (r.top - wr.top + r.height / 2) + 'px';
+        rip.style.marginLeft = '-20px';
+        rip.style.marginTop = '-20px';
+        wrap.appendChild(rip);
+        requestAnimationFrame(() => rip.classList.add('active'));
+        setTimeout(() => rip.remove(), 600);
+      }
+
+      function at(ms, fn) { setTimeout(fn, ms); }
 
       function resetState() {
         if (loopTimer) clearTimeout(loopTimer);
-        if (cursorRaf) cancelAnimationFrame(cursorRaf);
-        cursorRaf = null;
-
-        const viewport = $('viewport');
-        const cursor = $('cursor');
-        const stage = $('stage');
-        const toggle = $('toggle');
-        const modalBackdrop = $('modalBackdrop');
-        const modalSheet = $('modalSheet');
-        const btnActivate = $('btnActivate');
-        const successBadge = $('successBadge');
+        if (rafHandle) cancelAnimationFrame(rafHandle);
+        rafHandle = null;
 
         viewport.style.opacity = '1';
         viewport.style.transition = 'none';
 
         cursor.classList.remove('visible', 'clicking');
-        cursor.style.opacity = '';
-        stage.classList.remove('parallax', 'cta-zoom');
-        toggle.className = 'toggle';
-        modalBackdrop.classList.remove('visible');
-        modalSheet.classList.remove('visible');
-        modalSheet.classList.remove('product-stage');
-        const sc = $('modalScroll');
-        if (sc) sc.scrollTop = 0;
-        btnActivate.className = 'btn-activate';
-        successBadge.classList.remove('visible');
 
-        ['secProduct', 'secConfig', 'secM1', 'secM2', 'secM3', 'secM4', 'secFooter'].forEach((id) => {
-          $(id).classList.remove('visible');
-        });
+        $('step1').classList.add('active');
+        $('step1').classList.remove('done');
+        $('step2').classList.remove('active', 'done');
+        $('step3').classList.remove('active', 'done');
+        $('bar1').classList.remove('filled');
+        $('bar2').classList.remove('filled');
+
+        $('panel1').classList.add('active');
+        $('panel1').classList.remove('exit-left');
+        $('panel2').classList.remove('active', 'exit-left');
+        $('panel3').classList.remove('active');
+
+        $('themeLight').classList.add('selected');
+        $('themeDark').classList.remove('selected');
+        $('viewport').classList.remove('is-dark');
+        document.documentElement.classList.remove('demo-dark');
+
+        $('btnBack').classList.add('hidden');
+        $('btnNext').classList.remove('hover', 'pressed', 'reveal', 'pulse');
+        $('btnLabel').textContent = t().continue;
+
+        $('bannerTitle').textContent = t().banner1Title;
+        $('bannerSub').textContent = t().banner1Sub;
+
+        const srV = document.querySelectorAll('#panel3 .sr-val');
+        if (srV[2]) srV[2].textContent = t().themeValLight;
+
+        $('successOverlay').classList.remove('visible');
       }
+
+      function goStep2() {
+        $('step1').classList.remove('active');
+        $('step1').classList.add('done');
+        $('bar1').classList.add('filled');
+        $('step2').classList.add('active');
+
+        $('panel1').classList.remove('active');
+        $('panel1').classList.add('exit-left');
+        $('panel2').classList.add('active');
+
+        $('btnBack').classList.remove('hidden');
+        $('bannerTitle').textContent = t().banner2Title;
+        $('bannerSub').textContent = t().banner2Sub;
+      }
+
+      function goStep3() {
+        $('step2').classList.remove('active');
+        $('step2').classList.add('done');
+        $('bar2').classList.add('filled');
+        $('step3').classList.add('active');
+
+        $('panel2').classList.remove('active');
+        $('panel2').classList.add('exit-left');
+        $('panel3').classList.add('active');
+
+        $('btnLabel').textContent = t().pubNow;
+        $('bannerTitle').textContent = t().banner3Title;
+        $('bannerSub').textContent = t().banner3Sub;
+      }
+
+      function runAnimation() {
+        resetState();
+
+        const vr = viewport.getBoundingClientRect();
+        setCursorPos(vr.width * 0.78, vr.height * 0.85);
+
+        at(TIMING.cursorAppear, () => cursor.classList.add('visible'));
+
+        moveTo($('btnNext'), TIMING.moveToNext1Start, TIMING.moveToNext1Dur);
+        at(TIMING.btnHover1, () => $('btnNext').classList.add('hover'));
+        at(TIMING.btnClickDown1, () => {
+          $('btnNext').classList.remove('hover');
+          $('btnNext').classList.add('pressed');
+          cursor.classList.add('clicking');
+          ripple($('btnNext'));
+        });
+        at(TIMING.btnClickUp1, () => {
+          $('btnNext').classList.remove('pressed');
+          cursor.classList.remove('clicking');
+        });
+        at(TIMING.goStep2, goStep2);
+
+        moveTo($('themeDark'), TIMING.moveToDarkStart, TIMING.moveToDarkDur);
+        at(TIMING.darkHover, () => { /* subtle */ });
+        at(TIMING.darkClickDown, () => {
+          cursor.classList.add('clicking');
+          ripple($('themeDark'));
+        });
+        at(TIMING.darkClickUp, () => cursor.classList.remove('clicking'));
+        at(TIMING.selectDark, () => {
+          $('themeLight').classList.remove('selected');
+          $('themeDark').classList.add('selected');
+          $('viewport').classList.add('is-dark');
+          document.documentElement.classList.add('demo-dark');
+        });
+
+        moveTo($('btnNext'), TIMING.moveToNext2Start, TIMING.moveToNext2Dur);
+        at(TIMING.btnHover2, () => $('btnNext').classList.add('hover'));
+        at(TIMING.btnClickDown2, () => {
+          $('btnNext').classList.remove('hover');
+          $('btnNext').classList.add('pressed');
+          cursor.classList.add('clicking');
+          ripple($('btnNext'));
+        });
+        at(TIMING.btnClickUp2, () => {
+          $('btnNext').classList.remove('pressed');
+          cursor.classList.remove('clicking');
+        });
+        at(TIMING.goStep3, () => {
+          goStep3();
+          const tema = document.querySelectorAll('#panel3 .sr-val')[2];
+          if (tema) tema.textContent = t().themeValDark;
+          if ($('themeDark').classList.contains('selected')) {
+            $('viewport').classList.add('is-dark');
+            document.documentElement.classList.add('demo-dark');
+          }
+        });
+
+        at(TIMING.pubReveal, () => {
+          const b = $('btnNext');
+          b.classList.remove('reveal');
+          void b.offsetWidth;
+          b.classList.add('reveal');
+        });
+        at(TIMING.pubPulse, () => {
+          const b = $('btnNext');
+          b.classList.remove('pulse');
+          void b.offsetWidth;
+          b.classList.add('pulse');
+        });
+
+        moveTo($('btnNext'), TIMING.moveToPublishStart, TIMING.moveToPublishDur);
+        at(TIMING.pubHover, () => $('btnNext').classList.add('hover'));
+        at(TIMING.pubClickDown, () => {
+          $('btnNext').classList.remove('hover');
+          $('btnNext').classList.add('pressed');
+          cursor.classList.add('clicking');
+          ripple($('btnNext'));
+        });
+        at(TIMING.pubClickUp, () => {
+          $('btnNext').classList.remove('pressed');
+          cursor.classList.remove('clicking');
+        });
+        at(TIMING.successShow, () => {
+          $('successOverlay').classList.add('visible');
+          $('step3').classList.add('done');
+        });
+
+        at(TIMING.resetFade, () => {
+          viewport.style.transition = 'opacity 0.5s ease';
+          viewport.style.opacity = '0';
+        });
+        at(TIMING.resetDone, () => { viewport.style.opacity = '1'; });
+
+        loopTimer = setTimeout(runAnimation, TIMING.loopDelay);
+      }
+
+      applyDemoLang(getStoredDemoLang());
 
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', runAnimation);

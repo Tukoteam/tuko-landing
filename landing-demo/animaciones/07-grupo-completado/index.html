@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tuko — Grupo completado + Estadísticas</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;800&display=swap');
+
+  :root {
+    --n-white: #ffffff;
+    --n-50: #f5f6fa;
+    --n-100: #f1f5f9;
+    --n-200: #e5e7eb;
+    --n-300: #d1d5db;
+    --n-400: #9ca3af;
+    --n-500: #6b7280;
+    --n-600: #4b5563;
+    --n-900: #171717;
+    --indigo: #4f46e5;
+    --violet: #8b5cf6;
+    --violet-track: #ede9fe;
+    --emerald: #10b981;
+    --emerald-2: #059669;
+    --icon-blue: #3b82f6;
+    --icon-green: #14b8a6;
+    --icon-purple: #8b5cf6;
+    --icon-orange: #f97316;
+    --shadow: 0 10px 40px rgba(20, 24, 38, 0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--n-50);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html.embedded, html.embedded body {
+    min-height: 0;
+    height: 100%;
+  }
+  html.embedded body {
+    padding: 0;
+    overflow: hidden;
+    background: #fff;
+    display: block;
+  }
+  html.embedded .animation-viewport {
+    max-width: none;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  html.embedded .stage {
+    padding: 12px;
+  }
+  html.embedded .card {
+    border-radius: 18px;
+  }
+  html.embedded .panel {
+    padding: 14px 14px;
+  }
+
+  .animation-viewport {
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    background: linear-gradient(165deg, #f8fafc 0%, #eef2ff 45%, #f1f5f9 100%);
+    box-shadow: var(--shadow);
+    aspect-ratio: 1 / 1.08;
+  }
+
+  .stage {
+    position: absolute;
+    inset: 0;
+    padding: 16px 14px;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+  }
+
+  .card {
+    width: 100%;
+    background: var(--n-white);
+    border-radius: 20px;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    box-shadow: 0 4px 6px rgba(15, 23, 42, 0.03), 0 20px 60px rgba(15, 23, 42, 0.08);
+    padding: 16px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .panels { position: relative; height: 100%; }
+  .panel {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateX(28px) scale(0.99);
+    pointer-events: none;
+    transition: opacity 1.9s cubic-bezier(0.22,1,0.36,1), transform 2.1s cubic-bezier(0.22,1,0.36,1);
+    padding: 14px 14px;
+  }
+  .panel.active {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    pointer-events: auto;
+  }
+  .panel.exit-left {
+    opacity: 0;
+    transform: translateX(-24px) scale(0.99);
+  }
+
+  /* ---------- PANEL 1: relleno del grupo ---------- */
+  .fill-inner { display: flex; flex-direction: column; height: 100%; justify-content: center; }
+
+  .co-close-lbl { font-size: 12px; font-weight: 600; color: var(--n-600); text-align: center; margin-bottom: 18px; }
+
+  .co-big-num {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--n-900);
+    text-align: center;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+  }
+  .co-big-num .num-target { color: var(--n-400); font-weight: 700; }
+
+  .co-hint {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--n-500);
+    text-align: center;
+    margin-top: 4px;
+    margin-bottom: 16px;
+  }
+
+  .co-slider-track {
+    position: relative;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--violet-track);
+    margin-bottom: 8px;
+  }
+  .co-slider-fill {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--indigo), var(--violet));
+    width: 2.66%;
+    box-shadow: 0 0 14px rgba(139,92,246,0.0);
+  }
+  .co-slider-fill.filling { box-shadow: 0 0 14px rgba(139,92,246,0.45); }
+  .co-slider-knob {
+    position: absolute; top: 50%;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--indigo);
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 5px rgba(79,70,229,0.22), 0 3px 8px rgba(79,70,229,0.4);
+    transform: translate(-50%, -50%);
+    left: 2.66%;
+  }
+  .co-pct-lbl { font-size: 11px; font-weight: 700; color: var(--n-400); text-align: right; margin-bottom: 18px; }
+
+  .co-countdown-title { font-size: 12px; font-weight: 600; color: var(--n-600); text-align: center; margin-bottom: 8px; }
+  .co-countdown {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    border: 1px solid var(--n-200);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .co-cd-cell { text-align: center; padding: 10px 4px; border-right: 1px solid var(--n-200); }
+  .co-cd-cell:last-child { border-right: none; }
+  .co-cd-num { font-size: 20px; font-weight: 800; color: var(--n-900); font-variant-numeric: tabular-nums; }
+  .co-cd-lbl { font-size: 10px; font-weight: 600; color: var(--n-500); margin-top: 3px; }
+
+  .co-refund { font-size: 12px; font-weight: 500; color: var(--n-600); text-align: center; margin-top: 14px; }
+  .co-refund b { color: var(--indigo); font-weight: 700; }
+
+  /* pop cuando avanza el numero */
+  .co-big-num.pulse { animation: numPop 0.5s cubic-bezier(0.2,0.95,0.15,1); }
+  @keyframes numPop {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.06); color: var(--indigo); }
+    100% { transform: scale(1); }
+  }
+
+  /* ---------- PANEL 2: grupo completado ---------- */
+  .panel2-inner { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; position: relative; }
+
+  .confirm-circle {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: linear-gradient(135deg, #34d399, var(--emerald-2));
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 16px 38px rgba(16,185,129,0.35);
+    transform: scale(0.4); opacity: 0;
+    transition: transform 1.3s cubic-bezier(0.34,1.4,0.64,1), opacity 1s ease;
+    margin-bottom: 16px;
+  }
+  .confirm-circle.show { transform: scale(1); opacity: 1; }
+  .confirm-circle svg { width: 38px; height: 38px; stroke: #fff; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+  .confirm-title {
+    font-size: 22px; font-weight: 800; color: var(--n-900); letter-spacing: -0.03em; text-align: center;
+    opacity: 0; transform: translateY(8px);
+    transition: opacity 1.1s ease, transform 1.1s cubic-bezier(0.22,1,0.36,1);
+  }
+  .confirm-title.show { opacity: 1; transform: translateY(0); }
+
+  .confirm-sub {
+    font-size: 13px; font-weight: 500; color: var(--n-500); margin-top: 10px; text-align: center; line-height: 1.5; max-width: 27ch;
+    opacity: 0; transform: translateY(8px);
+    transition: opacity 1.1s ease 0.15s, transform 1.1s cubic-bezier(0.22,1,0.36,1) 0.15s;
+  }
+  .confirm-sub.show { opacity: 1; transform: translateY(0); }
+
+  .confirm-badge {
+    margin-top: 14px;
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.3);
+    color: var(--emerald-2);
+    font-size: 12.5px; font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 999px;
+    opacity: 0; transform: translateY(8px) scale(0.96);
+    transition: opacity 1.1s ease 0.3s, transform 1.1s cubic-bezier(0.22,1,0.36,1) 0.3s;
+  }
+  .confirm-badge.show { opacity: 1; transform: translateY(0) scale(1); }
+  .confirm-badge svg { width: 14px; height: 14px; stroke: var(--emerald-2); stroke-width: 2.5; fill: none; }
+
+  /* ---------- PANEL 2.5: transición "el grupo ha hecho su efecto" ---------- */
+  .panel25-inner { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; }
+
+  .effect-icon {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: rgba(79,70,229,0.1);
+    border: 1.5px solid rgba(79,70,229,0.25);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+    transform: scale(0.5); opacity: 0;
+    transition: transform 1.3s cubic-bezier(0.34,1.4,0.64,1), opacity 1s ease;
+  }
+  .effect-icon.show { transform: scale(1); opacity: 1; }
+  .effect-icon svg { width: 34px; height: 34px; stroke: var(--indigo); stroke-width: 2; fill: none; }
+
+  .effect-title {
+    font-size: 19px; font-weight: 800; color: var(--n-900); letter-spacing: -0.02em; line-height: 1.35; max-width: 24ch;
+    opacity: 0; transform: translateY(8px);
+    transition: opacity 1.1s ease, transform 1.1s cubic-bezier(0.22,1,0.36,1);
+  }
+  .effect-title.show { opacity: 1; transform: translateY(0); }
+
+  .effect-sub {
+    font-size: 13px; font-weight: 500; color: var(--n-500); margin-top: 12px; line-height: 1.5; max-width: 26ch;
+    opacity: 0; transform: translateY(8px);
+    transition: opacity 1.1s ease 0.15s, transform 1.1s cubic-bezier(0.22,1,0.36,1) 0.15s;
+  }
+  .effect-sub.show { opacity: 1; transform: translateY(0); }
+
+  .confetti-layer { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
+  .confetti-piece {
+    position: absolute;
+    top: -8%;
+    width: 7px; height: 11px;
+    border-radius: 2px;
+    opacity: 0;
+    animation: confettiFall 1.9s cubic-bezier(0.25,0.65,0.4,1) forwards;
+  }
+  @keyframes confettiFall {
+    0% { opacity: 0; transform: translateY(0) rotate(0deg); }
+    8% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(220px) rotate(360deg); }
+  }
+
+  /* ---------- PANEL 3: estadisticas (de la carpeta 04) ---------- */
+  .panel3-inner { display: flex; flex-direction: column; height: 100%; }
+
+  .head-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--n-900);
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .head-sub {
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--n-500);
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .stats-grid {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .stat-card {
+    background: var(--n-white);
+    border-radius: 12px;
+    padding: 10px 10px 12px;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .stat-ic {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .stat-ic svg { width: 18px; height: 18px; }
+  .stat-ic.blue { background: rgba(59, 130, 246, 0.12); color: var(--icon-blue); }
+  .stat-ic.teal { background: rgba(20, 184, 166, 0.12); color: var(--icon-green); }
+  .stat-ic.purple { background: rgba(139, 92, 246, 0.12); color: var(--icon-purple); }
+  .stat-ic.orange { background: rgba(249, 115, 22, 0.12); color: var(--icon-orange); }
+
+  .stat-label { font-size: 10.5px; font-weight: 600; color: var(--n-400); line-height: 1.3; }
+  .stat-value {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--n-900);
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-value.up { color: var(--emerald-2); }
+
+  .stat-delta {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--emerald-2);
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .stat-delta.show { opacity: 1; }
+  .stat-delta svg { width: 10px; height: 10px; stroke: var(--emerald-2); stroke-width: 3; fill: none; }
+</style>
+</head>
+<body>
+
+  <div class="animation-viewport" id="viewport">
+    <div class="stage">
+      <div class="card">
+        <div class="panels" id="panels">
+
+          <!-- PANEL 1: relleno hasta 75 -->
+          <div class="panel active" id="panelFill">
+            <div class="fill-inner">
+              <div class="co-big-num" id="coBigNum">2<span class="num-target"> de 75</span></div>
+              <div class="co-hint" id="coHint">Faltan 73 para que se llene</div>
+
+              <div class="co-slider-track">
+                <div class="co-slider-fill" id="coSliderFill"></div>
+                <div class="co-slider-knob" id="coSliderKnob"></div>
+              </div>
+              <div class="co-pct-lbl" id="coPctLbl">3%</div>
+
+              <div class="co-countdown-title">Se cierra en</div>
+              <div class="co-countdown">
+                <div class="co-cd-cell"><div class="co-cd-num">01</div><div class="co-cd-lbl">Días</div></div>
+                <div class="co-cd-cell"><div class="co-cd-num">05</div><div class="co-cd-lbl">Horas</div></div>
+                <div class="co-cd-cell"><div class="co-cd-num">13</div><div class="co-cd-lbl">Minutos</div></div>
+              </div>
+
+              <div class="co-refund">Si no se llena, <b>te devolvemos el 100%</b></div>
+            </div>
+          </div>
+
+          <!-- PANEL 2: grupo completado -->
+          <div class="panel" id="panelComplete">
+            <div class="panel2-inner">
+              <div class="confetti-layer" id="confettiLayer"></div>
+              <div class="confirm-circle" id="confirmCircle">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div class="confirm-title" id="confirmTitle">¡Grupo completado!</div>
+              <div class="confirm-sub" id="confirmSub">Las 75 plazas se han llenado. Todo el mundo paga el precio más bajo.</div>
+              <div class="confirm-badge" id="confirmBadge">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                75/75 personas unidas
+              </div>
+            </div>
+          </div>
+
+          <!-- PANEL 2.5: el grupo ha hecho su efecto -->
+          <div class="panel" id="panelEffect">
+            <div class="panel25-inner">
+              <div class="effect-icon" id="effectIcon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg>
+              </div>
+              <div class="effect-title" id="effectTitle">Y el grupo ha hecho su efecto</div>
+              <div class="effect-sub" id="effectSub">Así impacta en tus estadísticas cada compra colectiva</div>
+            </div>
+          </div>
+
+          <!-- PANEL 3: estadisticas -->
+          <div class="panel" id="panelStats">
+            <div class="panel3-inner">
+              <h1 class="head-title">Estadísticas</h1>
+              <p class="head-sub">Así crecen tus grupos tras cada compra colectiva</p>
+
+              <div class="stats-grid">
+                <div class="stat-card">
+                  <div class="stat-ic blue" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                      <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/>
+                    </svg>
+                  </div>
+                  <div class="stat-label">Grupos activos</div>
+                  <div class="stat-value" id="vActivos" data-type="int">0</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-ic teal" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                  </div>
+                  <div class="stat-label">Grupos exitosos</div>
+                  <div class="stat-value" id="vExitosos" data-type="int">0</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-ic purple" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                  </div>
+                  <div class="stat-label">Participantes totales</div>
+                  <div class="stat-value" id="vParticipantes" data-type="int">0</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-ic orange" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" opacity="0.9">
+                      <rect x="3" y="14" width="4" height="7" rx="1"/><rect x="9" y="10" width="4" height="11" rx="1"/>
+                      <rect x="15" y="6" width="4" height="15" rx="1"/><rect x="21" y="12" width="3" height="9" rx="0.8"/>
+                    </svg>
+                  </div>
+                  <div class="stat-label">Ingresos generados</div>
+                  <div class="stat-value" id="vIngresos" data-type="eur">0,00 €</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      if (window.parent !== window) document.documentElement.classList.add('embedded');
+
+      const $ = (id) => document.getElementById(id);
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const TOTAL = 75;
+      const START = 2;
+
+      const COPY = {
+        es: {
+          hint: function (falta) {
+            if (falta <= 0) return '¡Se ha llenado por completo!';
+            if (falta === 1) return 'Falta 1 para que se llene';
+            return 'Faltan ' + falta + ' para que se llene';
+          },
+          numTarget: function (n) { return ' de ' + n; },
+          days: 'Días', hours: 'Horas', minutes: 'Minutos',
+          countdownTitle: 'Se cierra en',
+          refund: 'Si no se llena, <b>te devolvemos el 100%</b>',
+          completeTitle: '¡Grupo completado!',
+          completeSub: 'Las 75 plazas se han llenado. Todo el mundo paga el precio más bajo.',
+          completeBadge: '75/75 personas unidas',
+          effectTitle: 'Y el grupo ha hecho su efecto',
+          effectSub: 'Así impacta en tus estadísticas cada compra colectiva',
+          statsTitle: 'Estadísticas',
+          statsSub: 'Así crecen tus grupos tras cada compra colectiva',
+          activos: 'Grupos activos',
+          exitosos: 'Grupos exitosos',
+          participantes: 'Participantes totales',
+          ingresos: 'Ingresos generados',
+        },
+        en: {
+          hint: function (falta) {
+            if (falta <= 0) return 'It filled completely!';
+            if (falta === 1) return '1 spot left to fill';
+            return falta + ' left to fill';
+          },
+          numTarget: function (n) { return ' of ' + n; },
+          days: 'Days', hours: 'Hours', minutes: 'Minutes',
+          countdownTitle: 'Closes in',
+          refund: 'If it doesn’t fill, <b>you get 100% back</b>',
+          completeTitle: 'Group completed!',
+          completeSub: 'All 75 spots filled. Everyone pays the lowest price.',
+          completeBadge: '75/75 people joined',
+          effectTitle: 'And the group did its job',
+          effectSub: 'Here’s how each group buy hits your stats',
+          statsTitle: 'Stats',
+          statsSub: 'How your groups grow after every group buy',
+          activos: 'Active groups',
+          exitosos: 'Successful groups',
+          participantes: 'Total participants',
+          ingresos: 'Revenue generated',
+        },
+      };
+
+      let lang = 'es';
+      let paused = false;
+
+      function getStoredDemoLang() {
+        try {
+          const q = new URLSearchParams(location.search).get('lang');
+          if (q === 'en' || q === 'es') return q;
+          const path = (window.parent !== window
+            ? (window.parent.location.pathname || '')
+            : (location.pathname || '')).replace(/\/$/, '') || '/';
+          if (path === '/en' || path.indexOf('/en/') === 0) return 'en';
+          const stored = localStorage.getItem('tuko-lang');
+          if (stored === 'en' || stored === 'es') return stored;
+        } catch (e) {}
+        return 'es';
+      }
+
+      function t() { return COPY[lang] || COPY.es; }
+
+      function applyStaticCopy() {
+        const c = t();
+        const cdTitle = document.querySelector('.co-countdown-title');
+        if (cdTitle) cdTitle.textContent = c.countdownTitle;
+        const labels = document.querySelectorAll('.co-cd-lbl');
+        if (labels[0]) labels[0].textContent = c.days;
+        if (labels[1]) labels[1].textContent = c.hours;
+        if (labels[2]) labels[2].textContent = c.minutes;
+        const refund = document.querySelector('.co-refund');
+        if (refund) refund.innerHTML = c.refund;
+        if ($('confirmTitle')) $('confirmTitle').textContent = c.completeTitle;
+        if ($('confirmSub')) $('confirmSub').textContent = c.completeSub;
+        if ($('confirmBadge')) {
+          $('confirmBadge').innerHTML =
+            '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>' + c.completeBadge;
+        }
+        if ($('effectTitle')) $('effectTitle').textContent = c.effectTitle;
+        if ($('effectSub')) $('effectSub').textContent = c.effectSub;
+        const headTitle = document.querySelector('.head-title');
+        const headSub = document.querySelector('.head-sub');
+        if (headTitle) headTitle.textContent = c.statsTitle;
+        if (headSub) headSub.textContent = c.statsSub;
+        const labelsStat = document.querySelectorAll('.stat-label');
+        if (labelsStat[0]) labelsStat[0].textContent = c.activos;
+        if (labelsStat[1]) labelsStat[1].textContent = c.exitosos;
+        if (labelsStat[2]) labelsStat[2].textContent = c.participantes;
+        if (labelsStat[3]) labelsStat[3].textContent = c.ingresos;
+        document.documentElement.lang = lang;
+      }
+
+      function applyDemoLang(next) {
+        lang = next === 'en' ? 'en' : 'es';
+        applyStaticCopy();
+        setFillState(parseInt((bigNum.textContent || String(START)).replace(/\D.*/, ''), 10) || START);
+      }
+
+      const bigNum = $('coBigNum');
+      const hint = $('coHint');
+      const sliderFill = $('coSliderFill');
+      const sliderKnob = $('coSliderKnob');
+      const pctLbl = $('coPctLbl');
+
+      function wait(ms) {
+        return new Promise((r) => {
+          let elapsed = 0;
+          let last = performance.now();
+          function tick(now) {
+            if (paused) {
+              last = now;
+              requestAnimationFrame(tick);
+              return;
+            }
+            elapsed += now - last;
+            last = now;
+            if (elapsed >= ms) r();
+            else requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        });
+      }
+
+      function setFillState(n) {
+        const pct = (n / TOTAL) * 100;
+        const c = t();
+        bigNum.innerHTML = n + '<span class="num-target">' + c.numTarget(TOTAL) + '</span>';
+        const falta = TOTAL - n;
+        hint.textContent = c.hint(falta);
+        sliderFill.style.width = pct + '%';
+        sliderKnob.style.left = pct + '%';
+        pctLbl.textContent = Math.round(pct) + '%';
+      }
+
+      function pulseNum() {
+        bigNum.classList.remove('pulse');
+        void bigNum.offsetWidth;
+        bigNum.classList.add('pulse');
+      }
+
+      async function runFillPhase() {
+        setFillState(START);
+        sliderFill.style.transition = 'none';
+        sliderKnob.style.transition = 'none';
+        void sliderFill.offsetWidth;
+        sliderFill.style.transition = 'width 0.85s cubic-bezier(0.22,1,0.36,1)';
+        sliderKnob.style.transition = 'left 0.85s cubic-bezier(0.22,1,0.36,1)';
+        sliderFill.classList.add('filling');
+
+        await wait(1000);
+
+        let n = START;
+        while (n < TOTAL) {
+          const remaining = TOTAL - n;
+          const step = remaining > 40 ? Math.ceil(remaining * 0.06) : remaining > 12 ? 2 : 1;
+          n = Math.min(TOTAL, n + step);
+          setFillState(n);
+          pulseNum();
+          const delay = reduceMotion ? 20 : (n >= TOTAL ? 220 : Math.max(90, 260 - n * 1.6));
+          await wait(delay);
+        }
+
+        sliderFill.classList.remove('filling');
+        await wait(1400);
+      }
+
+      function spawnConfetti() {
+        if (reduceMotion) return;
+        const layer = $('confettiLayer');
+        const colors = ['#4f46e5', '#8b5cf6', '#10b981', '#f97316', '#f43f5e', '#22c1c3'];
+        const rect = layer.getBoundingClientRect();
+        for (let i = 0; i < 26; i++) {
+          const piece = document.createElement('div');
+          piece.className = 'confetti-piece';
+          const left = 8 + Math.random() * (rect.width - 16 || 260);
+          piece.style.left = left + 'px';
+          piece.style.background = colors[i % colors.length];
+          piece.style.animationDelay = (Math.random() * 0.35) + 's';
+          piece.style.transform = 'rotate(' + Math.floor(Math.random() * 360) + 'deg)';
+          layer.appendChild(piece);
+          setTimeout(() => piece.remove(), 2600);
+        }
+      }
+
+      async function runCompletePhase() {
+        $('panelFill').classList.remove('active');
+        $('panelFill').classList.add('exit-left');
+        $('panelComplete').classList.add('active');
+
+        await wait(700);
+        $('confirmCircle').classList.add('show');
+        spawnConfetti();
+        await wait(700);
+        $('confirmTitle').classList.add('show');
+        await wait(400);
+        $('confirmSub').classList.add('show');
+        await wait(400);
+        $('confirmBadge').classList.add('show');
+
+        await wait(4200);
+      }
+
+      async function runEffectPhase() {
+        $('panelComplete').classList.remove('active');
+        $('panelComplete').classList.add('exit-left');
+        $('panelEffect').classList.add('active');
+
+        await wait(700);
+        $('effectIcon').classList.add('show');
+        await wait(600);
+        $('effectTitle').classList.add('show');
+        await wait(450);
+        $('effectSub').classList.add('show');
+
+        await wait(2600);
+      }
+
+      /* ---- Fase 3: estadísticas subiendo (misma lógica que 04-estadisticas-cimentacion) ---- */
+      const fmtInt = new Intl.NumberFormat('es-ES');
+      const fmtEur = new Intl.NumberFormat('es-ES', {
+        style: 'currency', currency: 'EUR', minimumFractionDigits: 2, maximumFractionDigits: 2,
+      });
+
+      const target = { activos: 0, exitosos: 0, participantes: 0, ingresos: 0 };
+      const display = { activos: 0, exitosos: 0, participantes: 0, ingresos: 0 };
+      const el = {
+        activos: $('vActivos'), exitosos: $('vExitosos'),
+        participantes: $('vParticipantes'), ingresos: $('vIngresos'),
+      };
+      const lastText = { activos: '', exitosos: '', participantes: '', ingresos: '' };
+
+      function render(key, val) {
+        const node = el[key];
+        if (!node) return;
+        const t = node.dataset.type;
+        const s = t === 'int' ? fmtInt.format(Math.round(val)) : fmtEur.format(val);
+        if (s === lastText[key]) return;
+        lastText[key] = s;
+        node.textContent = s;
+      }
+
+      function randInt(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
+
+      let liveAOV = 24 + Math.random() * 2;
+      function evolveEconomia() {
+        liveAOV += (Math.random() - 0.5) * 0.35;
+        liveAOV = Math.max(22, Math.min(28, liveAOV));
+      }
+
+      function chaseInt(from, to) {
+        if (from === to) return from;
+        const diff = to - from;
+        const ad = Math.abs(diff);
+        const sign = diff > 0 ? 1 : -1;
+        const step = Math.min(ad, Math.max(1, Math.ceil(ad * 0.16)));
+        return from + sign * step;
+      }
+
+      function chaseMoney(from, to) {
+        const diff = to - from;
+        const ad = Math.abs(diff);
+        if (ad < 0.005) return to;
+        const sign = diff > 0 ? 1 : -1;
+        const cents = ad * 100;
+        const centStep = Math.min(cents, Math.max(1, Math.ceil(cents * 0.18)));
+        return from + (sign * centStep) / 100;
+      }
+
+      function nudgeGruposActivos() {
+        if (target.activos === 0) { target.activos = randInt(7, 8); return; }
+        if (target.activos < 7 && Math.random() < 0.45) { target.activos += 1; return; }
+        if (target.activos > 8 && Math.random() < 0.4) { target.activos -= 1; return; }
+        if (Math.random() < 0.14) target.activos += 1;
+        else if (Math.random() < 0.1 && target.activos > 6) target.activos -= 1;
+        target.activos = Math.max(6, Math.min(10, target.activos));
+      }
+
+      function pulseGruposExitosos() {
+        const nuevosGrupos = randInt(2, 5);
+        let personasNuevas = 0;
+        for (let g = 0; g < nuevosGrupos; g++) personasNuevas += randInt(20, 30);
+        const aov = liveAOV;
+        target.exitosos += nuevosGrupos;
+        target.participantes += personasNuevas;
+        target.ingresos += personasNuevas * aov;
+        nudgeGruposActivos();
+      }
+
+      let statsIntervalGrupos = null;
+      let statsIntervalEcon = null;
+      let statsRaf = null;
+
+      function resetStats() {
+        target.activos = 0; target.exitosos = 0; target.participantes = 0; target.ingresos = 0;
+        display.activos = 0; display.exitosos = 0; display.participantes = 0; display.ingresos = 0;
+        lastText.activos = ''; lastText.exitosos = ''; lastText.participantes = ''; lastText.ingresos = '';
+        render('activos', 0); render('exitosos', 0); render('participantes', 0); render('ingresos', 0);
+      }
+
+      function tickDisplay() {
+        display.activos = chaseInt(display.activos, target.activos);
+        display.exitosos = chaseInt(display.exitosos, target.exitosos);
+        display.participantes = chaseInt(display.participantes, target.participantes);
+        display.ingresos = chaseMoney(display.ingresos, target.ingresos);
+        render('activos', display.activos);
+        render('exitosos', display.exitosos);
+        render('participantes', display.participantes);
+        render('ingresos', display.ingresos);
+        statsRaf = requestAnimationFrame(tickDisplay);
+      }
+
+      function stopStatsLoop() {
+        if (statsIntervalGrupos) clearInterval(statsIntervalGrupos);
+        if (statsIntervalEcon) clearInterval(statsIntervalEcon);
+        if (statsRaf) cancelAnimationFrame(statsRaf);
+        statsIntervalGrupos = null; statsIntervalEcon = null; statsRaf = null;
+      }
+
+      async function runStatsPhase() {
+        $('panelEffect').classList.remove('active');
+        $('panelEffect').classList.add('exit-left');
+        $('panelStats').classList.add('active');
+
+        resetStats();
+        pulseGruposExitosos();
+        statsIntervalGrupos = setInterval(pulseGruposExitosos, 700);
+        statsIntervalEcon = setInterval(evolveEconomia, 1900);
+        statsRaf = requestAnimationFrame(tickDisplay);
+
+        await wait(7500);
+        stopStatsLoop();
+        await wait(2200);
+      }
+
+      function resetAll() {
+        stopStatsLoop();
+
+        $('panelStats').classList.remove('active', 'exit-left');
+        $('panelEffect').classList.remove('active', 'exit-left');
+        $('panelComplete').classList.remove('active', 'exit-left');
+        $('panelFill').classList.remove('exit-left');
+        $('panelFill').classList.add('active');
+
+        $('confirmCircle').classList.remove('show');
+        $('confirmTitle').classList.remove('show');
+        $('confirmSub').classList.remove('show');
+        $('confirmBadge').classList.remove('show');
+        $('confettiLayer').innerHTML = '';
+
+        $('effectIcon').classList.remove('show');
+        $('effectTitle').classList.remove('show');
+        $('effectSub').classList.remove('show');
+
+        resetStats();
+        setFillState(START);
+        sliderFill.classList.remove('filling');
+      }
+
+      async function loop() {
+        resetAll();
+        await wait(1000);
+        await runFillPhase();
+        await runCompletePhase();
+        await runEffectPhase();
+        await runStatsPhase();
+        await wait(900);
+        loop();
+      }
+
+      let started = false;
+      function startLoop() {
+        paused = false;
+        if (!started) {
+          started = true;
+          loop();
+        }
+      }
+
+      function stopLoop() {
+        paused = true;
+        stopStatsLoop();
+      }
+
+      window.addEventListener('message', function (ev) {
+        if (!ev.data || typeof ev.data !== 'object') return;
+        if (ev.data.type === 'tuko-demo-lang') applyDemoLang(ev.data.lang);
+        if (ev.data.type === 'tuko-demo-play') startLoop();
+        if (ev.data.type === 'tuko-demo-pause') stopLoop();
+      });
+
+      applyDemoLang(getStoredDemoLang());
+      startLoop();
+    })();
+  </script>
+</body>
+</html>

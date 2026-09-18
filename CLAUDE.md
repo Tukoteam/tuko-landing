@@ -9,7 +9,18 @@ Plugin B2B de compra colectiva (group buying) para Shopify y WooCommerce. Permit
 ---
 
 ## Archivo principal
-`tuko-landing-v3.html` — Single-file HTML autocontenido (HTML5 + CSS3 + JS vanilla). Todo en un solo archivo, sin dependencias externas salvo Google Fonts.
+`index.html` — **landing principal** (español), congelada el 18 sep 2026. Es la home que se usa y la que hay que editar. Inglés: `en/index.html`.
+
+Copia de seguridad de esa versión: `_versiones/index_aprobada_20260918.html`.
+
+Las demás se quedan como archivo y **no se borran**:
+- `tuko-landing-v3.html` — landing antigua
+- `_versiones/index_hero_claro_20260918.html`
+- `_versiones/index_hero_oscuro_20260918.html`
+- `_versiones/index_pre_meta_anim_20260917_1658.html`
+- `_versiones/index_v20260403_1240.html`
+
+No iterar sobre esos archivos. En local, un badge abajo a la izquierda marca cuál estás viendo (`ACTUAL · index.html`, `ANTIGUA · tuko-landing-v3.html`, etc.). Solo aparece en localhost.
 
 ---
 

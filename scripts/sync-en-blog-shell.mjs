@@ -210,6 +210,10 @@ ${localize}
             <span data-i18n="blog_cat_novedades">News</span>
             <span class="bp-cat-n">${cats.novedades || 0}</span>
           </button></li>
+          <li><button type="button" class="bp-cat" data-cat="guias">
+            <span data-i18n="blog_cat_guias">Guides</span>
+            <span class="bp-cat-n">${cats.guias || 0}</span>
+          </button></li>
         </ul>
         <h2 class="bp-side-title bp-side-title--sort" data-i18n="blog_sort">Sort by</h2>
         <div class="bp-select-wrap">

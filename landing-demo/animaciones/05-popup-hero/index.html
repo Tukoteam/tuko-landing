@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tuko — Popup del hero (archivo de animación)</title>
+<!--
+  ARCHIVO / RESPALDO del popup interactivo que vivía en el hero de index.html.
+  Extraído tal cual (CSS + HTML + JS) el 2026-09-17 para no perderlo.
+  Es la réplica de la campaña que ve el comprador: tarjeta que gira al hacer clic,
+  cuenta atrás, avatares que se van uniendo, barra de progreso y escalera de descuentos.
+  Página autónoma: se puede abrir directamente en el navegador.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Roboto+Serif:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #4257ff;
+    --blue-light: #E0E7FF;
+    --blue-mid: #A4B3F2;
+    --green: #14C492;
+    --white: #FFFFFF;
+    --gray-1: #EDEDED;
+    --gray-2: #D9D9D9;
+    --gray-3: #A0A0A0;
+    --gray-4: #3A3A3A;
+    --black: #1a1a1a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 20px;
+    background: #F2F2F2;
+    font-family: 'Mona Sans', sans-serif;
+  }
+  .demo-stage { width: 100%; max-width: 460px; display: flex; justify-content: center; }
+
+/* ==== CSS del popup (index.html) ==== */
+  /* ---- Popup del plugin: réplica en HTML/CSS de lo que ve el comprador ---- */
+  /* Volteo en 2 fases (scaleX): se ve en Windows; el 3D puro a menudo "salta" */
+  .tk-flip {
+    width: 100%;
+    max-width: 420px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .tk-flip-stack {
+    position: relative;
+    width: 100%;
+    transform-origin: center center;
+    will-change: transform, filter;
+    filter: drop-shadow(0 16px 36px rgba(20, 24, 38, 0.12));
+  }
+  .tk-flip-plate {
+    position: absolute;
+    inset: 24px -18px -18px 18px;
+    border-radius: 24px;
+    background: linear-gradient(150deg, rgba(61,80,242,0.14) 0%, rgba(61,80,242,0.05) 100%);
+    border: 1px solid rgba(61,80,242,0.10);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .tk-flip-plate-2 {
+    position: absolute;
+    inset: 12px -9px -9px 9px;
+    border-radius: 23px;
+    background: rgba(255,255,255,0.72);
+    border: 1px solid rgba(61,80,242,0.08);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .tk-flip-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+  }
+
+  .tk-face {
+    grid-area: 1 / 1;
+    -webkit-font-smoothing: antialiased;
+  }
+  .tk-face-back {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .tk-flip.is-flipped .tk-face-front {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .tk-flip.is-flipped .tk-face-back {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .tk-popup {
+    width: 100%;
+    /* Ligera transparencia + desenfoque: efecto cristal sobre el grid del hero */
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.80);
+    backdrop-filter: blur(18px) saturate(1.5);
+    -webkit-backdrop-filter: blur(18px) saturate(1.5);
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid rgba(61,80,242,0.20);
+    /* Brillo azul de marca en el borde */
+    box-shadow:
+      0 30px 70px rgba(20,24,38,0.16),
+      0 4px 14px rgba(20,24,38,0.06),
+      0 0 0 1px rgba(61,80,242,0.10),
+      0 0 30px rgba(61,80,242,0.20);
+    font-stretch: normal;
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+  }
+  .tk-flip:hover .tk-popup {
+    border-color: rgba(61,80,242,0.38);
+    box-shadow:
+      0 30px 70px rgba(20,24,38,0.18),
+      0 4px 14px rgba(20,24,38,0.06),
+      0 0 0 1px rgba(61,80,242,0.20),
+      0 0 46px rgba(61,80,242,0.34);
+  }
+
+  .tk-popup-bar { height: 4px; background: var(--blue); flex: 0 0 auto; }
+  .tk-popup-inner { padding: 20px 22px 22px; flex: 1 1 auto; display: flex; flex-direction: column; }
+  /* El espacio sobrante se acumula justo encima del bloque CTA + nota */
+  .tk-face-front .tk-cta-wrap { margin-top: auto; }
+  .tk-cta-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+  }
+  .tk-popup-head { display: flex; align-items: center; justify-content: flex-start; margin-bottom: 16px; }
+  .tk-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue-light);
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 600;
+    font-stretch: semi-expanded;
+    letter-spacing: 0.04em;
+    padding: 7px 14px;
+    border-radius: 999px;
+  }
+  .tk-chip i { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+  .tk-close {
+    display: none;
+  }
+  .tk-close svg { width: 13px; height: 13px; stroke: currentColor; stroke-width: 2.5; fill: none; }
+
+  .tk-title {
+    font-size: 19px;
+    font-weight: 600;
+    font-stretch: semi-expanded;
+    line-height: 1.35;
+    letter-spacing: -0.025em;
+    color: var(--black);
+    margin-bottom: 18px;
+    text-align: left;
+    text-wrap: pretty;
+  }
+  .tk-title b {
+    color: var(--blue);
+    font-weight: 600;
+    display: inline-block;
+    min-width: 1.35em;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .tk-title em {
+    font-family: 'Roboto Serif', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-stretch: normal;
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .tk-title em::after {
+    content: '';
+    position: absolute;
+    left: -0.05em;
+    right: -0.05em;
+    bottom: -0.2em;
+    height: 0.42em;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 16' preserveAspectRatio='none'%3E%3Cpath d='M3 13 Q60 1 117 13' stroke='%233D50F2' stroke-width='4.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
+      center bottom / 100% 100% no-repeat;
+    pointer-events: none;
+  }
+
+  .tk-timer-label {
+    display: block;
+    width: 100%;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--gray-4);
+    text-align: center;
+    margin: 0 auto 8px;
+  }
+  .tk-popup .tk-timer-label {
+    text-align: center;
+  }
+  .tk-timer { display: flex; align-items: flex-start; justify-content: center; gap: 5px; margin-bottom: 18px; }
+  .tk-unit { display: flex; flex-direction: column; align-items: center; min-width: 50px; }
+  .tk-num {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    font-stretch: normal;
+    letter-spacing: -0.03em;
+    color: var(--black);
+    font-variant-numeric: normal;
+    font-feature-settings: normal;
+    font-variation-settings: "wght" 700, "wdth" 100;
+    line-height: 1.1;
+    display: inline-block;
+    min-width: 1.35em;
+    text-align: center;
+  }
+  .tk-lab { font-family: 'Mona Sans', sans-serif; font-size: 10px; font-weight: 400; color: var(--gray-4); margin-top: 3px; }
+  .tk-sep {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--gray-3);
+    line-height: 1.25;
+  }
+
+  .tk-product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(224, 231, 255, 0.45);
+    border: 1px solid var(--blue-light);
+    border-radius: 14px;
+    padding: 10px;
+    margin-bottom: 16px;
+  }
+  .tk-thumb {
+    width: 54px; height: 54px;
+    border-radius: 10px;
+    background: var(--white);
+    border: 1px solid rgba(0,0,0,0.06);
+    flex: 0 0 auto;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .tk-thumb { overflow: hidden; }
+  .tk-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .tk-thumb svg { width: 30px; height: 38px; }
+  .tk-pinfo { flex: 1 1 auto; min-width: 0; }
+  .tk-pname {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    font-stretch: semi-expanded;
+    color: var(--black);
+    margin-bottom: 3px;
+  }
+  .tk-old {
+    position: relative;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: semi-expanded;
+    color: var(--black);
+    letter-spacing: -0.02em;
+    margin-right: 8px;
+    text-decoration: none;
+    transition: color 0.35s ease, font-size 0.35s ease, font-weight 0.35s ease;
+  }
+  .tk-old::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1.6px;
+    background: currentColor;
+    border-radius: 1px;
+    transform: scaleX(0);
+    transform-origin: left center;
+    pointer-events: none;
+  }
+  .tk-new {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: semi-expanded;
+    color: var(--blue);
+    letter-spacing: -0.02em;
+    opacity: 0;
+    transform: translateY(8px) scale(0.92);
+    pointer-events: none;
+  }
+  .tk-off {
+    flex: 0 0 auto;
+    background: var(--blue);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    font-stretch: semi-expanded;
+    padding: 7px 12px;
+    border-radius: 999px;
+    letter-spacing: -0.01em;
+    opacity: 0;
+    transform: scale(0.55);
+    pointer-events: none;
+  }
+  /* Descuento en producto: tachado + precio + badge */
+  .tk-product.is-discounted .tk-old {
+    font-size: 12px;
+    font-weight: 400;
+    font-stretch: normal;
+    color: var(--gray-3);
+  }
+  .tk-product.is-discounted .tk-old::after {
+    animation: tk-strike 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .tk-product.is-discounted .tk-new {
+    pointer-events: auto;
+    animation: tk-price-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.12s forwards;
+  }
+  .tk-product.is-discounted .tk-off {
+    pointer-events: auto;
+    animation: tk-off-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.22s forwards;
+  }
+  /* Subida de tramo (5% → 10%): vuelve a animar precio y badge */
+  .tk-product.is-tier-bump .tk-new {
+    animation: none;
+  }
+  .tk-product.is-tier-bump .tk-off {
+    animation: none;
+  }
+  .tk-product.is-tier-bump.is-ready .tk-new {
+    animation: tk-price-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .tk-product.is-tier-bump.is-ready .tk-off {
+    animation: tk-off-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  @keyframes tk-strike {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+  @keyframes tk-price-in {
+    from { opacity: 0; transform: translateY(8px) scale(0.92); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes tk-off-pop {
+    0%   { opacity: 0; transform: scale(0.55); }
+    70%  { opacity: 1; transform: scale(1.12); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .tk-progress-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 10px;
+    margin-bottom: 9px;
+    height: 25px;
+  }
+  .tk-avatars {
+    display: flex;
+    height: 25px;
+    align-items: center;
+  }
+  .tk-av {
+    width: 25px; height: 25px;
+    border-radius: 50%;
+    border: 2px solid var(--white);
+    margin-left: -8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 600; color: var(--white);
+    transform: scale(0);
+    opacity: 0;
+    transform-origin: center;
+    box-sizing: border-box;
+  }
+  .tk-av:first-child { margin-left: 0; }
+  .tk-av.is-in {
+    opacity: 1;
+    transform: scale(1);
+    animation: tk-av-pop 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  @keyframes tk-av-pop {
+    0%   { transform: scale(0); opacity: 0; }
+    65%  { transform: scale(1.12); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .tk-av svg { width: 12px; height: 12px; fill: var(--white); }
+  .tk-av-1 { background: var(--blue); }
+  .tk-av-2 { background: #F2A93B; }
+  .tk-av-3 { background: var(--green); }
+  .tk-av-4 { background: #7B8CFF; }
+  .tk-av-more { background: var(--gray-1); color: var(--gray-4); }
+  .tk-joined {
+    display: flex;
+    align-items: center;
+    gap: 0.28em;
+    margin: 0;
+    padding: 0;
+    height: 25px;
+    font-size: 12.5px;
+    font-weight: 400;
+    font-stretch: normal;
+    color: var(--gray-4);
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    min-width: 0;
+  }
+  .tk-joined b {
+    font-weight: 700;
+    font-stretch: normal;
+    color: var(--blue);
+    font-size: inherit;
+    line-height: 1;
+  }
+  .tk-joined span {
+    font-size: inherit;
+    line-height: 1;
+  }
+  .tk-pct {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 0;
+    height: 25px;
+    font-size: 12.5px;
+    font-weight: 600;
+    font-stretch: normal;
+    color: var(--gray-4);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .tk-bar { height: 7px; border-radius: 999px; background: var(--gray-1); overflow: hidden; margin-bottom: 24px; }
+  .tk-bar-fill {
+    display: block;
+    height: 100%;
+    width: 0%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--blue) 0%, #6B7BFF 100%);
+    /* sin transition CSS: la anima JS para un “dibujado” suave */
+  }
+
+  .tk-cta {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: var(--blue);
+    color: var(--white);
+    border-radius: 999px;
+    padding: 14px 52px;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: semi-expanded;
+    letter-spacing: -0.015em;
+    box-shadow: 0 8px 24px rgba(61,80,242,0.30);
+  }
+  /* Reflejo que barre el botón cada pocos segundos */
+  .tk-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.45) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-18deg);
+    animation: tk-shine 3.8s ease-in-out 1.9s infinite;
+  }
+  @keyframes tk-shine {
+    0%   { left: -60%; }
+    26%  { left: 130%; }
+    100% { left: 130%; }
+  }
+
+  .tk-cta-ico, .tk-cta-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .tk-cta-ico { left: 8px; }
+  .tk-cta-arrow { right: 8px; }
+  .tk-cta svg { width: 15px; height: 15px; fill: none; stroke: var(--white); stroke-width: 2; }
+
+  /* Pista visible en la cara frontal: indica que la tarjeta gira */
+  .tk-no-charge {
+    margin: 0;
+    font-size: 12px;
+    text-align: center;
+    color: #666;
+    line-height: 1.35;
+  }
+  .tk-face-front .tk-front-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin: 16px -22px -22px;
+    padding: 11px 22px 22px;
+    border-top: none;
+    position: relative;
+    font-size: 11px;
+    font-weight: 400;
+    font-stretch: normal;
+    color: var(--gray-3);
+    transition: color 0.25s;
+  }
+  .tk-face-front .tk-front-hint::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--gray-1) 18%,
+      var(--gray-1) 82%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+  .tk-face-front .tk-front-hint svg {
+    width: 13px; height: 13px;
+    flex: 0 0 auto;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+  }
+  .tk-flip:hover .tk-face-front .tk-front-hint,
+  .tk-flip:focus-visible .tk-face-front .tk-front-hint { color: var(--blue); }
+
+  /* ---- Reverso de la tarjeta: cómo funciona una campaña Tuko ---- */
+  .tk-back-inner { display: flex; flex-direction: column; height: 100%; }
+  .tk-back-title {
+    font-size: 19px;
+    font-weight: 600;
+    font-stretch: semi-expanded;
+    line-height: 1.28;
+    letter-spacing: -0.025em;
+    color: var(--black);
+    margin-bottom: 4px;
+  }
+  .tk-back-title em {
+    font-family: 'Roboto Serif', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-stretch: normal;
+    color: var(--blue);
+  }
+  .tk-back-sub {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--gray-4);
+    line-height: 1.45;
+    margin-bottom: 12px;
+  }
+
+  /* Escalera de descuentos: cuantas más personas, más descuento */
+  .tk-tiers {
+    background: rgba(224, 231, 255, 0.45);
+    border: 1px solid var(--blue-light);
+    border-radius: 14px;
+    padding: 11px 13px;
+    margin-bottom: 12px;
+  }
+  .tk-tier { display: flex; align-items: center; gap: 10px; }
+  .tk-tier + .tk-tier { margin-top: 7px; }
+  .tk-tier-people { display: flex; align-items: center; flex: 0 0 auto; width: 92px; }
+  .tk-tier-people span {
+    width: 19px; height: 19px;
+    border-radius: 50%;
+    background: var(--blue-mid);
+    border: 2px solid var(--white);
+    margin-left: -6px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .tk-tier-people span:first-child { margin-left: 0; }
+  .tk-tier-people svg { width: 9px; height: 9px; fill: var(--white); }
+  .tk-tier.is-on .tk-tier-people span { background: var(--blue); }
+  .tk-tier-count {
+    flex: 1 1 auto;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--gray-4);
+    white-space: nowrap;
+  }
+  .tk-tier-off {
+    flex: 0 0 auto;
+    font-size: 12.5px;
+    font-weight: 600;
+    font-stretch: semi-expanded;
+    color: var(--gray-3);
+    background: var(--white);
+    border: 1px solid var(--gray-2);
+    border-radius: 999px;
+    padding: 4px 10px;
+    letter-spacing: -0.01em;
+  }
+  .tk-tier.is-on .tk-tier-off {
+    color: var(--white);
+    background: var(--blue);
+    border-color: var(--blue);
+  }
+
+  /* Pasos rápidos */
+  .tk-steps { display: flex; flex-direction: column; gap: 13px; margin-bottom: 12px; }
+  .tk-step { display: flex; align-items: flex-start; gap: 11px; }
+  .tk-step-n {
+    flex: 0 0 auto;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--blue-light);
+    color: var(--blue);
+    font-size: 11.5px;
+    font-weight: 600;
+    font-stretch: semi-expanded;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 0;
+  }
+  .tk-step p {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--gray-4);
+    /* 22px = alto del círculo: el número queda alineado con la primera línea */
+    line-height: 22px;
+    margin: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+    text-align: left; /* no heredar center del hero móvil */
+  }
+  .tk-step p b { font-weight: 600; color: var(--black); }
+
+  .tk-back-foot {
+    margin: auto -22px -22px;
+    padding: 11px 22px 22px;
+    border-top: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-size: 11.5px;
+    font-weight: 400;
+    color: var(--gray-3);
+  }
+  .tk-back-foot svg { width: 13px; height: 13px; fill: none; stroke: var(--gray-3); stroke-width: 2; }
+
+/* ==== reduced-motion (tk) ==== */
+@media (prefers-reduced-motion: reduce) {
+    .tk-flip-stack { transition: none; will-change: auto; filter: none; }
+    .tk-flip-inner { transition: none; will-change: auto; filter: none; }
+    .tk-bar-fill { transition: none; }
+    .tk-cta::before { animation: none; opacity: 0; }
+}
+
+/* ==== responsive tk (@media max-width:960px) ==== */
+@media (max-width: 960px) {
+    .tk-popup { max-width: 400px; text-align: left; }
+    .tk-popup-inner { padding: 16px 16px 18px; }
+    .tk-popup-head { margin-bottom: 12px; }
+    .tk-chip {
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      padding: 6px 12px;
+      gap: 6px;
+    }
+    .tk-pinfo { text-align: left; }
+    .tk-title {
+      font-size: clamp(16px, 4.4vw, 18px);
+      line-height: 1.45;
+      text-align: left;
+      text-wrap: pretty;
+      margin-bottom: 8px;
+      min-height: 0;
+    }
+    .tk-timer-label,
+    .tk-popup .tk-timer-label {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 6px;
+    }
+    .tk-cta-wrap {
+      gap: 28px;
+    }
+    .tk-no-charge {
+      margin: 0;
+      padding-top: 2px;
+    }
+    /* Capas más contenidas en móvil: menos “borde azul” saliente */
+    .tk-flip-plate {
+      inset: 10px -6px -6px 6px;
+      border-radius: 20px;
+    }
+    .tk-flip-plate-2 {
+      inset: 5px -3px -3px 3px;
+      border-radius: 19px;
+      background: linear-gradient(150deg, rgba(61,80,242,0.08) 0%, rgba(255,255,255,0.88) 100%);
+      border-color: rgba(61,80,242,0.12);
+    }
+    /* En móvil la cara oculta no estira la altura → sin hueco enorme sobre el CTA */
+    .tk-flip-inner { display: block; }
+    .tk-face-back {
+      position: absolute;
+      left: 0; right: 0; top: 0;
+      width: 100%;
+    }
+    .tk-flip.is-flipped .tk-face-front {
+      position: absolute;
+      left: 0; right: 0; top: 0;
+      width: 100%;
+    }
+    .tk-flip.is-flipped .tk-face-back { position: relative; }
+    .tk-face-front .tk-cta-wrap { margin-top: 16px; }
+    .tk-bar { margin-bottom: 14px; }
+    /* El reverso tiene más texto: se compacta un punto más en pantallas estrechas */
+    .tk-back-title { font-size: 17px; }
+    .tk-back-sub { font-size: 11.5px; margin-bottom: 10px; }
+    .tk-tiers { padding: 9px 11px; margin-bottom: 10px; }
+    .tk-tier + .tk-tier { margin-top: 6px; }
+    .tk-steps { gap: 8px; margin-bottom: 10px; text-align: left; }
+    .tk-step { gap: 9px; width: 100%; text-align: left; }
+    .tk-step-n { width: 20px; height: 20px; font-size: 11px; }
+    .tk-step p { font-size: 12px; line-height: 20px; text-align: left; }
+    .tk-back-inner { text-align: left; }
+    .tk-back-foot { padding-top: 9px; font-size: 11px; }
+}
+
+/* ==== responsive tk (@media max-width:418px) ==== */
+@media (max-width: 418px) {
+    /* Título del widget: wrap natural, sin reservar 2 líneas vacías */
+    .tk-title {
+      text-align: left;
+      line-height: 1.5;
+      margin-bottom: 8px;
+      text-wrap: pretty;
+      min-height: 0;
+    }
+    .tk-title em {
+      display: inline-block;
+      padding-bottom: 0.12em;
+    }
+    .tk-title em::after {
+      bottom: -0.08em;
+      height: 0.38em;
+    }
+}
+</style>
+</head>
+<body>
+<div class="demo-stage">
+      <div class="tk-flip fade-up d2" id="tkFlip" aria-label="Ver cómo funciona una campaña Tuko">
+        <div class="tk-flip-stack">
+          <div class="tk-flip-plate" aria-hidden="true"></div>
+          <div class="tk-flip-plate-2" aria-hidden="true"></div>
+          <div class="tk-flip-inner">
+
+          <!-- CARA FRONTAL: el popup tal cual lo ve el comprador -->
+          <div class="tk-popup tk-face tk-face-front">
+            <div class="tk-popup-bar"></div>
+            <div class="tk-popup-inner">
+              <div class="tk-popup-head">
+                <span class="tk-chip"><i></i><span data-i18n="pop_chip">CAMPAÑA ACTIVA</span></span>
+                <span class="tk-close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></span>
+              </div>
+
+              <div class="tk-title"><span data-i18n="pop_title_before">Faltan </span><b id="tkNeedN">10</b> <span data-i18n="pop_title_people">unidades</span><span data-i18n="pop_title_mid"> para bajar a </span><em id="tkDealPrice" data-i18n="pop_title_deal">25,20 €</em></div>
+
+              <p class="tk-timer-label" data-i18n="pop_timer">Termina en</p>
+              <div class="tk-timer" id="tkTimer">
+                <div class="tk-unit"><span class="tk-num" data-tk="d">02</span><span class="tk-lab" data-i18n="pop_days">Días</span></div>
+                <span class="tk-sep">:</span>
+                <div class="tk-unit"><span class="tk-num" data-tk="h">00</span><span class="tk-lab" data-i18n="pop_hours">Horas</span></div>
+                <span class="tk-sep">:</span>
+                <div class="tk-unit"><span class="tk-num" data-tk="m">00</span><span class="tk-lab" data-i18n="pop_minutes">Minutos</span></div>
+                <span class="tk-sep">:</span>
+                <div class="tk-unit"><span class="tk-num" data-tk="s">00</span><span class="tk-lab" data-i18n="pop_seconds">Segundos</span></div>
+              </div>
+
+              <div class="tk-product" id="tkProduct">
+                <div class="tk-thumb">
+                  <img src="assets/images/champu-natural.webp" alt=""
+                       onerror="this.style.display='none';this.nextElementSibling.style.display='block';" width="1024" height="1024" decoding="async">
+                  <svg viewBox="0 0 32 40" style="display:none">
+                    <rect x="12" y="1" width="8" height="5" rx="1.5" fill="#A4B3F2"/>
+                    <path d="M6 12c0-3.3 2.7-6 6-6h8c3.3 0 6 2.7 6 6v22a5 5 0 0 1-5 5H11a5 5 0 0 1-5-5z" fill="#E0E7FF"/>
+                    <rect x="6" y="18" width="20" height="11" fill="#3D50F2" opacity="0.85"/>
+                    <rect x="9.5" y="21" width="9" height="1.8" rx="0.9" fill="#FFFFFF" opacity="0.9"/>
+                    <rect x="9.5" y="25" width="6" height="1.5" rx="0.75" fill="#FFFFFF" opacity="0.6"/>
+                  </svg>
+                </div>
+                <div class="tk-pinfo">
+                  <span class="tk-pname" data-i18n="pop_product">Champú Natural</span>
+                  <span class="tk-old">28,00 €</span><span class="tk-new" id="tkNewPrice">25,20 €</span>
+                </div>
+                <span class="tk-off" id="tkOff">–10%</span>
+              </div>
+
+              <div class="tk-progress-row">
+                <div class="tk-avatars" id="tkAvatars">
+                  <span class="tk-av tk-av-1" data-tk-av><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span>
+                  <span class="tk-av tk-av-2" data-tk-av><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span>
+                  <span class="tk-av tk-av-3" data-tk-av><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span>
+                  <span class="tk-av tk-av-4" data-tk-av><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span>
+                  <span class="tk-av tk-av-more" id="tkAvMore">+0</span>
+                </div>
+                <div class="tk-joined"><b id="tkJoinedN">0</b><span id="tkJoinedLabel" data-i18n="pop_joined"> de 20 unidades reservadas</span></div>
+                <div class="tk-pct" id="tkPct">0%</div>
+              </div>
+              <div class="tk-bar"><span class="tk-bar-fill" id="tkBarFill" style="width:0%"></span></div>
+
+              <div class="tk-cta-wrap">
+                <div class="tk-cta">
+                  <span class="tk-cta-ico"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M20 8v6M23 11h-6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <span id="tkCtaLabel" data-i18n="pop_cta">Bájalo a 25,20 €</span>
+                  <span class="tk-cta-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </div>
+                <p class="tk-no-charge" data-i18n="pop_no_charge">Pagas al unirte. Si el grupo no se completa, te devolvemos el 100%.</p>
+              </div>
+              <p class="tk-front-hint" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M9 11V6.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V12m0-1a1.5 1.5 0 0 1 3 0v4.5a5.5 5.5 0 0 1-5.5 5.5h-1.6a5 5 0 0 1-3.9-1.9l-2.6-3.3a1.5 1.5 0 0 1 2.2-2l1.4 1.3V9.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-i18n="pop_front_hint">Haz clic para voltear</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- REVERSO: cómo funciona una campaña Tuko -->
+          <div class="tk-popup tk-face tk-face-back">
+            <div class="tk-popup-bar"></div>
+            <div class="tk-popup-inner tk-back-inner">
+              <div class="tk-back-title" data-i18n="pop_back_title">Así funciona una <em>campaña Tuko</em></div>
+              <p class="tk-back-sub" data-i18n="pop_back_sub">Cuantas más unidades se reservan, mayor es el descuento para todos.</p>
+
+              <div class="tk-tiers" id="tkTiers">
+                <div class="tk-tier" data-tk-tier="10">
+                  <div class="tk-tier-people"><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span></div>
+                  <span class="tk-tier-count" data-i18n="pop_tier1">10 unidades</span>
+                  <span class="tk-tier-off">–10%</span>
+                </div>
+                <div class="tk-tier" data-tk-tier="20">
+                  <div class="tk-tier-people"><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span></div>
+                  <span class="tk-tier-count" data-i18n="pop_tier2">20 unidades</span>
+                  <span class="tk-tier-off">–18%</span>
+                </div>
+                <div class="tk-tier" data-tk-tier="35">
+                  <div class="tk-tier-people"><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z"/></svg></span></div>
+                  <span class="tk-tier-count" data-i18n="pop_tier3">35 unidades</span>
+                  <span class="tk-tier-off">–25%</span>
+                </div>
+              </div>
+
+              <div class="tk-steps">
+                <div class="tk-step">
+                  <span class="tk-step-n">1</span>
+                  <p data-i18n="pop_step1">Eliges un producto, un objetivo de unidades y un plazo.</p>
+                </div>
+                <div class="tk-step">
+                  <span class="tk-step-n">2</span>
+                  <p data-i18n="pop_step2">Tus clientes compran y entran al grupo.</p>
+                </div>
+                <div class="tk-step">
+                  <span class="tk-step-n">3</span>
+                  <p data-i18n="pop_step3">Quien ya compró comparte para llegar al objetivo.</p>
+                </div>
+                <div class="tk-step">
+                  <span class="tk-step-n">4</span>
+                  <p data-i18n="pop_step4">Si se llega a la meta, se confirma el pedido con la rebaja.</p>
+                </div>
+                <div class="tk-step">
+                  <span class="tk-step-n">5</span>
+                  <p data-i18n="pop_step5">Si no se alcanza, se cancela y se devuelve el dinero.</p>
+                </div>
+              </div>
+
+              <div class="tk-back-foot">
+                <svg viewBox="0 0 24 24"><path d="M9 14l-4-4 4-4M5 10h9a5 5 0 0 1 0 10h-1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-i18n="pop_back_foot">Haz clic para volver</span>
+              </div>
+            </div>
+          </div>
+
+          </div>
+        </div>
+      </div>
+
+</div>
+<script>
+/* Tarjeta del hero: volteo con squash, sombra y rebote corto */
+(function () {
+  const flip = document.getElementById('tkFlip');
+  if (!flip) return;
+  const stack = flip.querySelector('.tk-flip-stack') || flip.querySelector('.tk-flip-inner');
+  const inner = flip.querySelector('.tk-flip-inner');
+  if (!stack || !inner) return;
+
+  flip.setAttribute('role', 'button');
+  flip.setAttribute('tabindex', '0');
+  flip.setAttribute('aria-pressed', 'false');
+
+  let flipped = false;
+  let busy = false;
+  const HALF = 320; /* ~640 ms total */
+
+  const easeIn = (t) => t * t * t;
+  /* easeOutBack: abre un pelín de más y asienta (rebote corto) */
+  const easeOutBack = (t) => {
+    const c1 = 1.55;
+    const c3 = c1 + 1;
+    return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+  };
+
+  const setState = (next) => {
+    flipped = next;
+    flip.classList.toggle('is-flipped', flipped);
+    flip.setAttribute('aria-pressed', flipped ? 'true' : 'false');
+  };
+
+  /* Transform en el stack: placas + carta squash juntas (si no, las placas se quedan y se ve roto) */
+  const paint = (sx, edge) => {
+    const sy = 1 - 0.045 * edge; /* scaleY ~0.955 en el canto */
+    const shadowY = 8 + 14 * (1 - edge);
+    const shadowBlur = 18 + 28 * (1 - edge);
+    const shadowAlpha = 0.06 + 0.12 * (1 - edge);
+    stack.style.transform = 'scaleX(' + sx.toFixed(4) + ') scaleY(' + sy.toFixed(4) + ')';
+    stack.style.filter =
+      'drop-shadow(0 ' + shadowY.toFixed(1) + 'px ' + shadowBlur.toFixed(1) +
+      'px rgba(20,24,38,' + shadowAlpha.toFixed(3) + '))';
+  };
+
+  const animateScale = (fromX, toX, duration, ease, closing) =>
+    new Promise((resolve) => {
+      const t0 = performance.now();
+      const step = (now) => {
+        const p = Math.min(1, (now - t0) / duration);
+        const e = ease(p);
+        const sx = fromX + (toX - fromX) * e;
+        const edge = closing ? e : 1 - Math.min(e, 1);
+        paint(Math.max(sx, 0.02), Math.min(Math.max(edge, 0), 1));
+        if (p < 1) requestAnimationFrame(step);
+        else {
+          paint(Math.max(toX, 0.02), closing ? 1 : 0);
+          resolve();
+        }
+      };
+      requestAnimationFrame(step);
+    });
+
+  const toggle = async () => {
+    if (busy) return;
+    busy = true;
+    const next = !flipped;
+
+    await animateScale(1, 0.02, HALF, easeIn, true);
+    setState(next);
+    await animateScale(0.02, 1, HALF, easeOutBack, false);
+
+    stack.style.transform = '';
+    stack.style.filter = '';
+    busy = false;
+  };
+
+  flip.addEventListener('click', (e) => {
+    e.preventDefault();
+    toggle();
+  });
+  flip.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggle();
+    }
+  });
+})();
+
+/* Cuenta atrás del popup del hero (siempre activa; reinicia al llegar a cero) */
+(function () {
+  const timer = document.getElementById('tkTimer');
+  if (!timer) return;
+  const out = {
+    d: timer.querySelector('[data-tk="d"]'),
+    h: timer.querySelector('[data-tk="h"]'),
+    m: timer.querySelector('[data-tk="m"]'),
+    s: timer.querySelector('[data-tk="s"]')
+  };
+  if (!out.d || !out.h || !out.m || !out.s) return;
+  const START = 2 * 24 * 60 * 60; /* 2 días — plazo de campaña más realista */
+  let left = START;
+  const pad = n => String(n).padStart(2, '0');
+  const tick = () => {
+    if (left < 0) left = START;
+    out.d.textContent = pad(Math.floor(left / 86400));
+    out.h.textContent = pad(Math.floor(left / 3600) % 24);
+    out.m.textContent = pad(Math.floor(left / 60) % 60);
+    out.s.textContent = pad(left % 60);
+    left--;
+  };
+  tick();
+  setInterval(tick, 1000);
+})();
+
+/* Avatares: 4 perfiles máx. → luego círculo gris +1, +2, +3 (barra y contador al unísono) */
+(function () {
+  const faces = Array.from(document.querySelectorAll('#tkAvatars [data-tk-av]'));
+  const moreEl = document.getElementById('tkAvMore');
+  const joinedEl = document.getElementById('tkJoinedN');
+  const needEl = document.getElementById('tkNeedN');
+  const pctEl = document.getElementById('tkPct');
+  const barEl = document.getElementById('tkBarFill');
+  if (!faces.length || !joinedEl || !pctEl || !barEl) return;
+
+  const productEl = document.getElementById('tkProduct');
+  const newPriceEl = document.getElementById('tkNewPrice');
+  const offEl = document.getElementById('tkOff');
+  const dealEl = document.getElementById('tkDealPrice');
+  const ctaEl = document.getElementById('tkCtaLabel');
+  const joinedLabelEl = document.getElementById('tkJoinedLabel');
+  const tierEls = Array.from(document.querySelectorAll('#tkTiers [data-tk-tier]'));
+  const END = 16;
+  const MAX_FACES = 4;
+  const BAR_MS = 640;
+  const TIERS = [
+    { at: 10, priceEs: '25,20 €', priceEn: '€25.20', off: '–10%' },
+    { at: 20, priceEs: '22,96 €', priceEn: '€22.96', off: '–18%' }
+  ];
+  const CAP = TIERS[TIERS.length - 1].at; /* tope fijo de la barra: siempre /20 */
+  let joined = 0;
+  let barFrom = 0;
+  let barAnim = null;
+  let lastWasBurst = false;
+  let discountAt = 0;
+
+  const isEn = () => document.documentElement.lang === 'en';
+  const tierPrice = (t) => (isEn() ? t.priceEn : t.priceEs);
+  const nextTier = () => {
+    for (let i = 0; i < TIERS.length; i++) {
+      if (joined < TIERS[i].at) return TIERS[i];
+    }
+    return TIERS[TIERS.length - 1];
+  };
+
+  const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+
+  /* Ritmo irregular: a veces casi seguido, a veces una pausa */
+  const nextDelay = () => {
+    const r = Math.random();
+    if (!lastWasBurst && r < 0.30) {
+      lastWasBurst = true;
+      return 90 + Math.random() * 110;  /* dos casi al instante */
+    }
+    lastWasBurst = false;
+    if (r < 0.55) return 240 + Math.random() * 160;
+    if (r < 0.82) return 380 + Math.random() * 200;
+    return 620 + Math.random() * 280;   /* pausa corta */
+  };
+
+  /* Barra: se “dibuja” frame a frame hasta el % objetivo */
+  const drawBarTo = (targetPct) => {
+    if (barAnim) cancelAnimationFrame(barAnim);
+    const from = parseFloat(barEl.style.width) || barFrom;
+    const to = targetPct;
+    const t0 = performance.now();
+    const step = (now) => {
+      const p = Math.min(1, (now - t0) / BAR_MS);
+      const v = from + (to - from) * easeOut(p);
+      barEl.style.width = v.toFixed(2) + '%';
+      if (p < 1) {
+        barAnim = requestAnimationFrame(step);
+      } else {
+        barFrom = to;
+        barEl.style.width = to + '%';
+        barAnim = null;
+      }
+    };
+    barAnim = requestAnimationFrame(step);
+  };
+
+  const syncBackTiers = () => {
+    tierEls.forEach((el) => {
+      el.classList.toggle('is-on', joined >= Number(el.dataset.tkTier));
+    });
+  };
+
+  const syncGoalCopy = () => {
+    const next = nextTier();
+    const goal = next.at;
+    const price = tierPrice(next);
+    const need = Math.max(0, goal - joined);
+    if (needEl) needEl.textContent = String(need);
+    if (dealEl) dealEl.textContent = price;
+    if (ctaEl) {
+      ctaEl.textContent = isEn() ? ('Drop it to ' + price) : ('Bájalo a ' + price);
+    }
+    if (joinedLabelEl) {
+      joinedLabelEl.textContent = isEn()
+        ? (' of ' + CAP + ' units reserved')
+        : (' de ' + CAP + ' unidades reservadas');
+    }
+    return { goal, price };
+  };
+
+  const syncProductDiscount = () => {
+    if (!productEl || !newPriceEl || !offEl) return;
+    let next = 0;
+    for (let i = 0; i < TIERS.length; i++) {
+      if (joined >= TIERS[i].at) next = TIERS[i].at;
+    }
+    if (next <= discountAt) {
+      if (discountAt > 0) {
+        const cur = TIERS.find((t) => t.at === discountAt);
+        if (cur) newPriceEl.textContent = tierPrice(cur);
+      }
+      syncBackTiers();
+      return;
+    }
+    const tier = TIERS.find((t) => t.at === next);
+    const upgrading = discountAt > 0;
+    discountAt = next;
+    newPriceEl.textContent = tierPrice(tier);
+    offEl.textContent = tier.off;
+
+    if (!upgrading) {
+      productEl.classList.add('is-discounted');
+    } else {
+      productEl.classList.remove('is-tier-bump', 'is-ready');
+      void productEl.offsetWidth;
+      productEl.classList.add('is-tier-bump');
+      requestAnimationFrame(() => productEl.classList.add('is-ready'));
+    }
+    syncBackTiers();
+  };
+
+  const paint = () => {
+    const showFaces = Math.min(joined, MAX_FACES);
+    const extra = Math.max(0, joined - MAX_FACES);
+
+    faces.forEach((av, i) => {
+      const shouldShow = i < showFaces;
+      const wasIn = av.classList.contains('is-in');
+      if (shouldShow && !wasIn) {
+        av.classList.remove('is-in');
+        void av.offsetWidth;
+        av.classList.add('is-in');
+      } else if (!shouldShow) {
+        av.classList.remove('is-in');
+      }
+    });
+
+    if (moreEl) {
+      if (extra > 0) {
+        const firstShow = !moreEl.classList.contains('is-in');
+        moreEl.textContent = '+' + extra;
+        if (firstShow) {
+          void moreEl.offsetWidth;
+          moreEl.classList.add('is-in');
+        }
+      } else {
+        moreEl.classList.remove('is-in');
+        moreEl.textContent = '+0';
+      }
+    }
+
+    joinedEl.textContent = String(joined);
+    syncGoalCopy();
+    const pct = Math.round((joined / CAP) * 100);
+    pctEl.textContent = pct + '%';
+    drawBarTo(pct);
+    syncProductDiscount();
+  };
+
+  paint();
+  window.tukoSyncWidgetGoals = paint;
+
+  const joinNext = () => {
+    if (joined >= END) return;
+    joined += 1;
+    paint();
+    if (joined < END) setTimeout(joinNext, nextDelay());
+  };
+
+  setTimeout(joinNext, 360);
+})();
+
+</script>
+</body>
+</html>
