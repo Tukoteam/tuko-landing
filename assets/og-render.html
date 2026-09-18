@@ -12,125 +12,99 @@
     background: #f7f8fc;
     position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
   }
   .glow-tl {
-    position: absolute; left: -80px; top: -100px; width: 460px; height: 460px;
-    background: radial-gradient(circle, rgba(180,140,255,0.28) 0%, rgba(180,140,255,0) 68%);
+    position: absolute; left: 120px; top: -60px; width: 420px; height: 420px;
+    background: radial-gradient(circle, rgba(180,140,255,0.30) 0%, rgba(180,140,255,0) 68%);
     pointer-events: none;
   }
   .glow-tr {
-    position: absolute; right: -40px; top: 80px; width: 380px; height: 380px;
-    background: radial-gradient(circle, rgba(120,210,200,0.22) 0%, rgba(120,210,200,0) 70%);
+    position: absolute; right: 140px; top: 40px; width: 360px; height: 360px;
+    background: radial-gradient(circle, rgba(120,210,200,0.24) 0%, rgba(120,210,200,0) 70%);
     pointer-events: none;
   }
-  .glow-bl {
-    position: absolute; left: 40px; bottom: -80px; width: 340px; height: 340px;
-    background: radial-gradient(circle, rgba(61,80,242,0.10) 0%, rgba(61,80,242,0) 70%);
-    pointer-events: none;
-  }
-  /* Perspective grid — bottom third, like previous OG */
   .grid {
     position: absolute;
     left: 0; right: 0; bottom: 0;
-    height: 42%;
+    height: 38%;
     background:
-      linear-gradient(to top, rgba(247,248,252,0.15) 0%, rgba(247,248,252,0.95) 100%),
-      repeating-linear-gradient(
-        90deg,
-        transparent 0,
-        transparent 47px,
-        rgba(90, 100, 140, 0.14) 47px,
-        rgba(90, 100, 140, 0.14) 48px
-      ),
-      repeating-linear-gradient(
-        0deg,
-        transparent 0,
-        transparent 28px,
-        rgba(90, 100, 140, 0.12) 28px,
-        rgba(90, 100, 140, 0.12) 29px
-      );
+      linear-gradient(to top, rgba(247,248,252,0.1) 0%, rgba(247,248,252,0.95) 100%),
+      repeating-linear-gradient(90deg, transparent 0, transparent 42px, rgba(90,100,140,0.13) 42px, rgba(90,100,140,0.13) 43px),
+      repeating-linear-gradient(0deg, transparent 0, transparent 24px, rgba(90,100,140,0.11) 24px, rgba(90,100,140,0.11) 25px);
     transform: perspective(420px) rotateX(52deg);
     transform-origin: 50% 100%;
-    mask-image: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%);
+    mask-image: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%);
     pointer-events: none;
   }
-  .content {
+  /*
+    WhatsApp crops a ~630×630 square from the center of 1200×630.
+    Keep all important content inside that square, oversized for readability.
+  */
+  .safe {
     position: relative;
     z-index: 2;
+    width: 560px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Safe zone for WhatsApp crop — keep text well inside */
-    width: 860px;
-    max-width: 860px;
-    padding: 0 24px;
+    text-align: center;
   }
   .logo {
-    height: 48px;
+    height: 72px;
     width: auto;
-    margin-bottom: 28px;
+    margin-bottom: 22px;
   }
   h1 {
-    text-align: center;
-    font-size: 46px;
-    line-height: 1.2;
+    font-size: 44px;
+    line-height: 1.12;
     font-weight: 800;
     font-stretch: semi-expanded;
     color: #1a1a1a;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.03em;
     width: 100%;
   }
   .accent {
     font-family: 'Roboto Serif', Georgia, serif;
     font-style: italic;
     font-weight: 700;
+    font-size: 48px;
     color: #3D50F2;
     position: relative;
     display: inline-block;
-    padding: 0 4px 4px;
+    padding: 0 4px 6px;
   }
   .accent::after {
     content: '';
     position: absolute;
-    left: 4%;
-    right: 4%;
+    left: 3%;
+    right: 3%;
     bottom: 4px;
-    height: 3.5px;
+    height: 4px;
     background: #3D50F2;
     border-radius: 99px;
-    transform: rotate(-1.5deg);
-    opacity: 0.95;
-  }
-  .sub {
-    margin-top: 18px;
-    font-size: 19px;
-    font-weight: 400;
-    color: #4D4D4D;
-    text-align: center;
-    letter-spacing: 0.01em;
+    transform: rotate(-1.2deg);
   }
   .cta {
-    margin-top: 30px;
+    margin-top: 26px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
     background: #3D50F2;
     color: #fff;
-    font-size: 19px;
+    font-size: 22px;
     font-weight: 700;
     font-stretch: semi-expanded;
-    padding: 15px 28px;
-    border-radius: 14px;
+    padding: 18px 34px;
+    border-radius: 16px;
     letter-spacing: -0.01em;
   }
   .cta svg {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
     flex-shrink: 0;
   }
 </style>
@@ -138,18 +112,17 @@
 <body>
   <div class="glow-tl"></div>
   <div class="glow-tr"></div>
-  <div class="glow-bl"></div>
   <div class="grid" aria-hidden="true"></div>
-  <div class="content">
-    <img class="logo" src="logos/3. Negro.svg" alt="tuko" width="200" height="76">
+  <div class="safe">
+    <img class="logo" src="logos/3. Negro.svg" alt="tuko" width="260" height="100">
     <h1>
       Un botón y tus<br>
-      clientes empiezan a<br>
-      <span class="accent">vender</span> por ti
+      clientes empiezan<br>
+      a <span class="accent">vender</span><br>
+      por ti
     </h1>
-    <p class="sub">Se unen al grupo y el precio baja para todos.</p>
     <div class="cta">
-      Instalar gratis en Shopify
+      Instalar gratis
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <path d="M6.5 8.5V7a5.5 5.5 0 0 1 11 0v1.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
         <path d="M5 9.5h14l-1.2 11.2a1.5 1.5 0 0 1-1.5 1.3H7.7a1.5 1.5 0 0 1-1.5-1.3L5 9.5Z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/>
