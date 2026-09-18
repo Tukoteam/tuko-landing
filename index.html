@@ -536,14 +536,21 @@
     .badge,
     .hero-copy > p,
     .hero-actions,
-    .hero-trust,
-    .hero-live-avatars,
-    .hero-live-avat,
-    .hero-live-line {
+    .hero-trust {
       animation: none !important;
       opacity: 1 !important;
       transform: none !important;
       filter: none !important;
+    }
+    /* Contador «3 de 10 ya en el grupo»: se mantiene en desktop (Windows suele tener reduced-motion) */
+    .hero-live-avat.is-pop {
+      animation: hero-avat-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    }
+    .hero-live-avatars.is-full .hero-live-avat {
+      animation: hero-avat-cheer 0.5s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+    }
+    .hero-live-line.is-pop {
+      animation: hero-line-pop 0.42s cubic-bezier(0.22, 1, 0.36, 1) !important;
     }
     .hero-actions .btn-blue::after {
       animation: tkCtaSheen 12s linear 1.5s infinite !important;
@@ -5896,14 +5903,12 @@ setTimeout(() => {
   var line = document.getElementById('heroLiveLine');
   if (!wrap || !line) return;
 
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   function faceCount(n) {
     return Math.max(START, Math.min(n, Math.min(MAX_SHOW, faces.length || MAX_SHOW)));
   }
 
   function popEl(el) {
-    if (reduce || !el) return;
+    if (!el) return;
     el.classList.remove('is-pop');
     void el.offsetWidth;
     el.classList.add('is-pop');
@@ -5953,7 +5958,7 @@ setTimeout(() => {
     for (i = current; i < count; i++) addAvatar(i, !instant && !resetting);
     wrap.classList.toggle('is-clipped', wrap.querySelectorAll('.hero-live-avat').length > VISIBLE);
 
-    if (n >= GOAL && !instant && !reduce) {
+    if (n >= GOAL && !instant) {
       wrap.classList.remove('is-full');
       void wrap.offsetWidth;
       wrap.classList.add('is-full');
@@ -5972,12 +5977,11 @@ setTimeout(() => {
   };
   render({ instant: true });
 
-  if (!reduce) {
-    setInterval(function () {
-      joined = joined >= GOAL ? START : joined + 1;
-      render();
-    }, 2600);
-  }
+  /* Siempre activo: en Windows “preferir menos movimiento” lo dejaba congelado en 3/10 */
+  setInterval(function () {
+    joined = joined >= GOAL ? START : joined + 1;
+    render();
+  }, 2600);
 })();
 
 /* ── SMOOTH SCROLL for nav (rAF: fluido aunque Windows reduzca animaciones) ── */
