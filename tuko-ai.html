@@ -1915,21 +1915,40 @@
       flex-direction: column;
       gap: 40px;
     }
-    .ia-hero-copy { max-width: none; flex: 1 1 auto; text-align: left; }
+    .ia-hero-copy { max-width: none; flex: 1 1 auto; text-align: center; }
     .ia-hero-visual { flex: 0 1 auto; width: 100%; max-width: none; }
-    .ia-hero h1 { text-align: left; }
-    .ia-lead { margin-left: 0; margin-right: 0; text-align: left; }
-    .ia-status { margin-left: 0; margin-right: 0; }
-    .ia-note { justify-content: flex-start; }
+    .ia-hero h1 { text-align: center; }
+    .ia-lead {
+      max-width: 460px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+    .ia-status {
+      display: flex;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .ia-note {
+      display: flex;
+      width: fit-content;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+      text-align: center;
+    }
     .ia-hero-cta {
       max-width: 400px;
-      margin-left: 0;
-      margin-right: 0;
+      margin-left: auto;
+      margin-right: auto;
       display: flex;
-      justify-content: flex-start;
+      justify-content: center;
     }
     .ia-hero-cta .btn-blue { width: 100%; justify-content: center; }
-    .ia-hero-social { justify-content: flex-start; }
+    .ia-hero-social { justify-content: center; }
     .ia-section-head {
       text-align: left;
       margin-left: 0;

@@ -32,7 +32,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tukoteam.com/en/">
 <meta property="og:title" content="Tuko · Goal-based discounts for Shopify stores">
-<meta property="og:description" content="Set a unit goal on a product and a deadline. Customers buy and join the group—if the goal is hit, everyone gets the discount; if not, the order is cancelled and refunded.">
+<meta property="og:description" content="Set a unit goal on a product: when it's hit, the price drops for everyone. Sell more without giving away margin. Group buying app for Shopify.">
 <meta property="og:image" content="https://tukoteam.com/assets/og-image-v8.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -46,7 +46,7 @@
 <meta name="twitter:site" content="@tuko_app">
 <meta name="twitter:creator" content="@tuko_app">
 <meta name="twitter:title" content="Tuko · Goal-based discounts for Shopify stores">
-<meta name="twitter:description" content="Set a unit goal on a product and a deadline. Customers buy and join the group—if the goal is hit, everyone gets the discount; if not, the order is cancelled and refunded.">
+<meta name="twitter:description" content="Set a unit goal on a product: when it's hit, the price drops for everyone. Sell more without giving away margin. Group buying app for Shopify.">
 <meta name="twitter:image" content="https://tukoteam.com/assets/og-image-v8.png">
 <meta name="twitter:image:alt" content="Tuko · One button and your customers start selling for you">
 
@@ -125,11 +125,11 @@
     {
       "@type": "WebSite",
       "@id": "https://tukoteam.com/#website",
-      "url": "https://tukoteam.com/en/",
+      "url": "https://tukoteam.com/",
       "name": "Tuko",
       "description": "Descuentos por objetivo para tiendas Shopify en España",
       "publisher": { "@id": "https://tukoteam.com/#organization" },
-      "inLanguage": "en",
+      "inLanguage": "es-ES",
       "potentialAction": {
         "@type": "SearchAction",
         "target": "https://tukoteam.com/?s={search_term_string}",
@@ -159,13 +159,13 @@
       },
       "offers": {
         "@type": "Offer",
-        "url": "https://tukoteam.com/en/tuko-ai#cta",
+        "url": "https://tukoteam.com/tuko-ai#cta",
         "priceCurrency": "EUR",
         "description": "App de descuentos por objetivo para tiendas Shopify",
         "availability": "https://schema.org/PreOrder"
       },
       "publisher": { "@id": "https://tukoteam.com/#organization" },
-      "inLanguage": "en"
+      "inLanguage": "es-ES"
     },
     {
       "@type": "Service",
@@ -174,7 +174,7 @@
       "alternateName": ["Group Buying Shopify", "Compra Colectiva Shopify"],
       "serviceType": "Plugin de Ecommerce / Group Buying",
       "description": "Plugin B2B de compras colectivas para tiendas Shopify en España. Activa descuentos escalonados por grupo, genera viralidad orgánica y aumenta ventas sin invertir más en publicidad.",
-      "url": "https://tukoteam.com/en/",
+      "url": "https://tukoteam.com/",
       "provider": { "@id": "https://tukoteam.com/#organization" },
       "areaServed": [
         { "@type": "Country", "name": "España" },
@@ -197,7 +197,7 @@
             "@type": "Offer",
             "name": "Acceso Anticipado Tuko",
             "description": "Regístrate en la lista de espera y sé de los primeros en activar campañas Tuko en tu tienda Shopify en España.",
-            "url": "https://tukoteam.com/en/tuko-ai#cta",
+            "url": "https://tukoteam.com/tuko-ai#cta",
             "availability": "https://schema.org/PreOrder",
             "priceCurrency": "EUR"
           }
@@ -209,7 +209,7 @@
         "geographicArea": { "@type": "Country", "name": "España" }
       },
       "category": ["Ecommerce", "Shopify Plugin", "", "Group Buying", "Compras Colectivas"],
-      "inLanguage": "en"
+      "inLanguage": "es-ES"
     },
     {
       "@type": "BreadcrumbList",
@@ -218,8 +218,8 @@
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "Home",
-          "item": "https://tukoteam.com/en/"
+          "name": "Inicio",
+          "item": "https://tukoteam.com/"
         },
         {
           "@type": "ListItem",
@@ -231,7 +231,7 @@
           "@type": "ListItem",
           "position": 3,
           "name": "Registrarse en Tuko",
-          "item": "https://tukoteam.com/en/tuko-ai#cta"
+          "item": "https://tukoteam.com/tuko-ai#cta"
         }
       ]
     }
@@ -371,108 +371,262 @@
   }
 
   /* ══════════════════════════════
-     HERO — full screen animated grid
+     HERO — letras + grid de perspectiva
+     Oscuro: _versiones/index_hero_oscuro_20260918.html
+     Claro:  _versiones/index_hero_claro_20260918.html
   ══════════════════════════════ */
   .hero {
     position: relative;
     width: 100%;
-    min-height: 700px;
-    min-height: max(700px, 100svh);
-    min-height: max(700px, 100dvh);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    overflow: hidden;
+    background: #EFEFF1;
+    padding: 0;
+  }
+
+  .hero-sky {
+    position: relative;
+    overflow: hidden;
+    min-height: 100svh;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    overflow: hidden;
-    background: var(--gray-1);
-    padding: 104px 0 56px;
+    padding: calc(104px + env(safe-area-inset-top, 0px)) 28px clamp(72px, 9vw, 120px);
   }
 
-  /* Canvas for animated grid */
   #heroCanvas {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
+    z-index: 2;
+    opacity: 0.85;
+    -webkit-mask-image: linear-gradient(#000 8%, #000 72%, transparent 100%);
+    mask-image: linear-gradient(#000 8%, #000 72%, transparent 100%);
+  }
+
+  .hero-blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .hero-blob-a {
+    top: -30%;
+    left: -10%;
+    width: min(1100px, 90vw);
+    aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(66, 87, 255, 0.30), rgba(66, 87, 255, 0) 62%);
+    filter: blur(60px);
+    animation: tkBlobA 26s ease-in-out infinite;
+  }
+  .hero-blob-b {
+    top: -10%;
+    right: -20%;
+    width: min(1000px, 85vw);
+    aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(20, 196, 146, 0.22), rgba(20, 196, 146, 0) 62%);
+    filter: blur(70px);
+    animation: tkBlobB 32s ease-in-out infinite;
+  }
+  .hero-blob-c {
+    bottom: -40%;
+    left: 30%;
+    width: min(1000px, 88vw);
+    aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(206, 51, 51, 0.13), rgba(206, 51, 51, 0) 60%);
+    filter: blur(80px);
+    animation: tkBlobC 38s ease-in-out infinite;
+  }
+  .hero-sheen {
+    position: absolute;
+    left: 50%;
+    top: 38%;
+    width: 160vw;
+    aspect-ratio: 1;
+    margin-left: -80vw;
+    margin-top: -80vw;
+    transform-origin: center;
+    background: conic-gradient(from 0deg, rgba(255,255,255,0) 0deg, rgba(255,255,255,.55) 40deg, rgba(255,255,255,0) 120deg, rgba(255,255,255,.35) 220deg, rgba(255,255,255,0) 320deg);
+    filter: blur(40px);
+    opacity: 0.5;
+    animation: tkSheen 60s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .hero-squares { display: none; }
+  .hero-veil {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 55% 45% at 50% 42%, rgba(255,255,255,.42), rgba(255,255,255,0) 70%);
+    pointer-events: none;
     z-index: 1;
   }
 
-  /* Blue curve decorations */
-  .hero-deco {
-    position: absolute;
-    pointer-events: none;
-    z-index: 2;
+  @keyframes tkBlobA {
+    0% { transform: translate(-14%, -6%) scale(1); }
+    33% { transform: translate(12%, 8%) scale(1.14); }
+    66% { transform: translate(-6%, 14%) scale(0.95); }
+    100% { transform: translate(-14%, -6%) scale(1); }
   }
-  .hero-deco-left {
-    left: -20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 200px;
+  @keyframes tkBlobB {
+    0% { transform: translate(10%, 4%) scale(1.05); }
+    40% { transform: translate(-12%, -10%) scale(0.92); }
+    75% { transform: translate(6%, -4%) scale(1.16); }
+    100% { transform: translate(10%, 4%) scale(1.05); }
   }
-  .hero-deco-right {
-    right: -20px;
-    top: 8%;
-    width: 180px;
-    transform: scaleX(-1) rotate(180deg);
+  @keyframes tkBlobC {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-10%, -12%) scale(1.2); }
   }
-  .hero-deco img { width: 100%; height: auto; display: block; }
+  @keyframes tkSheen { to { transform: rotate(360deg); } }
+  @keyframes tkWord {
+    from { opacity: 0; transform: translateY(26px); filter: blur(10px); }
+    to { opacity: 1; transform: none; filter: blur(0); }
+  }
+  @keyframes tkChar {
+    0% { opacity: 0; transform: translateY(18px); filter: blur(4px); }
+    100% { opacity: 1; transform: none; filter: blur(0); }
+  }
+  @keyframes tkUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes tkUnderlineDraw {
+    from { stroke-dashoffset: 1; opacity: 0.35; }
+    to { stroke-dashoffset: 0; opacity: 1; }
+  }
+  @keyframes tkUnderline {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes tkUnderlineFlow {
+    0% { transform: translate3d(-120%, 0, 0); opacity: 0; }
+    10% { opacity: 1; }
+    42% { transform: translate3d(220%, 0, 0); opacity: 0; }
+    100% { transform: translate3d(220%, 0, 0); opacity: 0; }
+  }
+  @keyframes tkFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes tkCtaSheen {
+    /* El brillo cruza despacio (~4s), luego pausa larga */
+    0% { transform: translateX(-140%); }
+    35% { transform: translateX(140%); }
+    35.01%, 100% { transform: translateX(140%); }
+  }
+  @keyframes tkCtaArrow {
+    0% { transform: translateX(0); }
+    8% { transform: translateX(5px); }
+    16% { transform: translateX(0); }
+    22% { transform: translateX(3px); }
+    28%, 100% { transform: translateX(0); }
+  }
 
-  .hero-content {
+  @media (prefers-reduced-motion: reduce) {
+    .hero-blob,
+    .hero-sheen,
+    .hero-word,
+    .hero-char,
+    .badge,
+    .hero-copy > p,
+    .hero-actions,
+    .hero-trust {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
+    /* Contador «3 de 10 ya en el grupo»: se mantiene en desktop (Windows suele tener reduced-motion) */
+    .hero-live-avat.is-pop {
+      animation: hero-avat-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    }
+    .hero-live-avatars.is-full .hero-live-avat {
+      animation: hero-avat-cheer 0.5s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+    }
+    .hero-live-line.is-pop {
+      animation: hero-line-pop 0.42s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    }
+    .hero-actions .btn-blue::after {
+      animation: tkCtaSheen 12s linear 1.5s infinite !important;
+      opacity: 1 !important;
+      filter: none !important;
+    }
+    .hero-cta-arrow {
+      animation: tkCtaArrow 12s ease-in-out 1.5s infinite !important;
+      opacity: 1 !important;
+      filter: none !important;
+    }
+  }
+
+  .hero-copy {
     position: relative;
     z-index: 3;
     width: 100%;
-    max-width: 1240px;
-    padding: 0 40px;
-    display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    align-items: center;
-    gap: clamp(32px, 4vw, 64px);
-    text-align: left;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0;
   }
-  .hero-left { min-width: 0; }
-  .hero-right { min-width: 0; display: flex; justify-content: center; }
 
-  /* El botón azul iguala el alto y el grosor de texto de la insignia verde */
-  .hero-actions .btn-blue {
-    padding: 12px 28px;
-    font-weight: 700;
-    line-height: 1.2;
-    gap: 9px;
-  }
-  .hero-actions .btn-blue svg {
-    width: 18px;
-    height: 18px;
-    flex: 0 0 auto;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
   .hero-actions {
     display: flex;
     align-items: center;
-    gap: 22px;
+    justify-content: center;
+    gap: 12px 22px;
     flex-wrap: wrap;
-    margin-bottom: 18px;
+    margin-top: clamp(30px, 3.4vw, 42px);
   }
+  .hero-actions .btn-blue {
+    padding: 17px 30px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    border-radius: 999px;
+    gap: 10px;
+    box-shadow: 0 16px 38px rgba(66, 87, 255, 0.28);
+  }
+  .hero-actions .btn-blue svg { display: none; }
+  .hero-cta-arrow {
+    display: inline-block;
+    font-size: 18px;
+    line-height: 1;
+    animation: tkCtaArrow 12s ease-in-out 1.5s infinite;
+  }
+  .hero-actions .btn-blue::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    mix-blend-mode: soft-light;
+    background: linear-gradient(105deg, transparent 32%, rgba(255,255,255,0.6) 50%, transparent 68%);
+    transform: translateX(-140%);
+    /* ~4s cruzando el botón + ~8s de pausa */
+    animation: tkCtaSheen 12s linear 1.5s infinite;
+  }
+
   .badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: white;
-    border: 1px solid rgba(0,0,0,0.1);
+    gap: 9px;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(26, 26, 26, 0.07);
     border-radius: 999px;
-    padding: 5px 16px 5px 6px;
+    padding: 7px 15px 7px 10px;
     line-height: 1;
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 12.5px;
+    font-weight: 600;
     font-stretch: semi-expanded;
     color: var(--gray-4);
-    margin-bottom: 32px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    margin-bottom: clamp(26px, 3.4vw, 42px);
     letter-spacing: -0.01em;
+    box-shadow: 0 2px 10px rgba(20, 24, 38, 0.04);
+    opacity: 1;
   }
   .badge-xiji {
     display: flex;
@@ -491,350 +645,204 @@
   }
 
   .hero h1 {
-    font-size: clamp(34px, 3.8vw, 52px);
+    font-size: clamp(36px, 5.2vw, 72px);
     font-weight: var(--title-weight);
     font-stretch: semi-expanded;
-    line-height: var(--title-lh);
-    letter-spacing: var(--title-spacing);
+    line-height: 1.06;
+    letter-spacing: -0.04em;
     color: var(--black);
-    margin-bottom: 22px;
+    margin: 0 auto;
+    max-width: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
   }
-  .hero h1 em {
+  .hero-line {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0 0.26em;
+    white-space: nowrap;
+  }
+  .hero-word {
+    display: inline-block;
+    opacity: 1;
+  }
+  .hero-accent {
     position: relative;
     display: inline-block;
     color: var(--blue);
     font-family: 'Roboto Serif', Georgia, serif;
     font-style: italic;
-    font-weight: 600;
+    font-weight: 500;
     font-stretch: normal;
     letter-spacing: -0.02em;
-    white-space: normal;
+    padding: 0 0.06em 0.02em;
   }
-  /* Arco dibujado trazo a trazo (no estirado) */
-  .hero h1 em .hero-em-arc {
+  .hero-char {
+    display: inline;
+    opacity: 1;
+  }
+  .hero-accent-line {
     position: absolute;
-    left: -0.02em;
-    bottom: -0.08em;
-    width: calc(100% - 0.04em);
-    height: 0.28em;
+    left: -0.04em;
+    right: -0.04em;
+    bottom: -0.14em;
+    height: 0.34em;
     display: block;
-    overflow: visible;
     pointer-events: none;
+    overflow: visible;
   }
-  .hero h1 em .hero-em-arc path {
+  .hero-accent-line svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .hero-accent-line path.hero-accent-base {
     fill: none;
     stroke: var(--blue);
-    stroke-width: 3;
-    stroke-linecap: butt;
-    stroke-dasharray: 1;
-    stroke-dashoffset: 1;
-    opacity: 0;
+    stroke-width: 3.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.85;
   }
-  /* forwards (no both): en el delay no aplica el keyframe from → no hay flash del remate */
-  .hero h1.fade-up.visible em .hero-em-arc path {
-    animation: hero-em-draw 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
-  }
-  @keyframes hero-em-draw {
-    0%   { stroke-dashoffset: 1; opacity: 0; }
-    1%   { stroke-dashoffset: 1; opacity: 1; }
-    100% { stroke-dashoffset: 0; opacity: 1; }
-  }
-
-  .hero p {
-    font-size: 17px;
-    font-weight: 300;
-    font-stretch: normal;
-    color: var(--gray-4);
-    line-height: 1.75;
-    margin-bottom: 18px;
-    max-width: 560px;
-    margin-left: 0;
-    margin-right: 0;
-  }
-  .hero p .s-para-gap {
-    height: 0.45em;
-  }
-
-  /* ── HERO MOCKUP: ficha de producto con meta única + reloj ── */
-  .hero-mock {
-    position: relative;
-    width: min(420px, 100%);
-    isolation: isolate;
-  }
-  .hero-mock::before {
-    content: '';
-    position: absolute;
-    inset: -12% -18%;
-    z-index: 0;
-    border-radius: 50%;
-    background: radial-gradient(ellipse at 50% 55%, rgba(66, 87, 255, 0.28) 0%, rgba(66, 87, 255, 0.08) 42%, transparent 70%);
-    filter: blur(22px);
-    pointer-events: none;
-  }
-  .hmock {
-    position: relative;
-    z-index: 1;
-    background: #fff;
-    border-radius: 22px;
-    border: 1px solid rgba(20, 24, 38, 0.07);
-    box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.9) inset,
-      0 24px 60px rgba(20, 24, 38, 0.14),
-      0 0 0 1px rgba(66, 87, 255, 0.06);
-    overflow: hidden;
-    transform: rotate(-1.2deg);
-    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .hero-mock:hover .hmock { transform: rotate(0deg) translateY(-3px); }
-  }
-  .hmock-chrome {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 11px 16px;
-    border-bottom: 1px solid rgba(26, 26, 26, 0.07);
-    background: linear-gradient(180deg, #fcfcfe 0%, #f4f5f8 100%);
-  }
-  .hmock-dots { display: flex; gap: 5px; flex: 0 0 auto; }
-  .hmock-dots i {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: rgba(26, 26, 26, 0.13);
-  }
-  .hmock-url {
-    flex: 1 1 auto;
-    font-size: 11.5px;
-    font-weight: 300;
-    font-stretch: normal;
-    color: var(--gray-3);
-    background: white;
-    border: 1px solid rgba(26, 26, 26, 0.07);
-    border-radius: 999px;
-    padding: 3px 12px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .hmock-body { padding: 20px 20px 20px; }
-  .hmock-prod { display: flex; align-items: center; gap: 14px; }
-  .hmock-thumb {
-    flex: 0 0 auto;
-    width: 56px; height: 56px;
-    border-radius: 14px;
-    border: 1px solid rgba(26, 26, 26, 0.07);
-    background: linear-gradient(150deg, var(--gray-1) 0%, #ffffff 100%);
-    display: flex; align-items: center; justify-content: center;
-  }
-  .hmock-thumb svg {
-    width: 24px; height: 24px;
-    fill: none; stroke: var(--gray-3);
-    stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
-  }
-  .hmock-name {
-    font-size: 15px;
-    font-weight: 600;
-    font-stretch: semi-expanded;
-    letter-spacing: -0.02em;
-    color: var(--black);
-    margin: 0 0 6px;
-  }
-  .hmock-prices { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .hmock-now {
-    font-size: 13.5px;
-    font-weight: 300;
-    font-stretch: normal;
-    color: var(--gray-3);
-    text-decoration: line-through;
-  }
-  .hmock-arrow {
-    width: 15px; height: 15px;
-    fill: none; stroke: var(--gray-2);
-    stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
-  }
-  .hmock-goal {
-    font-size: 20px;
-    font-weight: 800;
-    font-stretch: semi-expanded;
-    letter-spacing: -0.03em;
-    color: var(--blue);
-  }
-  .hmock-off {
-    font-size: 11px;
-    font-weight: 700;
-    font-stretch: semi-expanded;
-    padding: 3px 8px;
-    border-radius: 7px;
-    background: rgba(66, 87, 255, 0.1);
-    color: var(--blue);
-  }
-  .hmock-meta { margin-top: 20px; }
-  .hmock-meta-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 9px;
-    font-size: 13px;
-    font-weight: 300;
-    font-stretch: normal;
-    color: var(--gray-4);
-  }
-  .hmock-meta-head b {
-    font-weight: 700;
-    font-stretch: semi-expanded;
-    color: var(--black);
-  }
-  .hmock-meta-head .hmock-count { color: var(--blue); }
-  .hmock-track {
-    height: 8px;
-    border-radius: 999px;
-    background: var(--gray-1);
-    overflow: hidden;
-  }
-  .hmock-fill {
-    display: block;
-    height: 100%;
-    width: 70%;
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--blue) 0%, #6C7BFF 100%);
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition:
-      transform 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.45s,
-      width 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-      background 0.4s ease;
-  }
-  .hero-mock.visible .hmock-fill { transform: scaleX(1); }
-  .hmock-row {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 12px;
-    margin-top: 16px;
-    padding-top: 14px;
-    border-top: 1px solid rgba(26, 26, 26, 0.07);
-  }
-  .hmock-ppl { display: flex; align-items: center; gap: 10px; }
-  .hmock-ppl em {
-    font-style: normal;
-    font-size: 12.5px;
-    font-weight: 300;
-    font-stretch: normal;
-    color: var(--gray-4);
-  }
-  .hmock-countdown { margin-top: 16px; }
-  .hmock-countdown .why-clock-label { margin-bottom: 12px; }
-  .hmock-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 16px;
-    padding: 12px 16px;
-    border-radius: 12px;
-    background: var(--blue);
-    color: #fff;
-    font-size: 14.5px;
-    font-weight: 700;
-    font-stretch: semi-expanded;
-    letter-spacing: -0.01em;
-    box-shadow: 0 6px 18px rgba(66, 87, 255, 0.28);
-  }
-  .hmock-chip {
-    position: absolute;
-    z-index: 2;
-    right: -26px;
-    top: 58px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 14px 8px 8px;
-    border-radius: 999px;
-    background: #fff;
-    border: 1px solid rgba(20, 24, 38, 0.07);
-    box-shadow: var(--shadow-lift);
-    font-size: 12.5px;
-    font-weight: 600;
-    font-stretch: semi-expanded;
-    color: var(--black);
-    white-space: nowrap;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.5s ease 1.2s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 1.2s;
-  }
-  .hero-mock.visible .hmock-chip { opacity: 1; transform: translateY(0); }
-  .hmock-chip .avat { margin-left: 0; width: 24px; height: 24px; }
-
-  /* ── HERO MOCKUP: la campaña se llena sola (loop) y el visitante puede unirse ── */
-  .hmock-body { transition: opacity 0.35s ease; }
-  .hmock.is-resetting .hmock-body { opacity: 0.35; }
-  .hmock-btn {
-    cursor: pointer;
-    user-select: none;
-    transition: background 0.35s ease, box-shadow 0.35s ease, transform 0.15s ease;
-  }
-  .hmock-btn:active { transform: scale(0.985); }
-  .hmock.is-done .hmock-fill { background: linear-gradient(90deg, var(--green) 0%, #3DD9AE 100%); }
-  .hmock.is-done .hmock-meta-head .hmock-count,
-  .hmock.is-done .hmock-goal { color: var(--green); }
-  .hmock.is-done .hmock-off { background: rgba(20, 196, 146, 0.12); color: var(--green); }
-  .hmock.is-done .hmock-btn { background: var(--green); box-shadow: 0 6px 18px rgba(20, 196, 146, 0.3); }
-  .hmock-chip.is-pop { animation: hmock-chip-pop 0.55s cubic-bezier(0.22, 1, 0.36, 1); }
-  @keyframes hmock-chip-pop {
-    0%   { transform: translateY(10px) scale(0.92); opacity: 0; }
-    100% { transform: translateY(0) scale(1); opacity: 1; }
-  }
-  .hmock-chip-ok {
+  .hero-accent-line path.hero-accent-glow {
     display: none;
-    width: 24px; height: 24px;
-    border-radius: 50%;
-    background: rgba(20, 196, 146, 0.14);
-    align-items: center; justify-content: center;
-    flex: 0 0 auto;
   }
-  .hmock-chip-ok svg { width: 13px; height: 13px; fill: none; stroke: var(--green); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
-  .hmock-chip.is-done .avat { display: none; }
-  .hmock-chip.is-done .hmock-chip-ok { display: inline-flex; }
-  .avat.is-pop { animation: avat-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
-  @keyframes avat-pop {
-    0%   { transform: scale(0.3); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
+  .hero h1 em .hero-em-arc { display: none; }
+
+  .hero-copy > p {
+    color: var(--gray-4);
+    font-weight: 300;
+    font-stretch: normal;
+    font-size: clamp(17px, 1.5vw, 21px);
+    line-height: 1.55;
+    max-width: 48ch;
+    margin: clamp(24px, 2.6vw, 34px) auto 0;
+    opacity: 1;
   }
 
-  /* ── HERO: CTA secundario (texto) + línea de confianza bajo los botones ── */
   .btn-ghost {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 12px 6px;
-    font-size: 15.5px;
+    padding: 0 0 2px;
+    font-size: 15px;
     font-weight: 600;
     font-stretch: semi-expanded;
     letter-spacing: -0.015em;
-    color: var(--black);
+    color: var(--gray-4);
     text-decoration: none;
-    transition: color 0.2s ease;
+    border: none;
+    border-bottom: 1px solid rgba(26, 26, 26, 0.25);
+    border-radius: 0;
+    transition: color 0.2s ease, border-color 0.2s ease;
   }
-  .btn-ghost svg {
-    width: 16px; height: 16px;
-    fill: none; stroke: currentColor;
-    stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
-    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .btn-ghost:hover { color: var(--blue); }
-  .btn-ghost:hover svg { transform: translateY(3px); }
+  .btn-ghost svg { display: none; }
+  .btn-ghost:hover { background: none; color: var(--black); border-color: var(--black); }
+
   .hero-trust {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px 18px;
-    margin: 0 0 40px;
-    font-size: 13px;
-    font-weight: 400;
+    align-items: center;
+    justify-content: center;
+    gap: 10px 18px;
+    margin: clamp(26px, 3vw, 36px) 0 0;
+    font-size: 13.5px;
+    font-weight: 300;
     font-stretch: normal;
     color: var(--gray-4);
+    opacity: 1;
   }
-  .hero-trust span { display: inline-flex; align-items: center; gap: 6px; }
+  .hero-actions {
+    opacity: 1;
+  }
+  .hero-live-avatars {
+    display: flex;
+    width: fit-content;
+  }
+  .hero-live-avatars.is-clipped {
+    max-width: 164px;
+    overflow: hidden;
+    justify-content: flex-end;
+    padding: 3px 3px 3px 0;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 100%);
+  }
+  .hero-live-avat {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: -8px;
+    border: 2px solid #EFEFF1;
+    overflow: hidden;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+  }
+  .hero-live-avat svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-live-avat:first-child { margin-left: 0; }
+  .hero-live-avat.is-pop {
+    animation: hero-avat-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  @keyframes hero-avat-pop {
+    0%   { transform: scale(0.3); opacity: 0; }
+    70%  { transform: scale(1.12); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .hero-live-avatars.is-full .hero-live-avat {
+    animation: hero-avat-cheer 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .hero-live-avatars.is-full .hero-live-avat:nth-child(1) { animation-delay: 0s; }
+  .hero-live-avatars.is-full .hero-live-avat:nth-child(2) { animation-delay: 0.05s; }
+  .hero-live-avatars.is-full .hero-live-avat:nth-child(3) { animation-delay: 0.1s; }
+  .hero-live-avatars.is-full .hero-live-avat:nth-child(4) { animation-delay: 0.15s; }
+  .hero-live-avatars.is-full .hero-live-avat:nth-child(5) { animation-delay: 0.2s; }
+  .hero-live-avatars.is-full .hero-live-avat:nth-child(6) { animation-delay: 0.25s; }
+  .hero-live-avatars.is-full .hero-live-avat:nth-child(7) { animation-delay: 0.3s; }
+  .hero-live-avatars.is-full .hero-live-avat:nth-child(8) { animation-delay: 0.35s; }
+  .hero-live-avatars.is-full .hero-live-avat:nth-child(9) { animation-delay: 0.4s; }
+  .hero-live-avatars.is-full .hero-live-avat:nth-child(10) { animation-delay: 0.45s; }
+  @keyframes hero-avat-cheer {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.14); }
+    100% { transform: scale(1); }
+  }
+  .hero-live-line {
+    font-weight: 500;
+    color: var(--gray-4);
+    transform-origin: left center;
+  }
+  .hero-live-line.is-pop {
+    animation: hero-line-pop 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .hero-live-line.is-full { color: var(--black); }
+  @keyframes hero-line-pop {
+    0%   { transform: scale(1); }
+    38%  { transform: scale(1.06); }
+    100% { transform: scale(1); }
+  }
+  .hero-live-sep {
+    width: 1px;
+    height: 16px;
+    background: rgba(26, 26, 26, 0.14);
+  }
+  .hero-trust-note {
+    font-weight: 400;
+    color: var(--gray-4);
+  }
+  .hero-trust span { display: inline-flex; align-items: center; }
   .hero-trust em { font-style: normal; }
-  .hero-trust svg { width: 14px; height: 14px; fill: none; stroke: var(--green); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+  .hero-trust-dot { display: none; }
+
   .sr-only {
     position: absolute !important;
     width: 1px; height: 1px;
@@ -898,30 +906,13 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hmock-fill { transition: none; transform: scaleX(1); }
-    .hmock-chip { transition: none; opacity: 1; transform: none; }
-    .hmock { transform: none; }
-    .hmock-chip.is-pop, .avat.is-pop { animation: none; }
-    .hmock-body { transition: none; }
+    .avat.is-pop { animation: none; }
     .sticky-cta { transition: none; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero h1 em .hero-em-arc path {
-      stroke-dashoffset: 0;
-      opacity: 1;
-      animation: none;
-    }
-    .btn-blue,
-    .btn-blue::after {
-      transition: none !important;
-      animation: none !important;
-    }
     .btn-blue:hover {
       transform: none;
-    }
-    .btn-blue::after {
-      display: none;
     }
     .how-step {
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -964,6 +955,10 @@
     pointer-events: none;
     mix-blend-mode: soft-light;
   }
+  /* El CTA del hero anima solo con keyframes; sin transition que pelee con el shimmer */
+  .hero-actions .btn-blue::after {
+    transition: none;
+  }
   @media (hover: hover) {
     .btn-blue:hover {
       background: #2c3de0;
@@ -971,6 +966,11 @@
       box-shadow: 0 8px 28px rgba(61,80,242,0.42);
     }
     .btn-blue:hover::after { transform: translateX(130%); }
+    .hero-actions .btn-blue:hover::after {
+      /* No cortar el shimmer del hero al pasar el ratón */
+      transform: none;
+      animation: tkCtaSheen 12s linear 1.5s infinite;
+    }
   }
   .btn-blue:active {
     transform: translateY(0) scale(0.995);
@@ -1047,7 +1047,7 @@
     font-stretch: semi-expanded;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--gray-3);
+    color: var(--gray-4);
     margin-bottom: 30px;
   }
   .logos-overflow {
@@ -1084,13 +1084,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.55;
+    opacity: 0.92;
     flex-shrink: 0;
-    transition: opacity 0.25s ease, filter 0.25s ease;
-    filter: grayscale(1);
-    -webkit-filter: grayscale(1);
+    transition: opacity 0.25s ease;
   }
-  .logo-pill:hover { opacity: 1; filter: grayscale(0); -webkit-filter: grayscale(0); }
+  .logo-pill:hover { opacity: 1; }
   /* Misma distancia entre logos: columnas de ancho fijo + gap uniforme */
   .logos-section .logo-pill {
     flex: 0 0 252px;
@@ -1151,6 +1149,13 @@
   .how-title-underline {
     position: relative;
     display: inline;
+    font-family: 'Roboto Serif', Georgia, serif;
+    font-style: italic;
+    font-weight: 600;
+    font-stretch: normal;
+    color: var(--blue);
+    letter-spacing: -0.02em;
+    padding: 0 0.04em;
   }
   .how-title-underline::after {
     content: '';
@@ -1159,7 +1164,7 @@
     right: -0.06em;
     bottom: -0.06em;
     height: 0.4em;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 16' preserveAspectRatio='none'%3E%3Cpath d='M4 12 Q60 2.5 116 12' stroke='%234257ff' stroke-width='4.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 16' preserveAspectRatio='none'%3E%3Cpath d='M4 12 Q60 7.5 116 12' stroke='%234257ff' stroke-width='4.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
       center bottom / 100% 100% no-repeat;
     pointer-events: none;
   }
@@ -1273,19 +1278,31 @@
     border-radius: var(--radius-card);
     padding: 28px 22px 24px;
     box-shadow: var(--shadow-card);
+    transform: translateY(0) scale(1);
+    transform-origin: center center;
     transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease,
-      border-color 0.2s ease;
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.55s ease;
   }
-  .pricing-card:hover,
-  .pricing-card.fade-up.visible:hover,
-  .pricing-card.is-featured:hover,
-  .pricing-card.is-featured.fade-up.visible:hover {
-    transform: translateY(-2px);
-    z-index: 3;
-    border-color: rgba(61, 80, 242, 0.22);
-    box-shadow: var(--shadow-lift);
+  @media (hover: hover) and (pointer: fine) {
+    .pricing-card:hover,
+    .pricing-card.fade-up.visible:hover,
+    .pricing-card.is-featured:hover,
+    .pricing-card.is-featured.fade-up.visible:hover {
+      transform: translateY(-3px) scale(1.015);
+      z-index: 3;
+      border-color: rgba(61, 80, 242, 0.22);
+      box-shadow: var(--shadow-lift);
+    }
+    .pricing-card.is-featured:hover,
+    .pricing-card.is-featured.fade-up.visible:hover {
+      transform: translateY(-3px) scale(1.018);
+      border-color: rgba(61, 80, 242, 0.55);
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.9) inset,
+        0 22px 48px rgba(66, 87, 255, 0.22);
+    }
   }
   .pricing-card.is-featured {
     border-color: rgba(61, 80, 242, 0.45);
@@ -1295,13 +1312,6 @@
       0 1px 0 rgba(255, 255, 255, 0.9) inset,
       0 18px 44px rgba(66, 87, 255, 0.16);
     z-index: 2;
-  }
-  .pricing-card.is-featured:hover,
-  .pricing-card.is-featured.fade-up.visible:hover {
-    border-color: rgba(61, 80, 242, 0.55);
-    box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.9) inset,
-      0 22px 48px rgba(66, 87, 255, 0.22);
   }
   .pricing-rec {
     display: inline-flex;
@@ -1486,7 +1496,7 @@
     box-shadow: var(--shadow-card);
   }
   .calc-kicker {
-    margin: 0 0 10px;
+    margin: 0 0 14px;
     font-size: 12px;
     font-weight: 600;
     font-stretch: semi-expanded;
@@ -1495,7 +1505,7 @@
     color: var(--blue);
   }
   .calc-title {
-    margin: 0 0 8px;
+    margin: 0 0 14px;
     font-size: clamp(20px, 1.8vw, 24px);
     font-weight: 700;
     font-stretch: semi-expanded;
@@ -1504,24 +1514,30 @@
     color: var(--black);
   }
   .calc-help {
-    margin: 0 0 22px;
+    margin: 0 0 28px;
     font-size: 14px;
     font-weight: 300;
     font-stretch: normal;
     line-height: 1.55;
     color: var(--gray-4);
   }
-  .calc-value { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .calc-value {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
   .calc-value b {
     font-size: clamp(30px, 2.6vw, 40px);
-    font-weight: 800;
+    font-weight: 700;
     font-stretch: semi-expanded;
     letter-spacing: -0.035em;
     color: var(--black);
     font-variant-numeric: tabular-nums;
     line-height: 1;
   }
-  .calc-value span { font-size: 13px; font-weight: 400; font-stretch: normal; color: var(--gray-3); }
+  .calc-value span { font-size: 13px; font-weight: 400; font-stretch: normal; color: var(--gray-4); }
   .calc-range {
     -webkit-appearance: none;
     appearance: none;
@@ -1555,7 +1571,7 @@
   .calc-range::-moz-range-track { height: 6px; border-radius: 999px; background: var(--gray-1); }
   .calc-range::-moz-range-progress { height: 6px; border-radius: 999px; background: var(--blue); }
   .calc-range:focus-visible { box-shadow: 0 0 0 4px rgba(66, 87, 255, 0.18); }
-  .calc-scale { display: flex; justify-content: space-between; font-size: 11.5px; font-weight: 400; color: var(--gray-3); }
+  .calc-scale { display: flex; justify-content: space-between; font-size: 11.5px; font-weight: 500; color: var(--gray-4); }
   .calc-plans { display: flex; flex-direction: column; gap: 10px; }
   .calc-plan {
     display: grid;
@@ -1619,7 +1635,7 @@
     font-weight: 300;
     font-stretch: normal;
     line-height: 1.5;
-    color: var(--gray-3);
+    color: var(--gray-4);
   }
   @media (max-width: 960px) {
     .calc { grid-template-columns: minmax(0, 1fr); gap: 22px; padding: 22px 18px; margin-top: 28px; }
@@ -1634,12 +1650,14 @@
     .pricing-card.is-featured {
       transform: none;
     }
-    .pricing-card:hover,
-    .pricing-card.fade-up.visible:hover,
-    .pricing-card.is-featured:hover,
-    .pricing-card.is-featured.fade-up.visible:hover {
-      transform: translateY(-4px) scale(1.03);
-      z-index: 3;
+    @media (hover: hover) and (pointer: fine) {
+      .pricing-card:hover,
+      .pricing-card.fade-up.visible:hover,
+      .pricing-card.is-featured:hover,
+      .pricing-card.is-featured.fade-up.visible:hover {
+        transform: translateY(-3px) scale(1.012);
+        z-index: 3;
+      }
     }
   }
   @media (max-width: 720px) {
@@ -1821,7 +1839,7 @@
      DATOS — trigger + comparativa
   ══════════════════════════════ */
   .data {
-    padding: var(--space-section) 48px;
+    padding: var(--space-section) 48px clamp(36px, 4.5vw, 56px);
     text-align: center;
     background: white;
     position: relative;
@@ -1951,6 +1969,10 @@
     text-wrap: balance;
     max-width: 14ch;
   }
+  .data-card--good .data-side-title {
+    font-weight: 650;
+    line-height: 1.14;
+  }
   .data-side-sub {
     margin: 10px 0 0;
     font-size: 17px;
@@ -2002,30 +2024,45 @@
     font-stretch: semi-expanded;
     color: var(--black);
   }
+  .data-card--good .data-side-sub {
+    margin-top: 22px;
+    padding-top: 0;
+    max-width: 38ch;
+  }
   .data-side-sub em {
     font-family: 'Roboto Serif', Georgia, serif;
     font-style: italic;
     font-weight: 600;
     font-stretch: normal;
     color: var(--black);
+    text-decoration: underline;
+    text-decoration-color: rgba(20, 196, 146, 0.55);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+  }
+  .data-nowrap {
+    white-space: nowrap;
   }
   .data-src {
     margin-top: auto;
-    font-size: 12px;
-    font-weight: 300;
+    padding-top: 24px;
+    font-size: 12.5px;
+    font-weight: 400;
     font-stretch: normal;
-    color: var(--gray-3);
+    color: var(--gray-4);
+    line-height: 1.5;
   }
   .data-src a {
     color: inherit;
     text-decoration: underline;
-    text-decoration-color: rgba(0, 0, 0, 0.18);
-    text-underline-offset: 3px;
+    text-decoration-color: rgba(26, 26, 26, 0.28);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 6px;
     transition: color 0.2s ease;
   }
-  .data-src a:hover { color: var(--gray-4); }
+  .data-src a:hover { color: var(--black); }
   @media (max-width: 960px) {
-    .data { padding: 64px 18px 72px; }
+    .data { padding: 64px 18px 40px; }
     .data-sub { font-size: 17px; }
     .data-compare { grid-template-columns: 1fr; }
     .data-card { min-height: auto; }
@@ -2041,7 +2078,7 @@
   ══════════════════════════════ */
   .how-intro {
     background: white;
-    padding: var(--space-section) 48px 28px;
+    padding: clamp(32px, 4vw, 52px) 48px 28px;
     text-align: center;
   }
   .how-intro .s-title {
@@ -2298,23 +2335,21 @@
     transform: translateZ(0);
   }
 
-  /* Entrada escalonada (cuando .fade-up añade .visible) */
+  /* Entrada escalonada (cuando .fade-up añade .visible) — sin scale */
   .how-step.fade-up:not(.visible) .how-step-num,
   .how-step.fade-up:not(.visible) .how-step-title,
   .how-step.fade-up:not(.visible) .how-step-desc,
   .how-step.fade-up:not(.visible) .how-anim-box {
     opacity: 0;
-    transform: translateY(18px);
   }
   .how-step.reversed.fade-up:not(.visible) .how-anim-box {
-    transform: translateY(18px) scale(0.97);
+    opacity: 0;
   }
   .how-step.fade-up.visible .how-step-num,
   .how-step.fade-up.visible .how-step-title,
   .how-step.fade-up.visible .how-step-desc,
   .how-step.fade-up.visible .how-anim-box {
     opacity: 1;
-    transform: none;
   }
 
   /* Paso 1 — altura = wizard (sin hueco vacío debajo de Publicar) */
@@ -2554,11 +2589,10 @@
     box-shadow: var(--shadow-lift), 0 0 0 1px rgba(66, 87, 255, 0.06);
     padding: 22px 22px 22px;
     box-sizing: border-box;
-    transform: translateY(14px);
-    opacity: 0;
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+    transform: none;
+    /* Visible con el fade-up del row (antes opacity:0 aparte fallaba en desktop/Windows) */
+    opacity: 1;
   }
-  .why-row.visible .why-widget { opacity: 1; transform: none; }
   /* 1 — El reloj (cápsula Horas / Minutos / Segundos) */
   .why-widget:has(> .why-clock) {
     width: min(440px, 100%);
@@ -3147,31 +3181,8 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .why-widget { transition: none; opacity: 1; transform: none; }
-    .why-clock b.is-tick { animation: none; }
-    .why-race .why-goal-flag,
-    .why-race .why-goal-ring,
-    .why-race .why-race-flash,
-    .why-race .why-race-clouds i,
-    .why-race .why-conf i,
-    .why-race-count.is-pop,
-    .why-runner .wr-ring,
-    .why-runner .wr-plus { animation: none !important; }
-    .why-race .why-conf i { opacity: 0; }
-    .why-pack .why-runner { transition: none; }
-    .why-row:not(.visible) .why-group-ppl .avat--face,
-    .why-row:not(.visible) .why-group-chip {
-      opacity: 1;
-      transform: none;
-    }
-    .why-row.visible .why-group-ppl .avat--face,
-    .why-row.visible .why-group-ppl .avat--ghost,
-    .why-row.visible .why-share-btn,
-    .why-row.visible .why-group-chip,
-    .why-row.visible .why-group-chip.is-pop {
-      animation: none !important;
-      opacity: 1;
-      transform: none;
-    }
+    /* Las demos de La meta / El grupo se mantienen a propósito en desktop:
+       Windows suele tener “preferir menos movimiento” y las dejaba congeladas. */
   }
 
 
@@ -3218,11 +3229,33 @@
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
   }
   .final-cta-eyebrow i {
+    position: relative;
+    flex-shrink: 0;
     width: 7px;
     height: 7px;
     border-radius: 50%;
     background: var(--blue);
     box-shadow: 0 0 0 3px rgba(66, 87, 255, 0.18);
+  }
+  .final-cta-eyebrow i::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 7px;
+    height: 7px;
+    margin: -3.5px 0 0 -3.5px;
+    border-radius: 50%;
+    background: var(--blue);
+    pointer-events: none;
+    animation: fctaPulse 1.9s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+  }
+  @keyframes fctaPulse {
+    0% { transform: scale(1); opacity: 0.5; }
+    70%, 100% { transform: scale(2.8); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .final-cta-eyebrow i::after { animation: none; }
   }
   .final-cta h2 {
     font-size: var(--section-title-size);
@@ -3562,18 +3595,44 @@
 
   /* ══════════════════════════════
      SCROLL ANIMATIONS
+     Solo opacity (sin translate/scale): en Windows + zoom del navegador
+     el transform hacía que las cards se vieran “encogidas”.
   ══════════════════════════════ */
   .fade-up {
     opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.65s ease, transform 0.65s ease;
+    transition: opacity 0.55s ease;
   }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-up.visible { opacity: 1; }
   .d1 { transition-delay: 0.08s; }
   .d2 { transition-delay: 0.18s; }
   .d3 { transition-delay: 0.28s; }
   .d4 { transition-delay: 0.38s; }
   .d5 { transition-delay: 0.48s; }
+  /* Hover fluido en precios: no dejar que .fade-up anule el transition de transform */
+  .pricing-card.fade-up {
+    transition:
+      opacity 0.55s ease,
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.55s ease;
+  }
+  .pricing-card.fade-up.d1 { transition-delay: 0.08s, 0s, 0s, 0s; }
+  .pricing-card.fade-up.d2 { transition-delay: 0.18s, 0s, 0s, 0s; }
+  .pricing-card.fade-up.d3 { transition-delay: 0.28s, 0s, 0s, 0s; }
+  .pricing-card.fade-up.d4 { transition-delay: 0.38s, 0s, 0s, 0s; }
+  @media (prefers-reduced-motion: reduce) {
+    .fade-up {
+      opacity: 1 !important;
+      transition: none !important;
+    }
+    .pricing-card.fade-up {
+      transition:
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.55s ease !important;
+      transition-delay: 0s !important;
+    }
+  }
 
   /* ══════════════════════════════
      HAMBURGER MENU (mobile only)
@@ -3883,7 +3942,7 @@
     }
     .how-steps > .how-step:nth-child(4) .how-anim-box--embed { aspect-ratio: 9 / 12.8; }
 
-    .how-intro { padding: 36px 16px 18px; }
+    .how-intro { padding: 28px 16px 18px; }
 
     /* ── Carrusel logos móvil: fluido, sin parpadeo ── */
     .logos-track {
@@ -3924,52 +3983,54 @@
 
     .hero {
       height: auto;
+      min-height: 0;
+      padding: 0;
+    }
+    .hero-sky {
       min-height: 100svh;
       min-height: 100dvh;
-      padding: calc(84px + env(safe-area-inset-top, 0px)) 0 max(28px, env(safe-area-inset-bottom, 0px));
+      padding: calc(84px + env(safe-area-inset-top, 0px)) 16px max(48px, env(safe-area-inset-bottom, 0px));
     }
-    .hero-content {
-      padding: 0 16px;
-      width: 100%;
-      max-width: 100%;
-      grid-template-columns: 1fr;
-      gap: 40px;
-      text-align: left;
-    }
-    .hero-left { display: flex; flex-direction: column; align-items: flex-start; }
+    .hero-copy { padding-top: 12px; }
     .hero h1 {
-      font-size: clamp(26px, 7.2vw, 44px);
+      font-size: clamp(30px, 8.4vw, 44px);
       overflow-wrap: normal;
       word-break: normal;
-      text-wrap: balance;
       hyphens: none;
       text-align: center;
       width: 100%;
     }
-    .hero h1 em { white-space: normal; }
-    .hero p {
+    .hero-line { gap: 0 0.2em; }
+    .hero-copy > p {
       overflow-wrap: break-word;
-      margin: 0 auto 18px;
-      text-align: left;
-      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      max-width: 46ch;
       width: 100%;
-      font-size: 17px;
-      line-height: 1.75;
     }
-    .hero p .s-para-gap { height: 0.45em; }
     .hero-actions {
       flex-direction: column;
-      gap: 6px;
+      gap: 10px;
       width: 100%;
-      margin-bottom: 14px;
       align-items: center;
     }
-    .hero-trust { justify-content: center; gap: 6px 14px; margin-bottom: 28px; font-size: 12.5px; }
+    .hero-trust {
+      justify-content: center;
+      gap: 6px 14px;
+      font-size: 12.5px;
+    }
+    .hero-trust-dot { display: none; }
     .hero-actions .btn-blue {
       width: 100%;
-      max-width: 300px;
+      max-width: 320px;
       min-width: 0;
       box-sizing: border-box;
+      justify-content: center;
+    }
+    .hero-actions .btn-ghost {
+      width: auto;
+      max-width: none;
     }
 
     .badge {
@@ -3978,26 +4039,11 @@
       flex-wrap: nowrap;
       justify-content: center;
       align-items: center;
-      padding: 4px 13px 4px 5px;
-      margin-left: auto;
-      margin-right: auto;
+      padding: 6px 12px 6px 8px;
       margin-bottom: 20px;
-      margin-top: 4px;
       font-size: 11.5px;
       letter-spacing: -0.005em;
-      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
     }
-    /* Mockup del hero en móvil: debajo del CTA, sin glow ni rotación */
-    .hero-right { width: 100%; }
-    .hero-mock { width: min(400px, 100%); margin: 0 auto; }
-    .hero-mock::before { display: none; }
-    .hmock { transform: none; }
-    .hmock-chip { right: 10px; top: 30px; } /* sobre la barra de URL, sin tapar el nombre del producto */
-    .hmock-body { padding: 16px 16px 16px; }
-    .hmock-countdown { margin-top: 14px; }
-    .hmock-countdown .why-clock { padding: 16px 4px 14px; border-radius: 28px; }
-    .hmock-countdown .why-clock b { font-size: 28px; }
-    .hmock-countdown .why-clock i { font-size: 11.5px; }
     .btn-blue {
       width: 100%;
       max-width: 300px;
@@ -4005,7 +4051,6 @@
       padding: 12px 22px;
       box-sizing: border-box;
     }
-    .hero-deco { display: none; }
 
     .logos-section, .cta-wrap { padding: 72px 16px; }
     .s-title, .s-sub { overflow-wrap: anywhere; }
@@ -4172,10 +4217,6 @@
     .faq .s-sub {
       text-align: center;
     }
-    .hero p {
-      text-align: center;
-      max-width: 640px;
-    }
   }
 
   /* Móvil estrecho: texto a izquierda, ancho completo del padding */
@@ -4193,10 +4234,6 @@
       max-width: none;
       text-align: left;
     }
-    .hero p {
-      text-align: left;
-      max-width: none;
-    }
   }
 
   @media (max-width: 418px) {
@@ -4205,7 +4242,7 @@
     .lang-opt { padding: 6px 7px; }
   }
 </style>
-<link rel="prefetch" href="blog/" as="document">
+<link rel="prefetch" href="../blog/" as="document">
 <link rel="prefetch" href="../tuko-ai.html" as="document">
 </head>
 <body>
@@ -4229,7 +4266,7 @@
     <li><a href="#como-funciona" data-i18n="nav_link_como_funciona">How it works</a></li>
     <li><a href="#beneficios" data-i18n="nav_link_beneficios">Why it works</a></li>
     <li><a href="#precios" data-i18n="nav_link_precios">Pricing</a></li>
-    <li><a href="blog/" data-i18n="nav_link_blog">Blog</a></li>
+    <li><a href="../blog/index.html" data-i18n="nav_link_blog">Blog</a></li>
     <li><a href="../tuko-ai.html" data-i18n="nav_link_ia">tuko AI</a></li>
     <li><a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="nav-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Install free</a></li>
   </ul>
@@ -4259,10 +4296,10 @@
   <a href="#como-funciona" data-i18n="nav_link_como_funciona">How it works</a>
   <a href="#beneficios" data-i18n="nav_link_beneficios">Why it works</a>
   <a href="#precios" data-i18n="nav_link_precios">Pricing</a>
-  <a href="blog/" data-i18n="nav_link_blog">Blog</a>
+  <a href="../blog/index.html" data-i18n="nav_link_blog">Blog</a>
   <a href="../tuko-ai.html" data-i18n="nav_link_ia">tuko AI</a>
   <div class="mobile-lang">
-    <p class="mobile-lang-label" data-i18n="nav_lang_label">Language</p>
+    <p class="mobile-lang-label" data-i18n="nav_lang_label">Idioma</p>
     <div class="lang-switcher mobile-lang-switcher" role="group" aria-label="Selector de idioma" data-active="en">
       <span class="lang-thumb" aria-hidden="true"></span>
       <button type="button" class="lang-opt" data-lang="es" aria-label="Cambiar idioma a Español">
@@ -4289,97 +4326,52 @@
 
 <!-- HERO -->
 <section class="hero" id="inicio">
-  <canvas id="heroCanvas"></canvas>
-
-  <div class="hero-deco hero-deco-left">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLwAAAL1CAYAAADNWP2kAAAVa0lEQVR4nO3bMW4VMRhGUUAusin2wP6XQZXCBQ1FpEhokjDvn3fnHMm1v/rK/v7z1+9vAAAAAFDxY3oAAAAAAPxPghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwBQtKYHAAAwR/ACAIr29AAAAOYIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAApAheAAAAAKQIXgDAFa3pAQAAPC/BCwC4oj09AACA5yV4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngB/7KmBwAAAMBHCV7Av+zpAQAAAPBRghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghe0rekBAAAA8GiCF7Tt6QEAAADwaIIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCF5NepgcAAAAAPYIXk16nBwAAAAA9ghcAAAAAKYIXAAAAACmCF2da0wMAAACA+xG8ONOeHgAAAADcj+AFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuD1XF6mBwAAAABcneD1XF6nBwAAAABcneAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAwNnWIy8TvAAAAAA4237kZYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApdw1e6+8BAAAAIOau0WdPDwAAAADgHHd94QUAAABAlOAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4PXemh4AAAAAwOcJXu/t6QEAAAAAfJ7gBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAMBXrekBbwleAAAAAHzVnh7wluAFAAAAQIrgBQAAAECK4HWuS/1fBQAAALgDwetcl/q/CgAAAHAHghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmC172s6QEAAAAAZxO87mVPDwAAAAA4m+AFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAx6zpAcAxghcAAAAcs6cHAMcIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAcsaYHABwleAEAAHDEnh4AcJTgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQMof5rAWb19ljwUAAAAASUVORK5CYII=" alt="" decoding="async">
-  </div>
-  <div class="hero-deco hero-deco-right">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLwAAAL1CAYAAADNWP2kAAAVa0lEQVR4nO3bMW4VMRhGUUAusin2wP6XQZXCBQ1FpEhokjDvn3fnHMm1v/rK/v7z1+9vAAAAAFDxY3oAAAAAAPxPghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwBQtKYHAAAwR/ACAIr29AAAAOYIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAApAheAAAAAKQIXgDAFa3pAQAAPC/BCwC4oj09AACA5yV4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngBAAAAkCJ4AQAAAJAieAEAAACQIngB/7KmBwAAAMBHCV7Av+zpAQAAAPBRghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghe0rekBAAAA8GiCF7Tt6QEAAADwaIIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCF5NepgcAAAAAPYIXk16nBwAAAAA9ghcAAAAAKYIXAAAAACmCF2da0wMAAACA+xG8ONOeHgAAAADcj+AFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuD1XF6mBwAAAABcneD1XF6nBwAAAABcneAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAwNnWIy8TvAAAAAA4237kZYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApdw1e6+8BAAAAIOau0WdPDwAAAADgHHd94QUAAABAlOAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4PXemh4AAAAAwOcJXu/t6QEAAAAAfJ7gBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAMBXrekBbwleAAAAAHzVnh7wluAFAAAAQIrgBQAAAECK4HWuS/1fBQAAALgDwetcl/q/CgAAAHAHghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmCFwAAAAApghcAAAAAKYIXAAAAACmC172s6QEAAAAAZxO87mVPDwAAAAA4m+AFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAx6zpAcAxghcAAAAcs6cHAMcIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAApAheAAAAAKQIXgAAAACkCF4AAAAcsaYHABwleAEAAHDEnh4AcJTgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQIrgBQAAAECK4AUAAABAiuAFAAAAQMof5rAWb19ljwUAAAAASUVORK5CYII=" alt="" decoding="async">
-  </div>
-
-  <div class="hero-content">
-    <div class="hero-left">
-      <div class="badge fade-up">
+  <div class="hero-sky">
+    <div class="hero-blob hero-blob-a" aria-hidden="true"></div>
+    <div class="hero-blob hero-blob-b" aria-hidden="true"></div>
+    <div class="hero-blob hero-blob-c" aria-hidden="true"></div>
+    <div class="hero-sheen" aria-hidden="true"></div>
+    <div class="hero-veil" aria-hidden="true"></div>
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-copy">
+      <div class="badge">
         <span class="badge-xiji" aria-hidden="true">
           <img src="../assets/images/xiji-x-mark.png" alt="" width="18" height="18" decoding="async">
         </span>
         <span data-i18n="hero_badge">Backed by Xiji Incubator</span>
       </div>
-      <h1 class="fade-up d1" data-i18n="hero_title">One button and your customers<br><em>start selling for you</em></h1>
-      <p class="fade-up d2" data-i18n="hero_subtitle">Your customers tap a button, join the product group, and when it fills, the price drops for everyone.</p>
-
-      <div class="hero-actions fade-up d3">
+      <h1 class="hero-title" data-lang="en">
+        <span class="hero-line">
+          <span class="hero-word">One</span>
+          <span class="hero-word">button</span>
+          <span class="hero-word">and</span>
+          <span class="hero-word">your</span>
+        </span>
+        <span class="hero-line">
+          <span class="hero-word">customers</span>
+          <span class="hero-word">start</span>
+        </span>
+        <span class="hero-line">
+          <span class="hero-accent">selling<span class="hero-accent-line" aria-hidden="true"><svg viewBox="0 0 120 14" preserveAspectRatio="none"><defs><linearGradient id="tukoHeroShineGrad" gradientUnits="userSpaceOnUse" x1="-120" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.28" stop-color="#e8eeff" stop-opacity="0.05"/><stop offset="0.45" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0.42"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="0.72" stop-color="#e8eeff" stop-opacity="0.05"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs><path class="hero-accent-base" d="M4 10.5 Q60 3.2 116 10.5"/><path class="hero-accent-glow" d="M4 10.5 Q60 3.2 116 10.5"/></svg></span></span>
+          <span class="hero-word">for</span>
+          <span class="hero-word">you</span>
+        </span>
+      </h1>
+      <p data-i18n="hero_subtitle">They join the product group and, when it fills, the price drops for everyone. They fill it — not your ads budget.</p>
+      <div class="hero-actions">
         <a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="btn-blue" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 19h14"/></svg>
           <span data-i18n="hero_cta">Install free on Shopify</span>
+          <span class="hero-cta-arrow" aria-hidden="true">→</span>
         </a>
         <a href="#como-funciona" class="btn-ghost">
           <span data-i18n="hero_cta2">See how it works</span>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"/><path d="M6 13l6 6 6-6"/></svg>
-        </a>
-        <a href="mailto:team.tukoo@gmail.com" class="btn-ghost">
-          <span data-i18n="hero_cta3">Talk to us</span>
         </a>
       </div>
-      <div class="hero-trust fade-up d3">
-        <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><em data-i18n="hero_trust2">Set up in 2 minutes</em></span>
-        <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><em data-i18n="hero_trust3">No theme changes</em></span>
-      </div>
-    </div>
-
-    <div class="hero-right">
-      <!-- Mockup estático: lo que ve el comprador en la ficha de producto (meta única + reloj) -->
-      <div class="hero-mock fade-up d2" aria-hidden="true">
-        <div class="hmock">
-          <div class="hmock-chrome">
-            <span class="hmock-dots"><i></i><i></i><i></i></span>
-            <span class="hmock-url">tutienda.com/camiseta-organica</span>
-          </div>
-          <div class="hmock-body">
-            <div class="hmock-prod">
-              <span class="hmock-thumb">
-                <svg viewBox="0 0 24 24"><path d="M6.4 8h11.2l-1 11.4H7.4L6.4 8Z"/><path d="M9.3 8V6.5a2.7 2.7 0 0 1 5.4 0V8"/></svg>
-              </span>
-              <div class="hmock-prod-info">
-                <p class="hmock-name" data-i18n="hmock_product">Organic tee</p>
-                <div class="hmock-prices">
-                  <span class="hmock-now" data-i18n="hmock_price_old">€49.90</span>
-                  <svg class="hmock-arrow" viewBox="0 0 24 24"><path d="M5 12h12.5"/><path d="M13 7.2l4.8 4.8-4.8 4.8"/></svg>
-                  <span class="hmock-goal" data-i18n="hmock_price_new">€39.92</span>
-                  <span class="hmock-off" data-i18n="hmock_price_off">−20%</span>
-                </div>
-              </div>
-            </div>
-            <div class="hmock-meta">
-              <div class="hmock-meta-head">
-                <span data-i18n="hmock_missing"><b>3</b> more to unlock −20%</span>
-                <b class="hmock-count">7/10</b>
-              </div>
-              <div class="hmock-track"><span class="hmock-fill"></span></div>
-            </div>
-            <div class="hmock-row">
-              <span class="hmock-ppl">
-                <i class="avat avat--new"></i><i class="avat avat--new"></i><i class="avat avat--new"></i><i class="avat avat--new"></i>
-                <em data-i18n="hmock_joined">7 already in</em>
-              </span>
-            </div>
-            <div class="hmock-countdown">
-              <p class="why-clock-label" data-i18n="why1_w_label">Closes in</p>
-              <div class="why-clock" data-countdown>
-                <span><b data-cd="h">23</b><i data-i18n="why1_w_h">Hours</i></span>
-                <span><b data-cd="m">59</b><i data-i18n="why1_w_m">Minutes</i></span>
-                <span><b data-cd="s">59</b><i data-i18n="why1_w_s">Seconds</i></span>
-              </div>
-            </div>
-            <span class="hmock-btn" data-i18n="hmock_btn">Reserve at €39.92</span>
-          </div>
-        </div>
-        <div class="hmock-chip">
-          <i class="avat avat--new"></i>
-          <span class="hmock-chip-ok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-          <span data-i18n="hmock_chip">Marta just joined</span>
-        </div>
+      <div class="hero-trust">
+        <div class="hero-live-avatars" id="heroLiveAvatars" aria-hidden="true"></div>
+        <span class="hero-live-line" id="heroLiveLine">3 of 10 already in the group</span>
+        <span class="hero-live-sep" aria-hidden="true"></span>
+        <span class="hero-trust-note" data-i18n="hero_trust_note">Set up in 2 minutes · free until you sell</span>
       </div>
     </div>
   </div>
@@ -4387,7 +4379,7 @@
 
 <!-- LOGOS -->
 <section class="logos-section">
-  <p data-i18n="logos_label">Trusted by</p>
+  <p data-i18n="logos_label">Con el apoyo de</p>
   <div class="logos-overflow">
     <div class="logos-track">
       <div class="logo-pill"><img loading="lazy" src="../assets/logos colaboradores/UPM-color.svg" alt="Universidad Politécnica de Madrid" width="110" height="87" decoding="async"></div>
@@ -4418,58 +4410,58 @@
 <!-- DATOS — trigger + comparativa (se conserva id="problema" por los enlaces externos) -->
 <section class="data" id="problema">
   <div class="data-inner">
-    <div class="fade-up"><span class="data-trigger" data-i18n="data_trigger">Before launching another -20%, look at this.</span></div>
-    <h2 class="s-title data-headline fade-up d1" data-i18n="data_title">Discount should not give margin away. <span class="title-accent-red">It should bring new customers.</span></h2>
-    <p class="data-sub fade-up d2" data-i18n="data_sub">Compare both models before launching your next campaign.</p>
+    <div class="fade-up"><span class="data-trigger" data-i18n="data_trigger">Antes de lanzar otro -20 %, mira esto.</span></div>
+    <h2 class="s-title data-headline fade-up d1" data-i18n="data_title">El descuento no debería regalar margen. <span class="title-accent-red">Debería traer clientes nuevos.</span></h2>
+    <p class="data-sub fade-up d2" data-i18n="data_sub">Compara los dos modelos antes de activar tu próxima campaña.</p>
     <div class="data-compare fade-up d3">
       <article class="data-card data-card--bad">
         <div class="data-card-head">
-          <p class="data-label" data-i18n="data_bad_label">The expensive way</p>
+          <p class="data-label" data-i18n="data_bad_label">El camino caro</p>
           <svg class="data-icon data-icon--left" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M20 12a8 8 0 1 1-2.34-5.66" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
             <path d="M21 4v4.4h-4.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <div class="data-kpi">
-          <p class="data-num" data-i18n="data_num" data-count="68">68%</p>
+          <p class="data-num" data-count="68" aria-label="68 %">0 %</p>
         </div>
-        <p class="data-num-note" data-i18n="data_num_note">of discounted orders can come from customers who were already buying from you.</p>
-        <h3 class="data-side-title" data-i18n="data_bad_title">You pay to acquire and you also pay in discounts.</h3>
+        <p class="data-num-note" data-i18n="data_num_note">de los pedidos con descuento pueden venir de clientes que ya te compraban.</p>
+        <h3 class="data-side-title" data-i18n="data_bad_title">Pagas por atraer y rebajas ventas que ya eran tuyas.</h3>
         <ul class="data-list">
-          <li data-i18n="data_bad_b1">Each new customer costs more in paid ads.</li>
-          <li data-i18n="data_bad_b2">Discounts also hit orders that were already yours.</li>
-          <li data-i18n="data_bad_b3">To grow, you keep increasing ad spend.</li>
+          <li data-i18n="data_bad_b1">Cada cliente nuevo te cuesta más en anuncios.</li>
+          <li data-i18n="data_bad_b2">La rebaja también cae en pedidos que ya eran tuyos.</li>
+          <li data-i18n="data_bad_b3">Para crecer, tienes que seguir metiendo presupuesto.</li>
         </ul>
         <p class="data-src"><a href="https://www.klaviyo.com/blog/discount-pricing-strategies" target="_blank" rel="noopener" data-i18n="data_src">Klaviyo · ProfitPeak, 2025</a></p>
       </article>
       <article class="data-card data-card--good">
         <div class="data-card-head">
-          <p class="data-label" data-i18n="data_good_label">The multiplying way</p>
+          <p class="data-label" data-i18n="data_good_label">El camino que se multiplica</p>
+          <svg class="data-icon data-icon--right" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="8" cy="9" r="2.4" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="16.5" cy="8.2" r="1.8" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M4.5 18c.6-2.6 2.6-4.2 5.4-4.2s4.8 1.6 5.4 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M17.3 14.3h4.2M19.4 12.2v4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
         </div>
-        <svg class="data-icon data-icon--right" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="8" cy="9" r="2.4" stroke="currentColor" stroke-width="1.8"/>
-          <circle cx="16.5" cy="8.2" r="1.8" stroke="currentColor" stroke-width="1.8"/>
-          <path d="M4.5 18c.6-2.6 2.6-4.2 5.4-4.2s4.8 1.6 5.4 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          <path d="M17.3 14.3h4.2M19.4 12.2v4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-        </svg>
-        <h3 class="data-side-title" data-i18n="data_good_title">Each purchase can bring the next one.</h3>
+        <h3 class="data-side-title" data-i18n="data_good_title">Cada compra puede atraer la siguiente.</h3>
         <ul class="data-list">
-          <li data-i18n="data_good_b1">Customers share to complete the group goal.</li>
-          <li data-i18n="data_good_b2">One purchase turns into distribution.</li>
-          <li data-i18n="data_good_b3">Over time, your cost per new customer drops.</li>
+          <li data-i18n="data_good_b1">Tus clientes comparten para completar la meta.</li>
+          <li data-i18n="data_good_b2">El grupo convierte una venta en difusión.</li>
+          <li data-i18n="data_good_b3">Con el tiempo, baja tu coste por cliente nuevo.</li>
         </ul>
-        <p class="data-side-sub" data-i18n="data_good_sub">The discount only activates if the <em>goal</em> is met.</p>
+        <p class="data-side-sub" data-i18n="data_good_sub">La rebaja solo se activa si se cumple <span class="data-nowrap">la <em>meta</em>.</span></p>
       </article>
     </div>
-    <p class="data-foot fade-up d4" data-i18n="data_foot">It is not about lowering price more. <b>It is about making each sale bring the next one.</b></p>
+    <p class="data-foot fade-up d4" data-i18n="data_foot">No es bajar más el precio. <b>Es hacer que cada venta traiga otra.</b></p>
   </div>
 </section>
 
 <!-- HOW IT WORKS — INTRO -->
 <section class="how-intro" id="como-funciona">
-  <div class="fade-up"><span class="s-badge" data-i18n="how_badge">How it works</span></div>
-  <h2 class="s-title fade-up d1" data-i18n="how_title">A discount with conditions.<br><span class="how-title-underline">Yours</span></h2>
-  <p class="s-sub fade-up d2" data-i18n="how_sub">You set the discount, the goal and the deadline. If it isn't met, it doesn't exist. And everything happens inside your store.</p>
+  <div class="fade-up"><span class="s-badge" data-i18n="how_badge">Cómo funciona</span></div>
+  <h2 class="s-title fade-up d1" data-i18n="how_title">Un descuento con condiciones.<br>Las <span class="how-title-underline">tuyas</span></h2>
+  <p class="s-sub fade-up d2" data-i18n="how_sub">Tú fijas el descuento, la meta y la fecha. Si no se cumple, no existe. Y todo pasa dentro de tu tienda.</p>
 </section>
 
 <!-- HOW IT WORKS — STEPS (3 pasos) -->
@@ -4481,12 +4473,12 @@
       <div class="how-step-meta">
         <span class="how-step-num" aria-hidden="true">01</span>
       </div>
-      <h3 class="how-step-title" data-i18n="step1_title">Pick a product, a discount and a goal</h3>
-      <p class="how-step-desc" data-i18n="step1_desc">For example: −20% if 10 people reserve before Friday.</p>
+      <h3 class="how-step-title" data-i18n="step1_title">Eliges producto, descuento y meta</h3>
+      <p class="how-step-desc" data-i18n="step1_desc">Por ejemplo: −20 % si 10 personas reservan antes del viernes.</p>
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="../landing-demo/animaciones/01-activar-compra/index.html?v=20260917c" title="Demo: publicar el grupo en la tienda" loading="eager"></iframe>
+        <iframe class="how-step-iframe" src="../landing-demo/animaciones/01-activar-compra/index.html?v=20260918c" title="Demo: publicar el grupo en la tienda" loading="eager"></iframe>
       </div>
     </div>
   </div>
@@ -4497,12 +4489,12 @@
       <div class="how-step-meta">
         <span class="how-step-num" aria-hidden="true">02</span>
       </div>
-      <h3 class="how-step-title" data-i18n="step2_title">Your customers buy and join the group</h3>
-      <p class="how-step-desc" data-i18n="step2_desc">They buy in your store and they're already in. Then they share to reach the goal.</p>
+      <h3 class="how-step-title" data-i18n="step2_title">Tus clientes compran y entran al grupo</h3>
+      <p class="how-step-desc" data-i18n="step2_desc">Compran en tu tienda y ya están dentro. Luego comparten para llegar a la meta.</p>
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="../landing-demo/animaciones/06-reservar-piruleta/index.html?v=20260917d" title="Demo: buy the product and share" loading="eager"></iframe>
+        <iframe class="how-step-iframe" src="../landing-demo/animaciones/06-reservar-piruleta/index.html?v=20260917d" title="Demo: comprar el producto y compartir" loading="eager"></iframe>
       </div>
     </div>
   </div>
@@ -4513,12 +4505,12 @@
       <div class="how-step-meta">
         <span class="how-step-num" aria-hidden="true">03</span>
       </div>
-      <h3 class="how-step-title" data-i18n="step3_title">If the goal is hit in time, the discount applies</h3>
-      <p class="how-step-desc" data-i18n="step3_desc">If not, you'll have customers you already know want the product, <span class="how-retarget-underline">ready for retargeting</span>.</p>
+      <h3 class="how-step-title" data-i18n="step3_title">Si se llega a la meta a tiempo, se aplica la rebaja</h3>
+      <p class="how-step-desc" data-i18n="step3_desc">Si no se llega, tendrás clientes que ya sabes que quieren el producto, <span class="how-retarget-underline">listos para un retargeting</span>.</p>
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="../landing-demo/animaciones/07-grupo-completado/index.html?v=20260917b" title="Demo: group completed and stats" loading="eager"></iframe>
+        <iframe class="how-step-iframe" src="../landing-demo/animaciones/07-grupo-completado/index.html?v=20260917b" title="Demo: grupo completado y estadísticas" loading="eager"></iframe>
       </div>
     </div>
   </div>
@@ -4529,9 +4521,9 @@
 <section class="why" id="beneficios">
   <div class="why-inner">
     <div class="why-intro">
-      <div class="fade-up"><span class="s-badge" data-i18n="why_badge">Why it works</span></div>
-      <h2 class="s-title fade-up d1" data-i18n="why_title">Three things that make them <em class="title-accent-em">buy now</em></h2>
-      <p class="s-sub fade-up d2" data-i18n="why_sub">A volume discount makes one customer buy three units. Tuko makes three customers buy one.</p>
+      <div class="fade-up"><span class="s-badge" data-i18n="why_badge">Por qué funciona</span></div>
+      <h2 class="s-title fade-up d1" data-i18n="why_title">Tres cosas que hacen que <em class="title-accent-em">compren ahora</em></h2>
+      <p class="s-sub fade-up d2" data-i18n="why_sub">Un descuento por volumen hace que un cliente compre tres unidades. Tuko hace que tres clientes compren una.</p>
     </div>
 
     <div class="why-rows">
@@ -4539,17 +4531,17 @@
       <!-- 1 · El reloj -->
       <div class="why-row fade-up">
         <div class="why-text">
-          <span class="why-kicker" data-i18n="why1_kicker">The clock</span>
-          <h3 class="why-title" data-i18n="why1_title">With a deadline, they buy today</h3>
-          <p class="why-desc" data-i18n="why1_desc">Without one, "I'll think about it". With a date in front of them, the decision happens now.</p>
+          <span class="why-kicker" data-i18n="why1_kicker">El reloj</span>
+          <h3 class="why-title" data-i18n="why1_title">Con fecha, compran hoy</h3>
+          <p class="why-desc" data-i18n="why1_desc">Sin fecha, «ya lo pensaré». Con una fecha delante, la decisión se toma ahora.</p>
         </div>
         <div class="why-visual" aria-hidden="true">
           <div class="why-widget">
-            <p class="why-clock-label" data-i18n="why1_w_label">Closes in</p>
+            <p class="why-clock-label" data-i18n="why1_w_label">Se cierra en</p>
             <div class="why-clock" data-countdown>
-              <span><b data-cd="h">14</b><i data-i18n="why1_w_h">Hours</i></span>
-              <span><b data-cd="m">49</b><i data-i18n="why1_w_m">Minutes</i></span>
-              <span><b data-cd="s">25</b><i data-i18n="why1_w_s">Seconds</i></span>
+              <span><b data-cd="h">14</b><i data-i18n="why1_w_h">Horas</i></span>
+              <span><b data-cd="m">49</b><i data-i18n="why1_w_m">Minutos</i></span>
+              <span><b data-cd="s">25</b><i data-i18n="why1_w_s">Segundos</i></span>
             </div>
           </div>
         </div>
@@ -4558,13 +4550,13 @@
       <!-- 2 · La meta -->
       <div class="why-row reversed fade-up">
         <div class="why-text">
-          <span class="why-kicker" data-i18n="why2_kicker">The goal</span>
-          <h3 class="why-title" data-i18n="why2_title">The good price might not happen</h3>
-          <p class="why-desc" data-i18n="why2_desc">That's why nobody leaves it for tomorrow. Reserving today is the only way to lock in the discount.</p>
+          <span class="why-kicker" data-i18n="why2_kicker">La meta</span>
+          <h3 class="why-title" data-i18n="why2_title">El precio bueno puede no llegar</h3>
+          <p class="why-desc" data-i18n="why2_desc">Por eso nadie lo deja para mañana. Comprar hoy es la única forma de asegurarse el descuento.</p>
         </div>
         <div class="why-visual" aria-hidden="true">
           <div class="why-widget why-widget--race">
-            <p class="why-race-label" data-i18n="why2_w_missing"><b>8</b> more to reach −20% together</p>
+            <p class="why-race-label" data-i18n="why2_w_missing">Faltan <b>8</b> para llegar juntos al −20 %</p>
             <div class="why-race" data-why-race>
               <span class="why-race-sun"></span>
               <svg class="why-race-far" viewBox="0 0 404 190" preserveAspectRatio="none" aria-hidden="true">
@@ -4601,8 +4593,8 @@
                 <span class="why-goal-ring"></span>
                 <span class="why-goal-pole"></span>
                 <span class="why-goal-flag">
-                  <b data-i18n="hmock_price_off">−20%</b>
-                  <i data-i18n="why2_w_flag">Goal</i>
+                  <b data-i18n="hmock_price_off">−20 %</b>
+                  <i data-i18n="why2_w_flag">Meta</i>
                 </span>
               </div>
               <span class="why-race-flash"></span>
@@ -4617,9 +4609,9 @@
       <!-- 3 · El grupo -->
       <div class="why-row fade-up">
         <div class="why-text">
-          <span class="why-kicker" data-i18n="why3_kicker">The group</span>
-          <h3 class="why-title" data-i18n="why3_title">They see others already in, and they trust it</h3>
-          <p class="why-desc" data-i18n="why3_desc">And they share to fill it, because it pays off for them. That traffic costs you nothing.</p>
+          <span class="why-kicker" data-i18n="why3_kicker">El grupo</span>
+          <h3 class="why-title" data-i18n="why3_title">Ven que otros ya entraron y se fían</h3>
+          <p class="why-desc" data-i18n="why3_desc">Y comparten para llenarlo, porque les conviene. Ese tráfico no lo pagas tú.</p>
         </div>
         <div class="why-visual" aria-hidden="true">
           <div class="why-widget why-widget--group">
@@ -4632,16 +4624,16 @@
                 <i class="avat avat--face" data-why-face="4"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#FF8A6B"/><ellipse cx="7" cy="20" rx="5.2" ry="8.2" fill="#E56E52"/><ellipse cx="33" cy="20" rx="5.2" ry="8.2" fill="#E56E52"/><ellipse cx="20" cy="27.8" rx="7.2" ry="5.6" fill="#FFD4C4"/><ellipse cx="20" cy="26" rx="1.5" ry="1.15" fill="#3A2418"/><circle cx="14" cy="20.5" r="1.85" fill="#3A2418"/><circle cx="26" cy="20.5" r="1.85" fill="#3A2418"/><circle cx="14.5" cy="20" r=".45" fill="#fff"/><circle cx="26.5" cy="20" r=".45" fill="#fff"/><path d="M16 29.2c1.8 1.6 6.2 1.6 8 0" fill="none" stroke="#C45D4C" stroke-width="1.3" stroke-linecap="round"/></svg></i>
                 <i class="avat avat--face" data-why-face="5"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#F6C2E4"/><path fill="#3D50F2" d="M0 22C0 6 12 0 20 6c-8-2-16 6-18 18z"/><path fill="#14C492" d="M1 20C2 8 12 2 19 8c-8-2-14 5-16 14z"/><path fill="#A78BFA" d="M0 25C1 12 10 6 16 12c-8-2-13 4-14 14z"/><ellipse cx="8.5" cy="14" rx="3.4" ry="4.8" fill="#F6C2E4"/><ellipse cx="8.5" cy="14.4" rx="1.5" ry="2.4" fill="#FF9EC8"/><path fill="#F0C94A" d="M17.8 14.2L20.2 1.6 22.8 14.4z"/><path fill="#FFF6C4" d="M19.2 13.4L20.2 3.4 21.3 13.5z"/><circle cx="14.2" cy="22.2" r="1.9" fill="#3A2418"/><circle cx="25.8" cy="22.2" r="1.9" fill="#3A2418"/><circle cx="14.75" cy="21.65" r=".5" fill="#fff"/><circle cx="26.35" cy="21.65" r=".5" fill="#fff"/><path d="M15 27.6c2.4 2.5 7.6 2.5 10 0" fill="none" stroke="#C45D7A" stroke-width="1.4" stroke-linecap="round"/><ellipse cx="10.8" cy="26.2" rx="2.4" ry="1.35" fill="#FF9EC8" opacity=".55"/><ellipse cx="29.2" cy="26.2" rx="2.4" ry="1.35" fill="#FF9EC8" opacity=".55"/></svg></i>
               </span>
-              <span class="why-group-txt" data-i18n="why3_w_txt"><b>7 people</b> have already reserved</span>
+              <span class="why-group-txt" data-i18n="why3_w_txt"><b>7 personas</b> ya han reservado</span>
             </div>
             <div class="why-share">
               <span class="why-share-btn">
                 <svg viewBox="0 0 24 24"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M12 15V4"/><path d="M8 8l4-4 4 4"/></svg>
-                <span data-i18n="why3_w_btn">Share</span>
+                <span data-i18n="why3_w_btn">Compartir</span>
               </span>
               <span class="why-share-ico"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8 12h8"/><path d="M8 8.5h5"/><path d="M8 15.5h6"/></svg></span>
             </div>
-            <span class="why-group-chip"><i class="avat avat--face" data-why-chip-face><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#F4A261"/><path fill="#E07A3D" d="M6 18L10 4 18 14z"/><path fill="#E07A3D" d="M34 18L30 4 22 14z"/><path fill="#FFD7B8" d="M8.2 16L11 7.5 16 13.5z"/><path fill="#FFD7B8" d="M31.8 16L29 7.5 24 13.5z"/><ellipse cx="20" cy="28.5" rx="9.5" ry="7.2" fill="#FFF4E8"/><ellipse cx="20" cy="26.2" rx="1.7" ry="1.3" fill="#3A2418"/><circle cx="13.8" cy="19.8" r="1.85" fill="#3A2418"/><circle cx="26.2" cy="19.8" r="1.85" fill="#3A2418"/><circle cx="14.3" cy="19.3" r=".45" fill="#fff"/><circle cx="26.7" cy="19.3" r=".45" fill="#fff"/><path d="M16.2 30.4c1.8 1.6 5.8 1.6 7.6 0" fill="none" stroke="#C45D4C" stroke-width="1.3" stroke-linecap="round"/></svg></i><span data-i18n="why3_w_chip">Marta <em>just joined</em></span></span>
+            <span class="why-group-chip"><i class="avat avat--face" data-why-chip-face><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#F4A261"/><path fill="#E07A3D" d="M6 18L10 4 18 14z"/><path fill="#E07A3D" d="M34 18L30 4 22 14z"/><path fill="#FFD7B8" d="M8.2 16L11 7.5 16 13.5z"/><path fill="#FFD7B8" d="M31.8 16L29 7.5 24 13.5z"/><ellipse cx="20" cy="28.5" rx="9.5" ry="7.2" fill="#FFF4E8"/><ellipse cx="20" cy="26.2" rx="1.7" ry="1.3" fill="#3A2418"/><circle cx="13.8" cy="19.8" r="1.85" fill="#3A2418"/><circle cx="26.2" cy="19.8" r="1.85" fill="#3A2418"/><circle cx="14.3" cy="19.3" r=".45" fill="#fff"/><circle cx="26.7" cy="19.3" r=".45" fill="#fff"/><path d="M16.2 30.4c1.8 1.6 5.8 1.6 7.6 0" fill="none" stroke="#C45D4C" stroke-width="1.3" stroke-linecap="round"/></svg></i><span data-i18n="why3_w_chip">Marta <em>acaba de unirse</em></span></span>
           </div>
         </div>
       </div>
@@ -4653,117 +4645,117 @@
 <!-- PRECIOS -->
 <section class="pricing" id="precios">
   <div class="pricing-inner">
-    <div class="fade-up"><span class="s-badge" data-i18n="pricing_badge">Pricing</span></div>
-    <h2 class="s-title fade-up d1" data-i18n="pricing_title">We only win if you <em class="title-accent-em">sell</em></h2>
-    <p class="s-sub fade-up d2" data-i18n="pricing_sub">Pick the plan that fits your business.</p>
+    <div class="fade-up"><span class="s-badge" data-i18n="pricing_badge">Precios</span></div>
+    <h2 class="s-title fade-up d1" data-i18n="pricing_title">Solo ganamos si tú <em class="title-accent-em">vendes</em></h2>
+    <p class="s-sub fade-up d2" data-i18n="pricing_sub">Elige el plan que mejor se adapte a tu negocio.</p>
 
     <div class="pricing-grid">
       <article class="pricing-card fade-up d1">
         <h3 class="pricing-name" data-i18n="pricing_p1_name">Free</h3>
         <div class="pricing-price-row">
-          <span class="pricing-amount pricing-amount--custom" data-i18n="pricing_p1_price">Free install</span>
+          <span class="pricing-amount pricing-amount--custom" data-i18n="pricing_p1_price">Instalación gratuita</span>
         </div>
         <ul class="pricing-features">
-          <li data-i18n="pricing_p1_f1">€0/mo</li>
-          <li data-i18n="pricing_p1_f2">4.2% commission</li>
-          <li data-i18n="pricing_p1_f3">€500/mo cap</li>
-          <li data-i18n="pricing_p1_f4">No lock-in</li>
+          <li data-i18n="pricing_p1_f1">0 €/mes</li>
+          <li data-i18n="pricing_p1_f2">4,2 % de comisión</li>
+          <li data-i18n="pricing_p1_f3">Tope 500 €/mes</li>
+          <li data-i18n="pricing_p1_f4">Sin permanencia</li>
         </ul>
-        <p class="pricing-foot" data-i18n="pricing_p1_foot">If you don't sell, you pay €0.</p>
-        <a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="pricing-cta is-secondary" target="_blank" rel="noopener" data-i18n="pricing_p1_cta">Start free</a>
+        <p class="pricing-foot" data-i18n="pricing_p1_foot">Si no vendes, pagas 0 €.</p>
+        <a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="pricing-cta is-secondary" target="_blank" rel="noopener" data-i18n="pricing_p1_cta">Empezar gratis</a>
       </article>
 
       <article class="pricing-card fade-up d2">
         <h3 class="pricing-name" data-i18n="pricing_p2_name">Starter</h3>
         <div class="pricing-price-row">
-          <span class="pricing-amount" data-i18n="pricing_p2_price">€14.99</span>
-          <span class="pricing-period" data-i18n="pricing_per_month">/ mo</span>
+          <span class="pricing-amount" data-i18n="pricing_p2_price">14,99 €</span>
+          <span class="pricing-period" data-i18n="pricing_per_month">/ mes</span>
         </div>
         <ul class="pricing-features">
-          <li data-i18n="pricing_p2_f1">€14.99/mo</li>
-          <li data-i18n="pricing_p2_f2">2.5% commission</li>
-          <li data-i18n="pricing_p2_f3">€400/mo cap</li>
-          <li data-i18n="pricing_p2_f4">No lock-in</li>
+          <li data-i18n="pricing_p2_f1">14,99 €/mes</li>
+          <li data-i18n="pricing_p2_f2">2,5 % de comisión</li>
+          <li data-i18n="pricing_p2_f3">Tope 400 €/mes</li>
+          <li data-i18n="pricing_p2_f4">Sin permanencia</li>
         </ul>
-        <a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="pricing-cta is-secondary" target="_blank" rel="noopener" data-i18n="pricing_p2_cta">Choose plan</a>
+        <a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="pricing-cta is-secondary" target="_blank" rel="noopener" data-i18n="pricing_p2_cta">Elegir plan</a>
       </article>
 
       <article class="pricing-card is-featured fade-up d3">
-        <span class="pricing-rec" data-i18n="pricing_recommended">Recommended</span>
+        <span class="pricing-rec" data-i18n="pricing_recommended">Recomendado</span>
         <h3 class="pricing-name" data-i18n="pricing_p3_name">Pro</h3>
         <div class="pricing-price-row">
-          <span class="pricing-amount" data-i18n="pricing_p3_price">€69.99</span>
-          <span class="pricing-period" data-i18n="pricing_per_month">/ mo</span>
+          <span class="pricing-amount" data-i18n="pricing_p3_price">69,99 €</span>
+          <span class="pricing-period" data-i18n="pricing_per_month">/ mes</span>
         </div>
         <ul class="pricing-features">
-          <li data-i18n="pricing_p3_f1">€69.99/mo</li>
-          <li data-i18n="pricing_p3_f2">0.7% commission</li>
-          <li data-i18n="pricing_p3_f3">€300/mo cap</li>
-          <li data-i18n="pricing_p3_f4">No lock-in</li>
+          <li data-i18n="pricing_p3_f1">69,99 €/mes</li>
+          <li data-i18n="pricing_p3_f2">0,7 % de comisión</li>
+          <li data-i18n="pricing_p3_f3">Tope 300 €/mes</li>
+          <li data-i18n="pricing_p3_f4">Sin permanencia</li>
         </ul>
-        <a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="pricing-cta is-primary" target="_blank" rel="noopener" data-i18n="pricing_p3_cta">Choose plan</a>
+        <a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="pricing-cta is-primary" target="_blank" rel="noopener" data-i18n="pricing_p3_cta">Elegir plan</a>
       </article>
 
       <article class="pricing-card fade-up d4">
-        <h3 class="pricing-name" data-i18n="pricing_p4_name">Unlimited</h3>
+        <h3 class="pricing-name" data-i18n="pricing_p4_name">Ilimitado</h3>
         <div class="pricing-price-row">
-          <span class="pricing-amount" data-i18n="pricing_p4_price">€169</span>
-          <span class="pricing-period" data-i18n="pricing_per_month">/ mo</span>
+          <span class="pricing-amount" data-i18n="pricing_p4_price">169 €</span>
+          <span class="pricing-period" data-i18n="pricing_per_month">/ mes</span>
         </div>
         <ul class="pricing-features">
-          <li data-i18n="pricing_p4_f1">€169/mo</li>
-          <li data-i18n="pricing_p4_f2">0% commission</li>
-          <li data-i18n="pricing_p4_f3">No cap</li>
-          <li data-i18n="pricing_p4_f4">Includes Tuko AI beta</li>
-          <li data-i18n="pricing_p4_f5">No lock-in</li>
+          <li data-i18n="pricing_p4_f1">169 €/mes</li>
+          <li data-i18n="pricing_p4_f2">0 % de comisión</li>
+          <li data-i18n="pricing_p4_f3">Sin tope</li>
+          <li data-i18n="pricing_p4_f4">Incluye beta de Tuko AI</li>
+          <li data-i18n="pricing_p4_f5">Sin permanencia</li>
         </ul>
-        <p class="pricing-cap" data-i18n="pricing_p4_cap">No cap</p>
-        <a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="pricing-cta is-secondary" target="_blank" rel="noopener" data-i18n="pricing_p4_cta">Choose plan</a>
+        <p class="pricing-cap" data-i18n="pricing_p4_cap">Sin tope</p>
+        <a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="pricing-cta is-secondary" target="_blank" rel="noopener" data-i18n="pricing_p4_cta">Elegir plan</a>
       </article>
     </div>
 
     <!-- Calculadora: cuánto pagarías al mes según lo que vendas con Tuko (precios de esta página, tope aplicado) -->
     <div class="calc fade-up" id="calculadora">
       <div class="calc-left">
-        <p class="calc-kicker" data-i18n="calc_kicker">Calculator</p>
-        <h3 class="calc-title" data-i18n="calc_title">How much would you pay per month?</h3>
-        <p class="calc-help" data-i18n="calc_help">Drag to what you expect to sell in Tuko groups. Plan fee + capped commission (Unlimited has no commission).</p>
+        <p class="calc-kicker" data-i18n="calc_kicker">Calculadora</p>
+        <h3 class="calc-title" data-i18n="calc_title">¿Cuánto pagarías al mes?</h3>
+        <p class="calc-help" data-i18n="calc_help">Mueve el control hasta lo que crees que venderás en grupos Tuko. Cuota del plan + comisión con tope (Ilimitado no tiene comisión).</p>
         <div class="calc-value">
           <b id="calcSales">3.000 €</b>
-          <span data-i18n="calc_value_label">sold per month with Tuko</span>
+          <span data-i18n="calc_value_label">vendidos al mes con Tuko</span>
         </div>
-        <label class="sr-only" for="calcRange" data-i18n="calc_range_label">Monthly sales with Tuko</label>
+        <label class="sr-only" for="calcRange" data-i18n="calc_range_label">Ventas mensuales con Tuko</label>
         <input type="range" class="calc-range" id="calcRange" min="0" max="100000" step="100" value="3000">
         <div class="calc-scale" aria-hidden="true"><span data-scale="0">0 €</span><span data-scale="50000">50.000 €</span><span data-scale="100000">100.000 €</span></div>
       </div>
       <div class="calc-plans" id="calcPlans" aria-live="polite">
         <div class="calc-plan" data-plan="p1">
-          <span class="calc-plan-name"><span data-i18n="pricing_p1_name">Free</span><span class="calc-plan-tag" data-i18n="calc_best">Cheapest for you</span></span>
+          <span class="calc-plan-name"><span data-i18n="pricing_p1_name">Free</span><span class="calc-plan-tag" data-i18n="calc_best">El más barato</span></span>
           <b class="calc-plan-cost" data-cost>—</b>
           <span class="calc-plan-sub" data-sub></span>
         </div>
         <div class="calc-plan" data-plan="p2">
-          <span class="calc-plan-name"><span data-i18n="pricing_p2_name">Starter</span><span class="calc-plan-tag" data-i18n="calc_best">Cheapest for you</span></span>
+          <span class="calc-plan-name"><span data-i18n="pricing_p2_name">Starter</span><span class="calc-plan-tag" data-i18n="calc_best">El más barato</span></span>
           <b class="calc-plan-cost" data-cost>—</b>
           <span class="calc-plan-sub" data-sub></span>
         </div>
         <div class="calc-plan" data-plan="p3">
-          <span class="calc-plan-name"><span data-i18n="pricing_p3_name">Pro</span><span class="calc-plan-tag" data-i18n="calc_best">Cheapest for you</span></span>
+          <span class="calc-plan-name"><span data-i18n="pricing_p3_name">Pro</span><span class="calc-plan-tag" data-i18n="calc_best">El más barato</span></span>
           <b class="calc-plan-cost" data-cost>—</b>
           <span class="calc-plan-sub" data-sub></span>
         </div>
         <div class="calc-plan" data-plan="p4">
-          <span class="calc-plan-name"><span data-i18n="pricing_p4_name">Unlimited</span><span class="calc-plan-tag" data-i18n="calc_best">Cheapest for you</span></span>
+          <span class="calc-plan-name"><span data-i18n="pricing_p4_name">Ilimitado</span><span class="calc-plan-tag" data-i18n="calc_best">El más barato</span></span>
           <b class="calc-plan-cost" data-cost>—</b>
           <span class="calc-plan-sub" data-sub></span>
         </div>
-        <p class="calc-note" data-i18n="calc_note">Indicative figures: monthly fee + commission on Tuko group sales, with a cap. Unlimited is the fee only.</p>
+        <p class="calc-note" data-i18n="calc_note">Cálculo orientativo: cuota mensual + comisión sobre lo vendido en grupos Tuko, con tope. Ilimitado es solo la cuota.</p>
       </div>
     </div>
 
-    <p class="pricing-legal fade-up" data-i18n="pricing_legal">Commission is calculated only on Tuko group sales—never on the rest of your revenue. The cap is the most commission you can pay in a month (Unlimited has no commission and no cap). The plan fee is added on top.</p>
+    <p class="pricing-legal fade-up" data-i18n="pricing_legal">La comisión se calcula solo sobre lo vendido en grupos Tuko, nunca sobre el resto de tu facturación. El tope es el máximo de comisión al mes (el plan Ilimitado no tiene comisión ni tope). La cuota del plan se suma aparte.</p>
     <div class="pricing-links fade-up d1">
-      <a href="#faq" data-i18n="pricing_link_faq">Still have questions? See the FAQ →</a>
+      <a href="#faq" data-i18n="pricing_link_faq">¿Te quedan dudas? Mira las preguntas frecuentes →</a>
     </div>
   </div>
 </section>
@@ -4771,21 +4763,21 @@
 <!-- FAQ -->
 <section class="faq" id="faq">
   <div class="faq-inner">
-    <div class="fade-up"><span class="s-badge" data-i18n="faq_badge">FAQ</span></div>
-    <h2 class="s-title fade-up d1" data-i18n="faq_title">What we get asked <em class="title-accent-em">every time</em></h2>
-    <p class="s-sub fade-up d2" data-i18n="faq_sub">Real objections from sales calls, answered in writing for the people who will never pick up the phone.</p>
+    <div class="fade-up"><span class="s-badge" data-i18n="faq_badge">Preguntas frecuentes</span></div>
+    <h2 class="s-title fade-up d1" data-i18n="faq_title">Lo que nos preguntan <em class="title-accent-em">siempre</em></h2>
+    <p class="s-sub fade-up d2" data-i18n="faq_sub">Objeciones reales de las llamadas, respondidas por escrito para quien nunca va a llamar.</p>
     <div class="faq-list" id="faqList">
       <div class="faq-item is-open fade-up d1">
         <h3 class="faq-h">
           <button type="button" class="faq-trigger" aria-expanded="true" aria-controls="faq-panel-1" id="faq-btn-1">
             <span class="faq-num" aria-hidden="true">01</span>
-            <span class="faq-q" data-i18n="faq_q1">When does my customer get charged?</span>
+            <span class="faq-q" data-i18n="faq_q1">¿Cuándo se le cobra a mi cliente?</span>
             <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
           </button>
         </h3>
         <div class="faq-panel" id="faq-panel-1" role="region" aria-labelledby="faq-btn-1">
           <div class="faq-panel-inner">
-            <p class="faq-a" data-i18n="faq_a1">When they join the group. They pay the discounted price at checkout, like a normal purchase. The order waits to ship until the group is resolved.</p>
+            <p class="faq-a" data-i18n="faq_a1">En el momento de unirse al grupo. Paga directamente el precio ya rebajado en el checkout, como una compra normal. El pedido queda en espera de envío hasta que el grupo se resuelve.</p>
           </div>
         </div>
       </div>
@@ -4793,13 +4785,13 @@
         <h3 class="faq-h">
           <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-2" id="faq-btn-2">
             <span class="faq-num" aria-hidden="true">02</span>
-            <span class="faq-q" data-i18n="faq_q3">What if the goal isn't reached?</span>
+            <span class="faq-q" data-i18n="faq_q3">¿Y si no se alcanza el objetivo?</span>
             <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
           </button>
         </h3>
         <div class="faq-panel" id="faq-panel-2" role="region" aria-labelledby="faq-btn-2" hidden>
           <div class="faq-panel-inner">
-            <p class="faq-a" data-i18n="faq_a3">The order is cancelled and Shopify automatically refunds 100% of the money to your customer. You don't have to do anything. Tuko handles the refund and sends an email.</p>
+            <p class="faq-a" data-i18n="faq_a3">El pedido se cancela y Shopify devuelve el 100% del dinero a tu cliente automáticamente. Tú no tienes que hacer nada. Tuko gestiona la devolución y avisa por email.</p>
           </div>
         </div>
       </div>
@@ -4807,13 +4799,13 @@
         <h3 class="faq-h">
           <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-3" id="faq-btn-3">
             <span class="faq-num" aria-hidden="true">03</span>
-            <span class="faq-q" data-i18n="faq_q4">Won't this wreck my margin?</span>
+            <span class="faq-q" data-i18n="faq_q4">¿Esto no me destroza el margen?</span>
             <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
           </button>
         </h3>
         <div class="faq-panel" id="faq-panel-3" role="region" aria-labelledby="faq-btn-3" hidden>
           <div class="faq-panel-inner">
-            <p class="faq-a" data-i18n="faq_a4">No. The discount only applies if the group fills. If the goal isn't reached, there is no discounted sale. The order is cancelled and the money is refunded. You never sell below the margin you set.</p>
+            <p class="faq-a" data-i18n="faq_a4">No. El descuento solo se aplica si el grupo se completa. Si no se llega al objetivo, no hay venta con descuento. Se cancela y se devuelve el dinero. Nunca vendes por debajo del margen que tú decidiste.</p>
           </div>
         </div>
       </div>
@@ -4821,13 +4813,13 @@
         <h3 class="faq-h">
           <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-4" id="faq-btn-4">
             <span class="faq-num" aria-hidden="true">04</span>
-            <span class="faq-q" data-i18n="faq_q5">Is this like Groupon?</span>
+            <span class="faq-q" data-i18n="faq_q5">¿Esto es como Groupon?</span>
             <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
           </button>
         </h3>
         <div class="faq-panel" id="faq-panel-4" role="region" aria-labelledby="faq-btn-4" hidden>
           <div class="faq-panel-inner">
-            <p class="faq-a" data-i18n="faq_a5">No. On Groupon the discount is fixed from minute one. With Tuko the discount depends on enough buyers joining. If they don't, there is no discount and no sale, only a refund.</p>
+            <p class="faq-a" data-i18n="faq_a5">No. En Groupon el descuento es fijo desde el minuto uno. En Tuko el descuento depende de que se junten los compradores suficientes. Si no se juntan, no hay descuento ni venta, solo una devolución.</p>
           </div>
         </div>
       </div>
@@ -4835,13 +4827,13 @@
         <h3 class="faq-h">
           <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-5" id="faq-btn-5">
             <span class="faq-num" aria-hidden="true">05</span>
-            <span class="faq-q" data-i18n="faq_q6">I already use a volume-discount app. Why do I need this?</span>
+            <span class="faq-q" data-i18n="faq_q6">Ya uso una app de descuentos por volumen. ¿Para qué quiero esta?</span>
             <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
           </button>
         </h3>
         <div class="faq-panel" id="faq-panel-5" role="region" aria-labelledby="faq-btn-5" hidden>
           <div class="faq-panel-inner">
-            <p class="faq-a" data-i18n="faq_a6">A volume discount rewards one customer for buying more units on their own. Tuko rewards several different customers joining together. You get new people sharing your product, not just bigger orders from customers you already had.</p>
+            <p class="faq-a" data-i18n="faq_a6">Un descuento por volumen premia a un cliente por comprar más unidades él solo. Tuko premia que varios clientes distintos se unan. Así consigues gente nueva compartiendo tu producto, no solo pedidos más grandes de los que ya tenías.</p>
           </div>
         </div>
       </div>
@@ -4854,20 +4846,20 @@
   <div class="final-cta">
     <canvas id="ctaCanvas"></canvas>
     <div class="final-cta-inner">
-      <span class="final-cta-eyebrow fade-up"><i aria-hidden="true"></i><span data-i18n="fcta_eyebrow">Start today</span></span>
-      <h2 class="fade-up d1" data-i18n="fcta_title">Light up your <em>first campaign</em></h2>
-      <p class="fade-up d2" data-i18n="fcta_sub">Install is free. The Free plan has no subscription: 4.2% of what you sell with Tuko, capped at €500/mo.</p>
+      <span class="final-cta-eyebrow fade-up"><i aria-hidden="true"></i><span data-i18n="fcta_eyebrow">Empieza hoy</span></span>
+      <h2 class="fade-up d1" data-i18n="fcta_title">Enciende tu <em>primera campaña</em></h2>
+      <p class="fade-up d2" data-i18n="fcta_sub">Instalar es gratis. El plan Free no tiene cuota: 4,2 % de lo que vendas con Tuko, con tope de 500 €/mes.</p>
       <a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="final-cta-btn fade-up d3" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        <span data-i18n="fcta_btn">Install free on Shopify</span>
+        <span data-i18n="fcta_btn">Instalar gratis en Shopify</span>
       </a>
       <div class="final-cta-trust fade-up d4">
-        <span data-i18n="fcta_trust2">Set up in 2 minutes</span>
-        <span data-i18n="fcta_trust3">No theme changes</span>
+        <span data-i18n="fcta_trust2">Instalación en 2 minutos</span>
+        <span data-i18n="fcta_trust3">Sin tocar tu tema</span>
       </div>
       <div class="final-cta-shopify fade-up d5">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        <span data-i18n="fcta_shopify">Available on Shopify</span>
+        <span data-i18n="fcta_shopify">Disponible en Shopify</span>
       </div>
     </div>
   </div>
@@ -4888,29 +4880,29 @@
     <div class="footer-top">
       <div class="footer-brand">
         <a href="#" class="footer-brand-mark">tuko</a>
-        <p class="footer-brand-text" data-i18n="footer_tagline">Goal-based discounts for Shopify stores. Sell more units without giving away margin.</p>
+        <p class="footer-brand-text" data-i18n="footer_tagline">Descuentos por objetivo para tiendas Shopify. Vende más unidades sin regalar margen.</p>
       </div>
       <div class="footer-col">
-        <p class="footer-col-title" data-i18n="footer_col1_title">Contact</p>
+        <p class="footer-col-title" data-i18n="footer_col1_title">Contacto</p>
         <a href="mailto:team.tukoo@gmail.com" data-i18n="footer_email">team.tukoo@gmail.com</a>
       </div>
       <div class="footer-col">
-        <p class="footer-col-title" data-i18n="footer_col_product">Product</p>
-        <a href="#precios" data-i18n="footer_pricing">Pricing</a>
+        <p class="footer-col-title" data-i18n="footer_col_product">Producto</p>
+        <a href="#precios" data-i18n="footer_pricing">Precios</a>
       </div>
       <div class="footer-col">
-        <p class="footer-col-title" data-i18n="footer_col2_title">Legal</p>
-        <a href="../pages/privacidad.html" data-i18n="footer_privacy">Privacy policy</a>
-        <a href="../pages/terminos.html" data-i18n="footer_terms">Terms and conditions</a>
+        <p class="footer-col-title" data-i18n="footer_col2_title">Legales</p>
+        <a href="../pages/privacidad.html" data-i18n="footer_privacy">Política de privacidad</a>
+        <a href="../pages/terminos.html" data-i18n="footer_terms">Términos y condiciones</a>
       </div>
     </div>
   </div>
-  <div class="footer-bottom-inner" data-i18n="footer_copy">© 2026 Tuko. All rights reserved.</div>
+  <div class="footer-bottom-inner" data-i18n="footer_copy">© 2026 Tuko. Todos los derechos reservados.</div>
 </footer>
 
 <!-- CTA fija en móvil: aparece al pasar el hero, se esconde sobre Precios, el CTA final y el footer -->
 <div class="sticky-cta" id="stickyCta" aria-hidden="true">
-  <p class="sticky-cta-txt"><b data-i18n="sticky_title">Free until you sell</b><span data-i18n="sticky_sub">Set up in 2 min · No theme changes</span></p>
+  <p class="sticky-cta-txt"><b data-i18n="sticky_title">Gratis hasta que vendas</b><span data-i18n="sticky_sub">Instalación en 2 min · Sin tocar tu tema</span></p>
   <a href="https://apps.shopify.com/tuko?locale=en&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="btn-blue" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 19h14"/></svg>
     <span data-i18n="nav_cta">Install free</span>
@@ -5008,8 +5000,8 @@ function initGrid(canvas, opts) {
 
 // Hero grid
 const heroCanvas = document.getElementById('heroCanvas');
-initGrid(heroCanvas, {
-  speed: 0.72, horizonY: 0.50, lineWidth: 1.3,
+if (heroCanvas) initGrid(heroCanvas, {
+  speed: 0.62, horizonY: 0.50, lineWidth: 1.3,
   cols: 22, spread: 3.8, zoom: 1.4, fadeLen: 0.42,
   maxAlpha: 0.17, baseColor: '90,90,90', vpX: 0.50, lateral: 0.04
 });
@@ -5023,15 +5015,30 @@ if (ctaCanvas) initGrid(ctaCanvas, {
 });
 
 /* ── SCROLL FADE-UP ── */
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.08 });
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('visible');
+    e.target.dispatchEvent(new CustomEvent('tuko:visible', { bubbles: true }));
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
 
-document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+document.querySelectorAll('.fade-up').forEach(el => {
+  if (reduceMotion) {
+    el.classList.add('visible');
+    el.dispatchEvent(new CustomEvent('tuko:visible', { bubbles: true }));
+  } else {
+    obs.observe(el);
+  }
+});
 
 // Trigger hero immediately
 setTimeout(() => {
-  document.querySelectorAll('.hero .fade-up').forEach(el => el.classList.add('visible'));
+  document.querySelectorAll('.hero .fade-up').forEach(el => {
+    el.classList.add('visible');
+    el.dispatchEvent(new CustomEvent('tuko:visible', { bubbles: true }));
+  });
 }, 80);
 
 /* ── Relojes de los mockups (hero y "Por qué compran"): cuentan hacia atrás de verdad ── */
@@ -5079,11 +5086,11 @@ setTimeout(() => {
   if (!chip || !chipTxt || !chipFace) return;
 
   const NAMES = ['Marta', 'Carlos', 'Lucía', 'Sofía', 'Diego', 'Luna'];
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let i = 0, timer = 0;
 
   function render() {
-    const t = translations[document.documentElement.lang] || translations.es;
+    if (typeof translations === 'undefined') return;
+    const t = translations[document.documentElement.lang] || translations.es || {};
     const tpl = t.why3_w_chip_tpl || '{name} <em>acaba de unirse</em>';
     chipTxt.innerHTML = tpl.split('{name}').join(NAMES[i]);
     const src = widget.querySelector('[data-why-face="' + i + '"]');
@@ -5107,14 +5114,32 @@ setTimeout(() => {
   function play(on) {
     clearTimeout(timer);
     timer = 0;
-    if (on && !reduce) timer = setTimeout(tick, 2600);
+    if (on) {
+      pop();
+      timer = setTimeout(tick, 1800);
+    }
   }
 
-  if (reduce) return;
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => play(e.isIntersecting));
-  }, { threshold: 0.45 });
-  io.observe(widget);
+  const row = widget.closest('.why-row');
+  function syncPlay() {
+    if (row) row.classList.add('visible');
+    const r = widget.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    play(r.bottom > vh * 0.05 && r.top < vh * 0.95);
+  }
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting && row) row.classList.add('visible');
+        play(e.isIntersecting);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
+    io.observe(widget);
+  } else {
+    play(true);
+  }
+  if (row) row.addEventListener('tuko:visible', syncPlay);
+  /* No llamar render() aquí: `translations` se define más abajo en el mismo script */
 })();
 
 /* «La meta»: el grupo camina, llega a la bandera y desbloquea el −20 %.
@@ -5653,7 +5678,9 @@ setTimeout(() => {
   var last = 0;
 
   function playing() {
-    return onScreen && !mq.matches;
+    /* No bloquear por prefers-reduced-motion: en Windows suele estar activo
+       y dejaba la demo congelada en 10/10. Solo pausamos fuera de pantalla. */
+    return onScreen;
   }
 
   function tick(now) {
@@ -5673,8 +5700,7 @@ setTimeout(() => {
     } else {
       if (raf) cancelAnimationFrame(raf);
       raf = 0;
-      if (mq.matches) frozenEnd();
-      else for (var j = 0; j < actors.length; j++) apply(actors[j]);
+      for (var j = 0; j < actors.length; j++) apply(actors[j]);
     }
   }
 
@@ -5685,11 +5711,31 @@ setTimeout(() => {
 
   if ('IntersectionObserver' in window) {
     onScreen = false;
+    var row = stage.closest('.why-row');
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { onScreen = e.isIntersecting; });
+      var nowOn = entries.some(function (e) { return e.isIntersecting; });
+      if (nowOn && !onScreen) {
+        if (row) row.classList.add('visible');
+        /* Reinicia al entrar en pantalla para que en desktop siempre se vea la marcha */
+        enter('walk');
+      }
+      onScreen = nowOn;
       sync();
-    }, { threshold: 0.2 });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     io.observe(stage);
+    if (row) {
+      row.addEventListener('tuko:visible', function () {
+        var r = stage.getBoundingClientRect();
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        if (r.bottom > vh * 0.08 && r.top < vh * 0.92 && !onScreen) {
+          onScreen = true;
+          enter('walk');
+          sync();
+        } else if (onScreen) {
+          sync();
+        }
+      });
+    }
   }
   sync();
 
@@ -5721,6 +5767,220 @@ setTimeout(() => {
   };
 
   window.tukoEnsureHeroEmArc();
+})();
+
+(function () {
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+    });
+  }
+
+  window.tukoHeroTitleRender = function (opts) {
+    var h1 = document.querySelector('.hero-title');
+    if (!h1 || typeof translations === 'undefined') return;
+    var lang = document.documentElement.lang || 'es';
+    var t = translations[lang] || translations.es;
+    if (!t) return;
+    if (h1.getAttribute('data-lang') === lang) return;
+
+    var l1 = String(t.hero_title_l1 || '').split(/\s+/).filter(Boolean);
+    var l2 = String(t.hero_title_l2 || '').split(/\s+/).filter(Boolean);
+    var l3b = String(t.hero_title_l3_before || '').split(/\s+/).filter(Boolean);
+    var accent = String(t.hero_title_accent || '');
+    var l3a = String(t.hero_title_l3_after || '').split(/\s+/).filter(Boolean);
+    var html = '';
+
+    function word(text) {
+      return '<span class="hero-word">' + esc(text) + '</span>';
+    }
+
+    function line(parts) {
+      return '<span class="hero-line">' + parts.join('') + '</span>';
+    }
+
+    html += line(l1.map(word));
+    html += line(l2.map(word));
+
+    var third = l3b.map(word);
+    var acc = '<span class="hero-accent">' + esc(accent);
+    acc += '<span class="hero-accent-line" aria-hidden="true"><svg viewBox="0 0 120 14" preserveAspectRatio="none"><defs><linearGradient id="tukoHeroShineGrad" gradientUnits="userSpaceOnUse" x1="-120" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.28" stop-color="#e8eeff" stop-opacity="0.05"/><stop offset="0.45" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0.42"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="0.72" stop-color="#e8eeff" stop-opacity="0.05"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs><path class="hero-accent-base" d="M4 10.5 Q60 3.2 116 10.5"/><path class="hero-accent-glow" d="M4 10.5 Q60 3.2 116 10.5"/></svg></span>';
+    acc += '</span>';
+    third.push(acc);
+    third = third.concat(l3a.map(word));
+    html += line(third);
+
+    h1.innerHTML = html;
+    h1.setAttribute('data-lang', lang);
+    if (typeof window.tukoHeroAccentShine === 'function') window.tukoHeroAccentShine();
+  };
+})();
+
+(function () {
+  var raf = 0;
+  var glow = null;
+  var grad = null;
+  var start = 0;
+  var SWEEP = 2800;
+  var PAUSE = 2200;
+  var BAND = 110;
+
+  function easeInOut(t) {
+    return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+  }
+
+  function bind() {
+    var line = document.querySelector('.hero-accent-line');
+    if (!line) return false;
+    glow = line.querySelector('.hero-accent-glow');
+    grad = line.querySelector('#tukoHeroShineGrad') || line.querySelector('linearGradient');
+    return !!(glow && grad);
+  }
+
+  function frame(now) {
+    if (!glow || !glow.isConnected || !grad || !grad.isConnected) {
+      if (!bind()) { raf = 0; return; }
+      start = now;
+    }
+    if (!start) start = now;
+    var t = (now - start) % (SWEEP + PAUSE);
+    if (t > SWEEP) {
+      glow.style.opacity = '0';
+      grad.setAttribute('x1', String(-BAND));
+      grad.setAttribute('x2', '0');
+    } else {
+      var p = easeInOut(t / SWEEP);
+      var x = -BAND + p * (120 + BAND * 2);
+      var op = p < 0.2 ? p / 0.2 : p > 0.8 ? (1 - p) / 0.2 : 1;
+      glow.style.opacity = String(0.72 * Math.max(0, Math.min(1, op)));
+      grad.setAttribute('x1', String(x));
+      grad.setAttribute('x2', String(x + BAND));
+    }
+    raf = window.requestAnimationFrame(frame);
+  }
+
+  window.tukoHeroAccentShine = function () {
+    if (!bind()) return;
+    glow.style.opacity = '0';
+    grad.setAttribute('x1', String(-BAND));
+    grad.setAttribute('x2', '0');
+    start = 0;
+    if (!raf) raf = window.requestAnimationFrame(frame);
+  };
+
+  /* Arranque + reintento por si el título se re-renderiza después */
+  function boot() {
+    window.tukoHeroAccentShine();
+    window.setTimeout(window.tukoHeroAccentShine, 400);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
+
+(function () {
+  var GOAL = 10;
+  var DISCOUNT = 20;
+  var START = 2;
+  var MAX_SHOW = 10;
+  var VISIBLE = 6;
+  var faces = [];
+  document.querySelectorAll('[data-why-face]').forEach(function (el) {
+    var idx = Number(el.getAttribute('data-why-face'));
+    if (!isNaN(idx)) faces[idx] = el.innerHTML;
+  });
+  faces = faces.filter(Boolean).concat([
+    '<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#C4B5FD"/><path fill="#A78BFA" d="M9 18L7 1.5 18 13z"/><path fill="#A78BFA" d="M31 18L33 1.5 22 13z"/><path fill="#F5D0FE" d="M11 16L10 5 17 13z"/><path fill="#F5D0FE" d="M29 16L30 5 23 13z"/><circle cx="14.2" cy="21.2" r="1.85" fill="#3A2418"/><circle cx="25.8" cy="21.2" r="1.85" fill="#3A2418"/><circle cx="14.7" cy="20.7" r=".45" fill="#fff"/><circle cx="26.3" cy="20.7" r=".45" fill="#fff"/><ellipse cx="20" cy="25.4" rx="1.4" ry="1" fill="#FF9EC8"/><path d="M15 28c2.4 2.2 7.6 2.2 10 0" fill="none" stroke="#7C3AED" stroke-width="1.35" stroke-linecap="round"/></svg>',
+    '<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#EDEDED"/><circle cx="10" cy="11" r="6.1" fill="#1A1A1A"/><circle cx="30" cy="11" r="6.1" fill="#1A1A1A"/><ellipse cx="13.4" cy="20.6" rx="4.1" ry="3.5" fill="#1A1A1A"/><ellipse cx="26.6" cy="20.6" rx="4.1" ry="3.5" fill="#1A1A1A"/><circle cx="13.4" cy="20.6" r="1.45" fill="#fff"/><circle cx="26.6" cy="20.6" r="1.45" fill="#fff"/><circle cx="13.7" cy="20.3" r=".7" fill="#1A1A1A"/><circle cx="26.9" cy="20.3" r=".7" fill="#1A1A1A"/><ellipse cx="20" cy="27.4" rx="5.4" ry="3.8" fill="#fff"/><ellipse cx="20" cy="25.8" rx="1.25" ry=".95" fill="#1A1A1A"/><path d="M16 29.2c1.8 1.35 6.2 1.35 8 0" fill="none" stroke="#1A1A1A" stroke-width="1.3" stroke-linecap="round"/></svg>',
+    '<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#C68642"/><ellipse cx="7.2" cy="20" rx="5.3" ry="6.4" fill="#A96D33"/><ellipse cx="32.8" cy="20" rx="5.3" ry="6.4" fill="#A96D33"/><ellipse cx="7.2" cy="20" rx="3.1" ry="3.9" fill="#E8C4A0"/><ellipse cx="32.8" cy="20" rx="3.1" ry="3.9" fill="#E8C4A0"/><ellipse cx="20" cy="25.8" rx="8" ry="6.8" fill="#F2D2B0"/><circle cx="14.2" cy="20.2" r="1.85" fill="#3A2418"/><circle cx="25.8" cy="20.2" r="1.85" fill="#3A2418"/><circle cx="14.7" cy="19.7" r=".45" fill="#fff"/><circle cx="26.3" cy="19.7" r=".45" fill="#fff"/><ellipse cx="20" cy="24.7" rx="1.45" ry="1.1" fill="#3A2418"/><path d="M16 29.1c1.8 1.5 6.2 1.5 8 0" fill="none" stroke="#A96D33" stroke-width="1.3" stroke-linecap="round"/></svg>',
+    '<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#5EC8B4"/><path fill="#3D50F2" d="M11.5 9L14.5 1.2 18.5 9.2z"/><path fill="#14C492" d="M17.6 7.2L20 0.6 23.2 7.4z"/><path fill="#3D50F2" d="M24.2 9L27.4 2 31 9.2z"/><circle cx="14" cy="20.2" r="1.85" fill="#1A2418"/><circle cx="26" cy="20.2" r="1.85" fill="#1A2418"/><circle cx="14.5" cy="19.7" r=".45" fill="#fff"/><circle cx="26.5" cy="19.7" r=".45" fill="#fff"/><path fill="#E8A54B" d="M16.6 24.4L20 30.6 23.4 24.4z"/><path d="M15 27.6c2.4 2.1 7.6 2.1 10 0" fill="none" stroke="#0E8A68" stroke-width="1.35" stroke-linecap="round"/></svg>'
+  ]);
+  var joined = 3;
+  var wrap = document.getElementById('heroLiveAvatars');
+  var line = document.getElementById('heroLiveLine');
+  if (!wrap || !line) return;
+
+  function faceCount(n) {
+    return Math.max(START, Math.min(n, Math.min(MAX_SHOW, faces.length || MAX_SHOW)));
+  }
+
+  function popEl(el) {
+    if (!el) return;
+    el.classList.remove('is-pop');
+    void el.offsetWidth;
+    el.classList.add('is-pop');
+  }
+
+  function setLine(n, animate) {
+    var t = (typeof translations !== 'undefined' && (translations[document.documentElement.lang] || translations.es)) || {};
+    var left = GOAL - n;
+    var next;
+    if (left === 0) {
+      next = String(t.hero_live_full || 'Grupo completo · −{discount} % para todos').replace('{discount}', String(DISCOUNT));
+    } else {
+      next = String(t.hero_live_tpl || '{n} de {goal} ya en el grupo')
+        .replace('{n}', String(n))
+        .replace('{goal}', String(GOAL));
+    }
+    if (line.textContent !== next) {
+      line.textContent = next;
+      if (animate) popEl(line);
+    }
+    line.classList.toggle('is-full', left === 0);
+  }
+
+  function addAvatar(i, animate) {
+    var el = document.createElement('span');
+    el.className = 'hero-live-avat';
+    el.innerHTML = faces[i % (faces.length || 1)] || '';
+    wrap.appendChild(el);
+    if (animate) popEl(el);
+  }
+
+  function render(opts) {
+    var instant = !!(opts && opts.instant);
+    var n = Math.min(joined, GOAL);
+    var count = faceCount(n);
+    var current = wrap.querySelectorAll('.hero-live-avat').length;
+    var resetting = count < current;
+    var i;
+
+    if (resetting) {
+      wrap.textContent = '';
+      wrap.classList.remove('is-full');
+      wrap.classList.remove('is-clipped');
+      current = 0;
+    }
+
+    for (i = current; i < count; i++) addAvatar(i, !instant && !resetting);
+    wrap.classList.toggle('is-clipped', wrap.querySelectorAll('.hero-live-avat').length > VISIBLE);
+
+    if (n >= GOAL && !instant) {
+      wrap.classList.remove('is-full');
+      void wrap.offsetWidth;
+      wrap.classList.add('is-full');
+    } else if (n < GOAL) {
+      wrap.classList.remove('is-full');
+      if (!instant && !resetting && current === count) {
+        popEl(wrap.querySelector('.hero-live-avat:last-child'));
+      }
+    }
+
+    setLine(n, !instant);
+  }
+
+  window.tukoHeroLiveRender = function () {
+    setLine(Math.min(joined, GOAL), false);
+  };
+  render({ instant: true });
+
+  /* Siempre activo: en Windows “preferir menos movimiento” lo dejaba congelado en 3/10 */
+  setInterval(function () {
+    joined = joined >= GOAL ? START : joined + 1;
+    render();
+  }, 2600);
 })();
 
 /* ── SMOOTH SCROLL for nav (rAF: fluido aunque Windows reduzca animaciones) ── */
@@ -5980,13 +6240,23 @@ const translations = {
 
     /* HERO */
     hero_badge: 'Con el respaldo de Xiji Incubator',
-    hero_title: 'Un botón y tus clientes<br><em>empiezan a vender por ti</em>',
-    hero_subtitle: 'Tus clientes pulsan un botón, se unen al grupo del producto, y cuando se llena el precio baja para todos.',
+    hero_title: 'Un botón y tus clientes empiezan a vender por ti',
+    hero_title_l1: 'Un botón y tus',
+    hero_title_l2: 'clientes empiezan',
+    hero_title_l3_before: 'a',
+    hero_title_accent: 'vender',
+    hero_title_l3_after: 'por ti',
+    hero_subtitle: 'Se unen al grupo del producto y, cuando se llena, el precio baja para todos. Lo llenan ellos, no tu presupuesto de anuncios.',
     hero_cta: 'Instalar gratis en Shopify',
     hero_cta2: 'Ver cómo funciona',
     hero_cta3: 'Habla con nosotros',
+    hero_live_tpl: '{n} de {goal} ya en el grupo',
+    hero_live_full: 'Grupo completo · −{discount} % para todos',
+    hero_trust_note: 'Instalación en 2 minutos · gratis hasta que vendas',
     hero_trust2: 'Instalación en 2 minutos',
     hero_trust3: 'Sin tocar tu tema',
+    hero_trust4: 'Tu checkout de siempre',
+    hero_caption: 'Un descuento · una meta · una fecha. Si no se llena, pagan el precio normal.',
     sticky_title: 'Gratis hasta que vendas',
     sticky_sub: 'Instalación en 2 min · Sin tocar tu tema',
 
@@ -6045,7 +6315,7 @@ const translations = {
     data_good_b1: 'Tus clientes comparten para completar la meta.',
     data_good_b2: 'El grupo convierte una venta en difusión.',
     data_good_b3: 'Con el tiempo, baja tu coste por cliente nuevo.',
-    data_good_sub: 'La rebaja solo se activa si se cumple la <em>meta</em>.',
+    data_good_sub: 'La rebaja solo se activa si se cumple <span class="data-nowrap">la <em>meta</em>.</span>',
     data_foot: 'No es bajar más el precio. <b>Es hacer que cada venta traiga otra.</b>',
     data_src: 'Klaviyo · ProfitPeak, 2025',
 
@@ -6058,6 +6328,20 @@ const translations = {
     hmock_price_new: '39,92 €',
     hmock_price_off: '−20 %',
     hmock_chip: 'Marta acaba de unirse',
+    hmock_live: 'Campaña en directo',
+    hmock_col_product: 'El producto',
+    hmock_col_group: 'El grupo',
+    hmock_col_clock: 'El reloj',
+    hmock_col_price: 'El precio',
+    hmock_clock_note: 'Se cierra hoy. Con fecha, compran hoy.',
+    hmock_off_fixed: '−{n} % fijo',
+    hmock_groupline_tpl: 'Faltan {n} para desbloquear',
+    hmock_groupline_one: 'Falta 1 para desbloquear',
+    hmock_groupline_done: 'Grupo completo. Todos pagan menos.',
+    hmock_status: 'Reservas abiertas · −{n} % al llenarse',
+    hmock_status_done: 'Meta alcanzada · todos pagan {price}',
+    hmock_price_note: 'Se aplica al llegar a {n}',
+    hmock_price_note_done: 'Desbloqueado para los {n}',
     /* loop del mockup (plantillas: {n}, {name}) */
     hmock_missing_tpl: 'Faltan <b>{n}</b> para desbloquear el −20 %',
     hmock_missing_one: 'Falta <b>1</b> para desbloquear el −20 %',
@@ -6184,7 +6468,7 @@ const translations = {
     why1_w_foot: 'Después, el <b>−20 %</b> desaparece.',
     why2_kicker: 'La meta',
     why2_title: 'El precio bueno puede no llegar',
-    why2_desc: 'Por eso nadie lo deja para mañana. Reservar hoy es la única forma de asegurarse el descuento.',
+    why2_desc: 'Por eso nadie lo deja para mañana. Comprar hoy es la única forma de asegurarse el descuento.',
     why2_w_missing: 'Faltan <b>8</b> para llegar juntos al −20 %',
     why2_w_missing_tpl: 'Faltan <b>{n}</b> para llegar juntos al −20 %',
     why2_w_missing_one: 'Falta <b>1</b> para llegar juntos al −20 %',
@@ -6441,7 +6725,7 @@ const translations = {
     terms_h2_5: '<span class="legal-num">5.</span> Exclusión de responsabilidad',
     terms_p5: 'La web se ofrece \u201ctal cual\u201d. No garantizamos disponibilidad continua, ausencia de errores o compatibilidad con todos los dispositivos. No nos hacemos responsables de daños derivados del uso o imposibilidad de uso de la web.',
     terms_h2_6: '<span class="legal-num">6.</span> Datos personales',
-    terms_p6: 'El tratamiento de los datos personales se rige por nuestra <a href="privacidad.html" target="_blank">Política de Privacidad</a>.',
+    terms_p6: 'El tratamiento de los datos personales se rige por nuestra <a href="../pages/privacidad.html" target="_blank">Política de Privacidad</a>.',
     terms_h2_7: '<span class="legal-num">7.</span> Modificaciones',
     terms_p7: 'Tuko podrá modificar estos términos en cualquier momento. El uso continuado tras los cambios implica aceptación.',
     terms_h2_8: '<span class="legal-num">8.</span> Contacto',
@@ -6510,13 +6794,23 @@ const translations = {
 
     /* HERO */
     hero_badge: 'Backed by Xiji Incubator',
-    hero_title: 'One button and your customers<br><em>start selling for you</em>',
-    hero_subtitle: 'Your customers tap a button, join the product group, and when it fills, the price drops for everyone.',
+    hero_title: 'One button and your customers start selling for you',
+    hero_title_l1: 'One button and your',
+    hero_title_l2: 'customers start',
+    hero_title_l3_before: '',
+    hero_title_accent: 'selling',
+    hero_title_l3_after: 'for you',
+    hero_subtitle: 'They join the product group and, when it fills, the price drops for everyone. They fill it — not your ads budget.',
     hero_cta: 'Install free on Shopify',
     hero_cta2: 'See how it works',
     hero_cta3: 'Talk to us',
+    hero_live_tpl: '{n} of {goal} already in the group',
+    hero_live_full: 'Group complete · −{discount}% for everyone',
+    hero_trust_note: 'Set up in 2 minutes · free until you sell',
     hero_trust2: 'Set up in 2 minutes',
     hero_trust3: 'No theme changes',
+    hero_trust4: 'Your same checkout',
+    hero_caption: 'One discount · one goal · one deadline. If it doesn’t fill, they pay full price.',
     sticky_title: 'Free until you sell',
     sticky_sub: 'Set up in 2 min · No theme changes',
 
@@ -6575,7 +6869,7 @@ const translations = {
     data_good_b1: 'Customers share to complete the group goal.',
     data_good_b2: 'One purchase turns into distribution.',
     data_good_b3: 'Over time, your cost per new customer drops.',
-    data_good_sub: 'The discount only activates if the <em>goal</em> is met.',
+    data_good_sub: 'The discount only activates if <span class="data-nowrap">the <em>goal</em></span> is met.',
     data_foot: 'It is not about lowering price more. <b>It is about making each sale bring the next one.</b>',
     data_src: 'Klaviyo · ProfitPeak, 2025',
 
@@ -6588,6 +6882,20 @@ const translations = {
     hmock_price_new: '€39.92',
     hmock_price_off: '−20%',
     hmock_chip: 'Marta just joined',
+    hmock_live: 'Live campaign',
+    hmock_col_product: 'The product',
+    hmock_col_group: 'The group',
+    hmock_col_clock: 'The clock',
+    hmock_col_price: 'The price',
+    hmock_clock_note: 'Closes today. With a deadline, they buy today.',
+    hmock_off_fixed: '−{n}% fixed',
+    hmock_groupline_tpl: '{n} more to unlock',
+    hmock_groupline_one: '1 more to unlock',
+    hmock_groupline_done: 'Group full. Everyone pays less.',
+    hmock_status: 'Open for reservations · −{n}% when it fills',
+    hmock_status_done: 'Goal reached · everyone pays {price}',
+    hmock_price_note: 'Applies when you hit {n}',
+    hmock_price_note_done: 'Unlocked for all {n}',
     /* mockup loop (templates: {n}, {name}) */
     hmock_missing_tpl: '<b>{n}</b> more to unlock −20%',
     hmock_missing_one: '<b>1</b> more to unlock −20%',
@@ -6714,7 +7022,7 @@ const translations = {
     why1_w_foot: 'After that, the <b>−20%</b> is gone.',
     why2_kicker: 'The goal',
     why2_title: 'The good price might not happen',
-    why2_desc: 'That\'s why nobody leaves it for tomorrow. Reserving today is the only way to lock in the discount.',
+    why2_desc: 'That\'s why nobody leaves it for tomorrow. Buying today is the only way to lock in the discount.',
     why2_w_missing: '<b>8</b> more to reach −20% together',
     why2_w_missing_tpl: '<b>{n}</b> more to reach −20% together',
     why2_w_missing_one: 'Just <b>1</b> more to reach −20% together',
@@ -6971,7 +7279,7 @@ const translations = {
     terms_h2_5: '<span class="legal-num">5.</span> Disclaimer',
     terms_p5: 'The website is provided \u201cas is\u201d. We do not guarantee continuous availability, absence of errors or compatibility with all devices. We are not liable for damages arising from the use or inability to use the website.',
     terms_h2_6: '<span class="legal-num">6.</span> Personal data',
-    terms_p6: 'The processing of personal data is governed by our <a href="privacidad.html" target="_blank">Privacy Policy</a>.',
+    terms_p6: 'The processing of personal data is governed by our <a href="../pages/privacidad.html" target="_blank">Privacy Policy</a>.',
     terms_h2_7: '<span class="legal-num">7.</span> Modifications',
     terms_p7: 'Tuko may modify these terms at any time. Continued use after changes implies acceptance.',
     terms_h2_8: '<span class="legal-num">8.</span> Contact',
@@ -7089,7 +7397,8 @@ function initDemoIframeVisibility() {
 /* Idioma: path /en gana; si no, ?lang; si no, localStorage. */
 function resolveLang() {
   var path = (location.pathname || '').replace(/\/$/, '') || '/';
-  if (path === '/en' || path.indexOf('/en/') === 0) return 'en';
+  if (path === '/en' || path.indexOf('/en/') === 0 || /(^|\/)en(\/|$)/.test(path)) return 'en';
+  if ((document.documentElement.lang || '').toLowerCase().indexOf('en') === 0) return 'en';
   var q = new URLSearchParams(location.search).get('lang');
   if (q === 'es' || q === 'en') return q;
   return localStorage.getItem('tuko_lang') || 'es';
@@ -7186,11 +7495,13 @@ function setLanguage(lang, opts) {
     syncSeoLang(lang);
     broadcastDemoLang(lang);
     if (typeof window.tukoEnsureHeroEmArc === 'function') window.tukoEnsureHeroEmArc();
+    if (typeof window.tukoHeroTitleRender === 'function') window.tukoHeroTitleRender({ instant: true });
+    if (typeof window.tukoHeroLiveRender === 'function') window.tukoHeroLiveRender();
     if (typeof window.tukoSyncWidgetGoals === 'function') window.tukoSyncWidgetGoals();
-    if (typeof window.tukoHeroLoopRender === 'function') window.tukoHeroLoopRender();
     if (typeof window.tukoWhyGroupRender === 'function') window.tukoWhyGroupRender();
     if (typeof window.tukoWhyRaceRender === 'function') window.tukoWhyRaceRender();
     if (typeof window.tukoCalcRender === 'function') window.tukoCalcRender();
+    if (typeof window.tukoDataCountSync === 'function') window.tukoDataCountSync();
   };
 
   if (!shouldMotion) {
@@ -7428,138 +7739,78 @@ document.addEventListener('DOMContentLoaded', () => {
   updateSpy();
 });
 
-/* ── Hero mockup: la campaña se llena sola (y el visitante puede unirse pulsando "Reservar") ── */
-(function () {
-  const mock = document.querySelector('.hero-mock');
-  if (!mock) return;
-  const hm = mock.querySelector('.hmock');
-  const elMissing = mock.querySelector('[data-i18n="hmock_missing"]');
-  const elCount = mock.querySelector('.hmock-count');
-  const elFill = mock.querySelector('.hmock-fill');
-  const elJoined = mock.querySelector('[data-i18n="hmock_joined"]');
-  const elPpl = mock.querySelector('.hmock-ppl');
-  const elBtn = mock.querySelector('.hmock-btn');
-  const chip = mock.querySelector('.hmock-chip');
-  const chipTxt = chip ? chip.querySelector('[data-i18n="hmock_chip"]') : null;
-  if (!hm || !elMissing || !elCount || !elFill || !elJoined || !elPpl || !elBtn || !chip || !chipTxt) return;
-
-  const GOAL = 10, START = 7, MAX_AVATARS = 5;
-  const NAMES = ['Marta', 'Lucía', 'Pablo', 'Sara', 'Hugo', 'Nerea'];
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let n = START, who = NAMES[0], done = false, nameIdx = 1, timer = 0;
-
-  const dict = () => translations[document.documentElement.lang] || translations.es;
-  const tpl = (key, vars) => {
-    let s = dict()[key] || '';
-    Object.keys(vars || {}).forEach(k => { s = s.split('{' + k + '}').join(vars[k]); });
-    return s;
-  };
-
-  function render() {
-    const t = dict();
-    const left = GOAL - n;
-    if (done) {
-      elMissing.innerHTML = t.hmock_done || '';
-      chipTxt.innerHTML = t.hmock_chip_done || '';
-      elBtn.innerHTML = t.hmock_btn_done || t.hmock_btn || '';
-    } else {
-      elMissing.innerHTML = left === 1 ? (t.hmock_missing_one || '') : tpl('hmock_missing_tpl', { n: left });
-      chipTxt.innerHTML = who === '__you__' ? (t.hmock_chip_you || '') : tpl('hmock_chip_tpl', { name: who });
-      elBtn.innerHTML = t.hmock_btn || '';
-    }
-    elCount.textContent = n + '/' + GOAL;
-    elJoined.innerHTML = tpl('hmock_joined_tpl', { n: n });
-    elFill.style.width = Math.round((n / GOAL) * 100) + '%';
-    hm.classList.toggle('is-done', done);
-    chip.classList.toggle('is-done', done);
-  }
-  window.tukoHeroLoopRender = render;
-
-  function pop(el, cls) {
-    el.classList.remove(cls);
-    void el.offsetWidth; /* reinicia la animación */
-    el.classList.add(cls);
-  }
-
-  function addAvatar() {
-    const a = document.createElement('i');
-    a.className = 'avat avat--new is-pop';
-    elPpl.insertBefore(a, elPpl.firstChild);
-    const avs = elPpl.querySelectorAll('.avat');
-    if (avs.length > MAX_AVATARS) avs[avs.length - 1].remove();
-  }
-
-  function schedule(ms) {
-    clearTimeout(timer);
-    if (reduce) return;
-    timer = setTimeout(() => { if (done) reset(); else join(false); }, ms);
-  }
-
-  function join(isYou) {
-    if (done) return;
-    n += 1;
-    who = isYou ? '__you__' : NAMES[nameIdx++ % NAMES.length];
-    if (n >= GOAL) { n = GOAL; done = true; }
-    addAvatar();
-    render();
-    pop(chip, 'is-pop');
-    schedule(done ? 3800 : 2300);
-  }
-
-  function reset() {
-    hm.classList.add('is-resetting');
-    setTimeout(() => {
-      n = START; done = false; who = NAMES[0];
-      elPpl.querySelectorAll('.avat').forEach(a => a.remove());
-      const em = elPpl.querySelector('em');
-      for (let i = 0; i < 4; i++) {
-        const a = document.createElement('i');
-        a.className = 'avat avat--new';
-        elPpl.insertBefore(a, em);
-      }
-      render();
-      hm.classList.remove('is-resetting');
-      schedule(2600);
-    }, 380);
-  }
-
-  elBtn.addEventListener('click', () => { if (!done) join(true); });
-  render();
-  if (!reduce) schedule(3200);
-})();
-
 /* ── Cifras del bloque de datos: cuentan desde 0 al entrar en pantalla ── */
 (function () {
-  const nums = document.querySelectorAll('.data-num');
+  const nums = document.querySelectorAll('.data-num[data-count]');
   if (!nums.length) return;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce || !('IntersectionObserver' in window)) return;
   const ease = t => 1 - Math.pow(1 - t, 3);
+  const suffix = () => (document.documentElement.lang === 'en' ? '%' : ' %');
+  const fmt = (v) => String(v) + suffix();
 
   function run(el) {
-    const raw = (el.getAttribute('data-count') || el.textContent || '').trim();
-    const target = parseInt(raw.replace(/[^\d]/g, ''), 10);
+    if (el.dataset.countBusy === '1') return;
+    const target = parseInt(el.getAttribute('data-count') || '0', 10);
     if (!isFinite(target)) return;
-    const suffix = document.documentElement.lang === 'en' ? '%' : ' %';
-    const fmt = v => String(v) + suffix;
-    const dur = 1300, t0 = performance.now();
+    el.dataset.countBusy = '1';
+    el.dataset.countPlayed = '1';
+    const dur = 1400, t0 = performance.now();
     el.textContent = fmt(0);
     const step = now => {
       const p = Math.min(1, (now - t0) / dur);
       el.textContent = fmt(Math.round(target * ease(p)));
       if (p < 1) requestAnimationFrame(step);
+      else {
+        el.setAttribute('aria-label', fmt(target));
+        el.dataset.countBusy = '0';
+      }
     };
     requestAnimationFrame(step);
+  }
+
+  function tryRun(el) {
+    if (el.dataset.countPlayed === '1') return;
+    const host = el.closest('.fade-up') || el.closest('.data-card') || el;
+    if (host.classList.contains('fade-up') && !host.classList.contains('visible')) return;
+    run(el);
+  }
+
+  window.tukoDataCountSync = function () {
+    nums.forEach(el => {
+      const target = parseInt(el.getAttribute('data-count') || '0', 10);
+      if (!isFinite(target)) return;
+      if (el.dataset.countPlayed === '1') {
+        el.textContent = fmt(target);
+        el.setAttribute('aria-label', fmt(target));
+      } else {
+        el.textContent = fmt(0);
+      }
+    });
+  };
+
+  if (!('IntersectionObserver' in window)) {
+    nums.forEach(run);
+    return;
   }
 
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
-      io.unobserve(e.target);
-      run(e.target);
+      const el = e.target.classList.contains('data-num')
+        ? e.target
+        : e.target.querySelector('.data-num[data-count]');
+      if (!el) return;
+      const host = el.closest('.fade-up');
+      if (host) host.classList.add('visible');
+      tryRun(el);
     });
-  }, { threshold: 0.35 });
-  nums.forEach(el => io.observe(el));
+  }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+  nums.forEach(el => {
+    el.textContent = fmt(0);
+    const host = el.closest('.fade-up') || el.closest('.data-card') || el;
+    io.observe(host);
+    host.addEventListener('tuko:visible', () => tryRun(el));
+  });
 })();
 
 /* ── Calculadora de precios: coste mensual por plan según lo vendido con Tuko (tope aplicado) ── */
@@ -7662,7 +7913,7 @@ document.addEventListener('DOMContentLoaded', () => {
   update();
 })();
 </script>
-<script src="/assets/js/ga4-loader.js" defer></script>
-<script src="/assets/js/local-landing-label.js"></script>
+<script src="../assets/js/ga4-loader.js" defer></script>
+<script src="../assets/js/local-landing-label.js"></script>
 </body>
 </html>

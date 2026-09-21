@@ -7398,7 +7398,7 @@ function initDemoIframeVisibility() {
 /* Idioma: path /en gana; si no, ?lang; si no, localStorage. */
 function resolveLang() {
   var path = (location.pathname || '').replace(/\/$/, '') || '/';
-  if (path === '/en' || path.indexOf('/en/') === 0) return 'en';
+  if (path === '/en' || path.indexOf('/en/') === 0 || /(^|\/)en(\/|$)/.test(path)) return 'en';
   var q = new URLSearchParams(location.search).get('lang');
   if (q === 'es' || q === 'en') return q;
   return localStorage.getItem('tuko_lang') || 'es';
