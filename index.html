@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="es" data-url-es="https://tukoteam.com/" data-url-en="https://tukoteam.com/en/">
 <head>
+<script>
+(function () {
+  var nav = window.performance && performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+  var legacy = window.performance && performance.navigation ? performance.navigation.type : 0;
+  window.__tukoNavType = nav ? nav.type : (legacy === 1 ? 'reload' : legacy === 2 ? 'back_forward' : 'navigate');
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (window.__tukoNavType === 'reload' && location.hash) history.replaceState(null, '', location.pathname + location.search);
+})();
+</script>
 <!-- ═══ SEO: Charset & Viewport ═══ -->
 <!-- tuko-deploy: 2026-09-06-source-gap-56 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <!-- ═══ SEO: Title & Description ═══ -->
-<title>Tuko · Descuentos por objetivo para tiendas Shopify</title>
-<meta name="description" content="Pon un objetivo de unidades sobre un producto: si se alcanza, el precio baja para todos. Vende más sin regalar margen. App de compra colectiva para Shopify.">
+<title>Tuko · Un cliente entra. Trae a otro. Los dos compran.</title>
+<meta name="description" content="Tuko pone un botón en tus productos. Quien lo pulsa paga con descuento y tiene 24 horas para atraer a un comprador más.">
 
 <!-- ═══ SEO: Canonical & Robots ═══ -->
 <link rel="canonical" href="https://tukoteam.com/">
@@ -31,12 +40,12 @@
 <!-- ═══ SEO: Open Graph ═══ -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tukoteam.com/">
-<meta property="og:title" content="Tuko · Descuentos por objetivo para tiendas Shopify">
-<meta property="og:description" content="Pon un objetivo de unidades sobre un producto: si se alcanza, el precio baja para todos. Vende más sin regalar margen. App de compra colectiva para Shopify.">
+<meta property="og:title" content="Tuko · Un cliente entra. Trae a otro. Los dos compran.">
+<meta property="og:description" content="Tuko pone un botón en tus productos. Quien lo pulsa paga con descuento y tiene 24 horas para atraer a un comprador más.">
 <meta property="og:image" content="https://tukoteam.com/assets/og-image-v8.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Tuko · Un botón y tus clientes empiezan a vender por ti">
+<meta property="og:image:alt" content="Tuko · Un cliente entra. Trae a otro. Los dos compran.">
 <meta property="og:locale" content="es_ES">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:site_name" content="Tuko">
@@ -45,10 +54,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@tuko_app">
 <meta name="twitter:creator" content="@tuko_app">
-<meta name="twitter:title" content="Tuko · Descuentos por objetivo para tiendas Shopify">
-<meta name="twitter:description" content="Pon un objetivo de unidades sobre un producto: si se alcanza, el precio baja para todos. Vende más sin regalar margen. App de compra colectiva para Shopify.">
+<meta name="twitter:title" content="Tuko · Un cliente entra. Trae a otro. Los dos compran.">
+<meta name="twitter:description" content="Tuko pone un botón en tus productos. Quien lo pulsa paga con descuento y tiene 24 horas para atraer a un comprador más.">
 <meta name="twitter:image" content="https://tukoteam.com/assets/og-image-v8.png">
-<meta name="twitter:image:alt" content="Tuko · Un botón y tus clientes empiezan a vender por ti">
+<meta name="twitter:image:alt" content="Tuko · Un cliente entra. Trae a otro. Los dos compran.">
 
 <!-- ═══ SEO: Favicon (SVG+PNG barras azules; apple-touch aparte para iOS) ═══ -->
 <link rel="icon" href="assets/favicon.png?v=5" sizes="32x32" type="image/png">
@@ -115,7 +124,7 @@
         "width": 200,
         "height": 60
       },
-      "description": "Descuentos por objetivo para tiendas Shopify. Pon un objetivo de unidades: si se alcanza, el precio baja para todos. App de compra colectiva para Shopify.",
+      "description": "Tuko pone un botón en tus productos. Quien lo pulsa paga con descuento y tiene 24 horas para atraer a un comprador más.",
       "email": "team.tukoo@gmail.com",
       "foundingDate": "2025",
       "areaServed": { "@type": "Country", "name": "España" },
@@ -127,7 +136,7 @@
       "@id": "https://tukoteam.com/#website",
       "url": "https://tukoteam.com/",
       "name": "Tuko",
-      "description": "Descuentos por objetivo para tiendas Shopify en España",
+      "description": "Tuko pone un botón en tus productos. Quien lo pulsa paga con descuento y tiene 24 horas para atraer a un comprador más.",
       "publisher": { "@id": "https://tukoteam.com/#organization" },
       "inLanguage": "es-ES",
       "potentialAction": {
@@ -139,12 +148,12 @@
     {
       "@type": "SoftwareApplication",
       "@id": "https://tukoteam.com/#app",
-      "name": "Tuko — Descuentos por objetivo para Shopify",
+      "name": "Tuko — Un cliente entra. Trae a otro. Los dos compran.",
       "alternateName": ["Tuko Campaigns", "Tuko Plugin Shopify"],
       "applicationCategory": "BusinessApplication",
       "applicationSubCategory": "E-commerce Plugin",
       "operatingSystem": "Shopify",
-      "description": "Descuentos por objetivo para tiendas Shopify. Pon un objetivo de unidades: si se alcanza, el precio baja para todos. Vende más sin regalar margen.",
+      "description": "Tuko pone un botón en tus productos. Quien lo pulsa paga con descuento y tiene 24 horas para atraer a un comprador más.",
       "featureList": [
         "Descuentos escalonados por objetivo de unidades",
         "Campañas de descuento condicionadas",
@@ -161,7 +170,7 @@
         "@type": "Offer",
         "url": "https://tukoteam.com/tuko-ai#cta",
         "priceCurrency": "EUR",
-        "description": "App de descuentos por objetivo para tiendas Shopify",
+        "description": "Tuko pone un botón en tus productos. Quien lo pulsa paga con descuento y tiene 24 horas para atraer a un comprador más.",
         "availability": "https://schema.org/PreOrder"
       },
       "publisher": { "@id": "https://tukoteam.com/#organization" },
@@ -173,7 +182,7 @@
       "name": "Tuko — Plugin de Compras Colectivas",
       "alternateName": ["Group Buying Shopify", "Compra Colectiva Shopify"],
       "serviceType": "Plugin de Ecommerce / Group Buying",
-      "description": "Plugin B2B de compras colectivas para tiendas Shopify en España. Activa descuentos escalonados por grupo, genera viralidad orgánica y aumenta ventas sin invertir más en publicidad.",
+      "description": "Tuko pone un botón en tus productos. Quien lo pulsa paga con descuento y tiene 24 horas para atraer a un comprador más.",
       "url": "https://tukoteam.com/",
       "provider": { "@id": "https://tukoteam.com/#organization" },
       "areaServed": [
@@ -196,7 +205,7 @@
           {
             "@type": "Offer",
             "name": "Acceso Anticipado Tuko",
-            "description": "Regístrate en la lista de espera y sé de los primeros en activar campañas Tuko en tu tienda Shopify en España.",
+            "description": "Tuko pone un botón en tus productos. Quien lo pulsa paga con descuento y tiene 24 horas para atraer a un comprador más.",
             "url": "https://tukoteam.com/tuko-ai#cta",
             "availability": "https://schema.org/PreOrder",
             "priceCurrency": "EUR"
@@ -628,6 +637,18 @@
     box-shadow: 0 2px 10px rgba(20, 24, 38, 0.04);
     opacity: 1;
   }
+  .hero-pilot-note {
+    display: block;
+    width: 100%;
+    text-align: center;
+    line-height: 1.2;
+    font-size: 11.5px;
+    font-weight: 600;
+    font-stretch: semi-expanded;
+    letter-spacing: -0.01em;
+    color: var(--gray-4);
+    margin: 0 0 10px;
+  }
   .badge-xiji {
     display: flex;
     align-items: center;
@@ -841,6 +862,21 @@
   }
   .hero-trust span { display: inline-flex; align-items: center; }
   .hero-trust em { font-style: normal; }
+  .hero-appstore {
+    margin: 18px 0 0;
+    font-size: 13px;
+    font-weight: 450;
+    font-stretch: normal;
+    line-height: 1.3;
+  }
+  .hero-appstore a {
+    color: var(--gray-4);
+    text-decoration: underline;
+    text-decoration-color: rgba(26, 26, 26, 0.18);
+    text-underline-offset: 3px;
+    transition: color 0.2s, text-decoration-color 0.2s;
+  }
+  .hero-appstore a:hover { color: var(--black); text-decoration-color: currentColor; }
   .hero-trust-dot { display: none; }
 
   .sr-only {
@@ -1461,6 +1497,43 @@
     line-height: 1.65;
     color: var(--gray-4);
   }
+  .pricing-legal + .pricing-legal { margin-top: -16px; }
+  .pricing-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pricing-rec-corner {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 10px;
+    font-weight: 600;
+    font-stretch: semi-expanded;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: rgba(66, 87, 255, 0.08);
+    border: 1px solid rgba(66, 87, 255, 0.18);
+    border-radius: 999px;
+    padding: 3px 9px;
+  }
+  .pricing-card.is-soon { background: #f4f5f7; border-color: rgba(0, 0, 0, 0.08); }
+  .pricing-card.is-soon > :not(.pricing-ribbon) { filter: grayscale(1); opacity: 0.55; }
+  .pricing-ribbon { text-transform: none; letter-spacing: 0; line-height: 1.35; }
+  .pricing-card.is-gift,
+  .pricing-card.is-gift:hover,
+  .pricing-card.is-gift.fade-up.visible:hover {
+    background: #fff;
+    border: 2px solid var(--blue);
+  }
+  .pricing-card.is-gift {
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.9) inset,
+      0 18px 44px rgba(66, 87, 255, 0.16);
+    z-index: 2;
+  }
+  .pricing-card.is-gift .pricing-features li,
+  .pricing-card.is-gift .pricing-period { color: var(--black); }
+  .pricing-features li.is-no::after { display: none; }
+  .pricing-cta[aria-disabled="true"] { cursor: default; pointer-events: none; }
   .pricing-links {
     display: flex;
     flex-wrap: wrap;
@@ -2061,6 +2134,137 @@
     transition: color 0.2s ease;
   }
   .data-src a:hover { color: var(--black); }
+  .noreq-grid {
+    --noreq-gap: clamp(12px, 1.6vw, 18px);
+    list-style: none;
+    margin: clamp(26px, 3vw, 34px) auto 0;
+    padding: 0;
+    max-width: 960px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--noreq-gap);
+    text-align: left;
+  }
+  .noreq-tile {
+    flex: 0 1 calc((100% - 2 * var(--noreq-gap)) / 3);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: clamp(20px, 2.4vw, 26px);
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 20px;
+    box-shadow: var(--shadow-card);
+  }
+  .noreq-ic {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba(66, 87, 255, 0.09);
+    color: var(--blue);
+    flex: 0 0 auto;
+  }
+  .noreq-tile p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 300;
+    font-stretch: normal;
+    line-height: 1.45;
+    color: var(--gray-4);
+  }
+  .noreq-tile p b {
+    display: block;
+    margin-bottom: 2px;
+    font-weight: 700;
+    font-stretch: semi-expanded;
+    letter-spacing: -0.015em;
+    color: var(--black);
+  }
+  .pilot-asks {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: clamp(24px, 3.4vw, 40px);
+    border-radius: 28px;
+    background: linear-gradient(180deg, rgba(66, 87, 255, 0.07), rgba(66, 87, 255, 0.02));
+    border: 1px solid rgba(66, 87, 255, 0.12);
+  }
+  .pilot-asks-title { max-width: none; margin: 0 auto clamp(18px, 2.4vw, 26px); text-align: center; }
+  .pilot-asks-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(12px, 1.6vw, 18px);
+    text-align: left;
+  }
+  .pilot-ask {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: clamp(20px, 2.4vw, 26px);
+    background: #fff;
+    border: 1.5px solid rgba(0, 0, 0, 0.06);
+    border-radius: 20px;
+    opacity: 0.45;
+    filter: grayscale(1);
+    transform: translateY(6px);
+    transition: opacity 1.1s cubic-bezier(0.4, 0, 0.2, 1), filter 1.1s cubic-bezier(0.4, 0, 0.2, 1), transform 1.1s cubic-bezier(0.22, 1, 0.36, 1), border-color 1.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 1.1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .pilot-ask-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(66, 87, 255, 0.09);
+    color: var(--blue);
+    font-size: 15px;
+    font-weight: 800;
+    font-stretch: semi-expanded;
+    transition: background 1.1s cubic-bezier(0.4, 0, 0.2, 1), color 1.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 1.1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .pilot-ask p {
+    transition: color 1.1s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 0;
+    font-size: 16px;
+    font-weight: 300;
+    font-stretch: normal;
+    line-height: 1.45;
+    color: var(--gray-4);
+  }
+  .pilot-ask.is-lit {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    border-color: var(--blue);
+    box-shadow: 0 14px 36px rgba(66, 87, 255, 0.16);
+  }
+  .pilot-ask.is-lit .pilot-ask-num {
+    background: var(--blue);
+    color: #fff;
+    box-shadow: 0 0 0 4px rgba(66, 87, 255, 0.16);
+  }
+  .pilot-ask.is-lit p { color: var(--black); }
+  @media (prefers-reduced-motion: reduce) {
+    .pilot-ask,
+    .pilot-ask-num { transition: none; }
+    .pilot-ask {
+      opacity: 1;
+      filter: none;
+      transform: none;
+      border-color: var(--blue);
+      box-shadow: 0 14px 36px rgba(66, 87, 255, 0.16);
+    }
+    .pilot-ask .pilot-ask-num { background: var(--blue); color: #fff; box-shadow: 0 0 0 4px rgba(66, 87, 255, 0.16); }
+    .pilot-ask p { color: var(--black); }
+  }
   @media (max-width: 960px) {
     .data { padding: 64px 18px 40px; }
     .data-sub { font-size: 17px; }
@@ -2071,6 +2275,11 @@
     .data-side-title { max-width: none; }
     .data-side-sub { max-width: none; }
     .data-foot { font-size: 16px; }
+    .noreq-tile { flex-basis: calc((100% - var(--noreq-gap)) / 2); }
+    .pilot-asks-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .noreq-tile { flex-basis: 100%; flex-direction: row; align-items: flex-start; }
   }
 
   /* ══════════════════════════════
@@ -2297,10 +2506,12 @@
   }
 
   /* Paso 3: mockup teléfono (grupo completado) */
-  .how-steps > .how-step:nth-child(3) {
+  .how-steps > .how-step:nth-child(3),
+  .how-steps > .how-step:nth-child(4) {
     grid-template-columns: minmax(220px, 1fr) minmax(280px, 1fr);
   }
-  .how-steps > .how-step:nth-child(3) .how-anim-box {
+  .how-steps > .how-step:nth-child(3) .how-anim-box,
+  .how-steps > .how-step:nth-child(4) .how-anim-box {
     width: min(420px, 100%);
     max-width: 420px;
   }
@@ -2364,7 +2575,7 @@
 
   /* Paso 2 — reservar piruleta (formato móvil) */
   .how-steps > .how-step:nth-child(2) .how-anim-box--embed {
-    aspect-ratio: 9 / 15.2;
+    aspect-ratio: 9 / 13.4;
   }
 
   /* Paso 3 — grupo completado (casi cuadrado) */
@@ -2372,9 +2583,9 @@
     aspect-ratio: 1 / 1.08;
   }
 
-  /* Paso 4 — estadísticas */
+  /* Paso 4 — el grupo se repite (mismo formato que el paso 3) */
   .how-steps > .how-step:nth-child(4) .how-anim-box--embed {
-    aspect-ratio: 9 / 11.2;
+    aspect-ratio: 1 / 1.08;
   }
 
   /* Iframe a relleno estable (Safari / iOS: height 100% en flex) */
@@ -2517,6 +2728,18 @@
   }
   .why-row.reversed > .why-text   { order: 2; }
   .why-row.reversed > .why-visual { order: 1; }
+  .why-row { position: relative; }
+  .why-row::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(clamp(64px, 8vw, 112px) / -2);
+    height: 1px;
+    background: linear-gradient(90deg, rgba(26, 26, 26, 0), rgba(26, 26, 26, 0.07) 20%, rgba(26, 26, 26, 0.07) 80%, rgba(26, 26, 26, 0));
+    pointer-events: none;
+  }
+  .why-row:first-child::before { top: calc(clamp(56px, 7vw, 96px) / -2); }
   .why-text { text-align: left; min-width: 0; }
   .why-kicker {
     display: inline-flex;
@@ -3153,6 +3376,8 @@
     .why { padding: 64px 16px 72px; }
     .why-intro { margin-bottom: 40px; }
     .why-rows { gap: 56px; }
+    .why-row::before { top: -28px; }
+    .why-row:first-child::before { top: -20px; }
     .why-row,
     .why-row.reversed {
       grid-template-columns: 1fr;
@@ -3197,7 +3422,7 @@
     margin: 0 auto;
     width: 100%;
     max-width: 1100px;
-    padding: 84px 40px 100px;
+    padding: 60px 40px 68px;
     text-align: center;
   }
   .final-cta-wrap {
@@ -3225,7 +3450,7 @@
     background: #fff;
     border-radius: 999px;
     padding: 7px 14px 7px 11px;
-    margin-bottom: 24px;
+    margin-bottom: 18px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
   }
   .final-cta-eyebrow i {
@@ -3264,7 +3489,7 @@
     line-height: var(--title-lh);
     letter-spacing: var(--title-spacing);
     color: #fff;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
   }
   .final-cta h2 em {
     font-family: 'Roboto Serif', Georgia, serif;
@@ -3279,7 +3504,7 @@
     color: rgba(255,255,255,0.82);
     line-height: 1.65;
     max-width: 580px;
-    margin: 0 auto 48px;
+    margin: 0 auto 30px;
   }
   .final-cta-btn {
     display: inline-flex;
@@ -3314,7 +3539,7 @@
     justify-content: center;
     gap: 0;
     flex-wrap: wrap;
-    margin-top: 32px;
+    margin-top: 22px;
     font-size: 13px;
     font-weight: 400;
     font-stretch: normal;
@@ -3367,9 +3592,9 @@
       min-height: calc(100svh - 64px);
       padding: 36px 16px 48px;
     }
-    .final-cta { padding: 60px 20px 76px; border-radius: 22px; }
+    .final-cta { padding: 44px 20px 52px; border-radius: 22px; }
     .final-cta #ctaCanvas { opacity: 0.4; }
-    .final-cta > .final-cta-inner > p { margin-bottom: 40px; }
+    .final-cta > .final-cta-inner > p { margin-bottom: 26px; }
     .final-cta-btn {
       width: 100%;
       max-width: 280px;
@@ -3380,7 +3605,7 @@
     .final-cta-trust {
       flex-direction: column;
       gap: 10px;
-      margin-top: 28px;
+      margin-top: 20px;
     }
     .final-cta-trust span + span::before { display: none; }
     .final-cta-shopify { margin-top: 14px; }
@@ -3479,6 +3704,27 @@
     transition: background 0.2s, transform 0.15s;
   }
   .btn-submit:hover { background: #111; transform: translateY(-1px); }
+  .btn-submit:disabled { opacity: 0.6; cursor: default; transform: none; }
+  .cta-status { margin: 10px 0 0; font-size: 14px; font-weight: 500; line-height: 1.45; color: #fff; }
+  .final-cta .cta-form { width: 100%; }
+  .final-cta .cta-field { gap: 4px; margin-bottom: 2px; }
+  .cta-field-error {
+    display: flex; align-items: center; gap: 6px;
+    margin: 2px 0 0;
+    font-size: 12px; font-weight: 600; line-height: 1.35;
+    font-stretch: normal;
+    color: #fff;
+    text-align: left;
+  }
+  .cta-field-error[hidden] { display: none; }
+  .cta-field-error::before {
+    content: "";
+    flex: 0 0 auto;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #FFB4B4;
+  }
+  .cta-input[aria-invalid="true"] { box-shadow: 0 0 0 2px #FFB4B4; }
 
   /* ══════════════════════════════
      FOOTER
@@ -3620,6 +3866,22 @@
   .pricing-card.fade-up.d2 { transition-delay: 0.18s, 0s, 0s, 0s; }
   .pricing-card.fade-up.d3 { transition-delay: 0.28s, 0s, 0s, 0s; }
   .pricing-card.fade-up.d4 { transition-delay: 0.38s, 0s, 0s, 0s; }
+  .rescue-card.fade-up {
+    transition:
+      opacity 0.55s ease,
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.55s ease;
+  }
+  .rescue-card.fade-up.d3 { transition-delay: 0.28s, 0s, 0s, 0s; }
+  .rescue-card.fade-up.d5 { transition-delay: 0.48s, 0s, 0s, 0s; }
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .rescue-card.fade-up.visible:hover {
+      transform: translateY(-3px);
+      border-color: rgba(20, 196, 146, 0.36);
+      box-shadow: var(--shadow-lift);
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
     .fade-up {
       opacity: 1 !important;
@@ -3861,7 +4123,8 @@
     }
     .how-step,
     .how-step.reversed,
-    .how-steps > .how-step:nth-child(3) {
+    .how-steps > .how-step:nth-child(3),
+    .how-steps > .how-step:nth-child(4) {
       grid-template-columns: 1fr;
       min-height: unset;
       gap: 12px;
@@ -3919,7 +4182,8 @@
       max-width: 420px;
       margin-inline: auto;
     }
-    .how-steps > .how-step:nth-child(3) .how-anim-box {
+    .how-steps > .how-step:nth-child(3) .how-anim-box,
+    .how-steps > .how-step:nth-child(4) .how-anim-box {
       width: 100%;
       max-width: 520px;
     }
@@ -3929,7 +4193,7 @@
     }
     .how-step-iframe { min-height: 0; }
     /* En móvil: paso 2 formato teléfono */
-    .how-steps > .how-step:nth-child(2) .how-anim-box--embed { aspect-ratio: 9 / 15.2; }
+    .how-steps > .how-step:nth-child(2) .how-anim-box--embed { aspect-ratio: 9 / 13.4; }
     /* Paso 3 móvil: casi cuadrado */
     .how-steps > .how-step:nth-child(3) .how-anim-box--embed {
       aspect-ratio: 1 / 1.08;
@@ -3940,7 +4204,7 @@
       height: auto;
       aspect-ratio: 1 / 1.08;
     }
-    .how-steps > .how-step:nth-child(4) .how-anim-box--embed { aspect-ratio: 9 / 12.8; }
+    .how-steps > .how-step:nth-child(4) .how-anim-box--embed { aspect-ratio: 1 / 1.08; }
 
     .how-intro { padding: 28px 16px 18px; }
 
@@ -3989,9 +4253,9 @@
     .hero-sky {
       min-height: 100svh;
       min-height: 100dvh;
-      padding: calc(84px + env(safe-area-inset-top, 0px)) 16px max(48px, env(safe-area-inset-bottom, 0px));
+      padding: calc(72px + env(safe-area-inset-top, 0px)) 16px max(32px, env(safe-area-inset-bottom, 0px));
     }
-    .hero-copy { padding-top: 12px; }
+    .hero-copy { padding-top: 4px; }
     .hero h1 {
       font-size: clamp(30px, 8.4vw, 44px);
       overflow-wrap: normal;
@@ -4008,18 +4272,22 @@
       text-align: center;
       max-width: 46ch;
       width: 100%;
+      margin-top: 28px;
     }
     .hero-actions {
       flex-direction: column;
-      gap: 10px;
+      gap: 16px;
+      margin-top: 34px;
       width: 100%;
       align-items: center;
     }
     .hero-trust {
       justify-content: center;
       gap: 6px 14px;
+      margin-top: 20px;
       font-size: 12.5px;
     }
+    .hero-appstore { margin-top: 22px; font-size: 12.5px; }
     .hero-trust-dot { display: none; }
     .hero-actions .btn-blue {
       width: 100%;
@@ -4040,9 +4308,13 @@
       justify-content: center;
       align-items: center;
       padding: 6px 12px 6px 8px;
-      margin-bottom: 20px;
+      margin-bottom: 28px;
       font-size: 11.5px;
       letter-spacing: -0.005em;
+    }
+    .hero-pilot-note {
+      font-size: 10.5px;
+      margin-bottom: 12px;
     }
     .btn-blue {
       width: 100%;
@@ -4249,14 +4521,6 @@
 
 <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:4px;z-index:9999;padding:8px 16px;background:#3D50F2;color:#fff;font-weight:600;border-radius:6px;text-decoration:none;" onfocus="this.style.left='4px'" onblur="this.style.left='-9999px'" data-i18n="skip_link">Ir al contenido principal</a>
 <!-- NAV -->
-<!-- Formulario oculto para que Netlify lo detecte en el deploy -->
-<form name="contacto-tuko" netlify netlify-honeypot="bot-field" hidden>
-  <input type="text" name="bot-field">
-  <input type="email" name="email">
-  <input type="text" name="name">
-  <input type="text" name="business">
-</form>
-
 <header role="banner">
 <nav aria-label="Navegación principal">
   <a href="#" class="nav-logo">
@@ -4268,7 +4532,7 @@
     <li><a href="#precios" data-i18n="nav_link_precios">Precios</a></li>
     <li><a href="blog/index.html" data-i18n="nav_link_blog">Blog</a></li>
     <li><a href="tuko-ai.html" data-i18n="nav_link_ia">tuko AI</a></li>
-    <li><a href="https://apps.shopify.com/tuko?locale=es&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="nav-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Instalar gratis</a></li>
+    <li><a href="#solicitud" class="nav-cta" data-i18n="nav_cta">Acceder al piloto</a></li>
   </ul>
   <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false">
     <span></span><span></span><span></span>
@@ -4316,9 +4580,9 @@
       </button>
     </div>
   </div>
-  <a href="https://apps.shopify.com/tuko?locale=es&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="mobile-cta" target="_blank" rel="noopener">
+  <a href="#solicitud" class="mobile-cta">
     <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-    <span data-i18n="nav_cta">Instalar gratis</span>
+    <span data-i18n="nav_cta">Acceder al piloto</span>
   </a>
 </div>
 
@@ -4334,6 +4598,9 @@
     <div class="hero-veil" aria-hidden="true"></div>
     <canvas id="heroCanvas"></canvas>
     <div class="hero-copy">
+      <div class="hero-pilot-note">
+        <span data-i18n="hero_badge_pilot">Plan piloto · 5 plazas · 45 días gratis</span>
+      </div>
       <div class="badge">
         <span class="badge-xiji" aria-hidden="true">
           <img src="assets/images/xiji-x-mark.png" alt="" width="18" height="18" decoding="async">
@@ -4343,36 +4610,33 @@
       <h1 class="hero-title" data-lang="es">
         <span class="hero-line">
           <span class="hero-word">Un</span>
-          <span class="hero-word">botón</span>
-          <span class="hero-word">y</span>
-          <span class="hero-word">tus</span>
+          <span class="hero-word">cliente</span>
+          <span class="hero-word">entra.</span>
         </span>
         <span class="hero-line">
-          <span class="hero-word">clientes</span>
-          <span class="hero-word">empiezan</span>
-        </span>
-        <span class="hero-line">
+          <span class="hero-word">Trae</span>
           <span class="hero-word">a</span>
-          <span class="hero-accent">vender<span class="hero-accent-line" aria-hidden="true"><svg viewBox="0 0 120 14" preserveAspectRatio="none"><defs><linearGradient id="tukoHeroShineGrad" gradientUnits="userSpaceOnUse" x1="-120" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.28" stop-color="#e8eeff" stop-opacity="0.05"/><stop offset="0.45" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0.42"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="0.72" stop-color="#e8eeff" stop-opacity="0.05"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs><path class="hero-accent-base" d="M4 10.5 Q60 3.2 116 10.5"/><path class="hero-accent-glow" d="M4 10.5 Q60 3.2 116 10.5"/></svg></span></span>
-          <span class="hero-word">por</span>
-          <span class="hero-word">ti</span>
+          <span class="hero-word">otro.</span>
+        </span>
+        <span class="hero-line">
+          <span class="hero-word">Los</span>
+          <span class="hero-word">dos</span>
+          <span class="hero-accent">compran.<span class="hero-accent-line" aria-hidden="true"><svg viewBox="0 0 120 14" preserveAspectRatio="none"><defs><linearGradient id="tukoHeroShineGrad" gradientUnits="userSpaceOnUse" x1="-120" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.28" stop-color="#e8eeff" stop-opacity="0.05"/><stop offset="0.45" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0.42"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="0.72" stop-color="#e8eeff" stop-opacity="0.05"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs><path class="hero-accent-base" d="M4 10.5 Q60 3.2 116 10.5"/><path class="hero-accent-glow" d="M4 10.5 Q60 3.2 116 10.5"/></svg></span></span>
         </span>
       </h1>
-      <p data-i18n="hero_subtitle">Se unen al grupo del producto y, cuando se llena, el precio baja para todos. Lo llenan ellos, no tu presupuesto de anuncios.</p>
+      <p data-i18n="hero_subtitle">Tuko pone un botón en tus productos. Quien lo pulsa paga con descuento y tiene 24 horas para atraer a un comprador más.</p>
       <div class="hero-actions">
-        <a href="https://apps.shopify.com/tuko?locale=es&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="btn-blue" target="_blank" rel="noopener">
-          <span data-i18n="hero_cta">Instalar gratis en Shopify</span>
+        <a href="#solicitud" class="btn-blue">
+          <span data-i18n="hero_cta">Quiero una de las 5 plazas</span>
           <span class="hero-cta-arrow" aria-hidden="true">→</span>
         </a>
         <a href="#como-funciona" class="btn-ghost">
           <span data-i18n="hero_cta2">Ver cómo funciona</span>
         </a>
       </div>
+      <div class="hero-appstore"><a href="https://apps.shopify.com/tuko?locale=es&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" target="_blank" rel="noopener" data-i18n="hero_appstore">Disponible en la Shopify App Store</a></div>
       <div class="hero-trust">
-        <div class="hero-live-avatars" id="heroLiveAvatars" aria-hidden="true"></div>
-        <span class="hero-live-line" id="heroLiveLine">3 de 10 ya en el grupo</span>
-        <span class="hero-live-sep" aria-hidden="true"></span>
-        <span class="hero-trust-note" data-i18n="hero_trust_note">Instalación en 2 minutos · gratis hasta que vendas</span>
+        <span class="hero-trust-note" data-i18n="hero_trust_note">Sin tarjeta. Sin permanencia. Sin comisiones.</span>
       </div>
     </div>
   </div>
@@ -4413,7 +4677,7 @@
   <div class="data-inner">
     <div class="fade-up"><span class="data-trigger" data-i18n="data_trigger">Antes de lanzar otro -20 %, mira esto.</span></div>
     <h2 class="s-title data-headline fade-up d1" data-i18n="data_title">El descuento no debería regalar margen. <span class="title-accent-red">Debería traer clientes nuevos.</span></h2>
-    <p class="data-sub fade-up d2" data-i18n="data_sub">Compara los dos modelos antes de activar tu próxima campaña.</p>
+    <p class="data-sub fade-up d2" data-i18n="data_sub">Compara los dos modelos antes de activar tu campaña.</p>
     <div class="data-compare fade-up d3">
       <article class="data-card data-card--bad">
         <div class="data-card-head">
@@ -4461,11 +4725,11 @@
 <!-- HOW IT WORKS — INTRO -->
 <section class="how-intro" id="como-funciona">
   <div class="fade-up"><span class="s-badge" data-i18n="how_badge">Cómo funciona</span></div>
-  <h2 class="s-title fade-up d1" data-i18n="how_title">Un descuento con condiciones.<br>Las <span class="how-title-underline">tuyas</span></h2>
-  <p class="s-sub fade-up d2" data-i18n="how_sub">Tú fijas el descuento, la meta y la fecha. Si no se cumple, no existe. Y todo pasa dentro de tu tienda.</p>
+  <h2 class="s-title fade-up d1" data-i18n="how_title">Así es como funciona</h2>
+  <p class="s-sub fade-up d2" data-i18n="how_sub">Tú fijas el descuento, la meta y la fecha. Se inicia cuando el primero se une y tiene 24 horas para meter a otra persona.</p>
 </section>
 
-<!-- HOW IT WORKS — STEPS (3 pasos) -->
+<!-- HOW IT WORKS — STEPS (4 pasos) -->
 <section class="how-steps">
 
   <!-- PASO 1: Activar Tuko — texto izq, visual dcha -->
@@ -4474,12 +4738,12 @@
       <div class="how-step-meta">
         <span class="how-step-num" aria-hidden="true">01</span>
       </div>
-      <h3 class="how-step-title" data-i18n="step1_title">Eliges producto, descuento y meta</h3>
-      <p class="how-step-desc" data-i18n="step1_desc">Por ejemplo: −20 % si 10 personas reservan antes del viernes.</p>
+      <h3 class="how-step-title" data-i18n="step1_title">Elige producto y descuento</h3>
+      <p class="how-step-desc" data-i18n="step1_desc">Elige un producto o todos los que quieras de tu catálogo. Decides el descuento y solo se aplica cuando hay 2 personas.</p>
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/01-activar-compra/index.html?v=20260918c" title="Demo: publicar el grupo en la tienda" loading="eager"></iframe>
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/01-activar-compra/index.html?v=20260930g" title="Demo: publicar el grupo en la tienda" loading="eager"></iframe>
       </div>
     </div>
   </div>
@@ -4490,12 +4754,12 @@
       <div class="how-step-meta">
         <span class="how-step-num" aria-hidden="true">02</span>
       </div>
-      <h3 class="how-step-title" data-i18n="step2_title">Tus clientes compran y entran al grupo</h3>
-      <p class="how-step-desc" data-i18n="step2_desc">Compran en tu tienda y ya están dentro. Luego comparten para llegar a la meta.</p>
+      <h3 class="how-step-title" data-i18n="step2_title">Un cliente abre el grupo</h3>
+      <p class="how-step-desc" data-i18n="step2_desc">Paga con el descuento ya aplicado y tiene 24 horas para traer a una persona más. La comparte por WhatsApp o la trae tu propio tráfico.</p>
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/06-reservar-piruleta/index.html?v=20260917d" title="Demo: comprar el producto y compartir" loading="eager"></iframe>
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/06-reservar-piruleta/index.html?v=20260930g" title="Demo: comprar el producto y compartir" loading="eager"></iframe>
       </div>
     </div>
   </div>
@@ -4506,16 +4770,51 @@
       <div class="how-step-meta">
         <span class="how-step-num" aria-hidden="true">03</span>
       </div>
-      <h3 class="how-step-title" data-i18n="step3_title">Si se llega a la meta a tiempo, se aplica la rebaja</h3>
-      <p class="how-step-desc" data-i18n="step3_desc">Si no se llega, tendrás clientes que ya sabes que quieren el producto, <span class="how-retarget-underline">listos para un retargeting</span>.</p>
+      <h3 class="how-step-title" data-i18n="step3_title">Ya hay una persona dentro. Se une la segunda</h3>
+      <p class="how-step-desc" data-i18n="step3_desc">Cuando se une la segunda persona, el grupo se completa, se ejecuta el pedido y Tuko abre un grupo nuevo. El botón nunca se apaga.</p>
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/07-grupo-completado/index.html?v=20260917b" title="Demo: grupo completado y estadísticas" loading="eager"></iframe>
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/07-grupo-completado/index.html?v=20260930g" title="Demo: grupo completado y estadísticas" loading="eager"></iframe>
       </div>
     </div>
   </div>
 
+  <!-- PASO 4: El grupo se repite — visual izq, texto dcha -->
+  <div class="how-step reversed fade-up">
+    <div class="how-step-text">
+      <div class="how-step-meta">
+        <span class="how-step-num" aria-hidden="true">04</span>
+      </div>
+      <h3 class="how-step-title" data-i18n="step4_title">Se completa y Tuko abre otro grupo</h3>
+      <p class="how-step-desc" data-i18n="step4_desc">Cuando el grupo se completa, se ejecutan los pedidos y, a los 5 minutos, Tuko publica un grupo nuevo vacío, listo para el siguiente cliente. Tú no haces nada: se repite hasta que tú digas basta.</p>
+    </div>
+    <div class="how-step-visual">
+      <div class="how-anim-box how-anim-box--embed">
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/08-grupo-en-bucle/index.html?v=20260930g" title="Demo: Tuko abre un grupo nuevo tras cada grupo completado" loading="eager"></iframe>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- Y SI NO SE LLENA -->
+<section class="data" id="si-no-se-llena">
+  <div class="data-inner">
+    <h2 class="s-title data-headline fade-up d1" data-i18n="rescue_title">¿Y si nadie más entra?</h2>
+    <p class="data-sub fade-up d2" data-i18n="rescue_sub">Tu cliente elige, y las dos opciones son buenas.</p>
+    <div class="data-compare">
+      <article class="data-card data-card--good rescue-card fade-up d3">
+        <h3 class="data-side-title" data-i18n="rescue_opt1_title">Se queda las dos unidades al mismo precio de grupo.</h3>
+        <p class="data-side-sub" data-i18n="rescue_opt1_sub">Tú vendes dos.</p>
+      </article>
+      <article class="data-card data-card--good rescue-card fade-up d5">
+        <h3 class="data-side-title" data-i18n="rescue_opt2_title">O le devolvemos el dinero.</h3>
+        <p class="data-side-sub" data-i18n="rescue_opt2_sub">Entero, sin condiciones.</p>
+      </article>
+    </div>
+    <p class="data-foot fade-up d4" data-i18n="rescue_body">En ese segundo caso Shopify no te devuelve la comisión de la pasarela. La ponemos nosotros. Un grupo que no sale no te cuesta ni un euro.</p>
+  </div>
 </section>
 
 <!-- POR QUÉ COMPRAN (sustituye a "Beneficios"; se conserva id="beneficios" por los enlaces externos) -->
@@ -4524,7 +4823,6 @@
     <div class="why-intro">
       <div class="fade-up"><span class="s-badge" data-i18n="why_badge">Por qué funciona</span></div>
       <h2 class="s-title fade-up d1" data-i18n="why_title">Tres cosas que hacen que <em class="title-accent-em">compren ahora</em></h2>
-      <p class="s-sub fade-up d2" data-i18n="why_sub">Un descuento por volumen hace que un cliente compre tres unidades. Tuko hace que tres clientes compren una.</p>
     </div>
 
     <div class="why-rows">
@@ -4533,8 +4831,8 @@
       <div class="why-row fade-up">
         <div class="why-text">
           <span class="why-kicker" data-i18n="why1_kicker">El reloj</span>
-          <h3 class="why-title" data-i18n="why1_title">Con fecha, compran hoy</h3>
-          <p class="why-desc" data-i18n="why1_desc">Sin fecha, «ya lo pensaré». Con una fecha delante, la decisión se toma ahora.</p>
+          <h3 class="why-title" data-i18n="why1_title">Con 24 horas por delante, compran hoy.</h3>
+          <p class="why-desc" data-i18n="why1_desc">Sin reloj, lo dejan para nunca.</p>
         </div>
         <div class="why-visual" aria-hidden="true">
           <div class="why-widget">
@@ -4548,16 +4846,16 @@
         </div>
       </div>
 
-      <!-- 2 · La meta -->
+      <!-- 2 · La persona -->
       <div class="why-row reversed fade-up">
         <div class="why-text">
-          <span class="why-kicker" data-i18n="why2_kicker">La meta</span>
-          <h3 class="why-title" data-i18n="why2_title">El precio bueno puede no llegar</h3>
-          <p class="why-desc" data-i18n="why2_desc">Por eso nadie lo deja para mañana. Comprar hoy es la única forma de asegurarse el descuento.</p>
+          <span class="why-kicker" data-i18n="why2_kicker">La persona</span>
+          <h3 class="why-title" data-i18n="why2_title">No le pides que llene un grupo de veinte.</h3>
+          <p class="why-desc" data-i18n="why2_desc">Le pides una persona. Eso sí lo hace.</p>
         </div>
         <div class="why-visual" aria-hidden="true">
           <div class="why-widget why-widget--race">
-            <p class="why-race-label" data-i18n="why2_w_missing">Faltan <b>8</b> para llegar juntos al −20 %</p>
+            <p class="why-race-label" data-i18n="why2_w_missing">Ya hay 1 dentro. Falta <b>1</b> para que los dos compren con el −15&nbsp;%</p>
             <div class="why-race" data-why-race>
               <span class="why-race-sun"></span>
               <svg class="why-race-far" viewBox="0 0 404 190" preserveAspectRatio="none" aria-hidden="true">
@@ -4584,23 +4882,20 @@
               </div>
               <span class="why-goal-line"></span>
               <div class="why-pack" data-why-pack>
-                <span class="why-runner" data-run="sand"></span>
                 <span class="why-runner" data-run="teal"></span>
-                <span class="why-runner" data-run="rose"></span>
-                <span class="why-runner" data-run="navy"></span>
                 <span class="why-runner" data-run="lead"></span>
               </div>
               <div class="why-goal">
                 <span class="why-goal-ring"></span>
                 <span class="why-goal-pole"></span>
                 <span class="why-goal-flag">
-                  <b data-i18n="hmock_price_off">−20 %</b>
-                  <i data-i18n="why2_w_flag">Meta</i>
+                  <b data-i18n="hmock_price_off">−15 %</b>
+                  <i data-i18n="why2_w_flag">Los dos</i>
                 </span>
               </div>
               <span class="why-race-flash"></span>
               <span class="why-conf" data-why-conf></span>
-              <span class="why-race-count" data-why-count>2/10</span>
+              <span class="why-race-count" data-why-count>1/2</span>
               <span class="why-race-rail"><i></i></span>
             </div>
           </div>
@@ -4611,21 +4906,21 @@
       <div class="why-row fade-up">
         <div class="why-text">
           <span class="why-kicker" data-i18n="why3_kicker">El grupo</span>
-          <h3 class="why-title" data-i18n="why3_title">Ven que otros ya entraron y se fían</h3>
-          <p class="why-desc" data-i18n="why3_desc">Y comparten para llenarlo, porque les conviene. Ese tráfico no lo pagas tú.</p>
+          <h3 class="why-title" data-i18n="why3_title">Ven que alguien ya entró y pagó.</h3>
+          <p class="why-desc" data-i18n="why3_desc">Eso convence más que cualquier cosa que digas tú.</p>
         </div>
         <div class="why-visual" aria-hidden="true">
           <div class="why-widget why-widget--group">
             <div class="why-group-head">
               <span class="why-group-ppl">
                 <i class="avat avat--face" data-why-face="0"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#F4A261"/><path fill="#E07A3D" d="M6 18L10 4 18 14z"/><path fill="#E07A3D" d="M34 18L30 4 22 14z"/><path fill="#FFD7B8" d="M8.2 16L11 7.5 16 13.5z"/><path fill="#FFD7B8" d="M31.8 16L29 7.5 24 13.5z"/><ellipse cx="20" cy="28.5" rx="9.5" ry="7.2" fill="#FFF4E8"/><ellipse cx="20" cy="26.2" rx="1.7" ry="1.3" fill="#3A2418"/><circle cx="13.8" cy="19.8" r="1.85" fill="#3A2418"/><circle cx="26.2" cy="19.8" r="1.85" fill="#3A2418"/><circle cx="14.3" cy="19.3" r=".45" fill="#fff"/><circle cx="26.7" cy="19.3" r=".45" fill="#fff"/><path d="M16.2 30.4c1.8 1.6 5.8 1.6 7.6 0" fill="none" stroke="#C45D4C" stroke-width="1.3" stroke-linecap="round"/></svg></i>
-                <i class="avat avat--face" data-why-face="1"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#14C492"/><circle cx="12" cy="10.5" r="6.4" fill="#0FB389"/><circle cx="28" cy="10.5" r="6.4" fill="#0FB389"/><circle cx="12" cy="10.5" r="3.5" fill="#fff"/><circle cx="28" cy="10.5" r="3.5" fill="#fff"/><circle cx="12.7" cy="11" r="1.7" fill="#1A2418"/><circle cx="28.7" cy="11" r="1.7" fill="#1A2418"/><ellipse cx="20" cy="26.5" rx="8.5" ry="6" fill="#8FE8CC"/><path d="M14 27c2.6 2.8 9.4 2.8 12 0" fill="none" stroke="#0E8A68" stroke-width="1.4" stroke-linecap="round"/></svg></i>
-                <i class="avat avat--face" data-why-face="2"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#6B7CFF"/><path fill="#5A6BF0" d="M5 20L9 3 18 14z"/><path fill="#5A6BF0" d="M35 20L31 3 22 14z"/><path fill="#FFB4D0" d="M8 17L11 7 16 14z"/><path fill="#FFB4D0" d="M32 17L29 7 24 14z"/><circle cx="14.2" cy="21" r="1.85" fill="#1A1830"/><circle cx="25.8" cy="21" r="1.85" fill="#1A1830"/><circle cx="14.7" cy="20.5" r=".45" fill="#fff"/><circle cx="26.3" cy="20.5" r=".45" fill="#fff"/><ellipse cx="20" cy="25.2" rx="1.4" ry="1" fill="#FF9EC8"/><path d="M15 27.8c2.4 2.2 7.6 2.2 10 0" fill="none" stroke="#3D50F2" stroke-width="1.35" stroke-linecap="round"/></svg></i>
-                <i class="avat avat--face" data-why-face="3"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#F5D76E"/><ellipse cx="7.5" cy="22" rx="5.2" ry="4.2" fill="#E8C44A"/><ellipse cx="32.5" cy="22" rx="5.2" ry="4.2" fill="#E8C44A"/><path fill="#F4A261" d="M16.5 24L20 30 23.5 24z"/><circle cx="14" cy="19.5" r="1.85" fill="#3A2418"/><circle cx="26" cy="19.5" r="1.85" fill="#3A2418"/><circle cx="14.5" cy="19" r=".45" fill="#fff"/><circle cx="26.5" cy="19" r=".45" fill="#fff"/><ellipse cx="11" cy="24.5" rx="2.2" ry="1.2" fill="#E8A090" opacity=".45"/><ellipse cx="29" cy="24.5" rx="2.2" ry="1.2" fill="#E8A090" opacity=".45"/></svg></i>
-                <i class="avat avat--face" data-why-face="4"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#FF8A6B"/><ellipse cx="7" cy="20" rx="5.2" ry="8.2" fill="#E56E52"/><ellipse cx="33" cy="20" rx="5.2" ry="8.2" fill="#E56E52"/><ellipse cx="20" cy="27.8" rx="7.2" ry="5.6" fill="#FFD4C4"/><ellipse cx="20" cy="26" rx="1.5" ry="1.15" fill="#3A2418"/><circle cx="14" cy="20.5" r="1.85" fill="#3A2418"/><circle cx="26" cy="20.5" r="1.85" fill="#3A2418"/><circle cx="14.5" cy="20" r=".45" fill="#fff"/><circle cx="26.5" cy="20" r=".45" fill="#fff"/><path d="M16 29.2c1.8 1.6 6.2 1.6 8 0" fill="none" stroke="#C45D4C" stroke-width="1.3" stroke-linecap="round"/></svg></i>
-                <i class="avat avat--face" data-why-face="5"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#F6C2E4"/><path fill="#3D50F2" d="M0 22C0 6 12 0 20 6c-8-2-16 6-18 18z"/><path fill="#14C492" d="M1 20C2 8 12 2 19 8c-8-2-14 5-16 14z"/><path fill="#A78BFA" d="M0 25C1 12 10 6 16 12c-8-2-13 4-14 14z"/><ellipse cx="8.5" cy="14" rx="3.4" ry="4.8" fill="#F6C2E4"/><ellipse cx="8.5" cy="14.4" rx="1.5" ry="2.4" fill="#FF9EC8"/><path fill="#F0C94A" d="M17.8 14.2L20.2 1.6 22.8 14.4z"/><path fill="#FFF6C4" d="M19.2 13.4L20.2 3.4 21.3 13.5z"/><circle cx="14.2" cy="22.2" r="1.9" fill="#3A2418"/><circle cx="25.8" cy="22.2" r="1.9" fill="#3A2418"/><circle cx="14.75" cy="21.65" r=".5" fill="#fff"/><circle cx="26.35" cy="21.65" r=".5" fill="#fff"/><path d="M15 27.6c2.4 2.5 7.6 2.5 10 0" fill="none" stroke="#C45D7A" stroke-width="1.4" stroke-linecap="round"/><ellipse cx="10.8" cy="26.2" rx="2.4" ry="1.35" fill="#FF9EC8" opacity=".55"/><ellipse cx="29.2" cy="26.2" rx="2.4" ry="1.35" fill="#FF9EC8" opacity=".55"/></svg></i>
+                <i class="avat avat--face" data-why-face="1" style="display:none"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#14C492"/><circle cx="12" cy="10.5" r="6.4" fill="#0FB389"/><circle cx="28" cy="10.5" r="6.4" fill="#0FB389"/><circle cx="12" cy="10.5" r="3.5" fill="#fff"/><circle cx="28" cy="10.5" r="3.5" fill="#fff"/><circle cx="12.7" cy="11" r="1.7" fill="#1A2418"/><circle cx="28.7" cy="11" r="1.7" fill="#1A2418"/><ellipse cx="20" cy="26.5" rx="8.5" ry="6" fill="#8FE8CC"/><path d="M14 27c2.6 2.8 9.4 2.8 12 0" fill="none" stroke="#0E8A68" stroke-width="1.4" stroke-linecap="round"/></svg></i>
+                <i class="avat avat--face" data-why-face="2" style="display:none"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#6B7CFF"/><path fill="#5A6BF0" d="M5 20L9 3 18 14z"/><path fill="#5A6BF0" d="M35 20L31 3 22 14z"/><path fill="#FFB4D0" d="M8 17L11 7 16 14z"/><path fill="#FFB4D0" d="M32 17L29 7 24 14z"/><circle cx="14.2" cy="21" r="1.85" fill="#1A1830"/><circle cx="25.8" cy="21" r="1.85" fill="#1A1830"/><circle cx="14.7" cy="20.5" r=".45" fill="#fff"/><circle cx="26.3" cy="20.5" r=".45" fill="#fff"/><ellipse cx="20" cy="25.2" rx="1.4" ry="1" fill="#FF9EC8"/><path d="M15 27.8c2.4 2.2 7.6 2.2 10 0" fill="none" stroke="#3D50F2" stroke-width="1.35" stroke-linecap="round"/></svg></i>
+                <i class="avat avat--face" data-why-face="3" style="display:none"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#F5D76E"/><ellipse cx="7.5" cy="22" rx="5.2" ry="4.2" fill="#E8C44A"/><ellipse cx="32.5" cy="22" rx="5.2" ry="4.2" fill="#E8C44A"/><path fill="#F4A261" d="M16.5 24L20 30 23.5 24z"/><circle cx="14" cy="19.5" r="1.85" fill="#3A2418"/><circle cx="26" cy="19.5" r="1.85" fill="#3A2418"/><circle cx="14.5" cy="19" r=".45" fill="#fff"/><circle cx="26.5" cy="19" r=".45" fill="#fff"/><ellipse cx="11" cy="24.5" rx="2.2" ry="1.2" fill="#E8A090" opacity=".45"/><ellipse cx="29" cy="24.5" rx="2.2" ry="1.2" fill="#E8A090" opacity=".45"/></svg></i>
+                <i class="avat avat--face" data-why-face="4" style="display:none"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#FF8A6B"/><ellipse cx="7" cy="20" rx="5.2" ry="8.2" fill="#E56E52"/><ellipse cx="33" cy="20" rx="5.2" ry="8.2" fill="#E56E52"/><ellipse cx="20" cy="27.8" rx="7.2" ry="5.6" fill="#FFD4C4"/><ellipse cx="20" cy="26" rx="1.5" ry="1.15" fill="#3A2418"/><circle cx="14" cy="20.5" r="1.85" fill="#3A2418"/><circle cx="26" cy="20.5" r="1.85" fill="#3A2418"/><circle cx="14.5" cy="20" r=".45" fill="#fff"/><circle cx="26.5" cy="20" r=".45" fill="#fff"/><path d="M16 29.2c1.8 1.6 6.2 1.6 8 0" fill="none" stroke="#C45D4C" stroke-width="1.3" stroke-linecap="round"/></svg></i>
+                <i class="avat avat--face" data-why-face="5" style="display:none"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#F6C2E4"/><path fill="#3D50F2" d="M0 22C0 6 12 0 20 6c-8-2-16 6-18 18z"/><path fill="#14C492" d="M1 20C2 8 12 2 19 8c-8-2-14 5-16 14z"/><path fill="#A78BFA" d="M0 25C1 12 10 6 16 12c-8-2-13 4-14 14z"/><ellipse cx="8.5" cy="14" rx="3.4" ry="4.8" fill="#F6C2E4"/><ellipse cx="8.5" cy="14.4" rx="1.5" ry="2.4" fill="#FF9EC8"/><path fill="#F0C94A" d="M17.8 14.2L20.2 1.6 22.8 14.4z"/><path fill="#FFF6C4" d="M19.2 13.4L20.2 3.4 21.3 13.5z"/><circle cx="14.2" cy="22.2" r="1.9" fill="#3A2418"/><circle cx="25.8" cy="22.2" r="1.9" fill="#3A2418"/><circle cx="14.75" cy="21.65" r=".5" fill="#fff"/><circle cx="26.35" cy="21.65" r=".5" fill="#fff"/><path d="M15 27.6c2.4 2.5 7.6 2.5 10 0" fill="none" stroke="#C45D7A" stroke-width="1.4" stroke-linecap="round"/><ellipse cx="10.8" cy="26.2" rx="2.4" ry="1.35" fill="#FF9EC8" opacity=".55"/><ellipse cx="29.2" cy="26.2" rx="2.4" ry="1.35" fill="#FF9EC8" opacity=".55"/></svg></i>
               </span>
-              <span class="why-group-txt" data-i18n="why3_w_txt"><b>7 personas</b> ya han reservado</span>
+              <span class="why-group-txt" data-i18n="why3_w_txt"><b>1 persona</b> ya está dentro · falta 1</span>
             </div>
             <div class="why-share">
               <span class="why-share-btn">
@@ -4643,118 +4938,164 @@
   </div>
 </section>
 
+<!-- LO QUE NO TE PEDIMOS -->
+<section class="data" id="sin-requisitos">
+  <div class="data-inner">
+    <h2 class="s-title data-headline fade-up d1" data-i18n="noreq_title">Lo que no te pedimos</h2>
+    <ul class="noreq-grid">
+      <li class="noreq-tile fade-up d1">
+        <span class="noreq-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></span>
+        <p data-i18n="noreq_b1"><b>Ni un ajuste en tu Shopify.</b> Se queda como está.</p>
+      </li>
+      <li class="noreq-tile fade-up d2">
+        <span class="noreq-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+        <p data-i18n="noreq_b2"><b>No necesitas Shopify Plus.</b> Si lo tienes, también funciona.</p>
+      </li>
+      <li class="noreq-tile fade-up d3">
+        <span class="noreq-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></span>
+        <p data-i18n="noreq_b3"><b>Ningún pago a mano.</b> Ni uno.</p>
+      </li>
+      <li class="noreq-tile fade-up d4">
+        <span class="noreq-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></span>
+        <p data-i18n="noreq_b4"><b>Cero comisión por vender.</b> Nunca.</p>
+      </li>
+      <li class="noreq-tile fade-up d5">
+        <span class="noreq-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+        <p data-i18n="noreq_b6"><b>Dos minutos para instalarlo.</b> Uno para quitarlo.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- PLAN PILOTO -->
+<section class="data" id="piloto">
+  <div class="data-inner">
+    <div class="fade-up"><span class="data-trigger" data-i18n="pilot_badge">Piloto</span></div>
+    <h2 class="s-title data-headline fade-up d1" data-i18n="pilot_title">Buscamos 5 tiendas fundadoras</h2>
+    <p class="data-sub fade-up d2" data-i18n="pilot_sub">Tuko es nuevo y lo sabemos. Por eso, las 5 primeras tiendas que se lo tomen en serio y nos ayuden no van a pagar nada. Les daremos durante 45 días el plan más caro de Tuko, 129 € al mes, sin coste y sin tarjeta.</p>
+    <div class="pilot-asks fade-up d3">
+      <h3 class="data-side-title pilot-asks-title" data-i18n="pilot_ask_title">A cambio te pedimos tres cosas</h3>
+      <ol class="pilot-asks-grid" id="pilotAsks">
+        <li class="pilot-ask">
+          <span class="pilot-ask-num" aria-hidden="true">1</span>
+          <p data-i18n="pilot_ask1">Que lo uses de verdad. En productos con tráfico, no en uno perdido del catálogo.</p>
+        </li>
+        <li class="pilot-ask">
+          <span class="pilot-ask-num" aria-hidden="true">2</span>
+          <p data-i18n="pilot_ask2">Que nos digas qué falla. Una llamada corta cada dos o tres semanas.</p>
+        </li>
+        <li class="pilot-ask">
+          <span class="pilot-ask-num" aria-hidden="true">3</span>
+          <p data-i18n="pilot_ask3">Que dejes una reseña honesta en Shopify y nos dejes contar tu caso aquí.</p>
+        </li>
+      </ol>
+    </div>
+    <div class="hero-actions fade-up d4" style="margin-top:28px">
+      <a href="#solicitud" class="btn-blue">
+        <span data-i18n="pilot_cta">Quiero una de las 5 plazas</span>
+        <span class="hero-cta-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+    <p class="data-foot fade-up d4" data-i18n="pilot_foot">Sin tarjeta, sin permanencia y sin comisiones. Si a los 45 días no te sirve, lo desinstalas y no pasa nada.</p>
+  </div>
+</section>
+
 <!-- PRECIOS -->
 <section class="pricing" id="precios">
   <div class="pricing-inner">
     <div class="fade-up"><span class="s-badge" data-i18n="pricing_badge">Precios</span></div>
-    <h2 class="s-title fade-up d1" data-i18n="pricing_title">Solo ganamos si tú <em class="title-accent-em">vendes</em></h2>
-    <p class="s-sub fade-up d2" data-i18n="pricing_sub">Elige el plan que mejor se adapte a tu negocio.</p>
+    <h2 class="s-title fade-up d1" data-i18n="pricing_title">Los planes, cuando salgamos del piloto</h2>
+    <p class="s-sub fade-up d2" data-i18n="pricing_sub">Ninguno tiene comisión. Pagas una cuota y ya está. Ahora mismo no están disponibles: la única forma de entrar es el piloto.</p>
 
     <div class="pricing-grid">
-      <article class="pricing-card fade-up d1">
+      <article class="pricing-card is-soon fade-up d1">
         <h3 class="pricing-name" data-i18n="pricing_p1_name">Free</h3>
         <div class="pricing-price-row">
-          <span class="pricing-amount pricing-amount--custom" data-i18n="pricing_p1_price">Instalación gratuita</span>
-        </div>
-        <ul class="pricing-features">
-          <li data-i18n="pricing_p1_f1">0 €/mes</li>
-          <li data-i18n="pricing_p1_f2">4,2 % de comisión</li>
-          <li data-i18n="pricing_p1_f3">Tope 500 €/mes</li>
-          <li data-i18n="pricing_p1_f4">Sin permanencia</li>
-        </ul>
-        <p class="pricing-foot" data-i18n="pricing_p1_foot">Si no vendes, pagas 0 €.</p>
-        <a href="https://apps.shopify.com/tuko?locale=es&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="pricing-cta is-secondary" target="_blank" rel="noopener" data-i18n="pricing_p1_cta">Empezar gratis</a>
-      </article>
-
-      <article class="pricing-card fade-up d2">
-        <h3 class="pricing-name" data-i18n="pricing_p2_name">Starter</h3>
-        <div class="pricing-price-row">
-          <span class="pricing-amount" data-i18n="pricing_p2_price">14,99 €</span>
+          <span class="pricing-amount" data-i18n="pricing_p1_price">0 €</span>
           <span class="pricing-period" data-i18n="pricing_per_month">/ mes</span>
         </div>
-        <ul class="pricing-features">
-          <li data-i18n="pricing_p2_f1">14,99 €/mes</li>
-          <li data-i18n="pricing_p2_f2">2,5 % de comisión</li>
-          <li data-i18n="pricing_p2_f3">Tope 400 €/mes</li>
-          <li data-i18n="pricing_p2_f4">Sin permanencia</li>
+        <ul class="pricing-features" data-i18n="pricing_p1_rows">
+          <li>Comisión: 0 %</li>
+          <li>Grupos completados al mes: 5</li>
+          <li>Productos a la vez: 2</li>
+          <li>Emails de estado de Tuko: Sí</li>
+          <li class="is-no">Rescate de grupos: No</li>
+          <li class="is-no">Email marketing: No</li>
+          <li class="is-no">Soporte prioritario: No</li>
+          <li class="is-no">Tuko Marketplace: No</li>
+          <li class="is-no">Tuko AI: No</li>
+
         </ul>
-        <a href="https://apps.shopify.com/tuko?locale=es&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="pricing-cta is-secondary" target="_blank" rel="noopener" data-i18n="pricing_p2_cta">Elegir plan</a>
+        <a class="pricing-cta is-secondary" aria-disabled="true" data-i18n="pricing_p1_cta">Empezar gratis</a>
       </article>
 
-      <article class="pricing-card is-featured fade-up d3">
-        <span class="pricing-rec" data-i18n="pricing_recommended">Recomendado</span>
+      <article class="pricing-card is-soon fade-up d2">
+        <h3 class="pricing-name" data-i18n="pricing_p2_name">Básico</h3>
+        <div class="pricing-price-row">
+          <span class="pricing-amount" data-i18n="pricing_p2_price">19 €</span>
+          <span class="pricing-period" data-i18n="pricing_per_month">/ mes</span>
+        </div>
+        <ul class="pricing-features" data-i18n="pricing_p2_rows">
+          <li>Comisión: 0 %</li>
+          <li>Grupos completados al mes: 40</li>
+          <li>Productos a la vez: Ilimitados</li>
+          <li>Rescate de grupos: Sí</li>
+          <li>Emails de estado de Tuko: Sí</li>
+          <li class="is-no">Email marketing: No</li>
+          <li class="is-no">Soporte prioritario: No</li>
+          <li class="is-no">Tuko Marketplace: No</li>
+          <li class="is-no">Tuko AI: No</li>
+
+        </ul>
+        <a class="pricing-cta is-secondary" aria-disabled="true" data-i18n="pricing_p2_cta">Elegir plan</a>
+      </article>
+
+      <article class="pricing-card is-featured is-soon fade-up d3">
+        <span class="pricing-rec-corner" data-i18n="pricing_recommended">Recomendado</span>
         <h3 class="pricing-name" data-i18n="pricing_p3_name">Pro</h3>
         <div class="pricing-price-row">
-          <span class="pricing-amount" data-i18n="pricing_p3_price">69,99 €</span>
+          <span class="pricing-amount" data-i18n="pricing_p3_price">49 €</span>
           <span class="pricing-period" data-i18n="pricing_per_month">/ mes</span>
         </div>
-        <ul class="pricing-features">
-          <li data-i18n="pricing_p3_f1">69,99 €/mes</li>
-          <li data-i18n="pricing_p3_f2">0,7 % de comisión</li>
-          <li data-i18n="pricing_p3_f3">Tope 300 €/mes</li>
-          <li data-i18n="pricing_p3_f4">Sin permanencia</li>
+        <ul class="pricing-features" data-i18n="pricing_p3_rows">
+          <li>Comisión: 0 %</li>
+          <li>Grupos completados al mes: 150</li>
+          <li>Productos a la vez: Ilimitados</li>
+          <li>Rescate de grupos: Sí</li>
+          <li>Email marketing: Sí</li>
+          <li>Emails de estado de Tuko: Sí</li>
+          <li class="is-no">Soporte prioritario: No</li>
+          <li class="is-no">Tuko Marketplace: No</li>
+          <li class="is-no">Tuko AI: No</li>
+
         </ul>
-        <a href="https://apps.shopify.com/tuko?locale=es&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="pricing-cta is-primary" target="_blank" rel="noopener" data-i18n="pricing_p3_cta">Elegir plan</a>
+        <a class="pricing-cta is-primary" aria-disabled="true" data-i18n="pricing_p3_cta">Elegir plan</a>
       </article>
 
-      <article class="pricing-card fade-up d4">
-        <h3 class="pricing-name" data-i18n="pricing_p4_name">Ilimitado</h3>
+      <article class="pricing-card is-gift fade-up d4">
+        <span class="pricing-rec pricing-ribbon" data-i18n="pricing_p4_ribbon">Esto es lo que te regalamos: 45 días a las 5 tiendas del piloto</span>
+        <h3 class="pricing-name" data-i18n="pricing_p4_name">Escala</h3>
         <div class="pricing-price-row">
-          <span class="pricing-amount" data-i18n="pricing_p4_price">169 €</span>
+          <span class="pricing-amount" data-i18n="pricing_p4_price">129 €</span>
           <span class="pricing-period" data-i18n="pricing_per_month">/ mes</span>
         </div>
-        <ul class="pricing-features">
-          <li data-i18n="pricing_p4_f1">169 €/mes</li>
-          <li data-i18n="pricing_p4_f2">0 % de comisión</li>
-          <li data-i18n="pricing_p4_f3">Sin tope</li>
-          <li data-i18n="pricing_p4_f4">Incluye beta de Tuko AI</li>
-          <li data-i18n="pricing_p4_f5">Sin permanencia</li>
+        <ul class="pricing-features" data-i18n="pricing_p4_rows">
+          <li>Comisión: 0 %</li>
+          <li>Grupos completados al mes: Ilimitados</li>
+          <li>Productos a la vez: Ilimitados</li>
+          <li>Rescate de grupos: Sí</li>
+          <li>Email marketing: Sí</li>
+          <li>Soporte prioritario: Sí</li>
+          <li>Tuko Marketplace: Sí</li>
+          <li>Tuko AI: Sí</li>
+          <li>Emails de estado de Tuko: Sí</li>
+
         </ul>
-        <p class="pricing-cap" data-i18n="pricing_p4_cap">Sin tope</p>
-        <a href="https://apps.shopify.com/tuko?locale=es&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="pricing-cta is-secondary" target="_blank" rel="noopener" data-i18n="pricing_p4_cta">Elegir plan</a>
+        <a href="#solicitud" class="pricing-cta is-secondary" data-i18n="pricing_p4_cta">Elegir plan</a>
       </article>
     </div>
 
-    <!-- Calculadora: cuánto pagarías al mes según lo que vendas con Tuko (precios de esta página, tope aplicado) -->
-    <div class="calc fade-up" id="calculadora">
-      <div class="calc-left">
-        <p class="calc-kicker" data-i18n="calc_kicker">Calculadora</p>
-        <h3 class="calc-title" data-i18n="calc_title">¿Cuánto pagarías al mes?</h3>
-        <p class="calc-help" data-i18n="calc_help">Mueve el control hasta lo que crees que venderás en grupos Tuko. Cuota del plan + comisión con tope (Ilimitado no tiene comisión).</p>
-        <div class="calc-value">
-          <b id="calcSales">3.000 €</b>
-          <span data-i18n="calc_value_label">vendidos al mes con Tuko</span>
-        </div>
-        <label class="sr-only" for="calcRange" data-i18n="calc_range_label">Ventas mensuales con Tuko</label>
-        <input type="range" class="calc-range" id="calcRange" min="0" max="100000" step="100" value="3000">
-        <div class="calc-scale" aria-hidden="true"><span data-scale="0">0 €</span><span data-scale="50000">50.000 €</span><span data-scale="100000">100.000 €</span></div>
-      </div>
-      <div class="calc-plans" id="calcPlans" aria-live="polite">
-        <div class="calc-plan" data-plan="p1">
-          <span class="calc-plan-name"><span data-i18n="pricing_p1_name">Free</span><span class="calc-plan-tag" data-i18n="calc_best">El más barato</span></span>
-          <b class="calc-plan-cost" data-cost>—</b>
-          <span class="calc-plan-sub" data-sub></span>
-        </div>
-        <div class="calc-plan" data-plan="p2">
-          <span class="calc-plan-name"><span data-i18n="pricing_p2_name">Starter</span><span class="calc-plan-tag" data-i18n="calc_best">El más barato</span></span>
-          <b class="calc-plan-cost" data-cost>—</b>
-          <span class="calc-plan-sub" data-sub></span>
-        </div>
-        <div class="calc-plan" data-plan="p3">
-          <span class="calc-plan-name"><span data-i18n="pricing_p3_name">Pro</span><span class="calc-plan-tag" data-i18n="calc_best">El más barato</span></span>
-          <b class="calc-plan-cost" data-cost>—</b>
-          <span class="calc-plan-sub" data-sub></span>
-        </div>
-        <div class="calc-plan" data-plan="p4">
-          <span class="calc-plan-name"><span data-i18n="pricing_p4_name">Ilimitado</span><span class="calc-plan-tag" data-i18n="calc_best">El más barato</span></span>
-          <b class="calc-plan-cost" data-cost>—</b>
-          <span class="calc-plan-sub" data-sub></span>
-        </div>
-        <p class="calc-note" data-i18n="calc_note">Cálculo orientativo: cuota mensual + comisión sobre lo vendido en grupos Tuko, con tope. Ilimitado es solo la cuota.</p>
-      </div>
-    </div>
-
-    <p class="pricing-legal fade-up" data-i18n="pricing_legal">La comisión se calcula solo sobre lo vendido en grupos Tuko, nunca sobre el resto de tu facturación. El tope es el máximo de comisión al mes (el plan Ilimitado no tiene comisión ni tope). La cuota del plan se suma aparte.</p>
+    <p class="pricing-legal fade-up" data-i18n="pricing_note_groups">Solo cuentan los grupos que se cierran. Si un grupo no sale, no te consume nada.</p>
     <div class="pricing-links fade-up d1">
       <a href="#faq" data-i18n="pricing_link_faq">¿Te quedan dudas? Mira las preguntas frecuentes →</a>
     </div>
@@ -4772,13 +5113,13 @@
         <h3 class="faq-h">
           <button type="button" class="faq-trigger" aria-expanded="true" aria-controls="faq-panel-1" id="faq-btn-1">
             <span class="faq-num" aria-hidden="true">01</span>
-            <span class="faq-q" data-i18n="faq_q1">¿Cuándo se le cobra a mi cliente?</span>
+            <span class="faq-q" data-i18n="faq_q1">¿Mis clientes compran con desconocidos?</span>
             <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
           </button>
         </h3>
         <div class="faq-panel" id="faq-panel-1" role="region" aria-labelledby="faq-btn-1">
           <div class="faq-panel-inner">
-            <p class="faq-a" data-i18n="faq_a1">En el momento de unirse al grupo. Paga directamente el precio ya rebajado en el checkout, como una compra normal. El pedido queda en espera de envío hasta que el grupo se resuelve.</p>
+            <p class="faq-a" data-i18n="faq_a1">Compran en tu tienda, como siempre. Lo único que comparten es el precio. Cada pedido es individual y va a su dirección.</p>
           </div>
         </div>
       </div>
@@ -4786,13 +5127,13 @@
         <h3 class="faq-h">
           <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-2" id="faq-btn-2">
             <span class="faq-num" aria-hidden="true">02</span>
-            <span class="faq-q" data-i18n="faq_q3">¿Y si no se alcanza el objetivo?</span>
+            <span class="faq-q" data-i18n="faq_q2">¿Y si el grupo no se llena?</span>
             <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
           </button>
         </h3>
         <div class="faq-panel" id="faq-panel-2" role="region" aria-labelledby="faq-btn-2" hidden>
           <div class="faq-panel-inner">
-            <p class="faq-a" data-i18n="faq_a3">El pedido se cancela y Shopify devuelve el 100% del dinero a tu cliente automáticamente. Tú no tienes que hacer nada. Tuko gestiona la devolución y avisa por email.</p>
+            <p class="faq-a" data-i18n="faq_a2">Tu cliente elige: se queda las dos unidades al precio de grupo, o le devolvemos el dinero. Si hay devolución, la comisión de la pasarela la ponemos nosotros. A ti no te cuesta nada.</p>
           </div>
         </div>
       </div>
@@ -4800,41 +5141,69 @@
         <h3 class="faq-h">
           <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-3" id="faq-btn-3">
             <span class="faq-num" aria-hidden="true">03</span>
-            <span class="faq-q" data-i18n="faq_q4">¿Esto no me destroza el margen?</span>
+            <span class="faq-q" data-i18n="faq_q3">¿Tengo que cambiar algo en mi Shopify?</span>
             <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
           </button>
         </h3>
         <div class="faq-panel" id="faq-panel-3" role="region" aria-labelledby="faq-btn-3" hidden>
           <div class="faq-panel-inner">
-            <p class="faq-a" data-i18n="faq_a4">No. El descuento solo se aplica si el grupo se completa. Si no se llega al objetivo, no hay venta con descuento. Se cancela y se devuelve el dinero. Nunca vendes por debajo del margen que tú decidiste.</p>
-          </div>
-        </div>
-      </div>
-      <div class="faq-item fade-up d1">
-        <h3 class="faq-h">
-          <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-4" id="faq-btn-4">
-            <span class="faq-num" aria-hidden="true">04</span>
-            <span class="faq-q" data-i18n="faq_q5">¿Esto es como Groupon?</span>
-            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
-          </button>
-        </h3>
-        <div class="faq-panel" id="faq-panel-4" role="region" aria-labelledby="faq-btn-4" hidden>
-          <div class="faq-panel-inner">
-            <p class="faq-a" data-i18n="faq_a5">No. En Groupon el descuento es fijo desde el minuto uno. En Tuko el descuento depende de que se junten los compradores suficientes. Si no se juntan, no hay descuento ni venta, solo una devolución.</p>
+            <p class="faq-a" data-i18n="faq_a3">No. Ni ajustes de pago, ni Shopify Plus, ni nada a mano. Se instala y funciona.</p>
           </div>
         </div>
       </div>
       <div class="faq-item fade-up d2">
         <h3 class="faq-h">
           <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-5" id="faq-btn-5">
-            <span class="faq-num" aria-hidden="true">05</span>
-            <span class="faq-q" data-i18n="faq_q6">Ya uso una app de descuentos por volumen. ¿Para qué quiero esta?</span>
+            <span class="faq-num" aria-hidden="true">04</span>
+            <span class="faq-q" data-i18n="faq_q5">¿Cuánto tarda en instalarse?</span>
             <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
           </button>
         </h3>
         <div class="faq-panel" id="faq-panel-5" role="region" aria-labelledby="faq-btn-5" hidden>
           <div class="faq-panel-inner">
-            <p class="faq-a" data-i18n="faq_a6">Un descuento por volumen premia a un cliente por comprar más unidades él solo. Tuko premia que varios clientes distintos se unan. Así consigues gente nueva compartiendo tu producto, no solo pedidos más grandes de los que ya tenías.</p>
+            <p class="faq-a" data-i18n="faq_a5">Dos minutos. Eliges productos, pones el descuento y ya está encendido.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item fade-up d3">
+        <h3 class="faq-h">
+          <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-6" id="faq-btn-6">
+            <span class="faq-num" aria-hidden="true">05</span>
+            <span class="faq-q" data-i18n="faq_q6">¿Qué pasa cuando terminen los 45 días una vez he entrado en el piloto?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-panel" id="faq-panel-6" role="region" aria-labelledby="faq-btn-6" hidden>
+          <div class="faq-panel-inner">
+            <p class="faq-a" data-i18n="faq_a6">Eliges plan o desinstalas. No hay permanencia ni renovación automática sin avisar.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item fade-up d1">
+        <h3 class="faq-h">
+          <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-7" id="faq-btn-7">
+            <span class="faq-num" aria-hidden="true">06</span>
+            <span class="faq-q" data-i18n="faq_q7">¿Por qué solo 5 tiendas?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-panel" id="faq-panel-7" role="region" aria-labelledby="faq-btn-7" hidden>
+          <div class="faq-panel-inner">
+            <p class="faq-a" data-i18n="faq_a7">Porque queremos atenderlas bien y porque el piloto es para aprender, no para facturar. Cuando cerremos las cinco, cerramos.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item fade-up d2">
+        <h3 class="faq-h">
+          <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-8" id="faq-btn-8">
+            <span class="faq-num" aria-hidden="true">07</span>
+            <span class="faq-q" data-i18n="faq_q8">¿Esto no me quita ventas que ya iba a hacer?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-panel" id="faq-panel-8" role="region" aria-labelledby="faq-btn-8" hidden>
+          <div class="faq-panel-inner">
+            <p class="faq-a" data-i18n="faq_a8">Al revés que un descuento normal. Cuando pones un menos veinte por ciento en tu tienda, se lo lleva todo el que iba a comprar igualmente. Con Tuko, el descuento solo se aplica si entra una persona más. Nadie se lleva el precio bajo sin traerte un cliente.</p>
           </div>
         </div>
       </div>
@@ -4843,17 +5212,35 @@
 </section>
 
 <!-- CTA FINAL -->
-<section class="final-cta-wrap">
+<section class="final-cta-wrap" id="solicitud">
   <div class="final-cta">
     <canvas id="ctaCanvas"></canvas>
     <div class="final-cta-inner">
       <span class="final-cta-eyebrow fade-up"><i aria-hidden="true"></i><span data-i18n="fcta_eyebrow">Empieza hoy</span></span>
-      <h2 class="fade-up d1" data-i18n="fcta_title">Enciende tu <em>primera campaña</em></h2>
-      <p class="fade-up d2" data-i18n="fcta_sub">Instalar es gratis. El plan Free no tiene cuota: 4,2 % de lo que vendas con Tuko, con tope de 500 €/mes.</p>
-      <a href="https://apps.shopify.com/tuko?locale=es&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="final-cta-btn fade-up d3" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        <span data-i18n="fcta_btn">Instalar gratis en Shopify</span>
-      </a>
+      <h2 class="fade-up d1" data-i18n="fcta_title">Quedan 5 plazas</h2>
+      <p class="fade-up d2" data-i18n="fcta_sub">45 días con Tuko completo, gratis. Sin tarjeta y sin permanencia. Si no funciona, lo desinstalas.</p>
+      <form class="cta-form fade-up d3" id="pilotForm" name="piloto" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate data-tuko-form>
+        <input type="hidden" name="form-name" value="piloto">
+        <input type="hidden" name="subject" data-remove-prefix value="Solicitud plan piloto Tuko">
+        <input type="hidden" name="Formulario" value="Piloto">
+        <input type="hidden" name="Pagina" value="">
+        <input type="hidden" name="Idioma" value="Español">
+        <p class="cta-hp" hidden style="display:none"><label>No rellenar / Leave empty: <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <div class="cta-field">
+          <label for="pilotWeb" data-i18n="pilot_form_web_label">Link de tu web</label>
+          <input class="cta-input" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" id="pilotWeb" name="web" required data-validate="web" data-i18n="pilot_form_web_ph" placeholder="https://tutienda.com">
+        </div>
+        <div class="cta-field">
+          <label for="pilotName" data-i18n="pilot_form_name_label">Nombre y apellidos</label>
+          <input class="cta-input" type="text" id="pilotName" name="nombre" required autocomplete="name" data-validate="required" data-i18n="pilot_form_name_ph" placeholder="Nombre y apellidos">
+        </div>
+        <div class="cta-field">
+          <label for="pilotEmail" data-i18n="pilot_form_email_label">Email de contacto</label>
+          <input class="cta-input" type="email" id="pilotEmail" name="email" required autocomplete="email" autocapitalize="off" spellcheck="false" data-validate="email" data-i18n="pilot_form_email_ph" placeholder="tu@email.com">
+        </div>
+        <button type="submit" class="btn-submit" data-i18n="pilot_form_submit">Enviar</button>
+        <p class="cta-status" id="pilotFormStatus" role="status" aria-live="polite" data-form-status hidden></p>
+      </form>
       <div class="final-cta-trust fade-up d4">
         <span data-i18n="fcta_trust2">Instalación en 2 minutos</span>
         <span data-i18n="fcta_trust3">Sin tocar tu tema</span>
@@ -4881,7 +5268,7 @@
     <div class="footer-top">
       <div class="footer-brand">
         <a href="#" class="footer-brand-mark">tuko</a>
-        <p class="footer-brand-text" data-i18n="footer_tagline">Descuentos por objetivo para tiendas Shopify. Vende más unidades sin regalar margen.</p>
+        <p class="footer-brand-text" data-i18n="footer_tagline">Un cliente entra. Trae a otro. Los dos compran.</p>
       </div>
       <div class="footer-col">
         <p class="footer-col-title" data-i18n="footer_col1_title">Contacto</p>
@@ -4904,9 +5291,9 @@
 <!-- CTA fija en móvil: aparece al pasar el hero, se esconde sobre Precios, el CTA final y el footer -->
 <div class="sticky-cta" id="stickyCta" aria-hidden="true">
   <p class="sticky-cta-txt"><b data-i18n="sticky_title">Gratis hasta que vendas</b><span data-i18n="sticky_sub">Instalación en 2 min · Sin tocar tu tema</span></p>
-  <a href="https://apps.shopify.com/tuko?locale=es&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" class="btn-blue" target="_blank" rel="noopener">
+  <a href="#solicitud" class="btn-blue">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 19h14"/></svg>
-    <span data-i18n="nav_cta">Instalar gratis</span>
+    <span data-i18n="nav_cta">Acceder al piloto</span>
   </a>
 </div>
 
@@ -5155,7 +5542,7 @@ setTimeout(() => {
   var nodes = pack ? pack.querySelectorAll('.why-runner') : [];
   if (!pack || !chip || !label || !nodes.length) return;
 
-  var GOAL = 10, START = 2;
+  var GOAL = 2, START = 1;
 
   var PALETTE = {
     lead: { skin:'#F2C6A0', skinB:'#DAAC85', shirt:'#3D50F2', pants:'#2B3247', pantsB:'#20263A', hair:'#3B2A1E', shoe:'#1B2030', hairKind:'short', bag:'#14C492' },
@@ -5169,7 +5556,7 @@ setTimeout(() => {
      ph = fase inicial de la marcha · join = con qué número del contador entra */
   var CAST = {
     sand: { x: -0.075, d: 1.00, ph: 5.30, join: 7 },
-    teal: { x: -0.010, d: 0.78, ph: 2.35, join: 0 },
+    teal: { x: -0.010, d: 0.78, ph: 2.35, join: 1 },
     rose: { x:  0.055, d: 0.34, ph: 1.10, join: 10 },
     navy: { x:  0.120, d: 0.16, ph: 4.05, join: 4 },
     lead: { x:  0.185, d: 0.50, ph: 0.20, join: 0 }
@@ -5512,6 +5899,12 @@ setTimeout(() => {
       goalLine.style.left = lineX.toFixed(1) + 'px';
     }
     ADV = Math.max(70, lineX - (ref.x0 + 27));
+    /* Cada uno se para en la bandera; el que llega después, justo a su lado */
+    for (var q = 0; q < actors.length; q++) {
+      var b = actors[q];
+      var gap = b === ref ? 0 : 22 * hK;
+      b.target = Math.max(70, lineX - gap - (b.x0 + 27));
+    }
   }
 
   var STEPS = [0.12, 0.25, 0.37, 0.49, 0.61, 0.73, 0.85];
@@ -5566,6 +5959,7 @@ setTimeout(() => {
       var a = actors[j];
       a.p = a.def.ph;
       a.hip = 0; a.adv = 0;
+      a.arrived = false;
       a.stand = 0; a.cheer = 0; a.jumpY = 0; a.knee = 0;
       a.el.classList.remove('is-join');
       if (a.join > START) a.el.classList.add('is-ghost');
@@ -5594,20 +5988,28 @@ setTimeout(() => {
     tState += dt;
 
     if (state === 'walk') {
-      var rem = ADV - ref.adv;
-      var slow = rem < 56 ? 0.18 + 0.82 * ease(rem / 56) : 1;
+      var allIn = true;
+      var prog = 1;
       for (j = 0; j < actors.length; j++) {
         a = actors[j];
-        stride(a, a.rate * dt * slow);
-        a.adv = a.hip * a.unit;
-        a.stand = Math.max(0, a.stand - dt * 3);
+        var rem = a.target - a.adv;
+        if (!a.arrived && rem <= 1.2) a.arrived = true;
+        if (a.arrived) {
+          a.stand = Math.min(1, a.stand + dt / 0.42);
+        } else {
+          allIn = false;
+          var slow = rem < 56 ? 0.18 + 0.82 * ease(rem / 56) : 1;
+          stride(a, a.rate * dt * slow);
+          a.adv = a.hip * a.unit;
+          a.stand = Math.max(0, a.stand - dt * 3);
+        }
+        prog = Math.min(prog, Math.max(0, a.adv / a.target));
       }
-      var prog = Math.min(1, Math.max(0, ref.adv / ADV));
       stage.style.setProperty('--fill', prog.toFixed(3));
       var n = START;
       for (j = 0; j < STEPS.length; j++) if (prog >= STEPS[j]) n++;
       setCount(Math.min(n, GOAL - 1), false);
-      if (rem <= 1.2 || tState > 16) enter('win');
+      if (allIn || tState > 20) enter('win');
 
     } else if (state === 'win') {
       for (j = 0; j < actors.length; j++) {
@@ -5647,8 +6049,8 @@ setTimeout(() => {
       var a = actors[j];
       a.el.classList.remove('is-ghost');
       a.stand = 1; a.cheer = 0; a.jumpY = 0; a.knee = 0;
-      a.adv = ADV;
-      a.hip = ADV / a.unit;
+      a.adv = a.target;
+      a.hip = a.target / a.unit;
       apply(a);
     }
   }
@@ -5995,6 +6397,14 @@ setTimeout(() => {
     return Math.ceil(h + 12);
   };
 
+  const jumpTo = (y) => {
+    try {
+      window.scrollTo({ top: y, left: 0, behavior: 'instant' });
+    } catch (e) {
+      window.scrollTo(0, y);
+    }
+  };
+
   const stopAnim = () => {
     if (animFrame) cancelAnimationFrame(animFrame);
     animFrame = 0;
@@ -6010,12 +6420,12 @@ setTimeout(() => {
     const startY = window.scrollY;
     const dist = targetY - startY;
     if (Math.abs(dist) < 2) {
-      window.scrollTo(0, targetY);
+      jumpTo(targetY);
       return;
     }
-    const ms = duration || Math.min(900, Math.max(420, Math.abs(dist) * 0.45));
+    const ms = duration || Math.min(1150, Math.max(480, Math.abs(dist) * 0.45));
     const t0 = performance.now();
-    const ease = (t) => 1 - Math.pow(1 - t, 3);
+    const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
     const onUserScroll = () => stopAnim();
     window.addEventListener('wheel', onUserScroll, { passive: true, once: true });
@@ -6029,7 +6439,7 @@ setTimeout(() => {
 
     const step = (now) => {
       const t = Math.min(1, (now - t0) / ms);
-      window.scrollTo(0, startY + dist * ease(t));
+      jumpTo(startY + dist * ease(t));
       if (t < 1) {
         animFrame = requestAnimationFrame(step);
       } else {
@@ -6054,7 +6464,7 @@ setTimeout(() => {
     if (smooth) animateScrollTo(top);
     else {
       stopAnim();
-      window.scrollTo(0, top);
+      jumpTo(top);
     }
     return true;
   };
@@ -6068,7 +6478,7 @@ setTimeout(() => {
       }
       if (scrollToId(hash, true)) {
         e.preventDefault();
-        history.pushState(null, '', hash);
+        if (location.hash) history.replaceState(null, '', location.pathname + location.search);
         const menu = document.getElementById('mobileMenu');
         const burger = document.getElementById('navHamburger');
         const scrim = document.getElementById('mobileMenuScrim');
@@ -6086,8 +6496,27 @@ setTimeout(() => {
     });
   });
 
-  /* Si se entra con #en-la-url (Chrome a veces ignora scroll-padding) */
+  /* Restauración manual: recargar vuelve arriba, atrás/adelante recupera la posición, #ancla desde fuera baja a su sección */
+  const scrollKey = 'tukoScroll:' + location.pathname;
+  window.addEventListener('pagehide', () => {
+    try { sessionStorage.setItem(scrollKey, String(Math.round(window.scrollY))); } catch (e) {}
+  });
+  const navType = window.__tukoNavType;
+  if (navType === 'reload') jumpTo(0);
   window.addEventListener('load', () => {
+    if (navType === 'reload') {
+      stopAnim();
+      jumpTo(0);
+      return;
+    }
+    if (navType === 'back_forward') {
+      let saved = null;
+      try { saved = sessionStorage.getItem(scrollKey); } catch (e) {}
+      if (saved !== null) {
+        requestAnimationFrame(() => jumpTo(+saved || 0));
+        return;
+      }
+    }
     if (location.hash) {
       requestAnimationFrame(() => scrollToId(location.hash, false));
     }
@@ -6187,7 +6616,7 @@ const translations = {
     nav_link_faq: 'Preguntas',
     nav_link_beneficios: 'Por qué funciona',
     nav_link_blog: 'Blog',
-    nav_cta: 'Instalar gratis',
+    nav_cta: 'Acceder al piloto',
     nav_lang_label: 'Idioma',
     /* TUKO AI */
     nav_link_ia: 'tuko AI',
@@ -6228,32 +6657,31 @@ const translations = {
     ia_form_submit: 'Unirme a la lista de espera',
     ia_soon_tag: 'Pronto',
     ia_soon_text: 'También te dirá con qué creadores colaborar y por dónde crecer.',
-    ia_wl_eyebrow: 'Lista de espera',
-    ia_wl_count: '<b>39 marcas</b> ya están esperando su acceso',
-    ia_wl_foot: 'Solo 50 tiendas entran en la beta privada.',
     fcta_eyebrow: 'Empieza hoy',
-    fcta_title: 'Enciende tu <em>primera campaña</em>',
-    fcta_sub: 'Instalar es gratis. El plan Free no tiene cuota: 4,2 % de lo que vendas con Tuko, con tope de 500 €/mes.',
-    fcta_btn: 'Instalar gratis en Shopify',
+    fcta_title: 'Quedan 5 plazas',
+    fcta_sub: '45 días con Tuko completo, gratis. Sin tarjeta y sin permanencia. Si no funciona, lo desinstalas.',
+    fcta_btn: 'Quiero una de las 5 plazas',
     fcta_trust2: 'Instalación en 2 minutos',
     fcta_trust3: 'Sin tocar tu tema',
     fcta_shopify: 'Disponible en Shopify',
 
     /* HERO */
     hero_badge: 'Con el respaldo de Xiji Incubator',
-    hero_title: 'Un botón y tus clientes empiezan a vender por ti',
-    hero_title_l1: 'Un botón y tus',
-    hero_title_l2: 'clientes empiezan',
-    hero_title_l3_before: 'a',
-    hero_title_accent: 'vender',
-    hero_title_l3_after: 'por ti',
-    hero_subtitle: 'Se unen al grupo del producto y, cuando se llena, el precio baja para todos. Lo llenan ellos, no tu presupuesto de anuncios.',
-    hero_cta: 'Instalar gratis en Shopify',
+    hero_badge_pilot: 'Plan piloto · 5 plazas · 45 días gratis',
+    hero_title: 'Un cliente entra. Trae a otro. Los dos compran.',
+    hero_title_l1: 'Un cliente entra.',
+    hero_title_l2: 'Trae a otro.',
+    hero_title_l3_before: 'Los dos',
+    hero_title_accent: 'compran.',
+    hero_title_l3_after: '',
+    hero_subtitle: 'Tuko pone un botón en tus productos. Quien lo pulsa paga con descuento y tiene 24 horas para atraer a un comprador más.',
+    hero_cta: 'Quiero una de las 5 plazas',
     hero_cta2: 'Ver cómo funciona',
     hero_cta3: 'Habla con nosotros',
     hero_live_tpl: '{n} de {goal} ya en el grupo',
     hero_live_full: 'Grupo completo · −{discount} % para todos',
-    hero_trust_note: 'Instalación en 2 minutos · gratis hasta que vendas',
+    hero_trust_note: 'Sin tarjeta. Sin permanencia. Sin comisiones.',
+    hero_appstore: 'Disponible en la Shopify App Store',
     hero_trust2: 'Instalación en 2 minutos',
     hero_trust3: 'Sin tocar tu tema',
     hero_trust4: 'Tu checkout de siempre',
@@ -6303,7 +6731,7 @@ const translations = {
     /* DATOS (trigger + comparativa) */
     data_trigger: 'Antes de lanzar otro -20 %, mira esto.',
     data_title: 'El descuento no debería regalar margen. <span class="title-accent-red">Debería traer clientes nuevos.</span>',
-    data_sub: 'Compara los dos modelos antes de activar tu próxima campaña.',
+    data_sub: 'Compara los dos modelos antes de activar tu campaña.',
     data_bad_label: 'El camino caro',
     data_num: '68 %',
     data_num_note: 'de los pedidos con descuento pueden venir de clientes que ya te compraban.',
@@ -6327,7 +6755,7 @@ const translations = {
     hmock_btn: 'Reservar a 39,92 €',
     hmock_price_old: '49,90 €',
     hmock_price_new: '39,92 €',
-    hmock_price_off: '−20 %',
+    hmock_price_off: '−15 %',
     hmock_chip: 'Marta acaba de unirse',
     hmock_live: 'Campaña en directo',
     hmock_col_product: 'El producto',
@@ -6355,25 +6783,63 @@ const translations = {
 
     /* HOW IT WORKS */
     how_badge: 'Cómo funciona',
-    how_title: 'Un descuento con condiciones.<br>Las <span class="how-title-underline">tuyas</span>',
-    how_sub: 'Tú fijas el descuento, la meta y la fecha. Si no se cumple, no existe. Y todo pasa dentro de tu tienda.',
+    how_title: 'Así es como funciona',
+    how_sub: 'Tú fijas el descuento, la meta y la fecha. Se inicia cuando el primero se une y tiene 24 horas para meter a otra persona.',
 
     /* HOW IT WORKS — STEPS */
-    step1_title: 'Eliges producto, descuento y meta',
-    step1_desc: 'Por ejemplo: −20 % si 10 personas reservan antes del viernes.',
-    step2_title: 'Tus clientes compran y entran al grupo',
-    step2_desc: 'Compran en tu tienda y ya están dentro. Luego comparten para llegar a la meta.',
-    step3_title: 'Si se llega a la meta a tiempo, se aplica la rebaja',
-    step3_desc: 'Si no se llega, tendrás clientes que ya sabes que quieren el producto, <span class="how-retarget-underline">listos para un retargeting</span>.',
+    step1_title: 'Elige producto y descuento',
+    step1_desc: 'Elige un producto o todos los que quieras de tu catálogo. Decides el descuento y solo se aplica cuando hay 2 personas.',
+    step2_title: 'Un cliente abre el grupo',
+    step2_desc: 'Paga con el descuento ya aplicado y tiene 24 horas para traer a una persona más. La comparte por WhatsApp o la trae tu propio tráfico.',
+    step3_title: 'Ya hay una persona dentro. Se une la segunda',
+    step3_desc: 'Cuando se une la segunda persona, el grupo se completa, se ejecuta el pedido y Tuko abre un grupo nuevo. El botón nunca se apaga.',
+    step4_title: 'Se completa y Tuko abre otro grupo',
+    step4_desc: 'Cuando el grupo se completa, se ejecutan los pedidos y, a los 5 minutos, Tuko publica un grupo nuevo vacío, listo para el siguiente cliente. Tú no haces nada: se repite hasta que tú digas basta.',
+    rescue_title: '¿Y si nadie más entra?',
+    rescue_sub: 'Tu cliente elige, y las dos opciones son buenas.',
+    rescue_opt1_title: 'Se queda las dos unidades al mismo precio de grupo.',
+    rescue_opt1_sub: 'Tú vendes dos.',
+    rescue_opt2_title: 'O le devolvemos el dinero.',
+    rescue_opt2_sub: 'Entero, sin condiciones.',
+    rescue_body: 'En ese segundo caso Shopify no te devuelve la comisión de la pasarela. La ponemos nosotros. Un grupo que no sale no te cuesta ni un euro.',
+    noreq_title: 'Lo que no te pedimos',
+    noreq_b1: '<b>Ni un ajuste en tu Shopify.</b> Se queda como está.',
+    noreq_b2: '<b>No necesitas Shopify Plus.</b> Si lo tienes, también funciona.',
+    noreq_b3: '<b>Ningún pago a mano.</b> Ni uno.',
+    noreq_b4: '<b>Cero comisión por vender.</b> Nunca.',
+    noreq_b6: '<b>Dos minutos para instalarlo.</b> Uno para quitarlo.',
+    pilot_badge: 'Piloto',
+    pilot_title: 'Buscamos 5 tiendas fundadoras',
+    pilot_sub: 'Tuko es nuevo y lo sabemos. Por eso, las 5 primeras tiendas que se lo tomen en serio y nos ayuden no van a pagar nada. Les daremos durante 45 días el plan más caro de Tuko, 129 € al mes, sin coste y sin tarjeta.',
+    pilot_ask_title: 'A cambio te pedimos tres cosas',
+    pilot_ask1: 'Que lo uses de verdad. En productos con tráfico, no en uno perdido del catálogo.',
+    pilot_ask2: 'Que nos digas qué falla. Una llamada corta cada dos o tres semanas.',
+    pilot_ask3: 'Que dejes una reseña honesta en Shopify y nos dejes contar tu caso aquí.',
+    pilot_cta: 'Quiero una de las 5 plazas',
+    pilot_foot: 'Sin tarjeta, sin permanencia y sin comisiones. Si a los 45 días no te sirve, lo desinstalas y no pasa nada.',
+    pilot_form_title: 'Quiero una de las 5 plazas',
+    pilot_form_web_label: 'Link de tu web',
+    pilot_form_web_ph: 'https://tutienda.com',
+    pilot_form_name_label: 'Nombre y apellidos',
+    pilot_form_name_ph: 'Nombre y apellidos',
+    pilot_form_email_label: 'Email de contacto',
+    pilot_form_email_ph: 'tu@email.com',
+    pilot_form_submit: 'Enviar',
 
     /* PRECIOS */
     pricing_badge: 'Precios',
-    pricing_title: 'Solo ganamos si tú <em class="title-accent-em">vendes</em>',
-    pricing_sub: 'Elige el plan que mejor se adapte a tu negocio.',
+    pricing_title: 'Los planes, cuando salgamos del piloto',
+    pricing_sub: 'Ninguno tiene comisión. Pagas una cuota y ya está. Ahora mismo no están disponibles: la única forma de entrar es el piloto.',
     pricing_per_month: '/ mes',
     pricing_recommended: 'Recomendado',
+    pricing_p4_ribbon: 'Esto es lo que te regalamos: 45 días a las 5 tiendas del piloto',
+    pricing_p1_rows: '<li>Comisión: 0 %</li><li>Grupos completados al mes: 5</li><li>Productos a la vez: 2</li><li>Emails de estado de Tuko: Sí</li><li class="is-no">Rescate de grupos: No</li><li class="is-no">Email marketing: No</li><li class="is-no">Soporte prioritario: No</li><li class="is-no">Tuko Marketplace: No</li><li class="is-no">Tuko AI: No</li>',
+    pricing_p2_rows: '<li>Comisión: 0 %</li><li>Grupos completados al mes: 40</li><li>Productos a la vez: Ilimitados</li><li>Rescate de grupos: Sí</li><li>Emails de estado de Tuko: Sí</li><li class="is-no">Email marketing: No</li><li class="is-no">Soporte prioritario: No</li><li class="is-no">Tuko Marketplace: No</li><li class="is-no">Tuko AI: No</li>',
+    pricing_p3_rows: '<li>Comisión: 0 %</li><li>Grupos completados al mes: 150</li><li>Productos a la vez: Ilimitados</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li class="is-no">Soporte prioritario: No</li><li class="is-no">Tuko Marketplace: No</li><li class="is-no">Tuko AI: No</li>',
+    pricing_p4_rows: '<li>Comisión: 0 %</li><li>Grupos completados al mes: Ilimitados</li><li>Productos a la vez: Ilimitados</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Soporte prioritario: Sí</li><li>Tuko Marketplace: Sí</li><li>Tuko AI: Sí</li><li>Emails de estado de Tuko: Sí</li>',
+    pricing_note_groups: 'Solo cuentan los grupos que se cierran. Si un grupo no sale, no te consume nada.',
     pricing_p1_name: 'Free',
-    pricing_p1_price: 'Instalación gratuita',
+    pricing_p1_price: '0 €',
     pricing_p1_comm: 'Comisión sobre ventas de grupos Tuko. Máximo 500 €/mes',
     pricing_p1_f1: '0 €/mes',
     pricing_p1_f2: '4,2 % de comisión',
@@ -6382,8 +6848,8 @@ const translations = {
     pricing_p1_cap: 'Tope: 500 €/mes',
     pricing_p1_foot: 'Si no vendes, pagas 0 €.',
     pricing_p1_cta: 'Empezar gratis',
-    pricing_p2_name: 'Starter',
-    pricing_p2_price: '14,99 €',
+    pricing_p2_name: 'Básico',
+    pricing_p2_price: '19 €',
     pricing_p2_comm: 'Comisión sobre ventas de grupos Tuko. Máximo 400 €/mes',
     pricing_p2_f1: '14,99 €/mes',
     pricing_p2_f2: '2,5 % de comisión',
@@ -6393,7 +6859,7 @@ const translations = {
     pricing_p2_foot: 'Te sale a cuenta a partir de 880 €/mes vendidos con Tuko.',
     pricing_p2_cta: 'Elegir plan',
     pricing_p3_name: 'Pro',
-    pricing_p3_price: '69,99 €',
+    pricing_p3_price: '49 €',
     pricing_p3_comm: 'Comisión sobre ventas de grupos Tuko. Máximo 300 €/mes',
     pricing_p3_f1: '69,99 €/mes',
     pricing_p3_f2: '0,7 % de comisión',
@@ -6402,8 +6868,8 @@ const translations = {
     pricing_p3_cap: 'Tope: 300 €/mes',
     pricing_p3_foot: 'Te sale a cuenta a partir de 3.060 €/mes vendidos con Tuko.',
     pricing_p3_cta: 'Elegir plan',
-    pricing_p4_name: 'Ilimitado',
-    pricing_p4_price: '169 €',
+    pricing_p4_name: 'Escala',
+    pricing_p4_price: '129 €',
     pricing_p4_comm: 'Sin comisión sobre ventas de grupos Tuko. Sin tope.',
     pricing_p4_f1: '169 €/mes',
     pricing_p4_f2: '0 % de comisión',
@@ -6434,16 +6900,20 @@ const translations = {
     faq_badge: 'Preguntas frecuentes',
     faq_title: 'Lo que nos preguntan <em class="title-accent-em">siempre</em>',
     faq_sub: 'Objeciones reales de las llamadas, respondidas por escrito para quien nunca va a llamar.',
-    faq_q1: '¿Cuándo se le cobra a mi cliente?',
-    faq_a1: 'En el momento de unirse al grupo. Paga directamente el precio ya rebajado en el checkout, como una compra normal. El pedido queda en espera de envío hasta que el grupo se resuelve.',
-    faq_q3: '¿Y si no se alcanza el objetivo?',
-    faq_a3: 'El pedido se cancela y Shopify devuelve el 100% del dinero a tu cliente automáticamente. Tú no tienes que hacer nada. Tuko gestiona la devolución y avisa por email.',
-    faq_q4: '¿Esto no me destroza el margen?',
-    faq_a4: 'No. El descuento solo se aplica si el grupo se completa. Si no se llega al objetivo, no hay venta con descuento. Se cancela y se devuelve el dinero. Nunca vendes por debajo del margen que tú decidiste.',
-    faq_q5: '¿Esto es como Groupon?',
-    faq_a5: 'No. En Groupon el descuento es fijo desde el minuto uno. En Tuko el descuento depende de que se junten los compradores suficientes. Si no se juntan, no hay descuento ni venta, solo una devolución.',
-    faq_q6: 'Ya uso una app de descuentos por volumen. ¿Para qué quiero esta?',
-    faq_a6: 'Un descuento por volumen premia a un cliente por comprar más unidades él solo. Tuko premia que varios clientes distintos se unan. Así consigues gente nueva compartiendo tu producto, no solo pedidos más grandes de los que ya tenías.',
+    faq_q1: '¿Mis clientes compran con desconocidos?',
+    faq_a1: 'Compran en tu tienda, como siempre. Lo único que comparten es el precio. Cada pedido es individual y va a su dirección.',
+    faq_q2: '¿Y si el grupo no se llena?',
+    faq_a2: 'Tu cliente elige: se queda las dos unidades al precio de grupo, o le devolvemos el dinero. Si hay devolución, la comisión de la pasarela la ponemos nosotros. A ti no te cuesta nada.',
+    faq_q3: '¿Tengo que cambiar algo en mi Shopify?',
+    faq_a3: 'No. Ni ajustes de pago, ni Shopify Plus, ni nada a mano. Se instala y funciona.',
+    faq_q5: '¿Cuánto tarda en instalarse?',
+    faq_a5: 'Dos minutos. Eliges productos, pones el descuento y ya está encendido.',
+    faq_q6: '¿Qué pasa cuando terminen los 45 días una vez he entrado en el piloto?',
+    faq_a6: 'Eliges plan o desinstalas. No hay permanencia ni renovación automática sin avisar.',
+    faq_q7: '¿Por qué solo 5 tiendas?',
+    faq_a7: 'Porque queremos atenderlas bien y porque el piloto es para aprender, no para facturar. Cuando cerremos las cinco, cerramos.',
+    faq_q8: '¿Esto no me quita ventas que ya iba a hacer?',
+    faq_a8: 'Al revés que un descuento normal. Cuando pones un menos veinte por ciento en tu tienda, se lo lleva todo el que iba a comprar igualmente. Con Tuko, el descuento solo se aplica si entra una persona más. Nadie se lleva el precio bajo sin traerte un cliente.',
 
     /* MOCKUP */
     mockup_product_name: 'Set de cremas',
@@ -6458,28 +6928,27 @@ const translations = {
     /* POR QUÉ COMPRAN */
     why_badge: 'Por qué funciona',
     why_title: 'Tres cosas que hacen que <em class="title-accent-em">compren ahora</em>',
-    why_sub: 'Un descuento por volumen hace que un cliente compre tres unidades. Tuko hace que tres clientes compren una.',
     why1_kicker: 'El reloj',
-    why1_title: 'Con fecha, compran hoy',
-    why1_desc: 'Sin fecha, «ya lo pensaré». Con una fecha delante, la decisión se toma ahora.',
+    why1_title: 'Con 24 horas por delante, compran hoy.',
+    why1_desc: 'Sin reloj, lo dejan para nunca.',
     why1_w_label: 'Se cierra en',
     why1_w_h: 'Horas',
     why1_w_m: 'Minutos',
     why1_w_s: 'Segundos',
     why1_w_foot: 'Después, el <b>−20 %</b> desaparece.',
-    why2_kicker: 'La meta',
-    why2_title: 'El precio bueno puede no llegar',
-    why2_desc: 'Por eso nadie lo deja para mañana. Comprar hoy es la única forma de asegurarse el descuento.',
-    why2_w_missing: 'Faltan <b>8</b> para llegar juntos al −20 %',
-    why2_w_missing_tpl: 'Faltan <b>{n}</b> para llegar juntos al −20 %',
-    why2_w_missing_one: 'Falta <b>1</b> para llegar juntos al −20 %',
-    why2_w_unlocked: '<em>−20 % desbloqueado</em> para todo el grupo',
-    why2_w_flag: 'Meta',
+    why2_kicker: 'La persona',
+    why2_title: 'No le pides que llene un grupo de veinte.',
+    why2_desc: 'Le pides una persona. Eso sí lo hace.',
+    why2_w_missing: 'Ya hay 1 dentro. Falta <b>1</b> para que los dos compren con el −15&nbsp;%',
+    why2_w_missing_tpl: 'Falta <b>{n}</b> para que los dos compren con el −15&nbsp;%',
+    why2_w_missing_one: 'Ya hay 1 dentro. Falta <b>1</b> para que los dos compren con el −15&nbsp;%',
+    why2_w_unlocked: '<em>−15 % desbloqueado</em> para todo el grupo',
+    why2_w_flag: 'Los dos',
     why2_w_foot: 'Si no se llega, precio normal',
     why3_kicker: 'El grupo',
-    why3_title: 'Ven que otros ya entraron y se fían',
-    why3_desc: 'Y comparten para llenarlo, porque les conviene. Ese tráfico no lo pagas tú.',
-    why3_w_txt: '<b>7 personas</b> ya han reservado',
+    why3_title: 'Ven que alguien ya entró y pagó.',
+    why3_desc: 'Eso convence más que cualquier cosa que digas tú.',
+    why3_w_txt: '<b>1 persona</b> ya está dentro · falta 1',
     why3_w_btn: 'Compartir',
     why3_w_chip: 'Marta <em>acaba de unirse</em>',
     why3_w_chip_tpl: '{name} <em>acaba de unirse</em>',
@@ -6508,7 +6977,7 @@ const translations = {
     footer_col2_title: 'Legales',
     footer_privacy: 'Política de privacidad',
     footer_terms: 'Términos y condiciones',
-    footer_tagline: 'Descuentos por objetivo para tiendas Shopify. Vende más unidades sin regalar margen.',
+    footer_tagline: 'Un cliente entra. Trae a otro. Los dos compran.',
     footer_copy: '© 2026 Tuko. Todos los derechos reservados.',
 
     /* BLOG INDEX */
@@ -6741,7 +7210,7 @@ const translations = {
     nav_link_faq: 'FAQ',
     nav_link_beneficios: 'Why it works',
     nav_link_blog: 'Blog',
-    nav_cta: 'Install free',
+    nav_cta: 'Access the pilot',
     nav_lang_label: 'Language',
     /* TUKO AI */
     nav_link_ia: 'tuko AI',
@@ -6782,32 +7251,31 @@ const translations = {
     ia_form_submit: 'Join the waitlist',
     ia_soon_tag: 'Soon',
     ia_soon_text: 'It will also tell you which creators to work with and where to grow next.',
-    ia_wl_eyebrow: 'Waitlist',
-    ia_wl_count: '<b>39 brands</b> are already waiting for access',
-    ia_wl_foot: 'Only 50 stores get into the private beta.',
     fcta_eyebrow: 'Start today',
-    fcta_title: 'Light up your <em>first campaign</em>',
-    fcta_sub: 'Install is free. The Free plan has no subscription: 4.2% of what you sell with Tuko, capped at €500/mo.',
-    fcta_btn: 'Install free on Shopify',
+    fcta_title: '5 spots left',
+    fcta_sub: '45 days of full Tuko, free. No card and no lock-in. If it doesn\'t work, you uninstall it.',
+    fcta_btn: 'Get one of the 5 spots',
     fcta_trust2: 'Set up in 2 minutes',
     fcta_trust3: 'No theme changes',
     fcta_shopify: 'Available on Shopify',
 
     /* HERO */
     hero_badge: 'Backed by Xiji Incubator',
-    hero_title: 'One button and your customers start selling for you',
-    hero_title_l1: 'One button and your',
-    hero_title_l2: 'customers start',
-    hero_title_l3_before: '',
-    hero_title_accent: 'selling',
-    hero_title_l3_after: 'for you',
-    hero_subtitle: 'They join the product group and, when it fills, the price drops for everyone. They fill it — not your ads budget.',
-    hero_cta: 'Install free on Shopify',
+    hero_badge_pilot: 'Pilot plan · 5 spots · 45 days free',
+    hero_title: 'A customer walks in. Brings another. Both buy.',
+    hero_title_l1: 'A customer walks in.',
+    hero_title_l2: 'Brings another.',
+    hero_title_l3_before: 'Both',
+    hero_title_accent: 'buy.',
+    hero_title_l3_after: '',
+    hero_subtitle: 'Tuko puts a button on your products. Whoever taps it pays with the discount and has 24 hours to bring in one more buyer.',
+    hero_cta: 'Get one of the 5 spots',
     hero_cta2: 'See how it works',
     hero_cta3: 'Talk to us',
     hero_live_tpl: '{n} of {goal} already in the group',
     hero_live_full: 'Group complete · −{discount}% for everyone',
-    hero_trust_note: 'Set up in 2 minutes · free until you sell',
+    hero_trust_note: 'No card. No lock-in. No commissions.',
+    hero_appstore: 'Available on the Shopify App Store',
     hero_trust2: 'Set up in 2 minutes',
     hero_trust3: 'No theme changes',
     hero_trust4: 'Your same checkout',
@@ -6857,7 +7325,7 @@ const translations = {
     /* DATA (trigger + comparison) */
     data_trigger: 'Before launching another -20%, look at this.',
     data_title: 'Discount should not give margin away. <span class="title-accent-red">It should bring new customers.</span>',
-    data_sub: 'Compare both models before launching your next campaign.',
+    data_sub: 'Compare the two models before activating your campaign.',
     data_bad_label: 'The expensive way',
     data_num: '68%',
     data_num_note: 'of discounted orders can come from customers who were already buying from you.',
@@ -6881,7 +7349,7 @@ const translations = {
     hmock_btn: 'Reserve at €39.92',
     hmock_price_old: '€49.90',
     hmock_price_new: '€39.92',
-    hmock_price_off: '−20%',
+    hmock_price_off: '−15%',
     hmock_chip: 'Marta just joined',
     hmock_live: 'Live campaign',
     hmock_col_product: 'The product',
@@ -6909,25 +7377,63 @@ const translations = {
 
     /* HOW IT WORKS */
     how_badge: 'How it works',
-    how_title: 'A discount with conditions.<br><span class="how-title-underline">Yours</span>',
-    how_sub: 'You set the discount, the goal and the deadline. If it isn\'t met, it doesn\'t exist. And everything happens inside your store.',
+    how_title: 'This is how it works',
+    how_sub: 'You set the discount, the goal and the date. It starts when the first person joins, and they have 24 hours to bring someone else in.',
 
     /* HOW IT WORKS — STEPS */
-    step1_title: 'Pick a product, a discount and a goal',
-    step1_desc: 'For example: −20% if 10 people reserve before Friday.',
-    step2_title: 'Your customers buy and join the group',
-    step2_desc: 'They buy in your store and they\'re already in. Then they share to reach the goal.',
-    step3_title: 'If the goal is hit in time, the discount applies',
-    step3_desc: 'If not, you\'ll have customers you already know want the product, <span class="how-retarget-underline">ready for retargeting</span>.',
+    step1_title: 'Pick a product and a discount',
+    step1_desc: 'Pick one product or as many as you want from your catalogue. You set the discount, and it only applies when there are 2 people.',
+    step2_title: 'A customer opens the group',
+    step2_desc: 'They pay with the discount already applied and have 24 hours to bring one more person. They share it on WhatsApp, or your own traffic brings them.',
+    step3_title: 'One person is already in. The second one joins',
+    step3_desc: 'When the second person joins, the group is complete, the order goes through and Tuko opens a new group. The button never switches off.',
+    step4_title: 'It completes and Tuko opens another group',
+    step4_desc: 'When the group completes, the orders go through and, 5 minutes later, Tuko publishes a new empty group, ready for the next customer. You don\'t do a thing: it repeats until you say stop.',
+    rescue_title: 'What if nobody else joins?',
+    rescue_sub: 'Your customer chooses, and both options are good.',
+    rescue_opt1_title: 'They keep both units at the same group price.',
+    rescue_opt1_sub: 'You sell two.',
+    rescue_opt2_title: 'Or we refund their money.',
+    rescue_opt2_sub: 'In full, no strings attached.',
+    rescue_body: 'In that second case Shopify doesn\'t refund you the payment gateway fee. We cover it. A group that doesn\'t close doesn\'t cost you a single euro.',
+    noreq_title: 'What we don\'t ask of you',
+    noreq_b1: '<b>Not a single setting in your Shopify.</b> It stays as it is.',
+    noreq_b2: '<b>You don\'t need Shopify Plus.</b> If you have it, it works too.',
+    noreq_b3: '<b>No payments by hand.</b> Not one.',
+    noreq_b4: '<b>Zero commission for selling.</b> Ever.',
+    noreq_b6: '<b>Two minutes to install it.</b> One to remove it.',
+    pilot_badge: 'Pilot',
+    pilot_title: 'We\'re looking for 5 founding stores',
+    pilot_sub: 'Tuko is new and we know it. That\'s why the first 5 stores that take it seriously and help us won\'t pay anything. For 45 days we\'ll give them Tuko\'s most expensive plan, €129 a month, at no cost and with no card.',
+    pilot_ask_title: 'In return we ask you for three things',
+    pilot_ask1: 'That you really use it. On products with traffic, not on a forgotten one in the catalogue.',
+    pilot_ask2: 'That you tell us what fails. A short call every two or three weeks.',
+    pilot_ask3: 'That you leave an honest review on Shopify and let us tell your story here.',
+    pilot_cta: 'Get one of the 5 spots',
+    pilot_foot: 'No card, no lock-in and no commissions. If after 45 days it doesn\'t work for you, you uninstall it and that\'s that.',
+    pilot_form_title: 'Get one of the 5 spots',
+    pilot_form_web_label: 'Link to your website',
+    pilot_form_web_ph: 'https://yourstore.com',
+    pilot_form_name_label: 'Full name',
+    pilot_form_name_ph: 'Full name',
+    pilot_form_email_label: 'Contact email',
+    pilot_form_email_ph: 'you@email.com',
+    pilot_form_submit: 'Send',
 
     /* PRICING */
     pricing_badge: 'Pricing',
-    pricing_title: 'We only win if you <em class="title-accent-em">sell</em>',
-    pricing_sub: 'Pick the plan that fits your business.',
+    pricing_title: 'The plans, once we leave the pilot',
+    pricing_sub: 'None has a commission. You pay a fee and that\'s it. Right now they\'re not available: the only way in is the pilot.',
     pricing_per_month: '/ mo',
     pricing_recommended: 'Recommended',
+    pricing_p4_ribbon: 'This is what we\'re giving you: 45 days for the 5 pilot stores',
+    pricing_p1_rows: '<li>Commission: 0%</li><li>Completed groups per month: 5</li><li>Products at once: 2</li><li>Tuko status emails: Yes</li><li class="is-no">Group rescue: No</li><li class="is-no">Email marketing: No</li><li class="is-no">Priority support: No</li><li class="is-no">Tuko Marketplace: No</li><li class="is-no">Tuko AI: No</li>',
+    pricing_p2_rows: '<li>Commission: 0%</li><li>Completed groups per month: 40</li><li>Products at once: Unlimited</li><li>Group rescue: Yes</li><li>Tuko status emails: Yes</li><li class="is-no">Email marketing: No</li><li class="is-no">Priority support: No</li><li class="is-no">Tuko Marketplace: No</li><li class="is-no">Tuko AI: No</li>',
+    pricing_p3_rows: '<li>Commission: 0%</li><li>Completed groups per month: 150</li><li>Products at once: Unlimited</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Tuko status emails: Yes</li><li class="is-no">Priority support: No</li><li class="is-no">Tuko Marketplace: No</li><li class="is-no">Tuko AI: No</li>',
+    pricing_p4_rows: '<li>Commission: 0%</li><li>Completed groups per month: Unlimited</li><li>Products at once: Unlimited</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Priority support: Yes</li><li>Tuko Marketplace: Yes</li><li>Tuko AI: Yes</li><li>Tuko status emails: Yes</li>',
+    pricing_note_groups: 'Only groups that close count. If a group doesn\'t close, it uses up nothing.',
     pricing_p1_name: 'Free',
-    pricing_p1_price: 'Free install',
+    pricing_p1_price: '€0',
     pricing_p1_comm: 'Commission on Tuko group sales. Maximum €500/mo',
     pricing_p1_f1: '€0/mo',
     pricing_p1_f2: '4.2% commission',
@@ -6936,8 +7442,8 @@ const translations = {
     pricing_p1_cap: 'Cap: €500/mo',
     pricing_p1_foot: 'If you don\'t sell, you pay €0.',
     pricing_p1_cta: 'Start free',
-    pricing_p2_name: 'Starter',
-    pricing_p2_price: '€14.99',
+    pricing_p2_name: 'Basic',
+    pricing_p2_price: '€19',
     pricing_p2_comm: 'Commission on Tuko group sales. Maximum €400/mo',
     pricing_p2_f1: '€14.99/mo',
     pricing_p2_f2: '2.5% commission',
@@ -6947,7 +7453,7 @@ const translations = {
     pricing_p2_foot: 'Worth it from €880/mo sold with Tuko.',
     pricing_p2_cta: 'Choose plan',
     pricing_p3_name: 'Pro',
-    pricing_p3_price: '€69.99',
+    pricing_p3_price: '€49',
     pricing_p3_comm: 'Commission on Tuko group sales. Maximum €300/mo',
     pricing_p3_f1: '€69.99/mo',
     pricing_p3_f2: '0.7% commission',
@@ -6956,8 +7462,8 @@ const translations = {
     pricing_p3_cap: 'Cap: €300/mo',
     pricing_p3_foot: 'Worth it from €3,060/mo sold with Tuko.',
     pricing_p3_cta: 'Choose plan',
-    pricing_p4_name: 'Unlimited',
-    pricing_p4_price: '€169',
+    pricing_p4_name: 'Scale',
+    pricing_p4_price: '€129',
     pricing_p4_comm: 'No commission on Tuko group sales. No cap.',
     pricing_p4_f1: '€169/mo',
     pricing_p4_f2: '0% commission',
@@ -6988,16 +7494,20 @@ const translations = {
     faq_badge: 'FAQ',
     faq_title: 'What we get asked <em class="title-accent-em">every time</em>',
     faq_sub: 'Real objections from sales calls, answered in writing for the people who will never pick up the phone.',
-    faq_q1: 'When does my customer get charged?',
-    faq_a1: 'When they join the group. They pay the discounted price at checkout, like a normal purchase. The order waits to ship until the group is resolved.',
-    faq_q3: 'What if the goal isn\'t reached?',
-    faq_a3: 'The order is cancelled and Shopify automatically refunds 100% of the money to your customer. You don\'t have to do anything. Tuko handles the refund and sends an email.',
-    faq_q4: 'Won\'t this wreck my margin?',
-    faq_a4: 'No. The discount only applies if the group fills. If the goal isn\'t reached, there is no discounted sale. The order is cancelled and the money is refunded. You never sell below the margin you set.',
-    faq_q5: 'Is this like Groupon?',
-    faq_a5: 'No. On Groupon the discount is fixed from minute one. With Tuko the discount depends on enough buyers joining. If they don\'t, there is no discount and no sale, only a refund.',
-    faq_q6: 'I already use a volume-discount app. Why do I need this?',
-    faq_a6: 'A volume discount rewards one customer for buying more units on their own. Tuko rewards several different customers joining together. You get new people sharing your product, not just bigger orders from customers you already had.',
+    faq_q1: 'Do my customers buy with strangers?',
+    faq_a1: 'They buy in your store, as always. The only thing they share is the price. Each order is individual and goes to their own address.',
+    faq_q2: 'What if the group doesn\'t fill?',
+    faq_a2: 'Your customer chooses: they keep both units at the group price, or we refund their money. If there\'s a refund, we cover the payment gateway fee. It costs you nothing.',
+    faq_q3: 'Do I have to change anything in my Shopify?',
+    faq_a3: 'No. No payment settings, no Shopify Plus, nothing by hand. You install it and it works.',
+    faq_q5: 'How long does it take to install?',
+    faq_a5: 'Two minutes. You pick products, set the discount and it\'s on.',
+    faq_q6: 'What happens when the 45 days end once I\'ve joined the pilot?',
+    faq_a6: 'You choose a plan or uninstall. There\'s no lock-in and no automatic renewal without notice.',
+    faq_q7: 'Why only 5 stores?',
+    faq_a7: 'Because we want to look after them properly and because the pilot is for learning, not for billing. Once we fill the five, we close.',
+    faq_q8: 'Won\'t this take away sales I was going to make anyway?',
+    faq_a8: 'Quite the opposite of a normal discount. When you put twenty percent off in your store, everyone who was going to buy anyway takes it. With Tuko, the discount only applies if one more person joins. Nobody gets the low price without bringing you a customer.',
 
     /* MOCKUP */
     mockup_product_name: 'Cream set',
@@ -7012,28 +7522,27 @@ const translations = {
     /* WHY THEY BUY */
     why_badge: 'Why it works',
     why_title: 'Three things that make them <em class="title-accent-em">buy now</em>',
-    why_sub: 'A volume discount makes one customer buy three units. Tuko makes three customers buy one.',
     why1_kicker: 'The clock',
-    why1_title: 'With a deadline, they buy today',
-    why1_desc: 'Without one, "I\'ll think about it". With a date in front of them, the decision happens now.',
+    why1_title: 'With 24 hours ahead, they buy today.',
+    why1_desc: 'Without a clock, they leave it for never.',
     why1_w_label: 'Closes in',
     why1_w_h: 'Hours',
     why1_w_m: 'Minutes',
     why1_w_s: 'Seconds',
     why1_w_foot: 'After that, the <b>−20%</b> is gone.',
-    why2_kicker: 'The goal',
-    why2_title: 'The good price might not happen',
-    why2_desc: 'That\'s why nobody leaves it for tomorrow. Buying today is the only way to lock in the discount.',
-    why2_w_missing: '<b>8</b> more to reach −20% together',
-    why2_w_missing_tpl: '<b>{n}</b> more to reach −20% together',
-    why2_w_missing_one: 'Just <b>1</b> more to reach −20% together',
-    why2_w_unlocked: '<em>−20% unlocked</em> for the whole group',
-    why2_w_flag: 'Goal',
+    why2_kicker: 'The person',
+    why2_title: 'You don\'t ask them to fill a group of twenty.',
+    why2_desc: 'You ask for one person. That they\'ll do.',
+    why2_w_missing: 'There\'s 1 inside. <b>1</b> more so both buy at −15%',
+    why2_w_missing_tpl: '<b>{n}</b> more so both buy at −15%',
+    why2_w_missing_one: 'There\'s 1 inside. <b>1</b> more so both buy at −15%',
+    why2_w_unlocked: '<em>−15% unlocked</em> for the whole group',
+    why2_w_flag: 'Both',
     why2_w_foot: 'If the goal isn\'t hit, regular price',
     why3_kicker: 'The group',
-    why3_title: 'They see others already in, and they trust it',
-    why3_desc: 'And they share to fill it, because it pays off for them. That traffic costs you nothing.',
-    why3_w_txt: '<b>7 people</b> have already reserved',
+    why3_title: 'They see someone already joined and paid.',
+    why3_desc: 'That convinces more than anything you could say.',
+    why3_w_txt: '<b>1 person</b> already inside · 1 to go',
     why3_w_btn: 'Share',
     why3_w_chip: 'Marta <em>just joined</em>',
     why3_w_chip_tpl: '{name} <em>just joined</em>',
@@ -7062,7 +7571,7 @@ const translations = {
     footer_col2_title: 'Legal',
     footer_privacy: 'Privacy policy',
     footer_terms: 'Terms and conditions',
-    footer_tagline: 'Goal-based discounts for Shopify stores. Sell more units without giving away margin.',
+    footer_tagline: 'A customer walks in. Brings another. Both buy.',
     footer_copy: '© 2026 Tuko. All rights reserved.',
 
     /* BLOG INDEX */
@@ -7888,7 +8397,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const bar = document.getElementById('stickyCta');
   const hero = document.querySelector('.hero');
   if (!bar || !hero || !('IntersectionObserver' in window)) return;
-  const stops = [document.querySelector('.pricing'), document.querySelector('.final-cta-wrap'), document.querySelector('footer')].filter(Boolean);
+  const stops = [document.querySelector('.pricing'), document.querySelector('.final-cta-wrap'), document.querySelector('#solicitud'), document.querySelector('footer')].filter(Boolean);
   const mq = window.matchMedia('(max-width: 960px)');
   let heroIn = true;
   const inView = new Set();
@@ -7912,7 +8421,36 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mq.addEventListener) mq.addEventListener('change', update); else mq.addListener(update);
   update();
 })();
+
+/* ── Plan piloto: las tres peticiones se encienden de izquierda a derecha ── */
+(function () {
+  const grid = document.getElementById('pilotAsks');
+  if (!grid) return;
+  const cards = Array.from(grid.querySelectorAll('.pilot-ask'));
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) {
+    cards.forEach(c => c.classList.add('is-lit'));
+    return;
+  }
+  let timers = [];
+  let lit = false;
+  const clear = () => { timers.forEach(clearTimeout); timers = []; };
+  const io = new IntersectionObserver(entries => {
+    const e = entries[entries.length - 1];
+    if (e.isIntersecting && e.intersectionRatio >= 0.45) {
+      if (lit) return;
+      lit = true;
+      cards.forEach((c, i) => timers.push(setTimeout(() => c.classList.add('is-lit'), 700 + i * 1200)));
+    } else if (!e.isIntersecting) {
+      lit = false;
+      clear();
+      cards.forEach(c => c.classList.remove('is-lit'));
+    }
+  }, { threshold: [0, 0.45] });
+  io.observe(grid);
+})();
 </script>
+<script src="assets/js/tuko-form.js?v=20260930i" defer></script>
 <script src="assets/js/ga4-loader.js" defer></script>
 <script src="assets/js/local-landing-label.js"></script>
 </body>

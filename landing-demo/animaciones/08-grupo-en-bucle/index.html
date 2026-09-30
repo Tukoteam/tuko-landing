@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tuko — El grupo se repite</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800&display=swap');
+
+  :root {
+    --n-white: #ffffff;
+    --n-50: #f5f6fa;
+    --n-100: #f1f5f9;
+    --n-200: #e5e7eb;
+    --n-300: #d1d5db;
+    --n-400: #9ca3af;
+    --n-500: #6b7280;
+    --n-600: #4b5563;
+    --n-900: #171717;
+    --indigo: #4f46e5;
+    --azul: #3d50f2;
+    --verde: #22c55e;
+    --emerald: #10b981;
+    --emerald-2: #059669;
+    --slate-300: #cbd5e1;
+    --slate-400: #94a3b8;
+    --slate-500: #64748b;
+    --slate-600: #475569;
+    --slate-900: #0f172a;
+    --shadow: 0 10px 40px rgba(20, 24, 38, 0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--n-50);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html.embedded, html.embedded body {
+    min-height: 0;
+    height: 100%;
+  }
+  html.embedded body {
+    padding: 0;
+    overflow: hidden;
+    background: #fff;
+    display: block;
+  }
+  html.embedded .animation-viewport {
+    max-width: none;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .animation-viewport {
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    background: linear-gradient(165deg, #f8fafc 0%, #eef2ff 45%, #f1f5f9 100%);
+    box-shadow: var(--shadow);
+    aspect-ratio: 1 / 1.08;
+  }
+
+  .stage {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gb-fit {
+    flex-shrink: 0;
+    transform-origin: center center;
+    transition: opacity 0.6s ease;
+  }
+  .gb-fit.is-hidden { opacity: 0; }
+
+  /* ---------- Popup del grupo ---------- */
+  .gb-card {
+    width: 400px;
+    position: relative;
+    overflow: hidden;
+    background: var(--n-white);
+    border-radius: 24px;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    box-shadow: 0 4px 6px rgba(15, 23, 42, 0.03), 0 20px 60px rgba(15, 23, 42, 0.10);
+    text-align: center;
+    color: var(--slate-900);
+    transition: height 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .no-anim, .no-anim * { transition: none !important; animation: none !important; }
+
+  .gb-card[data-state="a"] [data-st]:not([data-st*="a"]),
+  .gb-card[data-state="b"] [data-st]:not([data-st*="b"]),
+  .gb-card[data-state="c"] [data-st]:not([data-st*="c"]),
+  .gb-card[data-state="x"] [data-st]:not([data-st*="x"]) { display: none !important; }
+
+  .gb-swap { transition: opacity 0.32s ease; }
+  .gb-card.is-swapping .gb-swap { opacity: 0; }
+
+  .gb-tag {
+    position: absolute; top: 0; left: 0;
+    padding: 7px 16px 8px;
+    border-radius: 0 0 14px 0;
+    font-size: 13px; font-weight: 800; color: #fff;
+    letter-spacing: -0.01em;
+    z-index: 2;
+  }
+  .gb-tag.is-in { background: linear-gradient(135deg, #3d50f2 0%, #5566f6 100%); }
+  .gb-tag.is-closed { background: #0f9f6e; }
+
+  .gb-x {
+    position: absolute; top: 16px; right: 16px;
+    width: 20px; height: 20px;
+    z-index: 2;
+  }
+  .gb-x svg { width: 100%; height: 100%; stroke: var(--slate-500); stroke-width: 2; fill: none; stroke-linecap: round; }
+
+  .gb-body { padding: 26px 22px 18px; }
+  .gb-card[data-state="b"] .gb-body { padding-top: 30px; }
+  .gb-card[data-state="c"] .gb-body { padding: 44px 22px 30px; }
+
+  .gb-price-row {
+    font-size: 20px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2;
+    padding: 0 24px;
+  }
+  .gb-old { color: var(--slate-400); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+  .gb-sep { color: var(--slate-400); margin: 0 1px; }
+  .gb-today { color: var(--slate-900); }
+  .gb-new { color: var(--azul); }
+
+  .gb-title { font-size: 20px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.2; color: var(--slate-900); padding: 0 26px; }
+  .gb-card[data-state="c"] .gb-title { font-size: 19px; padding: 0 8px; letter-spacing: -0.03em; }
+  .gb-sub { margin-top: 10px; font-size: 13.5px; font-weight: 700; color: #334155; }
+  .gb-sub b { color: var(--azul); font-weight: 800; }
+  .gb-price-c { margin-top: 10px; font-size: 16px; font-weight: 800; letter-spacing: -0.02em; }
+  .gb-price-c .gb-old { font-weight: 600; font-size: 14px; }
+  .gb-price-c .gb-new { color: var(--slate-900); }
+
+  .gb-count {
+    margin-top: 18px;
+    font-size: 50px; font-weight: 800; letter-spacing: -0.04em; line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .gb-card[data-state="b"] .gb-count,
+  .gb-card[data-state="x"] .gb-count,
+  .gb-card[data-state="c"] .gb-count { margin-top: 24px; font-size: 58px; }
+  .gb-count span { display: inline-block; transition: color 0.6s ease; }
+  .gb-card[data-state="a"] .gb-count span { color: var(--slate-400); }
+  .gb-card[data-state="b"] #cntN,
+  .gb-card[data-state="x"] #cntN { color: var(--azul); }
+  .gb-card[data-state="b"] #cntOf,
+  .gb-card[data-state="x"] #cntOf { color: var(--slate-500); }
+  .gb-card[data-state="c"] .gb-count span { color: var(--azul); }
+  #cntN.pop { animation: numPop 0.6s cubic-bezier(0.2, 0.95, 0.15, 1); }
+  @keyframes numPop {
+    0% { transform: scale(0.7); }
+    45% { transform: scale(1.12); }
+    100% { transform: scale(1); }
+  }
+
+  .gb-dots { display: flex; align-items: center; justify-content: center; margin-top: 20px; }
+  .gb-card[data-state="c"] .gb-dots { margin-top: 26px; }
+  .gb-dot {
+    width: 42px; height: 42px; border-radius: 50%;
+    position: relative; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: #f8fafc;
+    border: 2.5px solid #e2e8f0;
+    transition: background 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
+  }
+  .gb-dot.is-next {
+    background: #ffffff;
+    border-color: var(--slate-400);
+    box-shadow: 0 0 0 6px #eef1f5;
+  }
+  .gb-dot.is-done {
+    background: var(--verde);
+    border-color: var(--verde);
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.14), 0 8px 22px rgba(34, 197, 94, 0.38);
+  }
+  .gb-dot.pop { animation: dotPop 0.7s cubic-bezier(0.34, 1.4, 0.64, 1); }
+  @keyframes dotPop {
+    0% { transform: scale(0.82); }
+    60% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  .gb-dot svg {
+    position: absolute; width: 17px; height: 17px;
+    transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
+  }
+  .gb-ic-user { fill: var(--slate-300); }
+  .gb-dot.is-next .gb-ic-user { fill: var(--slate-600); }
+  .gb-ic-check { stroke: #fff; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transform: scale(0.4); }
+  .gb-dot.is-done .gb-ic-user { opacity: 0; transform: scale(0.5); }
+  .gb-dot.is-done .gb-ic-check { opacity: 1; transform: scale(1); }
+
+  .gb-line {
+    width: 54px; height: 3px; border-radius: 2px;
+    background: #e2e8f0;
+    margin: 0 2px;
+    position: relative; overflow: hidden;
+  }
+  .gb-line-fill {
+    position: absolute; inset: 0;
+    background: var(--verde);
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .gb-closes { margin-top: 22px; font-size: 14px; font-weight: 500; color: var(--slate-900); }
+  .gb-cd {
+    width: 84%;
+    margin: 10px auto 0;
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 12px 0;
+  }
+  .gb-cd-cell { padding: 2px 4px; }
+  .gb-cd-cell + .gb-cd-cell { border-left: 1px solid #e2e8f0; }
+  .gb-cd-num { font-size: 27px; font-weight: 700; color: var(--slate-900); line-height: 1.1; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+  .gb-cd-lbl { font-size: 11px; font-weight: 500; color: var(--slate-600); margin-top: 3px; }
+
+  .gb-lead { margin-top: 16px; font-size: 12.5px; font-weight: 700; color: var(--slate-600); line-height: 1.5; text-wrap: balance; }
+  .gb-lead b { color: var(--azul); font-weight: 800; }
+
+  .gb-done-t { margin-top: 30px; font-size: 14px; font-weight: 800; color: var(--slate-900); }
+  .gb-done-s { margin-top: 6px; font-size: 12.5px; font-weight: 500; color: var(--slate-400); }
+
+  .gb-foot { border-top: 1px solid #eef2f6; padding: 12px 12px 12px; }
+  .gb-btn {
+    width: 100%;
+    padding: 13px;
+    border-radius: 11px;
+    border: none;
+    background: var(--azul);
+    color: #fff;
+    font-family: inherit;
+    font-size: 13.5px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    box-shadow: 0 8px 20px rgba(61, 80, 242, 0.32);
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.32s ease;
+  }
+  .gb-btn svg { width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .gb-btn.pressed { transform: scale(0.95); box-shadow: 0 4px 12px rgba(61, 80, 242, 0.25); }
+  .gb-cancel { margin-top: 10px; font-size: 11px; font-weight: 500; color: var(--slate-400); text-decoration: underline; text-underline-offset: 2px; }
+  .gb-note { margin-top: 10px; font-size: 10px; font-weight: 500; color: var(--slate-500); line-height: 1.4; }
+
+
+  /* ---------- Paso 4: el grupo se repite ---------- */
+  .gb-body { padding: 40px 22px 20px; }
+  .gb-card .gb-count { margin-top: 22px; font-size: 58px; }
+  .gb-card[data-state="p0"] .gb-count span { color: var(--slate-400); }
+  .gb-card[data-state="p1"] #cntN { color: var(--azul); }
+  .gb-card[data-state="p1"] #cntOf { color: var(--slate-500); }
+  .gb-card[data-state="p2"] .gb-count span { color: var(--azul); }
+  .gb-dots { margin-top: 22px; }
+  .gb-tag { transition: background 0.6s ease; }
+
+  .gb-status {
+    width: 84%;
+    height: 64px;
+    margin: 24px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 14px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--slate-600);
+    transition: background 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  }
+  .gb-status b { color: var(--azul); font-weight: 800; }
+  .gb-status.is-ok {
+    background: rgba(34, 197, 94, 0.08);
+    border-color: rgba(34, 197, 94, 0.32);
+    color: #0f9f6e;
+    font-weight: 700;
+  }
+  .st-inner { display: flex; align-items: center; justify-content: center; gap: 9px; transition: opacity 0.3s ease; }
+  .st-inner.is-out { opacity: 0; }
+  .st-check {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--verde);
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .st-check svg { width: 13px; height: 13px; stroke: #fff; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .st-wait { flex-direction: column; gap: 1px; }
+  .st-wait-lbl { font-size: 11px; font-weight: 500; color: var(--slate-600); }
+  .st-wait-num { font-size: 24px; font-weight: 700; color: var(--slate-900); line-height: 1.1; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+
+  .gb-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 4px 0;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--slate-600);
+  }
+  .gb-counter-num {
+    min-width: 28px;
+    height: 26px;
+    padding: 0 9px;
+    border-radius: 999px;
+    background: rgba(61, 80, 242, 0.1);
+    color: var(--azul);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gb-counter-num.pop { animation: numPop 0.6s cubic-bezier(0.2, 0.95, 0.15, 1); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gb-fit, .gb-swap, .st-inner, .gb-tag, .gb-status, .gb-dot, .gb-dot svg, .gb-line-fill, .gb-count span { transition: none !important; }
+    .pop { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="animation-viewport" id="viewport">
+    <div class="stage">
+      <div class="gb-fit is-hidden" id="gbFit">
+        <div class="gb-card" id="gbCard" data-state="p0">
+          <div class="gb-tag is-in" id="tag">Grupo #1</div>
+          <div class="gb-body">
+            <div class="gb-price-row">
+              <span class="gb-old" data-k="old">80,00 €</span><span class="gb-sep"> · </span><span class="gb-today" data-k="today">Hoy</span>
+              <span class="gb-new" data-k="new">68,00 €</span>
+            </div>
+            <div class="gb-swap"><div class="gb-sub" id="sub">Grupo nuevo publicado</div></div>
+            <div class="gb-count"><span id="cntN">0</span><span id="cntOf">&nbsp;de 2</span></div>
+            <div class="gb-dots" aria-hidden="true">
+              <div class="gb-dot is-next" id="dot1">
+                <svg class="gb-ic-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.2"/><path d="M3.8 20.5c0-4.3 3.7-7 8.2-7s8.2 2.7 8.2 7z"/></svg>
+                <svg class="gb-ic-check" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7.2"/></svg>
+              </div>
+              <div class="gb-line"><div class="gb-line-fill" id="lineFill"></div></div>
+              <div class="gb-dot" id="dot2">
+                <svg class="gb-ic-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.2"/><path d="M3.8 20.5c0-4.3 3.7-7 8.2-7s8.2 2.7 8.2 7z"/></svg>
+                <svg class="gb-ic-check" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7.2"/></svg>
+              </div>
+            </div>
+            <div class="gb-status" id="status"><div class="st-inner" id="stInner"></div></div>
+          </div>
+          <div class="gb-foot">
+            <div class="gb-counter"><span id="counterLbl">Grupos completados</span><span class="gb-counter-num" id="counterNum">0</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      if (window.parent !== window) document.documentElement.classList.add('embedded');
+      const $ = (id) => document.getElementById(id);
+      const viewport = $('viewport');
+      const fitEl = $('gbFit');
+      const card = $('gbCard');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const COPY = {
+        es: {
+          old: '80,00 €',
+          nw: '68,00 €',
+          today: 'Hoy',
+          of: '\u00a0de 2',
+          group: 'Grupo #',
+          sub0: 'Grupo nuevo publicado',
+          sub1: 'Se ha unido <b>1 persona</b>',
+          sub2: 'Grupo completado',
+          st0: 'Se inicia cuando el primero se une',
+          st1: 'Falta <b>1 persona</b> para cerrar este grupo',
+          stRun: 'Ejecutando pedidos…',
+          stOk: 'Pedidos ejecutados',
+          stWait: 'Nuevo grupo en',
+          counter: 'Grupos completados',
+        },
+        en: {
+          old: '80.00 €',
+          nw: '68.00 €',
+          today: 'Today',
+          of: '\u00a0of 2',
+          group: 'Group #',
+          sub0: 'New group published',
+          sub1: '<b>1 person</b> has joined',
+          sub2: 'Group completed',
+          st0: 'It starts when the first person joins',
+          st1: '<b>1 person</b> left to close this group',
+          stRun: 'Placing orders…',
+          stOk: 'Orders placed',
+          stWait: 'New group in',
+          counter: 'Groups completed',
+        },
+      };
+      let lang = 'es';
+      let paused = false;
+      function t() { return COPY[lang] || COPY.es; }
+
+      function getStoredDemoLang() {
+        try {
+          const q = new URLSearchParams(location.search).get('lang');
+          if (q === 'en' || q === 'es') return q;
+          const path = (window.parent !== window
+            ? (window.parent.location.pathname || '')
+            : (location.pathname || '')).replace(/\/$/, '') || '/';
+          if (path === '/en' || path.indexOf('/en/') === 0) return 'en';
+          const stored = localStorage.getItem('tuko_lang') || localStorage.getItem('tuko-lang');
+          if (stored === 'en' || stored === 'es') return stored;
+        } catch (e) {}
+        return 'es';
+      }
+
+      /* ---- Estado ---- */
+      let groupNo = 1;
+      let completed = 0;
+      let phase = 'p0';     // p0 · p1 · p2 (el recuadro inferior añade run / ok / wait)
+      let statusMode = 'st0';
+      let waitSec = 300;
+
+      function pad2(n) { return (n < 10 ? '0' : '') + n; }
+      function waitText(sec) { return Math.floor(sec / 60) + ':' + pad2(sec % 60); }
+
+      function statusHTML(mode) {
+        const c = t();
+        if (mode === 'ok') {
+          return '<span class="st-check"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7.2"/></svg></span>' + c.stOk;
+        }
+        if (mode === 'wait') {
+          return '<span class="st-wait-lbl">' + c.stWait + '</span><span class="st-wait-num" id="waitNum">' + waitText(waitSec) + '</span>';
+        }
+        return '<span>' + (mode === 'st1' ? c.st1 : mode === 'run' ? c.stRun : c.st0) + '</span>';
+      }
+      function renderStatus() {
+        const inner = $('stInner');
+        inner.innerHTML = statusHTML(statusMode);
+        inner.classList.toggle('st-wait', statusMode === 'wait');
+        $('status').classList.toggle('is-ok', statusMode === 'ok');
+      }
+      function subHTML() {
+        const c = t();
+        return phase === 'p0' ? c.sub0 : phase === 'p1' ? c.sub1 : c.sub2;
+      }
+      function renderTag() {
+        const tag = $('tag');
+        tag.textContent = t().group + groupNo;
+        tag.classList.toggle('is-in', phase !== 'p2');
+        tag.classList.toggle('is-closed', phase === 'p2');
+      }
+      function setDots() {
+        const d1 = $('dot1');
+        const d2 = $('dot2');
+        d1.classList.toggle('is-next', phase === 'p0');
+        d1.classList.toggle('is-done', phase !== 'p0');
+        d2.classList.toggle('is-next', phase === 'p1');
+        d2.classList.toggle('is-done', phase === 'p2');
+        $('lineFill').style.transform = 'scaleX(' + (phase === 'p0' ? 0 : phase === 'p1' ? 0.5 : 1) + ')';
+        $('cntN').textContent = phase === 'p0' ? '0' : phase === 'p1' ? '1' : '2';
+      }
+      function renderAll() {
+        card.dataset.state = phase;
+        $('sub').innerHTML = subHTML();
+        setDots();
+        renderTag();
+        renderStatus();
+        $('counterNum').textContent = completed;
+      }
+
+      function applyStaticCopy() {
+        const c = t();
+        document.querySelectorAll('[data-k="old"]').forEach((n) => { n.textContent = c.old; });
+        document.querySelectorAll('[data-k="new"]').forEach((n) => { n.textContent = c.nw; });
+        document.querySelectorAll('[data-k="today"]').forEach((n) => { n.textContent = c.today; });
+        $('cntOf').textContent = c.of;
+        $('counterLbl').textContent = c.counter;
+        document.documentElement.lang = lang;
+        renderAll();
+      }
+
+      /* ---- Escalado: la tarjeta mantiene su diseño y se ajusta al hueco ---- */
+      let maxH = 0;
+      function fit() {
+        const pad = 10;
+        const availW = viewport.clientWidth - pad * 2;
+        const availH = viewport.clientHeight - pad * 2;
+        const w = card.offsetWidth;
+        const h = maxH || card.offsetHeight;
+        if (!w || !h || availW <= 0 || availH <= 0) return;
+        const s = Math.min(availW / w, availH / h, 1.2);
+        fitEl.style.transform = 'scale(' + s + ')';
+      }
+      function measureMax() {
+        maxH = card.offsetHeight;
+        fit();
+      }
+      function applyDemoLang(next) {
+        lang = next === 'en' ? 'en' : 'es';
+        applyStaticCopy();
+        measureMax();
+      }
+
+      function wait(ms) {
+        return new Promise((r) => {
+          let elapsed = 0;
+          let last = performance.now();
+          function tick(now) {
+            if (paused) {
+              last = now;
+              requestAnimationFrame(tick);
+              return;
+            }
+            elapsed += now - last;
+            last = now;
+            if (elapsed >= ms) r();
+            else requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        });
+      }
+      function pop(el) {
+        if (reduceMotion) return;
+        el.classList.remove('pop');
+        void el.offsetWidth;
+        el.classList.add('pop');
+      }
+
+      async function swapTo(nextPhase, nextStatus) {
+        card.classList.add('is-swapping');
+        $('stInner').classList.add('is-out');
+        await wait(reduceMotion ? 0 : 320);
+        const prevPhase = phase;
+        phase = nextPhase;
+        statusMode = nextStatus;
+        card.dataset.state = phase;
+        $('sub').innerHTML = subHTML();
+        setDots();
+        renderTag();
+        renderStatus();
+        if (prevPhase !== phase) {
+          pop($('cntN'));
+          pop(phase === 'p1' ? $('dot1') : $('dot2'));
+        }
+        card.classList.remove('is-swapping');
+        $('stInner').classList.remove('is-out');
+      }
+      async function setStatus(nextStatus) {
+        $('stInner').classList.add('is-out');
+        await wait(reduceMotion ? 0 : 300);
+        statusMode = nextStatus;
+        renderStatus();
+        $('stInner').classList.remove('is-out');
+      }
+
+      async function loop() {
+        // Grupo nuevo publicado, vacío: 0 de 2
+        phase = 'p0';
+        statusMode = 'st0';
+        waitSec = 300;
+        renderAll();
+        fitEl.classList.remove('is-hidden');
+        await wait(3600);
+
+        // Entra la primera persona: 1 de 2
+        await swapTo('p1', 'st1');
+        await wait(3000);
+
+        // Entra la segunda: 2 de 2 y se ejecutan los pedidos
+        await swapTo('p2', 'run');
+        await wait(1500);
+        await setStatus('ok');
+        completed += 1;
+        $('counterNum').textContent = completed;
+        pop($('counterNum'));
+        await wait(2600);
+
+        // A los 5 minutos, Tuko publica otro grupo (cuenta atrás acelerada)
+        await setStatus('wait');
+        if (!reduceMotion) {
+          await wait(500);
+          while (waitSec > 0) {
+            await wait(40);
+            waitSec = Math.max(0, waitSec - 5);
+            const n = $('waitNum');
+            if (n) n.textContent = waitText(waitSec);
+          }
+          await wait(400);
+        } else {
+          await wait(2600);
+        }
+
+        fitEl.classList.add('is-hidden');
+        await wait(700);
+        groupNo += 1;
+        loop();
+      }
+
+      let started = false;
+      function startLoop() {
+        paused = false;
+        if (!started) {
+          started = true;
+          loop();
+        }
+      }
+      function stopLoop() {
+        paused = true;
+      }
+
+      window.addEventListener('message', function (ev) {
+        if (!ev.data || typeof ev.data !== 'object') return;
+        if (ev.data.type === 'tuko-demo-lang') applyDemoLang(ev.data.lang);
+        if (ev.data.type === 'tuko-demo-play') startLoop();
+        if (ev.data.type === 'tuko-demo-pause') stopLoop();
+      });
+
+      window.addEventListener('resize', fit);
+      if (typeof ResizeObserver !== 'undefined') new ResizeObserver(fit).observe(viewport);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureMax);
+
+      applyDemoLang(getStoredDemoLang());
+      startLoop();
+    })();
+  </script>
+</body>
+</html>

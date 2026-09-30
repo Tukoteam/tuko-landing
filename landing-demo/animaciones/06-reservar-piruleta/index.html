@@ -89,7 +89,7 @@
       border-radius: 24px;
       background: linear-gradient(165deg, #f8fafc 0%, #eef2ff 45%, #f1f5f9 100%);
       box-shadow: var(--shadow);
-      aspect-ratio: 9 / 15.2;
+      aspect-ratio: 9 / 13.4;
     }
 
     .stage {
@@ -239,40 +239,6 @@
     .btn-want.hover { transform: scale(1.03); box-shadow: 0 10px 26px rgba(79,70,229,0.42); }
     .btn-want.pressed { transform: scale(0.94); }
 
-    /* ---------- Panel CONFIRMADA ---------- */
-    .panel3-inner { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
-    .confirm-circle {
-      width: 74px; height: 74px; border-radius: 50%;
-      background: linear-gradient(135deg, #34d399, var(--emerald-2));
-      display: flex; align-items: center; justify-content: center;
-      color: #fff; font-size: 34px;
-      box-shadow: 0 14px 34px rgba(16,185,129,0.35);
-      transform: scale(0.5); opacity: 0;
-      transition: transform 0.6s cubic-bezier(0.34,1.4,0.64,1), opacity 0.5s ease;
-      margin-bottom: 18px;
-    }
-    .confirm-circle.show { transform: scale(1); opacity: 1; }
-    .confirm-title { font-size: 18px; font-weight: 800; color: var(--n-900); letter-spacing: -0.02em; }
-    .confirm-sub { font-size: 12.5px; font-weight: 500; color: var(--n-500); margin-top: 8px; margin-bottom: 24px; text-align: center; }
-
-    .btn-share {
-      width: 100%;
-      padding: 15px;
-      border-radius: 16px;
-      border: none;
-      background: var(--rojo);
-      color: #fff;
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 700;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      box-shadow: 0 6px 18px rgba(192,57,43,0.32);
-      transition: transform 0.32s cubic-bezier(0.22,1,0.36,1), box-shadow 0.32s ease;
-    }
-    .btn-share svg { width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .btn-share.hover { transform: scale(1.03); box-shadow: 0 10px 26px rgba(192,57,43,0.42); }
-    .btn-share.pressed { transform: scale(0.94); }
-
     /* ---------- Modal overlays ---------- */
     .modal-overlay {
       position: absolute; inset: 0;
@@ -306,95 +272,134 @@
       font-size: 18px; color: var(--n-400); font-weight: 300; line-height: 1;
     }
 
-    /* checkout modal */
-    .co-price-row {
-      text-align: center;
-      margin-bottom: 12px;
-      padding-right: 16px;
-    }
-    .co-price-old { font-size: 13px; font-weight: 600; color: var(--n-400); text-decoration: line-through; }
-    .co-price-today { font-size: 17px; font-weight: 800; color: var(--n-900); }
-    .co-price-new { font-size: 17px; font-weight: 800; color: var(--indigo); }
-
-    .co-big-num { font-size: 32px; font-weight: 800; color: var(--n-400); text-align: center; letter-spacing: -0.03em; transition: color 0.3s ease; line-height: 1.1; }
-    .co-big-num.filling { color: var(--indigo); }
-    .co-hint { font-size: 11.5px; font-weight: 600; color: var(--n-600); text-align: center; margin-top: 2px; margin-bottom: 12px; }
-
-    .co-slider-track {
-      position: relative;
-      height: 5px;
-      border-radius: 999px;
-      background: var(--violet-track);
-      margin-bottom: 4px;
-    }
-    .co-slider-fill {
-      position: absolute; left: 0; top: 0; bottom: 0;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--indigo), var(--violet));
-      width: 0%;
-      transition: width 1.2s cubic-bezier(0.22,1,0.36,1);
-    }
-    .co-slider-knob {
-      position: absolute; top: 50%;
-      width: 15px; height: 15px;
-      border-radius: 50%;
-      background: var(--indigo);
-      border: 2px solid #fff;
-      box-shadow: 0 0 0 4px rgba(79,70,229,0.22), 0 2px 6px rgba(79,70,229,0.4);
-      transform: translate(-50%, -50%);
-      left: 0%;
-      transition: left 1.2s cubic-bezier(0.22,1,0.36,1);
-    }
-    .co-pct-lbl { font-size: 10px; font-weight: 700; color: var(--n-400); text-align: right; margin-bottom: 12px; }
-
-    .co-close-lbl { font-size: 11px; font-weight: 600; color: var(--n-600); text-align: center; margin-bottom: 6px; }
-    .co-countdown {
-      display: grid; grid-template-columns: 1fr 1fr 1fr;
-      border: 1px solid var(--n-200);
-      border-radius: 12px;
+    /* checkout modal (popup de grupo de 2) */
+    .modal-box.gb-card {
+      padding: 0;
+      border-radius: 22px;
       overflow: hidden;
-      margin-bottom: 10px;
+      text-align: center;
+      color: #0f172a;
     }
-    .co-cd-cell { text-align: center; padding: 7px 4px; border-right: 1px solid var(--n-200); }
-    .co-cd-cell:last-child { border-right: none; }
-    .co-cd-num { font-size: 17px; font-weight: 800; color: var(--n-900); font-variant-numeric: tabular-nums; }
-    .co-cd-lbl { font-size: 9px; font-weight: 600; color: var(--n-500); margin-top: 1px; }
-
-    .co-refund { font-size: 11px; font-weight: 500; color: var(--n-700); text-align: center; margin-bottom: 10px; }
-    .co-refund b { color: var(--indigo); font-weight: 700; }
-
-    .co-select {
-      width: 100%;
-      padding: 9px 12px;
-      border: 1px solid var(--n-200);
-      border-radius: 10px;
-      font-size: 12px; font-weight: 600; color: var(--n-900);
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 10px;
+    .gb-x {
+      position: absolute; top: 14px; right: 14px;
+      width: 18px; height: 18px;
     }
-    .co-select svg { width: 13px; height: 13px; stroke: var(--n-500); fill: none; stroke-width: 2; }
+    .gb-x svg { width: 100%; height: 100%; stroke: #64748b; stroke-width: 2; fill: none; stroke-linecap: round; }
+    .gb-body { padding: 24px 18px 16px; }
+    .gb-price-row {
+      font-size: 18px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2;
+      padding: 0 20px;
+    }
+    .gb-old { color: #94a3b8; text-decoration: line-through; text-decoration-thickness: 1.5px; }
+    .gb-sep { color: #94a3b8; margin: 0 1px; }
+    .gb-today { color: #0f172a; }
+    .gb-new { color: #3d50f2; }
 
-    .btn-pay {
+    .gb-sub { padding-top: 8px; font-size: 12.5px; font-weight: 700; color: #334155; }
+    .gb-sub b { color: #3d50f2; font-weight: 800; }
+
+    .gb-count {
+      margin-top: 16px;
+      font-size: 46px; font-weight: 800; letter-spacing: -0.04em; line-height: 1;
+      color: #94a3b8;
+    }
+    .gb-count span { display: inline-block; transition: color 0.6s ease; }
+    .gb-card.is-joined #coN { color: #3d50f2; }
+    .gb-card.is-joined #coOf { color: #64748b; }
+    #coN.pop { animation: numPop 0.6s cubic-bezier(0.2, 0.95, 0.15, 1); }
+    @keyframes numPop {
+      0% { transform: scale(0.7); }
+      45% { transform: scale(1.12); }
+      100% { transform: scale(1); }
+    }
+
+    .gb-dots { display: flex; align-items: center; justify-content: center; margin-top: 18px; }
+    .gb-dot {
+      width: 38px; height: 38px; border-radius: 50%;
+      position: relative; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: #f8fafc;
+      border: 2.5px solid #e2e8f0;
+    }
+    .gb-dot.is-next {
+      background: #ffffff;
+      border-color: #94a3b8;
+      box-shadow: 0 0 0 5px #eef1f5;
+    }
+    .gb-dot { transition: background 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease; }
+    .gb-dot.is-done {
+      background: #22c55e;
+      border-color: #22c55e;
+      box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.14), 0 8px 22px rgba(34, 197, 94, 0.38);
+    }
+    .gb-dot.pop { animation: dotPop 0.7s cubic-bezier(0.34, 1.4, 0.64, 1); }
+    @keyframes dotPop {
+      0% { transform: scale(0.82); }
+      60% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    .gb-dot svg {
+      position: absolute; width: 15px; height: 15px;
+      transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+    .gb-dot .gb-ic-user { fill: #cbd5e1; }
+    .gb-dot.is-next .gb-ic-user { fill: #475569; }
+    .gb-ic-check { stroke: #fff; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transform: scale(0.4); }
+    .gb-dot.is-done .gb-ic-user { opacity: 0; transform: scale(0.5); }
+    .gb-dot.is-done .gb-ic-check { opacity: 1; transform: scale(1); }
+    .gb-line { width: 48px; height: 3px; border-radius: 2px; background: #e2e8f0; margin: 0 2px; position: relative; overflow: hidden; }
+    .gb-line-fill {
+      position: absolute; inset: 0;
+      background: #22c55e;
+      transform-origin: left center;
+      transform: scaleX(0);
+      transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .gb-card.is-joined .gb-line-fill { transform: scaleX(0.5); }
+
+    .gb-closes { margin-top: 20px; font-size: 13px; font-weight: 500; color: #0f172a; }
+    .gb-closes b { color: #3d50f2; font-weight: 800; }
+    .gb-cd {
+      width: 86%;
+      margin: 10px auto 0;
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 10px 0;
+    }
+    .gb-cd-cell { padding: 2px 4px; }
+    .gb-cd-cell + .gb-cd-cell { border-left: 1px solid #e2e8f0; }
+    .gb-cd-num { font-size: 25px; font-weight: 700; color: #0f172a; line-height: 1.1; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+    .gb-cd-lbl { font-size: 10.5px; font-weight: 500; color: #475569; margin-top: 3px; }
+
+    .gb-lead { margin-top: 16px; font-size: 11.5px; font-weight: 700; color: #475569; line-height: 1.5; text-wrap: balance; }
+    .gb-lead b { color: #3d50f2; font-weight: 800; }
+    .co-swap { transition: opacity 0.28s ease; }
+    .co-swap.is-out { opacity: 0; }
+
+    .gb-foot { border-top: 1px solid #eef2f6; padding: 12px 10px 12px; position: relative; }
+    .gb-btn {
       width: 100%;
       padding: 12px;
-      border-radius: 12px;
+      border-radius: 10px;
       border: none;
-      background: var(--indigo);
+      background: #3d50f2;
       color: #fff;
       font-family: inherit;
       font-size: 13px; font-weight: 700;
-      box-shadow: 0 6px 18px rgba(79,70,229,0.32);
-      transition: transform 0.32s cubic-bezier(0.22,1,0.36,1), box-shadow 0.32s ease;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      box-shadow: 0 8px 20px rgba(61, 80, 242, 0.32);
+      transition: transform 0.32s cubic-bezier(0.22,1,0.36,1), box-shadow 0.32s ease, color 0.2s ease;
     }
-    .btn-pay.hover { transform: scale(1.03); box-shadow: 0 10px 26px rgba(79,70,229,0.42); }
-    .btn-pay.pressed { transform: scale(0.94); }
-
-    .co-refund-sm { font-size: 10px; font-weight: 500; color: var(--n-500); text-align: center; margin-top: 8px; }
+    .gb-btn.is-swapping { color: rgba(255, 255, 255, 0); }
+    .gb-btn.hover { transform: scale(1.03); box-shadow: 0 10px 26px rgba(61, 80, 242, 0.42); }
+    .gb-btn.pressed { transform: scale(0.94); }
+    .gb-note { margin-top: 10px; font-size: 9.5px; font-weight: 500; color: #64748b; line-height: 1.4; }
 
     /* share modal */
     .sh-title { font-size: 17px; font-weight: 800; color: var(--n-900); text-align: center; letter-spacing: -0.02em; }
-    .sh-sub { font-size: 12px; font-weight: 500; color: var(--n-500); text-align: center; margin-top: 4px; margin-bottom: 14px; }
-    .sh-sub b { color: var(--n-900); font-weight: 700; }
+    .sh-title + .sh-icons { margin-top: 14px; }
     .sh-icons { display: flex; justify-content: space-between; padding: 0 2px; margin-bottom: 14px; }
     .sh-icon-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
     .sh-icon-circ { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
@@ -495,25 +500,11 @@
 
               <button class="shop-buynow" disabled>Buy it now</button>
 
-              <button class="btn-want" id="btnWant">Págalo por 60,00 €</button>
+              <button class="btn-want" id="btnWant">Págalo por 68,00 €</button>
             </div>
           </div>
 
           <!-- PANEL 3: CONFIRMADA -->
-          <div class="panel" id="panel3">
-            <div class="panel3-inner">
-              <div class="confirm-circle" id="confirmCircle">✓</div>
-              <div class="confirm-title">Reserva confirmada</div>
-              <div class="confirm-sub">Invita a más gente compartiendo el enlace.</div>
-              <button class="btn-share" id="btnShare">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
-                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-                </svg>
-                Compartir
-              </button>
-            </div>
-          </div>
 
         </div>
       </div>
@@ -521,39 +512,41 @@
 
     <!-- CHECKOUT MODAL -->
     <div class="modal-overlay" id="checkoutOverlay">
-      <div class="modal-box">
-        <div class="modal-x">×</div>
-        <div class="co-price-row">
-          <span class="co-price-old">80,00 €</span> ·
-          <span class="co-price-today">Hoy</span>
-          <span class="co-price-new">60,00 €</span>
+      <div class="modal-box gb-card" id="coCard">
+        <div class="gb-x" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
+        <div class="gb-body">
+          <div class="gb-price-row">
+            <span class="gb-old" id="coOld">80,00 €</span><span class="gb-sep"> · </span><span class="gb-today" id="coToday">Hoy</span>
+            <span class="gb-new" id="coNew">68,00 €</span>
+          </div>
+          <div class="gb-sub co-swap" id="coSub">Sé el primero de 2</div>
+
+          <div class="gb-count" id="coBigNum"><span id="coN">0</span><span id="coOf">&nbsp;de 2</span></div>
+
+          <div class="gb-dots" aria-hidden="true">
+            <div class="gb-dot is-next" id="coDot1">
+              <svg class="gb-ic-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.2"/><path d="M3.8 20.5c0-4.3 3.7-7 8.2-7s8.2 2.7 8.2 7z"/></svg>
+              <svg class="gb-ic-check" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7.2"/></svg>
+            </div>
+            <div class="gb-line"><div class="gb-line-fill"></div></div>
+            <div class="gb-dot" id="coDot2">
+              <svg class="gb-ic-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.2"/><path d="M3.8 20.5c0-4.3 3.7-7 8.2-7s8.2 2.7 8.2 7z"/></svg>
+            </div>
+          </div>
+
+          <div class="gb-closes co-close-lbl co-swap">El reloj arranca <b>contigo</b></div>
+          <div class="gb-cd">
+            <div class="gb-cd-cell"><div class="gb-cd-num" id="cdH">24</div><div class="gb-cd-lbl co-cd-lbl">Horas</div></div>
+            <div class="gb-cd-cell"><div class="gb-cd-num" id="cdM">00</div><div class="gb-cd-lbl co-cd-lbl">Minutos</div></div>
+            <div class="gb-cd-cell"><div class="gb-cd-num" id="cdS">00</div><div class="gb-cd-lbl co-cd-lbl">Segundos</div></div>
+          </div>
+
         </div>
 
-        <div class="co-big-num filling" id="coBigNum">64 de 75</div>
-        <div class="co-hint" id="coHint">Faltan 11 para que se llene</div>
-
-        <div class="co-slider-track">
-          <div class="co-slider-fill" id="coSliderFill" style="width: 85%;"></div>
-          <div class="co-slider-knob" id="coSliderKnob" style="left: 85%;"></div>
+        <div class="gb-foot">
+          <button class="gb-btn" id="btnPay">Entrar por 68,00 €</button>
+          <div class="gb-note" id="coNote">Pagas 68,00 € ahora. Si algo saliera mal, te devolvemos el 100 %.</div>
         </div>
-        <div class="co-pct-lbl" id="coPctLbl">85%</div>
-
-        <div class="co-close-lbl">Se cierra en</div>
-        <div class="co-countdown">
-          <div class="co-cd-cell"><div class="co-cd-num">04</div><div class="co-cd-lbl">Horas</div></div>
-          <div class="co-cd-cell"><div class="co-cd-num">15</div><div class="co-cd-lbl">Minutos</div></div>
-          <div class="co-cd-cell"><div class="co-cd-num">32</div><div class="co-cd-lbl">Segundos</div></div>
-        </div>
-
-        <div class="co-refund">Si no se llena, <b>te devolvemos el 100%</b></div>
-
-        <div class="co-select">
-          <span>Piruleta Pirulín</span>
-          <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
-        </div>
-
-        <button class="btn-pay" id="btnPay">Pagar 60,00 €</button>
-        <div class="co-refund-sm">Si no se llena, te devolvemos 60,00 €.</div>
       </div>
     </div>
 
@@ -562,7 +555,6 @@
       <div class="modal-box">
         <div class="modal-x">×</div>
         <div class="sh-title">Comparte el enlace</div>
-        <div class="sh-sub">Si se llena, todos pagan <b>60,00 €</b>.</div>
 
         <div class="sh-icons">
           <div class="sh-icon-item">
@@ -611,7 +603,33 @@
       let rafHandle = null;
       const timers = [];
 
+      const CD_START = 24 * 3600;
+      let cdLeft = CD_START;
+      let cdTimer = null;
+
+      function pad2(n) { return (n < 10 ? '0' : '') + n; }
+
+      function setCountdown(sec) {
+        cdLeft = Math.max(0, sec);
+        $('cdH').textContent = pad2(Math.floor(cdLeft / 3600));
+        $('cdM').textContent = pad2(Math.floor((cdLeft % 3600) / 60));
+        $('cdS').textContent = pad2(cdLeft % 60);
+      }
+
+      function stopCountdown() {
+        if (cdTimer) { clearInterval(cdTimer); cdTimer = null; }
+      }
+
+      function startCountdown() {
+        stopCountdown();
+        cdTimer = setInterval(function () {
+          if (paused) return;
+          setCountdown(cdLeft - 1);
+        }, 1000);
+      }
+
       function clearTimers() {
+        stopCountdown();
         while (timers.length) clearTimeout(timers.pop());
         if (loopTimer) { clearTimeout(loopTimer); loopTimer = null; }
         if (rafHandle) { cancelAnimationFrame(rafHandle); rafHandle = null; }
@@ -626,46 +644,50 @@
 
       const COPY = {
         es: {
-          want: 'Págalo por 60,00 €',
-          confirmTitle: 'Reserva confirmada',
-          confirmSub: 'Invita a más gente compartiendo el enlace.',
-          share: 'Compartir',
-          coHint: 'Faltan 11 para que se llene',
-          coNum: '64 de 75',
-          pay: 'Pagar 60,00 €',
-          refund: 'Si no se llena, <b>te devolvemos el 100%</b>',
-          refundSm: 'Si no se llena, te devolvemos 60,00 €.',
+          want: 'Págalo por 68,00 €',
+          coOld: '80,00 €',
+          coToday: 'Hoy',
+          coNew: '68,00 €',
+          coOf: '\u00a0de 2',
+          coSub0: 'Sé el primero de 2',
+          coSub: 'Falta <b>1 persona</b> para cerrar este grupo',
+          pay: 'Entrar por 68,00 €',
+          payShare: 'Compartir plaza restante',
+          note: 'Pagas 68,00 € ahora. Si algo saliera mal, te devolvemos el 100 %.',
           shTitle: 'Comparte el enlace',
-          shSub: 'Si se llena, todos pagan <b>60,00 €</b>.',
           copy: 'Copiar enlace',
           copied: '¡Enlace copiado!',
           hours: 'Horas',
           minutes: 'Minutos',
           seconds: 'Segundos',
+          closeLbl0: 'El reloj arranca <b>contigo</b>',
           closeLbl: 'Se cierra en',
         },
         en: {
-          want: 'Pay 60.00 €',
-          confirmTitle: 'Reservation confirmed',
-          confirmSub: 'Invite more people by sharing the link.',
-          share: 'Share',
-          coHint: '11 left to fill',
-          coNum: '64 of 75',
-          pay: 'Pay 60.00 €',
-          refund: 'If it doesn’t fill, <b>you get 100% back</b>',
-          refundSm: 'If it doesn’t fill, you get 60.00 € back.',
+          want: 'Pay 68.00 €',
+          coOld: '80.00 €',
+          coToday: 'Today',
+          coNew: '68.00 €',
+          coOf: '\u00a0of 2',
+          coSub0: 'Be the first of 2',
+          coSub: '<b>1 person</b> left to close this group',
+          pay: 'Join for 68.00 €',
+          payShare: 'Share the remaining spot',
+          note: 'You pay 68.00 € now. If anything goes wrong, we refund 100%.',
           shTitle: 'Share the link',
-          shSub: 'If it fills, everyone pays <b>60.00 €</b>.',
           copy: 'Copy link',
           copied: 'Link copied!',
           hours: 'Hours',
           minutes: 'Minutes',
           seconds: 'Seconds',
+          closeLbl0: 'The clock starts <b>with you</b>',
           closeLbl: 'Closes in',
         },
       };
 
       let lang = 'es';
+      let joined = false;
+      let payMode = 'pay';
       function t() { return COPY[lang] || COPY.es; }
 
       function getStoredDemoLang() {
@@ -676,7 +698,7 @@
             ? (window.parent.location.pathname || '')
             : (location.pathname || '')).replace(/\/$/, '') || '/';
           if (path === '/en' || path.indexOf('/en/') === 0) return 'en';
-          const stored = localStorage.getItem('tuko-lang');
+          const stored = localStorage.getItem('tuko_lang') || localStorage.getItem('tuko-lang');
           if (stored === 'en' || stored === 'es') return stored;
         } catch (e) {}
         return 'es';
@@ -687,31 +709,16 @@
         const c = t();
         const want = $('btnWant');
         if (want) want.textContent = c.want;
-        const confTitle = document.querySelector('.confirm-title');
-        const confSub = document.querySelector('.confirm-sub');
-        if (confTitle) confTitle.textContent = c.confirmTitle;
-        if (confSub) confSub.textContent = c.confirmSub;
-        const shareTxt = document.querySelector('#btnShare');
-        if (shareTxt) {
-          const svg = shareTxt.querySelector('svg');
-          shareTxt.innerHTML = '';
-          if (svg) shareTxt.appendChild(svg);
-          shareTxt.appendChild(document.createTextNode(c.share));
-        }
-        if ($('coHint')) $('coHint').textContent = c.coHint;
-        if ($('coBigNum')) $('coBigNum').textContent = c.coNum;
-        if ($('btnPay')) $('btnPay').textContent = c.pay;
-        const refund = document.querySelector('.co-refund');
-        if (refund) refund.innerHTML = c.refund;
-        const refundSm = document.querySelector('.co-refund-sm');
-        if (refundSm) refundSm.textContent = c.refundSm;
+        if ($('coOld')) $('coOld').textContent = c.coOld;
+        if ($('coToday')) $('coToday').textContent = c.coToday;
+        if ($('coNew')) $('coNew').textContent = c.coNew;
+        if ($('coOf')) $('coOf').textContent = c.coOf;
+        setCoTexts(false);
+        if ($('btnPay')) $('btnPay').textContent = payMode === 'share' ? c.payShare : c.pay;
+        if ($('coNote')) $('coNote').textContent = c.note;
         const shTitle = document.querySelector('.sh-title');
-        const shSub = document.querySelector('.sh-sub');
         if (shTitle) shTitle.textContent = c.shTitle;
-        if (shSub) shSub.innerHTML = c.shSub;
         if ($('copyLabel')) $('copyLabel').textContent = c.copy;
-        const closeLbl = document.querySelector('.co-close-lbl');
-        if (closeLbl) closeLbl.textContent = c.closeLbl;
         const cdLbls = document.querySelectorAll('.co-cd-lbl');
         if (cdLbls[0]) cdLbls[0].textContent = c.hours;
         if (cdLbls[1]) cdLbls[1].textContent = c.minutes;
@@ -732,35 +739,76 @@
 
         // Checkout modal: countdown + Pagar
         coCursorReset: 6300,
-        moveToPayStart: 7400,
+        moveToPayStart: 10400,
         moveToPayDur: 1800,
-        payHover: 9400,
-        payClickDown: 9800,
-        payClickUp: 9950,
-        hideCheckout: 10150,
+        payHover: 12400,
+        payClickDown: 12800,
+        payClickUp: 12950,
+        // Mismo popup: «0 de 2» pasa a «1 de 2» (verde), arranca la cuenta atrás
+        // y el botón pasa a «Compartir plaza restante» en el mismo instante
+        joinShow: 12950,
+        moveToShareStart: 14950,
+        moveToShareDur: 900,
+        shareHover: 15950,
+        shareClickDown: 16150,
+        shareClickUp: 16300,
+        // Popup de redes sociales, y se queda ahí
+        showShare: 16500,
 
-        // Panel 2: confirmada (tras pagar)
-        goPanel3: 10300,
-        confirmShow: 10500,
-        moveToShareStart: 11700,
-        moveToShareDur: 1700,
-        shareHover: 13600,
-        shareClickDown: 14000,
-        shareClickUp: 14150,
-        showShare: 14350,
-
-        // Share modal
-        shCursorReset: 14550,
-        moveToCopyStart: 15500,
-        moveToCopyDur: 1700,
-        copyHover: 17400,
-        copyClickDown: 17800,
-        copyClickUp: 17950,
-        copyDone: 18050,
-
-        resetFade: 20300,
-        loopDelay: 22900,
+        resetFade: 21650,
+        loopDelay: 24250,
       };
+
+
+      function pop(el) {
+        el.classList.remove('pop');
+        void el.offsetWidth;
+        el.classList.add('pop');
+      }
+
+      function setCoTexts(animated) {
+        const c = t();
+        const items = [
+          [$('coSub'), joined ? c.coSub : c.coSub0],
+          [document.querySelector('.co-close-lbl'), joined ? c.closeLbl : c.closeLbl0],
+        ];
+        items.forEach(([el, html]) => {
+          if (!el) return;
+          if (!animated) {
+            el.classList.remove('is-out');
+            el.innerHTML = html;
+            return;
+          }
+          el.classList.add('is-out');
+          setTimeout(() => {
+            el.innerHTML = html;
+            el.classList.remove('is-out');
+          }, 280);
+        });
+      }
+
+      function setJoined(on) {
+        joined = on;
+        const card = $('coCard');
+        card.classList.toggle('is-joined', on);
+        $('coDot1').classList.toggle('is-next', !on);
+        $('coDot1').classList.toggle('is-done', on);
+        $('coDot2').classList.toggle('is-next', on);
+        $('coN').textContent = on ? '1' : '0';
+        setCoTexts(on);
+        if (on) {
+          pop($('coN'));
+          pop($('coDot1'));
+        } else {
+          $('coN').classList.remove('pop');
+          $('coDot1').classList.remove('pop');
+        }
+      }
+
+      function setPayMode(mode) {
+        payMode = mode;
+        $('btnPay').textContent = mode === 'share' ? t().payShare : t().pay;
+      }
 
       function centerOf(el) {
         const vr = viewport.getBoundingClientRect();
@@ -823,33 +871,23 @@
         // panels
         $('panelProduct').classList.add('active');
         $('panelProduct').classList.remove('exit-left');
-        $('panel3').classList.remove('active', 'exit-left');
 
         $('btnWant').classList.remove('hover', 'pressed');
-        $('btnShare').classList.remove('hover', 'pressed');
-        $('confirmCircle').classList.remove('show');
 
         // modals
         $('checkoutOverlay').classList.remove('visible');
         $('shareOverlay').classList.remove('visible');
         const c = t();
-        $('coBigNum').textContent = c.coNum;
-        $('coBigNum').classList.add('filling');
-        $('coHint').textContent = c.coHint;
-        $('coSliderFill').style.width = '85%';
-        $('coSliderKnob').style.left = '85%';
-        $('coPctLbl').textContent = '85%';
+        setJoined(false);
+        setPayMode('pay');
+        $('btnPay').classList.remove('is-swapping');
+        stopCountdown();
+        setCountdown(CD_START);
         $('btnPay').classList.remove('hover', 'pressed');
         $('btnCopy').classList.remove('hover', 'pressed', 'copied');
         $('copyLabel').textContent = c.copy;
       }
 
-      function goPanel3() {
-        $('panelProduct').classList.remove('active');
-        $('panelProduct').classList.add('exit-left');
-        $('panel3').classList.add('active');
-        at(200, () => $('confirmCircle').classList.add('show'));
-      }
 
       function runAnimation() {
         clearTimers();
@@ -894,54 +932,33 @@
           $('btnPay').classList.add('pressed');
           cursor.classList.add('clicking');
           ripple($('btnPay'));
+          startCountdown();
         });
         at(TIMING.payClickUp, () => {
           $('btnPay').classList.remove('pressed');
           cursor.classList.remove('clicking');
         });
-        at(TIMING.hideCheckout, () => {
-          $('checkoutOverlay').classList.remove('visible');
+        at(TIMING.joinShow, () => {
+          setJoined(true);
+          setPayMode('share');
         });
 
-        // ---- Panel 3: reserva confirmada (tras pagar) -> Compartir ----
-        at(TIMING.goPanel3, goPanel3);
-
-        moveTo($('btnShare'), TIMING.moveToShareStart, TIMING.moveToShareDur);
-        at(TIMING.shareHover, () => $('btnShare').classList.add('hover'));
+        // ---- «Compartir plaza restante» -> popup de redes sociales ----
+        moveTo($('btnPay'), TIMING.moveToShareStart, TIMING.moveToShareDur);
+        at(TIMING.shareHover, () => $('btnPay').classList.add('hover'));
         at(TIMING.shareClickDown, () => {
-          $('btnShare').classList.remove('hover');
-          $('btnShare').classList.add('pressed');
+          $('btnPay').classList.remove('hover');
+          $('btnPay').classList.add('pressed');
           cursor.classList.add('clicking');
-          ripple($('btnShare'));
+          ripple($('btnPay'));
         });
         at(TIMING.shareClickUp, () => {
-          $('btnShare').classList.remove('pressed');
+          $('btnPay').classList.remove('pressed');
           cursor.classList.remove('clicking');
         });
         at(TIMING.showShare, () => {
+          $('checkoutOverlay').classList.remove('visible');
           $('shareOverlay').classList.add('visible');
-        });
-
-        // ---- Share modal ----
-        at(TIMING.shCursorReset, () => {
-          const from = centerOf($('btnShare'));
-          setCursorPos(from.x, from.y);
-        });
-        moveTo($('btnCopy'), TIMING.moveToCopyStart, TIMING.moveToCopyDur);
-        at(TIMING.copyHover, () => $('btnCopy').classList.add('hover'));
-        at(TIMING.copyClickDown, () => {
-          $('btnCopy').classList.remove('hover');
-          $('btnCopy').classList.add('pressed');
-          cursor.classList.add('clicking');
-          ripple($('btnCopy'));
-        });
-        at(TIMING.copyClickUp, () => {
-          $('btnCopy').classList.remove('pressed');
-          cursor.classList.remove('clicking');
-        });
-        at(TIMING.copyDone, () => {
-          $('btnCopy').classList.add('copied');
-          $('copyLabel').textContent = t().copied;
         });
 
         // Fade out -> reset the content while invisible -> fade back in, so the
