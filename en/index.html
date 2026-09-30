@@ -3705,7 +3705,27 @@
   }
   .btn-submit:hover { background: #111; transform: translateY(-1px); }
   .btn-submit:disabled { opacity: 0.6; cursor: default; transform: none; }
-  .cta-status { margin: 10px 0 0; font-size: 14px; font-weight: 500; line-height: 1.45; color: #fff; }
+  .cta-status {
+    margin: 12px 0 0;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.45;
+    text-align: center;
+    color: #fff;
+  }
+  .cta-status[hidden] { display: none !important; }
+  .cta-status[data-state="ok"] {
+    background: rgba(20, 196, 146, 0.22);
+    border: 1px solid #14C492;
+    color: #fff;
+  }
+  .cta-status[data-state="error"] {
+    background: rgba(255, 80, 80, 0.18);
+    border: 1px solid #ff8080;
+    color: #fff;
+  }
   .final-cta .cta-form { width: 100%; }
   .final-cta .cta-field { gap: 4px; margin-bottom: 2px; }
   .cta-field-error {
@@ -8450,7 +8470,7 @@ document.addEventListener('DOMContentLoaded', () => {
   io.observe(grid);
 })();
 </script>
-<script src="../assets/js/tuko-form.js?v=20260930i" defer></script>
+<script src="../assets/js/tuko-form.js?v=20260930k" defer></script>
 <script src="../assets/js/ga4-loader.js" defer></script>
 <script src="../assets/js/local-landing-label.js"></script>
 </body>

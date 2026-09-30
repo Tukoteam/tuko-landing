@@ -16,6 +16,7 @@
       emailEmpty: 'Escribe tu email',
       email: 'Revisa el email: debe tener el formato nombre@dominio.com',
       ok: '¡Mensaje enviado! Te contactaremos pronto.',
+      okLocal: '✓ Listo (simulado en local). En tukoteam.com el envío es real.',
       error: 'Ha ocurrido un error. Por favor escríbenos a team.tukoo@gmail.com',
       lang: 'Español'
     },
@@ -25,6 +26,7 @@
       emailEmpty: 'Enter your email',
       email: 'Check your email: it should look like name@domain.com',
       ok: 'Message sent! We’ll be in touch soon.',
+      okLocal: '✓ Done (local simulation). On tukoteam.com the send is real.',
       error: 'Something went wrong. Please write to us at team.tukoo@gmail.com',
       lang: 'English'
     }
@@ -100,6 +102,9 @@
       status.textContent = text;
       status.setAttribute('data-state', state);
       status.hidden = false;
+      try {
+        status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } catch (e) { /* ignore */ }
     }
 
     form.addEventListener('submit', function (e) {
@@ -146,7 +151,7 @@
           }
           form.reset();
           inputs.forEach(function (input) { setError(input, ''); });
-          showStatus('ok', t('ok'));
+          showStatus('ok', IS_LOCAL ? t('okLocal') : t('ok'));
         })
         .catch(function () { showStatus('error', t('error')); })
         .then(function () { if (btn) btn.disabled = false; });
