@@ -87,10 +87,31 @@
     var status = form.querySelector('[data-form-status]');
     var btn = form.querySelector('[type="submit"]');
     var inputs = Array.prototype.slice.call(form.querySelectorAll('[data-validate]'));
+    var hideTimer = null;
+    var leaveTimer = null;
+
+    function clearStatusTimers() {
+      if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+      if (leaveTimer) { clearTimeout(leaveTimer); leaveTimer = null; }
+    }
+
+    function hideStatus() {
+      if (!status || status.hidden) return;
+      clearStatusTimers();
+      status.classList.add('is-leaving');
+      leaveTimer = setTimeout(function () {
+        status.hidden = true;
+        status.classList.remove('is-leaving');
+        status.removeAttribute('data-state');
+        status.textContent = '';
+        leaveTimer = null;
+      }, 450);
+    }
 
     inputs.forEach(function (input) {
       input.addEventListener('input', function () {
         if (input.getAttribute('aria-invalid') === 'true') setError(input, check(input));
+        if (status && !status.hidden) hideStatus();
       });
       input.addEventListener('blur', function () {
         if (input.value.trim()) setError(input, check(input));
@@ -99,17 +120,27 @@
 
     function showStatus(state, text) {
       if (!status) return;
+      clearStatusTimers();
+      status.classList.remove('is-leaving');
       status.textContent = text;
       status.setAttribute('data-state', state);
       status.hidden = false;
       try {
         status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } catch (e) { /* ignore */ }
+      /* Éxito: se desvanece solo ~5s. Error: se queda hasta que el usuario edite. */
+      if (state === 'ok') {
+        hideTimer = setTimeout(hideStatus, 5000);
+      }
     }
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (status) status.hidden = true;
+      clearStatusTimers();
+      if (status) {
+        status.classList.remove('is-leaving');
+        status.hidden = true;
+      }
 
       var firstBad = null;
       inputs.forEach(function (input) {

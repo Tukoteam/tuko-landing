@@ -667,7 +667,7 @@
 
   .hero h1 {
     font-size: clamp(36px, 5.2vw, 72px);
-    font-weight: var(--title-weight);
+    font-weight: 700;
     font-stretch: semi-expanded;
     line-height: 1.06;
     letter-spacing: -0.04em;
@@ -872,7 +872,8 @@
   .hero-appstore a {
     color: var(--gray-4);
     text-decoration: underline;
-    text-decoration-color: rgba(26, 26, 26, 0.18);
+    text-decoration-color: rgba(26, 26, 26, 0.22);
+    text-decoration-thickness: 1px;
     text-underline-offset: 3px;
     transition: color 0.2s, text-decoration-color 0.2s;
   }
@@ -1314,6 +1315,8 @@
     border-radius: var(--radius-card);
     padding: 28px 22px 24px;
     box-shadow: var(--shadow-card);
+    overflow: hidden;
+    background-clip: padding-box;
     transform: translateY(0) scale(1);
     transform-origin: center center;
     transition:
@@ -1522,12 +1525,13 @@
   .pricing-card.is-gift:hover,
   .pricing-card.is-gift.fade-up.visible:hover {
     background: #fff;
-    border: 2px solid var(--blue);
+    /* Anillo por box-shadow (no border): evita el “cuadrado” en esquinas al hacer zoom */
+    border-color: transparent;
+    box-shadow:
+      0 0 0 2px var(--blue),
+      0 18px 44px rgba(66, 87, 255, 0.16);
   }
   .pricing-card.is-gift {
-    box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.9) inset,
-      0 18px 44px rgba(66, 87, 255, 0.16);
     z-index: 2;
   }
   .pricing-card.is-gift .pricing-features li,
@@ -1979,6 +1983,197 @@
     background: rgba(20, 196, 146, 0.06);
     border-color: rgba(20, 196, 146, 0.2);
   }
+  /* Rescue: esquema (hub → rama → 2 opciones) */
+  #si-no-se-llena.data {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 28%, rgba(61, 80, 242, 0.07), transparent 70%),
+      #F4F5F9;
+  }
+  .rescue-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 860px;
+    margin: 4px auto 0;
+  }
+  .rescue-hub {
+    margin: 0;
+    max-width: 24em;
+    text-align: center;
+    font-size: clamp(17px, 2vw, 19px);
+    font-weight: 450;
+    font-stretch: normal;
+    line-height: 1.45;
+    letter-spacing: -0.015em;
+    color: #5c5c5c;
+  }
+  .rescue-schema {
+    width: 100%;
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  /* Esquema: cajas solapadas + ramas L/R para hover */
+  .rescue-tree-wrap {
+    position: relative;
+    width: 100%;
+    height: 92px;
+  }
+  .rescue-tree-stem,
+  .rescue-tree-bar,
+  .rescue-tree-drop {
+    position: absolute;
+    background: rgba(61, 80, 242, 0.45);
+    pointer-events: none;
+    transition:
+      background 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.45s ease;
+  }
+  .rescue-tree-stem {
+    left: 50%;
+    top: 0;
+    width: 3px;
+    /* termina exactamente en el borde superior de la barra */
+    height: calc(50% - 1.5px);
+    transform: translateX(-50%);
+    border-radius: 2px 2px 0 0;
+  }
+  .rescue-tree-bar {
+    top: 50%;
+    height: 3px;
+    transform: translateY(-50%);
+  }
+  .rescue-tree-bar--l {
+    left: calc(25% - 1.5px);
+    width: calc(25% + 1.5px);
+    border-radius: 2px 0 0 2px;
+  }
+  .rescue-tree-bar--r {
+    left: 50%;
+    width: calc(25% + 1.5px);
+    border-radius: 0 2px 2px 0;
+  }
+  .rescue-tree-drop {
+    /* empieza exactamente en el borde inferior de la barra */
+    top: calc(50% + 1.5px);
+    width: 3px;
+    height: calc(50% - 1.5px);
+    transform: translateX(-50%);
+    border-radius: 0 0 2px 2px;
+  }
+  .rescue-tree-drop--l { left: 25%; }
+  .rescue-tree-drop--r { left: 75%; }
+  .rescue-fork {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(16px, 2.6vw, 26px);
+    width: 100%;
+    align-items: stretch;
+  }
+  .rescue-opt {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 0;
+    height: 100%;
+  }
+  .rescue-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 22px;
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 180px;
+    overflow: hidden;
+    background: #fff;
+    border: none;
+    border-radius: 20px;
+    box-shadow:
+      0 0 0 1px rgba(20, 24, 38, 0.07),
+      0 14px 36px rgba(20, 24, 38, 0.07);
+    padding: clamp(28px, 3.4vw, 36px) clamp(26px, 3.2vw, 34px) clamp(24px, 3vw, 30px);
+    text-align: left;
+    isolation: isolate;
+    transition:
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .rescue-card .rescue-socket { display: none; }
+  .rescue-card .rescue-mark {
+    position: absolute;
+    right: 8px;
+    bottom: -6px;
+    font-size: clamp(96px, 14vw, 140px);
+    font-weight: 800;
+    font-stretch: semi-expanded;
+    line-height: 0.85;
+    letter-spacing: -0.06em;
+    color: rgba(61, 80, 242, 0.09);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    transition: color 0.5s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .rescue-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(61, 80, 242, 0.09) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .rescue-card > *:not(.rescue-mark):not(.rescue-socket) { position: relative; z-index: 1; }
+  .rescue-card .data-side-title {
+    margin: 0;
+    max-width: 16ch;
+    font-size: clamp(22px, 2.55vw, 28px);
+    font-weight: 600;
+    font-stretch: normal;
+    letter-spacing: -0.028em;
+    line-height: 1.28;
+    color: var(--black);
+    transition: color 0.45s ease;
+  }
+  .rescue-card .data-side-sub {
+    margin: 0;
+    margin-top: auto;
+    padding-top: 0;
+    border-top: none;
+    font-size: 15px;
+    font-weight: 550;
+    font-stretch: normal;
+    color: #4a4a4a;
+    transition:
+      color 0.45s ease,
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  #si-no-se-llena .data-foot {
+    margin-top: 28px;
+    max-width: 38em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (max-width: 720px) {
+    .rescue-tree-wrap { height: 48px; }
+    .rescue-tree-bar,
+    .rescue-tree-drop { display: none; }
+    .rescue-tree-stem { height: 100%; }
+    .rescue-fork {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .rescue-card { min-height: 0; }
+    .rescue-card .data-side-title { max-width: none; }
+  }
   .data-card-head {
     display: flex;
     align-items: center;
@@ -2157,6 +2352,11 @@
     border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 20px;
     box-shadow: var(--shadow-card);
+    transition:
+      opacity 0.6s ease,
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.55s ease;
   }
   .noreq-ic {
     display: inline-flex;
@@ -2252,6 +2452,12 @@
     box-shadow: 0 0 0 4px rgba(66, 87, 255, 0.16);
   }
   .pilot-ask.is-lit p { color: var(--black); }
+  @media (hover: hover) and (pointer: fine) {
+    .pilot-ask.is-lit:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 42px rgba(66, 87, 255, 0.22);
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
     .pilot-ask,
     .pilot-ask-num { transition: none; }
@@ -2764,7 +2970,7 @@
   }
   .why-title {
     font-size: clamp(26px, 2.5vw, 36px);
-    font-weight: var(--title-weight);
+    font-weight: 700;
     font-stretch: semi-expanded;
     letter-spacing: var(--title-spacing);
     line-height: 1.1;
@@ -3484,7 +3690,7 @@
   }
   .final-cta h2 {
     font-size: var(--section-title-size);
-    font-weight: var(--title-weight);
+    font-weight: 700;
     font-stretch: semi-expanded;
     line-height: var(--title-lh);
     letter-spacing: var(--title-spacing);
@@ -3660,9 +3866,9 @@
   }
   .cta-field label {
     display: block;
-    font-size: 12px; font-weight: 500;
+    font-size: 13.5px; font-weight: 500;
     font-stretch: normal;
-    color: rgba(255,255,255,0.70);
+    color: rgba(255,255,255,0.82);
     text-align: left;
   }
   .cta-input {
@@ -3676,7 +3882,9 @@
     color: #1a1a1a; outline: none;
     transition: box-shadow 0.2s;
   }
-  .cta-input::placeholder { color: rgba(0,0,0,0.25); font-weight: 300; }
+  .cta-input::placeholder { color: rgba(26,26,26,0.48); font-weight: 400; opacity: 1; }
+  .cta-input::-webkit-input-placeholder { color: rgba(26,26,26,0.48); font-weight: 400; opacity: 1; }
+  .cta-input::-moz-placeholder { color: rgba(26,26,26,0.48); font-weight: 400; opacity: 1; }
   .cta-input:focus { box-shadow: 0 0 0 2px rgba(255,255,255,0.6); }
   textarea.cta-input {
     min-height: 72px;
@@ -3714,6 +3922,13 @@
     line-height: 1.45;
     text-align: center;
     color: #fff;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+  .cta-status.is-leaving {
+    opacity: 0;
+    transform: translateY(-4px);
   }
   .cta-status[hidden] { display: none !important; }
   .cta-status[data-state="ok"] {
@@ -3859,25 +4074,27 @@
     display: none;
   }
 
-  /* ══════════════════════════════
-     SCROLL ANIMATIONS
-     Solo opacity (sin translate/scale): en Windows + zoom del navegador
-     el transform hacía que las cards se vieran “encogidas”.
-  ══════════════════════════════ */
+  /* SCROLL ANIMATIONS — opacity + leve subida (sin scale: evitaba bug Windows/zoom) */
   .fade-up {
     opacity: 0;
-    transition: opacity 0.55s ease;
+    transform: translate3d(0, 18px, 0);
+    transition:
+      opacity 0.6s ease,
+      transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
   }
-  .fade-up.visible { opacity: 1; }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
   .d1 { transition-delay: 0.08s; }
   .d2 { transition-delay: 0.18s; }
   .d3 { transition-delay: 0.28s; }
   .d4 { transition-delay: 0.38s; }
   .d5 { transition-delay: 0.48s; }
-  /* Hover fluido en precios: no dejar que .fade-up anule el transition de transform */
   .pricing-card.fade-up {
     transition:
-      opacity 0.55s ease,
+      opacity 0.6s ease,
       transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
       box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1),
       border-color 0.55s ease;
@@ -3888,27 +4105,69 @@
   .pricing-card.fade-up.d4 { transition-delay: 0.38s, 0s, 0s, 0s; }
   .rescue-card.fade-up {
     transition:
-      opacity 0.55s ease,
+      opacity 0.6s ease,
       transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
       box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1),
       border-color 0.55s ease;
   }
   .rescue-card.fade-up.d3 { transition-delay: 0.28s, 0s, 0s, 0s; }
   .rescue-card.fade-up.d5 { transition-delay: 0.48s, 0s, 0s, 0s; }
-  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-    .rescue-card.fade-up.visible:hover {
-      transform: translateY(-3px);
-      border-color: rgba(20, 196, 146, 0.36);
-      box-shadow: var(--shadow-lift);
+  .noreq-tile.fade-up {
+    transition:
+      opacity 0.6s ease,
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.55s ease;
+  }
+  .noreq-tile.fade-up.d1 { transition-delay: 0.08s, 0s, 0s, 0s; }
+  .noreq-tile.fade-up.d2 { transition-delay: 0.18s, 0s, 0s, 0s; }
+  .noreq-tile.fade-up.d3 { transition-delay: 0.28s, 0s, 0s, 0s; }
+  .noreq-tile.fade-up.d4 { transition-delay: 0.38s, 0s, 0s, 0s; }
+  .noreq-tile.fade-up.d5 { transition-delay: 0.48s, 0s, 0s, 0s; }
+  @media (hover: hover) and (pointer: fine) {
+    .rescue-card.fade-up.visible:hover,
+    .rescue-opt .rescue-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow:
+        0 0 0 1px rgba(61, 80, 242, 0.32),
+        0 28px 56px rgba(61, 80, 242, 0.16),
+        0 10px 22px rgba(20, 24, 38, 0.06);
+    }
+    .rescue-opt .rescue-card:hover::before { opacity: 1; }
+    .rescue-opt .rescue-card:hover .rescue-mark {
+      color: rgba(61, 80, 242, 0.14);
+      transform: translate(-4px, -6px);
+    }
+    .rescue-opt .rescue-card:hover .data-side-title { color: #2434c9; }
+    .rescue-opt .rescue-card:hover .data-side-sub {
+      color: var(--blue);
+      transform: translateX(3px);
+    }
+    .rescue-schema:has([data-branch="l"] .rescue-card:hover) .rescue-tree-stem,
+    .rescue-schema:has([data-branch="l"] .rescue-card:hover) .rescue-tree-bar--l,
+    .rescue-schema:has([data-branch="l"] .rescue-card:hover) .rescue-tree-drop--l,
+    .rescue-schema:has([data-branch="r"] .rescue-card:hover) .rescue-tree-stem,
+    .rescue-schema:has([data-branch="r"] .rescue-card:hover) .rescue-tree-bar--r,
+    .rescue-schema:has([data-branch="r"] .rescue-card:hover) .rescue-tree-drop--r {
+      background: var(--blue);
+      box-shadow: 0 0 14px rgba(61, 80, 242, 0.4);
+      filter: saturate(1.1);
+    }
+    .noreq-tile.fade-up.visible:hover,
+    .noreq-tile:hover {
+      transform: translate3d(0, -5px, 0);
+      border-color: rgba(61, 80, 242, 0.22);
+      box-shadow: 0 16px 36px rgba(20, 24, 38, 0.09);
     }
   }
   @media (prefers-reduced-motion: reduce) {
+    /* Entrada al scroll: se mantiene (más corta). Solo se desactiva el resto de motion. */
     .fade-up {
-      opacity: 1 !important;
-      transition: none !important;
+      transition-duration: 0.4s !important;
     }
     .pricing-card.fade-up {
       transition:
+        opacity 0.4s ease,
         transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
         box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1),
         border-color 0.55s ease !important;
@@ -4821,16 +5080,33 @@
 <section class="data" id="si-no-se-llena">
   <div class="data-inner">
     <h2 class="s-title data-headline fade-up d1" data-i18n="rescue_title">¿Y si nadie más entra?</h2>
-    <p class="data-sub fade-up d2" data-i18n="rescue_sub">Tu cliente elige, y las dos opciones son buenas.</p>
-    <div class="data-compare">
-      <article class="data-card data-card--good rescue-card fade-up d3">
-        <h3 class="data-side-title" data-i18n="rescue_opt1_title">Se queda las dos unidades al mismo precio de grupo.</h3>
-        <p class="data-side-sub" data-i18n="rescue_opt1_sub">Tú vendes dos.</p>
-      </article>
-      <article class="data-card data-card--good rescue-card fade-up d5">
-        <h3 class="data-side-title" data-i18n="rescue_opt2_title">O le devolvemos el dinero.</h3>
-        <p class="data-side-sub" data-i18n="rescue_opt2_sub">Entero, sin condiciones.</p>
-      </article>
+    <div class="rescue-flow fade-up d2">
+      <p class="rescue-hub" data-i18n="rescue_sub">Tu cliente elige, y las dos opciones son buenas.</p>
+      <div class="rescue-schema">
+        <div class="rescue-tree-wrap" aria-hidden="true">
+          <span class="rescue-tree-stem"></span>
+          <span class="rescue-tree-bar rescue-tree-bar--l"></span>
+          <span class="rescue-tree-bar rescue-tree-bar--r"></span>
+          <span class="rescue-tree-drop rescue-tree-drop--l"></span>
+          <span class="rescue-tree-drop rescue-tree-drop--r"></span>
+        </div>
+        <div class="rescue-fork">
+          <div class="rescue-opt" data-branch="l">
+            <article class="rescue-card">
+              <span class="rescue-mark" aria-hidden="true">1</span>
+              <h3 class="data-side-title" data-i18n="rescue_opt1_title">Se queda las dos unidades al mismo precio de grupo.</h3>
+              <p class="data-side-sub" data-i18n="rescue_opt1_sub">Tú vendes dos.</p>
+            </article>
+          </div>
+          <div class="rescue-opt" data-branch="r">
+            <article class="rescue-card">
+              <span class="rescue-mark" aria-hidden="true">2</span>
+              <h3 class="data-side-title" data-i18n="rescue_opt2_title">O le devolvemos el dinero.</h3>
+              <p class="data-side-sub" data-i18n="rescue_opt2_sub">Entero, sin condiciones.</p>
+            </article>
+          </div>
+        </div>
+      </div>
     </div>
     <p class="data-foot fade-up d4" data-i18n="rescue_body">En ese segundo caso Shopify no te devuelve la comisión de la pasarela. La ponemos nosotros. Un grupo que no sale no te cuesta ni un euro.</p>
   </div>
@@ -5069,8 +5345,7 @@
         <a class="pricing-cta is-secondary" aria-disabled="true" data-i18n="pricing_p2_cta">Elegir plan</a>
       </article>
 
-      <article class="pricing-card is-featured is-soon fade-up d3">
-        <span class="pricing-rec-corner" data-i18n="pricing_recommended">Recomendado</span>
+      <article class="pricing-card is-soon fade-up d3">
         <h3 class="pricing-name" data-i18n="pricing_p3_name">Pro</h3>
         <div class="pricing-price-row">
           <span class="pricing-amount" data-i18n="pricing_p3_price">49 €</span>
@@ -5088,7 +5363,7 @@
           <li class="is-no">Tuko AI: No</li>
 
         </ul>
-        <a class="pricing-cta is-primary" aria-disabled="true" data-i18n="pricing_p3_cta">Elegir plan</a>
+        <a class="pricing-cta is-secondary" aria-disabled="true" data-i18n="pricing_p3_cta">Elegir plan</a>
       </article>
 
       <article class="pricing-card is-gift fade-up d4">
@@ -5421,32 +5696,35 @@ if (ctaCanvas) initGrid(ctaCanvas, {
   maxAlpha: 0.17, baseColor: '255,255,255', vpX: 0.50, lateral: 0.04
 });
 
-/* ── SCROLL FADE-UP ── */
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    e.target.classList.add('visible');
-    e.target.dispatchEvent(new CustomEvent('tuko:visible', { bubbles: true }));
-  });
-}, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+/* ── SCROLL FADE-UP (siempre con JS; no se salta por “reducir movimiento”) ── */
+(function () {
+  var nodes = Array.prototype.slice.call(document.querySelectorAll('.fade-up'));
+  if (!nodes.length) return;
 
-document.querySelectorAll('.fade-up').forEach(el => {
-  if (reduceMotion) {
+  function reveal(el) {
+    if (el.classList.contains('visible')) return;
     el.classList.add('visible');
     el.dispatchEvent(new CustomEvent('tuko:visible', { bubbles: true }));
-  } else {
-    obs.observe(el);
   }
-});
 
-// Trigger hero immediately
-setTimeout(() => {
-  document.querySelectorAll('.hero .fade-up').forEach(el => {
-    el.classList.add('visible');
-    el.dispatchEvent(new CustomEvent('tuko:visible', { bubbles: true }));
-  });
-}, 80);
+  if (!('IntersectionObserver' in window)) {
+    nodes.forEach(reveal);
+  } else {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        reveal(e.target);
+        obs.unobserve(e.target);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+    nodes.forEach(function (el) { obs.observe(el); });
+  }
+
+  setTimeout(function () {
+    document.querySelectorAll('.hero .fade-up').forEach(reveal);
+  }, 80);
+})();
+
 
 /* ── Relojes de los mockups (hero y "Por qué compran"): cuentan hacia atrás de verdad ── */
 (function () {
@@ -6816,8 +7094,10 @@ const translations = {
     step4_desc: 'Cuando el grupo se completa, se ejecutan los pedidos y, a los 5 minutos, Tuko publica un grupo nuevo vacío, listo para el siguiente cliente. Tú no haces nada: se repite hasta que tú digas basta.',
     rescue_title: '¿Y si nadie más entra?',
     rescue_sub: 'Tu cliente elige, y las dos opciones son buenas.',
+    rescue_opt1_label: 'Opción A',
     rescue_opt1_title: 'Se queda las dos unidades al mismo precio de grupo.',
     rescue_opt1_sub: 'Tú vendes dos.',
+    rescue_opt2_label: 'Opción B',
     rescue_opt2_title: 'O le devolvemos el dinero.',
     rescue_opt2_sub: 'Entero, sin condiciones.',
     rescue_body: 'En ese segundo caso Shopify no te devuelve la comisión de la pasarela. La ponemos nosotros. Un grupo que no sale no te cuesta ni un euro.',
@@ -7410,8 +7690,10 @@ const translations = {
     step4_desc: 'When the group completes, the orders go through and, 5 minutes later, Tuko publishes a new empty group, ready for the next customer. You don\'t do a thing: it repeats until you say stop.',
     rescue_title: 'What if nobody else joins?',
     rescue_sub: 'Your customer chooses, and both options are good.',
+    rescue_opt1_label: 'Option A',
     rescue_opt1_title: 'They keep both units at the same group price.',
     rescue_opt1_sub: 'You sell two.',
+    rescue_opt2_label: 'Option B',
     rescue_opt2_title: 'Or we refund their money.',
     rescue_opt2_sub: 'In full, no strings attached.',
     rescue_body: 'In that second case Shopify doesn\'t refund you the payment gateway fee. We cover it. A group that doesn\'t close doesn\'t cost you a single euro.',
@@ -8470,7 +8752,7 @@ document.addEventListener('DOMContentLoaded', () => {
   io.observe(grid);
 })();
 </script>
-<script src="../assets/js/tuko-form.js?v=20260930k" defer></script>
+<script src="../assets/js/tuko-form.js?v=20260930m" defer></script>
 <script src="../assets/js/ga4-loader.js" defer></script>
 <script src="../assets/js/local-landing-label.js"></script>
 </body>

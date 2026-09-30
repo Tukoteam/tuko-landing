@@ -1688,6 +1688,13 @@
     font-weight: 500;
     line-height: 1.45;
     text-align: center;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+  .cta-wrap .cta-status.is-leaving {
+    opacity: 0;
+    transform: translateY(-4px);
   }
   .cta-wrap .cta-status[hidden] { display: none; }
   .cta-wrap .cta-status[data-state="ok"] { background: rgba(20,196,146,0.15); border: 1px solid #14C492; }
@@ -1717,10 +1724,10 @@
     gap: 7px;
   }
   .cta-wrap .cta-field label {
-    font-size: 12px;
+    font-size: 13.5px;
     font-weight: 550;
     letter-spacing: 0.02em;
-    color: rgba(255,255,255,0.78);
+    color: rgba(255,255,255,0.88);
   }
   .cta-wrap .cta-input {
     padding: 13px 16px;
@@ -1731,18 +1738,18 @@
     transition: box-shadow 0.2s, transform 0.15s;
   }
   .cta-wrap .cta-input::placeholder {
-    color: rgba(26,26,26,0.58);
-    font-weight: 600;
+    color: rgba(26,26,26,0.52);
+    font-weight: 500;
     opacity: 1;
   }
   .cta-wrap .cta-input::-webkit-input-placeholder {
-    color: rgba(26,26,26,0.58);
-    font-weight: 600;
+    color: rgba(26,26,26,0.52);
+    font-weight: 500;
     opacity: 1;
   }
   .cta-wrap .cta-input::-moz-placeholder {
-    color: rgba(26,26,26,0.58);
-    font-weight: 600;
+    color: rgba(26,26,26,0.52);
+    font-weight: 500;
     opacity: 1;
   }
   .cta-wrap .cta-input:hover {
@@ -2420,7 +2427,7 @@
 
 <script src="assets/js/main.js?v=20260904a" defer></script>
 <script src="assets/js/i18n.js?v=20260930j" defer></script>
-<script src="assets/js/tuko-form.js?v=20260930k" defer></script>
+<script src="assets/js/tuko-form.js?v=20260930m" defer></script>
 <script>
   /* Entrada del hero: mismo fade-up que el home */
   setTimeout(function () {
