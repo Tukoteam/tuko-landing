@@ -30,11 +30,11 @@
       if (g.role === 'hero') {
         /* Noche: líneas más apagadas (no blancas) */
         g.setOpts(theme === 'dark'
-          ? { baseColor: '72,88,150', maxAlpha: 0.13 }
+          ? { baseColor: '110,128,210', maxAlpha: 0.21 }
           : { baseColor: '90,90,90', maxAlpha: 0.17 });
       } else if (g.role === 'cta') {
         g.setOpts(theme === 'dark'
-          ? { baseColor: '130,150,235', maxAlpha: 0.16 }
+          ? { baseColor: '160,175,255', maxAlpha: 0.28 }
           : { baseColor: '255,255,255', maxAlpha: 0.17 });
       }
     }
