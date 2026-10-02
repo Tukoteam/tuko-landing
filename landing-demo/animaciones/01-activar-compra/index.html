@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tuko — Publicar grupo</title>
+  <script>(function(){try{var t=localStorage.getItem("tuko_theme");if(t==="dark"||t==="light"){document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.toggle("theme-dark",t==="dark");}if(window.parent!==window){var p=window.parent.document.documentElement.getAttribute("data-theme");if(p==="dark"||p==="light"){document.documentElement.setAttribute("data-theme",p);document.documentElement.classList.toggle("theme-dark",p==="dark");}}}catch(e){}})();</script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800&display=swap');
 
@@ -48,7 +49,7 @@
     html.embedded body {
       padding: 0;
       overflow: hidden;
-      background: #fff;
+      background: var(--n-white);
       display: block;
       min-height: 0;
     }
@@ -57,7 +58,7 @@
       width: 100%;
       border-radius: 0;
       box-shadow: none;
-      background: #fff;
+      background: var(--n-white);
     }
     html.embedded .stage { padding: 0; }
     html.embedded .wizard {
@@ -646,6 +647,8 @@
     }
     .click-ripple.active { animation: ripple-out 0.55s ease-out forwards; }
   </style>
+<link rel="stylesheet" href="/landing-demo/animaciones/tuko-anim-dark.css?v=20261002h">
+<script src="/landing-demo/animaciones/tuko-anim-theme.js?v=20261002d"></script>
 </head>
 <body>
 
@@ -831,26 +834,26 @@
         <!-- Intro -->
         <div class="intro" id="intro">
           <svg class="intro-art" viewBox="0 0 210 150" aria-hidden="true">
-            <circle cx="22" cy="28" r="3.2" fill="#c9cff6"/>
-            <circle cx="186" cy="42" r="3.2" fill="#c9cff6"/>
-            <ellipse cx="105" cy="138" rx="86" ry="9" fill="#e4e6f6"/>
-            <path d="M40 76 Q48 54 70 48" fill="none" stroke="#b8bff0" stroke-width="1.6" stroke-dasharray="4 4"/>
-            <rect x="70" y="38" width="70" height="74" rx="11" fill="#fff" stroke="#dde1fb" stroke-width="2"/>
-            <rect x="78" y="46" width="54" height="42" rx="7" fill="#eef0fd" stroke="#c6ccf4" stroke-width="1.5"/>
-            <circle cx="105" cy="67" r="9" fill="#dde1f6"/>
-            <path d="M105 62v10M100 67h10" stroke="#8a91b4" stroke-width="1.6" stroke-linecap="round"/>
-            <rect x="89" y="96" width="32" height="5" rx="2.5" fill="#dde1f6"/>
-            <g>
+            <circle class="intro-dot" cx="22" cy="28" r="3.2" fill="#c9cff6"/>
+            <circle class="intro-dot" cx="186" cy="42" r="3.2" fill="#c9cff6"/>
+            <ellipse class="intro-base" cx="105" cy="138" rx="86" ry="9" fill="#e4e6f6"/>
+            <path class="intro-dash" d="M40 76 Q48 54 70 48" fill="none" stroke="#b8bff0" stroke-width="1.6" stroke-dasharray="4 4"/>
+            <rect class="intro-frame" x="70" y="38" width="70" height="74" rx="11" fill="#fff" stroke="#dde1fb" stroke-width="2"/>
+            <rect class="intro-photo" x="78" y="46" width="54" height="42" rx="7" fill="#eef0fd" stroke="#c6ccf4" stroke-width="1.5"/>
+            <circle class="intro-plus-bg" cx="105" cy="67" r="9" fill="#dde1f6"/>
+            <path class="intro-plus" d="M105 62v10M100 67h10" stroke="#8a91b4" stroke-width="1.6" stroke-linecap="round"/>
+            <rect class="intro-bar" x="89" y="96" width="32" height="5" rx="2.5" fill="#dde1f6"/>
+            <g class="intro-avatar">
               <circle cx="105" cy="14" r="12" fill="#f6f7fc" stroke="#d6daf1" stroke-width="1.4"/>
               <circle cx="105" cy="11" r="4" fill="#d2d6e2"/>
               <path d="M97 22c1.4-3.6 4.2-5 8-5s6.6 1.4 8 5" fill="none" stroke="#d2d6e2" stroke-width="2"/>
             </g>
-            <g>
+            <g class="intro-avatar">
               <circle cx="34" cy="90" r="14" fill="#f6f7fc" stroke="#d6daf1" stroke-width="1.4"/>
               <circle cx="34" cy="86.5" r="4.6" fill="#d2d6e2"/>
               <path d="M24.5 100c1.6-4 4.8-5.8 9.5-5.8s7.9 1.8 9.5 5.8" fill="none" stroke="#d2d6e2" stroke-width="2.2"/>
             </g>
-            <g>
+            <g class="intro-avatar">
               <circle cx="176" cy="90" r="14" fill="#f6f7fc" stroke="#d6daf1" stroke-width="1.4"/>
               <circle cx="176" cy="86.5" r="4.6" fill="#d2d6e2"/>
               <path d="M166.5 100c1.6-4 4.8-5.8 9.5-5.8s7.9 1.8 9.5 5.8" fill="none" stroke="#d2d6e2" stroke-width="2.2"/>

@@ -83,24 +83,37 @@ function initGrid(canvas, opts) {
   resize();
   draw();
 
-  return { stop: () => cancelAnimationFrame(raf) };
+  return {
+    stop: () => cancelAnimationFrame(raf),
+    setOpts: (patch) => { Object.assign(opts, patch || {}); }
+  };
 }
+
+window.__tukoGrids = window.__tukoGrids || [];
 
 // Hero grid (only on landing page)
 const heroCanvas = document.getElementById('heroCanvas');
-if (heroCanvas) initGrid(heroCanvas, {
-  speed: 0.62, horizonY: 0.50, lineWidth: 1.3,
-  cols: 22, spread: 3.8, zoom: 1.4, fadeLen: 0.42,
-  maxAlpha: 0.17, baseColor: '90,90,90', vpX: 0.50, lateral: 0.04
-});
+if (heroCanvas) {
+  const heroGrid = initGrid(heroCanvas, {
+    speed: 0.62, horizonY: 0.50, lineWidth: 1.3,
+    cols: 22, spread: 3.8, zoom: 1.4, fadeLen: 0.42,
+    maxAlpha: 0.17, baseColor: '90,90,90', vpX: 0.50, lateral: 0.04
+  });
+  heroGrid.role = 'hero';
+  window.__tukoGrids.push(heroGrid);
+}
 
 // CTA grid (only on landing page)
 const ctaCanvas = document.getElementById('ctaCanvas');
-if (ctaCanvas) initGrid(ctaCanvas, {
-  speed: 0.62, horizonY: 0.50, lineWidth: 1.3,
-  cols: 22, spread: 3.8, zoom: 1.4, fadeLen: 0.42,
-  maxAlpha: 0.17, baseColor: '255,255,255', vpX: 0.50, lateral: 0.04
-});
+if (ctaCanvas) {
+  const ctaGrid = initGrid(ctaCanvas, {
+    speed: 0.62, horizonY: 0.50, lineWidth: 1.3,
+    cols: 22, spread: 3.8, zoom: 1.4, fadeLen: 0.42,
+    maxAlpha: 0.17, baseColor: '255,255,255', vpX: 0.50, lateral: 0.04
+  });
+  ctaGrid.role = 'cta';
+  window.__tukoGrids.push(ctaGrid);
+}
 
 /* ── SCROLL FADE-UP ── */
 const obs = new IntersectionObserver(entries => {

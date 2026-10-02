@@ -13,6 +13,7 @@
 <!-- ═══ SEO: Charset & Viewport ═══ -->
 <!-- tuko-deploy: 2026-09-06-source-gap-56 -->
 <meta charset="UTF-8">
+<script>(function(){try{var t=localStorage.getItem("tuko_theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <!-- ═══ SEO: Title & Description ═══ -->
@@ -1128,24 +1129,24 @@
   .logo-pill:hover { opacity: 1; }
   /* Misma distancia entre logos: columnas de ancho fijo + gap uniforme */
   .logos-section .logo-pill {
-    flex: 0 0 252px;
-    width: 252px;
-    max-width: 252px;
+    flex: 0 0 268px;
+    width: 268px;
+    max-width: 268px;
     box-sizing: border-box;
   }
   /* Alto uniforme: los PNG traen aire distinto, la altura visual se iguala aquí */
   .logo-pill img {
-    height: 64px;
+    height: 76px;
     width: auto;
-    max-width: 220px;
+    max-width: 240px;
     object-fit: contain;
   }
   .logos-section .logo-pill img {
-    max-width: min(220px, 100%);
+    max-width: min(240px, 100%);
   }
   .logos-section .logo-pill img[src*="Saper - Logo"] {
-    height: 80px;
-    max-width: min(240px, 100%);
+    height: 94px;
+    max-width: min(260px, 100%);
   }
 
   /* ══════════════════════════════
@@ -2109,7 +2110,7 @@
   .rescue-card .rescue-mark {
     position: absolute;
     right: 8px;
-    bottom: -6px;
+    bottom: -8px;
     font-size: clamp(96px, 14vw, 140px);
     font-weight: 800;
     font-stretch: semi-expanded;
@@ -2190,7 +2191,7 @@
     .rescue-card .data-side-title { font-size: clamp(18px, 5vw, 21px); }
     .rescue-card .rescue-mark {
       font-size: 88px;
-      bottom: -10px;
+      bottom: -12px;
       right: 6px;
     }
     #si-no-se-llena .data-foot {
@@ -4594,20 +4595,20 @@
       animation-duration: 26s;
     }
     .logos-section .logo-pill {
-      flex: 0 0 180px;
-      width: 180px;
-      max-width: 180px;
+      flex: 0 0 200px;
+      width: 200px;
+      max-width: 200px;
     }
     .logo-pill img {
-      height: 46px;
-      max-width: 150px;
+      height: 56px;
+      max-width: 170px;
     }
     .logos-section .logo-pill img {
-      max-width: min(150px, 100%);
+      max-width: min(170px, 100%);
     }
     .logos-section .logo-pill img[src*="Saper - Logo"] {
-      height: 58px;
-      max-width: min(170px, 100%);
+      height: 70px;
+      max-width: min(190px, 100%);
     }
     .logos-overflow::before,
     .logos-overflow::after { width: 60px; }
@@ -4771,11 +4772,14 @@
     #problema .data-headline,
     #problema .data-sub,
     #problema .data-trigger,
+    #problema .data-foot,
     #piloto .data-headline,
     #piloto .data-sub,
     #piloto .data-trigger,
+    #piloto .data-foot,
     #precios .s-title,
     #precios .s-sub,
+    #precios .pricing-legal,
     #faq .s-title,
     #faq .s-sub {
       text-align: center;
@@ -4930,11 +4934,14 @@
     #problema .data-headline,
     #problema .data-sub,
     #problema .data-trigger,
+    #problema .data-foot,
     #piloto .data-headline,
     #piloto .data-sub,
     #piloto .data-trigger,
+    #piloto .data-foot,
     #precios .s-title,
     #precios .s-sub,
+    #precios .pricing-legal,
     #faq .s-title,
     #faq .s-sub {
       text-align: center;
@@ -4959,6 +4966,7 @@
     .lang-opt { padding: 6px 7px; }
   }
 </style>
+<link rel="stylesheet" href="assets/css/tuko-theme.css?v=20261002ae">
 <link rel="prefetch" href="blog/" as="document">
 <link rel="prefetch" href="tuko-ai.html" as="document">
 </head>
@@ -4979,6 +4987,10 @@
     <li><a href="tuko-ai.html" data-i18n="nav_link_ia">tuko AI</a></li>
     <li><a href="#solicitud" class="nav-cta" data-i18n="nav_cta">Acceder al piloto</a></li>
   </ul>
+  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Activar modo oscuro" aria-pressed="false">
+    <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+  </button>
   <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -5188,7 +5200,7 @@
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/01-activar-compra/index.html?v=20261002b" title="Demo: publicar el grupo en la tienda" loading="eager"></iframe>
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/01-activar-compra/index.html?v=20261002h" title="Demo: publicar el grupo en la tienda" loading="eager"></iframe>
       </div>
     </div>
   </div>
@@ -5204,7 +5216,7 @@
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/06-reservar-piruleta/index.html?v=20261002b" title="Demo: comprar el producto y compartir" loading="eager"></iframe>
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/06-reservar-piruleta/index.html?v=20261002h" title="Demo: comprar el producto y compartir" loading="eager"></iframe>
       </div>
     </div>
   </div>
@@ -5220,7 +5232,7 @@
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/07-grupo-completado/index.html?v=20261002b" title="Demo: grupo completado y estadísticas" loading="eager"></iframe>
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/07-grupo-completado/index.html?v=20261002h" title="Demo: grupo completado y estadísticas" loading="eager"></iframe>
       </div>
     </div>
   </div>
@@ -5236,7 +5248,7 @@
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/08-grupo-en-bucle/index.html?v=20261002b" title="Demo: Tuko abre un grupo nuevo tras cada grupo completado" loading="eager"></iframe>
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/08-grupo-en-bucle/index.html?v=20261002h" title="Demo: Tuko abre un grupo nuevo tras cada grupo completado" loading="eager"></iframe>
       </div>
     </div>
   </div>
@@ -5852,24 +5864,42 @@ function initGrid(canvas, opts) {
   resize();
   draw();
 
-  return { stop: () => cancelAnimationFrame(raf) };
+  return {
+    stop: () => cancelAnimationFrame(raf),
+    setOpts: (patch) => { Object.assign(opts, patch || {}); }
+  };
 }
+
+window.__tukoGrids = window.__tukoGrids || [];
+var __tukoDark = document.documentElement.getAttribute('data-theme') === 'dark';
 
 // Hero grid
 const heroCanvas = document.getElementById('heroCanvas');
-if (heroCanvas) initGrid(heroCanvas, {
-  speed: 0.62, horizonY: 0.50, lineWidth: 1.3,
-  cols: 22, spread: 3.8, zoom: 1.4, fadeLen: 0.42,
-  maxAlpha: 0.17, baseColor: '90,90,90', vpX: 0.50, lateral: 0.04
-});
+if (heroCanvas) {
+  const heroGrid = initGrid(heroCanvas, {
+    speed: 0.62, horizonY: 0.50, lineWidth: 1.3,
+    cols: 22, spread: 3.8, zoom: 1.4, fadeLen: 0.42,
+    maxAlpha: __tukoDark ? 0.13 : 0.17,
+    baseColor: __tukoDark ? '72,88,150' : '90,90,90',
+    vpX: 0.50, lateral: 0.04
+  });
+  heroGrid.role = 'hero';
+  window.__tukoGrids.push(heroGrid);
+}
 
-// CTA grid (el formulario vive ahora en tuko-ai: aquí puede no existir)
+// CTA grid
 const ctaCanvas = document.getElementById('ctaCanvas');
-if (ctaCanvas) initGrid(ctaCanvas, {
-  speed: 0.62, horizonY: 0.50, lineWidth: 1.3,
-  cols: 22, spread: 3.8, zoom: 1.4, fadeLen: 0.42,
-  maxAlpha: 0.17, baseColor: '255,255,255', vpX: 0.50, lateral: 0.04
-});
+if (ctaCanvas) {
+  const ctaGrid = initGrid(ctaCanvas, {
+    speed: 0.62, horizonY: 0.50, lineWidth: 1.3,
+    cols: 22, spread: 3.8, zoom: 1.4, fadeLen: 0.42,
+    maxAlpha: __tukoDark ? 0.16 : 0.17,
+    baseColor: __tukoDark ? '130,150,235' : '255,255,255',
+    vpX: 0.50, lateral: 0.04
+  });
+  ctaGrid.role = 'cta';
+  window.__tukoGrids.push(ctaGrid);
+}
 
 /* ── SCROLL FADE-UP (siempre con JS; no se salta por “reducir movimiento”) ── */
 (function () {
@@ -8994,6 +9024,7 @@ document.addEventListener('DOMContentLoaded', () => {
   io.observe(grid);
 })();
 </script>
+<script src="assets/js/tuko-theme.js?v=20261002f" defer></script>
 <script src="assets/js/tuko-form.js?v=20260930m" defer></script>
 <script src="assets/js/ga4-loader.js" defer></script>
 <script src="assets/js/local-landing-label.js"></script>

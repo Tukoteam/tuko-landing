@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tuko — Reservar Piruleta Pirulín</title>
+  <script>(function(){try{var t=localStorage.getItem("tuko_theme");if(t==="dark"||t==="light"){document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.toggle("theme-dark",t==="dark");}if(window.parent!==window){var p=window.parent.document.documentElement.getAttribute("data-theme");if(p==="dark"||p==="light"){document.documentElement.setAttribute("data-theme",p);document.documentElement.classList.toggle("theme-dark",p==="dark");}}}catch(e){}})();</script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800&display=swap');
 
@@ -50,7 +51,7 @@
     html.embedded body {
       padding: 0;
       overflow: hidden;
-      background: #fff;
+      background: var(--n-white);
       display: block;
     }
     html.embedded .animation-viewport {
@@ -60,6 +61,7 @@
       aspect-ratio: auto;
       border-radius: 0;
       box-shadow: none;
+      background: var(--n-white);
     }
     html.embedded .stage {
       padding: 12px;
@@ -457,6 +459,8 @@
     @keyframes ripple-out { to { transform: scale(2.6); opacity: 0; } }
     .click-ripple.active { animation: ripple-out 0.55s ease-out forwards; }
   </style>
+  <link rel="stylesheet" href="/landing-demo/animaciones/tuko-anim-dark.css?v=20261002h">
+  <script src="/landing-demo/animaciones/tuko-anim-theme.js?v=20261002d"></script>
 </head>
 <body>
 

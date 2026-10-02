@@ -2,6 +2,7 @@
 <html lang="es" data-url-es="https://tukoteam.com/tuko-ai" data-url-en="https://tukoteam.com/en/tuko-ai">
 <head>
 <meta charset="UTF-8">
+<script>(function(){try{var t=localStorage.getItem("tuko_theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>tuko AI — Compras colectivas automatizadas con IA</title>
 <meta name="tuko-ia-build" content="20260731-panel-ready-1s">
@@ -110,6 +111,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Roboto+Serif:ital,opsz,wght@1,8..144,400..700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Roboto+Serif:ital,opsz,wght@1,8..144,400..700&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="assets/css/main.css?v=20260905f">
+<link rel="stylesheet" href="assets/css/tuko-theme.css?v=20261002ae">
 <style>
   /* ══════════════════════════════
      tuko AI — página de prelanzamiento
@@ -1621,7 +1623,10 @@
   .ia-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 42px rgba(0,0,0,0.22); }
   .ia-cta-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; }
 
-  /* Formulario de lista de espera */
+  /* Formulario de lista de espera — más aire respecto al footer */
+  .cta-wrap {
+    padding: 56px 48px 96px;
+  }
   .cta-wrap #ctaCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
   .cta-wrap .cta-inner {
     padding: 80px 48px 76px;
@@ -1799,7 +1804,7 @@
   @media (max-width: 640px) {
     .cta-wrap .cta-form { grid-template-columns: 1fr; max-width: 100%; }
     .cta-wrap .cta-inner { padding: 56px 20px 52px; }
-    .cta-wrap { padding: 20px 16px 8px; }
+    .cta-wrap { padding: 32px 16px 72px; }
   }
 
 
@@ -1860,14 +1865,18 @@
     }
     .ia-hero-cta .btn-blue { width: 100%; justify-content: center; }
     .ia-section-head {
-      text-align: left;
-      margin-left: 0;
-      margin-right: 0;
-      max-width: none;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 720px;
+    }
+    .ia-section-head h2,
+    .ia-section-head p {
+      text-align: center;
     }
     .ia-cta { text-align: left; }
     .ia-cta h2 { text-align: left; }
-    .ia-form-intro { text-align: left; margin-left: 0; margin-right: 0; }
+    .ia-form-intro { text-align: center; margin-left: auto; margin-right: auto; }
     .ia-soon {
       text-align: left;
     }
@@ -1965,7 +1974,7 @@
       padding: 14px 16px;
     }
     .ia-cta { padding: 72px 16px 76px; }
-    .cta-wrap { padding: 28px 16px 12px; }
+    .cta-wrap { padding: 40px 16px 80px; }
   }
   @media (prefers-reduced-motion: reduce) {
     /* Ping del badge: se mantiene (decorativo del hero) */
@@ -2035,6 +2044,10 @@
     <li><a href="tuko-ai" class="nav-link-active" data-i18n="nav_link_ia">tuko AI</a></li>
     <li><a href="/#solicitud" class="nav-cta" data-i18n="nav_cta_pilot">Quiero una de las 5 plazas</a></li>
   </ul>
+  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Activar modo oscuro" aria-pressed="false">
+    <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+  </button>
   <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -2425,7 +2438,8 @@
   <div class="footer-bottom-inner" data-i18n="footer_copy">© 2026 Tuko. Todos los derechos reservados.</div>
 </footer>
 
-<script src="assets/js/main.js?v=20260904a" defer></script>
+<script src="assets/js/main.js?v=20261002a" defer></script>
+<script src="assets/js/tuko-theme.js?v=20261002b" defer></script>
 <script src="assets/js/i18n.js?v=20260930j" defer></script>
 <script src="assets/js/tuko-form.js?v=20260930m" defer></script>
 <script>
@@ -2521,7 +2535,9 @@
       var x = dir * (1 - p) * 40;
       var y = (1 - p) * 36;
       var s = 0.88 + p * 0.12;
-      var o = 0.2 + p * 0.8;
+      /* En dark el suelo de opacidad sube: si no, las cards casi desaparecen */
+      var oMin = document.documentElement.getAttribute('data-theme') === 'dark' ? 0.52 : 0.2;
+      var o = oMin + p * (1 - oMin);
       card.style.opacity = o.toFixed(3);
       card.style.transform = 'translate3d(' + x.toFixed(2) + 'px,' + y.toFixed(2) + 'px,0) scale(' + s.toFixed(4) + ')';
       card.style.setProperty('--approach', p.toFixed(4));
