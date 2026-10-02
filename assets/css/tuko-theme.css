@@ -1143,10 +1143,14 @@ html[data-theme="dark"] .why-group-txt b,
 html[data-theme="dark"] .why-group-chip {
   color: #f2f3f7;
 }
-html[data-theme="dark"] .why-group-txt,
-html[data-theme="dark"] .why-group-chip em,
+html[data-theme="dark"] .why-group-txt {
+  color: #e8ebf5;
+}
+html[data-theme="dark"] .why-group-chip em {
+  color: #c5d0ff;
+}
 html[data-theme="dark"] .why-clock i {
-  color: #b8bfce;
+  color: #d0d5e0;
 }
 html[data-theme="dark"] .why-clock {
   background: #1c2030;
