@@ -1882,8 +1882,8 @@
   }
   .faq-a {
     margin: 0;
-    padding: 0 16px 24px calc(32px + 2.1rem);
-    max-width: 62ch;
+    padding: 0 calc(16px + 2.75rem) 24px calc(32px + 2.1rem);
+    max-width: none;
     font-size: 15.5px;
     font-weight: 400;
     line-height: 1.65;
@@ -1899,7 +1899,7 @@
       padding: 18px 12px 18px 22px;
     }
     .faq-a {
-      padding: 0 12px 20px calc(22px + 2rem);
+      padding: 0 calc(12px + 2.5rem) 20px calc(22px + 2rem);
       font-size: 15px;
     }
   }
@@ -2782,7 +2782,7 @@
   .how-anim-box {
     aspect-ratio: 1 / 1;
     background: #ffffff;
-    border-radius: 22px;
+    border-radius: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2794,6 +2794,8 @@
     padding: 0;
     background: #ffffff;
     overflow: hidden;
+    border-radius: 28px;
+    isolation: isolate;
     box-shadow:
       0 4px 12px rgba(20, 24, 38, 0.04),
       0 22px 56px rgba(61, 80, 242, 0.12),
@@ -2870,6 +2872,7 @@
     height: 100%;
     min-height: 0;
     border: 0;
+    border-radius: inherit;
     background: #ffffff;
     pointer-events: none;
     touch-action: manipulation;
@@ -4572,7 +4575,7 @@
     }
     .how-anim-box {
       min-height: 0;
-      border-radius: 18px;
+      border-radius: 28px;
     }
     .how-step-iframe { min-height: 0; }
     /* En móvil: paso 2 formato teléfono */
@@ -4969,7 +4972,7 @@
     .lang-opt { padding: 6px 7px; }
   }
 </style>
-<link rel="stylesheet" href="assets/css/tuko-theme.css?v=20261002ah">
+<link rel="stylesheet" href="assets/css/tuko-theme.css?v=20261003j">
 <link rel="prefetch" href="blog/" as="document">
 <link rel="prefetch" href="tuko-ai.html" as="document">
 </head>
@@ -5235,7 +5238,7 @@
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/07-grupo-completado/index.html?v=20261002h" title="Demo: grupo completado y estadísticas" loading="eager"></iframe>
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/07-grupo-completado/index.html?v=20261003n" title="Demo: grupo completado y estadísticas" loading="eager"></iframe>
       </div>
     </div>
   </div>
@@ -5251,7 +5254,7 @@
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/08-grupo-en-bucle/index.html?v=20261002h" title="Demo: Tuko abre un grupo nuevo tras cada grupo completado" loading="eager"></iframe>
+        <iframe class="how-step-iframe" src="landing-demo/animaciones/08-grupo-en-bucle/index.html?v=20261003n" title="Demo: Tuko abre un grupo nuevo tras cada grupo completado" loading="eager"></iframe>
       </div>
     </div>
   </div>
@@ -5481,7 +5484,7 @@
         <span class="hero-cta-arrow" aria-hidden="true">→</span>
       </a>
     </div>
-    <p class="data-foot fade-up d4" data-i18n="pilot_foot">Sin tarjeta, sin permanencia y sin comisiones. Si a los 45 días no te sirve, lo desinstalas y no pasa nada.</p>
+    <p class="data-foot fade-up d4" data-i18n="pilot_foot">Sin tarjeta, sin permanencia y sin comisiones. Si el día 45 quieres seguir usando Tuko, te dejamos el plan Escala a 49 €/mes de por vida.</p>
   </div>
 </section>
 
@@ -5659,7 +5662,7 @@
         </h3>
         <div class="faq-panel" id="faq-panel-6" role="region" aria-labelledby="faq-btn-6" hidden>
           <div class="faq-panel-inner">
-            <p class="faq-a" data-i18n="faq_a6">Eliges plan o desinstalas. No hay permanencia ni renovación automática sin avisar.</p>
+            <p class="faq-a" data-i18n="faq_a6">Si el día 45 quieres seguir usando Tuko, te dejamos el plan Escala a 49 €/mes de por vida (en vez de 129 €).</p>
           </div>
         </div>
       </div>
@@ -7326,7 +7329,7 @@ const translations = {
     pilot_ask2: 'Que nos digas qué falla. Una llamada corta cada dos o tres semanas.',
     pilot_ask3: 'Que dejes una reseña honesta en Shopify y nos dejes contar tu caso aquí.',
     pilot_cta: 'Quiero una de las 5 plazas',
-    pilot_foot: 'Sin tarjeta, sin permanencia y sin comisiones. Si a los 45 días no te sirve, lo desinstalas y no pasa nada.',
+    pilot_foot: 'Sin tarjeta, sin permanencia y sin comisiones. Si el día 45 quieres seguir usando Tuko, te dejamos el plan Escala a 49 €/mes de por vida.',
     pilot_form_title: 'Quiero una de las 5 plazas',
     pilot_form_web_label: 'Link de tu web',
     pilot_form_web_ph: 'https://tutienda.com',
@@ -7419,7 +7422,7 @@ const translations = {
     faq_q5: '¿Cuánto tarda en instalarse?',
     faq_a5: 'Dos minutos. Eliges productos, pones el descuento y ya está encendido.',
     faq_q6: '¿Qué pasa cuando terminen los 45 días una vez he entrado en el piloto?',
-    faq_a6: 'Eliges plan o desinstalas. No hay permanencia ni renovación automática sin avisar.',
+    faq_a6: 'Si el día 45 quieres seguir usando Tuko, te dejamos el plan Escala a 49 €/mes de por vida (en vez de 129 €).',
     faq_q7: '¿Por qué solo 5 tiendas?',
     faq_a7: 'Porque queremos atenderlas bien y porque el piloto es para aprender, no para facturar. Cuando cerremos las cinco, cerramos.',
     faq_q8: '¿Esto no me quita ventas que ya iba a hacer?',
@@ -7925,7 +7928,7 @@ const translations = {
     pilot_ask2: 'That you tell us what fails. A short call every two or three weeks.',
     pilot_ask3: 'That you leave an honest review on Shopify and let us tell your story here.',
     pilot_cta: 'Get one of the 5 spots',
-    pilot_foot: 'No card, no lock-in and no commissions. If after 45 days it doesn\'t work for you, you uninstall it and that\'s that.',
+    pilot_foot: 'No card, no lock-in and no commissions. If on day 45 you want to keep using Tuko, we give you the Escala plan at €49/month for life.',
     pilot_form_title: 'Get one of the 5 spots',
     pilot_form_web_label: 'Link to your website',
     pilot_form_web_ph: 'https://yourstore.com',
@@ -8018,7 +8021,7 @@ const translations = {
     faq_q5: 'How long does it take to install?',
     faq_a5: 'Two minutes. You pick products, set the discount and it\'s on.',
     faq_q6: 'What happens when the 45 days end once I\'ve joined the pilot?',
-    faq_a6: 'You choose a plan or uninstall. There\'s no lock-in and no automatic renewal without notice.',
+    faq_a6: 'If on day 45 you want to keep using Tuko, we give you the Escala plan at €49/month for life (instead of €129).',
     faq_q7: 'Why only 5 stores?',
     faq_a7: 'Because we want to look after them properly and because the pilot is for learning, not for billing. Once we fill the five, we close.',
     faq_q8: 'Won\'t this take away sales I was going to make anyway?',

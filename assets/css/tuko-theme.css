@@ -971,12 +971,16 @@ html[data-theme="dark"] .how-step-desc {
 }
 html[data-theme="dark"] .how-anim-box,
 html[data-theme="dark"] .how-anim-box--embed {
-  background: #12141c !important;
-  border: 1px solid rgba(123, 140, 255, 0.14);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+  background: #1a1f2e !important;
+  border: 1px solid rgba(123, 140, 255, 0.22);
+  /* Sin anillo extra 0 0 0 1px: solo este borde curvado */
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35) !important;
+  border-radius: 28px !important;
+  overflow: hidden !important;
 }
 html[data-theme="dark"] .how-step-iframe {
-  background: #161922;
+  background: #1a1f2e;
+  border-radius: inherit;
 }
 
 /* Rescue cards: texto legible (hover no deja azul oscuro) */
@@ -1048,21 +1052,21 @@ html[data-theme="dark"] .logos-track {
   gap: 28px;
 }
 html[data-theme="dark"] .logo-pill {
-  background: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #c5cad8;
+  border: 1px solid rgba(255, 255, 255, 0.04);
   border-radius: 14px;
   filter: none;
   opacity: 1;
   height: 112px;
   padding: 16px 20px;
   box-sizing: border-box;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
   overflow: hidden;
   isolation: isolate;
 }
 html[data-theme="dark"] .logo-pill:hover {
   opacity: 1;
-  background: #ffffff;
+  background: #d0d5e2;
 }
 html[data-theme="dark"] .logo-pill img {
   filter: none;

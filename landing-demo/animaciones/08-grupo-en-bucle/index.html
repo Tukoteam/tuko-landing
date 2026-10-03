@@ -62,6 +62,21 @@
     border-radius: 0;
     box-shadow: none;
     background: var(--n-white);
+    overflow: hidden;
+  }
+  html.embedded .gb-card {
+    border-radius: 28px;
+    overflow: hidden;
+  }
+  /* Noche: sin segundo borde (el marco es .how-anim-box). Día: borde+sombra propios */
+  html.embedded[data-theme="dark"] .gb-card,
+  html.embedded.theme-dark .gb-card {
+    border: none !important;
+    box-shadow: none !important;
+  }
+  html.embedded .gb-tag {
+    /* Pico superior izq. a 0: la card (overflow + radius 28) recorta la curva */
+    border-radius: 0 0 14px 0;
   }
 
   .animation-viewport {
@@ -96,7 +111,7 @@
     position: relative;
     overflow: hidden;
     background: var(--n-white);
-    border-radius: 24px;
+    border-radius: 28px;
     border: 1px solid rgba(226, 232, 240, 0.9);
     box-shadow: 0 4px 6px rgba(15, 23, 42, 0.03), 0 20px 60px rgba(15, 23, 42, 0.10);
     text-align: center;
@@ -342,7 +357,7 @@
     .pop { animation: none !important; }
   }
 </style>
-<link rel="stylesheet" href="/landing-demo/animaciones/tuko-anim-dark.css?v=20261002h">
+<link rel="stylesheet" href="/landing-demo/animaciones/tuko-anim-dark.css?v=20261003n">
 <script src="/landing-demo/animaciones/tuko-anim-theme.js?v=20261002d"></script>
 </head>
 <body>
@@ -510,7 +525,7 @@
       /* ---- Escalado: la tarjeta mantiene su diseño y se ajusta al hueco ---- */
       let maxH = 0;
       function fit() {
-        const pad = 10;
+        const pad = document.documentElement.classList.contains('embedded') ? 2 : 10;
         const availW = viewport.clientWidth - pad * 2;
         const availH = viewport.clientHeight - pad * 2;
         const w = card.offsetWidth;

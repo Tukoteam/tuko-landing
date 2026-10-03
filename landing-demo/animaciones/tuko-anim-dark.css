@@ -44,14 +44,12 @@ html.theme-dark.embedded .animation-viewport {
 html[data-theme="dark"] .wizard,
 html[data-theme="dark"] .card,
 html[data-theme="dark"] .gb-card,
-html[data-theme="dark"] .gb-fit,
 html[data-theme="dark"] .modal-box,
 html[data-theme="dark"].embedded .wizard,
 html[data-theme="dark"].embedded .card,
 html.theme-dark .wizard,
 html.theme-dark .card,
 html.theme-dark .gb-card,
-html.theme-dark .gb-fit,
 html.theme-dark .modal-box,
 html.theme-dark.embedded .wizard,
 html.theme-dark.embedded .card {
@@ -59,6 +57,35 @@ html.theme-dark.embedded .card {
   border-color: rgba(123, 140, 255, 0.16) !important;
   color: #e8ebf5 !important;
   box-shadow: none !important;
+}
+/* gb-fit NO debe pintar fondo: es el wrapper con scale y radio 0 → tapa la curva de la card */
+html[data-theme="dark"] .gb-fit,
+html.theme-dark .gb-fit {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"].embedded .gb-card,
+html.theme-dark.embedded .gb-card {
+  border-radius: 28px !important;
+  overflow: hidden !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .gb-tag,
+html[data-theme="dark"].embedded .gb-tag,
+html.theme-dark .gb-tag,
+html.theme-dark.embedded .gb-tag {
+  /* No poner 28px aquí: con altura ~31px el azul se ve pastilla recta */
+  border-radius: 0 0 14px 0 !important;
+}
+
+/* Día (embed): la card recupera borde/sombra; el tag lo recorta el overflow */
+html:not([data-theme="dark"]):not(.theme-dark).embedded .gb-card {
+  border: 1px solid rgba(226, 232, 240, 0.95) !important;
+  box-shadow:
+    0 4px 6px rgba(15, 23, 42, 0.03),
+    0 16px 40px rgba(15, 23, 42, 0.08) !important;
 }
 
 html[data-theme="dark"] .stage,
@@ -222,6 +249,48 @@ html.theme-dark .gb-line,
 html.theme-dark .step-bar {
   background: rgba(255, 255, 255, 0.12) !important;
   border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Avatares del progreso (anim 03/04): sin blanco fuerte en noche */
+html[data-theme="dark"] .gb-dot,
+html.theme-dark .gb-dot {
+  background: #1e2436 !important;
+  border-color: rgba(143, 160, 255, 0.22) !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .gb-dot.is-next,
+html.theme-dark .gb-dot.is-next {
+  background: #24304a !important;
+  border-color: rgba(143, 160, 255, 0.4) !important;
+  box-shadow: 0 0 0 5px rgba(143, 160, 255, 0.08) !important;
+}
+html[data-theme="dark"] .gb-dot .gb-ic-user,
+html.theme-dark .gb-dot .gb-ic-user {
+  fill: #6b738a !important;
+}
+html[data-theme="dark"] .gb-dot.is-next .gb-ic-user,
+html.theme-dark .gb-dot.is-next .gb-ic-user {
+  fill: #a8b0c4 !important;
+}
+html[data-theme="dark"] .gb-dot.is-done,
+html.theme-dark .gb-dot.is-done {
+  background: #14C492 !important;
+  border-color: #14C492 !important;
+  /* Sin halo claro: mismo verde plano que la línea */
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .gb-dot.is-done .gb-ic-check,
+html.theme-dark .gb-dot.is-done .gb-ic-check {
+  stroke: #ffffff !important;
+}
+/* Misma verde Tuko que los círculos */
+html[data-theme="dark"] .gb-line-fill,
+html.theme-dark .gb-line-fill {
+  background: #14C492 !important;
+}
+html[data-theme="dark"] .gb-tag.is-closed,
+html.theme-dark .gb-tag.is-closed {
+  background: #14C492 !important;
 }
 
 html[data-theme="dark"] .step-label,
