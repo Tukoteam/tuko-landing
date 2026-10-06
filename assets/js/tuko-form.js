@@ -17,7 +17,7 @@
       email: 'Revisa el email: debe tener el formato nombre@dominio.com',
       ok: '¡Mensaje enviado! Te contactaremos pronto.',
       okLocal: '✓ Listo (simulado en local). En tukoteam.com el envío es real.',
-      error: 'Ha ocurrido un error. Por favor escríbenos a team.tukoo@gmail.com',
+      error: 'Ha ocurrido un error. Por favor escríbenos a joan@tukoteam.com',
       lang: 'Español'
     },
     en: {
@@ -27,7 +27,7 @@
       email: 'Check your email: it should look like name@domain.com',
       ok: 'Message sent! We’ll be in touch soon.',
       okLocal: '✓ Done (local simulation). On tukoteam.com the send is real.',
-      error: 'Something went wrong. Please write to us at team.tukoo@gmail.com',
+      error: 'Something went wrong. Please write to us at joan@tukoteam.com',
       lang: 'English'
     }
   };

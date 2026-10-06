@@ -177,11 +177,11 @@ const translations = {
     cta_placeholder_details: 'Breve mensaje (máx. 100 caracteres)',
     cta_submit: 'Contactar',
     cta_success: '¡Mensaje enviado! Te contactaremos pronto.',
-    cta_error: 'Ha ocurrido un error. Por favor escríbenos a team.tukoo@gmail.com',
+    cta_error: 'Ha ocurrido un error. Por favor escríbenos a joan@tukoteam.com',
 
     /* FOOTER */
     footer_col1_title: 'Contacto',
-    footer_email: 'team.tukoo@gmail.com',
+    footer_email: 'joan@tukoteam.com',
     footer_col_product: 'Producto',
     footer_pricing: 'Precios',
     footer_col2_title: 'Legales',
@@ -377,7 +377,7 @@ const translations = {
     priv_intro: 'La presente Política de Privacidad describe cómo se recopilan y tratan los datos personales a través de la web de Tuko.',
     priv_h2_1: '<span class="legal-num">1.</span> Responsable del tratamiento',
     priv_p1: 'Hasta la constitución de la sociedad, el responsable del tratamiento es:',
-    priv_p2: '<strong>Joan de Zavala Prats y Rafael Alonso Barreto de Vicente</strong><br>Email de contacto: <a href="mailto:team.tukoo@gmail.com" data-i18n="footer_email">team.tukoo@gmail.com</a>',
+    priv_p2: '<strong>Joan de Zavala Prats y Rafael Alonso Barreto de Vicente</strong><br>Email de contacto: <a href="mailto:joan@tukoteam.com" data-i18n="footer_email">joan@tukoteam.com</a>',
     priv_p3: 'Este responsable actúa únicamente para gestionar las solicitudes enviadas a través del formulario de contacto.',
     priv_h2_2: '<span class="legal-num">2.</span> Datos que recopilamos',
     priv_p4: 'El único formulario de la web puede recopilar los siguientes datos personales, de forma voluntaria por parte del usuario:',
@@ -398,7 +398,7 @@ const translations = {
     priv_h2_6: '<span class="legal-num">6.</span> Conservación',
     priv_p10: 'Los datos se conservarán el tiempo necesario para responder a la solicitud, o hasta que el usuario solicite su eliminación.',
     priv_h2_7: '<span class="legal-num">7.</span> Derechos del usuario',
-    priv_p11: 'Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento o portabilidad enviando un correo a: <a href="mailto:team.tukoo@gmail.com" data-i18n="footer_email">team.tukoo@gmail.com</a>',
+    priv_p11: 'Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento o portabilidad enviando un correo a: <a href="mailto:joan@tukoteam.com" data-i18n="footer_email">joan@tukoteam.com</a>',
     priv_h2_8: '<span class="legal-num">8.</span> Seguridad',
     priv_p12: 'Se aplican medidas de seguridad razonables para proteger los datos personales frente al acceso no autorizado.',
     priv_update: 'Última actualización: 09/12/2025',
@@ -424,7 +424,7 @@ const translations = {
     terms_h2_7: '<span class="legal-num">7.</span> Modificaciones',
     terms_p7: 'Tuko podrá modificar estos términos en cualquier momento. El uso continuado tras los cambios implica aceptación.',
     terms_h2_8: '<span class="legal-num">8.</span> Contacto',
-    terms_p8: 'Para cualquier duda, escribe a: <a href="mailto:team.tukoo@gmail.com" data-i18n="footer_email">team.tukoo@gmail.com</a>',
+    terms_p8: 'Para cualquier duda, escribe a: <a href="mailto:joan@tukoteam.com" data-i18n="footer_email">joan@tukoteam.com</a>',
   },
 
   en: {
@@ -608,11 +608,11 @@ const translations = {
     cta_placeholder_details: 'Short message (max 100 characters)',
     cta_submit: 'Contact us',
     cta_success: 'Message sent! We will contact you soon.',
-    cta_error: 'Something went wrong. Please email us at team.tukoo@gmail.com',
+    cta_error: 'Something went wrong. Please email us at joan@tukoteam.com',
 
     /* FOOTER */
     footer_col1_title: 'Contact',
-    footer_email: 'team.tukoo@gmail.com',
+    footer_email: 'joan@tukoteam.com',
     footer_col_product: 'Product',
     footer_pricing: 'Pricing',
     footer_col2_title: 'Legal',
@@ -808,7 +808,7 @@ const translations = {
     priv_intro: 'This Privacy Policy describes how personal data is collected and processed through the Tuko website.',
     priv_h2_1: '<span class="legal-num">1.</span> Data controller',
     priv_p1: 'Until the company is formally incorporated, the data controller is:',
-    priv_p2: '<strong>Joan de Zavala Prats and Rafael Alonso Barreto de Vicente</strong><br>Contact email: <a href="mailto:team.tukoo@gmail.com" data-i18n="footer_email">team.tukoo@gmail.com</a>',
+    priv_p2: '<strong>Joan de Zavala Prats and Rafael Alonso Barreto de Vicente</strong><br>Contact email: <a href="mailto:joan@tukoteam.com" data-i18n="footer_email">joan@tukoteam.com</a>',
     priv_p3: 'This controller acts solely to manage requests submitted through the contact form.',
     priv_h2_2: '<span class="legal-num">2.</span> Data we collect',
     priv_p4: 'The only form on the website may collect the following personal data, voluntarily provided by the user:',
@@ -829,7 +829,7 @@ const translations = {
     priv_h2_6: '<span class="legal-num">6.</span> Retention',
     priv_p10: 'Data will be retained for as long as necessary to respond to the request, or until the user requests its deletion.',
     priv_h2_7: '<span class="legal-num">7.</span> User rights',
-    priv_p11: 'You can exercise your rights of access, rectification, erasure, objection, restriction of processing or portability by sending an email to: <a href="mailto:team.tukoo@gmail.com" data-i18n="footer_email">team.tukoo@gmail.com</a>',
+    priv_p11: 'You can exercise your rights of access, rectification, erasure, objection, restriction of processing or portability by sending an email to: <a href="mailto:joan@tukoteam.com" data-i18n="footer_email">joan@tukoteam.com</a>',
     priv_h2_8: '<span class="legal-num">8.</span> Security',
     priv_p12: 'Reasonable security measures are applied to protect personal data against unauthorized access.',
     priv_update: 'Last updated: 09/12/2025',
@@ -855,7 +855,7 @@ const translations = {
     terms_h2_7: '<span class="legal-num">7.</span> Modifications',
     terms_p7: 'Tuko may modify these terms at any time. Continued use after changes implies acceptance.',
     terms_h2_8: '<span class="legal-num">8.</span> Contact',
-    terms_p8: 'For any questions, write to: <a href="mailto:team.tukoo@gmail.com" data-i18n="footer_email">team.tukoo@gmail.com</a>',
+    terms_p8: 'For any questions, write to: <a href="mailto:joan@tukoteam.com" data-i18n="footer_email">joan@tukoteam.com</a>',
   }
 };
 
