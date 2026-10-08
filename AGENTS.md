@@ -23,7 +23,7 @@ Guía para agentes / CTO trabajando en este repo.
 - Imágenes: WebP preferido; max ~1600px desktop + `-800w` para banners; `loading="lazy"` fuera del LCP.
 - Hosting: **única** fuente de redirects/headers → `netlify.toml`. No reintroducir `_redirects`, `_headers` ni `.htaccess`.
 - GA4 solo tras consentimiento (`tuko_cookie_consent=accepted`); banner en home + legales + `tuko-ai`.
-- CI local: `npm run check:site` (enlaces, sitemap, hreflang, paridad ES/EN, `?v=` únicos). Workflow: `.github/workflows/landing-checks.yml`.
+- CI (`.github/workflows/landing-checks.yml`): `npm run build` + `git diff --exit-code` + `npm run check:site` — el tree debe quedar limpio tras build (entries/`?v=` ya commiteados). No editar a mano ficheros con banner `Built from`.
 - Preview local: `npx serve .` (usa `serve.json` → `public: "site"`).
 - Posts ES-only (`compra-colectiva-ecommerce`): no inventar EN; selector EN → `/en/blog/`.
 - Natrue: `/blog/natrue-x-tuko` (+ EN). `primer-articulo`: 301 → `/blog/`.
@@ -62,7 +62,7 @@ netlify.toml    ← redirects + headers
 - Marcadores: `<!-- tuko:partial:NAME -->…<!-- /tuko:partial:NAME -->` o `<!-- tuko:include:NAME -->`.
 - `npm run build` → concat CSS/JS parts + inyecta partials + `?v=` = hash sha256[0:8] del asset.
 - Tras tocar shell del blog: `npm run sync:blog-shell` y `npm run sync:en-blog-articles`, luego otra vez `npm run build`.
-- Antes de push: `npm run build && npm run check:site` → **0 errores, 0 warnings `?v=`**.
+- Antes de push: `npm run build && npm run check:site` → **0 errores, 0 warnings `?v=`**, y commit de lo que el build regeneró (CI falla si queda `git diff`).
 
 ## i18n / hosting (essentials)
 

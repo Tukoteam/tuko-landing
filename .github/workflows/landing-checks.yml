@@ -13,5 +13,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+      - name: Build site (concat parts, partials, ?v=)
+        run: npm run build
+      - name: Working tree must stay clean after build
+        run: git diff --exit-code
       - name: Run site checks
-        run: node scripts/check-site.mjs
+        run: npm run check:site
