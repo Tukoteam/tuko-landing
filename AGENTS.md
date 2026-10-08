@@ -25,7 +25,7 @@ Guía para agentes / CTO trabajando en este repo.
 - Scripts recurrentes: ver `scripts/README.md` / `package.json`. One-shots en `scripts/_archive/`.
 - Preview local: `npx serve .` (usa `serve.json` cleanUrls). Commits pequeños; no push a `main` sin OK.
 - Posts ES-only (`compra-colectiva-ecommerce`): no inventar EN; selector EN → `/en/blog/`.
-- Natrue y `primer-articulo`: 301 → `/blog/` (no republicar sin OK). Ver `docs/SPRINT3-CTO-OPINION.md`.
+- Natrue: publicado en `/blog/natrue-x-tuko` (+ EN). `primer-articulo`: 301 → `/blog/`. Ver `docs/SPRINT3-CTO-OPINION.md`.
 - Siguiente win estructural: `publish = "site"` (PR B). No publicar docs/scripts desde la raíz.
 
 ## Tokens de diseño
