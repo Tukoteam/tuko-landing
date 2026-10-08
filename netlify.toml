@@ -100,16 +100,9 @@
   status = 301
   force = true
 
-# Natrue: HTML no publicado — no 301 a URL limpia 404 (decisión Sprint 3: → índice blog)
-[[redirects]]
-  from = "/en/blog/natrue-x-tuko"
-  to = "/en/blog/"
-  status = 301
-  force = true
-
 [[redirects]]
   from = "/en/blog/natrue-x-tuko.html"
-  to = "/en/blog/"
+  to = "/en/blog/natrue-x-tuko"
   status = 301
   force = true
 
@@ -121,13 +114,8 @@
 
 # Blog: .html → URL limpia (explícitos: Netlify no sustituye bien :slug.html)
 [[redirects]]
-  from = "/blog/natrue-x-tuko"
-  to = "/blog/"
-  status = 301
-  force = true
-[[redirects]]
   from = "/blog/natrue-x-tuko.html"
-  to = "/blog/"
+  to = "/blog/natrue-x-tuko"
   status = 301
   force = true
 [[redirects]]
