@@ -12,7 +12,7 @@ const base = (process.argv[2] || "https://tukoteam.com").replace(/\/$/, "");
 const sitemapPath =
   process.argv[3] || path.join(root, "site", "sitemap.xml");
 const outFile =
-  process.argv[4] || path.join(root, "docs", "PR-B-inventory-before.txt");
+  process.argv[4] || path.join(root, "docs", "surface-inventory.txt");
 
 function extractLocs(xml) {
   return [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].trim());
@@ -37,14 +37,12 @@ function extractRedirectFroms() {
 const internal = [
   "/AGENTS.md",
   "/CLAUDE.md",
-  "/ARCHITECTURE.md",
   "/README.md",
-  "/SEO_NOTES.md",
+  "/docs/ARCHITECTURE.md",
+  "/docs/SEO_NOTES.md",
   "/package.json",
   "/serve.json",
-  "/docs/SPRINT3-CTO-OPINION.md",
-  "/docs/SPRINT3-LOVABLE-HANDOFF.md",
-  "/docs/SPRINT3-PR-B-CTO-OK.md",
+  "/docs/archive/sprint3/SPRINT3-CTO-OPINION.md",
   "/scripts/README.md",
   "/_to-migrate/README.md",
   "/google5360a4cde3647abe.html",
