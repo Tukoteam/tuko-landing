@@ -6,13 +6,12 @@ Ver commits en `main` (gitignore, GA4 consent, legales canónicos, `_to-migrate`
 
 - **Antes:** ~51.85 MB media → **Después:** ~1.95 MB (~50 MB ahorro)
 
-## Sprint 3 — PR A (SEO roto)
+## Sprint 3 — PR A / A.1
 
+- PR A (mergeado #4): `primer-articulo` retirado; zombis fuera; Natrue temporalmente 301 → `/blog/`.
+- **PR A.1** (`chore/landing-sprint3-pr-a1-natrue`): republicación Natrue ES/EN que **no entró** en el merge del #4 (commits posteriores). Ver handoff.
 - Docs: `docs/SPRINT3-CTO-OPINION.md`, `docs/SPRINT3-LOVABLE-HANDOFF.md`.
-- `blog/primer-articulo.html` **retirado**; URLs → 301 `/blog/`.
-- Eliminados redirects zombi `/_versiones/*` y `/_originales-png/*`.
-- **Natrue republicado** ES/EN (HTML + índice + sitemap); redirects `.html` → URL limpia otra vez.
-- Siguiente: PR B `publish = "site"` (ver handoff Lovable).
+- Siguiente tras A.1 en main: PR B `publish = "site"`.
 
 ## Sprint 2 (`chore/landing-sprint2`) — mergeado a main
 

@@ -1,31 +1,42 @@
-# Handoff Lovable — siguientes PRs (tras PR A)
+# Handoff Lovable — Sprint 3
 
-Copia esto en Lovable cuando PR A esté mergeado:
+## Orden (bloqueante)
+
+```text
+PR A (mergeado) → PR A.1 Natrue → PR B site/ → PR C CI → D/E después
+```
+
+### PR A.1 — Natrue republicado (ahora)
+
+Rama: `chore/landing-sprint3-pr-a1-natrue`.
+
+Los commits de republicación se pushearon **después** del merge del PR #4; no entraron en `main`. Este PR los cherry-pickea:
+
+- `blog/natrue-x-tuko.html` + `en/blog/natrue-x-tuko.html`
+- Cards en índices + sitemap
+- Redirects `.html` → URL limpia (ya no 301 a `/blog/`)
+
+**No empieces PR B hasta que A.1 esté mergeado y preview dé 200** en `/blog/natrue-x-tuko` y `/en/blog/natrue-x-tuko`.
+
+### PR B — superficie `site/` (después de A.1)
+
+1. Inventario curl BEFORE (prod) → `docs/PR-B-INVENTORY-before.txt`.
+2. `git mv` a `site/`: HTML públicos, `en/`, `blog/`, `assets/`, `landing-demo/`, `robots.txt`, `sitemap.xml`, `google5360…html`.
+3. `publish = "site"`; unificar redirects/headers en `netlify.toml`; borrar `_redirects` y `_headers`. CSP del toml sin cambiar el texto.
+4. Actualizar scripts + `serve` para `site/`.
+5. Actualizar `AGENTS.md` / `ARCHITECTURE.md` / `README.md`.
+6. Inventario AFTER (preview) + diff en el PR.
+
+**Fuera de alcance B:** i18n JSON, partials/build, borrar banners, cambiar CSP.
+
+**Nota:** `compra-colectiva-ecommerce` **sí está** en `sitemap.xml` en main; revalidar en inventario, no asumir huérfana.
+
+### PR C — CI (después)
+
+Links internos, sitemap vs ficheros, hreflang, drift EN.
 
 ---
 
-Eres el asistente de ingeniería del equipo **Tuko**. Repo: `tuko-landing` (landing estática Netlify, tukeros.com/tukoteam.com). Yo soy el CTO. **Solo landing.** Sin frameworks nuevos ni reescrituras grandes. Sin tocar Shopify/plugin.
+## Prompt listo para Lovable (tras merge A.1)
 
-**Ya hecho (PR A):** Natrue y `primer-articulo` → 301 a `/blog/`; eliminados redirects zombi `/_versiones/*` y `/_originales-png/*`. Opinión CTO en `docs/SPRINT3-CTO-OPINION.md`.
-
-**Implementa en PRs separados, en este orden:**
-
-### PR B — superficie `site/` (prioridad)
-1. Mover lo publicable a `site/` y `publish = "site"`.
-2. Unificar redirects + headers en `netlify.toml`; borrar `_redirects` y `_headers`.
-3. Quitar reglas zombi restantes si quedan. Inventario curl before/after en preview Netlify.
-4. No tocar CSP salvo unificar la fuente (mismo texto que hoy en `netlify.toml`).
-
-### PR C — CI
-5. GitHub Action: enlaces internos, sitemap vs ficheros, hreflang → destino existente.
-6. Comprobar que `en/` regenerado no deriva (o fallar CI).
-
-### PR D / E — después
-7. Partials header/footer + `npm run build` (cache-bust `?v=` por hash).
-8. i18n: `src/locales/*.json` como única fuente; EN generado con cabecera GENERATED.
-
-**Restricciones:** un PR = un tema; diffs pequeños; no borrar banners/assets sin listarlos y esperar OK; no cambiar copy legal sin marcarlo.
-
-Empieza por **PR B**. No implementes D/E en el mismo PR.
-
----
+> A.1 Natrue ya en main y 200 en preview. Implementa **solo PR B** (`chore/landing-sprint3-pr-b-site`) según `docs/SPRINT3-LOVABLE-HANDOFF.md`. Inventario before/after. Un PR = un tema. Muéstrame inventario BEFORE y el diff excluyendo renames puros antes de abrir el PR.
