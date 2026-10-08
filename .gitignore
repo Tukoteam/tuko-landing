@@ -10,6 +10,7 @@ node_modules/
 .env.*
 !.env.example
 *.pem
+_to-migrate/blog-cms/secrets/
 
 # Logs
 *.log

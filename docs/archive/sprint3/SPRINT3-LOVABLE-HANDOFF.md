@@ -6,7 +6,7 @@ Copia esto en Lovable cuando PR A esté mergeado:
 
 Eres el asistente de ingeniería del equipo **Tuko**. Repo: `tuko-landing` (landing estática Netlify, tukeros.com/tukoteam.com). Yo soy el CTO. **Solo landing.** Sin frameworks nuevos ni reescrituras grandes. Sin tocar Shopify/plugin.
 
-**Ya hecho (PR A):** Natrue y `primer-articulo` → 301 a `/blog/`; eliminados redirects zombi `/_versiones/*` y `/_originales-png/*`. Opinión CTO en `docs/SPRINT3-CTO-OPINION.md`.
+**Ya hecho (PR A):** Natrue y `primer-articulo` → 301 a `/blog/`; eliminados redirects zombi `/_versiones/*` y `/_originales-png/*`. Opinión CTO en `docs/archive/sprint3/SPRINT3-CTO-OPINION.md`.
 
 **Implementa en PRs separados, en este orden:**
 

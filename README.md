@@ -36,6 +36,7 @@ npx --yes serve -l 5173 .
 ## Docs
 
 - `AGENTS.md` — convenciones para agentes/CTO
-- `ARCHITECTURE.md` — decisiones
-- `docs/SPRINT3-PR-B-CTO-OK.md` — OK del move a `site/`
+- `docs/ARCHITECTURE.md` — decisiones
+- `docs/SEO_NOTES.md` — notas SEO
 - `docs/ORPHAN-ASSETS.md` — assets sin refs (no borrar sin OK)
+- `docs/archive/sprint3/` — notas e inventarios del Sprint 3
