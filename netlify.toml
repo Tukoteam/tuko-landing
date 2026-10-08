@@ -44,7 +44,7 @@
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
-  for = "/assets/logos colaboradores/*"
+  for = "/assets/logos-colaboradores/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
