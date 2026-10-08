@@ -79,10 +79,11 @@
     }
     var meta = document.querySelector(META);
     if (meta) meta.setAttribute('content', next === 'dark' ? '#0b0d14' : '#3D50F2');
-    var btn = document.getElementById('themeToggle');
-    if (btn) {
-      btn.setAttribute('aria-label', label(next));
-      btn.setAttribute('aria-pressed', next === 'dark' ? 'true' : 'false');
+    var btns = document.querySelectorAll('#themeToggle, .theme-toggle');
+    var i;
+    for (i = 0; i < btns.length; i++) {
+      btns[i].setAttribute('aria-label', label(next));
+      btns[i].setAttribute('aria-pressed', next === 'dark' ? 'true' : 'false');
     }
     syncGrids(next);
     syncIframes(next);
@@ -103,11 +104,14 @@
     setTimeout(function () { syncIframes(current()); }, 400);
     setTimeout(function () { syncIframes(current()); }, 1200);
 
-    var btn = document.getElementById('themeToggle');
-    if (!btn) return;
-    btn.addEventListener('click', function () {
-      apply(current() === 'dark' ? 'light' : 'dark', true);
-    });
+    var btns = document.querySelectorAll('#themeToggle, .theme-toggle');
+    if (!btns.length) return;
+    var i;
+    for (i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function () {
+        apply(current() === 'dark' ? 'light' : 'dark', true);
+      });
+    }
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
