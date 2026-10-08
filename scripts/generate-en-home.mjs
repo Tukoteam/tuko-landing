@@ -7,7 +7,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const landing = path.resolve(__dirname, '..');
+const repoRoot = path.resolve(__dirname, '..');
+const landing = path.resolve(repoRoot, 'site');
 const srcPath = path.join(landing, 'index.html');
 const outPath = path.join(landing, 'en', 'index.html');
 
@@ -283,13 +284,13 @@ function ensureSitemap(sm) {
 }
 
 function ensureRedirects() {
-  const redirectsPath = path.join(landing, '_redirects');
-  let r = fs.readFileSync(redirectsPath, 'utf8');
+  const redirectsPath = path.join(repoRoot, '_redirects');
+  let r = (fs.existsSync(redirectsPath) ? fs.readFileSync(redirectsPath, 'utf8') : '');
   if (!r.includes('/en/index.html')) {
     r += '\n/en/index.html                              /en/                                 301!\n';
-    fs.writeFileSync(redirectsPath, r);
+    if (fs.existsSync(redirectsPath)) fs.writeFileSync(redirectsPath, r);
   }
-  const netlifyPath = path.join(landing, 'netlify.toml');
+  const netlifyPath = path.join(repoRoot, 'netlify.toml');
   let n = fs.readFileSync(netlifyPath, 'utf8');
   if (!n.includes('from = "/en/index.html"')) {
     n += `

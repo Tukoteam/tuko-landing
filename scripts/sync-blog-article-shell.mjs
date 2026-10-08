@@ -7,7 +7,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const blogDir = path.resolve(__dirname, '..', 'blog');
+const blogDir = path.resolve(__dirname, '..', 'site', 'blog');
 const indexPath = path.join(blogDir, 'index.html');
 const index = fs.readFileSync(indexPath, 'utf8');
 

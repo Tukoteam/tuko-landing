@@ -1,12 +1,13 @@
 # Redirects 301 — hosting
 
-El repo incluye:
+Fuente de verdad en este repo (Netlify):
 
 | Archivo | Cuándo aplica |
 |---------|----------------|
-| [`_redirects`](../_redirects) | Netlify y Cloudflare Pages |
-| [`vercel.json`](../vercel.json) | Vercel (`cleanUrls` + redirects) |
-| Este doc | Nginx / Apache en VPS |
+| [`netlify.toml`](../netlify.toml) | Redirects + headers (`publish = "site"`) |
+| Este doc | Nginx / Apache en VPS (referencia) |
+
+Ya no hay `_redirects` ni `_headers` en la raíz: todo vive en `netlify.toml` para evitar deriva.
 
 ## Comprobar
 
@@ -14,6 +15,9 @@ El repo incluye:
 curl -I https://tukoteam.com/blog/natrue-x-tuko.html
 # Esperado: HTTP/2 301
 # location: https://tukoteam.com/blog/natrue-x-tuko
+
+curl -I https://tukoteam.com/AGENTS.md
+# Esperado: 404 (docs fuera de publish)
 ```
 
 ## Nginx (si aplica)

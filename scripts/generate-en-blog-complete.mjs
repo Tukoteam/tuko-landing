@@ -10,7 +10,8 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const landing = path.resolve(__dirname, '..');
+const repoRoot = path.resolve(__dirname, '..');
+const landing = path.resolve(repoRoot, 'site');
 const require = createRequire(import.meta.url);
 const cmsRoot = path.resolve(
   landing,
@@ -308,8 +309,8 @@ for (const slug of allEs) {
 }
 
 // redirects
-const redirectsPath = path.join(landing, '_redirects');
-let redirects = fs.readFileSync(redirectsPath, 'utf8');
+const redirectsPath = path.join(repoRoot, '_redirects');
+let redirects = (fs.existsSync(redirectsPath) ? fs.readFileSync(redirectsPath, 'utf8') : '');
 if (!redirects.includes('/en/blog/index.html')) {
   redirects += '\n/en/blog/index.html                         /en/blog/                              301!\n';
 }
@@ -322,7 +323,7 @@ for (const slug of enSlugs) {
 fs.writeFileSync(redirectsPath, redirects);
 
 // netlify.toml — append missing EN redirects if needed
-const netlifyPath = path.join(landing, 'netlify.toml');
+const netlifyPath = path.join(repoRoot, 'netlify.toml');
 let netlify = fs.readFileSync(netlifyPath, 'utf8');
 for (const slug of enSlugs) {
   const from = `/en/blog/${slug}.html`;

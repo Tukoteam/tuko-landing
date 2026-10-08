@@ -1,7 +1,7 @@
 {
   "name": "tuko-landing",
   "private": true,
-  "description": "Static Netlify landing — local maintenance scripts only (no Netlify build command).",
+  "description": "Static Netlify landing (publish=site). Local maintenance scripts only; no Netlify build command.",
   "type": "module",
   "scripts": {
     "generate:en-home": "node scripts/generate-en-home.mjs",
@@ -11,7 +11,8 @@
     "sync:en-blog-shell": "node scripts/sync-en-blog-shell.mjs",
     "sync:blog-shell": "node scripts/sync-blog-article-shell.mjs",
     "optimize:images": "node scripts/optimize-images.mjs",
-    "export:cms-shell": "node scripts/export-shell-for-cms.mjs"
+    "export:cms-shell": "node scripts/export-shell-for-cms.mjs",
+    "check:surface": "node scripts/check-surface.mjs"
   },
   "devDependencies": {
     "sharp": "^0.33.5"

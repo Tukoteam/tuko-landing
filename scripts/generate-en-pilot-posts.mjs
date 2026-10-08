@@ -7,7 +7,7 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const landing = path.resolve(__dirname, '..');
+const landing = path.resolve(__dirname, '..', 'site');
 const require = createRequire(import.meta.url);
 const cmsRoot = path.resolve(
   landing,
