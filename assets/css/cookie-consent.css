@@ -71,9 +71,12 @@
 
 @media (min-width: 720px) {
   .tuko-cookie-banner {
-    left: 24px;
+    left: 50%;
     right: auto;
     bottom: 24px;
+    width: min(480px, calc(100% - 48px));
+    max-width: 480px;
     margin: 0;
+    transform: translateX(-50%);
   }
 }

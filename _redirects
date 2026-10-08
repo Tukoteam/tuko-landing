@@ -51,4 +51,6 @@
 /en/terminos                                   /en/terminos.html                      200!
 /_to-migrate/*                                 /                                      404!
 /pages/*                                       /                                      404!
+/.DS_Store                                     /                                      404!
+/*/.DS_Store                                   /                                      404!
 

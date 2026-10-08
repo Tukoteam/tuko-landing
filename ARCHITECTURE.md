@@ -27,7 +27,12 @@ flowchart TB
 | Home CSS/JS externos | Mantenibilidad; HTML ~1k líneas |
 | Imágenes WebP + kebab + srcset banners | Peso ~52 MB → ~2 MB |
 | `landing-demo/` se mantiene | Enlazado desde el home (iframes) |
-| `natrue-x-tuko` se mantiene | Post de blog vivo + redirects |
+| Consent en legales + `tuko-ai` (Sprint 2) | Misma puerta GA4 en toda la superficie útil |
+| OG v2–v7 eliminados; png + v8 pendientes de unificar | Evitar assets muertos; Joan elige definitiva |
+| Posts ES-only sin hreflang `en` a 404 | SEO; EN selector → índice EN |
+| HTML Natrue no publicado; related → `/blog/` | Evitar 404 internos hasta republicar |
+
+Lighthouse Sprint 2: [`docs/LIGHTHOUSE-2026-10.md`](./docs/LIGHTHOUSE-2026-10.md). Resumen: [`docs/CLEANUP-SUMMARY.md`](./docs/CLEANUP-SUMMARY.md).
 
 ## i18n
 

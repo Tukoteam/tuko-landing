@@ -362,3 +362,14 @@
   from = "/_to-migrate/*"
   to = "/"
   status = 404
+
+# Never serve macOS Finder metadata
+[[redirects]]
+  from = "/.DS_Store"
+  to = "/"
+  status = 404
+
+[[redirects]]
+  from = "/*/.DS_Store"
+  to = "/"
+  status = 404

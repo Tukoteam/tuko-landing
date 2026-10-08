@@ -1199,6 +1199,22 @@
     border-radius: 50%;
     background: var(--blue);
   }
+  .legal-cookie-prefs {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 10px 16px;
+    border: 1px solid var(--blue);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--blue);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .legal-cookie-prefs:hover {
+    background: color-mix(in srgb, var(--blue) 8%, transparent);
+  }
   .legal-update {
     font-size: 13px;
     font-weight: 400;

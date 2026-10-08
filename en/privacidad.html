@@ -112,7 +112,7 @@
     <section class="legal-section">
       <h2 data-i18n="priv_h2_1"><span class="legal-num">1.</span> Data controller</h2>
       <p data-i18n="priv_p1">Until the company is formally incorporated, the data controller is:</p>
-      <p data-i18n="priv_p2"><strong>Joan de Zavala Prats and Rafael Alonso Barreto de Vicente</strong><br>Contact email: <a href="mailto:joan@tukoteam.com" data-i18n="footer_email">joan@tukoteam.com</a></p>
+      <p data-i18n="priv_p2"><strong>Joan de Zavala Prats and Konrad Ludwik Drobnik Pielaszkiewicz</strong><br>Contact email: <a href="mailto:joan@tukoteam.com" data-i18n="footer_email">joan@tukoteam.com</a></p>
       <p data-i18n="priv_p3">This controller acts solely to manage requests submitted through the contact form.</p>
     </section>
 
@@ -124,7 +124,7 @@
         <li data-i18n="priv_li2">Email</li>
         <li data-i18n="priv_li3">Store / company name</li>
       </ul>
-      <p data-i18n="priv_p5">No additional data is collected and no third-party cookies are used.</p>
+      <p data-i18n="priv_p5">In addition to the form, if you accept the cookie banner we may load Google Analytics 4 (see the “Cookies and analytics” section).</p>
     </section>
 
     <section class="legal-section">
@@ -145,7 +145,7 @@
 
     <section class="legal-section">
       <h2 data-i18n="priv_h2_5"><span class="legal-num">5.</span> Data sharing</h2>
-      <p data-i18n="priv_p9">We do not share personal data with any third party. No international transfers are made.</p>
+      <p data-i18n="priv_p9">Contact form data is not sold to commercial third parties. If you accept analytics cookies, Google acts as a measurement processor/provider (see “Cookies and analytics”).</p>
     </section>
 
     <section class="legal-section">
@@ -163,7 +163,24 @@
       <p data-i18n="priv_p12">Reasonable security measures are applied to protect personal data against unauthorized access.</p>
     </section>
 
-    <p class="legal-update" data-i18n="priv_update">Last updated: 09/12/2025</p>
+    <!-- REVISAR LEGAL -->
+    <section class="legal-section" id="cookies-analitica">
+      <h2 data-i18n="priv_h2_9"><span class="legal-num">9.</span> Cookies and analytics</h2>
+      <p data-i18n="priv_cookies_p1">If you accept the cookie banner, we load <strong>Google Analytics 4</strong> (measurement ID <code>G-W751M44D2X</code>).</p>
+      <ul class="legal-list">
+        <li data-i18n="priv_cookies_li1"><strong>Provider:</strong> Google Ireland Ltd. (Google Analytics 4 service).</li>
+        <li data-i18n="priv_cookies_li2"><strong>Purpose:</strong> anonymous / aggregated measurement of site usage (page views, traffic).</li>
+        <li data-i18n="priv_cookies_li3"><strong>Legal basis:</strong> data subject consent (GDPR art. 6.1.a).</li>
+        <li data-i18n="priv_cookies_li4"><strong>Cookies:</strong> <code>_ga</code> (approx. 2 years) and <code>_ga_&lt;ID&gt;</code> (approx. 2 years).</li>
+        <li data-i18n="priv_cookies_li5"><strong>International transfer:</strong> may involve processing by Google LLC (U.S.), covered by the EU-US Data Privacy Framework where applicable.</li>
+        <li data-i18n="priv_cookies_li6"><strong>Technical preference:</strong> we store your choice in <code>localStorage</code> under the key <code>tuko_cookie_consent</code> (<code>accepted</code> / <code>rejected</code>).</li>
+      </ul>
+      <p data-i18n="priv_cookies_p2">You can withdraw or change consent at any time:</p>
+      <p><button type="button" class="legal-cookie-prefs" onclick="typeof window.TukoOpenCookiePreferences==='function'&&window.TukoOpenCookiePreferences()" data-i18n="priv_cookies_btn">Change cookie preferences</button></p>
+    </section>
+    <!-- /REVISAR LEGAL -->
+
+    <p class="legal-update" data-i18n="priv_update">Last updated: 08/10/2026</p>
   </div>
 </main>
 
@@ -193,6 +210,7 @@
         <p class="footer-col-title" data-i18n="footer_col2_title">Legal</p>
         <a href="../assets/legal/politica-de-privacidad.pdf" target="_blank" rel="noopener" data-i18n="footer_privacy">Privacy policy</a>
         <a href="../assets/legal/terminos-y-condiciones.pdf" target="_blank" rel="noopener" data-i18n="footer_terms">Terms and conditions</a>
+        <a href="#" role="button" onclick="event.preventDefault();typeof window.TukoOpenCookiePreferences==='function'&&window.TukoOpenCookiePreferences()">Cookie preferences</a>
       </div>
     </div>
   </div>
@@ -201,5 +219,9 @@
 
 <script src="../assets/js/main.js?v=20260730" defer></script>
 <script src="../assets/js/i18n.js?v=20260905b" defer></script>
+
+<script src="../assets/js/ga4-loader.js" defer></script>
+<link rel="stylesheet" href="../assets/css/cookie-consent.css">
+<script src="../assets/js/cookie-consent.js" defer></script>
 </body>
 </html>
