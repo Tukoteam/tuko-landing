@@ -24,6 +24,7 @@ Guía para agentes / CTO trabajando en este repo.
 - Hosting: **única** fuente de redirects/headers → `netlify.toml`. No reintroducir `_redirects`, `_headers` ni `.htaccess`.
 - GA4 solo tras consentimiento (`tuko_cookie_consent=accepted`); banner en home + legales + `tuko-ai`.
 - Scripts recurrentes: ver `scripts/README.md` / `package.json` (leen/escriben bajo `site/`).
+- CI local: `npm run check:site` (enlaces, sitemap, hreflang, paridad ES/EN, sin `_redirects`/`_headers`). Workflow: `.github/workflows/landing-checks.yml`.
 - Preview local: `npx serve .` (usa `serve.json` → `public: "site"`).
 - Posts ES-only (`compra-colectiva-ecommerce`): no inventar EN; selector EN → `/en/blog/`.
 - Natrue: `/blog/natrue-x-tuko` (+ EN). `primer-articulo`: 301 → `/blog/`.

@@ -1,0 +1,6 @@
+{
+  "siteDir": "site",
+  "excludeDirs": ["landing-demo"],
+  "esOnlyBlogPosts": ["compra-colectiva-ecommerce"],
+  "host": "https://tukoteam.com"
+}

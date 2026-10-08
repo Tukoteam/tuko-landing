@@ -16,6 +16,7 @@ Herramientas Node locales. **Netlify no ejecuta** estos scripts (`publish = "sit
 | `optimize-images.mjs` | Comprime / genera WebP y variantes `-800w` |
 | `export-shell-for-cms.mjs` | Exporta shell HTML para el CMS (`_to-migrate`) |
 | `check-surface.mjs` | Inventario HEAD de URLs (publish hygiene) |
+| `check-site.mjs` | CI: enlaces internos, sitemap, hreflang, paridad ES/EN |
 
 ```bash
 npm run generate:en-home

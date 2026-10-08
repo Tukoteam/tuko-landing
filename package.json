@@ -12,7 +12,8 @@
     "sync:blog-shell": "node scripts/sync-blog-article-shell.mjs",
     "optimize:images": "node scripts/optimize-images.mjs",
     "export:cms-shell": "node scripts/export-shell-for-cms.mjs",
-    "check:surface": "node scripts/check-surface.mjs"
+    "check:surface": "node scripts/check-surface.mjs",
+    "check:site": "node scripts/check-site.mjs"
   },
   "devDependencies": {
     "sharp": "^0.33.5"
