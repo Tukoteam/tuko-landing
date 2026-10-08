@@ -264,6 +264,63 @@ if (fs.existsSync(esBlog)) {
   }
 }
 
+// --- 5b. EN pages must not deep-link into ES surface paths ---
+// Allow: /en/*, language switcher, hreflang/canonical (stripped), assets.
+function isEnPageFile(rel) {
+  return rel === "en/index.html" || rel.startsWith("en/");
+}
+
+for (const file of htmlFiles) {
+  const rel = path.relative(siteDir, file).replace(/\\/g, "/");
+  if (!isEnPageFile(rel)) continue;
+  const html = fs.readFileSync(file, "utf8");
+
+  // Strip alternate/canonical link tags before scanning anchors (hreflang ES is intentional)
+  const scanned = html
+    .replace(/<link\b[^>]*rel=["']alternate["'][^>]*>/gi, "")
+    .replace(/<link\b[^>]*rel=["']canonical["'][^>]*>/gi, "")
+    .replace(/\bdata-url-es=["'][^"']*["']/gi, "");
+
+  const hrefRe = /\bhref=["']([^"']+)["']/gi;
+  let hm;
+  while ((hm = hrefRe.exec(scanned))) {
+    const raw = hm[1].trim();
+    if (isExternalOrSpecial(raw) && !raw.startsWith(host)) continue;
+    const internal = normalizeInternal(raw.split("#")[0] || raw, file);
+    if (!internal) continue;
+
+    // Relative ../blog from en/* resolving to /blog is the classic leak
+    const pathOnly = internal.split("?")[0];
+    const isEsSurface =
+      pathOnly === "/blog" ||
+      pathOnly.startsWith("/blog/") ||
+      pathOnly === "/tuko-ai" ||
+      pathOnly === "/tuko-ai.html" ||
+      pathOnly === "/privacidad" ||
+      pathOnly === "/privacidad.html" ||
+      pathOnly === "/terminos" ||
+      pathOnly === "/terminos.html" ||
+      // Absolute host without /en
+      (raw.startsWith(host) &&
+        !raw.startsWith(`${host}/en`) &&
+        (/\/blog(\/|$)/.test(raw) ||
+          /\/tuko-ai(\.html)?(\/|$|\?|#)/.test(raw) ||
+          /\/privacidad(\.html)?(\/|$|\?|#)/.test(raw) ||
+          /\/terminos(\.html)?(\/|$|\?|#)/.test(raw)));
+
+    if (!isEsSurface) continue;
+
+    // Lang switcher / ES twin controls
+    const idx = hm.index ?? 0;
+    const around = scanned.slice(Math.max(0, idx - 240), idx + 80);
+    if (/lang-switcher|data-lang=["']es["']|mobile-lang|hreflang|data-url-es/i.test(around)) {
+      continue;
+    }
+
+    errors.push(`EN page links to ES surface in ${rel}: ${raw} → ${pathOnly}`);
+  }
+}
+
 // Deduplicate errors
 const uniqErrors = [...new Set(errors)];
 const uniqWarnings = [...new Set(warnings)];
