@@ -30,7 +30,7 @@ flowchart TB
 | Consent en legales + `tuko-ai` (Sprint 2) | Misma puerta GA4 en toda la superficie útil |
 | OG v2–v7 eliminados; png + v8 pendientes de unificar | Evitar assets muertos; Joan elige definitiva |
 | Posts ES-only sin hreflang `en` a 404 | SEO; EN selector → índice EN |
-| HTML Natrue no publicado; URLs Natrue → `/blog/` (301) | Evitar 404 SEO (Sprint 3 PR A) |
+| Natrue republicado ES/EN como HTML estático | Hub lo despublicó 2026-09-24; restaurado en Sprint 3 |
 | `primer-articulo` retirado → `/blog/` | Borrador huérfano fuera de índice |
 | Redirects zombi `_versiones` / `_originales-png` eliminados | Carpetas inexistentes |
 | Norte: `publish = "site"` (pendiente PR B) | Dejar de servir docs/scripts/AGENTS |

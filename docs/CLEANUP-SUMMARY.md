@@ -9,9 +9,9 @@ Ver commits en `main` (gitignore, GA4 consent, legales canónicos, `_to-migrate`
 ## Sprint 3 — PR A (SEO roto)
 
 - Docs: `docs/SPRINT3-CTO-OPINION.md`, `docs/SPRINT3-LOVABLE-HANDOFF.md`.
-- Natrue (ES/EN, limpia + `.html`) → **301 `/blog/`** / **`/en/blog/`** (ya no a URL 404).
 - `blog/primer-articulo.html` **retirado**; URLs → 301 `/blog/`.
 - Eliminados redirects zombi `/_versiones/*` y `/_originales-png/*`.
+- **Natrue republicado** ES/EN (HTML + índice + sitemap); redirects `.html` → URL limpia otra vez.
 - Siguiente: PR B `publish = "site"` (ver handoff Lovable).
 
 ## Sprint 2 (`chore/landing-sprint2`) — mergeado a main

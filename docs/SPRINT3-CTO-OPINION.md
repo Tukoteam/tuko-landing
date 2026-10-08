@@ -34,7 +34,7 @@ No priorizar “lazy/meta cosmético” ni borrar banners huérfanos antes de li
 
 ## Decisiones Joan (siguen abiertas salvo default PR A)
 
-1. Natrue: **default aplicado** = 301 → `/blog/` (no republicar). Cambiar si se quiere republicar desde CMS.
+1. Natrue: **republicado** como HTML estático ES/EN (2026-10-08). El Hub CMS lo había despublicado el 24-sep; el contenido sigue también en `_to-migrate/blog-cms`.
 2. `primer-articulo`: **default aplicado** = retirar + 301 → `/blog/`.
 3. OG png vs v8 — pendiente.
 4. PDF vs HTML legal — pendiente.
