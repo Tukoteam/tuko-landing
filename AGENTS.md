@@ -23,6 +23,18 @@ Guía para agentes / CTO trabajando en este repo.
 - GA4 solo tras consentimiento (`tuko_cookie_consent=accepted`).
 - Commits pequeños; rama de trabajo, no push directo a `main` en limpiezas.
 
+## Tokens de diseño
+
+```css
+--blue: #3D50F2;
+--blue-light: #E0E7FF;
+--green: #14C492;
+--gray-1: #F2F2F2;
+--black: #1a1a1a;
+```
+
+Fuente: Mona Sans. Títulos con peso alto; párrafos ligeros (`font-weight: 300`).
+
 ## Estructura útil
 
 - Home: `index.html` + `assets/css/home.css` + `assets/js/home-*.js`
