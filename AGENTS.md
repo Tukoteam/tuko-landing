@@ -26,7 +26,7 @@ Guía para agentes / CTO trabajando en este repo.
 - Preview local: `npx serve .` (usa `serve.json` cleanUrls). Commits pequeños; no push a `main` sin OK.
 - Posts ES-only (`compra-colectiva-ecommerce`): no inventar EN; selector EN → `/en/blog/`.
 - Natrue: publicado en `/blog/natrue-x-tuko` (+ EN). `primer-articulo`: 301 → `/blog/`. Ver `docs/SPRINT3-CTO-OPINION.md`.
-- Siguiente win estructural: `publish = "site"` (PR B). No publicar docs/scripts desde la raíz.
+- Siguiente win estructural: `publish = "site"` (PR B) — **CTO OK** en `docs/SPRINT3-PR-B-CTO-OK.md`. No publicar docs/scripts desde la raíz.
 
 ## Tokens de diseño
 

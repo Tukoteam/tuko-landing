@@ -12,7 +12,7 @@ Ver commits en `main` (gitignore, GA4 consent, legales canónicos, `_to-migrate`
 - `blog/primer-articulo.html` **retirado**; URLs → 301 `/blog/`.
 - Eliminados redirects zombi `/_versiones/*` y `/_originales-png/*`.
 - **Natrue republicado** ES/EN (HTML + índice + sitemap); redirects `.html` → URL limpia otra vez.
-- Siguiente: PR B `publish = "site"` (ver handoff Lovable).
+- **CTO OK PR B** (`docs/SPRINT3-PR-B-CTO-OK.md`): `publish = "site"`; handoff actualizado.
 
 ## Sprint 2 (`chore/landing-sprint2`) — mergeado a main
 
