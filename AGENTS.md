@@ -18,10 +18,13 @@ Guía para agentes / CTO trabajando en este repo.
 ## Convenciones
 
 - Nombres de assets: **kebab-case**, sin espacios ni mayúsculas.
-- Imágenes: WebP preferido; max ~1600px desktop + `-800w` para banners; `loading="lazy"` fuera del LCP; una sola OG (`assets/og-image.png` 1200-ish).
+- Imágenes: WebP preferido; max ~1600px desktop + `-800w` para banners; `loading="lazy"` fuera del LCP.
+- OG: hoy conviven `assets/og-image.png` y `assets/og-image-v8.png` (homes usan v8; resto png) — unificar solo con OK de Joan.
 - Hosting: fuente de verdad `netlify.toml` + `_redirects` + `_headers`. No reintroducir `.htaccess`.
-- GA4 solo tras consentimiento (`tuko_cookie_consent=accepted`).
-- Commits pequeños; rama de trabajo, no push directo a `main` en limpiezas.
+- GA4 solo tras consentimiento (`tuko_cookie_consent=accepted`); banner en home + legales + `tuko-ai`.
+- Scripts recurrentes: ver `scripts/README.md` / `package.json`. One-shots en `scripts/_archive/`.
+- Preview local: `npx serve .` (usa `serve.json` cleanUrls). Commits pequeños; no push a `main` sin OK.
+- Posts ES-only (`compra-colectiva-ecommerce`, `primer-articulo`): no inventar EN; selector EN → `/en/blog/`.
 
 ## Tokens de diseño
 

@@ -1,45 +1,63 @@
-# Landing cleanup — resumen final (`chore/landing-cleanup`)
+# Landing cleanup — resumen
 
-## Commits (rama)
+## Sprint 1 (`chore/landing-cleanup`) — historial
 
-1. `chore: add .gitignore`
-2. `chore: remove local Claude settings and empty .gitmodules`
-3. `feat: gate GA4 behind cookie consent banner`
-4. `chore: canonicalize legal pages and redirect /pages/*`
-5. `chore: move blog-cms out of publish surface to _to-migrate`
-6. `chore: point footers to canonical legal URLs and block _to-migrate`
-7. `perf: compress images, kebab-case assets, banner srcset (~52MB to ~2MB)`
-8. `docs: note image size before/after for landing cleanup`
-9. `refactor: extract home CSS/JS from index into assets/`
-10. `docs: i18n proposal and CSP unsafe-inline status`
-11. (+ docs README / AGENTS / ARCHITECTURE / summary + netlify logos path)
+Ver commits en `main` (gitignore, GA4 consent, legales canónicos, `_to-migrate`, WebP/kebab, home CSS/JS externos, docs).
 
-## MB ahorrados (assets)
+- **Antes:** ~51.85 MB media → **Después:** ~1.95 MB (~50 MB ahorro)
 
-- **Antes:** ~51.85 MB (89 ficheros media bajo `assets/`)
-- **Después:** ~1.95 MB (~63 ficheros)
-- **Ahorro:** ~50 MB
+## Sprint 2 (`chore/landing-sprint2`) — local, sin push
 
-## Lighthouse
+### Commits
 
-No se pudo obtener score móvil fiable en esta sesión (Chrome headless). Recomendación: correr Lighthouse en la **preview de Netlify** de esta rama (Performance + Best Practices) y anotar before/after de producción.
+1. `fix: document GA4 cookies in privacy pages`
+2. `chore: remove tracked .DS_Store files`
+3. `chore: normalize CLAUDE.md to UTF-8 and add .editorconfig`
+4. `chore: remove unused og-image versions`
+5. `perf: move inline home PNG to cached WebP asset`
+6. `chore: finish kebab-case image and logo renames`
+7. `chore: archive one-shot scripts and document recurring ones`
+8. `feat: add cookie consent to legal and tuko-ai pages`
+9. `fix: avoid broken en hreflang for ES-only blog posts`
+10. (+ T10) link-check fixes + Lighthouse/docs
 
-## Informes (Fase 2)
+### Qué se hizo
 
-- **`landing-demo/`**: **sí está enlazada y publicada** (iframes “Cómo funciona” en home). No mover.
-- **`natrue-x-tuko`**: post vivo + redirects + JSON en CMS migrado. **Mantener.**
-- **Privacidad vs GA4**: el copy legal aún puede decir que no hay cookies de terceros; el banner ya informa de Analytics. **Alinear legales solo con tu OK.**
+| T | Resumen |
+|---|---------|
+| T1 | Privacidad ES/EN: § cookies/GA4 + `TukoOpenCookiePreferences` (`<!-- REVISAR LEGAL -->`) |
+| T2 | `.DS_Store` untracked + 404 Netlify |
+| T3 | Tokens en `AGENTS.md`; `CLAUDE.md` stub UTF-8; `.editorconfig` |
+| T4 | Borrados `og-image-v2`…`v7`; `og-render.html` → `docs/`; quedan png + v8 |
+| T5 | Base64 home → `assets/images/tuko-logo-nav.webp` |
+| T6 | Showcase/icons/logos/banners kebab |
+| T7 | One-shots → `scripts/_archive/`; `scripts/README.md`; `package.json` |
+| T8 | Consent + GA4 en 6 páginas legales/`tuko-ai` |
+| T9 | ES-only posts: hreflang es/x-default; EN selector → `/en/blog/` |
+| T10 | Linkinator 0 rotos internos (local + `serve.json` cleanUrls); Lighthouse doc |
 
-## Secretos (Fase 1)
+### Assets
 
-- Tracked eliminado: `.claude/settings.local.json` (rutas locales de otra máquina).
-- **No tracked** pero presentes en disco bajo `_to-migrate/blog-cms/`: `.env`, posible `secrets/*.pem` — gitignored; no publicar; rotar si alguna vez se subieron al remoto.
-- Emails en HTML (`team.tukoo@gmail.com`, etc.): no son secretos; migración a `joan@tukoteam.com` en copy es decisión tuya.
+- Media bajo `assets/`: ~**2.06 MB** / 62 ficheros (post sprint 2).
+- OG restantes: `og-image.png` (~220 KB), `og-image-v8.png` (~142 KB) — **no unificados**.
 
-## Decisiones que te tocan
+### Link check (local)
 
-1. ¿Alinear texto de privacidad/cookies con GA4?
-2. ¿Merge PR `chore/landing-cleanup` → `main` (Netlify prod)?
-3. ¿Rotar PEM/.env del CMS si existieron en GitHub alguna vez?
-4. ¿Aprobar propuesta i18n (`docs/I18N-PROPOSAL.md`) para un siguiente sprint?
-5. CSP: ¿seguir con unsafe-inline por ahora? (recomendado sí)
+- `npx serve` + `serve.json` (`cleanUrls`) + linkinator: **0 rotos internos**.
+- Sitemap: 23 `<loc>`, sin Natrue, sin EN 404.
+- Fixes en T10: `asset-08-1.svg` refs; Grand View URL absoluta; hrefs blog absolutas (`/blog/…`); related Natrue → `/blog/` (HTML Natrue no publicado).
+
+### Lighthouse
+
+Ver [`docs/LIGHTHOUSE-2026-10.md`](./LIGHTHOUSE-2026-10.md). Homes ~63–64 Perf; blog/artículo/tuko-ai ~80–84. No se optimizó Perf en este sprint.
+
+### Decisiones para Joan
+
+1. **OG definitiva:** ¿`og-image.png` o `og-image-v8.png`?
+2. **PDF vs HTML privacidad:** HTML ya documenta GA4; PDF no editado — ¿actualizar PDF / validación legal?
+3. **EN `compra-colectiva-ecommerce`:** ¿traducir o dejar ES-only?
+4. **`primer-articulo`:** ¿borrador a eliminar del índice / noindex?
+5. **Banners huérfanos:** `tuko-banner-youtube-*`, `tuko-miniatura-es-*`, `chatgpt-image-*` (-800w suelto), `blog-compra-…-800w` sin srcset — ¿borrar?
+6. **Natrue:** related cards ya no apuntan al 404; ¿republicar HTML desde CMS o retirar banners/redirects?
+7. **Validación legal** del bloque `<!-- REVISAR LEGAL -->` en privacidad.
+8. Tras OK local → push/PR de `chore/landing-sprint2`.
