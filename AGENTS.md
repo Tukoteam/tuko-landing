@@ -24,7 +24,9 @@ Guía para agentes / CTO trabajando en este repo.
 - GA4 solo tras consentimiento (`tuko_cookie_consent=accepted`); banner en home + legales + `tuko-ai`.
 - Scripts recurrentes: ver `scripts/README.md` / `package.json`. One-shots en `scripts/_archive/`.
 - Preview local: `npx serve .` (usa `serve.json` cleanUrls). Commits pequeños; no push a `main` sin OK.
-- Posts ES-only (`compra-colectiva-ecommerce`, `primer-articulo`): no inventar EN; selector EN → `/en/blog/`.
+- Posts ES-only (`compra-colectiva-ecommerce`): no inventar EN; selector EN → `/en/blog/`.
+- Natrue y `primer-articulo`: 301 → `/blog/` (no republicar sin OK). Ver `docs/SPRINT3-CTO-OPINION.md`.
+- Siguiente win estructural: `publish = "site"` (PR B). No publicar docs/scripts desde la raíz.
 
 ## Tokens de diseño
 

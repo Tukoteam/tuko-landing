@@ -100,9 +100,16 @@
   status = 301
   force = true
 
+# Natrue: HTML no publicado — no 301 a URL limpia 404 (decisión Sprint 3: → índice blog)
+[[redirects]]
+  from = "/en/blog/natrue-x-tuko"
+  to = "/en/blog/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/en/blog/natrue-x-tuko.html"
-  to = "/en/blog/natrue-x-tuko"
+  to = "/en/blog/"
   status = 301
   force = true
 
@@ -114,8 +121,13 @@
 
 # Blog: .html → URL limpia (explícitos: Netlify no sustituye bien :slug.html)
 [[redirects]]
+  from = "/blog/natrue-x-tuko"
+  to = "/blog/"
+  status = 301
+  force = true
+[[redirects]]
   from = "/blog/natrue-x-tuko.html"
-  to = "/blog/natrue-x-tuko"
+  to = "/blog/"
   status = 301
   force = true
 [[redirects]]
@@ -148,9 +160,15 @@
   to = "/blog/shiji-incubator"
   status = 301
   force = true
+# primer-articulo: borrador retirado (no indexar ni 200 huérfano)
+[[redirects]]
+  from = "/blog/primer-articulo"
+  to = "/blog/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/blog/primer-articulo.html"
-  to = "/blog/primer-articulo"
+  to = "/blog/"
   status = 301
   force = true
 # Posts comerciales retirados → /blog/
@@ -281,17 +299,6 @@
   to = "/terminos.html"
   status = 200
   force = true
-
-# Nunca indexar las carpetas de trabajo
-[[redirects]]
-  from = "/_versiones/*"
-  to = "/"
-  status = 301
-
-[[redirects]]
-  from = "/_originales-png/*"
-  to = "/"
-  status = 301
 
 [[redirects]]
   from = "/en/blog/gran-paso-tuko.html"
