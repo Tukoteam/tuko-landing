@@ -21,10 +21,9 @@ CTO snapshot: landing marcada **v1.0** (`tag v1.0.0`).
 - Split editable CSS/JS into parts; build concatenates entries
 - Extracted `tuko-ai` inline CSS/JS to assets
 - Removed sprint archive docs, one-shot scripts, 33 orphan assets
-- Dual OG kept (`og-image.png` + `og-image-v8.png`) pending Joan
+- Dual OG kept on purpose (`og-image-v8` on home, `og-image.png` elsewhere)
 
 ## Next (optional / out of v1)
 
 1. PR E — i18n JSON
-2. Joan — unify OG if desired
-3. Further home shell thinning if editing `index.html` becomes painful
+2. Further home shell thinning if editing `index.html` becomes painful

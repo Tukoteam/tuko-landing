@@ -14,8 +14,8 @@ Guía para agentes / CTO trabajando en este repo.
 
 - Diseño visual, copy de marketing, comportamiento del widget embebido en demos.
 - App / plugin / backend / Shopify (`plugin-tuko`).
-- “Arreglar” el Blog CMS: vive en el Hub (`plugin-tuko` backend), no en esta landing.
-- Unificar OG dual (`og-image.png` / `og-image-v8.png`) sin OK de Joan.
+- Código del Blog CMS / Hub / app Shopify (`plugin-tuko`): no vive en este repo.
+- OG dual a propósito: home usa `og-image-v8.png`; blog/legales/tuko-ai usan `og-image.png`. No unificar salvo decisión explícita.
 
 ## Convenciones
 
@@ -63,6 +63,13 @@ netlify.toml    ← redirects + headers
 - `npm run build` → concat CSS/JS parts + inyecta partials + `?v=` = hash sha256[0:8] del asset.
 - Tras tocar shell del blog: `npm run sync:blog-shell` y `npm run sync:en-blog-articles`, luego otra vez `npm run build`.
 - Antes de push: `npm run build && npm run check:site` → **0 errores, 0 warnings `?v=`**, y commit de lo que el build regeneró (CI falla si queda `git diff`).
+
+## Blog CMS (puente con el Hub)
+
+- Los posts se **publican desde el Hub** (GitHub App / panel interno), no creando HTML a mano aquí. El CMS escribe/actualiza ficheros bajo `site/blog/` (+ EN) y Netlify despliega.
+- Marco (nav/footer) de la landing → Hub: `npm run export:cms-shell`.
+- Marco en posts ya existentes en este repo: `npm run sync:blog-shell` / `sync:en-blog-articles`, luego `npm run build`.
+- No reintroducir un CMS dentro de `tuko-landing`.
 
 ## i18n / hosting (essentials)
 
