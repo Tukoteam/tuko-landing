@@ -6,7 +6,15 @@ Ver commits en `main` (gitignore, GA4 consent, legales canónicos, `_to-migrate`
 
 - **Antes:** ~51.85 MB media → **Después:** ~1.95 MB (~50 MB ahorro)
 
-## Sprint 2 (`chore/landing-sprint2`) — local, sin push
+## Sprint 3 — PR A (SEO roto)
+
+- Docs: `docs/SPRINT3-CTO-OPINION.md`, `docs/SPRINT3-LOVABLE-HANDOFF.md`.
+- Natrue (ES/EN, limpia + `.html`) → **301 `/blog/`** / **`/en/blog/`** (ya no a URL 404).
+- `blog/primer-articulo.html` **retirado**; URLs → 301 `/blog/`.
+- Eliminados redirects zombi `/_versiones/*` y `/_originales-png/*`.
+- Siguiente: PR B `publish = "site"` (ver handoff Lovable).
+
+## Sprint 2 (`chore/landing-sprint2`) — mergeado a main
 
 ### Commits
 
@@ -56,8 +64,8 @@ Ver [`docs/LIGHTHOUSE-2026-10.md`](./LIGHTHOUSE-2026-10.md). Homes ~63–64 Perf
 1. **OG definitiva:** ¿`og-image.png` o `og-image-v8.png`?
 2. **PDF vs HTML privacidad:** HTML ya documenta GA4; PDF no editado — ¿actualizar PDF / validación legal?
 3. **EN `compra-colectiva-ecommerce`:** ¿traducir o dejar ES-only?
-4. **`primer-articulo`:** ¿borrador a eliminar del índice / noindex?
-5. **Banners huérfanos:** `tuko-banner-youtube-*`, `tuko-miniatura-es-*`, `chatgpt-image-*` (-800w suelto), `blog-compra-…-800w` sin srcset — ¿borrar?
-6. **Natrue:** related cards ya no apuntan al 404; ¿republicar HTML desde CMS o retirar banners/redirects?
+4. **`primer-articulo`:** retirado (301 → `/blog/`). Reabrir solo si se quiere como post real.
+5. **Banners huérfanos:** `tuko-banner-youtube-*`, `tuko-miniatura-es-*`, `chatgpt-image-*`, etc. — ¿borrar?
+6. **Natrue:** default 301 → `/blog/`. ¿Republicar desde CMS?
 7. **Validación legal** del bloque `<!-- REVISAR LEGAL -->` en privacidad.
-8. Tras OK local → push/PR de `chore/landing-sprint2`.
+8. **PR B:** OK para mover a `site/` + unificar redirects.
