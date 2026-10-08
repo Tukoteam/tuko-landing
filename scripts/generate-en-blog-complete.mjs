@@ -1,8 +1,9 @@
 /**
  * Genera / actualiza TODAS las versiones EN del blog (salvo primer-articulo).
- * - en/blog/{slug}.html + _to-migrate/blog-cms/content/{slug}.en.json
- * - índice EN, sitemap, redirects
+ * - site/en/blog/{slug}.html
+ * - índice EN, sitemap, redirects en netlify.toml
  * - hreflang + data-url-* en cada post ES emparejado
+ * Content JSON del CMS vive en el Hub, no en esta landing.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -18,7 +19,6 @@ const cmsRoot = path.resolve(
   '../plugin-tuko-main/plugin-tuko-main/backend/src/services/blogCms'
 );
 const render = require(path.join(cmsRoot, 'render.js'));
-const store = require(path.join(cmsRoot, 'store.js'));
 
 const i18nSrc = fs.readFileSync(path.join(landing, 'assets/js/i18n.js'), 'utf8');
 const enStart = i18nSrc.indexOf('en: {');
@@ -202,9 +202,7 @@ const posts = [
 ];
 
 const enDir = path.join(landing, 'en/blog');
-const contentDir = path.join(landing, '_to-migrate/blog-cms/content');
 fs.mkdirSync(enDir, { recursive: true });
-fs.mkdirSync(contentDir, { recursive: true });
 
 const articles = [];
 for (const p of posts) {
@@ -278,11 +276,6 @@ for (const article of articles) {
     sibling: { slug: article.slug, locale: 'es', status: 'published' },
   });
   fs.writeFileSync(path.join(enDir, `${article.slug}.html`), html);
-  fs.writeFileSync(
-    path.join(contentDir, `${article.slug}.en.json`),
-    `${JSON.stringify(render.toRepoContentJson(article), null, 2)}\n`
-  );
-  store.saveArticle(article);
 }
 
 let index = render.bootstrapEnIndexHtml();
@@ -308,21 +301,7 @@ for (const slug of allEs) {
   patchEsPost(slug, enSlugs.has(slug));
 }
 
-// redirects
-const redirectsPath = path.join(repoRoot, '_redirects');
-let redirects = (fs.existsSync(redirectsPath) ? fs.readFileSync(redirectsPath, 'utf8') : '');
-if (!redirects.includes('/en/blog/index.html')) {
-  redirects += '\n/en/blog/index.html                         /en/blog/                              301!\n';
-}
-for (const slug of enSlugs) {
-  const line = `/en/blog/${slug}.html`;
-  if (!redirects.includes(line)) {
-    redirects += `/en/blog/${slug}.html                 /en/blog/${slug}                 301!\n`;
-  }
-}
-fs.writeFileSync(redirectsPath, redirects);
-
-// netlify.toml — append missing EN redirects if needed
+// netlify.toml — append missing EN redirects if needed (no _redirects file)
 const netlifyPath = path.join(repoRoot, 'netlify.toml');
 let netlify = fs.readFileSync(netlifyPath, 'utf8');
 for (const slug of enSlugs) {

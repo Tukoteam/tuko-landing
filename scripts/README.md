@@ -14,7 +14,7 @@ Herramientas Node locales. **Netlify no ejecuta** estos scripts (`publish = "sit
 | `sync-en-blog-shell.mjs` | Sincroniza shell/nav/footer de `site/en/blog/*` |
 | `sync-blog-article-shell.mjs` | Sincroniza shell de artículos ES |
 | `optimize-images.mjs` | Comprime / genera WebP y variantes `-800w` |
-| `export-shell-for-cms.mjs` | Exporta shell HTML para el CMS (`_to-migrate`) |
+| `export-shell-for-cms.mjs` | Exporta shell HTML para el Blog CMS del Hub |
 | `check-surface.mjs` | Inventario HEAD de URLs (publish hygiene) |
 | `check-site.mjs` | CI: enlaces internos, sitemap, hreflang, paridad ES/EN |
 

@@ -17,4 +17,4 @@
 ## Qué no hacer ahora
 
 - No fusionar ES/EN en un solo HTML con swap total hasta que el home deje de depender de markup distinto por idioma.
-- No tocar el CMS del blog en este repo (está en `_to-migrate/`).
+- No tocar el CMS del blog (vive en el Hub / `plugin-tuko`, no en esta landing).

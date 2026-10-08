@@ -23,7 +23,7 @@ flowchart TB
 | `publish = "site"` | No servir docs/scripts/AGENTS en 200 |
 | Redirects/headers solo en `netlify.toml` | Evitar deriva `_redirects` / `_headers` |
 | Legales en raíz de `site/`; `/pages/*` → 404/301 | Una URL canónica |
-| `blog-cms` → `_to-migrate/` + 404 | No pertenece a la landing |
+| Blog CMS fuera de este repo (Hub) | Landing solo HTML estático; `/_to-migrate/*` → 404 por si quedan URLs viejas |
 | GA4 tras consentimiento | RGPD |
 | Natrue ES/EN HTML estático | Hub lo despublicó; republicado en Sprint 3 |
 | Imágenes WebP + kebab + srcset | Peso ~52 MB → ~2 MB |

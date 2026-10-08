@@ -365,6 +365,7 @@
   force = true
 
 [[redirects]]
+  # Legacy path from when blog-cms lived in this repo (folder removed; keep 404)
   from = "/_to-migrate/*"
   to = "/"
   status = 404
