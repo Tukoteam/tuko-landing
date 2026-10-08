@@ -34,6 +34,7 @@ npx --yes serve -l 5173 .
 
 ## Docs
 
-- `AGENTS.md` — convenciones para agentes/CTO (fuente de verdad)
+- `docs/GUIA-REPO-SIMPLE.md` — explicación sencilla de carpetas y archivos
+- `AGENTS.md` — convenciones para agentes/CTO (fuente de verdad técnica)
 - `docs/LANDING-AUDIT-2026-10.md` — snapshot v1.0
 - `docs/LIGHTHOUSE-2026-10.md` — baseline perf móvil
