@@ -71,7 +71,8 @@ html[data-theme="dark"] body {
 
 html[data-theme="dark"] nav,
 html[data-theme="dark"] body:has(.blog-hero) nav,
-html[data-theme="dark"] body:has(.article-page) nav {
+html[data-theme="dark"] body:has(.article-page) nav,
+html[data-theme="dark"] body:has(.legal-page) nav {
   background: rgba(11, 13, 20, 0.92);
   border-bottom-color: rgba(255, 255, 255, 0.06);
 }
@@ -695,6 +696,40 @@ html[data-theme="dark"] .article-back {
 html[data-theme="dark"] .article-back:hover {
   color: #b4c0ff;
 }
+
+/* Legal pages: same night palette as articles (body uses --gray-4 on light surface) */
+html[data-theme="dark"] .legal-page {
+  background: #0b0d14;
+  color: #f2f3f7;
+}
+html[data-theme="dark"] .legal-badge {
+  background: rgba(61, 80, 242, 0.18);
+  color: #b4c0ff;
+}
+html[data-theme="dark"] .legal-title,
+html[data-theme="dark"] .legal-section h2,
+html[data-theme="dark"] .legal-section strong {
+  color: #f2f3f7;
+}
+html[data-theme="dark"] .legal-intro,
+html[data-theme="dark"] .legal-section p,
+html[data-theme="dark"] .legal-list li {
+  color: #d0d5e0;
+}
+html[data-theme="dark"] .legal-update {
+  color: #b8bfce;
+}
+html[data-theme="dark"] .legal-intro,
+html[data-theme="dark"] .legal-section {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme="dark"] .legal-section a {
+  color: #8fa0ff;
+}
+html[data-theme="dark"] .legal-section a:hover {
+  color: #b4c0ff;
+}
+
 html[data-theme="dark"] .blog-post-title-link:hover .blog-post-title,
 html[data-theme="dark"] .blog-post-link:hover .blog-post-title {
   color: #8fa0ff;

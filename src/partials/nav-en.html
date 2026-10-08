@@ -1,0 +1,66 @@
+<!-- NAV -->
+<header role="banner">
+<nav aria-label="Main navigation">
+  <a href="/en/" class="nav-logo">
+    <img src="/assets/images/tuko-logo-nav.webp" width="840" height="321" alt="Tuko" decoding="async" fetchpriority="high">
+  </a>
+  <ul class="nav-links">
+    <li><a href="/en/#como-funciona" data-i18n="nav_link_como_funciona">How it works</a></li>
+    <li><a href="/en/#beneficios" data-i18n="nav_link_beneficios">Why it works</a></li>
+    <li><a href="/en/#precios" data-i18n="nav_link_precios">Pricing</a></li>
+    <li><a href="/en/blog/" data-i18n="nav_link_blog">Blog</a></li>
+    <li><a href="/en/tuko-ai" data-i18n="nav_link_ia">tuko AI</a></li>
+    <li><a href="/en/#solicitud" class="nav-cta" data-i18n="nav_cta">Join the pilot</a></li>
+  </ul>
+  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" aria-pressed="false">
+    <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+  </button>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="lang-switcher" role="group" aria-label="Language selector" data-active="en">
+    <span class="lang-thumb" aria-hidden="true"></span>
+    <button type="button" class="lang-opt" data-lang="es" aria-label="Cambiar idioma a Español">
+      <span class="lang-opt-flag" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" width="22" height="15"><rect width="3" height="2" fill="#c60b1e"/><rect width="3" height="1" y="0.5" fill="#ffc400"/></svg>
+      </span>
+      <span class="lang-opt-label">ES</span>
+    </button>
+    <button type="button" class="lang-opt active" data-lang="en" aria-label="Switch language to English">
+      <span class="lang-opt-flag" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="22" height="15"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg>
+      </span>
+      <span class="lang-opt-label">EN</span>
+    </button>
+  </div>
+</nav>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu" aria-hidden="true">
+  <a href="/en/#como-funciona" data-i18n="nav_link_como_funciona">How it works</a>
+  <a href="/en/#beneficios" data-i18n="nav_link_beneficios">Why it works</a>
+  <a href="/en/#precios" data-i18n="nav_link_precios">Pricing</a>
+  <a href="/en/blog/" data-i18n="nav_link_blog">Blog</a>
+  <a href="/en/tuko-ai" data-i18n="nav_link_ia">tuko AI</a>
+  <div class="mobile-lang">
+    <p class="mobile-lang-label" data-i18n="nav_lang_label">Language</p>
+    <div class="lang-switcher mobile-lang-switcher" role="group" aria-label="Language selector" data-active="en">
+      <span class="lang-thumb" aria-hidden="true"></span>
+      <button type="button" class="lang-opt" data-lang="es" aria-label="Cambiar idioma a Español">
+        <span class="lang-opt-flag" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" width="22" height="15"><rect width="3" height="2" fill="#c60b1e"/><rect width="3" height="1" y="0.5" fill="#ffc400"/></svg>
+        </span>
+        <span class="lang-opt-label">ES</span>
+      </button>
+      <button type="button" class="lang-opt active" data-lang="en" aria-label="Switch language to English">
+        <span class="lang-opt-flag" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="22" height="15"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg>
+        </span>
+        <span class="lang-opt-label">EN</span>
+      </button>
+    </div>
+  </div>
+  <a href="/en/#solicitud" class="mobile-cta" data-i18n="nav_cta">Join the pilot</a>
+</div>

@@ -45,10 +45,19 @@ Fuente: Mona Sans. Títulos con peso alto; párrafos ligeros (`font-weight: 300`
 
 ```text
 site/           ← ÚNICO publish (HTML, assets, blog, en, demo, sitemap…)
+src/partials/   ← nav/footer/theme-head (no publicado); editar aquí el chrome
 docs/           ← no publicado
 scripts/        ← no publicado
 netlify.toml    ← redirects + headers
 ```
+
+## Build (PR D)
+
+- Chrome compartido vive en `src/partials/` (`nav-es`, `nav-en`, `footer-es`, `footer-en`, `theme-head`).
+- Marcadores en HTML: `<!-- tuko:partial:NAME -->…<!-- /tuko:partial:NAME -->`.
+- Tras editar partials o CSS/JS: `npm run build` (inyecta partials + `?v=` = hash del asset).
+- Luego, si tocas shell del blog: `npm run sync:blog-shell` y `npm run sync:en-blog-articles`.
+- CI / antes de push: `npm run build && npm run check:site`.
 
 - Home: `site/index.html` + `site/assets/css/home.css` + `site/assets/js/home-*.js`
 - i18n resto: `site/assets/js/i18n.js` + árbol `site/en/`

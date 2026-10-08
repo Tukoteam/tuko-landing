@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-url-es="https://tukoteam.com/" data-url-en="https://tukoteam.com/en/">
 <head>
 <script>
@@ -13,7 +13,9 @@
 <!-- ═══ SEO: Charset & Viewport ═══ -->
 <!-- tuko-deploy: 2026-09-06-source-gap-56 -->
 <meta charset="UTF-8">
+<!-- tuko:partial:theme-head -->
 <script>(function(){try{var t=localStorage.getItem("tuko_theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<!-- /tuko:partial:theme-head -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <!-- ═══ SEO: Title & Description ═══ -->
@@ -105,9 +107,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Roboto+Serif:ital,opsz,wght@1,8..144,400..700&display=swap">
-<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Roboto+Serif:ital,opsz,wght@1,8..144,400..700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Roboto+Serif:ital,opsz,wght@1,8..144,400..700&display=swap" rel="stylesheet"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,300;75..125,400;75..125,600;75..125,700;75..125,800&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,300;75..125,400;75..125,600;75..125,700;75..125,800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,300;75..125,400;75..125,600;75..125,700;75..125,800&display=swap" rel="stylesheet"></noscript>
 
 <!-- ═══ SEO: JSON-LD Structured Data ═══ -->
 <script type="application/ld+json">
@@ -248,27 +250,29 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="/assets/css/home.css">
-<link rel="stylesheet" href="assets/css/tuko-theme.css?v=20261003j">
+<link rel="preload" as="style" href="/assets/css/home.css?v=46c9a351">
+<link rel="stylesheet" href="/assets/css/home.css?v=46c9a351">
+<link rel="stylesheet" href="/assets/css/tuko-theme.css?v=e973c645">
 <link rel="prefetch" href="blog/" as="document">
 <link rel="prefetch" href="tuko-ai.html" as="document">
 </head>
 <body>
 
 <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:4px;z-index:9999;padding:8px 16px;background:#3D50F2;color:#fff;font-weight:600;border-radius:6px;text-decoration:none;" onfocus="this.style.left='4px'" onblur="this.style.left='-9999px'" data-i18n="skip_link">Ir al contenido principal</a>
+<!-- tuko:partial:nav-es -->
 <!-- NAV -->
 <header role="banner">
 <nav aria-label="Navegación principal">
-  <a href="#" class="nav-logo">
-    <img src="assets/images/tuko-logo-nav.webp" width="840" height="321" alt="Tuko" decoding="async">
+  <a href="/" class="nav-logo">
+    <img src="/assets/images/tuko-logo-nav.webp" width="840" height="321" alt="Tuko" decoding="async" fetchpriority="high">
   </a>
   <ul class="nav-links">
-    <li><a href="#como-funciona" data-i18n="nav_link_como_funciona">Cómo funciona</a></li>
-    <li><a href="#beneficios" data-i18n="nav_link_beneficios">Por qué funciona</a></li>
-    <li><a href="#precios" data-i18n="nav_link_precios">Precios</a></li>
-    <li><a href="blog/index.html" data-i18n="nav_link_blog">Blog</a></li>
-    <li><a href="tuko-ai.html" data-i18n="nav_link_ia">tuko AI</a></li>
-    <li><a href="#solicitud" class="nav-cta" data-i18n="nav_cta">Acceder al piloto</a></li>
+    <li><a href="/#como-funciona" data-i18n="nav_link_como_funciona">Cómo funciona</a></li>
+    <li><a href="/#beneficios" data-i18n="nav_link_beneficios">Por qué funciona</a></li>
+    <li><a href="/#precios" data-i18n="nav_link_precios">Precios</a></li>
+    <li><a href="/blog/" data-i18n="nav_link_blog">Blog</a></li>
+    <li><a href="/tuko-ai" data-i18n="nav_link_ia">tuko AI</a></li>
+    <li><a href="/#solicitud" class="nav-cta" data-i18n="nav_cta">Acceder al piloto</a></li>
   </ul>
   <button type="button" class="theme-toggle" id="themeToggle" aria-label="Activar modo oscuro" aria-pressed="false">
     <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -297,11 +301,11 @@
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Menú de navegación" aria-hidden="true">
-  <a href="#como-funciona" data-i18n="nav_link_como_funciona">Cómo funciona</a>
-  <a href="#beneficios" data-i18n="nav_link_beneficios">Por qué funciona</a>
-  <a href="#precios" data-i18n="nav_link_precios">Precios</a>
-  <a href="blog/index.html" data-i18n="nav_link_blog">Blog</a>
-  <a href="tuko-ai.html" data-i18n="nav_link_ia">tuko AI</a>
+  <a href="/#como-funciona" data-i18n="nav_link_como_funciona">Cómo funciona</a>
+  <a href="/#beneficios" data-i18n="nav_link_beneficios">Por qué funciona</a>
+  <a href="/#precios" data-i18n="nav_link_precios">Precios</a>
+  <a href="/blog/" data-i18n="nav_link_blog">Blog</a>
+  <a href="/tuko-ai" data-i18n="nav_link_ia">tuko AI</a>
   <div class="mobile-lang">
     <p class="mobile-lang-label" data-i18n="nav_lang_label">Idioma</p>
     <div class="lang-switcher mobile-lang-switcher" role="group" aria-label="Selector de idioma" data-active="es">
@@ -320,11 +324,11 @@
       </button>
     </div>
   </div>
-  <a href="#solicitud" class="mobile-cta">
-    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-    <span data-i18n="nav_cta">Acceder al piloto</span>
-  </a>
+  <a href="/#solicitud" class="mobile-cta" data-i18n="nav_cta">Acceder al piloto</a>
 </div>
+<!-- /tuko:partial:nav-es -->
+
+
 
 <main id="main-content">
 
@@ -347,7 +351,7 @@
         </span>
         <span data-i18n="hero_badge">Con el respaldo de Xiji Incubator</span>
       </div>
-      <h1 class="hero-title" data-lang="es">
+      <h1 class="hero-title" data-lcp="1" data-lang="es">
         <span class="hero-line">
           <span class="hero-word">Un</span>
           <span class="hero-word">cliente</span>
@@ -483,7 +487,7 @@
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/01-activar-compra/index.html?v=20261002h" title="Demo: publicar el grupo en la tienda" loading="eager"></iframe>
+        <iframe class="how-step-iframe" data-src="landing-demo/animaciones/01-activar-compra/index.html?v=20261002h" src="about:blank" loading="lazy" title="Demo: publicar el grupo en la tienda"></iframe>
       </div>
     </div>
   </div>
@@ -499,7 +503,7 @@
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/06-reservar-piruleta/index.html?v=20261002h" title="Demo: comprar el producto y compartir" loading="eager"></iframe>
+        <iframe class="how-step-iframe" data-src="landing-demo/animaciones/06-reservar-piruleta/index.html?v=20261002h" src="about:blank" loading="lazy" title="Demo: comprar el producto y compartir"></iframe>
       </div>
     </div>
   </div>
@@ -515,7 +519,7 @@
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/07-grupo-completado/index.html?v=20261003n" title="Demo: grupo completado y estadísticas" loading="eager"></iframe>
+        <iframe class="how-step-iframe" data-src="landing-demo/animaciones/07-grupo-completado/index.html?v=20261003n" src="about:blank" loading="lazy" title="Demo: grupo completado y estadísticas"></iframe>
       </div>
     </div>
   </div>
@@ -531,7 +535,7 @@
     </div>
     <div class="how-step-visual">
       <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" src="landing-demo/animaciones/08-grupo-en-bucle/index.html?v=20261003n" title="Demo: Tuko abre un grupo nuevo tras cada grupo completado" loading="eager"></iframe>
+        <iframe class="how-step-iframe" data-src="landing-demo/animaciones/08-grupo-en-bucle/index.html?v=20261003n" src="about:blank" loading="lazy" title="Demo: Tuko abre un grupo nuevo tras cada grupo completado"></iframe>
       </div>
     </div>
   </div>
@@ -1019,9 +1023,10 @@
 
 </main>
 
+<!-- tuko:partial:footer-es -->
 <!-- FOOTER -->
 <footer>
-  <div class="footer-bg" aria-hidden="true"><svg class="footer-svg-logo" viewBox="0 0 840 321" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <div class="footer-bg"><svg class="footer-svg-logo" viewBox="0 0 840 321" fill="none" xmlns="http://www.w3.org/2000/svg">
 <ellipse cx="125.26" cy="160.499" rx="29.0064" ry="108.774" fill="#FFFFFF"/>
 <path d="M154.267 160.499C154.267 220.574 154.267 269.273 154.267 269.273C182.301 269.273 205.028 220.574 205.028 160.499C205.028 100.425 182.301 51.7255 154.267 51.7255C154.267 51.7255 154.267 100.425 154.267 160.499Z" fill="#FFFFFF"/>
 <path d="M205.021 160.497C205.021 200.546 205.021 233.013 205.021 233.013C221.04 233.013 234.027 200.546 234.027 160.497C234.027 120.447 221.04 87.9808 205.021 87.9808C205.021 87.9808 205.021 120.447 205.021 160.497Z" fill="#FFFFFF"/>
@@ -1031,8 +1036,8 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="#" class="footer-brand-mark">tuko</a>
-        <p class="footer-brand-text" data-i18n="footer_tagline">Un cliente entra. Trae a otro. Los dos compran.</p>
+        <a href="/" class="footer-brand-mark">tuko</a>
+        <p class="footer-brand-text" data-i18n="footer_tagline">Descuentos por objetivo para tiendas Shopify. Vende más unidades sin regalar margen.</p>
       </div>
       <div class="footer-col">
         <p class="footer-col-title" data-i18n="footer_col1_title">Contacto</p>
@@ -1040,7 +1045,7 @@
       </div>
       <div class="footer-col">
         <p class="footer-col-title" data-i18n="footer_col_product">Producto</p>
-        <a href="#precios" data-i18n="footer_pricing">Precios</a>
+        <a href="/#precios" data-i18n="footer_pricing">Precios</a>
       </div>
       <div class="footer-col">
         <p class="footer-col-title" data-i18n="footer_col2_title">Legales</p>
@@ -1051,6 +1056,7 @@
   </div>
   <div class="footer-bottom-inner" data-i18n="footer_copy">© 2026 Tuko. Todos los derechos reservados.</div>
 </footer>
+<!-- /tuko:partial:footer-es -->
 
 <!-- CTA fija en móvil: aparece al pasar el hero, se esconde sobre Precios, el CTA final y el footer -->
 <div class="sticky-cta" id="stickyCta" aria-hidden="true">
@@ -1061,13 +1067,34 @@
   </a>
 </div>
 
-<script src="/assets/js/home-animations.js"></script>
-<script src="/assets/js/home-ui.js"></script>
-<script src="assets/js/tuko-theme.js?v=20261002h" defer></script>
-<script src="assets/js/tuko-form.js?v=20260930m" defer></script>
-<script src="assets/js/ga4-loader.js" defer></script>
-<link rel="stylesheet" href="assets/css/cookie-consent.css">
-<script src="assets/js/cookie-consent.js" defer></script>
-<script src="assets/js/local-landing-label.js"></script>
+<script src="/assets/js/home-animations.js?v=624ab54b"></script>
+<script src="/assets/js/home-ui.js?v=c2423289"></script>
+<script src="/assets/js/tuko-theme.js?v=f7ecd51e" defer></script>
+<script src="/assets/js/tuko-form.js?v=0d3b9783" defer></script>
+<script src="/assets/js/ga4-loader.js?v=ff83e0f4" defer></script>
+<link rel="stylesheet" href="/assets/css/cookie-consent.css?v=3e49c38b" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/assets/css/cookie-consent.css?v=3e49c38b"></noscript>
+<script src="/assets/js/cookie-consent.js?v=dd9b4eac" defer></script>
+<script src="/assets/js/local-landing-label.js?v=159e0b49"></script>
+
+<script>
+(function tukoLazyHowIframes(){
+  function arm(iframe){
+    if(!iframe || iframe.dataset.armed) return;
+    iframe.dataset.armed = '1';
+    var src = iframe.getAttribute('data-src');
+    if(!src) return;
+    var load = function(){ if(iframe.getAttribute('src') === 'about:blank') iframe.setAttribute('src', src); };
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ load(); io.disconnect(); } });
+      }, { rootMargin: '200px 0px' });
+      io.observe(iframe);
+    } else {
+      load();
+    }
+  }
+  document.querySelectorAll('iframe.how-step-iframe[data-src]').forEach(arm);
+})();
+</script>
 </body>
 </html>

@@ -1,6 +1,19 @@
-# Lighthouse móvil — Sprint 2 (`chore/landing-sprint2`)
+# Lighthouse móvil — 2026-10
 
-Fecha: 2026-10-08. Local: `npx serve .` + Lighthouse CLI (Chrome headless, form-factor mobile). **Solo documentar; no se arreglaron scores en este sprint.**
+## Sprint pro + LCP (post-fix)
+
+Fecha: 2026-10-08. Local: `npx serve site -l 5188` + Lighthouse CLI (Chrome headless, form-factor mobile).
+
+| URL | Perf | FCP | LCP | Notas |
+|-----|------|-----|-----|--------|
+| `/` | **84** | 3.0 s | 3.5 s | Antes 64. Demos how-step lazy + fonts más ligeras + preload `home.css` |
+| `/en/` | **82** | 3.2 s | 3.5 s | Antes 63 |
+
+Cambios LCP: iframes `landing-demo` con `data-src` + IntersectionObserver; Mona Sans sin Roboto Serif en critical path; preload `home.css`; cookie-consent diferido; logo nav `fetchpriority="high"`.
+
+## Sprint 2 (baseline histórico)
+
+Fecha: 2026-10-08. Local: `npx serve .` + Lighthouse CLI.
 
 | URL | Perf | A11y | Best Practices | SEO | Top causas Perf &lt;90 |
 |-----|------|------|----------------|-----|------------------------|
@@ -12,6 +25,5 @@ Fecha: 2026-10-08. Local: `npx serve .` + Lighthouse CLI (Chrome headless, form-
 
 ## Notas
 
-- Homes ES/EN: el cuello de botella es **LCP/FCP** (hero + CSS/fuentes). Best Practices y SEO ya en 100.
-- Blog list/artículo y tuko-ai: Perf ~80–84; prioridad menor que el home.
-- Repetir en **preview Netlify** antes de prod (CDN vs `serve` local puede variar 5–15 pts).
+- Repetir en **preview Netlify** (CDN vs `serve` local puede variar 5–15 pts).
+- Objetivo home ≥80 móvil: **cumplido** en medición local post-LCP.

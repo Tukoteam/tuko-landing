@@ -81,7 +81,7 @@ function resolveExists(urlPath) {
 
 function isExternalOrSpecial(href) {
   if (!href || href === "#" || href.startsWith("#")) return true;
-  if (/^(mailto:|tel:|javascript:|data:)/i.test(href)) return true;
+  if (/^(mailto:|tel:|javascript:|data:|about:)/i.test(href)) return true;
   if (/^https?:\/\//i.test(href)) {
     if (href.startsWith(host)) return false;
     return true;
