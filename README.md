@@ -34,8 +34,6 @@ npx --yes serve -l 5173 .
 
 ## Docs
 
-- `AGENTS.md` — convenciones para agentes/CTO
-- `docs/ARCHITECTURE.md` — decisiones
-- `docs/SEO_NOTES.md` — notas SEO
-- `docs/ORPHAN-ASSETS.md` — assets sin refs (no borrar sin OK)
-- `docs/archive/sprint3/` — notas e inventarios del Sprint 3
+- `AGENTS.md` — convenciones para agentes/CTO (fuente de verdad)
+- `docs/LANDING-AUDIT-2026-10.md` — snapshot v1.0
+- `docs/LIGHTHOUSE-2026-10.md` — baseline perf móvil

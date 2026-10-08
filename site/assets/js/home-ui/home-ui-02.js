@@ -463,6 +463,27 @@ function postDemoPlayState(iframe, play) {
 /** Altura del iframe = contenido real (paso 1: wizard) */
 function initDemoIframeHugHeight() {
   const isMobile = () => window.matchMedia('(max-width: 960px)').matches;
+  /* Cap estable: no seguir innerHeight al mostrar/ocultar chrome móvil (evita saltos de scroll). */
+  let frozenCap = null;
+  let lastInnerH = 0;
+  function mobileCap() {
+    const vh = window.innerHeight || document.documentElement.clientHeight || 700;
+    if (frozenCap == null) {
+      frozenCap = Math.min(Math.round(vh * 0.55), 440);
+      lastInnerH = vh;
+      return frozenCap;
+    }
+    /* Solo recalcular en cambios grandes (orientación), no en ±toolbar */
+    if (Math.abs(vh - lastInnerH) >= 120) {
+      frozenCap = Math.min(Math.round(vh * 0.55), 440);
+      lastInnerH = vh;
+    }
+    return frozenCap;
+  }
+  window.addEventListener('orientationchange', function () {
+    frozenCap = null;
+    lastInnerH = 0;
+  });
   function stepIndex(iframe) {
     const step = iframe.closest('.how-step');
     if (!step || !step.parentElement) return -1;
@@ -479,7 +500,7 @@ function initDemoIframeHugHeight() {
     box.style.minHeight = '0';
     if (isMobile()) {
       /* En móvil: misma idea de menos altura, pero escalando el contenido (no cortando) */
-      const cap = Math.min(Math.round(window.innerHeight * 0.55), 440);
+      const cap = mobileCap();
       if (h > cap) {
         const scale = Math.max(0.72, cap / h);
         box.classList.add('is-scaled');

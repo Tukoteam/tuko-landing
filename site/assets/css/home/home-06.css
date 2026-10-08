@@ -137,7 +137,6 @@
     }
     .hero-sky {
       min-height: 100svh;
-      min-height: 100dvh;
       padding: calc(72px + env(safe-area-inset-top, 0px)) 16px max(32px, env(safe-area-inset-bottom, 0px));
     }
     .hero-copy { padding-top: 4px; }

@@ -48,7 +48,7 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
-    min-height: 100dvh;
+    min-height: 100svh;
   }
 
   img, video { max-width: 100%; height: auto; }
@@ -150,7 +150,6 @@
     position: relative;
     overflow: hidden;
     min-height: 100svh;
-    min-height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4393,7 +4392,6 @@
     }
     .hero-sky {
       min-height: 100svh;
-      min-height: 100dvh;
       padding: calc(72px + env(safe-area-inset-top, 0px)) 16px max(32px, env(safe-area-inset-bottom, 0px));
     }
     .hero-copy { padding-top: 4px; }
