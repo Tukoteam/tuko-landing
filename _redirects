@@ -1,6 +1,5 @@
 # Netlify — force (!) aunque el fichero .html exista
-/blog/natrue-x-tuko                         /blog/                                 301!
-/blog/natrue-x-tuko.html                    /blog/                                 301!
+/blog/natrue-x-tuko.html                    /blog/natrue-x-tuko                    301!
 /blog/gran-paso-tuko.html                   /blog/gran-paso-tuko                   301!
 /blog/new-formulas-shanghai.html            /blog/new-formulas-shanghai            301!
 /blog/ocea-hub-shanghai.html                /blog/ocea-hub-shanghai                301!
@@ -10,8 +9,7 @@
 /blog/primer-articulo                       /blog/                                 301!
 /blog/primer-articulo.html                  /blog/                                 301!
 /en/blog/index.html                         /en/blog/                              301!
-/en/blog/natrue-x-tuko                      /en/blog/                              301!
-/en/blog/natrue-x-tuko.html                 /en/blog/                              301!
+/en/blog/natrue-x-tuko.html                 /en/blog/natrue-x-tuko                 301!
 /en/blog/shiji-incubator.html               /en/blog/shiji-incubator               301!
 
 # Posts comerciales retirados → índice del blog
