@@ -41,7 +41,11 @@ function loadPartials() {
 }
 
 function assetHash(absPath) {
-  const buf = fs.readFileSync(absPath);
+  let buf = fs.readFileSync(absPath);
+  // Same ?v= on Windows (CRLF) and Linux CI (LF) for text assets
+  if (/\.(css|js|mjs|html|svg|json|txt|md)$/i.test(absPath)) {
+    buf = Buffer.from(buf.toString('utf8').replace(/\r\n/g, '\n'), 'utf8');
+  }
   return crypto.createHash('sha256').update(buf).digest('hex').slice(0, 8);
 }
 
