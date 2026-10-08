@@ -25,21 +25,21 @@ const logoMap = [
 ];
 
 const bannerMap = [
-  ['ChatGPT Image 11 mar 2026, 16_21_45.webp', 'chatgpt-image-11-mar-2026-16-21-45.webp'],
+  ['ChatGPT Image 11 mar 2026, 16_21_45.webp', 'blog-shiji-incubator.webp'],
   ['ChatGPT Image 11 mar 2026, 16_29_14.webp', 'chatgpt-image-11-mar-2026-16-29-14.webp'],
-  ['ChatGPT Image 11 mar 2026, 16_29_29.webp', 'chatgpt-image-11-mar-2026-16-29-29.webp'],
-  ['ChatGPT Image 11 mar 2026, 17_59_56.webp', 'chatgpt-image-11-mar-2026-17-59-56.webp'],
-  ['ChatGPT Image 11 mar 2026, 18_03_24.webp', 'chatgpt-image-11-mar-2026-18-03-24.webp'],
-  ['ChatGPT Image 11 mar 2026, 18_23_16.webp', 'chatgpt-image-11-mar-2026-18-23-16.webp'],
-  ['ChatGPT Image 11 mar 2026, 18_44_43.webp', 'chatgpt-image-11-mar-2026-18-44-43.webp'],
-  ['Esta la mejorare con claude.webp', 'esta-la-mejorare-con-claude.webp'],
-  ['ChatGPT Image 11 mar 2026, 16_21_45.png', 'chatgpt-image-11-mar-2026-16-21-45.webp'],
-  ['ChatGPT Image 11 mar 2026, 16_29_29.png', 'chatgpt-image-11-mar-2026-16-29-29.webp'],
-  ['ChatGPT Image 11 mar 2026, 17_59_56.png', 'chatgpt-image-11-mar-2026-17-59-56.webp'],
-  ['ChatGPT Image 11 mar 2026, 18_03_24.png', 'chatgpt-image-11-mar-2026-18-03-24.webp'],
-  ['ChatGPT Image 11 mar 2026, 18_23_16.png', 'chatgpt-image-11-mar-2026-18-23-16.webp'],
-  ['ChatGPT Image 11 mar 2026, 18_44_43.png', 'chatgpt-image-11-mar-2026-18-44-43.webp'],
-  ['Esta la mejorare con claude.png', 'esta-la-mejorare-con-claude.webp'],
+  ['ChatGPT Image 11 mar 2026, 16_29_29.webp', 'blog-stron-tech-trek.webp'],
+  ['ChatGPT Image 11 mar 2026, 17_59_56.webp', 'blog-spain-innovation-day.webp'],
+  ['ChatGPT Image 11 mar 2026, 18_03_24.webp', 'blog-new-formulas-shanghai.webp'],
+  ['ChatGPT Image 11 mar 2026, 18_23_16.webp', 'blog-natrue-x-tuko.webp'],
+  ['ChatGPT Image 11 mar 2026, 18_44_43.webp', 'blog-gran-paso-tuko.webp'],
+  ['Esta la mejorare con claude.webp', 'blog-ocea-hub-shanghai.webp'],
+  ['ChatGPT Image 11 mar 2026, 16_21_45.png', 'blog-shiji-incubator.webp'],
+  ['ChatGPT Image 11 mar 2026, 16_29_29.png', 'blog-stron-tech-trek.webp'],
+  ['ChatGPT Image 11 mar 2026, 17_59_56.png', 'blog-spain-innovation-day.webp'],
+  ['ChatGPT Image 11 mar 2026, 18_03_24.png', 'blog-new-formulas-shanghai.webp'],
+  ['ChatGPT Image 11 mar 2026, 18_23_16.png', 'blog-natrue-x-tuko.webp'],
+  ['ChatGPT Image 11 mar 2026, 18_44_43.png', 'blog-gran-paso-tuko.webp'],
+  ['Esta la mejorare con claude.png', 'blog-ocea-hub-shanghai.webp'],
 ];
 
 function cookieSnippet(cssHref, jsHref) {
