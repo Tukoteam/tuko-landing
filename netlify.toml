@@ -234,6 +234,18 @@
   force = true
 
 [[redirects]]
+  from = "/tuko-ai"
+  to = "/tuko-ai.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/en/tuko-ai"
+  to = "/en/tuko-ai.html"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/pages/privacidad.html"
   to = "/privacidad"
   status = 301

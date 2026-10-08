@@ -1,0 +1,673 @@
+/* Dark surfaces for landing demos when parent is in night mode */
+html[data-theme="dark"],
+html.theme-dark {
+  color-scheme: dark;
+  --n-white: #1a1f2e;
+  --n-50: #12141c;
+  --n-100: #161922;
+  --n-200: #2a2e3a;
+  --n-300: #3a4050;
+  --n-400: #8b92a5;
+  --n-500: #a8aebc;
+  --n-600: #c2c8d6;
+  --n-700: #d0d5e0;
+  --n-800: #e8ebf5;
+  --n-900: #f2f3f7;
+  --slate-300: #3a4050;
+  --slate-400: #8b92a5;
+  --slate-500: #a8aebc;
+  --slate-600: #c2c8d6;
+  --slate-900: #f2f3f7;
+  --shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+html[data-theme="dark"],
+html[data-theme="dark"] body,
+html.theme-dark,
+html.theme-dark body,
+html[data-theme="dark"].embedded,
+html[data-theme="dark"].embedded body,
+html.theme-dark.embedded,
+html.theme-dark.embedded body {
+  background: #161922 !important;
+  color: #e8ebf5 !important;
+}
+
+html[data-theme="dark"] .animation-viewport,
+html[data-theme="dark"].embedded .animation-viewport,
+html.theme-dark .animation-viewport,
+html.theme-dark.embedded .animation-viewport {
+  background: #161922 !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="dark"] .wizard,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .gb-card,
+html[data-theme="dark"] .modal-box,
+html[data-theme="dark"].embedded .wizard,
+html[data-theme="dark"].embedded .card,
+html.theme-dark .wizard,
+html.theme-dark .card,
+html.theme-dark .gb-card,
+html.theme-dark .modal-box,
+html.theme-dark.embedded .wizard,
+html.theme-dark.embedded .card {
+  background: #1a1f2e !important;
+  border-color: rgba(123, 140, 255, 0.16) !important;
+  color: #e8ebf5 !important;
+  box-shadow: none !important;
+}
+/* gb-fit NO debe pintar fondo: es el wrapper con scale y radio 0 → tapa la curva de la card */
+html[data-theme="dark"] .gb-fit,
+html.theme-dark .gb-fit {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"].embedded .gb-card,
+html.theme-dark.embedded .gb-card {
+  border-radius: 28px !important;
+  overflow: hidden !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .gb-tag,
+html[data-theme="dark"].embedded .gb-tag,
+html.theme-dark .gb-tag,
+html.theme-dark.embedded .gb-tag {
+  /* No poner 28px aquí: con altura ~31px el azul se ve pastilla recta */
+  border-radius: 0 0 14px 0 !important;
+}
+
+/* Día (embed): la card recupera borde/sombra; el tag lo recorta el overflow */
+html:not([data-theme="dark"]):not(.theme-dark).embedded .gb-card {
+  border: 1px solid rgba(226, 232, 240, 0.95) !important;
+  box-shadow:
+    0 4px 6px rgba(15, 23, 42, 0.03),
+    0 16px 40px rgba(15, 23, 42, 0.08) !important;
+}
+
+html[data-theme="dark"] .stage,
+html.theme-dark .stage {
+  background: transparent !important;
+}
+
+/* Intro «Publicar grupo» */
+html[data-theme="dark"] .intro,
+html.theme-dark .intro {
+  background:
+    radial-gradient(60% 45% at 78% 6%, rgba(61, 80, 242, 0.18), transparent 70%),
+    radial-gradient(55% 40% at 12% 70%, rgba(61, 80, 242, 0.1), transparent 70%),
+    #161922 !important;
+}
+
+html[data-theme="dark"] .intro-title,
+html[data-theme="dark"] .w-title,
+html[data-theme="dark"] .info-title,
+html[data-theme="dark"] .product-name,
+html[data-theme="dark"] .field-label,
+html[data-theme="dark"] .shop-brand,
+html[data-theme="dark"] .shop-title,
+html[data-theme="dark"] .shop-price,
+html[data-theme="dark"] .shop-qty-num,
+html[data-theme="dark"] .sh-title,
+html[data-theme="dark"] .gb-title,
+html[data-theme="dark"] .gb-today,
+html[data-theme="dark"] .gb-sub,
+html[data-theme="dark"] .confirm-title,
+html[data-theme="dark"] .preview-title,
+html[data-theme="dark"] .pub-title,
+html[data-theme="dark"] .goal-main,
+html[data-theme="dark"] .goal-price,
+html.theme-dark .intro-title,
+html.theme-dark .w-title,
+html.theme-dark .info-title,
+html.theme-dark .product-name,
+html.theme-dark .field-label,
+html.theme-dark .shop-brand,
+html.theme-dark .shop-title,
+html.theme-dark .shop-price,
+html.theme-dark .shop-qty-num,
+html.theme-dark .sh-title,
+html.theme-dark .gb-title,
+html.theme-dark .gb-today,
+html.theme-dark .gb-sub {
+  color: #f2f3f7 !important;
+}
+
+html[data-theme="dark"] .intro-sub,
+html[data-theme="dark"] .w-sub,
+html[data-theme="dark"] .info-sub,
+html[data-theme="dark"] .product-price,
+html[data-theme="dark"] .field-help,
+html[data-theme="dark"] .hint,
+html[data-theme="dark"] .shop-taxes,
+html[data-theme="dark"] .sh-icon-lbl,
+html[data-theme="dark"] .gb-note,
+html[data-theme="dark"] .confirm-sub,
+html[data-theme="dark"] .preview-sub,
+html[data-theme="dark"] .pub-sub,
+html[data-theme="dark"] .goal-hint,
+html[data-theme="dark"] .summary-meta,
+html.theme-dark .intro-sub,
+html.theme-dark .w-sub,
+html.theme-dark .info-sub,
+html.theme-dark .product-price,
+html.theme-dark .shop-taxes,
+html.theme-dark .hint,
+html.theme-dark .gb-note {
+  color: #b8bfce !important;
+}
+
+html[data-theme="dark"] .shop-image-box,
+html[data-theme="dark"] .media,
+html[data-theme="dark"] .thumb,
+html[data-theme="dark"] .product-thumb,
+html[data-theme="dark"] .info-banner,
+html[data-theme="dark"] .product-card,
+html[data-theme="dark"] .preview-card,
+html[data-theme="dark"] .share-sheet,
+html[data-theme="dark"] .modal-sheet,
+html[data-theme="dark"] .input,
+html[data-theme="dark"] .shop-qty-stepper,
+html[data-theme="dark"] .shop-addcart,
+html[data-theme="dark"] .shop-buynow,
+html[data-theme="dark"] .summary-card,
+html[data-theme="dark"] .goal-tgt,
+html[data-theme="dark"] .panel-box,
+html.theme-dark .shop-image-box,
+html.theme-dark .info-banner,
+html.theme-dark .product-card,
+html.theme-dark .input,
+html.theme-dark .shop-qty-stepper,
+html.theme-dark .shop-addcart,
+html.theme-dark .shop-buynow,
+html.theme-dark .product-thumb {
+  background: #12141c !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #e8ebf5 !important;
+}
+
+html[data-theme="dark"] .shop-topbar,
+html.theme-dark .shop-topbar {
+  background: #2a2410 !important;
+  color: #f5e6a8 !important;
+}
+
+html[data-theme="dark"] .shop-nav,
+html.theme-dark .shop-nav {
+  background: transparent !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="dark"] .btn-primary,
+html[data-theme="dark"] .btn-want,
+html[data-theme="dark"] .btn-start,
+html[data-theme="dark"] .btn-continue,
+html[data-theme="dark"] .btn-copy,
+html[data-theme="dark"] .btn-yes,
+html[data-theme="dark"] .gb-btn,
+html[data-theme="dark"] .store-btn,
+html.theme-dark .btn-primary,
+html.theme-dark .btn-want,
+html.theme-dark .btn-start,
+html.theme-dark .btn-continue,
+html.theme-dark .gb-btn,
+html.theme-dark .store-btn {
+  background: #3D50F2 !important;
+  color: #fff !important;
+}
+
+html[data-theme="dark"] .add-link,
+html[data-theme="dark"] .add-products,
+html[data-theme="dark"] a.link,
+html[data-theme="dark"] .link-blue,
+html.theme-dark .add-link,
+html.theme-dark .add-products {
+  color: #8fa0ff !important;
+}
+
+html[data-theme="dark"] .shop-nav-icons svg,
+html[data-theme="dark"] .w-close svg,
+html[data-theme="dark"] .gb-x svg,
+html[data-theme="dark"] .chev,
+html.theme-dark .shop-nav-icons svg,
+html.theme-dark .w-close svg,
+html.theme-dark .chev {
+  stroke: #e8ebf5 !important;
+}
+
+html[data-theme="dark"] .divider,
+html[data-theme="dark"] hr,
+html[data-theme="dark"] .gb-line,
+html[data-theme="dark"] .sh-divider::before,
+html[data-theme="dark"] .sh-divider::after,
+html[data-theme="dark"] .step-bar,
+html.theme-dark .divider,
+html.theme-dark .gb-line,
+html.theme-dark .step-bar {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Avatares del progreso (anim 03/04): sin blanco fuerte en noche */
+html[data-theme="dark"] .gb-dot,
+html.theme-dark .gb-dot {
+  background: #1e2436 !important;
+  border-color: rgba(143, 160, 255, 0.22) !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .gb-dot.is-next,
+html.theme-dark .gb-dot.is-next {
+  background: #24304a !important;
+  border-color: rgba(143, 160, 255, 0.4) !important;
+  box-shadow: 0 0 0 5px rgba(143, 160, 255, 0.08) !important;
+}
+html[data-theme="dark"] .gb-dot .gb-ic-user,
+html.theme-dark .gb-dot .gb-ic-user {
+  fill: #6b738a !important;
+}
+html[data-theme="dark"] .gb-dot.is-next .gb-ic-user,
+html.theme-dark .gb-dot.is-next .gb-ic-user {
+  fill: #a8b0c4 !important;
+}
+html[data-theme="dark"] .gb-dot.is-done,
+html.theme-dark .gb-dot.is-done {
+  background: #14C492 !important;
+  border-color: #14C492 !important;
+  /* Sin halo claro: mismo verde plano que la línea */
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .gb-dot.is-done .gb-ic-check,
+html.theme-dark .gb-dot.is-done .gb-ic-check {
+  stroke: #ffffff !important;
+}
+/* Misma verde Tuko que los círculos */
+html[data-theme="dark"] .gb-line-fill,
+html.theme-dark .gb-line-fill {
+  background: #14C492 !important;
+}
+html[data-theme="dark"] .gb-tag.is-closed,
+html.theme-dark .gb-tag.is-closed {
+  background: #14C492 !important;
+}
+
+html[data-theme="dark"] .step-label,
+html.theme-dark .step-label {
+  color: #a8aebc !important;
+}
+html[data-theme="dark"] .step-item.active .step-label,
+html.theme-dark .step-item.active .step-label {
+  color: #8fa0ff !important;
+}
+
+html[data-theme="dark"] .gb-old,
+html[data-theme="dark"] .gb-sep,
+html.theme-dark .gb-old,
+html.theme-dark .gb-sep {
+  color: #8b92a5 !important;
+}
+html[data-theme="dark"] .gb-new,
+html[data-theme="dark"] .gb-sub b,
+html.theme-dark .gb-new,
+html.theme-dark .gb-sub b {
+  color: #8fa0ff !important;
+}
+html[data-theme="dark"] .gb-price-c .gb-new,
+html.theme-dark .gb-price-c .gb-new {
+  color: #f2f3f7 !important;
+}
+
+html[data-theme="dark"] .modal-overlay,
+html.theme-dark .modal-overlay {
+  background: rgba(4, 6, 12, 0.72) !important;
+}
+
+html[data-theme="dark"] .info-ic,
+html.theme-dark .info-ic {
+  background: rgba(143, 160, 255, 0.14) !important;
+  color: #8fa0ff !important;
+}
+
+/* Catch remaining hardcoded white panels */
+html[data-theme="dark"] .panels,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .w-footer,
+html[data-theme="dark"] .footer-bar,
+html.theme-dark .panels,
+html.theme-dark .panel,
+html.theme-dark .w-footer {
+  background: transparent !important;
+  color: #e8ebf5 !important;
+}
+
+/* ── Intro art: foto embebida + avatares (no blancos) ── */
+html[data-theme="dark"] .intro-art .intro-base,
+html.theme-dark .intro-art .intro-base {
+  fill: rgba(143, 160, 255, 0.14) !important;
+}
+html[data-theme="dark"] .intro-art .intro-dot,
+html.theme-dark .intro-art .intro-dot {
+  fill: rgba(143, 160, 255, 0.5) !important;
+}
+html[data-theme="dark"] .intro-art .intro-dash,
+html.theme-dark .intro-art .intro-dash {
+  stroke: rgba(143, 160, 255, 0.4) !important;
+}
+html[data-theme="dark"] .intro-art .intro-frame,
+html.theme-dark .intro-art .intro-frame {
+  fill: #1e2436 !important;
+  stroke: rgba(143, 160, 255, 0.35) !important;
+}
+html[data-theme="dark"] .intro-art .intro-photo,
+html.theme-dark .intro-art .intro-photo {
+  fill: #2f3a5c !important;
+  stroke: rgba(143, 160, 255, 0.45) !important;
+}
+html[data-theme="dark"] .intro-art .intro-plus-bg,
+html.theme-dark .intro-art .intro-plus-bg {
+  fill: rgba(143, 160, 255, 0.22) !important;
+}
+html[data-theme="dark"] .intro-art .intro-plus,
+html.theme-dark .intro-art .intro-plus {
+  stroke: #8fa0ff !important;
+}
+html[data-theme="dark"] .intro-art .intro-bar,
+html.theme-dark .intro-art .intro-bar {
+  fill: rgba(143, 160, 255, 0.35) !important;
+}
+html[data-theme="dark"] .intro-art .intro-avatar > circle:first-child,
+html.theme-dark .intro-art .intro-avatar > circle:first-child {
+  fill: #252b3d !important;
+  stroke: rgba(143, 160, 255, 0.45) !important;
+}
+html[data-theme="dark"] .intro-art .intro-avatar > circle:nth-child(2),
+html.theme-dark .intro-art .intro-avatar > circle:nth-child(2) {
+  fill: #8fa0ff !important;
+}
+html[data-theme="dark"] .intro-art .intro-avatar > path,
+html.theme-dark .intro-art .intro-avatar > path {
+  stroke: #8fa0ff !important;
+}
+
+/* ── Stepper: círculos y barras ── */
+html[data-theme="dark"] .step-circle,
+html.theme-dark .step-circle {
+  background: #1e2436 !important;
+  border-color: rgba(143, 160, 255, 0.28) !important;
+  color: #8b92a5 !important;
+}
+html[data-theme="dark"] .step-item.active .step-circle,
+html.theme-dark .step-item.active .step-circle {
+  background: #3D50F2 !important;
+  border-color: #3D50F2 !important;
+  color: #fff !important;
+  box-shadow: 0 0 0 4px rgba(61, 80, 242, 0.28) !important;
+}
+html[data-theme="dark"] .step-item.done .step-circle,
+html.theme-dark .step-item.done .step-circle {
+  background: rgba(20, 196, 146, 0.16) !important;
+  border-color: #14C492 !important;
+  color: #14C492 !important;
+}
+html[data-theme="dark"] .step-item.done .step-circle svg,
+html.theme-dark .step-item.done .step-circle svg {
+  stroke: #14C492 !important;
+}
+html[data-theme="dark"] .step-item.done .step-label,
+html.theme-dark .step-item.done .step-label {
+  color: #14C492 !important;
+}
+html[data-theme="dark"] .step-item.active .step-label,
+html.theme-dark .step-item.active .step-label {
+  color: #8fa0ff !important;
+}
+html[data-theme="dark"] .step-bar,
+html.theme-dark .step-bar {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+html[data-theme="dark"] .step-bar::after,
+html.theme-dark .step-bar::after {
+  background: #3D50F2 !important;
+}
+
+/* ── Tema / publicar / resumen (paneles claros → noche) ── */
+html[data-theme="dark"] .preview-card,
+html[data-theme="dark"] .when-card,
+html[data-theme="dark"] .summary,
+html[data-theme="dark"] .theme-card,
+html[data-theme="dark"] .pub-card,
+html.theme-dark .preview-card,
+html.theme-dark .when-card,
+html.theme-dark .summary,
+html.theme-dark .theme-card,
+html.theme-dark .pub-card {
+  background: #12141c !important;
+  border-color: rgba(123, 140, 255, 0.16) !important;
+  color: #e8ebf5 !important;
+}
+html[data-theme="dark"] .theme-card.selected,
+html[data-theme="dark"] .pub-card.selected,
+html.theme-dark .theme-card.selected,
+html.theme-dark .pub-card.selected {
+  background: #1a2033 !important;
+  border-color: #3D50F2 !important;
+  box-shadow: 0 0 0 3px rgba(61, 80, 242, 0.22) !important;
+}
+html[data-theme="dark"] .theme-name,
+html[data-theme="dark"] .preview-title,
+html[data-theme="dark"] .preview-sub,
+html[data-theme="dark"] .when-title,
+html[data-theme="dark"] .summary-meta,
+html[data-theme="dark"] .summary-goal-lbl,
+html.theme-dark .theme-name,
+html.theme-dark .preview-title,
+html.theme-dark .preview-sub,
+html.theme-dark .when-title,
+html.theme-dark .summary-meta,
+html.theme-dark .summary-goal-lbl {
+  color: #c2c8d6 !important;
+}
+html[data-theme="dark"] .summary-head,
+html.theme-dark .summary-head {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+html[data-theme="dark"] .summary .product-name,
+html[data-theme="dark"] .summary .product-price,
+html[data-theme="dark"] .goal-main,
+html[data-theme="dark"] .goal-price,
+html.theme-dark .summary .product-name,
+html.theme-dark .summary .product-price,
+html.theme-dark .goal-main,
+html.theme-dark .goal-price {
+  color: #f2f3f7 !important;
+}
+html[data-theme="dark"] .goal-row,
+html.theme-dark .goal-row {
+  background: #1a1f2e !important;
+  border-color: rgba(123, 140, 255, 0.14) !important;
+}
+html[data-theme="dark"] .goal-tgt,
+html.theme-dark .goal-tgt {
+  background: #12141c !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+html[data-theme="dark"] .goal-tgt svg,
+html.theme-dark .goal-tgt svg {
+  stroke: #8fa0ff !important;
+}
+html[data-theme="dark"] .pub-ic,
+html.theme-dark .pub-ic {
+  background: rgba(143, 160, 255, 0.14) !important;
+}
+html[data-theme="dark"] .pub-ic svg,
+html.theme-dark .pub-ic svg {
+  stroke: #8fa0ff !important;
+}
+html[data-theme="dark"] .swatch,
+html.theme-dark .swatch {
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+html[data-theme="dark"] .swatch.light,
+html.theme-dark .swatch.light {
+  background: #f2f3f7 !important;
+}
+html[data-theme="dark"] .swatch.dark,
+html.theme-dark .swatch.dark {
+  background: #0b0d14 !important;
+  border-color: rgba(143, 160, 255, 0.25) !important;
+}
+
+/* ── Popup de lanzamiento / confirmación ── */
+html[data-theme="dark"] .confirm-overlay,
+html.theme-dark .confirm-overlay {
+  background: rgba(4, 6, 12, 0.72) !important;
+}
+html[data-theme="dark"] .confirm-box,
+html.theme-dark .confirm-box {
+  background: linear-gradient(180deg, #1e2436 0%, #161922 48%, #12141c 100%) !important;
+  border: 1px solid rgba(123, 140, 255, 0.22) !important;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45) !important;
+  color: #e8ebf5 !important;
+}
+html[data-theme="dark"] .confirm-title,
+html.theme-dark .confirm-title {
+  color: #f2f3f7 !important;
+}
+html[data-theme="dark"] .confirm-sub,
+html.theme-dark .confirm-sub {
+  color: #b8bfce !important;
+}
+html[data-theme="dark"] .confirm-x svg,
+html.theme-dark .confirm-x svg {
+  stroke: #c2c8d6 !important;
+}
+html[data-theme="dark"] .btn-cancel,
+html.theme-dark .btn-cancel {
+  background: #1a1f2e !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  color: #e8ebf5 !important;
+}
+html[data-theme="dark"] .btn-yes,
+html.theme-dark .btn-yes {
+  background: linear-gradient(90deg, #3D50F2 0%, #6366f1 100%) !important;
+  color: #fff !important;
+}
+html[data-theme="dark"] .confirm-art circle,
+html.theme-dark .confirm-art circle {
+  fill: rgba(143, 160, 255, 0.45) !important;
+}
+
+/* ── Reloj / cronómetro / status / contador (demos 06–08) ── */
+html[data-theme="dark"] .gb-closes,
+html[data-theme="dark"] .co-close-lbl,
+html.theme-dark .gb-closes,
+html.theme-dark .co-close-lbl {
+  color: #e8ebf5 !important;
+}
+html[data-theme="dark"] .gb-closes b,
+html[data-theme="dark"] .co-close-lbl b,
+html[data-theme="dark"] .gb-sub b,
+html[data-theme="dark"] .gb-lead b,
+html.theme-dark .gb-closes b,
+html.theme-dark .co-close-lbl b,
+html.theme-dark .gb-sub b,
+html.theme-dark .gb-lead b {
+  color: #8fa0ff !important;
+}
+
+html[data-theme="dark"] .gb-cd,
+html.theme-dark .gb-cd {
+  background: #12141c !important;
+  border-color: rgba(123, 140, 255, 0.18) !important;
+}
+html[data-theme="dark"] .gb-cd-cell + .gb-cd-cell,
+html.theme-dark .gb-cd-cell + .gb-cd-cell {
+  border-left-color: rgba(255, 255, 255, 0.12) !important;
+}
+html[data-theme="dark"] .gb-cd-num,
+html.theme-dark .gb-cd-num {
+  color: #f2f3f7 !important;
+}
+html[data-theme="dark"] .gb-cd-lbl,
+html[data-theme="dark"] .co-cd-lbl,
+html.theme-dark .gb-cd-lbl,
+html.theme-dark .co-cd-lbl {
+  color: #b8bfce !important;
+}
+
+html[data-theme="dark"] .gb-status,
+html.theme-dark .gb-status {
+  background: #12141c !important;
+  border-color: rgba(123, 140, 255, 0.18) !important;
+  color: #e8ebf5 !important;
+}
+html[data-theme="dark"] .gb-status b,
+html.theme-dark .gb-status b {
+  color: #8fa0ff !important;
+}
+html[data-theme="dark"] .gb-status.is-ok,
+html.theme-dark .gb-status.is-ok {
+  background: rgba(20, 196, 146, 0.12) !important;
+  border-color: rgba(20, 196, 146, 0.35) !important;
+  color: #3ddbb0 !important;
+}
+html[data-theme="dark"] .st-wait-lbl,
+html.theme-dark .st-wait-lbl {
+  color: #b8bfce !important;
+}
+html[data-theme="dark"] .st-wait-num,
+html.theme-dark .st-wait-num {
+  color: #f2f3f7 !important;
+}
+
+html[data-theme="dark"] .gb-counter,
+html.theme-dark .gb-counter {
+  color: #d0d5e0 !important;
+}
+html[data-theme="dark"] .gb-counter-num,
+html.theme-dark .gb-counter-num {
+  background: rgba(143, 160, 255, 0.2) !important;
+  color: #8fa0ff !important;
+  border: 1px solid rgba(143, 160, 255, 0.35);
+}
+
+/* Contador grande “1 de 2” → azul AI */
+html[data-theme="dark"] .gb-count span,
+html.theme-dark .gb-count span {
+  color: #c2c8d6 !important;
+}
+html[data-theme="dark"] .gb-card.is-joined #coN,
+html[data-theme="dark"] .gb-card[data-state="b"] #cntN,
+html[data-theme="dark"] .gb-card[data-state="c"] .gb-count span,
+html[data-theme="dark"] .gb-card[data-state="p1"] #cntN,
+html[data-theme="dark"] .gb-card[data-state="p2"] .gb-count span,
+html.theme-dark .gb-card.is-joined #coN,
+html.theme-dark .gb-card[data-state="b"] #cntN,
+html.theme-dark .gb-card[data-state="c"] .gb-count span,
+html.theme-dark .gb-card[data-state="p1"] #cntN,
+html.theme-dark .gb-card[data-state="p2"] .gb-count span {
+  color: #8fa0ff !important;
+}
+html[data-theme="dark"] .gb-card.is-joined #coOf,
+html[data-theme="dark"] .gb-card[data-state="p1"] #cntOf,
+html.theme-dark .gb-card.is-joined #coOf,
+html.theme-dark .gb-card[data-state="p1"] #cntOf {
+  color: #8b92a5 !important;
+}
+
+html[data-theme="dark"] .gb-sub,
+html[data-theme="dark"] .gb-lead,
+html.theme-dark .gb-sub,
+html.theme-dark .gb-lead {
+  color: #d0d5e0 !important;
+}
+html[data-theme="dark"] .gb-foot,
+html.theme-dark .gb-foot {
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+html[data-theme="dark"] .gb-new,
+html.theme-dark .gb-new {
+  color: #8fa0ff !important;
+}

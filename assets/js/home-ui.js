@@ -88,9 +88,9 @@ const translations = {
     nav_link_como_funciona: 'Cómo funciona',
     nav_link_precios: 'Precios',
     nav_link_faq: 'Preguntas',
-    nav_link_beneficios: 'Qué ganas',
+    nav_link_beneficios: 'Por qué funciona',
     nav_link_blog: 'Blog',
-    nav_cta: 'Instalar gratis',
+    nav_cta: 'Acceder al piloto',
     nav_lang_label: 'Idioma',
     /* TUKO AI */
     nav_link_ia: 'tuko AI',
@@ -131,27 +131,37 @@ const translations = {
     ia_form_submit: 'Unirme a la lista de espera',
     ia_soon_tag: 'Pronto',
     ia_soon_text: 'También te dirá con qué creadores colaborar y por dónde crecer.',
-    ia_wl_eyebrow: 'Lista de espera',
-    ia_wl_count: '<b>39 marcas</b> ya están esperando su acceso',
-    ia_wl_foot: 'Solo 50 tiendas entran en la beta privada.',
     fcta_eyebrow: 'Empieza hoy',
-    fcta_title: 'Prueba una campaña<br><em>Si no vendes, no pagas</em>',
-    fcta_sub: 'Instalar es gratis y el plan de entrada no tiene cuota: solo cobramos un porcentaje de lo que vendas con Tuko, con un tope máximo al mes.<br><br>Si un mes no lanzas ninguna campaña, pagas cero.',
-    fcta_btn: 'Instalar gratis en Shopify',
-    fcta_trust2: 'Sin cuota mensual',
-    fcta_trust3: '+50 tiendas ya lo usan',
+    fcta_title: 'Quedan 5 plazas',
+    fcta_sub: '45 días con Tuko completo, gratis. Sin tarjeta y sin permanencia. Si no funciona, lo desinstalas.',
+    fcta_btn: 'Quiero una de las 5 plazas',
+    fcta_trust2: 'Instalación en 2 minutos',
+    fcta_trust3: 'Sin tocar tu tema',
     fcta_shopify: 'Disponible en Shopify',
 
     /* HERO */
     hero_badge: 'Con el respaldo de Xiji Incubator',
-    hero_title: 'El descuento que<br>te <em>trae clientes</em>, en vez de quitártelos',
-    hero_subtitle: 'Pones un objetivo de unidades sobre un producto y un plazo. Tus clientes reservan sin que se les cobre nada.<span class="s-para-gap" aria-hidden="true"></span>Si se alcanza el objetivo, todos pagan el precio rebajado; si no, pagan el precio de siempre y tú no has regalado ni un euro de margen.',
-    hero_cta: 'Instalar gratis en Shopify',
-    hero_official: 'Sin cuota · Solo cobramos si vendes',
-    hero_stat1_num: '+50',
-    hero_stat1_lab: 'Tiendas usando Tuko',
-    hero_stat2_num: '+30.000 €',
-    hero_stat2_lab: 'Facturados en campañas Tuko',
+    hero_badge_pilot: 'Plan piloto · 5 plazas · 45 días gratis',
+    hero_title: 'Un cliente entra. Trae a otro. Los dos compran.',
+    hero_title_l1: 'Un cliente entra.',
+    hero_title_l2: 'Trae a otro.',
+    hero_title_l3_before: 'Los dos',
+    hero_title_accent: 'compran.',
+    hero_title_l3_after: '',
+    hero_subtitle: 'Tuko pone un botón en tus productos. Quien lo pulsa paga con descuento y tiene 24 horas para atraer a un comprador más.',
+    hero_cta: 'Quiero una de las 5 plazas',
+    hero_cta2: 'Ver cómo funciona',
+    hero_cta3: 'Habla con nosotros',
+    hero_live_tpl: '{n} de {goal} ya en el grupo',
+    hero_live_full: 'Grupo completo · −{discount} % para todos',
+    hero_trust_note: 'Sin tarjeta. Sin permanencia. Sin comisiones.',
+    hero_appstore: 'Disponible en la Shopify App Store',
+    hero_trust2: 'Instalación en 2 minutos',
+    hero_trust3: 'Sin tocar tu tema',
+    hero_trust4: 'Tu checkout de siempre',
+    hero_caption: 'Un descuento · una meta · una fecha. Si no se llena, pagan el precio normal.',
+    sticky_title: 'Gratis hasta que vendas',
+    sticky_sub: 'Instalación en 2 min · Sin tocar tu tema',
 
     /* POPUP DEL PLUGIN */
     pop_chip: 'CAMPAÑA ACTIVA',
@@ -168,25 +178,21 @@ const translations = {
     pop_product: 'Champú Natural',
     pop_joined: ' de 20 unidades reservadas',
     pop_cta: 'Bájalo a 25,20 €',
-    pop_no_charge: 'No se te cobra nada hasta que termine la campaña.',
+    pop_no_charge: 'Pagas al unirte. Si el grupo no se completa, te devolvemos el 100%.',
     pop_back_title: 'Así funciona una <em>campaña Tuko</em>',
     pop_back_sub: 'Cuantas más unidades se reservan, mayor es el descuento para todos.',
     pop_tier1: '10 unidades',
     pop_tier2: '20 unidades',
     pop_tier3: '35 unidades',
     pop_step1: 'Eliges un producto, un objetivo de unidades y un plazo.',
-    pop_step2: 'Tus clientes reservan en tu checkout; se retiene el importe, sin cobro todavía.',
-    pop_step3: 'Quien ya reservó comparte para llegar al objetivo.',
-    pop_step4: 'Al cerrar, se cobra el precio del escalón alcanzado.',
-    pop_step5: 'Si no se alcanza ningún escalón, pagan el precio normal.',
+    pop_step2: 'Tus clientes compran y entran al grupo.',
+    pop_step3: 'Quien ya compró comparte para llegar al objetivo.',
+    pop_step4: 'Si se llega a la meta, se confirma el pedido con la rebaja.',
+    pop_step5: 'Si no se alcanza, se cancela y se devuelve el dinero.',
     pop_front_hint: 'Haz clic para voltear',
     pop_front_hint_tap: 'Toca para voltear',
     pop_back_foot: 'Haz clic para volver',
     pop_back_foot_tap: 'Toca para volver',
-
-    /* VIDEO */
-    video_title: 'Una campaña de <span class="video-brand">Tuko</span>, <em class="video-title-em">de principio a fin</em>',
-    video_subtitle: 'Dos minutos: cómo se monta la campaña, qué ve tu cliente en la ficha de producto y qué pasa cuando se alcanza el objetivo.',
 
     /* LOGOS */
     logos_label: 'Con el apoyo de',
@@ -196,110 +202,197 @@ const translations = {
     logo_bio: 'Bio Vida Sana',
     logo_saper: 'Sáper Organic',
 
-    /* PROBLEM */
-    problem_badge: 'El problema',
-    problem_title: 'Bajar el precio no es el problema.<br><span class="title-accent">Regalárselo</span> a quien ya iba a<br>comprar, <em class="title-accent-em">sí</em>',
-    problem_sub: 'Cada rebaja plana se la llevan también los clientes que habrían comprado igual.<span class="s-para-gap" aria-hidden="true"></span>Estás pagando margen por ventas que ya tenías.',
-    card1_title: 'Cada cliente nuevo te cuesta más',
-    card1_text: 'El coste de captar un cliente en e-commerce ha subido más de un 200 % en una década.<span class="s-para-gap" aria-hidden="true"></span>Cada venta que traes con anuncios es más cara que la anterior.',
-    card2_title: 'El stock parado se come el margen',
-    card2_text: 'Rebajarlo un 30 % lo mueve, sí. Pero se lleva por delante el beneficio de todo el lote.<span class="s-para-gap" aria-hidden="true"></span>Y encima el descuento lo cobran también los clientes que ya lo iban a comprar.',
-    card3_title: 'El descuento plano no se paga solo',
-    card3_text: 'Un −20 % en un producto con 60 % de margen te obliga a vender un 67 % más unidades solo para quedarte igual.<span class="s-para-gap" aria-hidden="true"></span>Casi nunca pasa.',
-    card1_source: 'Fuente: SimplicityDX, «The Customer Acquisition Crisis»',
-    card2_source: 'Ejemplo ilustrativo de margen sobre una rebaja del 30 %',
-    card3_source: 'Cálculo de umbral de rentabilidad (margen 60 %, descuento −20 %)',
+    /* DATOS (trigger + comparativa) */
+    data_trigger: 'Antes de lanzar otro -20 %, mira esto.',
+    data_title: 'El descuento no debería regalar margen. <span class="title-accent-red">Debería traer clientes nuevos.</span>',
+    data_sub: 'Compara los dos modelos antes de activar tu campaña.',
+    data_bad_label: 'El camino caro',
+    data_num: '68 %',
+    data_num_note: 'de los pedidos con descuento pueden venir de clientes que ya te compraban.',
+    data_bad_title: 'Pagas por atraer y rebajas ventas que ya eran tuyas.',
+    data_bad_b1: 'Cada cliente nuevo te cuesta más en anuncios.',
+    data_bad_b2: 'La rebaja también cae en pedidos que ya eran tuyos.',
+    data_bad_b3: 'Para crecer, tienes que seguir metiendo presupuesto.',
+    data_good_label: 'El camino que se multiplica',
+    data_good_title: 'Cada compra puede atraer la siguiente.',
+    data_good_b1: 'Tus clientes comparten para completar la meta.',
+    data_good_b2: 'El grupo convierte una venta en difusión.',
+    data_good_b3: 'Con el tiempo, baja tu coste por cliente nuevo.',
+    data_good_sub: 'La rebaja solo se activa si se cumple <span class="data-nowrap">la <em>meta</em>.</span>',
+    data_foot: 'No es bajar más el precio. <b>Es hacer que cada venta traiga otra.</b>',
+    data_src: 'Klaviyo · ProfitPeak, 2025',
+
+    /* HERO — MOCKUP */
+    hmock_product: 'Camiseta orgánica',
+    hmock_missing: 'Faltan <b>3</b> para desbloquear el −20 %',
+    hmock_joined: '7 ya dentro',
+    hmock_btn: 'Reservar a 39,92 €',
+    hmock_price_old: '49,90 €',
+    hmock_price_new: '39,92 €',
+    hmock_price_off: '−15 %',
+    hmock_chip: 'Marta acaba de unirse',
+    hmock_live: 'Campaña en directo',
+    hmock_col_product: 'El producto',
+    hmock_col_group: 'El grupo',
+    hmock_col_clock: 'El reloj',
+    hmock_col_price: 'El precio',
+    hmock_clock_note: 'Se cierra hoy. Con fecha, compran hoy.',
+    hmock_off_fixed: '−{n} % fijo',
+    hmock_groupline_tpl: 'Faltan {n} para desbloquear',
+    hmock_groupline_one: 'Falta 1 para desbloquear',
+    hmock_groupline_done: 'Grupo completo. Todos pagan menos.',
+    hmock_status: 'Reservas abiertas · −{n} % al llenarse',
+    hmock_status_done: 'Meta alcanzada · todos pagan {price}',
+    hmock_price_note: 'Se aplica al llegar a {n}',
+    hmock_price_note_done: 'Desbloqueado para los {n}',
+    /* loop del mockup (plantillas: {n}, {name}) */
+    hmock_missing_tpl: 'Faltan <b>{n}</b> para desbloquear el −20 %',
+    hmock_missing_one: 'Falta <b>1</b> para desbloquear el −20 %',
+    hmock_joined_tpl: '{n} ya dentro',
+    hmock_chip_tpl: '{name} acaba de unirse',
+    hmock_chip_you: 'Tú acabas de unirte',
+    hmock_done: '¡Meta alcanzada! Todos pagan <b>39,92 €</b>',
+    hmock_chip_done: '−20 % para todos',
+    hmock_btn_done: 'Precio desbloqueado: 39,92 €',
 
     /* HOW IT WORKS */
     how_badge: 'Cómo funciona',
-    how_title: 'Un descuento con condiciones.<br>Las <span class="how-title-underline">tuyas</span>',
-    how_sub: 'Eliges un producto, un objetivo de unidades y un plazo.<span class="s-para-gap" aria-hidden="true"></span>El descuento no existe hasta que se cumple el objetivo.<span class="s-para-gap" aria-hidden="true"></span>Todo pasa dentro de tu tienda: el cliente no sale de tu web en ningún momento.',
-    how_step1: 'Eliges producto y objetivo.',
-    how_step2: 'Tus clientes reservan, como siempre.',
-    how_step3: 'Ellos traen a los que faltan.',
-    how_step4: 'Se cierra la campaña y se cobra.',
+    how_title: 'Así es como funciona',
+    how_sub: 'Tú fijas el descuento, la meta y la fecha. Se inicia cuando el primero se une y tiene 24 horas para meter a otra persona.',
 
     /* HOW IT WORKS — STEPS */
-    step1_title: 'Eliges producto y objetivo',
-    step1_desc: 'Un producto, un objetivo de unidades y un plazo (72 horas funciona bien).<span class="s-para-gap" aria-hidden="true"></span>La escalera de descuentos la pones tú: no cedes ni un punto de margen más del que decidas.',
-    step2_title: 'Tus clientes reservan, como siempre',
-    step2_desc: 'Ven en la ficha cuántas unidades faltan para el siguiente precio y pasan por tu checkout de siempre, sin registrarse en ningún sitio y sin conocer a nadie.<span class="s-para-gap" aria-hidden="true"></span>Se les retiene el importe en la tarjeta, pero no se les cobra nada todavía.',
-    step3_title: 'Ellos traen a los que faltan',
-    step3_desc: 'A quien ya ha reservado le interesa que se llegue al objetivo, así que lo comparte.<span class="s-para-gap" aria-hidden="true"></span>Ese tráfico no lo has pagado tú.',
-    step4_title: 'Se cierra la campaña y se cobra',
-    step4_desc: 'Cuando termina el plazo, se cobra a todos el precio del escalón alcanzado.<span class="s-para-gap" aria-hidden="true"></span>Si no se alcanza ninguno, cada cliente paga el precio normal y la venta sigue siendo tuya.<span class="s-para-gap" aria-hidden="true"></span>Nunca pierdes una venta por intentarlo.',
+    step1_title: 'Elige producto y descuento',
+    step1_desc: 'Elige un producto o todos los que quieras de tu catálogo. Decides el descuento y solo se aplica cuando hay 2 personas.',
+    step2_title: 'Un cliente abre el grupo',
+    step2_desc: 'Paga con el descuento ya aplicado y tiene 24 horas para traer a una persona más. La comparte por WhatsApp o la trae tu propio tráfico.',
+    step3_title: 'Ya hay una persona dentro. Se une la segunda',
+    step3_desc: 'Cuando se une la segunda persona, el grupo se completa, se ejecuta el pedido y Tuko abre un grupo nuevo. El botón nunca se apaga.',
+    step4_title: 'Se completa y Tuko abre otro grupo',
+    step4_desc: 'Cuando el grupo se completa, se ejecutan los pedidos y, a los 5 minutos, Tuko publica un grupo nuevo vacío, listo para el siguiente cliente. Tú no haces nada: se repite hasta que tú digas basta.',
+    rescue_title: '¿Y si nadie más entra?',
+    rescue_sub: 'Tu cliente elige, y las tres opciones son buenas.',
+    rescue_opt1_label: 'Opción A',
+    rescue_opt1_title: 'Se queda las dos unidades al mismo precio de grupo.',
+    rescue_opt1_sub: 'Tú vendes dos.',
+    rescue_opt2_label: 'Opción B',
+    rescue_opt2_title: 'Entra automáticamente en un grupo nuevo del mismo producto.',
+    rescue_opt2_sub: 'Sigue intentándolo sin empezar de cero.',
+    rescue_opt3_label: 'Opción C',
+    rescue_opt3_title: 'O le devolvemos el dinero.',
+    rescue_opt3_sub: 'Entero, sin condiciones.',
+    rescue_body: 'Si elige la devolución, Shopify no te devuelve la comisión de la pasarela. La ponemos nosotros. Un grupo que no sale no te cuesta ni un euro.',
+    noreq_title: 'Lo que no te pedimos',
+    noreq_b1: '<b>Ni un ajuste en tu Shopify.</b> Se queda como está.',
+    noreq_b2: '<b>No necesitas Shopify Plus.</b> Si lo tienes, también funciona.',
+    noreq_b3: '<b>Ningún pago a mano.</b> Ni uno.',
+    noreq_b4: '<b>Cero comisión por vender.</b> Nunca.',
+    noreq_b6: '<b>Ni un montón de tráfico.</b> Empieza con lo que tengas.',
+    pilot_badge: 'Piloto',
+    pilot_title: 'Buscamos 5 tiendas fundadoras',
+    pilot_sub: 'Tuko es nuevo y lo sabemos. Por eso, las 5 primeras tiendas que se lo tomen en serio y nos ayuden no van a pagar nada. Les daremos durante 45 días el plan más caro de Tuko, 129 € al mes, sin coste y sin tarjeta.',
+    pilot_ask_title: 'A cambio te pedimos tres cosas',
+    pilot_ask1: 'Que lo uses de verdad. En productos con tráfico, no en uno perdido del catálogo.',
+    pilot_ask2: 'Que nos digas qué falla. Una llamada corta cada dos o tres semanas.',
+    pilot_ask3: 'Que dejes una reseña honesta en Shopify y nos dejes contar tu caso aquí.',
+    pilot_cta: 'Quiero una de las 5 plazas',
+    pilot_foot: 'Sin tarjeta, sin permanencia y sin comisiones. Si el día 45 quieres seguir usando Tuko, te dejamos el plan Escala a 49 €/mes de por vida.',
+    pilot_form_title: 'Quiero una de las 5 plazas',
+    pilot_form_web_label: 'Link de tu web',
+    pilot_form_web_ph: 'https://tutienda.com',
+    pilot_form_name_label: 'Nombre y apellidos',
+    pilot_form_name_ph: 'Nombre y apellidos',
+    pilot_form_email_label: 'Email de contacto',
+    pilot_form_email_ph: 'tu@email.com',
+    pilot_form_submit: 'Enviar',
 
     /* PRECIOS */
     pricing_badge: 'Precios',
-    pricing_title: 'Solo ganamos si tú <em class="title-accent-em">vendes</em>',
-    pricing_sub: 'Sin cuota de entrada y sin permanencia.<span class="s-para-gap" aria-hidden="true"></span>Cobramos un porcentaje de lo que vendas en campañas de Tuko, con un tope máximo al mes que apruebas tú antes de que se aplique nada.<span class="s-para-gap" aria-hidden="true"></span>Si un mes no lanzas ninguna campaña, tu factura es de cero euros.',
-    pricing_per_month: '/mes',
+    pricing_title: 'Los planes, cuando salgamos del piloto',
+    pricing_sub: 'Ninguno tiene comisión. Pagas una cuota y ya está. Ahora mismo no están disponibles: la única forma de entrar es el piloto.',
+    pricing_per_month: '/ mes',
     pricing_recommended: 'Recomendado',
-    pricing_p1_name: 'Arranque',
+    pricing_p4_ribbon: 'Esto es lo que te regalamos: 45 días a las 5 tiendas del piloto',
+    pricing_p1_rows: '<li>Comisión: 0 %</li><li>Grupos completados al mes: 5</li><li>Productos a la vez: 2</li><li>Emails de estado de Tuko: Sí</li><li class="is-no">Rescate de grupos: No</li><li class="is-no">Email marketing: No</li><li class="is-no">Soporte prioritario: No</li><li class="is-no">Tuko Marketplace: No</li><li class="is-no">Tuko AI: No</li>',
+    pricing_p2_rows: '<li>Comisión: 0 %</li><li>Grupos completados al mes: 20</li><li>Productos a la vez: Ilimitados</li><li>Rescate de grupos: Sí</li><li>Emails de estado de Tuko: Sí</li><li class="is-no">Email marketing: No</li><li class="is-no">Soporte prioritario: No</li><li class="is-no">Tuko Marketplace: No</li><li class="is-no">Tuko AI: No</li>',
+    pricing_p3_rows: '<li>Comisión: 0 %</li><li>Grupos completados al mes: 50</li><li>Productos a la vez: Ilimitados</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li class="is-no">Soporte prioritario: No</li><li class="is-no">Tuko Marketplace: No</li><li class="is-no">Tuko AI: No</li>',
+    pricing_p4_rows: '<li>Comisión: 0 %</li><li>Grupos completados al mes: Ilimitados</li><li>Productos a la vez: Ilimitados</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Soporte prioritario: Sí</li><li>Tuko Marketplace: Sí</li><li>Tuko AI: Sí</li><li>Emails de estado de Tuko: Sí</li>',
+    pricing_note_groups: 'Solo cuentan los grupos que se cierran. Si un grupo no sale, no te consume nada.',
+    pricing_p1_name: 'Free',
     pricing_p1_price: '0 €',
-    pricing_p1_comm: '+ 5 % de lo que vendas con Tuko',
-    pricing_p1_f1: '1 campaña activa a la vez',
-    pricing_p1_f2: 'Escalera de hasta 3 escalones',
-    pricing_p1_f3: 'Widget en la ficha de producto',
-    pricing_p1_f4: 'Analítica de campaña',
-    pricing_p1_cap: 'Tope: 300 €/mes',
+    pricing_p1_comm: 'Comisión sobre ventas de grupos Tuko. Máximo 500 €/mes',
+    pricing_p1_f1: '0 €/mes',
+    pricing_p1_f2: '4,2 % de comisión',
+    pricing_p1_f3: 'Tope 500 €/mes',
+    pricing_p1_f4: 'Sin permanencia',
+    pricing_p1_cap: 'Tope: 500 €/mes',
     pricing_p1_foot: 'Si no vendes, pagas 0 €.',
     pricing_p1_cta: 'Empezar gratis',
-    pricing_p2_name: 'Crecimiento',
-    pricing_p2_price: '49 €',
-    pricing_p2_comm: '+ 2,5 % de lo que vendas con Tuko',
-    pricing_p2_f1: 'Campañas ilimitadas y simultáneas',
-    pricing_p2_f2: 'Pop-up inteligente',
-    pricing_p2_f3: 'Test A/B de escaleras y textos',
-    pricing_p2_f4: 'Objetivo en unidades o en personas',
-    pricing_p2_f5: 'Soporte en 24 h',
-    pricing_p2_cap: 'Tope: 700 €/mes',
-    pricing_p2_foot: 'Te sale a cuenta a partir de 1.960 €/mes vendidos con Tuko.',
+    pricing_p2_name: 'Básico',
+    pricing_p2_price: '19 €',
+    pricing_p2_comm: 'Comisión sobre ventas de grupos Tuko. Máximo 400 €/mes',
+    pricing_p2_f1: '14,99 €/mes',
+    pricing_p2_f2: '2,5 % de comisión',
+    pricing_p2_f3: 'Tope 400 €/mes',
+    pricing_p2_f4: 'Sin permanencia',
+    pricing_p2_cap: 'Tope: 400 €/mes',
+    pricing_p2_foot: 'Te sale a cuenta a partir de 880 €/mes vendidos con Tuko.',
     pricing_p2_cta: 'Elegir plan',
-    pricing_p3_name: 'Escala',
-    pricing_p3_price: '149 €',
-    pricing_p3_comm: '+ 1,2 % de lo que vendas con Tuko',
-    pricing_p3_f1: 'Todo lo de Crecimiento',
-    pricing_p3_f2: 'Tuko AI: objetivo y escalera sugeridos',
-    pricing_p3_f3: 'Multitienda y multiidioma',
-    pricing_p3_f4: 'Informe mensual de margen',
-    pricing_p3_f5: 'Gestor de cuenta',
-    pricing_p3_cap: 'Tope: 1.800 €/mes',
-    pricing_p3_foot: 'Te sale a cuenta a partir de 7.700 €/mes vendidos con Tuko.',
+    pricing_p3_name: 'Pro',
+    pricing_p3_price: '49 €',
+    pricing_p3_comm: 'Comisión sobre ventas de grupos Tuko. Máximo 300 €/mes',
+    pricing_p3_f1: '69,99 €/mes',
+    pricing_p3_f2: '0,7 % de comisión',
+    pricing_p3_f3: 'Tope 300 €/mes',
+    pricing_p3_f4: 'Sin permanencia',
+    pricing_p3_cap: 'Tope: 300 €/mes',
+    pricing_p3_foot: 'Te sale a cuenta a partir de 3.060 €/mes vendidos con Tuko.',
     pricing_p3_cta: 'Elegir plan',
-    pricing_p4_name: 'Enterprise',
-    pricing_p4_price: 'A medida',
-    pricing_p4_comm: 'Comisión y tope negociados',
-    pricing_p4_f1: 'Varias tiendas o varios mercados',
-    pricing_p4_f2: 'Integraciones a medida',
-    pricing_p4_f3: 'Acuerdo de nivel de servicio',
-    pricing_p4_f4: 'Acompañamiento en cada campaña',
-    pricing_p4_foot: 'Hablamos y lo ajustamos a tu volumen.',
-    pricing_p4_cta: 'Hablamos',
-    pricing_legal: 'El porcentaje se calcula solo sobre lo vendido en campañas de Tuko, nunca sobre el resto de tu facturación. El tope es el máximo que puedes pagar en un mes y lo apruebas tú desde Shopify antes de que se aplique ningún cargo.',
+    pricing_p4_name: 'Escala',
+    pricing_p4_price: '129 €',
+    pricing_p4_comm: 'Sin comisión sobre ventas de grupos Tuko. Sin tope.',
+    pricing_p4_f1: '169 €/mes',
+    pricing_p4_f2: '0 % de comisión',
+    pricing_p4_f3: 'Sin tope',
+    pricing_p4_f4: 'Incluye beta de Tuko AI',
+    pricing_p4_f5: 'Sin permanencia',
+    pricing_p4_cap: 'Sin tope',
+    pricing_p4_foot: 'Te sale a cuenta a partir de 14.150 €/mes vendidos con Tuko.',
+    pricing_p4_cta: 'Elegir plan',
+    pricing_legal: 'La comisión se calcula solo sobre lo vendido en grupos Tuko, nunca sobre el resto de tu facturación. El tope es el máximo de comisión al mes (el plan Ilimitado no tiene comisión ni tope). La cuota del plan se suma aparte.',
     pricing_link_calc: '¿Cuánto tendrías que vender para que te compense? Haz el cálculo →',
-    pricing_link_faq: '¿Te quedan dudas? Mira las preguntas frecuentes →',
+    /* Calculadora */
+    calc_kicker: 'Calculadora',
+    calc_title: '¿Cuánto pagarías al mes?',
+    calc_help: 'Mueve el control hasta lo que crees que venderás en grupos Tuko. Cuota del plan + comisión con tope (Ilimitado no tiene comisión).',
+    calc_value_label: 'vendidos al mes con Tuko',
+    calc_range_label: 'Ventas mensuales con Tuko',
+    calc_best: 'El más barato',
+    calc_sub_tpl: '{fee} + {rate} de lo vendido',
+    calc_sub_pct: 'Solo el {rate} de lo vendido',
+    calc_sub_capped: 'Tope de comisión de {cap} aplicado',
+    calc_sub_flat: 'Solo {fee}, sin comisión',
+    calc_sub_zero: 'Sin ventas, sin comisión',
+    calc_note: 'Cálculo orientativo: cuota mensual + comisión sobre lo vendido en grupos Tuko, con tope. Ilimitado es solo la cuota.',
+    pricing_link_faq: '¿Te quedan dudas? Mira las preguntas frecuentes',
 
     /* FAQ */
     faq_badge: 'Preguntas frecuentes',
     faq_title: 'Lo que nos preguntan <em class="title-accent-em">siempre</em>',
     faq_sub: 'Objeciones reales de las llamadas, respondidas por escrito para quien nunca va a llamar.',
-    faq_q1: '¿Cuándo se le cobra a mi cliente?',
-    faq_a1: 'Solo al cerrarse la campaña. Al pasar por el checkout se le retiene el importe del precio normal en la tarjeta, pero no hay ningún cargo: el dinero sigue en su cuenta. Cuando termina el plazo o se completa el objetivo, se le cobra una sola vez, con el descuento del escalón alcanzado ya aplicado.',
-    faq_q2: '¿Mis clientes tienen que comprar con desconocidos?',
-    faq_a2: 'No. Nadie se une a nada ni conoce a nadie. Cada cliente reserva por su cuenta, en tu checkout de siempre. Lo único que cambia es que ve cuántas unidades faltan para que baje el precio.',
-    faq_q3: '¿Y si no se alcanza el objetivo?',
-    faq_a3: 'Se cobra el precio normal, el mismo que tu cliente ya había aceptado al reservar. La venta sigue siendo tuya y tú no has cedido margen. Nunca pierdes una venta por intentarlo.',
-    faq_q4: '¿Esto no me destroza el margen?',
-    faq_a4: 'Al revés que una rebaja plana: el descuento no existe hasta que llega el volumen que lo paga. Tú fijas el descuento máximo y Tuko te avisa antes de publicar si un escalón se come tu margen.',
-    faq_q5: '¿Esto es como Groupon?',
-    faq_a5: 'No. Groupon te traía cazadores de ofertas de su lista, se quedaba una parte grande de cada venta y esos clientes no volvían. Con Tuko todo pasa dentro de tu tienda, con tus clientes y en tu base de datos, y el descuento solo aparece si te han traído ventas nuevas.',
-    faq_q6: 'Ya uso una app de descuentos por volumen. ¿Para qué quiero esta?',
-    faq_a6: 'Esa hace que un cliente compre tres unidades. Tuko hace que tres clientes compren una. Son complementarias: una sube el ticket, la otra trae compradores.',
-    faq_q7: '¿Y si mis clientes no comparten nada?',
-    faq_a7: 'La primera ola de una campaña no viene de tráfico frío: viene de tu lista de correo y de tus redes, que ya te leen. Compartir es lo que acelera, no lo que arranca. Y el primer escalón se diseña para que compense de verdad hacerlo.',
-    faq_q8: '¿Cuánto cuesta?',
-    faq_a8: 'Instalar es gratis y no hay cuota mensual en el plan de entrada. Solo cobramos un porcentaje de lo que vendas en campañas de Tuko, con un tope máximo al mes que ves y apruebas antes de que se aplique nada. Si un mes no lanzas ninguna campaña, pagas cero.',
+    faq_q1: '¿Mis clientes compran con desconocidos?',
+    faq_a1: 'Compran en tu tienda, como siempre. Lo único que comparten es el precio. Cada pedido es individual y va a su dirección.',
+    faq_q2: '¿Y si el grupo no se llena?',
+    faq_a2: 'Tu cliente elige: se queda las dos unidades al precio de grupo, entra en un grupo nuevo del mismo producto, o le devolvemos el dinero. Si hay devolución, la comisión de la pasarela la ponemos nosotros. A ti no te cuesta nada.',
+    faq_q3: '¿Tengo que cambiar algo en mi Shopify?',
+    faq_a3: 'No. Ni ajustes de pago, ni Shopify Plus, ni nada a mano. Se instala y funciona.',
+    faq_q5: '¿Cuánto tarda en instalarse?',
+    faq_a5: 'Dos minutos. Eliges productos, pones el descuento y ya está encendido.',
+    faq_q6: '¿Qué pasa cuando terminen los 45 días una vez he entrado en el piloto?',
+    faq_a6: 'Si el día 45 quieres seguir usando Tuko, te dejamos el plan Escala a 49 €/mes de por vida (en vez de 129 €).',
+    faq_q7: '¿Por qué solo 5 tiendas?',
+    faq_a7: 'Porque queremos atenderlas bien y porque el piloto es para aprender, no para facturar. Cuando cerremos las cinco, cerramos.',
+    faq_q8: '¿Esto no me quita ventas que ya iba a hacer?',
+    faq_a8: 'Al revés que un descuento normal. Cuando pones un menos veinte por ciento en tu tienda, se lo lleva todo el que iba a comprar igualmente. Con Tuko, el descuento solo se aplica si entra una persona más. Nadie se lleva el precio bajo sin traerte un cliente.',
 
     /* MOCKUP */
     mockup_product_name: 'Set de cremas',
@@ -311,22 +404,33 @@ const translations = {
     mockup_tip_label: 'Nueva opción',
     mockup_tip_text: 'Permite que los clientes reserven en una campaña',
 
-    /* BENEFITS */
-    benefits_badge: 'Qué ganas',
-    benefits_title: 'Un descuento por volumen hace que un cliente compre tres unidades. <span class="title-accent">Tuko</span> hace que <em class="title-accent-em">tres clientes</em> compren una',
-    benefits_sub: 'No es una app de descuentos más.<span class="s-para-gap" aria-hidden="true"></span>Es la única que usa el descuento para traerte compradores que no tenías.',
-    ben1_title: 'Más unidades por campaña',
-    ben1_text: 'El mismo producto y la misma semana, vendiendo el doble o el triple de unidades.<span class="s-para-gap" aria-hidden="true"></span>Sin subir un euro el presupuesto de anuncios.',
-    ben2_title: 'Stock parado, fuera',
-    ben2_text: 'Convierte la rebaja que ibas a hacer de todas formas en una venta condicionada al volumen.<span class="s-para-gap" aria-hidden="true"></span>Liberas capital sin regalar margen.',
-    ben3_title: 'Tú decides el suelo',
-    ben3_text: 'Defines la escalera y el descuento máximo.<span class="s-para-gap" aria-hidden="true"></span>Tuko te avisa si un escalón se come tu margen antes de publicar la campaña.',
-    ben4_title: 'Compradores que no has pagado',
-    ben4_text: 'Cada cliente que ya ha reservado tiene un motivo económico para compartirlo.<span class="s-para-gap" aria-hidden="true"></span>Ese tráfico te cuesta cero.',
-    ben5_title: 'Instalado en dos minutos',
-    ben5_text: 'App nativa de Shopify. Se añade a la ficha de producto sin tocar el tema ni el checkout.',
-    ben6_title: 'Ni devoluciones ni ajustes a mano',
-    ben6_text: 'A tus clientes se les retiene el importe al reservar y se les cobra una sola vez al cerrar la campaña, con el descuento ya aplicado.<span class="s-para-gap" aria-hidden="true"></span>Sin cobros parciales ni devoluciones que gestionar.',
+    /* POR QUÉ COMPRAN */
+    why_badge: 'Por qué funciona',
+    why_title: 'Tres cosas que hacen que <em class="title-accent-em">compren ahora</em>',
+    why1_kicker: 'El reloj',
+    why1_title: 'Con 24 horas por delante, compran hoy.',
+    why1_desc: 'Sin reloj, lo dejan para nunca.',
+    why1_w_label: 'Se cierra en',
+    why1_w_h: 'Horas',
+    why1_w_m: 'Minutos',
+    why1_w_s: 'Segundos',
+    why1_w_foot: 'Después, el <b>−20 %</b> desaparece.',
+    why2_kicker: 'La persona',
+    why2_title: 'No le pides que llene un grupo de veinte.',
+    why2_desc: 'Le pides una persona. Eso sí lo hace.',
+    why2_w_missing: 'Ya hay 1 dentro. Falta <b>1</b> para que los dos compren con el −15&nbsp;%',
+    why2_w_missing_tpl: 'Falta <b>{n}</b> para que los dos compren con el −15&nbsp;%',
+    why2_w_missing_one: 'Ya hay 1 dentro. Falta <b>1</b> para que los dos compren con el −15&nbsp;%',
+    why2_w_unlocked: '<em>−15 % desbloqueado</em> para todo el grupo',
+    why2_w_flag: 'Los dos',
+    why2_w_foot: 'Si no se llega, precio normal',
+    why3_kicker: 'El grupo',
+    why3_title: 'Ven que alguien ya entró y pagó.',
+    why3_desc: 'Eso convence más que cualquier cosa que digas tú.',
+    why3_w_txt: '<b>1 persona</b> ya está dentro · falta 1',
+    why3_w_btn: 'Compartir',
+    why3_w_chip: 'Marta <em>acaba de unirse</em>',
+    why3_w_chip_tpl: '{name} <em>acaba de unirse</em>',
 
     /* CTA */
     cta_title: 'Activa Tuko en tu tienda y convierte el tráfico en ventas reales.',
@@ -342,17 +446,17 @@ const translations = {
     cta_placeholder_details: 'Breve mensaje (máx. 100 caracteres)',
     cta_submit: 'Contactar',
     cta_success: '¡Mensaje enviado! Te contactaremos pronto.',
-    cta_error: 'Ha ocurrido un error. Por favor escríbenos a team.tukoo@gmail.com',
+    cta_error: 'Ha ocurrido un error. Por favor escríbenos a joan@tukoteam.com',
 
     /* FOOTER */
     footer_col1_title: 'Contacto',
-    footer_email: 'team.tukoo@gmail.com',
+    footer_email: 'joan@tukoteam.com',
     footer_col_product: 'Producto',
     footer_pricing: 'Precios',
     footer_col2_title: 'Legales',
     footer_privacy: 'Política de privacidad',
     footer_terms: 'Términos y condiciones',
-    footer_tagline: 'Descuentos por objetivo para tiendas Shopify. Vende más unidades sin regalar margen.',
+    footer_tagline: 'Un cliente entra. Trae a otro. Los dos compran.',
     footer_copy: '© 2026 Tuko. Todos los derechos reservados.',
 
     /* BLOG INDEX */
@@ -527,7 +631,7 @@ const translations = {
     priv_intro: 'La presente Política de Privacidad describe cómo se recopilan y tratan los datos personales a través de la web de Tuko.',
     priv_h2_1: '<span class="legal-num">1.</span> Responsable del tratamiento',
     priv_p1: 'Hasta la constitución de la sociedad, el responsable del tratamiento es:',
-    priv_p2: '<strong>Joan de Zavala Prats y Rafael Alonso Barreto de Vicente</strong><br>Email de contacto: <a href="mailto:team.tukoo@gmail.com" data-i18n="footer_email">team.tukoo@gmail.com</a>',
+    priv_p2: '<strong>Joan de Zavala Prats y Rafael Alonso Barreto de Vicente</strong><br>Email de contacto: <a href="mailto:joan@tukoteam.com" data-i18n="footer_email">joan@tukoteam.com</a>',
     priv_p3: 'Este responsable actúa únicamente para gestionar las solicitudes enviadas a través del formulario de contacto.',
     priv_h2_2: '<span class="legal-num">2.</span> Datos que recopilamos',
     priv_p4: 'El único formulario de la web puede recopilar los siguientes datos personales, de forma voluntaria por parte del usuario:',
@@ -548,7 +652,7 @@ const translations = {
     priv_h2_6: '<span class="legal-num">6.</span> Conservación',
     priv_p10: 'Los datos se conservarán el tiempo necesario para responder a la solicitud, o hasta que el usuario solicite su eliminación.',
     priv_h2_7: '<span class="legal-num">7.</span> Derechos del usuario',
-    priv_p11: 'Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento o portabilidad enviando un correo a: <a href="mailto:team.tukoo@gmail.com" data-i18n="footer_email">team.tukoo@gmail.com</a>',
+    priv_p11: 'Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento o portabilidad enviando un correo a: <a href="mailto:joan@tukoteam.com" data-i18n="footer_email">joan@tukoteam.com</a>',
     priv_h2_8: '<span class="legal-num">8.</span> Seguridad',
     priv_p12: 'Se aplican medidas de seguridad razonables para proteger los datos personales frente al acceso no autorizado.',
     priv_update: 'Última actualización: 09/12/2025',
@@ -574,7 +678,7 @@ const translations = {
     terms_h2_7: '<span class="legal-num">7.</span> Modificaciones',
     terms_p7: 'Tuko podrá modificar estos términos en cualquier momento. El uso continuado tras los cambios implica aceptación.',
     terms_h2_8: '<span class="legal-num">8.</span> Contacto',
-    terms_p8: 'Para cualquier duda, escribe a: <a href="mailto:team.tukoo@gmail.com" data-i18n="footer_email">team.tukoo@gmail.com</a>',
+    terms_p8: 'Para cualquier duda, escribe a: <a href="mailto:joan@tukoteam.com" data-i18n="footer_email">joan@tukoteam.com</a>',
   },
 
   en: {
@@ -583,9 +687,9 @@ const translations = {
     nav_link_como_funciona: 'How it works',
     nav_link_precios: 'Pricing',
     nav_link_faq: 'FAQ',
-    nav_link_beneficios: 'What you get',
+    nav_link_beneficios: 'Why it works',
     nav_link_blog: 'Blog',
-    nav_cta: 'Install free',
+    nav_cta: 'Access the pilot',
     nav_lang_label: 'Language',
     /* TUKO AI */
     nav_link_ia: 'tuko AI',
@@ -626,27 +730,37 @@ const translations = {
     ia_form_submit: 'Join the waitlist',
     ia_soon_tag: 'Soon',
     ia_soon_text: 'It will also tell you which creators to work with and where to grow next.',
-    ia_wl_eyebrow: 'Waitlist',
-    ia_wl_count: '<b>39 brands</b> are already waiting for access',
-    ia_wl_foot: 'Only 50 stores get into the private beta.',
     fcta_eyebrow: 'Start today',
-    fcta_title: 'Try a campaign<br><em>If you don\'t sell, you don\'t pay</em>',
-    fcta_sub: 'Install is free and the entry plan has no monthly fee: we only take a percentage of what you sell with Tuko, with a monthly cap.<br><br>If you don\'t run a campaign that month, you pay zero.',
-    fcta_btn: 'Install free on Shopify',
-    fcta_trust2: 'No monthly fee',
-    fcta_trust3: '+50 stores already using it',
+    fcta_title: '5 spots left',
+    fcta_sub: '45 days of full Tuko, free. No card and no lock-in. If it doesn\'t work, you uninstall it.',
+    fcta_btn: 'Get one of the 5 spots',
+    fcta_trust2: 'Set up in 2 minutes',
+    fcta_trust3: 'No theme changes',
     fcta_shopify: 'Available on Shopify',
 
     /* HERO */
     hero_badge: 'Backed by Xiji Incubator',
-    hero_title: 'The discount that<br>brings you <em>customers</em>, instead of taking them away',
-    hero_subtitle: 'You set a unit goal on a product and a deadline. Your customers reserve with nothing charged yet.<span class="s-para-gap" aria-hidden="true"></span>If the goal is hit, everyone pays the lower price; if not, they pay the regular price and you haven\'t given away a euro of margin.',
-    hero_cta: 'Install free on Shopify',
-    hero_official: 'No fee · We only charge if you sell',
-    hero_stat1_num: '+50',
-    hero_stat1_lab: 'Stores using Tuko',
-    hero_stat2_num: '+€30,000',
-    hero_stat2_lab: 'Billed through Tuko campaigns',
+    hero_badge_pilot: 'Pilot plan · 5 spots · 45 days free',
+    hero_title: 'A customer walks in. Brings another. Both buy.',
+    hero_title_l1: 'A customer walks in.',
+    hero_title_l2: 'Brings another.',
+    hero_title_l3_before: 'Both',
+    hero_title_accent: 'buy.',
+    hero_title_l3_after: '',
+    hero_subtitle: 'Tuko puts a button on your products. Whoever taps it pays with the discount and has 24 hours to bring in one more buyer.',
+    hero_cta: 'Get one of the 5 spots',
+    hero_cta2: 'See how it works',
+    hero_cta3: 'Talk to us',
+    hero_live_tpl: '{n} of {goal} already in the group',
+    hero_live_full: 'Group complete · −{discount}% for everyone',
+    hero_trust_note: 'No card. No lock-in. No commissions.',
+    hero_appstore: 'Available on the Shopify App Store',
+    hero_trust2: 'Set up in 2 minutes',
+    hero_trust3: 'No theme changes',
+    hero_trust4: 'Your same checkout',
+    hero_caption: 'One discount · one goal · one deadline. If it doesn’t fill, they pay full price.',
+    sticky_title: 'Free until you sell',
+    sticky_sub: 'Set up in 2 min · No theme changes',
 
     /* POPUP DEL PLUGIN */
     pop_chip: 'CAMPAIGN LIVE',
@@ -663,25 +777,21 @@ const translations = {
     pop_product: 'Natural Shampoo',
     pop_joined: ' of 20 units reserved',
     pop_cta: 'Drop it to €25.20',
-    pop_no_charge: 'Nothing is charged until the campaign ends.',
+    pop_no_charge: 'You pay when you join. If the group doesn\'t fill, you get a full refund.',
     pop_back_title: 'How a <em>Tuko campaign</em> works',
     pop_back_sub: 'The more units reserved, the bigger the discount for everyone.',
     pop_tier1: '10 units',
     pop_tier2: '20 units',
     pop_tier3: '35 units',
     pop_step1: 'You pick a product, a unit goal and a deadline.',
-    pop_step2: 'Your customers reserve at your checkout; the amount is held, with nothing charged yet.',
-    pop_step3: 'Anyone who already reserved shares to help hit the goal.',
-    pop_step4: 'When it closes, everyone is charged the price of the tier reached.',
-    pop_step5: 'If no tier is reached, they pay the regular price.',
+    pop_step2: 'Your customers buy and join the group.',
+    pop_step3: 'Anyone who already bought shares to help hit the goal.',
+    pop_step4: 'If the goal is hit, the order is confirmed with the discount.',
+    pop_step5: 'If it isn\'t reached, the order is cancelled and refunded.',
     pop_front_hint: 'Click to flip',
     pop_front_hint_tap: 'Tap to flip',
     pop_back_foot: 'Click to go back',
     pop_back_foot_tap: 'Tap to go back',
-
-    /* VIDEO */
-    video_title: 'A <span class="video-brand">Tuko</span> campaign, <em class="video-title-em">start to finish</em>',
-    video_subtitle: 'Two minutes: how you set up the campaign, what your customer sees on the product page, and what happens when the goal is hit.',
 
     /* LOGOS */
     logos_label: 'Trusted by',
@@ -691,110 +801,197 @@ const translations = {
     logo_bio: 'Bio Vida Sana',
     logo_saper: 'Sáper Organic',
 
-    /* PROBLEM */
-    problem_badge: 'The problem',
-    problem_title: 'Cutting the price isn\'t the problem.<br><span class="title-accent">Giving it away</span> to people who were<br>going to buy anyway <em class="title-accent-em">is</em>',
-    problem_sub: 'Every flat discount also goes to customers who would have bought at full price.<span class="s-para-gap" aria-hidden="true"></span>You\'re paying margin on sales you already had.',
-    card1_title: 'Every new customer costs you more',
-    card1_text: 'The cost of acquiring a customer in ecommerce has risen more than 200% in a decade.<span class="s-para-gap" aria-hidden="true"></span>Every sale you bring in with ads is more expensive than the last.',
-    card2_title: 'Idle stock eats your margin',
-    card2_text: 'Cutting 30% moves it, sure. But it wipes the profit on the whole batch.<span class="s-para-gap" aria-hidden="true"></span>And customers who were already going to buy take the discount too.',
-    card3_title: 'A flat discount doesn\'t pay for itself',
-    card3_text: 'A −20% on a product with 60% margin forces you to sell 67% more units just to stay even.<span class="s-para-gap" aria-hidden="true"></span>That almost never happens.',
-    card1_source: 'Source: SimplicityDX, “The Customer Acquisition Crisis”',
-    card2_source: 'Illustrative margin example on a 30% markdown',
-    card3_source: 'Break-even threshold calculation (60% margin, −20% discount)',
+    /* DATA (trigger + comparison) */
+    data_trigger: 'Before launching another -20%, look at this.',
+    data_title: 'Discount should not give margin away. <span class="title-accent-red">It should bring new customers.</span>',
+    data_sub: 'Compare the two models before activating your campaign.',
+    data_bad_label: 'The expensive way',
+    data_num: '68%',
+    data_num_note: 'of discounted orders can come from customers who were already buying from you.',
+    data_bad_title: 'You pay to acquire and you also pay in discounts.',
+    data_bad_b1: 'Each new customer costs more in paid ads.',
+    data_bad_b2: 'Discounts also hit orders that were already yours.',
+    data_bad_b3: 'To grow, you keep increasing ad spend.',
+    data_good_label: 'The multiplying way',
+    data_good_title: 'Each purchase can bring the next one.',
+    data_good_b1: 'Customers share to complete the group goal.',
+    data_good_b2: 'One purchase turns into distribution.',
+    data_good_b3: 'Over time, your cost per new customer drops.',
+    data_good_sub: 'The discount only activates if <span class="data-nowrap">the <em>goal</em></span> is met.',
+    data_foot: 'It is not about lowering price more. <b>It is about making each sale bring the next one.</b>',
+    data_src: 'Klaviyo · ProfitPeak, 2025',
+
+    /* HERO — MOCKUP */
+    hmock_product: 'Organic tee',
+    hmock_missing: '<b>3</b> more to unlock −20%',
+    hmock_joined: '7 already in',
+    hmock_btn: 'Reserve at €39.92',
+    hmock_price_old: '€49.90',
+    hmock_price_new: '€39.92',
+    hmock_price_off: '−15%',
+    hmock_chip: 'Marta just joined',
+    hmock_live: 'Live campaign',
+    hmock_col_product: 'The product',
+    hmock_col_group: 'The group',
+    hmock_col_clock: 'The clock',
+    hmock_col_price: 'The price',
+    hmock_clock_note: 'Closes today. With a deadline, they buy today.',
+    hmock_off_fixed: '−{n}% fixed',
+    hmock_groupline_tpl: '{n} more to unlock',
+    hmock_groupline_one: '1 more to unlock',
+    hmock_groupline_done: 'Group full. Everyone pays less.',
+    hmock_status: 'Open for reservations · −{n}% when it fills',
+    hmock_status_done: 'Goal reached · everyone pays {price}',
+    hmock_price_note: 'Applies when you hit {n}',
+    hmock_price_note_done: 'Unlocked for all {n}',
+    /* mockup loop (templates: {n}, {name}) */
+    hmock_missing_tpl: '<b>{n}</b> more to unlock −20%',
+    hmock_missing_one: '<b>1</b> more to unlock −20%',
+    hmock_joined_tpl: '{n} already in',
+    hmock_chip_tpl: '{name} just joined',
+    hmock_chip_you: 'You just joined',
+    hmock_done: 'Goal reached! Everyone pays <b>€39.92</b>',
+    hmock_chip_done: '−20% for everyone',
+    hmock_btn_done: 'Price unlocked: €39.92',
 
     /* HOW IT WORKS */
     how_badge: 'How it works',
-    how_title: 'A discount with conditions.<br><span class="how-title-underline">Yours</span>',
-    how_sub: 'You pick a product, a unit goal and a deadline.<span class="s-para-gap" aria-hidden="true"></span>The discount doesn\'t exist until the goal is met.<span class="s-para-gap" aria-hidden="true"></span>Everything happens inside your store: the customer never leaves your site.',
-    how_step1: 'You pick a product and a goal.',
-    how_step2: 'Your customers reserve, as usual.',
-    how_step3: 'They bring the ones still missing.',
-    how_step4: 'The campaign closes and everyone is charged.',
+    how_title: 'This is how it works',
+    how_sub: 'You set the discount, the goal and the date. It starts when the first person joins, and they have 24 hours to bring someone else in.',
 
     /* HOW IT WORKS — STEPS */
-    step1_title: 'You pick a product and a goal',
-    step1_desc: 'One product, a unit goal and a deadline (72 hours works well).<span class="s-para-gap" aria-hidden="true"></span>You set the discount ladder: you never give away a point of margin beyond what you decide.',
-    step2_title: 'Your customers reserve, as usual',
-    step2_desc: 'They see on the product page how many units are left for the next price and go through your usual checkout—no signing up elsewhere, no meeting anyone.<span class="s-para-gap" aria-hidden="true"></span>The amount is held on their card, but nothing is charged yet.',
-    step3_title: 'They bring the ones still missing',
-    step3_desc: 'Anyone who already reserved wants the goal to be hit, so they share it.<span class="s-para-gap" aria-hidden="true"></span>That traffic didn\'t cost you a thing.',
-    step4_title: 'The campaign closes and everyone is charged',
-    step4_desc: 'When the deadline ends, everyone is charged the price of the tier reached.<span class="s-para-gap" aria-hidden="true"></span>If none is reached, each customer pays the regular price and the sale is still yours.<span class="s-para-gap" aria-hidden="true"></span>You never lose a sale for trying.',
+    step1_title: 'Pick a product and a discount',
+    step1_desc: 'Pick one product or as many as you want from your catalogue. You set the discount, and it only applies when there are 2 people.',
+    step2_title: 'A customer opens the group',
+    step2_desc: 'They pay with the discount already applied and have 24 hours to bring one more person. They share it on WhatsApp, or your own traffic brings them.',
+    step3_title: 'One person is already in. The second one joins',
+    step3_desc: 'When the second person joins, the group is complete, the order goes through and Tuko opens a new group. The button never switches off.',
+    step4_title: 'It completes and Tuko opens another group',
+    step4_desc: 'When the group completes, the orders go through and, 5 minutes later, Tuko publishes a new empty group, ready for the next customer. You don\'t do a thing: it repeats until you say stop.',
+    rescue_title: 'What if nobody else joins?',
+    rescue_sub: 'Your customer chooses, and all three options are good.',
+    rescue_opt1_label: 'Option A',
+    rescue_opt1_title: 'They keep both units at the same group price.',
+    rescue_opt1_sub: 'You sell two.',
+    rescue_opt2_label: 'Option B',
+    rescue_opt2_title: 'They join a new group of the same product automatically.',
+    rescue_opt2_sub: 'Keep trying without starting from scratch.',
+    rescue_opt3_label: 'Option C',
+    rescue_opt3_title: 'Or we refund their money.',
+    rescue_opt3_sub: 'In full, no strings attached.',
+    rescue_body: 'If they choose a refund, Shopify doesn\'t return the payment gateway fee. We cover it. A group that doesn\'t close doesn\'t cost you a single euro.',
+    noreq_title: 'What we don\'t ask of you',
+    noreq_b1: '<b>Not a single setting in your Shopify.</b> It stays as it is.',
+    noreq_b2: '<b>You don\'t need Shopify Plus.</b> If you have it, it works too.',
+    noreq_b3: '<b>No payments by hand.</b> Not one.',
+    noreq_b4: '<b>Zero commission for selling.</b> Ever.',
+    noreq_b6: '<b>You don\'t need a flood of traffic.</b> Start with what you have.',
+    pilot_badge: 'Pilot',
+    pilot_title: 'We\'re looking for 5 founding stores',
+    pilot_sub: 'Tuko is new and we know it. That\'s why the first 5 stores that take it seriously and help us won\'t pay anything. For 45 days we\'ll give them Tuko\'s most expensive plan, €129 a month, at no cost and with no card.',
+    pilot_ask_title: 'In return we ask you for three things',
+    pilot_ask1: 'That you really use it. On products with traffic, not on a forgotten one in the catalogue.',
+    pilot_ask2: 'That you tell us what fails. A short call every two or three weeks.',
+    pilot_ask3: 'That you leave an honest review on Shopify and let us tell your story here.',
+    pilot_cta: 'Get one of the 5 spots',
+    pilot_foot: 'No card, no lock-in and no commissions. If on day 45 you want to keep using Tuko, we give you the Escala plan at €49/month for life.',
+    pilot_form_title: 'Get one of the 5 spots',
+    pilot_form_web_label: 'Link to your website',
+    pilot_form_web_ph: 'https://yourstore.com',
+    pilot_form_name_label: 'Full name',
+    pilot_form_name_ph: 'Full name',
+    pilot_form_email_label: 'Contact email',
+    pilot_form_email_ph: 'you@email.com',
+    pilot_form_submit: 'Send',
 
     /* PRICING */
     pricing_badge: 'Pricing',
-    pricing_title: 'We only win if you <em class="title-accent-em">sell</em>',
-    pricing_sub: 'No entry fee and no lock-in.<span class="s-para-gap" aria-hidden="true"></span>We take a percentage of what you sell in Tuko campaigns, with a monthly cap you approve before anything is charged.<span class="s-para-gap" aria-hidden="true"></span>If you don\'t run a campaign that month, your bill is zero.',
-    pricing_per_month: '/mo',
+    pricing_title: 'The plans, once we leave the pilot',
+    pricing_sub: 'None has a commission. You pay a fee and that\'s it. Right now they\'re not available: the only way in is the pilot.',
+    pricing_per_month: '/ mo',
     pricing_recommended: 'Recommended',
-    pricing_p1_name: 'Start',
+    pricing_p4_ribbon: 'This is what we\'re giving you: 45 days for the 5 pilot stores',
+    pricing_p1_rows: '<li>Commission: 0%</li><li>Completed groups per month: 5</li><li>Products at once: 2</li><li>Tuko status emails: Yes</li><li class="is-no">Group rescue: No</li><li class="is-no">Email marketing: No</li><li class="is-no">Priority support: No</li><li class="is-no">Tuko Marketplace: No</li><li class="is-no">Tuko AI: No</li>',
+    pricing_p2_rows: '<li>Commission: 0%</li><li>Completed groups per month: 20</li><li>Products at once: Unlimited</li><li>Group rescue: Yes</li><li>Tuko status emails: Yes</li><li class="is-no">Email marketing: No</li><li class="is-no">Priority support: No</li><li class="is-no">Tuko Marketplace: No</li><li class="is-no">Tuko AI: No</li>',
+    pricing_p3_rows: '<li>Commission: 0%</li><li>Completed groups per month: 50</li><li>Products at once: Unlimited</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Tuko status emails: Yes</li><li class="is-no">Priority support: No</li><li class="is-no">Tuko Marketplace: No</li><li class="is-no">Tuko AI: No</li>',
+    pricing_p4_rows: '<li>Commission: 0%</li><li>Completed groups per month: Unlimited</li><li>Products at once: Unlimited</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Priority support: Yes</li><li>Tuko Marketplace: Yes</li><li>Tuko AI: Yes</li><li>Tuko status emails: Yes</li>',
+    pricing_note_groups: 'Only groups that close count. If a group doesn\'t close, it uses up nothing.',
+    pricing_p1_name: 'Free',
     pricing_p1_price: '€0',
-    pricing_p1_comm: '+ 5% of what you sell with Tuko',
-    pricing_p1_f1: '1 active campaign at a time',
-    pricing_p1_f2: 'Ladder of up to 3 tiers',
-    pricing_p1_f3: 'Widget on the product page',
-    pricing_p1_f4: 'Campaign analytics',
-    pricing_p1_cap: 'Cap: €300/mo',
+    pricing_p1_comm: 'Commission on Tuko group sales. Maximum €500/mo',
+    pricing_p1_f1: '€0/mo',
+    pricing_p1_f2: '4.2% commission',
+    pricing_p1_f3: '€500/mo cap',
+    pricing_p1_f4: 'No lock-in',
+    pricing_p1_cap: 'Cap: €500/mo',
     pricing_p1_foot: 'If you don\'t sell, you pay €0.',
     pricing_p1_cta: 'Start free',
-    pricing_p2_name: 'Growth',
-    pricing_p2_price: '€49',
-    pricing_p2_comm: '+ 2.5% of what you sell with Tuko',
-    pricing_p2_f1: 'Unlimited simultaneous campaigns',
-    pricing_p2_f2: 'Smart pop-up',
-    pricing_p2_f3: 'A/B tests for ladders and copy',
-    pricing_p2_f4: 'Goals in units or people',
-    pricing_p2_f5: 'Support within 24h',
-    pricing_p2_cap: 'Cap: €700/mo',
-    pricing_p2_foot: 'Worth it from €1,960/mo sold with Tuko.',
+    pricing_p2_name: 'Basic',
+    pricing_p2_price: '€19',
+    pricing_p2_comm: 'Commission on Tuko group sales. Maximum €400/mo',
+    pricing_p2_f1: '€14.99/mo',
+    pricing_p2_f2: '2.5% commission',
+    pricing_p2_f3: '€400/mo cap',
+    pricing_p2_f4: 'No lock-in',
+    pricing_p2_cap: 'Cap: €400/mo',
+    pricing_p2_foot: 'Worth it from €880/mo sold with Tuko.',
     pricing_p2_cta: 'Choose plan',
-    pricing_p3_name: 'Scale',
-    pricing_p3_price: '€149',
-    pricing_p3_comm: '+ 1.2% of what you sell with Tuko',
-    pricing_p3_f1: 'Everything in Growth',
-    pricing_p3_f2: 'Tuko AI: suggested goals and ladders',
-    pricing_p3_f3: 'Multi-store and multi-language',
-    pricing_p3_f4: 'Monthly margin report',
-    pricing_p3_f5: 'Account manager',
-    pricing_p3_cap: 'Cap: €1,800/mo',
-    pricing_p3_foot: 'Worth it from €7,700/mo sold with Tuko.',
+    pricing_p3_name: 'Pro',
+    pricing_p3_price: '€49',
+    pricing_p3_comm: 'Commission on Tuko group sales. Maximum €300/mo',
+    pricing_p3_f1: '€69.99/mo',
+    pricing_p3_f2: '0.7% commission',
+    pricing_p3_f3: '€300/mo cap',
+    pricing_p3_f4: 'No lock-in',
+    pricing_p3_cap: 'Cap: €300/mo',
+    pricing_p3_foot: 'Worth it from €3,060/mo sold with Tuko.',
     pricing_p3_cta: 'Choose plan',
-    pricing_p4_name: 'Enterprise',
-    pricing_p4_price: 'Custom',
-    pricing_p4_comm: 'Negotiated commission and cap',
-    pricing_p4_f1: 'Multiple stores or markets',
-    pricing_p4_f2: 'Custom integrations',
-    pricing_p4_f3: 'Service-level agreement',
-    pricing_p4_f4: 'Support on every campaign',
-    pricing_p4_foot: 'We’ll talk and fit it to your volume.',
-    pricing_p4_cta: 'Let’s talk',
-    pricing_legal: 'The percentage is calculated only on what you sell in Tuko campaigns—never on the rest of your revenue. The cap is the most you can pay in a month, and you approve it in Shopify before any charge applies.',
+    pricing_p4_name: 'Scale',
+    pricing_p4_price: '€129',
+    pricing_p4_comm: 'No commission on Tuko group sales. No cap.',
+    pricing_p4_f1: '€169/mo',
+    pricing_p4_f2: '0% commission',
+    pricing_p4_f3: 'No cap',
+    pricing_p4_f4: 'Includes Tuko AI beta',
+    pricing_p4_f5: 'No lock-in',
+    pricing_p4_cap: 'No cap',
+    pricing_p4_foot: 'Worth it from €14,150/mo sold with Tuko.',
+    pricing_p4_cta: 'Choose plan',
+    pricing_legal: 'Commission is calculated only on Tuko group sales—never on the rest of your revenue. The cap is the most commission you can pay in a month (Unlimited has no commission and no cap). The plan fee is added on top.',
     pricing_link_calc: 'How much would you need to sell for it to pay off? Run the numbers →',
-    pricing_link_faq: 'Still have questions? See the FAQ →',
+    /* Calculator */
+    calc_kicker: 'Calculator',
+    calc_title: 'How much would you pay per month?',
+    calc_help: 'Drag to what you expect to sell in Tuko groups. Plan fee + capped commission (Unlimited has no commission).',
+    calc_value_label: 'sold per month with Tuko',
+    calc_range_label: 'Monthly sales with Tuko',
+    calc_best: 'Cheapest for you',
+    calc_sub_tpl: '{fee} + {rate} of sales',
+    calc_sub_pct: 'Just {rate} of sales',
+    calc_sub_capped: '{cap} commission cap applied',
+    calc_sub_flat: '{fee} only, no commission',
+    calc_sub_zero: 'No sales, no commission',
+    calc_note: 'Indicative figures: monthly fee + commission on Tuko group sales, with a cap. Unlimited is the fee only.',
+    pricing_link_faq: 'Still have questions? See the FAQ',
 
     /* FAQ */
     faq_badge: 'FAQ',
     faq_title: 'What we get asked <em class="title-accent-em">every time</em>',
     faq_sub: 'Real objections from sales calls, answered in writing for the people who will never pick up the phone.',
-    faq_q1: 'When does my customer get charged?',
-    faq_a1: 'Only when the campaign closes. At checkout the regular price is held on their card, but nothing is charged yet—the money stays in their account. When the deadline ends or the goal is hit, they are charged once, with the discount of the tier reached already applied.',
-    faq_q2: 'Do my customers have to buy with strangers?',
-    faq_a2: 'No. Nobody joins a group or meets anyone. Each customer reserves on their own, through your usual checkout. The only change is that they see how many units are left for the price to drop.',
-    faq_q3: 'What if the goal isn\'t reached?',
-    faq_a3: 'They are charged the regular price—the same one they already accepted when they reserved. The sale is still yours and you haven\'t given away margin. You never lose a sale for trying.',
-    faq_q4: 'Won\'t this wreck my margin?',
-    faq_a4: 'The opposite of a flat markdown: the discount doesn\'t exist until the volume that pays for it arrives. You set the maximum discount and Tuko warns you before you publish if a tier eats your margin.',
-    faq_q5: 'Is this like Groupon?',
-    faq_a5: 'No. Groupon brought deal hunters from its own list, took a large cut of every sale, and those customers rarely came back. With Tuko everything stays inside your store, with your customers and in your database—and the discount only appears if it has brought you new sales.',
-    faq_q6: 'I already use a volume-discount app. Why do I need this?',
-    faq_a6: 'That one makes a customer buy three units. Tuko makes three customers buy one. They complement each other: one raises ticket size, the other brings buyers.',
-    faq_q7: 'What if my customers never share anything?',
-    faq_a7: 'The first wave of a campaign doesn\'t come from cold traffic: it comes from your email list and your social channels—people who already follow you. Sharing speeds things up; it isn\'t what starts them. And the first tier is designed so sharing is genuinely worth it.',
-    faq_q8: 'How much does it cost?',
-    faq_a8: 'Install is free and there is no monthly fee on the entry plan. We only take a percentage of what you sell through Tuko campaigns, with a monthly cap you see and approve before anything is applied. If you run no campaigns in a month, you pay zero.',
+    faq_q1: 'Do my customers buy with strangers?',
+    faq_a1: 'They buy in your store, as always. The only thing they share is the price. Each order is individual and goes to their own address.',
+    faq_q2: 'What if the group doesn\'t fill?',
+    faq_a2: 'Your customer chooses: they keep both units at the group price, join a new group of the same product, or we refund their money. If there\'s a refund, we cover the payment gateway fee. It costs you nothing.',
+    faq_q3: 'Do I have to change anything in my Shopify?',
+    faq_a3: 'No. No payment settings, no Shopify Plus, nothing by hand. You install it and it works.',
+    faq_q5: 'How long does it take to install?',
+    faq_a5: 'Two minutes. You pick products, set the discount and it\'s on.',
+    faq_q6: 'What happens when the 45 days end once I\'ve joined the pilot?',
+    faq_a6: 'If on day 45 you want to keep using Tuko, we give you the Escala plan at €49/month for life (instead of €129).',
+    faq_q7: 'Why only 5 stores?',
+    faq_a7: 'Because we want to look after them properly and because the pilot is for learning, not for billing. Once we fill the five, we close.',
+    faq_q8: 'Won\'t this take away sales I was going to make anyway?',
+    faq_a8: 'Quite the opposite of a normal discount. When you put twenty percent off in your store, everyone who was going to buy anyway takes it. With Tuko, the discount only applies if one more person joins. Nobody gets the low price without bringing you a customer.',
 
     /* MOCKUP */
     mockup_product_name: 'Cream set',
@@ -806,22 +1003,33 @@ const translations = {
     mockup_tip_label: 'New option',
     mockup_tip_text: 'Lets customers reserve in a campaign',
 
-    /* BENEFITS */
-    benefits_badge: 'What you get',
-    benefits_title: 'A volume discount makes one customer buy three units. <span class="title-accent">Tuko</span> makes <em class="title-accent-em">three customers</em> buy one',
-    benefits_sub: 'It isn\'t another discount app.<span class="s-para-gap" aria-hidden="true"></span>It\'s the only one that uses the discount to bring you buyers you didn\'t have.',
-    ben1_title: 'More units per campaign',
-    ben1_text: 'Same product, same week—selling double or triple the units.<span class="s-para-gap" aria-hidden="true"></span>Without raising your ad budget by a euro.',
-    ben2_title: 'Idle stock, cleared',
-    ben2_text: 'Turn the markdown you were going to make anyway into a sale conditioned on volume.<span class="s-para-gap" aria-hidden="true"></span>Free up capital without giving away margin.',
-    ben3_title: 'You set the floor',
-    ben3_text: 'You define the ladder and the maximum discount.<span class="s-para-gap" aria-hidden="true"></span>Tuko warns you if a tier eats your margin before you publish the campaign.',
-    ben4_title: 'Buyers you didn\'t pay for',
-    ben4_text: 'Every customer who already reserved has a financial reason to share it.<span class="s-para-gap" aria-hidden="true"></span>That traffic costs you zero.',
-    ben5_title: 'Live in two minutes',
-    ben5_text: 'Native Shopify app. It adds to the product page without touching your theme or checkout.',
-    ben6_title: 'No refunds or manual adjustments',
-    ben6_text: 'Customers get an authorization hold when they reserve and are charged once when the campaign closes, with the discount already applied.<span class="s-para-gap" aria-hidden="true"></span>No partial charges or refunds to manage.',
+    /* WHY THEY BUY */
+    why_badge: 'Why it works',
+    why_title: 'Three things that make them <em class="title-accent-em">buy now</em>',
+    why1_kicker: 'The clock',
+    why1_title: 'With 24 hours ahead, they buy today.',
+    why1_desc: 'Without a clock, they leave it for never.',
+    why1_w_label: 'Closes in',
+    why1_w_h: 'Hours',
+    why1_w_m: 'Minutes',
+    why1_w_s: 'Seconds',
+    why1_w_foot: 'After that, the <b>−20%</b> is gone.',
+    why2_kicker: 'The person',
+    why2_title: 'You don\'t ask them to fill a group of twenty.',
+    why2_desc: 'You ask for one person. That they\'ll do.',
+    why2_w_missing: 'There\'s 1 inside. <b>1</b> more so both buy at −15%',
+    why2_w_missing_tpl: '<b>{n}</b> more so both buy at −15%',
+    why2_w_missing_one: 'There\'s 1 inside. <b>1</b> more so both buy at −15%',
+    why2_w_unlocked: '<em>−15% unlocked</em> for the whole group',
+    why2_w_flag: 'Both',
+    why2_w_foot: 'If the goal isn\'t hit, regular price',
+    why3_kicker: 'The group',
+    why3_title: 'They see someone already joined and paid.',
+    why3_desc: 'That convinces more than anything you could say.',
+    why3_w_txt: '<b>1 person</b> already inside · 1 to go',
+    why3_w_btn: 'Share',
+    why3_w_chip: 'Marta <em>just joined</em>',
+    why3_w_chip_tpl: '{name} <em>just joined</em>',
 
     /* CTA */
     cta_title: 'Install Tuko and turn traffic into real sales.',
@@ -837,17 +1045,17 @@ const translations = {
     cta_placeholder_details: 'Short message (max 100 characters)',
     cta_submit: 'Contact us',
     cta_success: 'Message sent! We\'ll be in touch soon.',
-    cta_error: 'Something went wrong. Please write to us at team.tukoo@gmail.com',
+    cta_error: 'Something went wrong. Please write to us at joan@tukoteam.com',
 
     /* FOOTER */
     footer_col1_title: 'Contact',
-    footer_email: 'team.tukoo@gmail.com',
+    footer_email: 'joan@tukoteam.com',
     footer_col_product: 'Product',
     footer_pricing: 'Pricing',
     footer_col2_title: 'Legal',
     footer_privacy: 'Privacy policy',
     footer_terms: 'Terms and conditions',
-    footer_tagline: 'Goal-based discounts for Shopify stores. Sell more units without giving away margin.',
+    footer_tagline: 'A customer walks in. Brings another. Both buy.',
     footer_copy: '© 2026 Tuko. All rights reserved.',
 
     /* BLOG INDEX */
@@ -1022,7 +1230,7 @@ const translations = {
     priv_intro: 'This Privacy Policy describes how personal data is collected and processed through the Tuko website.',
     priv_h2_1: '<span class="legal-num">1.</span> Data controller',
     priv_p1: 'Until the company is formally incorporated, the data controller is:',
-    priv_p2: '<strong>Joan de Zavala Prats and Rafael Alonso Barreto de Vicente</strong><br>Contact email: <a href="mailto:team.tukoo@gmail.com" data-i18n="footer_email">team.tukoo@gmail.com</a>',
+    priv_p2: '<strong>Joan de Zavala Prats and Rafael Alonso Barreto de Vicente</strong><br>Contact email: <a href="mailto:joan@tukoteam.com" data-i18n="footer_email">joan@tukoteam.com</a>',
     priv_p3: 'This controller acts solely to manage requests submitted through the contact form.',
     priv_h2_2: '<span class="legal-num">2.</span> Data we collect',
     priv_p4: 'The only form on the website may collect the following personal data, voluntarily provided by the user:',
@@ -1043,7 +1251,7 @@ const translations = {
     priv_h2_6: '<span class="legal-num">6.</span> Retention',
     priv_p10: 'Data will be retained for as long as necessary to respond to the request, or until the user requests its deletion.',
     priv_h2_7: '<span class="legal-num">7.</span> User rights',
-    priv_p11: 'You can exercise your rights of access, rectification, erasure, objection, restriction of processing or portability by sending an email to: <a href="mailto:team.tukoo@gmail.com" data-i18n="footer_email">team.tukoo@gmail.com</a>',
+    priv_p11: 'You can exercise your rights of access, rectification, erasure, objection, restriction of processing or portability by sending an email to: <a href="mailto:joan@tukoteam.com" data-i18n="footer_email">joan@tukoteam.com</a>',
     priv_h2_8: '<span class="legal-num">8.</span> Security',
     priv_p12: 'Reasonable security measures are applied to protect personal data against unauthorized access.',
     priv_update: 'Last updated: 09/12/2025',
@@ -1069,7 +1277,7 @@ const translations = {
     terms_h2_7: '<span class="legal-num">7.</span> Modifications',
     terms_p7: 'Tuko may modify these terms at any time. Continued use after changes implies acceptance.',
     terms_h2_8: '<span class="legal-num">8.</span> Contact',
-    terms_p8: 'For any questions, write to: <a href="mailto:team.tukoo@gmail.com" data-i18n="footer_email">team.tukoo@gmail.com</a>',
+    terms_p8: 'For any questions, write to: <a href="mailto:joan@tukoteam.com" data-i18n="footer_email">joan@tukoteam.com</a>',
   }
 };
 
@@ -1102,45 +1310,71 @@ function postDemoPlayState(iframe, play) {
   } catch (e) {}
 }
 
-/** Altura del demo 03 (stack móvil) = contenido real, sin hueco vacío abajo */
+/** Altura del iframe = contenido real (paso 1: wizard) */
 function initDemoIframeHugHeight() {
+  const isMobile = () => window.matchMedia('(max-width: 960px)').matches;
+  function stepIndex(iframe) {
+    const step = iframe.closest('.how-step');
+    if (!step || !step.parentElement) return -1;
+    return Array.prototype.indexOf.call(step.parentElement.children, step);
+  }
+  function shouldHug(iframe) {
+    const i = stepIndex(iframe);
+    return i === 0;
+  }
+  function applyHug(box, h) {
+    box.classList.add('is-hug');
+    box.style.setProperty('--demo-hug-h', h + 'px');
+    box.style.aspectRatio = 'auto';
+    box.style.minHeight = '0';
+    if (isMobile()) {
+      /* En móvil: misma idea de menos altura, pero escalando el contenido (no cortando) */
+      const cap = Math.min(Math.round(window.innerHeight * 0.55), 440);
+      if (h > cap) {
+        const scale = Math.max(0.72, cap / h);
+        box.classList.add('is-scaled');
+        box.style.setProperty('--demo-scale', String(scale));
+        box.style.setProperty('--demo-scale-h', Math.round(h * scale) + 'px');
+        box.style.height = Math.round(h * scale) + 'px';
+        return;
+      }
+    }
+    box.classList.remove('is-scaled');
+    box.style.removeProperty('--demo-scale');
+    box.style.removeProperty('--demo-scale-h');
+    box.style.height = h + 'px';
+  }
+  function clearHug(box) {
+    box.classList.remove('is-hug', 'is-scaled');
+    box.style.removeProperty('--demo-hug-h');
+    box.style.removeProperty('--demo-scale');
+    box.style.removeProperty('--demo-scale-h');
+    box.style.height = '';
+    box.style.aspectRatio = '';
+    box.style.minHeight = '';
+  }
+
   window.addEventListener('message', function (ev) {
     const data = ev.data;
     if (!data || data.type !== 'tuko-demo-resize' || !data.height) return;
     const h = Math.round(Number(data.height));
-    if (!Number.isFinite(h) || h < 200) return;
+    if (!Number.isFinite(h) || h < 160) return;
 
     document.querySelectorAll('iframe.how-step-iframe').forEach(function (iframe) {
       try {
         if (iframe.contentWindow !== ev.source) return;
         const box = iframe.closest('.how-anim-box--embed');
         if (!box) return;
-        /* Solo abrazar en viewport estrecho (stack vertical del 03) */
-        if (window.matchMedia('(max-width: 960px)').matches) {
-          box.classList.add('is-hug');
-          box.style.setProperty('--demo-hug-h', h + 'px');
-          box.style.height = h + 'px';
-          box.style.aspectRatio = 'auto';
-          box.style.minHeight = '0';
-        } else {
-          box.classList.remove('is-hug');
-          box.style.removeProperty('--demo-hug-h');
-          box.style.height = '';
-          box.style.aspectRatio = '';
-          box.style.minHeight = '';
-        }
+        if (shouldHug(iframe)) applyHug(box, h);
+        else clearHug(box);
       } catch (e) {}
     });
   });
 
   window.addEventListener('resize', function () {
-    if (window.matchMedia('(max-width: 960px)').matches) return;
     document.querySelectorAll('.how-steps > .how-step:nth-child(3) .how-anim-box--embed').forEach(function (box) {
-      box.classList.remove('is-hug');
-      box.style.removeProperty('--demo-hug-h');
-      box.style.height = '';
-      box.style.aspectRatio = '';
-      box.style.minHeight = '';
+      if (isMobile()) return;
+      clearHug(box);
     });
   });
 }
@@ -1174,7 +1408,7 @@ function initDemoIframeVisibility() {
 /* Idioma: path /en gana; si no, ?lang; si no, localStorage. */
 function resolveLang() {
   var path = (location.pathname || '').replace(/\/$/, '') || '/';
-  if (path === '/en' || path.indexOf('/en/') === 0) return 'en';
+  if (path === '/en' || path.indexOf('/en/') === 0 || /(^|\/)en(\/|$)/.test(path)) return 'en';
   var q = new URLSearchParams(location.search).get('lang');
   if (q === 'es' || q === 'en') return q;
   return localStorage.getItem('tuko_lang') || 'es';
@@ -1235,7 +1469,8 @@ function setLanguage(lang, opts) {
   if (dest) {
     var herePath = location.pathname.replace(/\/$/, '') || '/';
     var destPath = dest.pathname.replace(/\/$/, '') || '/';
-    if (destPath !== herePath) {
+    var isLocal = /^(localhost|127\.0\.0\.1|::1)$/.test(location.hostname);
+    if (destPath !== herePath && !isLocal) {
       localStorage.setItem('tuko_lang', lang);
       location.href = dest.href;
       return;
@@ -1267,12 +1502,17 @@ function setLanguage(lang, opts) {
       }
     });
 
-    setVideoLang(lang);
     syncSeoLang(lang);
     broadcastDemoLang(lang);
     if (typeof window.tukoEnsureHeroEmArc === 'function') window.tukoEnsureHeroEmArc();
-    if (typeof window.tukoRefreshHeroStats === 'function') window.tukoRefreshHeroStats();
+    if (typeof window.tukoHeroTitleRender === 'function') window.tukoHeroTitleRender({ instant: true });
+    if (typeof window.tukoHeroLiveRender === 'function') window.tukoHeroLiveRender();
     if (typeof window.tukoSyncWidgetGoals === 'function') window.tukoSyncWidgetGoals();
+    if (typeof window.tukoWhyGroupRender === 'function') window.tukoWhyGroupRender();
+    if (typeof window.tukoWhyRaceRender === 'function') window.tukoWhyRaceRender();
+    if (typeof window.tukoCalcRender === 'function') window.tukoCalcRender();
+    if (typeof window.tukoDataCountSync === 'function') window.tukoDataCountSync();
+    document.dispatchEvent(new CustomEvent('tuko:langchange', { detail: { lang } }));
   };
 
   if (!shouldMotion) {
@@ -1287,28 +1527,6 @@ function setLanguage(lang, opts) {
       document.body.classList.remove('lang-switching');
     });
   }, 180);
-}
-
-/* El vídeo comercial existe en dos idiomas: se muestra el que toca */
-function setVideoLang(lang) {
-  const box = document.getElementById('tukoVideo');
-  if (!box) return;
-  const id = box.dataset[lang === 'en' ? 'ytEn' : 'ytEs'];
-  if (!id || id === box.dataset.ytId) return;
-  box.dataset.ytId = id;
-
-  const iframe = box.querySelector('iframe');
-  if (iframe) {
-    /* ya estaba reproduciéndose: se cambia sobre la marcha */
-    const url = (typeof window.tukoYtEmbedUrl === 'function')
-      ? window.tukoYtEmbedUrl(id, true)
-      : 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
-    iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
-    iframe.src = url;
-    return;
-  }
-  const img = box.querySelector('img');
-  if (img) img.src = 'https://i.ytimg.com/vi/' + id + '/maxresdefault.jpg';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1475,7 +1693,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ── SCROLLSPY: sección activa en header (home) ── */
 document.addEventListener('DOMContentLoaded', () => {
-  const sectionIds = ['problema', 'como-funciona', 'beneficios'];
+  const sectionIds = ['como-funciona', 'beneficios', 'precios'];
   const sections = sectionIds
     .map(id => document.getElementById(id))
     .filter(Boolean);
@@ -1531,3 +1749,249 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateSpy();
 });
+
+/* ── Cifras del bloque de datos: cuentan desde 0 al entrar en pantalla ── */
+(function () {
+  const nums = document.querySelectorAll('.data-num[data-count]');
+  if (!nums.length) return;
+  const ease = t => 1 - Math.pow(1 - t, 3);
+  const suffix = () => (document.documentElement.lang === 'en' ? '%' : ' %');
+  const fmt = (v) => String(v) + suffix();
+
+  function run(el) {
+    if (el.dataset.countBusy === '1') return;
+    const target = parseInt(el.getAttribute('data-count') || '0', 10);
+    if (!isFinite(target)) return;
+    el.dataset.countBusy = '1';
+    el.dataset.countPlayed = '1';
+    const dur = 1400, t0 = performance.now();
+    el.textContent = fmt(0);
+    const step = now => {
+      const p = Math.min(1, (now - t0) / dur);
+      el.textContent = fmt(Math.round(target * ease(p)));
+      if (p < 1) requestAnimationFrame(step);
+      else {
+        el.setAttribute('aria-label', fmt(target));
+        el.dataset.countBusy = '0';
+      }
+    };
+    requestAnimationFrame(step);
+  }
+
+  function tryRun(el) {
+    if (el.dataset.countPlayed === '1') return;
+    const host = el.closest('.fade-up') || el.closest('.data-card') || el;
+    if (host.classList.contains('fade-up') && !host.classList.contains('visible')) return;
+    run(el);
+  }
+
+  window.tukoDataCountSync = function () {
+    nums.forEach(el => {
+      const target = parseInt(el.getAttribute('data-count') || '0', 10);
+      if (!isFinite(target)) return;
+      if (el.dataset.countPlayed === '1') {
+        el.textContent = fmt(target);
+        el.setAttribute('aria-label', fmt(target));
+      } else {
+        el.textContent = fmt(0);
+      }
+    });
+  };
+
+  if (!('IntersectionObserver' in window)) {
+    nums.forEach(run);
+    return;
+  }
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target.classList.contains('data-num')
+        ? e.target
+        : e.target.querySelector('.data-num[data-count]');
+      if (!el) return;
+      const host = el.closest('.fade-up');
+      if (host) host.classList.add('visible');
+      tryRun(el);
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+  nums.forEach(el => {
+    el.textContent = fmt(0);
+    const host = el.closest('.fade-up') || el.closest('.data-card') || el;
+    io.observe(host);
+    host.addEventListener('tuko:visible', () => tryRun(el));
+  });
+})();
+
+/* ── Calculadora de precios: coste mensual por plan según lo vendido con Tuko (tope aplicado) ── */
+(function () {
+  const range = document.getElementById('calcRange');
+  const out = document.getElementById('calcSales');
+  const wrap = document.getElementById('calcPlans');
+  const calc = range ? range.closest('.calc') : null;
+  if (!range || !out || !wrap || !calc) return;
+
+  const PLANS = [
+    { id: 'p1', fee: 0,     rate: 0.042, cap: 500 },
+    { id: 'p2', fee: 14.99, rate: 0.025, cap: 400 },
+    { id: 'p3', fee: 69.99, rate: 0.007, cap: 300 },
+    { id: 'p4', fee: 169,   rate: 0,     cap: null }
+  ];
+  const dict = () => translations[document.documentElement.lang] || translations.es;
+  const isEn = () => document.documentElement.lang === 'en';
+  const money = v => {
+    const n = Math.round(Number(v) * 100) / 100;
+    const hasCents = Math.abs(n - Math.round(n)) > 0.001;
+    const s = n.toLocaleString(isEn() ? 'en-US' : 'de-DE', {
+      minimumFractionDigits: hasCents ? 2 : 0,
+      maximumFractionDigits: 2
+    });
+    return isEn() ? '€' + s : s + ' €';
+  };
+  const pct = r => {
+    const v = Math.round(r * 1000) / 10;
+    const s = Number.isInteger(v) ? String(v) : String(v).replace('.', isEn() ? '.' : ',');
+    return s + (isEn() ? '%' : ' %');
+  };
+  const tpl = (key, vars) => {
+    let s = dict()[key] || '';
+    Object.keys(vars || {}).forEach(k => { s = s.split('{' + k + '}').join(vars[k]); });
+    return s;
+  };
+  const planCost = (p, sales) => p.cap == null ? p.fee : p.fee + Math.min(sales * p.rate, p.cap);
+
+  function render() {
+    const sales = Number(range.value) || 0;
+    const min = Number(range.min) || 0, max = Number(range.max) || 1;
+    out.textContent = money(sales);
+    range.style.setProperty('--p', (((sales - min) / (max - min)) * 100).toFixed(2) + '%');
+    calc.querySelectorAll('[data-scale]').forEach(s => { s.textContent = money(Number(s.getAttribute('data-scale'))); });
+
+    let best = null;
+    const rows = PLANS.map(p => {
+      const cost = planCost(p, sales);
+      const capped = p.cap != null && sales * p.rate > p.cap;
+      if (!best || cost < best.cost - 0.001) best = { id: p.id, cost };
+      return { p, cost, capped };
+    });
+    const t = dict();
+    rows.forEach(({ p, cost, capped }) => {
+      const row = wrap.querySelector('[data-plan="' + p.id + '"]');
+      if (!row) return;
+      row.querySelector('[data-cost]').textContent = money(cost);
+      const sub = row.querySelector('[data-sub]');
+      if (p.cap == null) sub.textContent = tpl('calc_sub_flat', { fee: money(p.fee) });
+      else if (capped) sub.textContent = tpl('calc_sub_capped', { cap: money(p.cap) });
+      else if (sales === 0 && !p.fee) sub.textContent = t.calc_sub_zero || '';
+      else if (!p.fee) sub.textContent = tpl('calc_sub_pct', { rate: pct(p.rate) });
+      else sub.textContent = tpl('calc_sub_tpl', { fee: money(p.fee), rate: pct(p.rate) });
+      row.classList.toggle('is-best', !!best && best.id === p.id);
+    });
+  }
+  window.tukoCalcRender = render;
+  range.addEventListener('input', render);
+  render();
+})();
+
+/* ── Rescue móvil: las 3 tarjetas a la misma altura (la más alta) ── */
+(function () {
+  const fork = document.querySelector('#si-no-se-llena .rescue-fork');
+  if (!fork) return;
+  const mq = window.matchMedia('(max-width: 900px)');
+  let timer = null;
+
+  function equalize() {
+    const cards = Array.from(fork.querySelectorAll('.rescue-card'));
+    if (!cards.length) return;
+    cards.forEach(c => c.style.removeProperty('--rescue-card-h'));
+    if (!mq.matches) return;
+    void fork.offsetHeight;
+    let max = 0;
+    cards.forEach(c => { max = Math.max(max, c.offsetHeight); });
+    if (max > 0) cards.forEach(c => c.style.setProperty('--rescue-card-h', max + 'px'));
+  }
+  function schedule() {
+    clearTimeout(timer);
+    timer = setTimeout(equalize, 60);
+  }
+
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
+  window.addEventListener('resize', schedule, { passive: true });
+  window.addEventListener('load', schedule);
+  if (mq.addEventListener) mq.addEventListener('change', schedule); else mq.addListener(schedule);
+  document.addEventListener('tuko:langchange', schedule);
+  schedule();
+})();
+
+/* ── CTA fija en móvil: visible tras el hero; se oculta al hacer scroll y reaparece a ~1,5s ── */
+(function () {
+  const bar = document.getElementById('stickyCta');
+  const hero = document.querySelector('.hero');
+  if (!bar || !hero || !('IntersectionObserver' in window)) return;
+  const stops = [document.querySelector('.pricing'), document.querySelector('.final-cta-wrap'), document.querySelector('#solicitud'), document.querySelector('footer')].filter(Boolean);
+  const mq = window.matchMedia('(max-width: 960px)');
+  let heroIn = true;
+  const inView = new Set();
+  let scrolling = false;
+  let idleTimer = null;
+
+  function update() {
+    const on = mq.matches && !heroIn && inView.size === 0 && !scrolling;
+    bar.classList.toggle('is-on', on);
+    bar.setAttribute('aria-hidden', on ? 'false' : 'true');
+    if ('inert' in bar) bar.inert = !on;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.target === hero) heroIn = e.isIntersecting;
+      else if (e.isIntersecting) inView.add(e.target);
+      else inView.delete(e.target);
+    });
+    update();
+  }, { threshold: 0.02 });
+  io.observe(hero);
+  stops.forEach(s => io.observe(s));
+
+  window.addEventListener('scroll', function () {
+    if (!mq.matches) return;
+    scrolling = true;
+    update();
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(function () {
+      scrolling = false;
+      update();
+    }, 1500);
+  }, { passive: true });
+
+  if (mq.addEventListener) mq.addEventListener('change', update); else mq.addListener(update);
+  update();
+})();
+
+/* ── Plan piloto: las tres peticiones se encienden de izquierda a derecha ── */
+(function () {
+  const grid = document.getElementById('pilotAsks');
+  if (!grid) return;
+  const cards = Array.from(grid.querySelectorAll('.pilot-ask'));
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) {
+    cards.forEach(c => c.classList.add('is-lit'));
+    return;
+  }
+  let timers = [];
+  let lit = false;
+  const clear = () => { timers.forEach(clearTimeout); timers = []; };
+  const io = new IntersectionObserver(entries => {
+    const e = entries[entries.length - 1];
+    if (e.isIntersecting && e.intersectionRatio >= 0.45) {
+      if (lit) return;
+      lit = true;
+      cards.forEach((c, i) => timers.push(setTimeout(() => c.classList.add('is-lit'), 700 + i * 1200)));
+    } else if (!e.isIntersecting) {
+      lit = false;
+      clear();
+      cards.forEach(c => c.classList.remove('is-lit'));
+    }
+  }, { threshold: [0, 0.45] });
+  io.observe(grid);
+})();

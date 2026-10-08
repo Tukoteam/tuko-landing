@@ -15,7 +15,7 @@ const EN_TITLE = 'Tuko · Goal-based discounts for Shopify stores';
 const EN_DESC =
   'Set a unit goal on a product: when it\'s hit, the price drops for everyone. Sell more without giving away margin. Group buying app for Shopify.';
 const EN_OG_DESC =
-  'Set a unit goal on a product and a deadline. Customers reserve with nothing charged yet—if the goal is hit, everyone pays less; if not, they pay full price and you keep your margin.';
+  'Set a unit goal on a product and a deadline. Customers buy and join the group—if the goal is hit, everyone gets the discount; if not, the order is cancelled and refunded.';
 
 function extractTranslations(html) {
   const start = html.indexOf('const translations = {');
