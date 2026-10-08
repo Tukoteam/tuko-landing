@@ -1,31 +1,45 @@
-# Handoff Lovable — siguientes PRs (tras PR A)
+# Handoff Lovable — Sprint 3
 
-Copia esto en Lovable cuando PR A esté mergeado:
+## Estado
 
----
+- Natrue ES/EN en `main` y prod (**200**). Bloqueo A.1 **levantado**.
+- CTO OK al **PR B**: ver [`SPRINT3-PR-B-CTO-OK.md`](./SPRINT3-PR-B-CTO-OK.md).
 
-Eres el asistente de ingeniería del equipo **Tuko**. Repo: `tuko-landing` (landing estática Netlify, tukeros.com/tukoteam.com). Yo soy el CTO. **Solo landing.** Sin frameworks nuevos ni reescrituras grandes. Sin tocar Shopify/plugin.
+## Orden
 
-**Ya hecho (PR A):** Natrue y `primer-articulo` → 301 a `/blog/`; eliminados redirects zombi `/_versiones/*` y `/_originales-png/*`. Opinión CTO en `docs/SPRINT3-CTO-OPINION.md`.
+```text
+PR A (+ Natrue) done → PR B site/ (OK CTO) → PR C CI → D partials/?v= → E i18n JSON
+```
 
-**Implementa en PRs separados, en este orden:**
+## PR B — `chore/landing-sprint3-pr-b-site` (implementar ahora)
 
-### PR B — superficie `site/` (prioridad)
-1. Mover lo publicable a `site/` y `publish = "site"`.
-2. Unificar redirects + headers en `netlify.toml`; borrar `_redirects` y `_headers`.
-3. Quitar reglas zombi restantes si quedan. Inventario curl before/after en preview Netlify.
-4. No tocar CSP salvo unificar la fuente (mismo texto que hoy en `netlify.toml`).
+Un solo tema: Netlify publica solo la superficie pública. Sin frameworks, sin build step, sin i18n JSON, sin partials, sin borrar banners, sin cambiar el texto de la CSP.
 
-### PR C — CI
-5. GitHub Action: enlaces internos, sitemap vs ficheros, hreflang → destino existente.
-6. Comprobar que `en/` regenerado no deriva (o fallar CI).
+1. **Inventario BEFORE:** `scripts/check-surface.sh` (o `.mjs` en Windows) con `BASE_URL`; curl `-sI` a todas las `<loc>` de `sitemap.xml`, todos los `from` de redirects en `netlify.toml` **y** `_redirects`, y rutas internas (`/AGENTS.md`, `/CLAUDE.md`, `/ARCHITECTURE.md`, `/README.md`, `/SEO_NOTES.md`, `/package.json`, `/serve.json`, `/docs/SPRINT3-*.md`, `/scripts/README.md`, `/_to-migrate/README.md`, `/google5360a4cde3647abe.html`). Registrar status, Location, CSP, Permissions-Policy, Cache-Control → `docs/PR-B-inventory-before.txt` (contra `https://tukoteam.com`).
 
-### PR D / E — después
-7. Partials header/footer + `npm run build` (cache-bust `?v=` por hash).
-8. i18n: `src/locales/*.json` como única fuente; EN generado con cabecera GENERATED.
+2. **`git mv` → `site/`:** `index.html`, `privacidad.html`, `terminos.html`, `tuko-ai.html`, `en/`, `blog/`, `assets/`, `landing-demo/`, `robots.txt`, `sitemap.xml`, `google5360a4cde3647abe.html`.  
+   **Fuera:** `docs/`, `scripts/`, `_to-migrate/`, `*.md`, `package.json`, `serve.json`, `.editorconfig`, `netlify.toml`.
 
-**Restricciones:** un PR = un tema; diffs pequeños; no borrar banners/assets sin listarlos y esperar OK; no cambiar copy legal sin marcarlo.
+3. **`netlify.toml`:** `publish = "site"`. **Diff** `_redirects` vs toml y fusionar lo que falte (hoy el toml ya tiene `/pages/privacidad|terminos`; `_redirects` puede tener más). Mantener precedencia efectiva actual. Borrar `_redirects` y `_headers`. Headers/CSP del toml **sin cambios byte a byte**.
 
-Empieza por **PR B**. No implementes D/E en el mismo PR.
+4. Apuntar los scripts `*.mjs` y `serve.json` / comando local a `site/`.
 
----
+5. Actualizar `AGENTS.md`, `CLAUDE.md`, `ARCHITECTURE.md`, `README.md`.
+
+6. Orphans: crear `docs/ORPHAN-ASSETS.md` (lista), **no borrar**.
+
+7. Inventario AFTER (Deploy Preview) → `docs/PR-B-inventory-after.txt` + diff en la descripción del PR.
+
+**Aceptación:** URLs públicas idénticas; internos 200→404; Natrue ES/EN 200 y `.html`→301; formulario Netlify detectado; sin `_redirects`/`_headers` en el repo.
+
+**Antes de abrir el PR:** mostrar inventario BEFORE + diff **excluyendo renames puros**.
+
+**Checklist humano al merge:** Google verify dentro de `site/`; Publish directory de la UI Netlify no pisa el toml; Hub/`export-shell-for-cms` no escribe en la raíz antigua; rollback = revert del merge.
+
+## Fuera de B (C/D/E)
+
+- compra-colectiva solo ES; `?v=` desalineados; CI; partials; i18n JSON.
+
+## Prompt corto (pegar)
+
+> CTO OK al PR B (`docs/SPRINT3-PR-B-CTO-OK.md`). Natrue no tocar. Diff real `_redirects` vs toml. Inventario BEFORE + diff sin renames antes de abrir el PR. Orphans solo listados. Rama `chore/landing-sprint3-pr-b-site`.
