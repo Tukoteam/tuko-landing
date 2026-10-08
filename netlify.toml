@@ -264,6 +264,18 @@
   force = true
 
 [[redirects]]
+  from = "/en/pages/privacidad.html"
+  to = "/en/privacidad"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/pages/terminos.html"
+  to = "/en/terminos"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/privacidad.html"
   to = "/privacidad"
   status = 301
