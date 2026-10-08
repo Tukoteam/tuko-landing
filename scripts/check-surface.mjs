@@ -44,7 +44,7 @@ const internal = [
   "/serve.json",
   "/docs/archive/sprint3/SPRINT3-CTO-OPINION.md",
   "/scripts/README.md",
-  "/_to-migrate/README.md",
+  "/_to-migrate/x",
   "/google5360a4cde3647abe.html",
 ];
 

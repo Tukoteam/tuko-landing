@@ -16,7 +16,6 @@ Repo: `Tukoteam/tuko-landing`. Equipo pequeño (2 personas).
 | `site/assets/` | CSS, JS, media |
 | `site/landing-demo/` | Iframes del home |
 | `docs/`, `scripts/`, `*.md` | No publicados |
-| `_to-migrate/` | Fuera de la landing (404) |
 | `netlify.toml` | Redirects + headers (única fuente) |
 
 ## Probar en local

@@ -14,7 +14,6 @@ const cmsRoot = path.resolve(
   '../plugin-tuko-main/plugin-tuko-main/backend/src/services/blogCms'
 );
 const render = require(path.join(cmsRoot, 'render.js'));
-const store = require(path.join(cmsRoot, 'store.js'));
 
 const i18nSrc = fs.readFileSync(path.join(landing, 'assets/js/i18n.js'), 'utf8');
 const enStart = i18nSrc.indexOf('en: {');
@@ -91,9 +90,7 @@ const posts = [
 ];
 
 const enDir = path.join(landing, 'en/blog');
-const contentDir = path.join(landing, '_to-migrate/blog-cms/content');
 fs.mkdirSync(enDir, { recursive: true });
-fs.mkdirSync(contentDir, { recursive: true });
 
 const articles = [];
 for (const p of posts) {
@@ -143,11 +140,6 @@ for (const p of posts) {
     sibling: { slug: p.slug, locale: 'es', status: 'published' },
   });
   fs.writeFileSync(path.join(enDir, `${p.slug}.html`), html);
-  fs.writeFileSync(
-    path.join(contentDir, `${p.slug}.en.json`),
-    `${JSON.stringify(render.toRepoContentJson(article), null, 2)}\n`
-  );
-  store.saveArticle(article);
   console.log('OK', p.slug, title.slice(0, 48), 'words=', words);
 }
 

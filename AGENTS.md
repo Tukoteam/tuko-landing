@@ -13,7 +13,7 @@ Guía para agentes / CTO trabajando en este repo.
 
 - Diseño visual, copy de marketing, comportamiento del widget embebido en demos.
 - App / plugin / backend / Shopify (`plugin-tuko`).
-- “Arreglar” el CMS: vive en `_to-migrate/blog-cms/` y no se publica.
+- “Arreglar” el Blog CMS: vive en el Hub (`plugin-tuko` backend), no en esta landing.
 - Borrar assets listados en `docs/ORPHAN-ASSETS.md` sin OK de Joan.
 
 ## Convenciones
@@ -47,7 +47,6 @@ Fuente: Mona Sans. Títulos con peso alto; párrafos ligeros (`font-weight: 300`
 site/           ← ÚNICO publish (HTML, assets, blog, en, demo, sitemap…)
 docs/           ← no publicado
 scripts/        ← no publicado
-_to-migrate/    ← 404
 netlify.toml    ← redirects + headers
 ```
 
