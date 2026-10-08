@@ -6,42 +6,34 @@
 flowchart TB
   Browser[Browser]
   Netlify[Netlify_CDN]
-  Root[Repo_root_static]
-  Browser --> Netlify --> Root
-  Root --> Home[index_en_index]
-  Root --> Blog[blog_en_blog]
-  Root --> Legal[privacidad_terminos]
-  Root --> Assets[assets_css_js_images]
-  Root --> Demo[landing-demo_iframes]
-  Root -.-> Migrate[_to-migrate_404]
+  Site[site_publish]
+  Browser --> Netlify --> Site
+  Site --> Home[index_en_index]
+  Site --> Blog[blog_en_blog]
+  Site --> Legal[privacidad_terminos]
+  Site --> Assets[assets_css_js_images]
+  Site --> Demo[landing-demo_iframes]
+  Netlify -.-> Private[docs_scripts_md_404]
 ```
 
-## Decisiones (cleanup 2026-10)
+## Decisiones (2026-10)
 
 | Decisión | Motivo |
 |----------|--------|
-| Netlify only (`netlify.toml` + `_redirects` + `_headers`) | Hosting real; `.htaccess` eliminado |
-| Legales en raíz; `/pages/*` → 301 | Una URL canónica |
-| `blog-cms` → `_to-migrate/` + 404 | No pertenece a la landing publicada |
+| `publish = "site"` | No servir docs/scripts/AGENTS en 200 |
+| Redirects/headers solo en `netlify.toml` | Evitar deriva `_redirects` / `_headers` |
+| Legales en raíz de `site/`; `/pages/*` → 404/301 | Una URL canónica |
+| `blog-cms` → `_to-migrate/` + 404 | No pertenece a la landing |
 | GA4 tras consentimiento | RGPD |
-| Home CSS/JS externos | Mantenibilidad; HTML ~1k líneas |
-| Imágenes WebP + kebab + srcset banners | Peso ~52 MB → ~2 MB |
-| `landing-demo/` se mantiene | Enlazado desde el home (iframes) |
-| Consent en legales + `tuko-ai` (Sprint 2) | Misma puerta GA4 en toda la superficie útil |
-| OG v2–v7 eliminados; png + v8 pendientes de unificar | Evitar assets muertos; Joan elige definitiva |
-| Posts ES-only sin hreflang `en` a 404 | SEO; EN selector → índice EN |
-| Natrue republicado ES/EN como HTML estático | Hub lo despublicó 2026-09-24; restaurado en Sprint 3 |
-| `primer-articulo` retirado → `/blog/` | Borrador huérfano fuera de índice |
-| Redirects zombi `_versiones` / `_originales-png` eliminados | Carpetas inexistentes |
-| Norte: `publish = "site"` (pendiente PR B) | Dejar de servir docs/scripts/AGENTS |
-
-Lighthouse Sprint 2: [`docs/LIGHTHOUSE-2026-10.md`](./docs/LIGHTHOUSE-2026-10.md). Opinión Sprint 3: [`docs/SPRINT3-CTO-OPINION.md`](./docs/SPRINT3-CTO-OPINION.md). Resumen: [`docs/CLEANUP-SUMMARY.md`](./docs/CLEANUP-SUMMARY.md).
+| Natrue ES/EN HTML estático | Hub lo despublicó; republicado en Sprint 3 |
+| Imágenes WebP + kebab + srcset | Peso ~52 MB → ~2 MB |
+| `landing-demo/` dentro de `site/` | Enlazado desde el home |
 
 ## i18n
 
-Hoy: diccionarios en `home-ui.js` + `i18n.js` + HTML espejo `en/`. Propuesta futura: [`docs/I18N-PROPOSAL.md`](./docs/I18N-PROPOSAL.md).
+Hoy: diccionarios en `home-ui.js` + `i18n.js` + HTML espejo `site/en/`. Futuro: `docs/I18N-PROPOSAL.md` / Sprint 3 PR E.
 
-## Seguridad / secretos
+## Seguridad
 
-- `.gitignore` cubre `.env*`, `*.pem`, `node_modules`, settings locales.
-- Secretos locales del CMS (si existen) no deben publicarse; carpeta migrada fuera de la superficie útil.
+- `.gitignore` cubre `.env*`, `*.pem`, `node_modules`.
+- CSP y Permissions-Policy viven en `netlify.toml` (no en `_headers`).

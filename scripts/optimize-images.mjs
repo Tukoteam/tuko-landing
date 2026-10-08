@@ -11,7 +11,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'site');
 const skipDirs = new Set(['node_modules', '.git', '_to-migrate', '_versiones', 'landing-demo']);
 
 function walk(dir, pred, out = []) {

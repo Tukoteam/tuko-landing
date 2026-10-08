@@ -12,7 +12,14 @@ Ver commits en `main` (gitignore, GA4 consent, legales canónicos, `_to-migrate`
 - `blog/primer-articulo.html` **retirado**; URLs → 301 `/blog/`.
 - Eliminados redirects zombi `/_versiones/*` y `/_originales-png/*`.
 - **Natrue republicado** ES/EN (HTML + índice + sitemap); redirects `.html` → URL limpia otra vez.
-- Siguiente: PR B `publish = "site"` (ver handoff Lovable).
+
+## Sprint 3 — PR B (`publish = "site"`)
+
+- HTML/assets/blog/en/demo → `site/`; `publish = "site"`.
+- Redirects/headers unificados en `netlify.toml` (sin `_redirects` / `_headers`).
+- Scripts + `serve.json` apuntan a `site/`.
+- Orphans listados en `docs/ORPHAN-ASSETS.md` (no borrados).
+- Inventarios: `docs/PR-B-inventory-before.txt` / `docs/PR-B-inventory-after.txt`.
 
 ## Sprint 2 (`chore/landing-sprint2`) — mergeado a main
 

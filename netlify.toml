@@ -4,8 +4,8 @@
 # Redeploy marker: 2026-09-06-source-gap
 
 [build]
-  publish = "."
-  # No build command: static site from repo root.
+  publish = "site"
+  # Static site: only `site/` is published (docs/scripts stay private).
 
 # ── Cabeceras por defecto: seguridad para todo el sitio ──
 [[headers]]
@@ -355,6 +355,12 @@
 
 [[redirects]]
   from = "/_to-migrate/*"
+  to = "/"
+  status = 404
+
+# Catch-all former /pages/* (canonical legales are root URLs; was only in _redirects)
+[[redirects]]
+  from = "/pages/*"
   to = "/"
   status = 404
 

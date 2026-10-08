@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const index = fs.readFileSync(
-  path.resolve(__dirname, '..', 'blog', 'index.html'),
+  path.resolve(__dirname, '..', 'site', 'blog', 'index.html'),
   'utf8'
 );
 
