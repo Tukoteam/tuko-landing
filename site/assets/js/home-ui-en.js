@@ -1,3 +1,4 @@
+/* Built from ./home-ui-en/ — edit parts, not this file */
 
 /* ── FAQ accordion + FAQPage JSON-LD ── */
 (function () {
@@ -848,6 +849,7 @@ const translations = {
     hmock_missing_tpl: '<b>{n}</b> more to unlock −20%',
     hmock_missing_one: '<b>1</b> more to unlock −20%',
     hmock_joined_tpl: '{n} already in',
+
     hmock_chip_tpl: '{name} just joined',
     hmock_chip_you: 'You just joined',
     hmock_done: 'Goal reached! Everyone pays <b>€39.92</b>',
@@ -1698,6 +1700,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const sections = sectionIds
     .map(id => document.getElementById(id))
     .filter(Boolean);
+
   if (!sections.length) return;
 
   const navLinks = Array.from(

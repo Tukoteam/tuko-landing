@@ -1,0 +1,213 @@
+  @media (max-width: 640px) {
+    .ia-signals {
+      grid-template-columns: 1fr;
+      border-radius: 20px;
+    }
+    .ia-signal { padding: 22px 20px 20px; }
+    .ia-signal::before { top: 14px; bottom: 14px; }
+  }
+
+  @media (max-width: 960px) {
+    .ia-hero {
+      padding: 108px 20px 56px;
+      min-height: 100svh;
+      min-height: 100dvh;
+    }
+    .ia-hero-inner {
+      flex-direction: column;
+      gap: 40px;
+    }
+    .ia-hero-copy { max-width: none; flex: 1 1 auto; text-align: center; }
+    .ia-hero-visual { flex: 0 1 auto; width: 100%; max-width: none; }
+    .ia-hero h1 { text-align: center; }
+    .ia-lead {
+      max-width: 460px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+    .ia-status {
+      display: flex;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .ia-note {
+      display: flex;
+      width: fit-content;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+      text-align: center;
+    }
+    .ia-hero-cta {
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      justify-content: center;
+    }
+    .ia-hero-cta .btn-blue { width: 100%; justify-content: center; }
+    .ia-section-head {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 720px;
+    }
+    .ia-section-head h2,
+    .ia-section-head p {
+      text-align: center;
+    }
+    .ia-cta { text-align: left; }
+    .ia-cta h2 { text-align: left; }
+    .ia-form-intro { text-align: center; margin-left: auto; margin-right: auto; }
+    .ia-soon {
+      text-align: center;
+    }
+    .ia-panel-wrap { max-width: 360px; margin: 0 auto; }
+    .ia-panel-plate {
+      inset: 14px -10px -10px 10px;
+      border-radius: 22px;
+    }
+    .ia-panel-plate-2 {
+      inset: 7px -5px -5px 5px;
+      border-radius: 21px;
+      background: linear-gradient(150deg, rgba(61,80,242,0.08) 0%, rgba(255,255,255,0.88) 100%);
+      border-color: rgba(61,80,242,0.12);
+    }
+    .ia-panel-signals { padding: 12px 14px 8px; }
+    .ia-sig-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+    }
+    .ia-sig-row {
+      width: 100%;
+      min-width: 0;
+      justify-content: flex-start;
+      padding: 5px 7px 5px 5px;
+      gap: 5px;
+      box-sizing: border-box;
+    }
+    .ia-sig-txt {
+      font-size: 10.5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .ia-sig-ico { width: 13px; height: 13px; }
+    .ia-sig-ico svg { width: 7px; height: 7px; }
+    .ia-panel-proposal { margin: 8px 14px 12px; }
+    .ia-section { padding: 68px 16px; }
+    .ia-flow {
+      gap: 20px;
+    }
+    .ia-flow-spine {
+      left: 21px;
+      margin-left: 0;
+    }
+    .ia-flow-step {
+      grid-template-columns: 44px minmax(0, 1fr);
+      gap: 0 14px;
+      align-items: start;
+    }
+    .ia-flow-step::before { width: 120px; height: 120px; margin: -60px 0 0 -20px; left: 0; }
+    .ia-flow-marker {
+      grid-column: 1;
+      grid-row: 1;
+      width: 44px;
+      height: 44px;
+    }
+    .ia-flow-marker span {
+      width: 36px;
+      height: 36px;
+      font-size: 11px;
+      box-shadow: 0 8px 18px rgba(61,80,242,0.14);
+    }
+    .ia-flow-step:nth-of-type(odd) .ia-flow-card,
+    .ia-flow-step:nth-of-type(even) .ia-flow-card {
+      --dir: 0;
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: stretch;
+      max-width: none;
+    }
+    .ia-flow-marker::after { display: none; }
+    .ia-flow-spacer { display: none; }
+    .ia-flow-card {
+      padding: 18px 16px 20px;
+      border-radius: 18px;
+    }
+    .ia-flow-card::before {
+      inset: 8px 8px -6px -6px;
+      border-radius: 16px;
+    }
+    .ia-flow-step:nth-of-type(even) .ia-flow-card::before {
+      inset: 8px 8px -6px -6px;
+    }
+    .ia-flow-card-top { gap: 12px; margin-bottom: 12px; }
+    .ia-flow-ico { width: 36px; height: 36px; border-radius: 11px; }
+    .ia-flow-step h3 { font-size: 18px; }
+    .ia-soon {
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+      margin-top: 28px;
+      border-radius: 18px;
+      max-width: none;
+      padding: 14px 16px;
+    }
+    .ia-cta { padding: 72px 16px 76px; }
+    .cta-wrap { padding: 40px 16px 80px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    /* Ping del badge: se mantiene (decorativo del hero) */
+    .ia-dot i::after { animation: ia-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
+    .ia-panel-wrap { animation: none; }
+    .ia-sig-row.is-active .ia-sig-ico::after { animation: none; }
+    .ia-panel-progress > span { transition: none; }
+    .ia-flow-rail-track i { transition: none; transform: scaleX(1); }
+    .ia-flow-rail-node { transition: none; }
+    /* Flow: NO aplastar — el approach lo mueve JS inline pese a Windows */
+    .ia-flow-card,
+    .ia-flow-card *,
+    .ia-flow-marker span,
+    .ia-flow-spine i,
+    .ia-soon {
+      transition: none !important;
+      animation: none !important;
+    }
+    /* Brillo / pop del flow: sí, fluido pese a Windows */
+    html.ia-force-flow-motion .ia-flow-card.is-glow::after {
+      animation: ia-card-glow 1s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+    }
+    html.ia-force-flow-motion .ia-flow-marker span.is-pop {
+      animation: ia-marker-pop 0.48s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    }
+    html.ia-force-flow-motion .ia-flow-marker-ring.is-pop-ring {
+      animation: ia-flow-ring 0.75s cubic-bezier(0.22,1,0.36,1) forwards !important;
+    }
+    .ia-proposal-spinner { animation: none; border-top-color: var(--blue); opacity: 0.7; }
+    .ia-proposal-dots i {
+      animation: ia-dot-pulse 1.2s ease-in-out infinite;
+    }
+    @keyframes ia-dot-pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+    /* Brillo del título: se mantiene (efecto decorativo del hero) */
+    .ia-shine-glint {
+      animation: ia-letter-shine 6.5s ease-in-out infinite !important;
+    }
+    html.ia-force-flow-motion .cta-wrap .fade-up {
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    }
+    .ia-signal,
+    .ia-signal-ico,
+    .ia-signal::before { transition: none; }
+    .ia-signal:hover .ia-signal-ico { transform: none; }
+  }
+
+.skip-link{position:absolute;left:-9999px;top:0;z-index:999;background:#3D50F2;color:#fff;padding:10px 18px;border-radius:0 0 8px 0;font-size:14px;text-decoration:none}.skip-link:focus{left:0}

@@ -24,7 +24,7 @@ if (!headerMatch || !footerMatch) {
 const header = headerMatch[0].trimEnd() + '\n';
 const footer = footerMatch[0];
 const scripts =
-  '<script src="../assets/js/main.js?v=20260731o" defer></script>\n<script src="../assets/js/i18n.js?v=20260804c" defer></script>';
+  '<script src="../assets/js/main.js" defer></script>\n<script src="../assets/js/i18n.js" defer></script>\n<script src="../assets/js/tuko-theme.js" defer></script>';
 
 if (!header.includes('mobile-cta') || !header.includes('</div>')) {
   console.error('Header incompleto (falta mobile-menu cerrado)');

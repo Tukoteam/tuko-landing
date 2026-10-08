@@ -1,0 +1,472 @@
+      --section-title-size: clamp(22px, 5.2vw, 30px);
+    }
+
+    /* Cómo funciona: una columna + iframes usables en tablet/móvil */
+    .how-steps {
+      padding: 4px 14px 28px;
+      gap: 28px;
+    }
+    .how-step,
+    .how-step.reversed,
+    .how-steps > .how-step:nth-child(3),
+    .how-steps > .how-step:nth-child(4) {
+      grid-template-columns: 1fr;
+      min-height: unset;
+      gap: 12px;
+      padding: 24px 18px 22px;
+      border-radius: 24px;
+      /* Evita scroll horizontal: glow ::after y demos no deben salirse */
+      overflow: hidden;
+    }
+    .how-step::before {
+      top: 14px;
+      bottom: 14px;
+      width: 3px;
+      border-radius: 0 5px 5px 0;
+    }
+    .how-step.reversed::before {
+      left: 0;
+      right: auto;
+      border-radius: 0 5px 5px 0;
+    }
+    .how-step::after {
+      width: 220px;
+      height: 220px;
+      top: -18%;
+      left: 28%;
+      opacity: 0.85;
+    }
+    /* Texto arriba, demo abajo — también en pasos reversed (2 y 4) */
+    .how-step.reversed > .how-step-text  { order: 1; }
+    .how-step.reversed > .how-step-visual { order: 2; }
+    .how-step-text {
+      padding: 2px 2px 6px;
+      align-items: flex-start;
+      text-align: left;
+    }
+    .how-step.reversed > .how-step-text { padding: 2px 2px 6px; }
+    .how-step-meta { margin-bottom: 6px; gap: 5px; }
+    .how-step-num { font-size: 64px; }
+    .how-step-meta::after { width: 28px; height: 2.5px; box-shadow: none; }
+    .how-step-title {
+      max-width: none;
+      font-size: clamp(22px, 5.5vw, 28px);
+      margin-bottom: 8px;
+      line-height: 1.18;
+    }
+    .how-step-desc {
+      max-width: none;
+      font-size: 15.5px;
+      line-height: 1.6;
+    }
+    .how-step-desc .s-para-gap { height: 0.4em; }
+    .how-step-visual { min-height: 0; padding: 6px 0 0; }
+    .how-steps > .how-step .how-anim-box {
+      /* 100% del contenedor (no 100vw): 100vw en móvil provoca scroll lateral */
+      width: 100%;
+      max-width: 420px;
+      margin-inline: auto;
+    }
+    .how-steps > .how-step:nth-child(3) .how-anim-box,
+    .how-steps > .how-step:nth-child(4) .how-anim-box {
+      width: 100%;
+      max-width: 520px;
+    }
+    .how-anim-box {
+      min-height: 0;
+      border-radius: 28px;
+    }
+    .how-step-iframe { min-height: 0; }
+    /* En móvil: paso 2 formato teléfono */
+    .how-steps > .how-step:nth-child(2) .how-anim-box--embed { aspect-ratio: 9 / 13.4; }
+    /* Paso 3 móvil: casi cuadrado */
+    .how-steps > .how-step:nth-child(3) .how-anim-box--embed {
+      aspect-ratio: 1 / 1.08;
+      min-height: 0;
+      height: auto;
+    }
+    .how-steps > .how-step:nth-child(3) .how-anim-box--embed.is-hug {
+      height: auto;
+      aspect-ratio: 1 / 1.08;
+    }
+    .how-steps > .how-step:nth-child(4) .how-anim-box--embed { aspect-ratio: 1 / 1.08; }
+
+    .how-intro { padding: 28px 16px 18px; }
+
+    /* ── Carrusel logos móvil: fluido, sin parpadeo ── */
+    .logos-track {
+      gap: 4px;
+      animation-name: logos-scroll-mobile;
+      animation-duration: 26s;
+    }
+    .logos-section .logo-pill {
+      flex: 0 0 200px;
+      width: 200px;
+      max-width: 200px;
+    }
+    .logo-pill img {
+      height: 56px;
+      max-width: 170px;
+    }
+    .logos-section .logo-pill img {
+      max-width: min(170px, 100%);
+    }
+    .logos-section .logo-pill img[src*="Saper - Logo"] {
+      height: 70px;
+      max-width: min(190px, 100%);
+    }
+    .logos-overflow::before,
+    .logos-overflow::after { width: 60px; }
+
+    nav { padding: 0 16px 0 12px; }
+    .nav-logo img { height: 28px; }
+    .nav-links { display: none; }
+    /* Header limpio: logo + hamburguesa (idiomas dentro del menú) */
+    nav > .lang-switcher { display: none; }
+    .nav-hamburger {
+      display: flex;
+      position: static;
+      transform: none;
+      margin-left: auto;
+    }
+
+    .hero {
+      height: auto;
+      min-height: 0;
+      padding: 0;
+    }
+    .hero-sky {
+      min-height: 100svh;
+      min-height: 100dvh;
+      padding: calc(72px + env(safe-area-inset-top, 0px)) 16px max(32px, env(safe-area-inset-bottom, 0px));
+    }
+    .hero-copy { padding-top: 4px; }
+    .hero h1 {
+      font-size: clamp(30px, 8.4vw, 44px);
+      overflow-wrap: normal;
+      word-break: normal;
+      hyphens: none;
+      text-align: center;
+      width: 100%;
+    }
+    .hero-line { gap: 0 0.2em; }
+    .hero-copy > p {
+      overflow-wrap: break-word;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      max-width: 46ch;
+      width: 100%;
+      margin-top: 28px;
+    }
+    .hero-actions {
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 34px;
+      width: 100%;
+      align-items: center;
+    }
+    .hero-trust {
+      justify-content: center;
+      gap: 6px 14px;
+      margin-top: 20px;
+      font-size: 12.5px;
+    }
+    .hero-appstore { margin-top: 22px; font-size: 12.5px; }
+    .hero-trust-dot { display: none; }
+    .hero-actions .btn-blue {
+      width: 100%;
+      max-width: 320px;
+      min-width: 0;
+      box-sizing: border-box;
+      justify-content: center;
+    }
+    .hero-actions .btn-ghost {
+      width: auto;
+      max-width: none;
+    }
+
+    .badge {
+      max-width: fit-content;
+      width: auto;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+      padding: 6px 12px 6px 8px;
+      margin-bottom: 28px;
+      font-size: 11.5px;
+      letter-spacing: -0.005em;
+    }
+    .hero-pilot-note {
+      font-size: 10.5px;
+      margin-bottom: 12px;
+    }
+    .btn-blue {
+      width: 100%;
+      max-width: 300px;
+      justify-content: center;
+      padding: 12px 22px;
+      box-sizing: border-box;
+    }
+
+    .logos-section, .cta-wrap { padding: 72px 16px; }
+    .s-title, .s-sub { overflow-wrap: anywhere; }
+    /* Títulos: un poco más de aire entre líneas; título→texto > texto→texto */
+    .data .s-title,
+    .why .s-title,
+    .how-intro .s-title,
+    .pricing .s-title,
+    .faq .s-title {
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .data .s-sub,
+    .why .s-sub,
+    .how-intro .s-sub,
+    .pricing .s-sub,
+    .faq .s-sub {
+      margin-bottom: 40px;
+      line-height: 1.65;
+    }
+    .pricing .s-badge { margin-bottom: 16px; }
+    .pricing .s-title { margin-bottom: 12px; }
+    .pricing .s-sub { margin-bottom: 28px; }
+    .pricing .s-para-gap { height: 0.4em; }
+    .s-sub + .s-sub {
+      margin-top: -28px;
+      margin-bottom: 40px;
+    }
+    .s-para-gap {
+      display: block;
+      height: 0.45em;
+    }
+    /* ≤960: columna centrada con el MISMO ancho (evita escalones título vs texto) */
+    .data,
+    .why,
+    .how-intro,
+    .pricing,
+    .faq {
+      text-align: left;
+    }
+    .data .s-title,
+    .why .s-title,
+    .how-intro .s-title,
+    .pricing .s-title,
+    .faq .s-title,
+    .data .s-sub,
+    .why .s-sub,
+    .how-intro .s-sub,
+    .pricing .s-sub,
+    .faq .s-sub {
+      max-width: 680px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+      box-sizing: border-box;
+    }
+    .why-intro,
+    .why-intro .s-title,
+    .why-intro .s-sub,
+    .how-intro,
+    .how-intro .s-title,
+    .how-intro .s-sub {
+      text-align: center;
+    }
+    #sin-requisitos .data-headline,
+    #problema .data-headline,
+    #problema .data-sub,
+    #problema .data-trigger,
+    #problema .data-foot,
+    #piloto .data-headline,
+    #piloto .data-sub,
+    #piloto .data-trigger,
+    #piloto .data-foot,
+    #precios .s-title,
+    #precios .s-sub,
+    #precios .pricing-legal,
+    #faq .s-title,
+    #faq .s-sub {
+      text-align: center;
+    }
+    #piloto .data-headline,
+    #sin-requisitos .data-headline,
+    #problema .data-headline {
+      max-width: none;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #piloto .fade-up:has(.data-trigger),
+    #problema .fade-up:has(.data-trigger) {
+      display: flex;
+      justify-content: center;
+    }
+    .data .s-badge,
+    .why .s-badge,
+    .how-intro .s-badge,
+    .pricing .s-badge,
+    .faq .s-badge {
+      display: block;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .how-step-desc .s-para-gap {
+      height: 0.4em;
+    }
+    .how-step-desc,
+    .faq-a {
+      line-height: 1.6;
+    }
+    .final-cta-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .final-cta > .final-cta-inner > p {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      align-self: stretch;
+    }
+    .final-cta h2 { align-self: stretch; text-align: center; }
+    .final-cta-btn {
+      display: flex;
+      width: 100%;
+      max-width: 280px;
+      box-sizing: border-box;
+    }
+    .final-cta-shopify {
+      display: flex;
+      width: fit-content;
+    }
+
+    .cta-inner { padding: 48px 16px; }
+    .cta-inner h2 { margin-bottom: 36px; }
+    .cta-form { max-width: 100%; }
+
+    /* Footer móvil: color de fondo al rebotar; sin bloquear el scroll */
+    html {
+      background-color: #14151a;
+    }
+    footer {
+      padding: 0 0 env(safe-area-inset-bottom, 0px);
+      flex-direction: unset;
+      min-height: 0;
+      align-items: unset;
+      text-align: left;
+      margin-bottom: 0;
+    }
+    .footer-inner {
+      padding: 48px 20px 0;
+    }
+    .footer-top {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding-bottom: 36px;
+      text-align: left;
+    }
+    .footer-brand {
+      max-width: none;
+      align-items: flex-start;
+    }
+    .footer-cols {
+      display: contents;
+    }
+    .footer-col {
+      align-items: flex-start;
+    }
+    .footer-bg {
+      inset: 0;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-svg-logo {
+      width: min(88%, 340px);
+      max-height: 42%;
+      opacity: 0.06;
+    }
+    .footer-bottom-inner {
+      position: relative;
+      bottom: auto;
+      padding: 18px 20px 24px;
+      text-align: center;
+    }
+    .footer-bottom { padding: 18px 16px; }
+  }
+
+  /* Tablet (≈641–960): intro centrado — se lee como composición, no como móvil estirado */
+  @media (min-width: 641px) and (max-width: 960px) {
+    .data .s-title,
+    .why .s-title,
+    .how-intro .s-title,
+    .pricing .s-title,
+    .faq .s-title,
+    .data .s-sub,
+    .why .s-sub,
+    .how-intro .s-sub,
+    .pricing .s-sub,
+    .faq .s-sub {
+      text-align: center;
+    }
+  }
+
+  /* Móvil estrecho: texto a izquierda, ancho completo del padding */
+  @media (max-width: 640px) {
+    .data .s-title,
+    .why .s-title,
+    .how-intro .s-title,
+    .pricing .s-title,
+    .faq .s-title,
+    .data .s-sub,
+    .why .s-sub,
+    .how-intro .s-sub,
+    .pricing .s-sub,
+    .faq .s-sub {
+      max-width: none;
+      text-align: left;
+    }
+    .why-intro,
+    .why-intro .s-title,
+    .why-intro .s-sub,
+    .how-intro,
+    .how-intro .s-title,
+    .how-intro .s-sub {
+      text-align: center;
+    }
+    #sin-requisitos .data-headline,
+    #problema .data-headline,
+    #problema .data-sub,
+    #problema .data-trigger,
+    #problema .data-foot,
+    #piloto .data-headline,
+    #piloto .data-sub,
+    #piloto .data-trigger,
+    #piloto .data-foot,
+    #precios .s-title,
+    #precios .s-sub,
+    #precios .pricing-legal,
+    #faq .s-title,
+    #faq .s-sub {
+      text-align: center;
+    }
+    #piloto .data-headline,
+    #sin-requisitos .data-headline,
+    #problema .data-headline {
+      max-width: none;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #piloto .fade-up:has(.data-trigger),
+    #problema .fade-up:has(.data-trigger) {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 418px) {
+    nav { padding: 0 10px 0 8px; }
+    .lang-opt-label { display: none; }
+    .lang-opt { padding: 6px 7px; }
+  }

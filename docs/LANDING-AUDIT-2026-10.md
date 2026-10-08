@@ -1,29 +1,30 @@
-# Landing audit — 2026-10
+# Landing audit — v1.0 (2026-10)
 
-CTO snapshot after Sprint 3 (PR B + hotfixes + CI + hygiene).
+CTO snapshot: landing marcada **v1.0** (`tag v1.0.0`).
 
 ## Score
 
-~8.5/10 for a static marketing site (team of 2).
+~9/10 for a static marketing site (team of 2): hygiene, CI, partials, asset hash `?v=`, CSS/JS parts &lt;1000, árbol limpio.
 
 ## Keep
 
 - `.github/workflows/` — CI (`landing-checks`)
 - `site/` — only Netlify publish surface
-- `site/landing-demo/` — used by home iframes (not migration junk)
-- `docs/`, `scripts/` — private tooling/docs
+- `site/landing-demo/` — used by home iframes (vendor/demo exempt from line limits)
+- `src/partials/` — shared chrome + home hero/FAQ
+- `docs/LIGHTHOUSE-2026-10.md` — perf baseline
+- `scripts/` — `build`, `check:site`, generate/sync EN
 
-## Removed
+## Done in v1
 
-- `_to-migrate/blog-cms` — legacy in-repo CMS; Hub owns blog CMS now.
-  Netlify still 404s `/_to-migrate/*` for old URLs.
+- Unified `?v=` via content hash; multiple versions = check-site **error**
+- Split editable CSS/JS into parts; build concatenates entries
+- Extracted `tuko-ai` inline CSS/JS to assets
+- Removed sprint archive docs, one-shot scripts, 33 orphan assets
+- Dual OG kept (`og-image.png` + `og-image-v8.png`) pending Joan
 
-## Branches / PRs
+## Next (optional / out of v1)
 
-One theme per branch/PR; delete branch after merge. `main` stays deployable.
-
-## Next (not in this PR)
-
-1. PR D — partials + automatic `?v=` cache-bust
-2. Joan — orphans list + legal footer PDF vs HTML
-3. PR E — i18n JSON
+1. PR E — i18n JSON
+2. Joan — unify OG if desired
+3. Further home shell thinning if editing `index.html` becomes painful

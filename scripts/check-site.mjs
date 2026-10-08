@@ -157,10 +157,10 @@ for (const file of htmlFiles) {
   }
 }
 
-// --- soft warn multiple ?v= ---
+// --- multiple ?v= for same asset is an error (build must unify hashes) ---
 for (const [asset, versions] of assetVersionMap) {
   if (versions.size > 1) {
-    warnings.push(`multiple ?v= for ${asset}: ${[...versions].join(", ")}`);
+    errors.push(`multiple ?v= for ${asset}: ${[...versions].join(", ")}`);
   }
 }
 

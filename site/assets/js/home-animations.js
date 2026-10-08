@@ -1,3 +1,4 @@
+/* Built from ./home-animations/ — edit parts, not this file */
 /* ── ANIMATED PERSPECTIVE GRID ── */
 function initGrid(canvas, opts) {
   const ctx = canvas.getContext('2d');
@@ -848,6 +849,7 @@ if (ctaCanvas) {
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     io.observe(stage);
     if (row) {
+
       row.addEventListener('tuko:visible', function () {
         var r = stage.getBoundingClientRect();
         var vh = window.innerHeight || document.documentElement.clientHeight;

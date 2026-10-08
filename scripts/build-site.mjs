@@ -83,16 +83,82 @@ function injectPartials(html, partials) {
 }
 
 function bustAssetQueries(html) {
+  // Absolute (/assets/...), root-relative (assets/...), or up-tree (../assets/...)
   return html.replace(
-    /(\b(?:href|src)=["'])(\/?assets\/(?:css|js)\/[^"'?#]+\.(?:css|js))(?:\?[^"']*)?(["'])/gi,
-    (full, pre, assetPath, post) => {
-      const normalized = assetPath.startsWith('/') ? assetPath : `/${assetPath}`;
+    /(\b(?:href|src)=["'])((?:\.\.\/)+|\/)?assets\/((?:css|js)\/[^"'?#]+\.(?:css|js))(?:\?[^"']*)?(["'])/gi,
+    (full, pre, prefix, assetTail, post) => {
+      const normalized = `/assets/${assetTail}`;
       const v = bustVersion(normalized);
       if (!v) return full;
-      return `${pre}${normalized}?v=${v}${post}`;
+      // Keep original path style (../ vs /) so relative pages keep working
+      const outPath = prefix && prefix.startsWith('.')
+        ? `${prefix}assets/${assetTail}`
+        : normalized;
+      return `${pre}${outPath}?v=${v}${post}`;
     }
   );
 }
+
+/** Concatenate site/assets/css/{folder}/*.css into site/assets/css/{entry}.css */
+function concatCssBundles() {
+  const cssDir = path.join(siteDir, 'assets', 'css');
+  const bundles = [
+    { entry: 'home.css', folder: 'home' },
+    { entry: 'tuko-theme.css', folder: 'theme' },
+    { entry: 'main.css', folder: 'main' },
+    { entry: 'tuko-ai.css', folder: 'tuko-ai' },
+  ];
+  let n = 0;
+  for (const { entry, folder } of bundles) {
+    const dir = path.join(cssDir, folder);
+    if (!fs.existsSync(dir)) continue;
+    const parts = fs
+      .readdirSync(dir)
+      .filter((f) => f.endsWith('.css'))
+      .sort();
+    if (!parts.length) continue;
+    const banner = `/* Built from ./${folder}/ — edit parts, not this file */\n`;
+    const body = parts
+      .map((f) => fs.readFileSync(path.join(dir, f), 'utf8').trimEnd())
+      .join('\n\n');
+    fs.writeFileSync(path.join(cssDir, entry), `${banner}${body}\n`);
+    n += 1;
+    hashCache.delete(path.join(cssDir, entry));
+  }
+  return n;
+}
+
+/** Concatenate ES module parts into a classic IIFE-compatible bundle when folder exists */
+function concatJsBundles() {
+  const jsDir = path.join(siteDir, 'assets', 'js');
+  const bundles = [
+    { entry: 'home-ui.js', folder: 'home-ui' },
+    { entry: 'home-ui-en.js', folder: 'home-ui-en' },
+    { entry: 'home-animations.js', folder: 'home-animations' },
+    { entry: 'home-animations-en.js', folder: 'home-animations-en' },
+  ];
+  let n = 0;
+  for (const { entry, folder } of bundles) {
+    const dir = path.join(jsDir, folder);
+    if (!fs.existsSync(dir)) continue;
+    const parts = fs
+      .readdirSync(dir)
+      .filter((f) => f.endsWith('.js') && !f.startsWith('_'))
+      .sort();
+    if (!parts.length) continue;
+    const banner = `/* Built from ./${folder}/ — edit parts, not this file */\n`;
+    const body = parts
+      .map((f) => fs.readFileSync(path.join(dir, f), 'utf8').trimEnd())
+      .join('\n\n');
+    fs.writeFileSync(path.join(jsDir, entry), `${banner}${body}\n`);
+    n += 1;
+    hashCache.delete(path.join(jsDir, entry));
+  }
+  return n;
+}
+
+const cssBundles = concatCssBundles();
+const jsBundles = concatJsBundles();
 
 const partials = loadPartials();
 const htmlFiles = walk(siteDir).filter((f) => f.endsWith('.html'));
@@ -109,5 +175,5 @@ for (const file of htmlFiles) {
 }
 
 console.log(
-  `build-site: ${changed} HTML updated · ${partials.size} partials · ${hashCache.size} assets hashed`
+  `build-site: ${changed} HTML updated · ${partials.size} partials · ${cssBundles} css bundles · ${jsBundles} js bundles · ${hashCache.size} assets hashed`
 );
