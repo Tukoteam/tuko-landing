@@ -11,7 +11,7 @@ const i18nPath = path.join(landing, 'assets', 'js', 'i18n.js');
 
 const PAGES = [
   {
-    src: 'pages/privacidad.html',
+    src: 'privacidad.html',
     out: 'en/privacidad.html',
     slug: 'privacidad',
     enTitle: 'Privacy Policy — Tuko',
@@ -20,7 +20,7 @@ const PAGES = [
     enCanon: 'https://tukoteam.com/en/privacidad',
   },
   {
-    src: 'pages/terminos.html',
+    src: 'terminos.html',
     out: 'en/terminos.html',
     slug: 'terminos',
     enTitle: 'Terms of Use — Tuko',

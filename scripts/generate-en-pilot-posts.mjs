@@ -91,7 +91,7 @@ const posts = [
 ];
 
 const enDir = path.join(landing, 'en/blog');
-const contentDir = path.join(landing, 'blog-cms/content');
+const contentDir = path.join(landing, '_to-migrate/blog-cms/content');
 fs.mkdirSync(enDir, { recursive: true });
 fs.mkdirSync(contentDir, { recursive: true });
 

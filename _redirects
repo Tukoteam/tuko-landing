@@ -46,3 +46,9 @@
 /en/tuko-ai.html                             /en/tuko-ai                            301!
 /en/privacidad.html                      /en/privacidad                         301!
 /en/terminos.html                        /en/terminos                         301!
+
+/en/privacidad                                 /en/privacidad.html                    200!
+/en/terminos                                   /en/terminos.html                      200!
+/_to-migrate/*                                 /                                      404!
+/pages/*                                       /                                      404!
+

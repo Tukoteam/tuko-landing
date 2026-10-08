@@ -1,6 +1,6 @@
 /**
  * Genera / actualiza TODAS las versiones EN del blog (salvo primer-articulo).
- * - en/blog/{slug}.html + blog-cms/content/{slug}.en.json
+ * - en/blog/{slug}.html + _to-migrate/blog-cms/content/{slug}.en.json
  * - índice EN, sitemap, redirects
  * - hreflang + data-url-* en cada post ES emparejado
  */
@@ -201,7 +201,7 @@ const posts = [
 ];
 
 const enDir = path.join(landing, 'en/blog');
-const contentDir = path.join(landing, 'blog-cms/content');
+const contentDir = path.join(landing, '_to-migrate/blog-cms/content');
 fs.mkdirSync(enDir, { recursive: true });
 fs.mkdirSync(contentDir, { recursive: true });
 

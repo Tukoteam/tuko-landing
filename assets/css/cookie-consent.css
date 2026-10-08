@@ -1,0 +1,79 @@
+/* Cookie consent banner — minimal, accessible, equal-weight actions */
+.tuko-cookie-banner {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10000;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 18px 18px 16px;
+  border-radius: 14px;
+  background: #0f172a;
+  color: #f8fafc;
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.35);
+  font-family: inherit;
+  line-height: 1.45;
+}
+
+.tuko-cookie-banner[hidden] {
+  display: none !important;
+}
+
+.tuko-cookie-banner__text {
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: #e2e8f0;
+}
+
+.tuko-cookie-banner__text a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.tuko-cookie-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tuko-cookie-banner__btn {
+  flex: 1 1 120px;
+  min-height: 42px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #64748b;
+  background: transparent;
+  color: #f8fafc;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tuko-cookie-banner__btn:hover,
+.tuko-cookie-banner__btn:focus-visible {
+  outline: 2px solid #94a3b8;
+  outline-offset: 2px;
+}
+
+.tuko-cookie-banner__btn--accept {
+  background: #f8fafc;
+  color: #0f172a;
+  border-color: #f8fafc;
+}
+
+.tuko-cookie-banner__btn--accept:hover,
+.tuko-cookie-banner__btn--accept:focus-visible {
+  outline-color: #fff;
+}
+
+@media (min-width: 720px) {
+  .tuko-cookie-banner {
+    left: 24px;
+    right: auto;
+    bottom: 24px;
+    margin: 0;
+  }
+}

@@ -85,9 +85,9 @@ Este documento registra todos los cambios realizados para optimizar la landing p
 | Variable | Ubicación | Qué poner | Prioridad |
 |----------|-----------|-----------|-----------|
 | `TUDOMINIO.com` | index.html (head), robots.txt, sitemap.xml | Tu dominio real (ej. `tuko.io`) | CRÍTICA |
-| `assets/og-image.png` | meta og:image, twitter:image | Imagen 1200×630px PNG | ALTA |
-| `assets/favicon.png` | link rel="icon" | Favicon 32×32 PNG/SVG | MEDIA |
-| `assets/apple-touch-icon.png` | link apple-touch-icon | Icono 180×180 para iOS | MEDIA |
+| `assets/og-image.webp` | meta og:image, twitter:image | Imagen 1200×630px PNG | ALTA |
+| `assets/favicon.webp` | link rel="icon" | Favicon 32×32 PNG/SVG | MEDIA |
+| `assets/apple-touch-icon.webp` | link apple-touch-icon | Icono 180×180 para iOS | MEDIA |
 | `assets/logo.png` | JSON-LD Organization.logo | Logo accesible por URL | ALTA |
 | `sameAs: []` | JSON-LD Organization | URLs redes sociales (LinkedIn, etc.) | MEDIA |
 
@@ -103,8 +103,8 @@ Este documento registra todos los cambios realizados para optimizar la landing p
 
 ### 2. Imágenes OG y favicon
 - [ ] Crear imagen 1200×630px con diseño Tuko (preview social)
-- [ ] Subir como `assets/og-image.png`
-- [ ] Crear favicon.png (32×32) y apple-touch-icon.png (180×180)
+- [ ] Subir como `assets/og-image.webp`
+- [ ] Crear favicon.webp (32×32) y apple-touch-icon.webp (180×180)
 
 ### 3. reCAPTCHA para formulario
 - [ ] Registrarse en https://www.google.com/recaptcha/admin
@@ -195,11 +195,11 @@ tuko-landing/
     ├── js/
     │   ├── i18n.js
     │   └── main.js
-    ├── favicon.png              ← POR CREAR
-    ├── apple-touch-icon.png     ← POR CREAR
-    ├── og-image.png             ← POR CREAR
+    ├── favicon.webp              ← POR CREAR
+    ├── apple-touch-icon.webp     ← POR CREAR
+    ├── og-image.webp             ← POR CREAR
     ├── logo.png                 ← POR CREAR (si no existe)
-    └── logos colaboradores/
+    └── logos-colaboradores/
         └── [PNG logos]
 ```
 

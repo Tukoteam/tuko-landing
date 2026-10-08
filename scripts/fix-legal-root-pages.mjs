@@ -14,5 +14,5 @@ function fix(srcPath, destPath) {
   console.log('wrote', destPath);
 }
 
-fix('pages/privacidad.html', 'privacidad.html');
-fix('pages/terminos.html', 'terminos.html');
+fix('privacidad.html', 'privacidad.html');
+fix('terminos.html', 'terminos.html');

@@ -44,7 +44,7 @@
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
-  for = "/assets/logos colaboradores/*"
+  for = "/assets/logos-colaboradores/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
@@ -346,3 +346,19 @@
   to = "/en/terminos"
   status = 301
   force = true
+[[redirects]]
+  from = "/en/privacidad"
+  to = "/en/privacidad.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/en/terminos"
+  to = "/en/terminos.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/_to-migrate/*"
+  to = "/"
+  status = 404
