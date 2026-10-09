@@ -3,6 +3,8 @@
 Explicación en lenguaje claro de carpetas y archivos.  
 La web pública es solo **`site/`**. Lo demás es cocina / normas / herramientas.
 
+**¿Solo quieres el flujo para cambiar algo?** → [FLUJO-DIARIO.md](./FLUJO-DIARIO.md) (1 página).
+
 ---
 
 ## Carpetas principales
@@ -95,46 +97,9 @@ Los archivos gordos `home.css`, `home-ui.js`, etc. con el aviso `Built from` **n
 
 ## Flujo de trabajo (día a día)
 
-**Chuleta:** `rama → editar → build → localhost → commit → PR → merge → pro`
+Paso a paso corto (con tip de PowerShell): **[FLUJO-DIARIO.md](./FLUJO-DIARIO.md)**.
 
-`main` = producción (tukoteam.com). No trabajes cambios reales directo en `main`.
-
-Ejemplo: cambiar el footer.
-
-1. **Rama**
-   ```bash
-   git pull origin main
-   git checkout -b chore/footer-update
-   ```
-2. **Editar** — p. ej. `src/partials/footer-es.html` (y EN si aplica). Guardar (Ctrl+S).  
-   Si el cambio no es un partial, editas la página en `site/`.
-3. **Build** — obligatorio tras tocar partials / parts CSS-JS:
-   ```bash
-   npm run build
-   npm run check:site
-   ```
-   En **PowerShell de Windows**, si sale error de “ejecución de scripts deshabilitada”, usa:
-   ```powershell
-   npm.cmd run build
-   npm.cmd run check:site
-   ```
-   (Arreglo permanente, una vez: `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` → cierra y abre la terminal.)
-4. **Localhost** — no abras el HTML a doble clic; sirve la carpeta:
-   ```bash
-   npx serve .
-   ```
-   Si PowerShell bloquea scripts: `npx.cmd serve .`  
-   (`serve.json` ya apunta a `site/`). Abre la URL que te salga y revisa.
-5. **PR**
-   ```bash
-   git add .
-   git commit -m "chore: update footer"
-   git push -u origin HEAD
-   ```
-   En GitHub: PR → `main`. CI verde (+ Deploy Preview si Netlify lo tiene) → merge.
-6. **Pro** — Netlify publica `main`. En 1–2 min en tukoteam.com (a veces Ctrl+F5).
-
-**Más adelante (opcional):** rama `staging` + URL de pre si necesitáis un sitio fijo de pruebas. Hasta entonces, local + preview del PR basta.
+Resumen: `rama → editar → npm.cmd run build → npx.cmd serve . → PR → main`.
 
 ---
 
