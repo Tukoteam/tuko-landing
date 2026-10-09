@@ -93,12 +93,41 @@ Los archivos gordos `home.css`, `home-ui.js`, etc. con el aviso `Built from` **n
 
 ---
 
-## Flujo típico al cambiar algo
+## Flujo de trabajo (día a día)
 
-1. Editas partials / parts / página en `site/`  
-2. `npm run build` (y a veces sync/generate)  
-3. `npm run check:site`  
-4. Commit + push → GitHub Actions checkea → Netlify publica `site/`  
+**Chuleta:** `rama → editar → build → localhost → commit → PR → merge → pro`
+
+`main` = producción (tukoteam.com). No trabajes cambios reales directo en `main`.
+
+Ejemplo: cambiar el footer.
+
+1. **Rama**
+   ```bash
+   git pull origin main
+   git checkout -b chore/footer-update
+   ```
+2. **Editar** — p. ej. `src/partials/footer-es.html` (y EN si aplica). Guardar (Ctrl+S).  
+   Si el cambio no es un partial, editas la página en `site/`.
+3. **Build** — obligatorio tras tocar partials / parts CSS-JS:
+   ```bash
+   npm run build
+   npm run check:site
+   ```
+4. **Localhost** — no abras el HTML a doble clic; sirve la carpeta:
+   ```bash
+   npx serve .
+   ```
+   (`serve.json` ya apunta a `site/`). Abre la URL que te salga y revisa.
+5. **PR**
+   ```bash
+   git add .
+   git commit -m "chore: update footer"
+   git push -u origin HEAD
+   ```
+   En GitHub: PR → `main`. CI verde (+ Deploy Preview si Netlify lo tiene) → merge.
+6. **Pro** — Netlify publica `main`. En 1–2 min en tukoteam.com (a veces Ctrl+F5).
+
+**Más adelante (opcional):** rama `staging` + URL de pre si necesitáis un sitio fijo de pruebas. Hasta entonces, local + preview del PR basta.
 
 ---
 
