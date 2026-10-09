@@ -113,10 +113,17 @@ Ejemplo: cambiar el footer.
    npm run build
    npm run check:site
    ```
+   En **PowerShell de Windows**, si sale error de “ejecución de scripts deshabilitada”, usa:
+   ```powershell
+   npm.cmd run build
+   npm.cmd run check:site
+   ```
+   (Arreglo permanente, una vez: `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` → cierra y abre la terminal.)
 4. **Localhost** — no abras el HTML a doble clic; sirve la carpeta:
    ```bash
    npx serve .
    ```
+   Si PowerShell bloquea scripts: `npx.cmd serve .`  
    (`serve.json` ya apunta a `site/`). Abre la URL que te salga y revisa.
 5. **PR**
    ```bash
