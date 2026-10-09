@@ -19,7 +19,8 @@ Repo: `Tukoteam/tuko-landing`. Equipo pequeño (2 personas). **v1.0** (`tag v1.0
 | `docs/`, `scripts/`, `*.md` | No publicados |
 | `netlify.toml` | Redirects + headers (única fuente) |
 
-Guía sencilla de carpetas/archivos: [`docs/GUIA-REPO-SIMPLE.md`](docs/GUIA-REPO-SIMPLE.md).
+- Flujo día a día (corto): [`docs/FLUJO-DIARIO.md`](docs/FLUJO-DIARIO.md)
+- Guía de carpetas: [`docs/GUIA-REPO-SIMPLE.md`](docs/GUIA-REPO-SIMPLE.md)
 
 ## Probar en local
 
@@ -35,6 +36,8 @@ Tras editar partials o parts de CSS/JS:
 npm run build
 npm run check:site
 ```
+
+En PowerShell, si `npm`/`npx` fallan por política de scripts: `npm.cmd` / `npx.cmd` (detalle en `docs/FLUJO-DIARIO.md`).
 
 ## Despliegue
 
