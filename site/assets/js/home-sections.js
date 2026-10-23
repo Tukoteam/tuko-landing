@@ -37,6 +37,24 @@
     if (!track || !pills.length) return;
     track.classList.add('is-js');
 
+    /* En oscuro, cada logo usa su versión blanca con fondo transparente (assets/logos-colaboradores/dark/): todos con el mismo blanco */
+    var imgs = Array.prototype.slice.call(track.querySelectorAll('img'));
+    function darkSrc(src) {
+      return src.replace(/logos-colaboradores\/([\w-]+)\.(png|svg)$/, function (m, name, ext) {
+        return 'logos-colaboradores/dark/' + (ext === 'svg' ? name.replace('-color', '') : name) + '-white.' + ext;
+      });
+    }
+    function syncLogos() {
+      var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      imgs.forEach(function (img) {
+        if (!img.dataset.light) img.dataset.light = img.getAttribute('src');
+        var want = dark ? darkSrc(img.dataset.light) : img.dataset.light;
+        if (img.getAttribute('src') !== want) img.setAttribute('src', want);
+      });
+    }
+    new MutationObserver(syncLogos).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    syncLogos();
+
     var tip = document.createElement('span');
     tip.className = 'logos-tip';
     tip.setAttribute('aria-hidden', 'true');
@@ -79,7 +97,8 @@
 
     window.addEventListener('scroll', function () {
       var y = window.scrollY;
-      boost = Math.min(boost + Math.abs(y - lastY) * 1.6, 520);
+      /* El scroll solo le da un empujón suave: como mucho unas 3 veces su velocidad normal */
+      boost = Math.min(boost + Math.abs(y - lastY) * 0.35, 80);
       lastY = y;
     }, { passive: true });
     window.addEventListener('resize', measure);

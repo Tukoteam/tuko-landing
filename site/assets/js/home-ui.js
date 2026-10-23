@@ -1283,8 +1283,11 @@ const translations = {
   }
 };
 
+/* Los marcos de las demos: los antiguos (.how-step-iframe) y los del rediseño de Cómo funciona (.hx-demo) */
+const DEMO_FRAMES = 'iframe.how-step-iframe, iframe.hx-demo';
+
 function broadcastDemoLang(lang) {
-  document.querySelectorAll('iframe.how-step-iframe').forEach((iframe) => {
+  document.querySelectorAll(DEMO_FRAMES).forEach((iframe) => {
     try {
       const w = iframe.contentWindow;
       if (w) w.postMessage({ type: 'tuko-demo-lang', lang: lang }, '*');
@@ -1295,7 +1298,7 @@ function broadcastDemoLang(lang) {
 }
 
 function initDemoIframeLangSync() {
-  document.querySelectorAll('iframe.how-step-iframe').forEach((iframe) => {
+  document.querySelectorAll(DEMO_FRAMES).forEach((iframe) => {
     iframe.addEventListener('load', () => {
       try {
         const current = localStorage.getItem('tuko_lang') || 'es';
@@ -1523,6 +1526,11 @@ function setLanguage(lang, opts) {
       } else {
         el.innerHTML = t[key];
       }
+    });
+
+    /* Textos cortos que llevan los dos idiomas en el propio HTML (data-es / data-en), como las etiquetas del dial de Cómo funciona */
+    document.querySelectorAll('[data-es][data-en]').forEach(el => {
+      el.textContent = el.getAttribute(lang === 'en' ? 'data-en' : 'data-es');
     });
 
     syncSeoLang(lang);

@@ -63,18 +63,12 @@
   .logos-section .logo-pill img[src*="xiji"] { height: 68px; }
   .logos-section .logo-pill img[src*="bio-vida"] { height: 64px; }
   .logos-section .logo-pill img[src*="saper"] { height: 84px; }
-  html[data-theme="dark"] .logos-section .logo-pill img {
-    filter: grayscale(1) invert(1) contrast(1.2) brightness(1.35);
-    mix-blend-mode: screen;
-    opacity: 0.62;
-  }
+  /* En oscuro los logos ya son blancos (versión de assets/logos-colaboradores/dark/): no hace falta filtro */
+  html[data-theme="dark"] .logos-section .logo-pill img { filter: none; mix-blend-mode: normal; opacity: 0.62; }
   @media (hover: hover) and (pointer: fine) {
     .logos-overflow:hover .logos-track { animation-play-state: paused; }
     .logos-section .logo-pill:hover img { filter: none; opacity: 1; }
-    html[data-theme="dark"] .logos-section .logo-pill:hover img {
-      filter: grayscale(1) invert(1) contrast(1.2) brightness(1.5);
-      opacity: 1;
-    }
+    html[data-theme="dark"] .logos-section .logo-pill:hover img { filter: none; opacity: 1; }
   }
   /* Con JS (home-sections.js) la cinta la mueve un bucle con inercia y el logo del centro se enciende (--f: 0…1) */
   .logos-track.is-js { animation: none; will-change: transform; }
@@ -84,16 +78,14 @@
     transform: scale(calc(1 + 0.07 * var(--f, 0)));
     transition: filter 180ms linear, opacity 180ms linear, transform 180ms linear;
   }
+  /* En oscuro, el logo del centro brilla al 100 % y los demás se quedan apagados: el mismo foco que en claro */
   html[data-theme="dark"] .logos-track.is-js .logo-pill img {
-    filter: grayscale(1) invert(1) contrast(1.2) brightness(calc(1.2 + 0.4 * var(--f, 0)));
-    opacity: calc(0.5 + 0.5 * var(--f, 0));
+    filter: none;
+    opacity: calc(0.32 + 0.68 * var(--f, 0));
   }
   @media (hover: hover) and (pointer: fine) {
     .logos-track.is-js .logo-pill:hover img { filter: none; opacity: 1; transform: scale(1.07); }
-    html[data-theme="dark"] .logos-track.is-js .logo-pill:hover img {
-      filter: grayscale(1) invert(1) contrast(1.2) brightness(1.6);
-      opacity: 1;
-    }
+    html[data-theme="dark"] .logos-track.is-js .logo-pill:hover img { filter: none; opacity: 1; }
   }
   /* Nombre del logo señalado: una píldora pequeña que viaja con él */
   .logos-section { position: relative; }
