@@ -875,3 +875,52 @@ html[data-theme="dark"] .wx .wx-submit {
   .wx .wx-form { margin-left: auto; margin-right: auto; text-align: left; grid-template-columns: minmax(0, 1fr); }
   .wx .cta-field + .cta-field:not(.cta-field--full) { border-left: 0; }
 }
+
+/* ══════════════════════════════
+   TUKO AI · EL ESPACIO SIGUE — en oscuro, las secciones de en medio llevan las estrellas de la cabecera, mucho más
+   tenues y quietas (solo parpadean despacio), y una luz azul suave detrás de cada título. La cabecera sigue siendo lo más intenso.
+══════════════════════════════ */
+html[data-theme="dark"] .sx,
+html[data-theme="dark"] .fz { position: relative; isolation: isolate; }
+html[data-theme="dark"] .sx::before,
+html[data-theme="dark"] .fz::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(2.1px 2.1px at 12% 18%, rgba(210, 218, 255, 0.55), transparent 60%),
+    radial-gradient(1.9px 1.9px at 37% 72%, rgba(210, 218, 255, 0.45), transparent 60%),
+    radial-gradient(2.3px 2.3px at 64% 28%, rgba(170, 185, 255, 0.5), transparent 60%),
+    radial-gradient(1.9px 1.9px at 86% 61%, rgba(210, 218, 255, 0.4), transparent 60%),
+    radial-gradient(2.0px 2.0px at 52% 91%, rgba(210, 218, 255, 0.4), transparent 60%),
+    radial-gradient(2.5px 2.5px at 23% 47%, rgba(143, 160, 255, 0.45), transparent 60%),
+    radial-gradient(1.9px 1.9px at 76% 9%, rgba(210, 218, 255, 0.45), transparent 60%);
+  background-size: 300px 280px;
+  -webkit-mask: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
+  mask: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
+  opacity: 0.55;
+  animation: axSpaceTw 7s ease-in-out infinite alternate, axSpaceUp 38s linear infinite;
+}
+/* Una segunda capa desfasada para que no se note la repetición */
+html[data-theme="dark"] .sx::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(1.9px 1.9px at 8% 64%, rgba(210, 218, 255, 0.4), transparent 60%),
+    radial-gradient(2.2px 2.2px at 58% 12%, rgba(170, 185, 255, 0.45), transparent 60%),
+    radial-gradient(1.9px 1.9px at 91% 83%, rgba(210, 218, 255, 0.35), transparent 60%),
+    /* Luz detrás del título */
+    radial-gradient(520px 260px at 50% 230px, rgba(66, 87, 255, 0.22), transparent 70%);
+  background-size: 290px 330px, 290px 330px, 290px 330px, 100% 100%;
+  background-repeat: repeat, repeat, repeat, no-repeat;
+  animation: axSpaceTw 9s ease-in-out -4s infinite alternate-reverse, axSpaceUp2 56s linear infinite;
+}
+/* Suben muy despacio (una baldosa entera por vuelta, así el bucle no se nota); la capa de atrás va más lenta */
+@keyframes axSpaceUp { from { background-position: 0 0; } to { background-position: 0 -280px; } }
+@keyframes axSpaceUp2 { from { background-position: 0 0, 0 0, 0 0, 0 0; } to { background-position: 0 -330px, 0 -330px, 0 -330px, 0 0; } }
+@keyframes axSpaceTw { from { opacity: 0.6; } to { opacity: 1; } }
