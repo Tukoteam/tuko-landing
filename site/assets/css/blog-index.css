@@ -18,7 +18,7 @@ html:not([data-theme="dark"]) header > nav:not(.is-scrolled) .lang-opt.active { 
   place-items: center;
   /* Algo más baja y con más aire abajo que arriba: el título sube y no queda hueco bajo el nav */
   min-height: clamp(520px, 72svh, 680px);
-  padding: calc(var(--nav-h, 72px) + 8px) 24px 120px;
+  padding: calc(var(--nav-h, 72px) + 8px) 24px 180px;
   border-radius: 0 0 clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px);
   background:
     radial-gradient(60% 70% at 50% 0%, rgba(140, 155, 255, 0.55), transparent 65%),
@@ -194,7 +194,7 @@ html[data-theme="dark"] .blog-list-section { background: transparent; }
 /* ── Móvil ── */
 @media (max-width: 760px) {
   /* El título algo más arriba y la cabecera más baja: la lista asoma antes */
-  .bx-stage { min-height: 530px; padding: calc(var(--nav-h, 64px) + 6px) 18px 96px; border-radius: 0 0 28px 28px; }
+  .bx-stage { min-height: 530px; padding: calc(var(--nav-h, 64px) + 6px) 18px 156px; border-radius: 0 0 28px 28px; }
   .bx-copy h1 { font-size: clamp(76px, 24vw, 110px); }
   .bx-copy p { font-size: 15.5px; }
   .bx-tip { display: none; }
