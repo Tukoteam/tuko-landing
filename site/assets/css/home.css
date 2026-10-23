@@ -8802,8 +8802,8 @@ html[data-theme="dark"] .final-cta.fc .cta-form label { color: rgba(255, 255, 25
 ══════════════════════════════ */
 footer.ft,
 html[data-theme="dark"] footer.ft {
-  /* Bajo para el «tuko» gigante: asoma lo justo para firmar la página sin alargarla */
-  padding-bottom: clamp(96px, 14vw, 200px);
+  /* Sitio para el «tuko» de abajo: se lee entero y apoya su base en el borde */
+  padding-bottom: clamp(110px, 16vw, 210px);
   background: radial-gradient(70% 50% at 50% 120%, rgba(66, 87, 255, 0.12), transparent 70%), #0c0d14;
   isolation: isolate;
 }
@@ -8826,13 +8826,14 @@ footer.ft::before {
   align-items: flex-end;
   z-index: 0;
 }
+/* Más pequeño y casi entero: el borde solo corta su base (el SVG trae aire arriba y abajo de las letras) */
 .ft .footer-svg-logo {
-  width: 100%;
-  max-width: 1120px;
+  width: min(640px, 52vw);
+  max-width: none;
   max-height: none;
   margin: 0 auto;
   opacity: 1;
-  translate: 0 40%;
+  translate: 0 14%;
   -webkit-mask-image: none;
   mask-image: none;
 }
@@ -8900,7 +8901,6 @@ html[data-theme="dark"] .ft .footer-bottom-inner {
 /* ── Móvil ── */
 @media (max-width: 700px) {
   footer.ft,
-  html[data-theme="dark"] footer.ft { padding-bottom: 26vw; }
-  /* Al ancho de la pantalla y asomando más: se lee como firma, no como un trozo gigante cortado */
-  .ft .footer-svg-logo { width: 96%; translate: 0 14%; }
+  html[data-theme="dark"] footer.ft { padding-bottom: 30vw; }
+  .ft .footer-svg-logo { width: 88%; }
 }

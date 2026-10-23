@@ -1,0 +1,7 @@
+/* ══════════════════════════════
+   PÁGINAS INTERIORES (artículos del blog y legales)
+   Todas cargan main.css (también las que publica el CMS), así que aquí se trae la hoja de Inicio: el mismo nav,
+   el mismo footer y la misma base. Debajo van solo los estilos propios de estas páginas.
+   El build pone la versión de caché al import (?v=), igual que en los <link>.
+══════════════════════════════ */
+@import url("home.css");

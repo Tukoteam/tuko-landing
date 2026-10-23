@@ -118,71 +118,12 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap" rel="stylesheet"></noscript>
-<link rel="stylesheet" href="../assets/css/main.css?v=cf0718ce">
+<link rel="stylesheet" href="../assets/css/home.css?v=0be7554e">
 <link rel="stylesheet" href="../assets/css/tuko-theme.css?v=cf1fd4c8">
+<link rel="stylesheet" href="../assets/css/blog-index.css?v=c965bfa9">
 
 
 <style>
-  .blog-hero {
-    position: relative;
-    min-height: 280px;
-    overflow: hidden;
-    background: #3D50F2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: calc(80px + env(safe-area-inset-top, 0px)) 48px 56px;
-    text-align: center;
-  }
-  .blog-hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: min(720px, 90%);
-    margin: 0 auto;
-    text-align: center;
-  }
-  .bh-badge {
-    display: inline-block;
-    background: rgba(255,255,255,0.15);
-    color: white;
-    font-size: 13px;
-    font-weight: 600;
-    font-stretch: semi-expanded;
-    padding: 6px 16px;
-    border-radius: 999px;
-    margin-top: 14px;
-    margin-bottom: 20px;
-    letter-spacing: 0.005em;
-  }
-  .blog-hero h1 {
-    font-size: clamp(48px, 8vw, 88px);
-    font-weight: 800;
-    font-stretch: semi-expanded;
-    line-height: 1.0;
-    letter-spacing: -0.03em;
-    color: white;
-    margin-bottom: 16px;
-  }
-  .blog-hero p {
-    font-size: 16px;
-    font-weight: 300;
-    font-stretch: normal;
-    color: rgba(255,255,255,0.85);
-    line-height: 1.6;
-    margin: 0 auto;
-    max-width: 36em;
-  }
-  .bh-deco-right {
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-    width: auto;
-    display: block;
-    pointer-events: none;
-    opacity: 1;
-  }
-
   /* ── Article list ── */
   .blog-list-section {
     background: #fff;
@@ -569,19 +510,20 @@
 <!-- /tuko:partial:nav-es -->
 
 <main id="main-content">
-<!-- BLOG HERO -->
-<section class="blog-hero">
-
-  <div class="blog-hero-content">
-    <div class="bh-badge" data-i18n="blog_badge">Recursos</div>
-    <h1 data-i18n="blog_title">Blog</h1>
-    <p data-i18n="blog_subtitle">Casos de uso, novedades y estrategias de compra colectiva.</p>
+<!-- CABECERA «galería flotante»: las portadas de los artículos flotan en 3D alrededor del título (las monta
+     blog-index.js a partir de la rejilla, así siempre son los últimos publicados). -->
+<section class="bx-hero">
+  <div class="bx-stage">
+    <div class="bx-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="bx-floats"></div>
+    <div class="bx-grain" aria-hidden="true"></div>
+    <div class="bx-copy">
+      <div class="bh-badge" data-i18n="blog_badge">Recursos</div>
+      <h1 data-i18n="blog_title">Blog</h1>
+      <p data-i18n="blog_subtitle">Casos de uso, novedades y estrategias de compra colectiva.</p>
+    </div>
   </div>
-
-  <img class="bh-deco-right" src="../assets/images/asset-08-1.svg" alt="" aria-hidden="true" width="400" height="400" decoding="async">
-
 </section>
-
 <!-- BLOG LIST -->
 <section class="blog-list-section">
   <div class="bp-layout">
@@ -893,7 +835,10 @@
 })();
 </script>
 
-<script src="../assets/js/main.js?v=e8c1067a" defer></script>
+<script src="../assets/js/site-nav.js?v=b64caa9f" defer></script>
+<script src="../assets/js/home-footer.js?v=fe698d5b" defer></script>
+<script src="../assets/js/blog-index.js?v=3998021a" defer></script>
+<script src="../assets/js/main.js?v=27ca6f87" defer></script>
 <script src="../assets/js/tuko-theme.js?v=b2ef7977" defer></script>
 <script src="../assets/js/i18n.js?v=a86e2a28" defer></script>
 </body>

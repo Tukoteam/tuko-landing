@@ -6,7 +6,8 @@
   'use strict';
 
   var footer = document.querySelector('footer');
-  if (!footer) return;
+  /* Una sola vez aunque el script llegue por dos caminos (la página y main.js) */
+  if (!footer || footer.classList.contains('ft')) return;
   var en = (document.documentElement.lang || 'es').slice(0, 2) === 'en';
   var T = en ? { top: 'Back to top' } : { top: 'Volver arriba' };
   footer.classList.add('ft');

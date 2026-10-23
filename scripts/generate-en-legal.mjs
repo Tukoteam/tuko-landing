@@ -93,6 +93,10 @@ function buildEnPage(srcHtml, cfg, dict) {
   h = h.replace(/https:\/\/tukoteam\.com\/terminos(?![\w/-])/g, 'https://tukoteam.com/en/terminos');
   h = h.replace(/\/en\/en\//g, '/en/');
 
+  // Nav y footer compartidos en inglés (los rellena el build desde src/partials)
+  h = h.replace(/tuko:partial:nav-es/g, 'tuko:partial:nav-en');
+  h = h.replace(/tuko:partial:footer-es/g, 'tuko:partial:footer-en');
+
   // Breadcrumb home → /en/
   h = h.replace(
     /("item": ")https:\/\/tukoteam\.com\/(")/,

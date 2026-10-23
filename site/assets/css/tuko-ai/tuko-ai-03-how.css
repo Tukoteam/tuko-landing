@@ -192,9 +192,11 @@ html[data-theme="dark"] .fx-meta { color: #8fa0ff; }
 .ax-product { margin: 9px 0 0; font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: var(--ax-ink); }
 .ax-insight { margin: 2px 0 0; font-size: 12.5px; color: var(--ax-ink-3); }
 /* «Pronto»: una cápsula con brillo debajo de los pasos */
-.fx-soon { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px; max-width: 640px; margin: clamp(48px, 6vw, 72px) auto 0; padding: 12px 18px 12px 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.6); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 8%, transparent); font-size: 15px; color: var(--ink-2); text-align: center; }
-html[data-theme="dark"] .fx-soon { background: rgba(255, 255, 255, 0.03); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07); }
+/* Sin caja: una línea de cierre bajo la escena (entre dos escenarios oscuros, otra caja sobraba) */
+.fx-soon { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px 12px; max-width: 640px; margin: clamp(48px, 6vw, 72px) auto 0; padding: 0 16px; font-size: 15.5px; color: var(--ink-2); text-align: center; text-wrap: balance; }
 .fx-soon-tag { padding: 5px 12px; border-radius: 999px; background: linear-gradient(100deg, #4257ff, #9b7bff); font-size: 12.5px; font-weight: 700; color: #fff; box-shadow: 0 6px 16px -6px rgba(110, 90, 255, 0.8); }
 @media (max-width: 900px) {
-  .fx-soon { border-radius: 22px; }
+  .fx-soon { flex-direction: column; }
+  /* En móvil la escena suelta sin aire debajo: «Pronto» se separa un poco de ella */
+  .fz .fx-soon { margin-top: 40px; }
 }

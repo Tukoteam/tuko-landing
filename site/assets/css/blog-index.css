@@ -1,0 +1,201 @@
+/* Blog (índice): cabecera «galería flotante», nav y footer de Inicio y la lista con algo más de vida.
+   La cabecera es azul Tuko a pantalla completa (también detrás del nav); las portadas de los artículos flotan
+   alrededor del título a tres profundidades. Lo mueve blog-index.js. Siempre animado. */
+
+/* ── Nav de Inicio sobre el azul: mientras no hay scroll, textos y logo en blanco ── */
+header > nav:not(.is-scrolled) { --ink: #f3f5ff; --hover-fill: rgba(255, 255, 255, 0.12); }
+header > nav:not(.is-scrolled) .nav-logo img { filter: brightness(0) invert(1); }
+header > nav:not(.is-scrolled) .lang-opt { color: rgba(243, 245, 255, 0.8); }
+html:not([data-theme="dark"]) header > nav:not(.is-scrolled) .lang-opt.active { color: #10142e; }
+
+/* ── Cabecera ── */
+.bx-hero { position: relative; }
+.bx-stage {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  /* Algo más baja y con más aire abajo que arriba: el título sube y no queda hueco bajo el nav */
+  min-height: clamp(520px, 72svh, 680px);
+  padding: calc(var(--nav-h, 72px) + 8px) 24px 120px;
+  border-radius: 0 0 clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px);
+  background:
+    radial-gradient(60% 70% at 50% 0%, rgba(140, 155, 255, 0.55), transparent 65%),
+    linear-gradient(180deg, #3d50f2 0%, #2f40e0 55%, #2230bf 100%);
+  box-shadow: 0 40px 80px -50px rgba(30, 40, 160, 0.6);
+  color: #fff;
+}
+html[data-theme="dark"] .bx-stage {
+  border-radius: 0;
+  box-shadow: none;
+  background:
+    radial-gradient(60% 70% at 50% 0%, rgba(90, 108, 255, 0.45), transparent 65%),
+    linear-gradient(180deg, #1c2580 0%, #121860 55%, var(--hero-ground) 100%);
+}
+/* En oscuro se funde con la página, sin corte */
+html[data-theme="dark"] .bx-stage::after { content: ''; position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; height: 200px; background: linear-gradient(180deg, transparent, var(--hero-ground)); pointer-events: none; }
+
+/* Aurora: luces lentas que dan profundidad al azul */
+.bx-aurora i { position: absolute; z-index: -1; border-radius: 50%; filter: blur(80px); }
+.bx-aurora i:nth-child(1) { width: 520px; height: 520px; left: -8%; top: -20%; background: #7b5cff; opacity: 0.45; animation: bxDriftA 18s ease-in-out infinite; }
+.bx-aurora i:nth-child(2) { width: 460px; height: 460px; right: -6%; bottom: -30%; background: #14c492; opacity: 0.22; animation: bxDriftB 22s ease-in-out infinite; }
+.bx-aurora i:nth-child(3) { width: 380px; height: 380px; left: 40%; top: 30%; background: #8fa0ff; opacity: 0.25; animation: bxDriftA 20s ease-in-out -6s infinite; }
+@keyframes bxDriftA { 50% { transform: translate3d(60px, 40px, 0) scale(1.1); } }
+@keyframes bxDriftB { 50% { transform: translate3d(-70px, -40px, 0) scale(0.92); } }
+.bx-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* El título, delante */
+.bx-copy { position: relative; z-index: 4; max-width: 640px; text-align: center; pointer-events: none; }
+.bx-copy .bh-badge,
+.bx-copy h1,
+.bx-copy p { pointer-events: auto; }
+.bx-copy .bh-badge {
+  display: inline-block;
+  margin: 0 0 18px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #fff;
+  animation: bxRise 700ms var(--ease-out) 100ms both;
+}
+.bx-copy h1 {
+  margin: 0;
+  font-size: clamp(88px, 13vw, 180px);
+  font-weight: 800;
+  font-stretch: 112%;
+  line-height: 0.88;
+  letter-spacing: -0.055em;
+  color: #fff;
+  text-shadow: 0 20px 60px rgba(20, 24, 120, 0.45);
+  animation: bxFocus 1100ms var(--ease-out) 150ms both;
+}
+.bx-copy p {
+  max-width: 30em;
+  margin: 22px auto 0;
+  font-size: clamp(16.5px, 1.4vw, 19px);
+  line-height: 1.55;
+  color: rgba(240, 243, 255, 0.88);
+  animation: bxRise 800ms var(--ease-out) 380ms both;
+}
+@keyframes bxRise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes bxFocus { from { opacity: 0.1; filter: blur(14px); transform: translateY(0.06em); } to { opacity: 1; filter: blur(0); transform: none; } }
+
+/* ── Las portadas que flotan ── */
+.bx-floats { position: absolute; inset: 0; z-index: 2; }
+.bx-card {
+  --k: 20px;
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  aspect-ratio: 16 / 10;
+  translate: calc(-50% + var(--px, 0) * var(--k)) calc(-50% + var(--py, 0) * var(--k));
+  rotate: var(--r);
+  border-radius: 14px;
+  outline: none;
+  /* Entrada: salen del centro y se abren hasta su sitio */
+  animation: bxIn 1100ms var(--ease-out) calc(250ms + var(--i) * 90ms) both;
+}
+.bx-card-in {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.28), 0 24px 50px -20px rgba(10, 14, 80, 0.7);
+  animation: bxFloat var(--f, 9s) ease-in-out var(--fd, 0s) infinite;
+  transition: scale 400ms var(--ease-out), box-shadow 400ms ease, filter 400ms ease, opacity 400ms ease;
+}
+.bx-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* Profundidad: las de atrás, más pequeñas, desenfocadas y tenues; se mueven menos con el cursor */
+.bx-card[data-d="2"] { --k: 11px; }
+.bx-card[data-d="2"] .bx-card-in { filter: blur(1px) saturate(0.9); opacity: 0.78; }
+.bx-card[data-d="3"] { --k: 5px; }
+.bx-card[data-d="3"] .bx-card-in { filter: blur(3px) saturate(0.8); opacity: 0.5; }
+@keyframes bxIn { from { opacity: 0; left: 50%; top: 50%; scale: 0.5; } }
+@keyframes bxFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -12px; } }
+/* Al pasar el ratón: se acerca, se enfoca y enseña su título */
+.bx-tip {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 10px);
+  width: max-content;
+  max-width: 240px;
+  padding: 7px 12px;
+  translate: -50% 4px;
+  border-radius: 10px;
+  background: rgba(12, 16, 52, 0.78);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms ease, translate 300ms var(--ease-out);
+}
+.bx-card[data-tip="up"] .bx-tip { top: auto; bottom: calc(100% + 10px); translate: -50% -4px; }
+.bx-card[data-align="start"] .bx-tip { left: 0; translate: 0 4px; }
+.bx-card[data-align="end"] .bx-tip { left: auto; right: 0; translate: 0 4px; }
+.bx-card[data-tip="up"][data-align="start"] .bx-tip,
+.bx-card[data-tip="up"][data-align="end"] .bx-tip { translate: 0 -4px; }
+@media (hover: hover) and (pointer: fine) {
+  .bx-card:hover { z-index: 5; }
+  .bx-card:hover .bx-card-in { scale: 1.08; filter: none; opacity: 1; box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.7), 0 30px 60px -18px rgba(10, 14, 80, 0.8); }
+  .bx-card:hover .bx-tip { opacity: 1; translate: -50% 0; }
+  .bx-card[data-align]:hover .bx-tip { translate: 0 0; }
+}
+.bx-card:focus-visible .bx-card-in { box-shadow: 0 0 0 2px #fff, 0 24px 50px -20px rgba(10, 14, 80, 0.7); }
+
+/* ── La lista: mismo diseño, con algo más de vida ── */
+.blog-list-section,
+html[data-theme="dark"] .blog-list-section { background: transparent; }
+/* Luz que sigue al cursor por el borde de cada tarjeta */
+.bp-card { position: relative; isolation: isolate; }
+.bp-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 0%), rgba(66, 87, 255, 0.75), transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .bp-card:hover::after { opacity: 1; }
+}
+/* Las tarjetas entran al aparecer, en cascada */
+.bp-card.bx-pre { opacity: 0; translate: 0 18px; }
+.bp-card.bx-show { opacity: 1; translate: none; transition: opacity 600ms ease var(--d, 0ms), translate 800ms var(--ease-out) var(--d, 0ms); }
+
+/* ── Móvil ── */
+@media (max-width: 760px) {
+  /* El título algo más arriba y la cabecera más baja: la lista asoma antes */
+  .bx-stage { min-height: 530px; padding: calc(var(--nav-h, 64px) + 6px) 18px 96px; border-radius: 0 0 28px 28px; }
+  .bx-copy h1 { font-size: clamp(76px, 24vw, 110px); }
+  .bx-copy p { font-size: 15.5px; }
+  .bx-tip { display: none; }
+}

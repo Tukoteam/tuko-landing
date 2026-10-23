@@ -122,9 +122,14 @@ function concatCssBundles() {
       .sort();
     if (!parts.length) continue;
     const banner = `/* Built from ./${folder}/ — edit parts, not this file */\n`;
-    const body = parts
+    let body = parts
       .map((f) => fs.readFileSync(path.join(dir, f), 'utf8').trimEnd())
       .join('\n\n');
+    // @import de otra hoja del mismo directorio (main.css trae home.css): misma versión de caché que los <link>
+    body = body.replace(/@import url\("([\w-]+\.css)(?:\?v=[^"]*)?"\);/g, (full, file) => {
+      const v = fs.existsSync(path.join(cssDir, file)) ? assetHash(path.join(cssDir, file)) : null;
+      return v ? `@import url("${file}?v=${v}");` : full;
+    });
     fs.writeFileSync(path.join(cssDir, entry), `${banner}${body}\n`);
     n += 1;
     hashCache.delete(path.join(cssDir, entry));
@@ -161,8 +166,25 @@ function concatJsBundles() {
   return n;
 }
 
+/** Rutas de scripts que main.js carga por su cuenta (nav y footer de Inicio): misma versión de caché que los <script> */
+function stampJsRefs() {
+  const jsDir = path.join(siteDir, 'assets', 'js');
+  const file = path.join(jsDir, 'main.js');
+  if (!fs.existsSync(file)) return;
+  const src = fs.readFileSync(file, 'utf8');
+  const out = src.replace(/(['"])\/assets\/js\/([\w-]+\.js)\?v=[0-9a-f]*\1/g, (full, q, name) => {
+    const abs = path.join(jsDir, name);
+    return fs.existsSync(abs) ? `${q}/assets/js/${name}?v=${assetHash(abs)}${q}` : full;
+  });
+  if (out !== src) {
+    fs.writeFileSync(file, out);
+    hashCache.delete(file);
+  }
+}
+
 const cssBundles = concatCssBundles();
 const jsBundles = concatJsBundles();
+stampJsRefs();
 
 const partials = loadPartials();
 const htmlFiles = walk(siteDir).filter((f) => f.endsWith('.html'));

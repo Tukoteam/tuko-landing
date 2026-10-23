@@ -185,3 +185,18 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 })();
+
+/* ── Nav y footer de Inicio en las páginas interiores (artículos del blog y legales) ──
+   Estas páginas (también las que publica el CMS) solo cargan main.js, así que desde aquí se traen los scripts del nav
+   y del footer si la página no los trae ya. Solo si está la hoja de Inicio (main.css la importa).
+   El build estampa la versión de caché en estas rutas (?v=), igual que en los <script> de las páginas. */
+(function () {
+  if (!getComputedStyle(document.documentElement).getPropertyValue('--nav-x')) return;
+  ['/assets/js/site-nav.js?v=b64caa9f', '/assets/js/home-footer.js?v=fe698d5b'].forEach(function (src) {
+    var file = src.split('?')[0].split('/').pop();
+    if (document.querySelector('script[src*="/' + file + '"]')) return;
+    var s = document.createElement('script');
+    s.src = src;
+    document.head.appendChild(s);
+  });
+})();
