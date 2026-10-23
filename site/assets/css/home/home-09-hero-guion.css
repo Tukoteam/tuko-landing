@@ -1017,3 +1017,52 @@ html[data-theme="dark"] .hg-wa-card { background: rgba(255, 255, 255, 0.06); }
   header .nav-links .nav-cta:hover,
   html[data-theme="dark"] header .nav-links .nav-cta:hover { background: #2337f2; }
 }
+
+/* ── Giro de entrada: al cargar, el móvil da una vuelta entera y enseña su parte de atrás ──
+   home-hero-guion.js gira el móvil (rotate en Y), lo eleva un poco (translate) y estrecha la sombra (--hg-fs).
+   Entre 90° y 270° pone .is-flip: la parte de atrás tapa la pantalla. Va en espejo (scaleX(-1)) para leerse
+   bien con el móvil dado la vuelta. Fuera del giro no se ve. */
+.hg-floor { scale: var(--hg-fs, 1) 1; }
+.hg-back {
+  position: absolute;
+  z-index: 20;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: inherit;
+  background:
+    radial-gradient(120% 80% at 30% 20%, rgba(255, 255, 255, 0.1), transparent 55%),
+    linear-gradient(155deg, #3a3e49 0%, #1d2027 30%, #111318 65%, #08090c 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14), inset 0 0 0 2.5px rgba(0, 0, 0, 0.7);
+  transform: scaleX(-1);
+  opacity: 0;
+  pointer-events: none;
+}
+.hg-phone.is-flip .hg-back { opacity: 1; }
+/* Módulo de cámaras, arriba a la izquierda */
+.hg-back-cam {
+  position: absolute;
+  left: 7%;
+  top: 3.5%;
+  width: 36%;
+  aspect-ratio: 1;
+  border-radius: 24%;
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12), 0 6px 14px -6px rgba(0, 0, 0, 0.8);
+}
+.hg-back-cam i {
+  position: absolute;
+  left: 9%;
+  width: 40%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #3b4a7a 0%, #10131c 45%, #050608 70%);
+  box-shadow: 0 0 0 2px #1a1c22, 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+.hg-back-cam i:first-child { top: 9%; }
+.hg-back-cam i:nth-child(2) { bottom: 9%; }
+.hg-back-cam b { position: absolute; right: 16%; top: 18%; width: 14%; aspect-ratio: 1; border-radius: 50%; background: #d9d4c4; opacity: 0.6; }
+/* El logo de Tuko en el centro */
+.hg-back-logo { width: 26%; height: auto; overflow: visible; filter: drop-shadow(0 6px 16px rgba(66, 87, 255, 0.55)); }
+.hg-back-logo ellipse,
+.hg-back-logo path { fill: url(#hgBackG); stroke: rgba(255, 255, 255, 0.35); stroke-width: 1; }

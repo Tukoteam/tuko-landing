@@ -1,0 +1,331 @@
+/* ══════════════════════════════
+   POR QUÉ FUNCIONA — tres capítulos en un marco de plano
+   Cada razón ocupa su fila: la frase a dos tonos (título en tinta, continuación en gris) a un lado y su widget,
+   más grande y sin caja, al otro; los lados se alternan. Una luz baja por el borde izquierdo y, al pasar,
+   enciende la cruz, la línea y el número de cada capítulo; al final gira por la línea de abajo y la retícula late.
+   El scroll lo mueven home-scroll.js (Lenis) y home-why.js (GSAP ScrollTrigger). Los widgets no se tocan.
+══════════════════════════════ */
+.why--chapters,
+html[data-theme="dark"] .why.why--chapters { background: transparent; padding: clamp(72px, 9vw, 120px) 20px; overflow: visible; }
+.why--chapters .why-inner { max-width: 1120px; }
+.why--chapters .why-intro { margin-bottom: clamp(48px, 6vw, 80px); }
+
+/* Antetítulo editorial, como en «Cómo funciona» */
+.why--chapters .s-badge,
+html[data-theme="dark"] .why--chapters .s-badge {
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  font-size: 14.5px;
+  font-weight: 600;
+  font-stretch: 100%;
+  letter-spacing: -0.005em;
+  text-transform: none;
+  color: var(--blue);
+}
+html[data-theme="dark"] .why--chapters .s-badge { color: #8fa0ff; }
+.why--chapters .s-badge::before,
+.why--chapters .s-badge::after {
+  content: '';
+  display: inline-block;
+  width: clamp(20px, 4vw, 44px);
+  height: 1px;
+  margin: 0 14px;
+  vertical-align: middle;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, currentColor 45%, transparent));
+}
+.why--chapters .s-badge::after { background: linear-gradient(90deg, color-mix(in srgb, currentColor 45%, transparent), transparent); }
+/* El título se enciende palabra a palabra con el scroll */
+.why--chapters .why-intro .data-split .w {
+  opacity: calc(0.14 + 0.86 * clamp(0, var(--p, 1) * (var(--n) + 3) - var(--i), 1));
+  transition: opacity 140ms linear;
+}
+
+/* ── Marco de plano ── */
+.wc-list {
+  --rule: color-mix(in srgb, var(--ink) 11%, transparent);
+  --cross: color-mix(in srgb, var(--ink) 34%, transparent);
+  position: relative;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+/* Borde izquierdo: un haz de luz baja con el scroll (--sp la pone lab-why.js).
+   Estela tenue que se apaga hacia arriba y una punta brillante; al pasar por cada capítulo lo «enciende». */
+.wc-spine { position: absolute; z-index: 3; left: -1px; top: 0; bottom: -1px; width: 1px; background: var(--rule); pointer-events: none; clip-path: inset(0 -40px -40px -40px); }
+.wc-spine i {
+  position: absolute;
+  left: -0.5px;
+  top: 0;
+  width: 2px;
+  height: calc(var(--sp, 0) * 100%);
+  border-radius: 2px;
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--blue) 35%, transparent) 25%, color-mix(in srgb, var(--blue) 60%, transparent) calc(100% - 200px), var(--blue));
+  box-shadow: 0 0 10px color-mix(in srgb, var(--blue) 35%, transparent);
+}
+/* Punta: un destello alargado (como los haces de «¿Y si nadie más entra?»), sin círculo */
+.wc-spine b {
+  position: absolute;
+  left: -1px;
+  top: calc(var(--sp, 0) * 100%);
+  width: 3px;
+  height: 160px;
+  border-radius: 3px;
+  translate: 0 -100%;
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--blue) 25%, transparent) 40%, color-mix(in srgb, var(--blue) 75%, transparent) 78%, var(--blue) 92%, #fff);
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--blue) 80%, transparent)) drop-shadow(0 0 12px color-mix(in srgb, var(--blue) 45%, transparent));
+  opacity: calc(clamp(0, var(--sp, 0) * 40, 1) * (1 - clamp(0, (var(--sp, 0) - 0.985) * 70, 1)));
+}
+.wc-spine b::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -14px;
+  width: 20px;
+  height: 46px;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--blue) 40%, transparent), transparent);
+  filter: blur(3px);
+}
+/* Cruces en las esquinas de cada capítulo */
+.wc::before,
+.wc::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: -6px;
+  width: 11px;
+  height: 11px;
+  background:
+    linear-gradient(var(--cross), var(--cross)) center / 1px 100% no-repeat,
+    linear-gradient(var(--cross), var(--cross)) center / 100% 1px no-repeat;
+  pointer-events: none;
+}
+.wc::before { left: -6px; }
+/* El tema oscuro pinta .why-row::before con un color liso (era la raya de la versión anterior): aquí es una cruz */
+html .why--chapters .why-row.wc::before,
+html[data-theme="dark"] .why--chapters .why-row.wc::before {
+  background:
+    linear-gradient(var(--cross), var(--cross)) center / 1px 100% no-repeat,
+    linear-gradient(var(--cross), var(--cross)) center / 100% 1px no-repeat;
+}
+.wc::after { right: -6px; }
+
+/* ── Capítulo ── */
+.why--chapters .why-row.wc {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 0;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+.wc:nth-of-type(even) .wc-text { order: 2; }
+.wc-text { padding: clamp(32px, 5vw, 64px); }
+/* La fila del widget lleva su propia línea vertical que la separa del texto */
+.wc-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: clamp(340px, 32vw, 420px);
+  isolation: isolate;
+  border-left: 1px solid var(--rule);
+}
+.wc:nth-of-type(even) .wc-stage { border-left: 0; border-right: 1px solid var(--rule); }
+
+.wc-head { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+.wc-num {
+  display: inline-grid;
+  place-items: center;
+  min-width: 34px;
+  height: 24px;
+  padding: 0 8px;
+  border: 1px solid color-mix(in srgb, var(--blue) 30%, transparent);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums slashed-zero;
+  letter-spacing: 0.02em;
+  color: color-mix(in srgb, #fff calc(var(--hit) * 100%), var(--blue));
+  background: color-mix(in srgb, var(--blue) calc(var(--hit) * 100%), transparent);
+  box-shadow: 0 0 calc(var(--hit) * 18px) color-mix(in srgb, var(--blue) calc(var(--hit) * 45%), transparent);
+}
+html[data-theme="dark"] .wc-num { color: color-mix(in srgb, #fff calc(var(--hit) * 100%), #8fa0ff); border-color: rgba(143, 160, 255, 0.3); }
+.why--chapters .wc .why-kicker { margin: 0; font-size: 12.5px; letter-spacing: 0.1em; color: var(--ink-3); }
+.why--chapters .wc .why-kicker::after { display: none; }
+
+/* Frase a dos tonos: el título en tinta y la continuación, al mismo tamaño, en gris */
+.why--chapters .wc-line {
+  max-width: 19ch;
+  margin: 0;
+  font-size: clamp(27px, 2.9vw, 40px);
+  font-weight: 650;
+  font-stretch: 100%;
+  line-height: 1.12;
+  letter-spacing: -0.028em;
+  text-wrap: pretty;
+}
+.why--chapters .wc-line .why-title,
+.why--chapters .wc-line .why-desc { display: inline; margin: 0; font: inherit; letter-spacing: inherit; line-height: inherit; }
+.why--chapters .wc-line .why-title,
+html[data-theme="dark"] .why--chapters .wc-line .why-title { color: var(--ink); }
+.why--chapters .wc-line .why-desc,
+html[data-theme="dark"] .why--chapters .wc-line .why-desc { color: color-mix(in srgb, var(--ink) 36%, transparent); }
+
+/* ── Escenario: halo azul y puntos que se desvanecen; sin caja ── */
+.wc-halo {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background:
+    radial-gradient(closest-side, rgba(66, 87, 255, 0.26), transparent) 50% 50% / 85% 85% no-repeat,
+    radial-gradient(circle at center, color-mix(in srgb, var(--blue) 42%, transparent) 1.2px, transparent 1.8px) 50% 50% / 20px 20px;
+  -webkit-mask-image: radial-gradient(closest-side, #000 60%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 60%, transparent 100%);
+  opacity: 0;
+  scale: 0.85;
+  transition: opacity 900ms ease 200ms, scale 1200ms var(--ease-out) 200ms;
+  pointer-events: none;
+}
+html[data-theme="dark"] .wc-halo {
+  background:
+    radial-gradient(closest-side, rgba(110, 128, 255, 0.24), transparent) 50% 50% / 85% 85% no-repeat,
+    radial-gradient(circle at center, rgba(143, 160, 255, 0.36) 1.2px, transparent 1.8px) 50% 50% / 20px 20px;
+}
+.why--chapters .wc .why-visual { width: 100%; max-width: none; margin: 0; display: flex; justify-content: center; scale: 1.14; }
+.why--chapters .wc .why-visual::before { display: none; }
+/* La carrera es el widget más grande: un poco menos de escala para que respire como los otros */
+.why--chapters .wc[data-k="2"] .why-visual { scale: 1.02; }
+.why--chapters .wc .why-widget { box-shadow: 0 1px 2px rgba(20, 24, 38, 0.05), 0 30px 70px -28px rgba(61, 80, 242, 0.45), 0 0 0 1px rgba(61, 80, 242, 0.08); }
+html[data-theme="dark"] .why--chapters .wc .why-widget { box-shadow: 0 30px 70px -28px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(143, 160, 255, 0.16) !important; }
+
+/* Entrada atada al scroll: lab-why.js da a cada capítulo --k (0 → 1) con GSAP, suavizado.
+   Sin JS, --k vale 1 y todo se ve. Primero se dibuja la línea, luego la frase palabra a palabra y el widget llega inclinado. */
+.wc { --k: 1; --hit: 1; --rl: 1; --v: clamp(0, (var(--k) - 0.08) / 0.62, 1); }
+.wc-rule {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 1px;
+  clip-path: inset(-12px 0 -12px 0);
+  pointer-events: none;
+}
+.wc-rule::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--blue) 55%, transparent), color-mix(in srgb, var(--blue) 18%, transparent) 70%, transparent);
+  transform: scaleX(var(--rl));
+  transform-origin: left;
+}
+.wc-rule::after {
+  content: '';
+  position: absolute;
+  top: -0.5px;
+  left: calc(var(--rl) * 100%);
+  width: 160px;
+  height: 2px;
+  border-radius: 2px;
+  translate: -100% 0;
+  background: linear-gradient(90deg, transparent, var(--blue) 80%, #fff);
+  box-shadow: 0 0 12px 1px color-mix(in srgb, var(--blue) 60%, transparent);
+  opacity: calc(clamp(0, var(--rl) * 25, 1) * (1 - clamp(0, (var(--rl) - 0.86) * 7.2, 1)));
+}
+.wc::before,
+.wc::after { opacity: clamp(0, var(--k) * 3 - 0.4, 1); }
+.wc-head { opacity: clamp(0, var(--k) * 4 - 0.3, 1); translate: 0 calc((1 - clamp(0, var(--k) * 4 - 0.3, 1)) * 12px); }
+.wc-line .w { opacity: calc(0.1 + 0.9 * clamp(0, (var(--k) - 0.12) / 0.55 * (var(--wn) + 4) - var(--wi), 1)); }
+.wc .why-visual {
+  opacity: var(--v);
+  filter: blur(calc((1 - var(--v)) * 10px));
+  transform: perspective(1200px) translateY(calc((1 - var(--v)) * 56px)) rotateX(calc((1 - var(--v)) * 18deg));
+  transform-origin: 50% 50%;
+}
+.wc .wc-halo { opacity: var(--v); scale: calc(0.7 + 0.3 * var(--v)); transition: none; }
+.why--chapters .wc.fade-up { opacity: 1; transform: none; }
+
+/* Móvil: una columna, el texto arriba y el widget debajo */
+@media (max-width: 900px) {
+  .why--chapters .why-row.wc { grid-template-columns: minmax(0, 1fr); }
+  .wc:nth-of-type(even) .wc-text { order: 0; }
+  .wc-text { padding: 36px 22px 8px; text-align: left; }
+  .wc-head { justify-content: flex-start; margin-bottom: 16px; }
+  .why--chapters .wc-line { font-size: 26px; max-width: none; text-align: left; }
+  .wc-stage,
+  .wc:nth-of-type(even) .wc-stage { height: 300px; border: 0; }
+  .why--chapters .wc .why-visual { scale: 0.95; }
+  .why--chapters .wc[data-k="2"] .why-visual { scale: 0.9; }
+}
+
+/* Lenis (scroll suave): sus reglas mínimas y sin el scroll suave nativo, que choca con él */
+html.lenis, html.lenis body { height: auto; scroll-behavior: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+/* Mientras desliza, los iframes (demos de «Cómo funciona») no se quedan la rueda */
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* ── Final: la luz gira la esquina, recorre la línea de abajo y el marco late dos veces (.is-done) ── */
+.wc-rule.wc-end { top: auto; bottom: -1px; }
+.wc-list::before,
+.wc-list::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  bottom: -6px;
+  width: 11px;
+  height: 11px;
+  --cross: color-mix(in srgb, var(--ink) 34%, transparent);
+  background:
+    linear-gradient(var(--cross), var(--cross)) center / 1px 100% no-repeat,
+    linear-gradient(var(--cross), var(--cross)) center / 100% 1px no-repeat;
+  pointer-events: none;
+}
+.wc-list::before { left: -6px; }
+.wc-list::after { right: -6px; }
+/* Las cruces por las que pasa la luz se encienden: azul y un brillo pequeño (clases de lab-why.js) */
+.wc::before,
+.wc-list::before,
+.wc-list::after { transition: filter 400ms ease; }
+.wc.is-lit::before,
+.wc-list.is-end-l::before,
+.wc-list.is-end-r::after {
+  --cross: var(--blue);
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--blue) 80%, transparent)) drop-shadow(0 0 8px color-mix(in srgb, var(--blue) 40%, transparent));
+}
+html[data-theme="dark"] .wc.is-lit::before,
+html[data-theme="dark"] .wc-list.is-end-l::before,
+html[data-theme="dark"] .wc-list.is-end-r::after { --cross: #8fa0ff; }
+.wc-pulse {
+  position: absolute;
+  z-index: 2;
+  inset: -1px;
+  border: 1px solid var(--blue);
+  box-shadow: 0 0 36px -4px color-mix(in srgb, var(--blue) 45%, transparent), inset 0 0 70px -10px color-mix(in srgb, var(--blue) 18%, transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+.wc-list.is-done .wc-pulse { animation: wcPump 1.9s var(--ease-out) both; }
+@keyframes wcPump {
+  0% { opacity: 0; }
+  10% { opacity: 0.85; }
+  28% { opacity: 0.12; }
+  40% { opacity: 0.6; }
+  100% { opacity: 0; }
+}
+/* El latido llega también a las líneas de dentro (entre capítulos y la central), más suave que el marco */
+.wc-list.is-done .why-row.wc,
+.wc-list.is-done .wc-stage { animation: wcPumpLine 1.9s var(--ease-out) both; }
+@keyframes wcPumpLine {
+  0% { border-color: var(--rule); }
+  10% { border-color: color-mix(in srgb, var(--blue) 55%, transparent); }
+  28% { border-color: var(--rule); }
+  40% { border-color: color-mix(in srgb, var(--blue) 38%, transparent); }
+  100% { border-color: var(--rule); }
+}

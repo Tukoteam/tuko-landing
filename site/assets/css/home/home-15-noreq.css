@@ -1,0 +1,181 @@
+/* ══════════════════════════════
+   LO QUE NO TE PEDIMOS — lista de comprobación con un sello 3D
+   Sección tranquila y tipográfica, a contraste con las anteriores: cinco filas grandes, sin tarjetas ni escenas.
+   A la izquierda un círculo que dibuja su check al bajar; en medio la frase en negrita; a la derecha, pequeña
+   y en gris, la continuación. Cada fila empieza apagada y se enciende al marcarse.
+   Encima del título, un sello: una pieza de cristal con el logo en relieve que mira al cursor y da una vuelta
+   cuando las cinco filas quedan marcadas. Todo lo mueve home-noreq.js. Siempre animado.
+══════════════════════════════ */
+
+.data.nk { position: relative; overflow: clip; isolation: isolate; }
+html[data-theme="dark"] .data.nk { background: transparent; }
+.nk .data-inner { position: relative; z-index: 1; }
+/* El título se enciende palabra a palabra con el scroll */
+.nk .nk-title.data-split .w {
+  opacity: calc(0.14 + 0.86 * clamp(0, var(--p, 1) * (var(--n) + 3) - var(--i), 1));
+  transition: opacity 140ms linear;
+}
+
+.nk-list {
+  --line: color-mix(in srgb, var(--ink) 10%, transparent);
+  list-style: none;
+  max-width: 860px;
+  margin: clamp(36px, 4.5vw, 60px) auto 0;
+  padding: 0;
+  text-align: left;
+}
+
+/* ── Fila ── */
+.nk-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(16px, 2.4vw, 28px);
+  padding: clamp(20px, 2.4vw, 28px) clamp(8px, 1.6vw, 18px);
+  border-radius: 18px;
+  transition: background-color 400ms ease, translate 500ms var(--ease-out);
+}
+/* Líneas finas entre filas, que se apagan en los extremos */
+.nk-row::before,
+.nk-row:last-child::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line) 12%, var(--line) 88%, transparent);
+  pointer-events: none;
+}
+.nk-row:last-child::after { top: auto; bottom: 0; }
+@media (hover: hover) and (pointer: fine) {
+  .nk-row:hover { translate: 6px 0; background-color: color-mix(in srgb, var(--blue) 4%, transparent); }
+}
+
+/* Frase en negrita, grande; la continuación a la derecha, pequeña y gris */
+.nk-row p {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 8px 28px;
+  margin: 0;
+  font-size: 16.5px;
+  line-height: 1.4;
+  color: var(--ink-3);
+  opacity: 0.32;
+  transition: opacity 600ms ease;
+}
+.nk-row p b {
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 700;
+  font-stretch: semi-expanded;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+.nk-row.is-on p { opacity: 1; }
+
+/* ── El check: un círculo fino que se rellena de verde y dibuja su marca ── */
+.nk-ck {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(34px, 3.2vw, 42px);
+  height: clamp(34px, 3.2vw, 42px);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--ink) 16%, transparent);
+  transition: background-color 420ms ease, box-shadow 420ms ease, scale 520ms var(--ease-out);
+}
+.nk-ck svg { width: 62%; height: 62%; fill: none; stroke: #fff; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+.nk-ck path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 520ms var(--ease-out) 180ms; }
+.nk-row.is-on .nk-ck {
+  background-color: #14c492;
+  box-shadow: inset 0 0 0 1.5px #14c492, 0 10px 24px -10px rgba(20, 196, 146, 0.7);
+  animation: nkPop 620ms var(--ease-out);
+}
+.nk-row.is-on .nk-ck path { stroke-dashoffset: 0; }
+@keyframes nkPop { 40% { scale: 1.12; } }
+
+/* ── Sello: una pieza de cristal pequeña con el logo en relieve ──
+   Mira al cursor con inercia (--rx, --ry); en reposo, casi de frente y con un vaivén suave.
+   El reflejo (--sx, --sy) y la sombra (--ty) se mueven con la inclinación; al marcarse las cinco filas da una vuelta (--spin). */
+.nk-seal { position: relative; display: grid; place-items: center; margin: 0 auto clamp(22px, 2.6vw, 30px); perspective: 700px; }
+.nk-seal::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  bottom: -18px;
+  width: 150px;
+  height: 36px;
+  translate: calc(-50% - var(--ty, 0) * 14px) 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(66, 87, 255, 0.35), transparent);
+  filter: blur(8px);
+}
+.nk-seal-tile {
+  --ry: -8deg;
+  --rx: 8deg;
+  --spin: 0deg;
+  position: relative;
+  width: 104px;
+  height: 104px;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx)) rotateY(calc(var(--ry) + var(--spin)));
+  animation: nkSealFloat 6s ease-in-out infinite;
+}
+@keyframes nkSealFloat { 50% { translate: 0 -7px; } }
+.nk-seal-tile > * { position: absolute; inset: 0; border-radius: 28px; }
+/* Canto de la pieza: capas detrás de la cara (también se ve por detrás al dar la vuelta) */
+.nk-seal-edge { background: #c9cff0; transform: translateZ(var(--z)); }
+.nk-seal-edge:first-child { background: linear-gradient(150deg, #e9ecfb, #d6dbf5); }
+html[data-theme="dark"] .nk-seal-edge { background: #262b3d; }
+html[data-theme="dark"] .nk-seal-edge:first-child { background: linear-gradient(150deg, #262b3d, #161924); }
+.nk-seal-face {
+  transform: translateZ(0);
+  background: linear-gradient(150deg, #ffffff, #eef0fb 60%, #e3e7fa);
+  box-shadow: inset 0 0 0 1px rgba(66, 87, 255, 0.14), inset 0 1px 0 #fff, 0 30px 50px -22px rgba(61, 80, 242, 0.55);
+}
+html[data-theme="dark"] .nk-seal-face {
+  background: linear-gradient(150deg, #262b3d, #181b27 60%, #12141c);
+  box-shadow: inset 0 0 0 1px rgba(143, 160, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 30px 50px -22px rgba(0, 0, 0, 0.9);
+}
+/* Logo en relieve: poco fondo para que se lean las cuatro formas, como en el menú */
+.nk-seal-tile svg { inset: 24%; width: 52%; height: 52%; border-radius: 0; overflow: visible; transform: translateZ(var(--z)); }
+.nk-seal-tile .nks-l > * { fill: #3445d8; }
+.nk-seal-tile .nks-front > * { fill: url(#nkSealG); stroke: rgba(255, 255, 255, 0.7); stroke-width: 0.8; }
+html[data-theme="dark"] .nk-seal-tile .nks-l > * { fill: #2e3cb8; }
+/* Reflejo que sigue a la inclinación y un brillo que cruza la pieza de vez en cuando */
+.nk-seal-shine { overflow: hidden; transform: translateZ(12px); pointer-events: none; }
+.nk-seal-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--sx, 35%) var(--sy, 25%), rgba(255, 255, 255, 0.55), transparent 48%);
+  mix-blend-mode: soft-light;
+}
+html[data-theme="dark"] .nk-seal-shine::after { background: radial-gradient(circle at var(--sx, 35%) var(--sy, 25%), rgba(190, 200, 255, 0.35), transparent 50%); mix-blend-mode: screen; }
+.nk-seal-shine::before {
+  content: '';
+  position: absolute;
+  inset: -20% -60%;
+  background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.55) 50%, transparent 60%);
+  translate: -70% 0;
+  animation: nkShine 6s ease-in-out infinite;
+}
+html[data-theme="dark"] .nk-seal-shine::before { background: linear-gradient(105deg, transparent 40%, rgba(190, 200, 255, 0.22) 50%, transparent 60%); }
+@keyframes nkShine { 0%, 62% { translate: -70% 0; } 88%, 100% { translate: 70% 0; } }
+
+/* Móvil: la continuación baja debajo de la frase; el sello, más pequeño y centrado sobre el título */
+@media (max-width: 700px) {
+  .nk-row { align-items: start; padding: 20px 4px; }
+  .nk-row p { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .nk-row p b { font-size: 21px; }
+  .nk-ck { margin-top: 1px; }
+  .nk .nk-title { text-align: center; }
+  .nk-seal::after { width: 110px; }
+  .nk-seal-tile { width: 84px; height: 84px; }
+  .nk-seal-tile > * { border-radius: 23px; }
+  .nk-seal-tile svg { border-radius: 0; }
+}

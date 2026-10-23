@@ -1,0 +1,290 @@
+/* ══════════════════════════════
+   ¿Y SI NADIE MÁS ENTRA? — las tres opciones a la vista
+   El reloj del grupo llega a 00:00:00; la luz baja por una línea y se abre por una regla que recorre
+   tres columnas, mientras una retícula fina se revela desde el cruce. En cada columna, el resultado
+   para la tienda en grande se enciende de izquierda a derecha. Sin cajas, iconos ni pestañas.
+   La cuenta atrás y la entrada (.is-zero) las pone home-sections.js. Siempre animado.
+══════════════════════════════ */
+
+.re { padding: clamp(72px, 9vw, 120px) 20px; }
+.re-inner { position: relative; isolation: isolate; max-width: 1120px; margin: 0 auto; }
+.re-title { margin: 0 auto; text-align: center; }
+.re-sub { max-width: 30em; margin: 14px auto 0; text-align: center; font-size: clamp(17px, 1.6vw, 19px); line-height: 1.5; color: var(--ink-2); }
+
+/* ── Retícula de fondo ──
+   Puntos (no líneas) cada 28 px: así no compiten con las líneas rectas del esquema, que quedan como lo único trazado.
+   Desvanecida hacia los bordes.
+   Se revela en círculo desde el cruce de la línea con la regla, al mismo ritmo que la luz. */
+.re-grid {
+  --re-line: rgba(40, 52, 120, 0.2);
+  position: absolute;
+  z-index: -1;
+  left: -8%;
+  right: -8%;
+  top: 40px;
+  height: 760px;
+  background-image: radial-gradient(circle at center, var(--re-line) 1.1px, transparent 1.6px);
+  background-size: 28px 28px;
+  background-position: 50% 0;
+  /* Se apaga igual hacia arriba y hacia abajo (y a los lados): sin bordes rectos */
+  -webkit-mask-image: radial-gradient(ellipse 54% 50% at 50% 42%, #000 0, rgba(0, 0, 0, 0.55) 50%, transparent 100%);
+  mask-image: radial-gradient(ellipse 54% 50% at 50% 42%, #000 0, rgba(0, 0, 0, 0.55) 50%, transparent 100%);
+  clip-path: circle(0% at 50% 25%);
+  transition: clip-path 1400ms var(--ease-in-out) 480ms;
+  pointer-events: none;
+}
+html[data-theme="dark"] .re-grid { --re-line: rgba(143, 160, 255, 0.2); }
+.re.is-zero .re-grid { clip-path: circle(80% at 50% 25%); }
+
+/* ── Reloj → línea → regla ── */
+.re-fork { position: relative; height: 104px; margin-top: clamp(36px, 4vw, 52px); }
+.re-clock {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  height: 40px;
+  padding: 0 16px 0 12px;
+  translate: -50% 0;
+  border-radius: 999px;
+  background: var(--hero-fade);
+  box-shadow: 0 0 0 1px var(--hairline), 0 1px 2px rgba(20, 24, 38, 0.05), 0 10px 26px -16px rgba(20, 24, 38, 0.3);
+}
+html[data-theme="dark"] .re-clock { background: #12151f; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.09), 0 10px 26px -16px rgba(0, 0, 0, 0.7); }
+.re-clock svg { width: 20px; height: 20px; fill: none; stroke-linecap: round; }
+.re-dial { stroke: color-mix(in srgb, var(--ink) 14%, transparent); stroke-width: 2; }
+.re-left { stroke: var(--blue); stroke-width: 2; stroke-dasharray: var(--re-left, 1) 1; }
+html[data-theme="dark"] .re-left { stroke: #8fa0ff; }
+.re-hand { stroke: var(--ink-3); stroke-width: 1.8; stroke-linejoin: round; }
+.re-time { min-width: 6.6ch; font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: 0.02em; color: var(--ink); transition: color 400ms ease; }
+.re.is-zero .re-time { color: var(--ink-3); }
+.re-stem {
+  position: absolute;
+  left: 50%;
+  top: 40px;
+  bottom: 0;
+  width: 1px;
+  background: color-mix(in srgb, var(--ink) 30%, transparent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 520ms var(--ease-out);
+}
+.re.is-zero .re-stem { transform: none; }
+.re-rule {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  /* Se apaga en los extremos: sin cortes secos a los lados */
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--ink) 24%, transparent) 10% 90%, transparent);
+  transform: scaleX(0);
+  transition: transform 1100ms var(--ease-in-out) 480ms;
+}
+.re.is-zero .re-rule { transform: none; }
+
+/* Halo azul muy suave detrás del reloj; se aviva al llegar a cero */
+.re-fork::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  width: 420px;
+  height: 220px;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(66, 87, 255, 0.14), transparent);
+  opacity: 0.4;
+  transition: opacity 900ms ease;
+  pointer-events: none;
+}
+.re.is-zero .re-fork::before { opacity: 1; }
+/* Al llegar a 00:00:00, un aro fino sale del reloj y se desvanece */
+.re-clock::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  border: 1px solid color-mix(in srgb, var(--blue) 70%, transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+html[data-theme="dark"] .re-clock::after { border-color: rgba(143, 160, 255, 0.7); }
+.re.is-zero .re-clock::after { animation: reRing 900ms var(--ease-out) both; }
+@keyframes reRing { from { opacity: 0.9; scale: 1; } to { opacity: 0; scale: 1.35 1.6; } }
+
+/* La luz va en la punta de cada línea mientras se dibuja: misma duración y curva que la línea.
+   Cada haz es una ventana (overflow: hidden) sobre el tramo de su línea; dentro, el trazo de luz tiene la cabeza
+   en la punta y la cola hacia el centro. Empieza en el centro exacto y nunca cruza el reloj. */
+.re { --re-glow: #4257ff; }
+html[data-theme="dark"] .re { --re-glow: #a9b5ff; }
+.re-beam { position: absolute; z-index: 2; overflow: hidden; pointer-events: none; opacity: 0; }
+.re-beam::before { content: ''; position: absolute; border-radius: 2px; box-shadow: 0 0 6px 1px color-mix(in srgb, var(--re-glow) 60%, transparent); }
+/* Bajada: ventana sobre la línea vertical; la cabeza va abajo */
+.re-beam--down { left: 50%; top: 40px; bottom: 0; width: 13px; margin-left: -6.5px; }
+.re-beam--down::before { left: 6px; width: 1px; height: 70%; bottom: 100%; background: linear-gradient(180deg, transparent, var(--re-glow)); }
+/* Apertura: una ventana por lado; la cabeza mira hacia fuera y la cola llega al centro */
+.re-beam--l, .re-beam--r { top: 100%; height: 13px; margin-top: -7px; }
+.re-beam--l { left: 0; right: 50%; }
+.re-beam--r { left: 50%; right: 0; }
+.re-beam--l::before, .re-beam--r::before { top: 6px; height: 1px; width: 55%; }
+.re-beam--l::before { left: 100%; background: linear-gradient(90deg, var(--re-glow), transparent); }
+.re-beam--r::before { right: 100%; background: linear-gradient(270deg, var(--re-glow), transparent); }
+
+.re.is-zero .re-beam--down { animation: reFade 520ms linear both; }
+.re.is-zero .re-beam--down::before { animation: reDownTip 520ms var(--ease-out) both, reTailV 520ms linear both; }
+.re.is-zero .re-beam--l, .re.is-zero .re-beam--r { animation: reFade 1100ms linear 480ms both; }
+.re.is-zero .re-beam--l::before { animation: reLeftTip 1100ms var(--ease-in-out) 480ms both, reTailH 1100ms linear 480ms both; }
+.re.is-zero .re-beam--r::before { animation: reRightTip 1100ms var(--ease-in-out) 480ms both, reTailH 1100ms linear 480ms both; }
+@keyframes reDownTip { from { bottom: 100%; } to { bottom: 0%; } }
+@keyframes reLeftTip { from { left: 100%; } to { left: 0%; } }
+@keyframes reRightTip { from { right: 100%; } to { right: 0%; } }
+@keyframes reFade { 0% { opacity: 0; } 6% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; } }
+/* Al acercarse al final, la cola se recoge hacia la punta: no queda ningún rastro parado en los extremos */
+@keyframes reTailH { 0%, 45% { width: 55%; } 100% { width: 0%; } }
+@keyframes reTailV { 0%, 55% { height: 70%; } 100% { height: 0%; } }
+
+/* ── Tres columnas separadas por filetes ── */
+.re-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.re-col {
+  position: relative;
+  padding: 30px clamp(20px, 2.6vw, 36px) 34px;
+  transition: background-color 300ms ease;
+}
+.re-col + .re-col::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ink) 22%, transparent), transparent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 700ms var(--ease-out) calc(1150ms + var(--i) * 160ms);
+}
+.re.is-zero .re-col + .re-col::after { transform: none; }
+/* Al pasar el ratón, el tramo de regla de esa columna se pone azul */
+.re-col::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 2px;
+  background: var(--blue);
+  transform: scaleX(0);
+  transition: transform 380ms var(--ease-out);
+}
+html[data-theme="dark"] .re-col::before { background: #8fa0ff; }
+@media (hover: hover) and (pointer: fine) {
+  .re-col:hover { background: linear-gradient(180deg, color-mix(in srgb, var(--blue) 4%, transparent), transparent 70%); }
+  .re-col:hover::before { transform: none; }
+}
+
+.re-label { display: block; font-size: 12.5px; font-weight: 600; letter-spacing: 0.02em; color: var(--ink-3); }
+/* Lo que ganas tú: grande; se ve desde el principio en gris y se enciende de izquierda a derecha */
+.re-win {
+  margin: 14px 0 0;
+  font-size: clamp(25px, 2.5vw, 34px);
+  font-weight: 700;
+  font-stretch: 105%;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  color: transparent;
+  background-image: linear-gradient(90deg, var(--ink) 0 45%, color-mix(in srgb, var(--ink) 28%, transparent) 55% 100%);
+  background-size: 230% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition: background-position 1100ms var(--ease-in-out) calc(1400ms + var(--i) * 180ms);
+}
+.re.is-zero .re-win { background-position: 0 0; }
+@media (forced-colors: active) { .re-win { color: CanvasText; background: none; } }
+.re-who { max-width: 30ch; margin: 14px 0 0; font-size: 15.5px; line-height: 1.5; color: var(--ink-3); }
+
+.re-foot { max-width: 600px; margin: clamp(36px, 4vw, 52px) auto 0; text-align: center; text-wrap: balance; font-size: 15.5px; line-height: 1.6; color: var(--ink-3); }
+.re-foot b { display: block; margin-top: 4px; font-weight: 600; color: var(--ink); }
+
+/* Móvil: línea de tiempo vertical. El reloj pasa a la izquierda y su línea baja por el borde izquierdo
+   atravesando las opciones A, B y C; una luz la recorre y cada opción enciende su marca cuando llega. */
+@media (max-width: 760px) {
+  .re-fork { height: 52px; }
+  .re-clock { left: 0; translate: none; }
+  .re-fork::before { left: 22px; width: 260px; }
+  .re-stem { left: 22px; }
+  .re-rule,
+  .re-beam--l,
+  .re-beam--r { display: none; }
+  /* En móvil la luz es una sola: sale de debajo del reloj y baja por las opciones */
+  .re-beam--down { display: none; }
+  .re-grid { top: 40px; height: 900px; background-size: 24px 24px; }
+  .re-cols { position: relative; grid-template-columns: minmax(0, 1fr); padding-left: 46px; clip-path: inset(-12px -40px -40px -40px); }
+  /* La línea sigue hacia abajo por las tres opciones */
+  .re-cols::before {
+    content: '';
+    position: absolute;
+    left: 22px;
+    top: 0;
+    height: var(--re-end, calc(100% - 34px));
+    width: 1px;
+    background: color-mix(in srgb, var(--ink) 26%, transparent);
+    transform: scaleY(0);
+    transform-origin: top;
+    /* Mismo ritmo (lineal) que la luz: la línea se dibuja justo detrás de su cabeza */
+    transition: transform 1900ms linear 120ms;
+  }
+  .re.is-zero .re-cols::before { transform: none; }
+  /* La luz baja por ella (recortada arriba: nace justo bajo el reloj, no se ve por encima) */
+  .re-cols::after {
+    content: '';
+    position: absolute;
+    left: 21px;
+    top: 0;
+    width: 3px;
+    height: 130px;
+    border-radius: 3px;
+    /* Cometa: la cola se desvanece arriba y la cabeza también se suaviza abajo (sin bordes duros) */
+    background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--re-glow) 25%, transparent) 45%, color-mix(in srgb, var(--re-glow) 85%, transparent) 82%, var(--re-glow) 92%, transparent 100%);
+    filter: drop-shadow(0 0 5px color-mix(in srgb, var(--re-glow) 70%, transparent));
+    opacity: 0;
+    pointer-events: none;
+  }
+  .re.is-zero .re-cols::after { animation: reColsBeam 1900ms linear 120ms both; }
+  .re-col { padding: 20px 0 24px; }
+  /* Marca de cada opción sobre la línea: se enciende en azul cuando llega la luz (y no hay hover en táctil) */
+  .re-col::before,
+  .re-col:hover::before {
+    left: -29px;
+    right: auto;
+    top: 26px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--hero-fade);
+    box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--ink) 30%, transparent);
+    transform: none;
+    /* --rd (home-sections.js): el momento exacto en que la luz llega a esta marca */
+    transition: background-color 300ms ease var(--rd, 800ms), box-shadow 300ms ease var(--rd, 800ms);
+  }
+  html[data-theme="dark"] .re-col::before { background: #0d0f16; }
+  .re.is-zero .re-col::before { background: var(--blue); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 18%, transparent), 0 0 12px rgba(66, 87, 255, 0.6); }
+  .re-col + .re-col::after { left: 0; right: 0; top: 0; bottom: auto; width: auto; height: 1px; background: color-mix(in srgb, var(--ink) 10%, transparent); transform: scaleX(0); transform-origin: left; transition: transform 600ms var(--ease-out) calc(var(--rd, 800ms) - 250ms); }
+  .re.is-zero .re-col + .re-col::after { transform: none; }
+  .re-win { font-size: clamp(24px, 7vw, 30px); transition-duration: 900ms; transition-delay: calc(var(--rd, 800ms) + 60ms); }
+}
+@keyframes reColsBeam {
+  0% { top: -120px; opacity: 0; }
+  8% { opacity: 1; }
+  94% { opacity: 1; }
+  100% { top: calc(var(--re-end, 100%) - 120px); opacity: 0; }
+}
+
+/* Remate de la garantía: «ni un euro» pasa a verde cuando las tres opciones ya están encendidas */
+.re-euro { color: var(--ink); transition: color 700ms ease; }
+.re.is-zero .re-euro { color: #0a9a71; transition-delay: 2700ms; }
+html[data-theme="dark"] .re.is-zero .re-euro { color: #3fe0b0; }

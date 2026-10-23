@@ -210,7 +210,8 @@
     if (document.hidden) { stop(); reset(); }
     else if (visible) play(400);
   });
-  play(900);
+  /* La primera vez espera a que el móvil aterrice del giro de entrada */
+  play(1700);
 
   /* ── Ondas de difusión: al completarse el grupo, una onda sale del móvil y enciende la rejilla ── */
   var dots = hero.querySelector('.hg-dots');
@@ -309,6 +310,42 @@
     else window.addEventListener('resize', measure);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
     new MutationObserver(function () { if (!raf) draw(-1); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  }
+
+  /* ── Giro de entrada: al cargar, el móvil entra dando una vuelta entera, como una moneda ──
+     Gira en Y y se eleva un poco; entre 90° y 270° se ve su parte de atrás (.is-flip) y la sombra se estrecha.
+     Solo una vez: al cargar o, si el móvil queda más abajo (pantallas pequeñas), al aparecer. Siempre animado. */
+  var phone = hero.querySelector('.hg-phone');
+  if (phone && stage) {
+    var SPIN_MS = 1500, SPIN_DELAY = 420, spinT0 = 0;
+    var spinEase = function (k) { return 1 - Math.pow(1 - k, 4); };
+    var spinStep = function (now) {
+      if (!spinT0) spinT0 = now;
+      var k = Math.min(1, (now - spinT0) / SPIN_MS);
+      var a = spinEase(k) * 360;
+      var c = Math.cos(a * Math.PI / 180);
+      phone.style.rotate = 'y ' + a.toFixed(2) + 'deg';
+      phone.style.translate = '0 ' + (-Math.sin(k * Math.PI) * 16).toFixed(2) + 'px';
+      phone.classList.toggle('is-flip', c < 0);
+      stage.style.setProperty('--hg-fs', (0.45 + 0.55 * Math.abs(c)).toFixed(3));
+      if (k < 1) requestAnimationFrame(spinStep);
+      else {
+        phone.style.rotate = '';
+        phone.style.translate = '';
+        phone.classList.remove('is-flip');
+        stage.style.removeProperty('--hg-fs');
+      }
+    };
+    /* Si el móvil se ve al cargar (escritorio), gira al entrar; si queda más abajo (móvil), gira cuando aparece */
+    var startSpin = function (delay) { setTimeout(function () { requestAnimationFrame(spinStep); }, delay); };
+    var pr = phone.getBoundingClientRect();
+    if (pr.top < window.innerHeight * 0.75 || !('IntersectionObserver' in window)) startSpin(SPIN_DELAY);
+    else {
+      var spinIo = new IntersectionObserver(function (en) {
+        if (en[0].isIntersecting) { spinIo.disconnect(); startSpin(120); }
+      }, { threshold: 0.35 });
+      spinIo.observe(phone);
+    }
   }
 
   /* ── Giro 3D del móvil con muelle: recto en reposo, sigue al ratón y vuelve al salir ── */

@@ -1,0 +1,108 @@
+/* ══════════════════════════════
+   FOOTER DE LA HOME — tranquilo: cierra la página sin robarle protagonismo al CTA
+   Un «tuko» gigante estático y muy sutil (como un grabado) cortado por el borde de abajo, una línea de luz arriba,
+   enlaces con una flecha al pasar el ratón y un botón redondo para volver arriba.
+   Todo va bajo .ft (la pone home-footer.js): el resto de páginas, que comparten el footer, no cambian.
+══════════════════════════════ */
+footer.ft,
+html[data-theme="dark"] footer.ft {
+  padding-bottom: clamp(150px, 23vw, 320px);
+  background: radial-gradient(70% 50% at 50% 120%, rgba(66, 87, 255, 0.12), transparent 70%), #0c0d14;
+  isolation: isolate;
+}
+/* Una línea de luz en el borde de arriba */
+footer.ft::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: min(900px, 90%);
+  height: 1px;
+  translate: -50% 0;
+  background: linear-gradient(90deg, transparent, rgba(143, 160, 255, 0.55), transparent);
+}
+
+/* ── El «tuko» gigante ── */
+.ft .footer-bg {
+  inset: auto 0 0 0;
+  height: auto;
+  align-items: flex-end;
+  z-index: 0;
+}
+.ft .footer-svg-logo {
+  width: 100%;
+  max-width: 1400px;
+  max-height: none;
+  margin: 0 auto;
+  opacity: 1;
+  translate: 0 34%;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.ft .footer-svg-logo > ellipse,
+.ft .footer-svg-logo > path { fill: url(#ftGrad); }
+
+/* ── Columnas ── */
+.ft .footer-inner { padding-top: clamp(72px, 9vw, 110px); }
+.ft .footer-top { border-bottom-color: rgba(255, 255, 255, 0.08); }
+.ft .footer-brand-mark,
+html[data-theme="dark"] .ft .footer-brand-mark { font-size: 32px; color: #fff; }
+.ft .footer-brand-text,
+html[data-theme="dark"] .ft .footer-brand-text { font-size: 15.5px; color: rgba(255, 255, 255, 0.62); }
+.ft .footer-col-title,
+html[data-theme="dark"] .ft .footer-col-title { font-size: 12px; letter-spacing: 0.12em; color: rgba(255, 255, 255, 0.45); }
+.ft .footer-col a,
+html[data-theme="dark"] .ft .footer-col a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.78);
+  transition: color 250ms ease, translate 300ms var(--ease-out);
+}
+.ft .footer-col a::after { content: '→'; font-size: 0.9em; opacity: 0; translate: -4px 0; transition: opacity 250ms ease, translate 300ms var(--ease-out); }
+.ft .footer-col a:hover { color: #fff; translate: 3px 0; }
+.ft .footer-col a:hover::after { opacity: 1; translate: none; }
+
+/* ── Línea de abajo: copyright y volver arriba ── */
+.ft-bottom {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 22px clamp(20px, 4vw, 48px) 28px;
+}
+.ft .footer-bottom-inner,
+html[data-theme="dark"] .ft .footer-bottom-inner {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.45);
+}
+.ft-top {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  cursor: pointer;
+  transition: background 250ms ease, border-color 250ms ease, translate 300ms var(--ease-out);
+}
+.ft-top svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: translate 300ms var(--ease-out); }
+.ft-top:hover { background: rgba(143, 160, 255, 0.16); border-color: rgba(143, 160, 255, 0.5); }
+.ft-top:hover svg { translate: 0 -2px; }
+.ft-top:focus-visible { outline: 2px solid #8fa0ff; outline-offset: 2px; }
+
+/* ── Móvil ── */
+@media (max-width: 700px) {
+  footer.ft,
+  html[data-theme="dark"] footer.ft { padding-bottom: 90px; }
+  .ft .footer-svg-logo { width: 130%; margin-left: -15%; }
+}

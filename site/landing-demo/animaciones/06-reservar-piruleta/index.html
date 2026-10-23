@@ -399,40 +399,82 @@
     .gb-btn.pressed { transform: scale(0.94); }
     .gb-note { margin-top: 10px; font-size: 9.5px; font-weight: 500; color: #64748b; line-height: 1.4; }
 
-    /* share modal */
-    .sh-title { font-size: 17px; font-weight: 800; color: var(--n-900); text-align: center; letter-spacing: -0.02em; }
-    .sh-title + .sh-icons { margin-top: 14px; }
-    .sh-icons { display: flex; justify-content: space-between; padding: 0 2px; margin-bottom: 14px; }
-    .sh-icon-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .sh-icon-circ { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-    .sh-icon-circ svg { width: 20px; height: 20px; fill: #fff; }
-    .sh-icon-lbl { font-size: 10px; font-weight: 600; color: var(--n-600); }
-    .sh-wa { background: #25d366; }
-    .sh-tg { background: #29a9eb; }
-    .sh-x { background: #000; }
-    .sh-fb { background: #1877f2; }
-
-    .sh-divider { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-    .sh-divider::before, .sh-divider::after { content:''; flex:1; height:1px; background: var(--n-200); }
-    .sh-divider span { font-size: 10.5px; font-weight: 600; color: var(--n-400); white-space: nowrap; }
-
-    .btn-copy {
-      width: 100%;
-      padding: 12px;
-      border-radius: 12px;
-      border: none;
-      background: var(--indigo);
-      color: #fff;
-      font-family: inherit;
-      font-size: 13px; font-weight: 700;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      box-shadow: 0 6px 18px rgba(79,70,229,0.32);
-      transition: transform 0.32s cubic-bezier(0.22,1,0.36,1), box-shadow 0.32s ease, background 0.25s ease;
+    /* Hoja de compartir: la misma que en el móvil del hero (ShareOffer de la app) */
+    .ss-overlay {
+      position: absolute; inset: 0; z-index: 40;
+      background: rgba(20, 24, 38, 0.45);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease-out;
     }
-    .btn-copy svg { width: 14px; height: 14px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .btn-copy.hover { transform: scale(1.03); box-shadow: 0 10px 26px rgba(79,70,229,0.42); }
-    .btn-copy.pressed { transform: scale(0.94); }
-    .btn-copy.copied { background: var(--emerald-2); }
+    .ss-overlay.visible { opacity: 1; }
+    .ss {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      overflow: hidden;
+      font-size: 12.5px;
+      border-radius: 24px 24px 0 0;
+      background: #fff;
+      color: #141826;
+      text-align: center;
+      box-shadow: 0 -12px 36px -12px rgba(20, 24, 38, 0.35);
+      transform: translateY(104%);
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .ss-overlay.visible .ss { transform: none; }
+    .ss-photo { position: relative; height: 8.4em; background: #f1f3f9; }
+    .ss-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .ss-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20, 24, 38, 0.25), transparent 55%); }
+    .ss-grab { position: absolute; z-index: 1; left: 50%; top: 0.6em; width: 2.4em; height: 0.25em; margin-left: -1.2em; border-radius: 1em; background: rgba(255, 255, 255, 0.8); }
+    .ss-x {
+      position: absolute; z-index: 1; right: 0.85em; top: 0.85em;
+      display: grid; place-items: center;
+      width: 2.2em; height: 2.2em; border-radius: 50%;
+      background: #fff; color: #141826;
+      box-shadow: 0 4px 14px rgba(20, 24, 38, 0.18);
+    }
+    .ss-x svg { width: 0.85em; height: 0.85em; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; }
+    .ss-badge {
+      position: absolute; z-index: 1; left: 50%; bottom: -2.15em;
+      width: 4.35em; height: 4.35em; margin-left: -2.175em; padding: 0.36em;
+      border-radius: 50%; background: #fff;
+      box-shadow: 0 8px 24px rgba(20, 24, 38, 0.14);
+    }
+    .ss-badge span { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: #e0e7ff; color: #3d50f2; }
+    .ss-badge svg { width: 1.45em; height: 1.45em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+    .ss-body { padding: 2.8em 1.4em 1.5em; }
+    .ss-title { margin: 0; font-size: 1.5em; font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; }
+    .ss-title em { font-family: 'Roboto Serif', Georgia, serif; font-style: italic; font-weight: 500; letter-spacing: 0; color: #3d50f2; }
+    .ss-text { max-width: 19em; margin: 0.75em auto 0; font-size: 0.88em; line-height: 1.4; color: #5b6275; }
+    .ss-text b { font-weight: 600; color: #141826; }
+    .ss-nets { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.9em 0.5em; margin-top: 1.3em; }
+    .ss-net { display: grid; justify-items: center; gap: 0.45em; width: 30%; }
+    .ss-net em { font-style: normal; font-size: 0.8em; font-weight: 500; color: #141826; }
+    .ss-net i { position: relative; display: block; width: 3.5em; height: 3.5em; border-radius: 50%; box-shadow: 0 6px 16px rgba(20, 24, 38, 0.14); }
+    .ss-net i::after {
+      content: ''; position: absolute; inset: 24%; background: #fff;
+      -webkit-mask: var(--glyph) center / contain no-repeat;
+      mask: var(--glyph) center / contain no-repeat;
+    }
+    .ss-net--wa i { background: #25d366; --glyph: url('/landing-demo/animaciones/02-unirse-al-grupo/icons/whatsapp.svg'); }
+    .ss-net--x i { background: #000; --glyph: url('/landing-demo/animaciones/02-unirse-al-grupo/icons/x.svg'); }
+    .ss-net--x i::after { inset: 29%; }
+    .ss-net--ig i { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%); --glyph: url('/landing-demo/animaciones/02-unirse-al-grupo/icons/instagram.svg'); }
+    .ss-net--fb i::after, .ss-net--tg i::after { inset: 0; }
+    .ss-net--fb i::after { background: #0866ff; --glyph: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z'/%3E%3C/svg%3E"); }
+    .ss-net--tg i::after { background: #26a5e4; --glyph: url('/landing-demo/animaciones/02-unirse-al-grupo/icons/telegram.svg'); }
+    .ss-copy {
+      display: flex; align-items: center; justify-content: center; gap: 0.5em;
+      height: 2.9em; margin-top: 1.4em; border-radius: 0.75em;
+      background: #3d50f2; color: #fff;
+      font-size: 0.88em; font-weight: 600;
+    }
+    .ss-copy svg { width: 1.15em; height: 1.15em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+    html[data-theme="dark"] .ss, html.theme-dark .ss { background: #1a1f2e; color: #f2f3f7; }
+    html[data-theme="dark"] .ss-text, html.theme-dark .ss-text { color: #a3aabd; }
+    html[data-theme="dark"] .ss-text b, html.theme-dark .ss-text b,
+    html[data-theme="dark"] .ss-net em, html.theme-dark .ss-net em { color: #f2f3f7; }
+    html[data-theme="dark"] .ss-title em, html.theme-dark .ss-title em { color: #8fa0ff; }
+    html[data-theme="dark"] .ss-badge, html.theme-dark .ss-badge { background: #1a1f2e; }
+    html[data-theme="dark"] .ss-badge span, html.theme-dark .ss-badge span { background: rgba(143, 160, 255, 0.16); color: #8fa0ff; }
 
     /* ---------- Cursor / ripple ---------- */
     .cursor {
@@ -549,42 +591,32 @@
 
         <div class="gb-foot">
           <button class="gb-btn" id="btnPay">Entrar por 68,00 €</button>
-          <div class="gb-note" id="coNote">Pagas 68,00 € ahora. Si algo saliera mal, te devolvemos el 100 %.</div>
+          <div class="gb-note" id="coNote">Pagas 68,00 € ahora. Si no se completa el grupo, te devolvemos el 100&nbsp;%.</div>
         </div>
       </div>
     </div>
 
-    <!-- SHARE MODAL -->
-    <div class="modal-overlay" id="shareOverlay">
-      <div class="modal-box">
-        <div class="modal-x">×</div>
-        <div class="sh-title">Comparte el enlace</div>
-
-        <div class="sh-icons">
-          <div class="sh-icon-item">
-            <div class="sh-icon-circ sh-wa"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5-.1-.1-.6-1.5-.8-2-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.5 1.1 2.7c.1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4z"/><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.4A10 10 0 1 0 12 2z"/></svg></div>
-            <div class="sh-icon-lbl">WhatsApp</div>
-          </div>
-          <div class="sh-icon-item">
-            <div class="sh-icon-circ sh-tg"><svg viewBox="0 0 24 24"><path d="M21.9 4.4L2.7 11.9c-1 .4-1 1.7.1 2l4.5 1.4 1.7 5.4c.2.7 1 .9 1.6.4l2.6-2.3 4.7 3.4c.8.6 1.9.1 2.1-.8l3.1-14.7c.2-1.1-.9-2-1.9-1.6zM8 14.6l9.5-6.1c.3-.2.6.2.3.4l-8 7.5-.3 3.2z"/></svg></div>
-            <div class="sh-icon-lbl">Telegram</div>
-          </div>
-          <div class="sh-icon-item">
-            <div class="sh-icon-circ sh-x"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.4 8.4L23 22h-6.8l-5.4-6.6L4.6 22H1.5l7.9-9L1 2h7l4.9 6.1zm-1.2 18h1.9L7.4 4H5.4z"/></svg></div>
-            <div class="sh-icon-lbl">X</div>
-          </div>
-          <div class="sh-icon-item">
-            <div class="sh-icon-circ sh-fb"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg></div>
-            <div class="sh-icon-lbl">Facebook</div>
-          </div>
+    <!-- HOJA DE COMPARTIR (la del hero) -->
+    <div class="ss-overlay" id="shareOverlay">
+      <div class="ss">
+        <div class="ss-photo">
+          <img id="ssPhoto" alt="">
+          <span class="ss-grab"></span>
+          <span class="ss-x"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></span>
+          <span class="ss-badge"><span><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.3 10.7l7.4-4.4M8.3 13.3l7.4 4.4"/></svg></span></span>
         </div>
-
-        <div class="sh-divider"><span>O copia el enlace</span></div>
-
-        <button class="btn-copy" id="btnCopy">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.4l2-2a5 5 0 0 0-7-7l-1.2 1.1"/><path d="M14 11a5 5 0 0 0-7.5-.4l-2 2a5 5 0 0 0 7 7l1.1-1.1"/></svg>
-          <span id="copyLabel">Copiar enlace</span>
-        </button>
+        <div class="ss-body">
+          <p class="ss-title" id="ssTitle">Comparte el grupo<br><em>y pagad menos.</em></p>
+          <p class="ss-text" id="ssText"><b>Si se une alguien, los dos lo pagáis a 68,00 €</b> en vez de <s>80,00 €</s>.</p>
+          <div class="ss-nets">
+            <span class="ss-net ss-net--fb"><i></i><em>Facebook</em></span>
+            <span class="ss-net ss-net--wa"><i></i><em>WhatsApp</em></span>
+            <span class="ss-net ss-net--x"><i></i><em>X</em></span>
+            <span class="ss-net ss-net--ig"><i></i><em>Instagram</em></span>
+            <span class="ss-net ss-net--tg"><i></i><em>Telegram</em></span>
+          </div>
+          <span class="ss-copy" id="btnCopy"><svg viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/></svg><span id="copyLabel">Copiar enlace</span></span>
+        </div>
       </div>
     </div>
 
@@ -598,6 +630,10 @@
       if (window.parent !== window) document.documentElement.classList.add('embedded');
 
       const $ = (id) => document.getElementById(id);
+      (function () {
+        const src = document.querySelector('.shop-image-box img');
+        if (src && $('ssPhoto')) $('ssPhoto').src = src.src;
+      })();
       const viewport = $('viewport');
       const cursor = $('cursor');
 
@@ -657,8 +693,9 @@
           coSub: 'Falta <b>1 persona</b> para cerrar este grupo',
           pay: 'Entrar por 68,00 €',
           payShare: 'Compartir plaza restante',
-          note: 'Pagas 68,00 € ahora. Si algo saliera mal, te devolvemos el 100 %.',
-          shTitle: 'Comparte el enlace',
+          note: 'Pagas 68,00 € ahora. Si no se completa el grupo, te devolvemos el 100 %.',
+          shTitle: 'Comparte el grupo<br><em>y pagad menos.</em>',
+          shText: '<b>Si se une alguien, los dos lo pagáis a 68,00 €</b> en vez de <s>80,00 €</s>.',
           copy: 'Copiar enlace',
           copied: '¡Enlace copiado!',
           hours: 'Horas',
@@ -677,8 +714,9 @@
           coSub: '<b>1 person</b> left to close this group',
           pay: 'Join for 68.00 €',
           payShare: 'Share the remaining spot',
-          note: 'You pay 68.00 € now. If anything goes wrong, we refund 100%.',
-          shTitle: 'Share the link',
+          note: 'You pay 68.00 € now. If the group is not completed, we refund 100%.',
+          shTitle: 'Share the group<br><em>and pay less.</em>',
+          shText: '<b>If someone joins, you both pay 68.00 €</b> instead of <s>80.00 €</s>.',
           copy: 'Copy link',
           copied: 'Link copied!',
           hours: 'Hours',
@@ -720,8 +758,8 @@
         setCoTexts(false);
         if ($('btnPay')) $('btnPay').textContent = payMode === 'share' ? c.payShare : c.pay;
         if ($('coNote')) $('coNote').textContent = c.note;
-        const shTitle = document.querySelector('.sh-title');
-        if (shTitle) shTitle.textContent = c.shTitle;
+        if ($('ssTitle')) $('ssTitle').innerHTML = c.shTitle;
+        if ($('ssText')) $('ssText').innerHTML = c.shText;
         if ($('copyLabel')) $('copyLabel').textContent = c.copy;
         const cdLbls = document.querySelectorAll('.co-cd-lbl');
         if (cdLbls[0]) cdLbls[0].textContent = c.hours;

@@ -1,0 +1,593 @@
+/* CÓMO FUNCIONA — el ciclo (escenario fijo + anillo).
+   La sección se queda en pantalla: a la izquierda el anillo con los 4 pasos, a la derecha un solo marco
+   que cambia de forma y de demo. Las demos (iframes) no se tocan. Lo mueve home-how-cycle.js. */
+
+/* Pista de scroll: una pantalla + 85 % de pantalla por paso */
+/* --sc registrado como color: así el cambio de paso funde la luz de un color al siguiente */
+@property --sc { syntax: '<color>'; inherits: true; initial-value: #4257ff; }
+.hx { position: relative; height: calc(100svh + 4 * 85svh); --p: 0; --sc: #4257ff; transition: --sc 900ms ease; }
+.hx[data-step="1"] { --sc: #2f72ee; }
+.hx[data-step="2"] { --sc: #1898bd; }
+.hx[data-step="3"] { --sc: #0fa87c; }
+html[data-theme="dark"] .hx { --sc: #8fa0ff; }
+html[data-theme="dark"] .hx[data-step="1"] { --sc: #74a6ff; }
+html[data-theme="dark"] .hx[data-step="2"] { --sc: #4fcbe3; }
+html[data-theme="dark"] .hx[data-step="3"] { --sc: #3fe0b0; }
+
+.hx-sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: clip;
+}
+.hx-grid {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding-top: var(--nav-h, 72px);
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+}
+
+/* ── Lista de pasos con el hilo ── */
+.hx-side { position: relative; padding-left: 34px; }
+.hx-rail {
+  z-index: 0;
+  position: absolute;
+  left: 6px;
+  top: 22px;
+  bottom: 30px;
+  width: 2px;
+  border-radius: 2px;
+  background: repeating-linear-gradient(180deg, color-mix(in srgb, var(--ink) 16%, transparent) 0 5px, transparent 5px 10px);
+}
+.hx-rail i {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, #4257ff, #2f72ee 35%, #1898bd 68%, #0fa87c);
+  /* Se recorta (no se encoge): cada tramo del hilo conserva su color, azul arriba y verde al final */
+  clip-path: inset(0 -12px calc((1 - var(--p)) * 100%) -12px);
+  transform-origin: top;
+  box-shadow: 0 0 10px rgba(66, 87, 255, 0.35);
+}
+.hx-loop {
+  z-index: 1;
+  position: absolute;
+  left: -8px;
+  bottom: -2px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--hero-fade);
+  color: color-mix(in srgb, var(--ink) 40%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--ink) 14%, transparent);
+  transition: background-color 400ms ease, color 400ms ease, box-shadow 400ms ease;
+}
+.hx-loop svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.hx.is-looped .hx-loop { background: #0fa87c; color: #fff; box-shadow: 0 0 0 6px rgba(15, 168, 124, 0.16), 0 10px 26px -6px rgba(15, 168, 124, 0.55); }
+.hx.is-looped .hx-loop svg { animation: hxSpin 1.1s var(--ease-out) both; }
+@keyframes hxSpin { from { transform: rotate(-200deg); } to { transform: none; } }
+
+.hx-list { display: grid; gap: 4px; margin: 0; padding: 0 0 44px; list-style: none; }
+/* Por encima del hilo: los nudos tapan la línea en vez de quedar atravesados por ella */
+.hx-item { --c: var(--a); position: relative; z-index: 1; padding: 14px 0; }
+html[data-theme="dark"] .hx-item { --c: var(--ad); }
+/* Nudo del hilo, a la altura de cada paso */
+.hx-item::before {
+  content: '';
+  position: absolute;
+  left: -34px;
+  top: 22px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--hero-fade);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--ink) 18%, transparent);
+  transition: background-color 300ms ease, box-shadow 300ms ease, transform 400ms var(--ease-out);
+}
+.hx-item.is-done::before,
+.hx-item.is-active::before { background: var(--c); box-shadow: 0 0 0 4px color-mix(in srgb, var(--c) 20%, transparent); }
+.hx-item.is-active::before { transform: scale(1.15); box-shadow: 0 0 0 5px color-mix(in srgb, var(--c) 22%, transparent), 0 0 18px color-mix(in srgb, var(--c) 60%, transparent); }
+
+.hx-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+}
+.hx-head:focus-visible { outline: 2px solid var(--blue); outline-offset: 6px; border-radius: 8px; }
+.hx-num {
+  flex: 0 0 auto;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums slashed-zero;
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+  transition: color 300ms ease;
+}
+.hx-title {
+  font-size: clamp(20px, 2vw, 27px);
+  font-weight: 700;
+  font-stretch: 105%;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: color-mix(in srgb, var(--ink) 34%, transparent);
+  text-wrap: balance;
+  transition: color 300ms ease;
+}
+.hx-head:hover .hx-title { color: color-mix(in srgb, var(--ink) 62%, transparent); }
+.hx-item.is-done .hx-num { color: color-mix(in srgb, var(--c) 70%, transparent); }
+.hx-item.is-active .hx-num { color: var(--c); }
+.hx-item.is-active .hx-title { color: var(--ink); }
+
+/* La descripción se despliega solo en el paso activo */
+.hx-body { display: grid; grid-template-rows: 0fr; margin-left: 38px; transition: grid-template-rows 520ms var(--ease-in-out), margin-top 520ms var(--ease-in-out); }
+.hx-body p {
+  min-height: 0;
+  overflow: hidden;
+  margin: 0;
+  max-width: 40ch;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+.hx-item.is-active .hx-body { grid-template-rows: 1fr; margin-top: 10px; }
+.hx-item.is-active .hx-body p { opacity: 1; transition: opacity 420ms ease 160ms; }
+
+/* ── Escenario: un panel con rejilla de puntos y un marco que cambia de forma ── */
+.hx-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  /* Alto: el de la demo activa + aire (lo calcula lab-how-stage.js) */
+  height: 600px;
+  border-radius: 36px;
+  isolation: isolate;
+  transition: height 760ms cubic-bezier(0.77, 0, 0.175, 1);
+}
+.hx-stage::before {
+  content: '';
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--ink) 12%, transparent) 1px, transparent 1.5px) 0 0 / 22px 22px,
+    linear-gradient(160deg, color-mix(in srgb, var(--sc) 6%, var(--hero-fade)), var(--hero-fade) 60%);
+  /* Sin borde: la rejilla y el tinte se apagan antes de llegar al límite, así no queda ningún corte recto */
+  -webkit-mask-image: radial-gradient(closest-side, #000 45%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 45%, transparent 100%);
+  transition: background 600ms ease;
+}
+.hx-floor {
+  position: absolute;
+  z-index: -1;
+  inset: 12%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--sc) 26%, transparent), transparent);
+  transition: background 700ms ease;
+  pointer-events: none;
+}
+.hx-frame {
+  /* Centrado absoluto: aunque mida más que el escenario (se escala), queda en medio */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  width: var(--fw, 480px);
+  height: var(--fh, 640px);
+  scale: var(--fit, 1);
+  border-radius: 28px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--sc) 18%, transparent),
+    0 4px 12px rgba(20, 24, 38, 0.05),
+    0 30px 70px -24px color-mix(in srgb, var(--sc) 45%, transparent);
+  transition:
+    width 760ms cubic-bezier(0.77, 0, 0.175, 1),
+    height 760ms cubic-bezier(0.77, 0, 0.175, 1),
+    scale 760ms cubic-bezier(0.77, 0, 0.175, 1),
+    box-shadow 700ms ease;
+}
+html[data-theme="dark"] .hx-frame { background: #161922; box-shadow: 0 0 0 1px color-mix(in srgb, var(--sc) 30%, transparent), 0 30px 70px -24px color-mix(in srgb, var(--sc) 40%, transparent), 0 18px 40px rgba(0, 0, 0, 0.4); }
+/* Cada demo a su tamaño real, centrada; la que sale se desvanece con un leve desenfoque */
+.hx-demo {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + var(--off, 0px));
+  border: 0;
+  background: transparent;
+  translate: -50% -50%;
+  opacity: 0;
+  scale: 0.96;
+  filter: blur(6px);
+  pointer-events: none;
+  transition: opacity 380ms ease, scale 600ms var(--ease-out), filter 380ms ease;
+}
+.hx-demo.is-on { opacity: 1; scale: 1; filter: none; transition-delay: 200ms; }
+
+/* Barra de ventana: tres luces y la dirección de dónde ocurre el paso */
+.hx-bar {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px;
+  background: #fff;
+  box-shadow: inset 0 -1px 0 rgba(20, 24, 38, 0.06);
+  transition: transform 520ms cubic-bezier(0.77, 0, 0.175, 1), opacity 300ms ease;
+}
+.hx-lights { display: flex; gap: 6px; flex: 0 0 auto; }
+.hx-lights i { width: 9px; height: 9px; border-radius: 50%; background: #d9dce3; }
+.hx-lights i:nth-child(1) { background: #ff6159; }
+.hx-lights i:nth-child(2) { background: #ffbd2e; }
+.hx-lights i:nth-child(3) { background: #28c941; }
+.hx-url {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 22px;
+  margin-right: 30px;
+  border-radius: 7px;
+  background: #f3f4f7;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #5b6172;
+}
+.hx-url > span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: opacity 320ms ease, transform 420ms var(--ease-out);
+}
+.hx-url svg { width: 12px; height: 12px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linejoin: round; }
+.hx-url-b { opacity: 0; transform: translateY(6px); }
+.hx[data-step="1"] .hx-url-a,
+.hx[data-step="2"] .hx-url-a { opacity: 0; transform: translateY(-6px); }
+.hx[data-step="1"] .hx-url-b,
+.hx[data-step="2"] .hx-url-b { opacity: 1; transform: none; transition-delay: 120ms; }
+/* Paso 4: sin ventana; la tarjeta de la demo es el único marco */
+.hx[data-step="3"] .hx-bar { transform: translateY(-100%); opacity: 0; }
+.hx[data-step="3"] .hx-frame { box-shadow: 0 4px 12px rgba(20, 24, 38, 0.05), 0 30px 70px -24px color-mix(in srgb, var(--sc) 50%, transparent); }
+html[data-theme="dark"] .hx-bar { background: #161922; box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.05); }
+html[data-theme="dark"] .hx-url { background: #1f2433; color: #a3aabd; }
+html[data-theme="dark"] .hx[data-step="3"] .hx-frame { box-shadow: 0 30px 70px -24px color-mix(in srgb, var(--sc) 40%, transparent), 0 18px 40px rgba(0, 0, 0, 0.4); }
+
+.hx-dots { display: none; }
+
+/* ── Móvil: arriba el escenario, abajo solo el paso activo y 4 barras de progreso ── */
+@media (max-width: 900px) {
+  /* Scroll más corto en móvil: cada paso pasa antes */
+  .hx { height: calc(100svh + 4 * 52svh); }
+  .hx-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    gap: 18px;
+    width: calc(100% - 16px);
+    padding-top: calc(var(--nav-h, 64px) + 4px);
+  }
+  /* Más bajo que en la prueba: la barra fija de abajo (CTA móvil) no debe tapar el texto del paso */
+  /* Demo más grande: más alto y casi todo el ancho */
+  .hx-stage { order: -1; height: 54svh; min-height: 0; border-radius: 24px; }
+  .hx-grid { padding-bottom: 72px; }
+  .hx-side { padding-left: 0; }
+  .hx-rail, .hx-loop, .hx-item::before { display: none; }
+  .hx-list { display: block; padding: 0; min-height: 9.5em; }
+  .hx-item { display: none; padding: 0; }
+  .hx-item.is-active { display: block; animation: hxIn 420ms var(--ease-out) both; }
+  .hx-head { gap: 12px; }
+  .hx-title { font-size: 22px; }
+  .hx-body { margin-left: 0; }
+  .hx-body p { font-size: 15.5px; }
+  .hx-dots { display: flex; gap: 6px; position: absolute; left: 50%; bottom: 12px; translate: -50% 0; }
+  .hx-dots i { width: 22px; height: 3px; border-radius: 3px; background: color-mix(in srgb, var(--ink) 16%, transparent); transition: background-color 300ms ease, width 300ms var(--ease-out); }
+  .hx[data-step="0"] .hx-dots i:nth-child(1),
+  .hx[data-step="1"] .hx-dots i:nth-child(-n+2),
+  .hx[data-step="2"] .hx-dots i:nth-child(-n+3),
+  .hx[data-step="3"] .hx-dots i { background: var(--sc); }
+}
+@keyframes hxIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ── Fondo de la sección ──
+   Dos luces grandes y difusas: una del color del paso detrás del escenario y otra azul Tuko detrás de la lista.
+   Se mueven muy despacio y se apagan hacia arriba y abajo, para fundirse con el resto de la página. */
+.hx-sticky { isolation: isolate; }
+.hx-bg {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 78%, transparent 100%);
+}
+.hx-glow { position: absolute; border-radius: 50%; will-change: transform; }
+.hx-glow--a {
+  width: 70vmax;
+  height: 70vmax;
+  right: -18vmax;
+  top: 50%;
+  margin-top: -35vmax;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--sc) 22%, transparent), transparent);
+  animation: hxDriftA 16s ease-in-out infinite;
+}
+.hx-glow--b {
+  width: 56vmax;
+  height: 56vmax;
+  left: -22vmax;
+  top: 50%;
+  margin-top: -28vmax;
+  background: radial-gradient(closest-side, rgba(66, 87, 255, 0.13), transparent);
+  animation: hxDriftB 19s ease-in-out infinite;
+}
+html[data-theme="dark"] .hx-glow--a { background: radial-gradient(closest-side, color-mix(in srgb, var(--sc) 26%, transparent), transparent); }
+html[data-theme="dark"] .hx-glow--b { background: radial-gradient(closest-side, rgba(66, 87, 255, 0.2), transparent); }
+/* Recorridos en bucle (no de ida y vuelta) y con tiempos distintos: las luces se cruzan y nunca repiten la misma figura */
+@keyframes hxDriftA {
+  0%, 100% { transform: translate3d(0, -6vh, 0) scale(1); }
+  33% { transform: translate3d(-12vw, 4vh, 0) scale(1.14); }
+  66% { transform: translate3d(-4vw, 10vh, 0) scale(0.94); }
+}
+@keyframes hxDriftB {
+  0%, 100% { transform: translate3d(0, 6vh, 0) scale(1.06); }
+  40% { transform: translate3d(11vw, -6vh, 0) scale(0.95); }
+  75% { transform: translate3d(4vw, -12vh, 0) scale(1.12); }
+}
+
+@media (max-width: 900px) {
+  .hx-glow--a { right: -40vmax; top: 30%; }
+}
+
+/* ── El anillo ── */
+/* La columna del anillo es algo más ancha: los títulos de fuera necesitan aire a los dos lados */
+.hx--ring .hx-grid { grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); }
+.hx--ring .hx-side {
+  position: relative;
+  width: min(460px, 100%, calc(100svh - var(--nav-h, 72px) - 120px));
+  aspect-ratio: 1;
+  margin: 0 auto;
+  padding: 0;
+}
+.hx--ring .hx-rail,
+.hx--ring .hx-loop,
+.hx--ring .hx-item::before { display: none; }
+
+/* ── El anillo ── */
+.hr-ring { position: absolute; inset: 0; }
+/* El ciclo empieza en la diagonal de arriba a la derecha (01) y gira en el sentido del reloj */
+.hr-ring svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.hr-track { fill: none; stroke: color-mix(in srgb, var(--ink) 11%, transparent); stroke-width: 1.5; }
+/* Rayitas (líneas vectoriales, nítidas a cualquier tamaño): grises y, al pasar el arco, del color de su tramo */
+.hr-tick {
+  --lit: clamp(0, (var(--p) * 48 - var(--t)) * 2, 1);
+  stroke: color-mix(in srgb, var(--tc) calc(var(--lit) * 100%), color-mix(in srgb, var(--ink) 16%, transparent));
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  transition: stroke 300ms ease;
+}
+
+/* Cada tramo se dibuja cuando el scroll pasa por su paso (--p de 0 a 1 recorre los cuatro) */
+.hr-seg {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: clamp(0, var(--p) * 4 - var(--q), 1) 1;
+  filter: drop-shadow(0 0 5px rgba(66, 87, 255, 0.3));
+}
+/* Cometa en la punta del arco */
+.hr-comet { position: absolute; inset: 0; rotate: calc(var(--p) * 360deg + 45deg); pointer-events: none; }
+.hr-comet::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 6%;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 3px var(--sc), 0 0 18px 4px color-mix(in srgb, var(--sc) 60%, transparent);
+}
+
+/* Nudos en las diagonales: 01 arriba a la derecha, 02 abajo a la derecha, 03 abajo a la izquierda, 04 arriba a la izquierda.
+   Así cada título queda fuera del anillo, sin cruzarse con el arco */
+.hr-node {
+  --c: var(--a);
+  position: absolute;
+  left: calc(50% + sin(var(--k) * 90deg + 45deg) * 44%);
+  top: calc(50% - cos(var(--k) * 90deg + 45deg) * 44%);
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: var(--hero-fade);
+  box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--ink) 16%, transparent);
+  transition: background-color 400ms ease, box-shadow 400ms ease, scale 500ms var(--ease-out);
+}
+html[data-theme="dark"] .hr-node { --c: var(--ad); }
+.hr-node b { font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums slashed-zero; color: var(--ink-3); transition: color 300ms ease; }
+/* Hechos: color del paso; activo: más grande y con halo */
+.hx[data-step="1"] .hr-node:nth-of-type(-n+1),
+.hx[data-step="2"] .hr-node:nth-of-type(-n+2),
+.hx[data-step="3"] .hr-node:nth-of-type(-n+3) { background: var(--c); box-shadow: 0 0 0 4px color-mix(in srgb, var(--c) 18%, transparent); }
+.hx[data-step="1"] .hr-node:nth-of-type(-n+1) b,
+.hx[data-step="2"] .hr-node:nth-of-type(-n+2) b,
+.hx[data-step="3"] .hr-node:nth-of-type(-n+3) b { color: #fff; }
+.hx[data-step="0"] .hr-node:nth-of-type(1),
+.hx[data-step="1"] .hr-node:nth-of-type(2),
+.hx[data-step="2"] .hr-node:nth-of-type(3),
+.hx[data-step="3"] .hr-node:nth-of-type(4) {
+  background: var(--hero-fade);
+  box-shadow: 0 0 0 2.5px var(--c), 0 0 0 9px color-mix(in srgb, var(--c) 14%, transparent), 0 10px 30px -6px color-mix(in srgb, var(--c) 55%, transparent);
+  scale: 1.18;
+}
+.hx[data-step="0"] .hr-node:nth-of-type(1) b,
+.hx[data-step="1"] .hr-node:nth-of-type(2) b,
+.hx[data-step="2"] .hr-node:nth-of-type(3) b,
+.hx[data-step="3"] .hr-node:nth-of-type(4) b { color: var(--c); }
+/* Al cerrarse el anillo, el 01 vuelve a encenderse: empieza otro grupo */
+.hx--ring.is-looped .hr-node:nth-of-type(1) { animation: hrRestart 1.6s var(--ease-out) infinite; }
+@keyframes hrRestart {
+  0% { box-shadow: 0 0 0 0 rgba(66, 87, 255, 0.55); }
+  70%, 100% { box-shadow: 0 0 0 16px rgba(66, 87, 255, 0); }
+}
+
+/* Los nudos son botones: llevan al tramo de su paso */
+.hr-node { z-index: 2; padding: 0; border: 0; font: inherit; color: inherit; cursor: pointer; }
+.hr-node:hover { scale: 1.08; }
+.hr-node:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+
+/* Título corto de cada paso, por fuera: 01 y 02 a la derecha del nudo, 03 y 04 a la izquierda */
+.hr-label {
+  position: absolute;
+  white-space: nowrap;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--ink-3);
+  pointer-events: none;
+  transition: color 300ms ease, opacity 300ms ease;
+}
+.hr-node--0 .hr-label,
+.hr-node--1 .hr-label { left: calc(100% + 12px); top: 50%; translate: 0 -50%; transform-origin: left center; }
+.hr-node--2 .hr-label,
+.hr-node--3 .hr-label { right: calc(100% + 12px); top: 50%; translate: 0 -50%; transform-origin: right center; text-align: right; }
+.hx[data-step="1"] .hr-node:nth-of-type(-n+1) .hr-label,
+.hx[data-step="2"] .hr-node:nth-of-type(-n+2) .hr-label,
+.hx[data-step="3"] .hr-node:nth-of-type(-n+3) .hr-label { color: var(--ink-2); }
+.hx[data-step="0"] .hr-node:nth-of-type(1) .hr-label,
+.hx[data-step="1"] .hr-node:nth-of-type(2) .hr-label,
+.hx[data-step="2"] .hr-node:nth-of-type(3) .hr-label,
+.hx[data-step="3"] .hr-node:nth-of-type(4) .hr-label { color: var(--c); }
+/* El nudo activo crece (escala 1,18): su título vuelve a su tamaño */
+.hx[data-step="0"] .hr-node:nth-of-type(1) .hr-label,
+.hx[data-step="1"] .hr-node:nth-of-type(2) .hr-label,
+.hx[data-step="2"] .hr-node:nth-of-type(3) .hr-label,
+.hx[data-step="3"] .hr-node:nth-of-type(4) .hr-label { scale: 0.85; }
+.hr-node b { position: relative; }
+
+/* Centro iluminado: un disco de luz muy suave del color del paso, detrás del texto */
+.hr-disc {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--sc) 9%, transparent), transparent);
+  transition: background 700ms ease;
+}
+html[data-theme="dark"] .hr-disc { background: radial-gradient(closest-side, color-mix(in srgb, var(--sc) 14%, transparent), transparent); }
+
+/* Cierre del ciclo: la cometa desaparece en el 01 y el anillo entero emite un pulso de luz */
+.hr-comet { transition: opacity 300ms ease; }
+.hx--ring.is-looped .hr-comet { opacity: 0; }
+.hr-ring::after {
+  content: '';
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(20, 196, 146, 0);
+  pointer-events: none;
+}
+.hx--ring.is-looped .hr-ring::after { animation: hrClose 1.4s var(--ease-out) both; }
+@keyframes hrClose {
+  0% { box-shadow: 0 0 0 0 rgba(20, 196, 146, 0.45), inset 0 0 0 0 rgba(20, 196, 146, 0.3); }
+  100% { box-shadow: 0 0 0 26px rgba(20, 196, 146, 0), inset 0 0 0 20px rgba(20, 196, 146, 0); }
+}
+
+/* ── El paso activo, en el centro del anillo ── */
+/* Zona de texto dentro de las rayitas (que empiezan al 37 % del radio): margen holgado a los lados */
+.hx--ring .hx-list { position: absolute; inset: 15% 20%; padding: 0; }
+.hx--ring .hx-item {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  text-align: center;
+  opacity: 0;
+  translate: 0 10px;
+  pointer-events: none;
+  transition: opacity 320ms ease, translate 520ms var(--ease-out);
+}
+.hx--ring .hx-item.is-active { opacity: 1; translate: none; pointer-events: auto; transition-delay: 160ms; }
+.hx--ring .hx-head { flex-direction: column; align-items: center; gap: 8px; width: auto; cursor: default; }
+/* El nudo activo ya dice el paso: sin número encima del título */
+.hx--ring .hx-num { display: none; }
+.hx--ring .hx-title { max-width: none; font-size: clamp(18px, 1.7vw, 22px); line-height: 1.15; color: var(--ink); text-align: center; text-wrap: balance; }
+.hx--ring .hx-body { grid-template-rows: 1fr; margin: 10px 0 0; }
+.hx--ring .hx-body p { max-width: 30ch; margin: 0 auto; font-size: 13.5px; line-height: 1.5; opacity: 1; }
+
+/* Móvil: el anillo se estira en una línea de pasos arriba (01 → 04, se rellena con el scroll y se puede pulsar),
+   la demo en medio y, debajo, el texto del paso activo centrado */
+@media (max-width: 900px) {
+  .hx--ring .hx-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .hx--ring .hx-side { display: contents; }
+  .hx--ring .hx-stage { order: -1; height: 50svh; }
+  .hx--ring .hr-ring { order: -2; position: relative; inset: auto; display: flex; justify-content: space-between; align-items: center; width: min(300px, 84%); height: 40px; margin: 0 auto; }
+  .hx--ring .hr-ring svg,
+  .hx--ring .hr-disc,
+  .hx--ring .hr-comet,
+  .hx--ring .hr-label,
+  .hx--ring .hx-dots { display: none; }
+  .hx--ring .hr-ring::before,
+  .hx--ring .hr-ring::after { content: ''; position: absolute; left: 17px; right: 17px; top: 50%; height: 2px; margin-top: -1px; border-radius: 2px; }
+  .hx--ring .hr-ring::before { background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--ink) 16%, transparent) 0 5px, transparent 5px 10px); }
+  .hx--ring .hr-ring::after { background: linear-gradient(90deg, #4257ff, #2f72ee 35%, #1898bd 68%, #0fa87c); box-shadow: 0 0 10px rgba(66, 87, 255, 0.35); clip-path: inset(-6px calc((1 - var(--p)) * 100%) -6px 0); }
+  .hx--ring .hr-node { position: relative; left: auto; top: auto; width: 34px; height: 34px; translate: none; }
+  .hx--ring .hr-node b { font-size: 11.5px; }
+  .hx--ring .hx-list { position: static; min-height: 8.5em; }
+  .hx--ring .hx-item { position: static; display: none; opacity: 1; translate: none; text-align: center; }
+  .hx--ring .hx-item.is-active { display: block; }
+  .hx--ring .hx-head { flex-direction: column; align-items: center; gap: 6px; width: 100%; }
+  .hx--ring .hx-num { display: none; }
+  .hx--ring .hx-title { text-align: center; text-wrap: balance; }
+  .hx--ring .hx-body p { max-width: 34ch; margin: 0 auto; font-size: 15px; }
+}
+
+/* Escritorio estrecho: anillo algo menor para que los títulos de fuera no toquen el borde */
+@media (min-width: 901px) and (max-width: 1240px) {
+  .hx--ring .hx-side { width: min(400px, 100%, calc(100svh - var(--nav-h, 72px) - 120px)); }
+  .hr-label { font-size: 11.5px; }
+  .hx--ring .hx-body p { font-size: 13px; }
+}
+
+/* Ciclo cerrado: el 04 deja de estar «activo» y queda hecho, con su color, como los demás; el 01 late para volver a empezar */
+.hx--ring.is-looped .hr-node:nth-of-type(4) {
+  background: var(--c);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--c) 18%, transparent);
+  scale: 1;
+}
+.hx--ring.is-looped .hr-node:nth-of-type(4) b { color: #fff; }
+.hx--ring.is-looped .hr-node:nth-of-type(4) .hr-label { scale: 1; color: var(--ink-2); }
+/* Por debajo de 1180 px no caben los títulos a los lados sin chocar: se quedan solo los números (el título va en el centro) */
+@media (min-width: 901px) and (max-width: 1180px) {
+  .hr-label { display: none; }
+}

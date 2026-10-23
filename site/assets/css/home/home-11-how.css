@@ -1,0 +1,38 @@
+  /* ══════════════════════════════
+     CÓMO FUNCIONA — intro: antetítulo editorial y título que se enciende con el scroll
+     (los pasos van en home-12-how-cycle.css)
+  ══════════════════════════════ */
+
+  /* Antetítulo editorial, como el de la sección del descuento */
+  .how-intro .s-badge,
+  html[data-theme="dark"] .how-intro .s-badge {
+    display: inline-block;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    font-size: 14.5px;
+    font-weight: 600;
+    font-stretch: 100%;
+    letter-spacing: -0.005em;
+    text-transform: none;
+    color: var(--blue);
+  }
+  html[data-theme="dark"] .how-intro .s-badge { color: #8fa0ff; }
+  .how-intro .s-badge::before,
+  .how-intro .s-badge::after {
+    content: '';
+    display: inline-block;
+    width: clamp(20px, 4vw, 44px);
+    height: 1px;
+    margin: 0 14px;
+    vertical-align: middle;
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, currentColor 45%, transparent));
+  }
+  .how-intro .s-badge::after { background: linear-gradient(90deg, color-mix(in srgb, currentColor 45%, transparent), transparent); }
+  /* El título se enciende palabra a palabra con el scroll (--p lo pone home-sections.js) */
+  .how-intro .data-split .w {
+    opacity: calc(0.14 + 0.86 * clamp(0, var(--p, 1) * (var(--n) + 3) - var(--i), 1));
+    transition: opacity 140ms linear;
+  }

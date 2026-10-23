@@ -252,8 +252,8 @@
   ]
 }
 </script>
-<link rel="preload" as="style" href="/assets/css/home.css?v=e78b32e5">
-<link rel="stylesheet" href="/assets/css/home.css?v=e78b32e5">
+<link rel="preload" as="style" href="/assets/css/home.css?v=028a2145">
+<link rel="stylesheet" href="/assets/css/home.css?v=028a2145">
 <link rel="stylesheet" href="../assets/css/tuko-theme.css?v=cf1fd4c8">
 <link rel="prefetch" href="blog/" as="document">
 <link rel="prefetch" href="tuko-ai" as="document">
@@ -387,6 +387,8 @@
       <div class="hg-stage" role="img" aria-label="Demo: a shopper taps the Tuko button, shares it on WhatsApp, a second person joins and both buy at the discount.">
         <div class="hg-tilt">
           <div class="hg-phone">
+            <!-- Parte de atrás (solo se ve durante el giro de entrada; la pone a la vista home-hero-guion.js) -->
+            <span class="hg-back" aria-hidden="true"><span class="hg-back-cam"><i></i><i></i><b></b></span><svg class="hg-back-logo" viewBox="44 36 213 249"><defs><linearGradient id="hgBackG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fa0ff"/><stop offset=".55" stop-color="#4257ff"/><stop offset="1" stop-color="#3a8fe0"/></linearGradient></defs><ellipse cx="132.298" cy="160.5" rx="32.1333" ry="120.5"/><path d="M164.431 160.5C164.431 227.05 164.431 281 164.431 281C195.488 281 220.664 227.05 220.664 160.5C220.664 93.9497 195.488 40 164.431 40C164.431 40 164.431 93.9497 164.431 160.5Z"/><path d="M220.657 160.497C220.657 204.864 220.657 240.83 220.657 240.83C238.403 240.83 252.79 204.864 252.79 160.497C252.79 116.13 238.403 80.1636 220.657 80.1636C220.657 80.1636 220.657 116.13 220.657 160.497Z"/><ellipse cx="80.0841" cy="160.497" rx="20.0833" ry="80.3333"/></svg></span>
             <div class="hg-screen">
               <span class="hg-island"></span>
               <i class="hg-touch"></i>
@@ -555,7 +557,7 @@
     </div>
   </div>
   <script src="/assets/js/home-hero.js?v=5d868ce8" defer></script>
-  <script src="/assets/js/home-hero-guion.js?v=25cb9cfd" defer></script>
+  <script src="/assets/js/home-hero-guion.js?v=ef8b4b15" defer></script>
 </section>
 
 <!-- LOGOS -->
@@ -640,148 +642,156 @@
   </div>
 </section>
 
-<script src="/assets/js/home-sections.js?v=00b0d47e" defer></script>
+<script src="/assets/js/home-sections.js?v=d2d5986c" defer></script>
 
 <!-- HOW IT WORKS ? INTRO -->
 <!-- /tuko:partial:home-hero-en -->
 
 <section class="how-intro" id="como-funciona">
-  <div class="fade-up"><span class="s-badge" data-i18n="how_badge">C�mo funciona</span></div>
-  <h2 class="s-title fade-up d1" data-i18n="how_title">As� es como funciona</h2>
-  <p class="s-sub fade-up d2" data-i18n="how_sub">T� fijas el descuento, la meta y la fecha. Se inicia cuando el primero se une y tiene 24 horas para meter a otra persona.</p>
+  <div class="fade-up"><span class="s-badge" data-i18n="how_badge">How it works</span></div>
+  <h2 class="s-title fade-up d1" data-i18n="how_title">This is how it works</h2>
+  <p class="s-sub fade-up d2" data-i18n="how_sub">You set the discount, the goal and the date. It starts when the first person joins, and they have 24 hours to bring someone else in.</p>
 </section>
 
-<!-- HOW IT WORKS ? STEPS (4 pasos) -->
-<section class="how-steps">
-
-  <!-- PASO 1: Activar Tuko ? texto izq, visual dcha -->
-  <div class="how-step fade-up">
-    <div class="how-step-text">
-      <div class="how-step-meta">
-        <span class="how-step-num" aria-hidden="true">01</span>
-      </div>
-      <h3 class="how-step-title" data-i18n="step1_title">Elige producto y descuento</h3>
-      <p class="how-step-desc" data-i18n="step1_desc">Elige un producto o todos los que quieras de tu cat�logo. Decides el descuento y solo se aplica cuando hay 2 personas.</p>
+<!-- El ciclo: los 4 pasos en un anillo que se rellena con el scroll y se cierra al volver al 01 -->
+<section class="hx hx--ring" data-step="0">
+  <div class="hx-sticky">
+    <!-- Fondo: dos luces suaves; la del escenario toma el color del paso -->
+    <div class="hx-bg" aria-hidden="true">
+      <i class="hx-glow hx-glow--a"></i>
+      <i class="hx-glow hx-glow--b"></i>
     </div>
-    <div class="how-step-visual">
-      <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" data-src="../landing-demo/animaciones/01-activar-compra/index.html?v=20261002h" src="about:blank" loading="lazy" title="Demo: publicar el grupo en la tienda"></iframe>
-      </div>
-    </div>
-  </div>
-
-  <!-- PASO 2: Los clientes compran ? visual izq, texto dcha -->
-  <div class="how-step reversed fade-up">
-    <div class="how-step-text">
-      <div class="how-step-meta">
-        <span class="how-step-num" aria-hidden="true">02</span>
-      </div>
-      <h3 class="how-step-title" data-i18n="step2_title">Un cliente abre el grupo</h3>
-      <p class="how-step-desc" data-i18n="step2_desc">Paga con el descuento ya aplicado y tiene 24 horas para traer a una persona m�s. La comparte por WhatsApp o la trae tu propio tr�fico.</p>
-    </div>
-    <div class="how-step-visual">
-      <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" data-src="../landing-demo/animaciones/06-reservar-piruleta/index.html?v=20261002h" src="about:blank" loading="lazy" title="Demo: comprar el producto y compartir"></iframe>
-      </div>
-    </div>
-  </div>
-
-  <!-- PASO 3: Meta cumplida ? texto izq, visual dcha -->
-  <div class="how-step fade-up">
-    <div class="how-step-text">
-      <div class="how-step-meta">
-        <span class="how-step-num" aria-hidden="true">03</span>
-      </div>
-      <h3 class="how-step-title" data-i18n="step3_title">Ya hay una persona dentro. Se une la segunda</h3>
-      <p class="how-step-desc" data-i18n="step3_desc">Cuando se une la segunda persona, el grupo se completa, se ejecuta el pedido y Tuko abre un grupo nuevo. El bot�n nunca se apaga.</p>
-    </div>
-    <div class="how-step-visual">
-      <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" data-src="../landing-demo/animaciones/07-grupo-completado/index.html?v=20261003n" src="about:blank" loading="lazy" title="Demo: grupo completado y estad�sticas"></iframe>
-      </div>
-    </div>
-  </div>
-
-  <!-- PASO 4: El grupo se repite ? visual izq, texto dcha -->
-  <div class="how-step reversed fade-up">
-    <div class="how-step-text">
-      <div class="how-step-meta">
-        <span class="how-step-num" aria-hidden="true">04</span>
-      </div>
-      <h3 class="how-step-title" data-i18n="step4_title">Se completa y Tuko abre otro grupo</h3>
-      <p class="how-step-desc" data-i18n="step4_desc">Cuando el grupo se completa, se ejecutan los pedidos y, a los 5 minutos, Tuko publica un grupo nuevo vac�o, listo para el siguiente cliente. T� no haces nada: se repite hasta que t� digas basta.</p>
-    </div>
-    <div class="how-step-visual">
-      <div class="how-anim-box how-anim-box--embed">
-        <iframe class="how-step-iframe" data-src="../landing-demo/animaciones/08-grupo-en-bucle/index.html?v=20261003n" src="about:blank" loading="lazy" title="Demo: Tuko abre un grupo nuevo tras cada grupo completado"></iframe>
-      </div>
-    </div>
-  </div>
-
-</section>
-
-<!-- Y SI NO SE LLENA -->
-<section class="data" id="si-no-se-llena">
-  <div class="data-inner">
-    <h2 class="s-title data-headline fade-up d1" data-i18n="rescue_title">What if nobody else joins?</h2>
-    <div class="rescue-flow fade-up d2">
-      <p class="rescue-hub" data-i18n="rescue_sub">Your customer chooses, and all three options are good.</p>
-      <div class="rescue-schema">
-        <div class="rescue-tree-wrap" aria-hidden="true">
-          <span class="rescue-tree-stem"></span>
-          <span class="rescue-tree-bar rescue-tree-bar--l"></span>
-          <span class="rescue-tree-bar rescue-tree-bar--r"></span>
-          <span class="rescue-tree-drop rescue-tree-drop--l"></span>
-          <span class="rescue-tree-drop rescue-tree-drop--c"></span>
-          <span class="rescue-tree-drop rescue-tree-drop--r"></span>
+    <div class="hx-grid">
+      <div class="hx-side">
+        <!-- El anillo: esfera con marcas, arco que se rellena y cuatro nudos con su título corto (se pueden pulsar) -->
+        <div class="hr-ring">
+          <span class="hr-disc" aria-hidden="true"></span>
+          <!-- El arco va en 4 tramos (uno por paso), cada uno con su degradado: el color sigue el recorrido -->
+          <svg viewBox="0 0 400 400" aria-hidden="true">
+            <defs><linearGradient id="hrG0" gradientUnits="userSpaceOnUse" x1="324.45" y1="75.55" x2="324.45" y2="324.45"><stop offset="0" stop-color="#4257ff"/><stop offset="1" stop-color="#2f72ee"/></linearGradient><linearGradient id="hrG1" gradientUnits="userSpaceOnUse" x1="324.45" y1="324.45" x2="75.55" y2="324.45"><stop offset="0" stop-color="#2f72ee"/><stop offset="1" stop-color="#1898bd"/></linearGradient><linearGradient id="hrG2" gradientUnits="userSpaceOnUse" x1="75.55" y1="324.45" x2="75.55" y2="75.55"><stop offset="0" stop-color="#1898bd"/><stop offset="1" stop-color="#0fa87c"/></linearGradient><linearGradient id="hrG3" gradientUnits="userSpaceOnUse" x1="75.55" y1="75.55" x2="324.45" y2="75.55"><stop offset="0" stop-color="#0fa87c"/><stop offset="1" stop-color="#14c492"/></linearGradient></defs>
+            <circle class="hr-track" cx="200" cy="200" r="176"/>
+            <!-- Rayitas por dentro del arco: se encienden con el color de su tramo cuando el arco pasa por ellas -->
+            <g class="hr-ticks"><line class="hr-tick" style="--t:1;--tc:#4059fe" x1="319.00" y1="108.69" x2="326.14" y2="103.21"/><line class="hr-tick" style="--t:2;--tc:#3f5cfc" x1="329.90" y1="125.00" x2="337.70" y2="120.50"/><line class="hr-tick" style="--t:3;--tc:#3d5efb" x1="338.58" y1="142.60" x2="346.90" y2="139.15"/><line class="hr-tick" style="--t:4;--tc:#3c60f9" x1="344.89" y1="161.18" x2="353.58" y2="158.85"/><line class="hr-tick" style="--t:5;--tc:#3a62f8" x1="348.72" y1="180.42" x2="357.64" y2="179.25"/><line class="hr-tick" style="--t:6;--tc:#3965f7" x1="350.00" y1="200.00" x2="359.00" y2="200.00"/><line class="hr-tick" style="--t:7;--tc:#3767f5" x1="348.72" y1="219.58" x2="357.64" y2="220.75"/><line class="hr-tick" style="--t:8;--tc:#3569f4" x1="344.89" y1="238.82" x2="353.58" y2="241.15"/><line class="hr-tick" style="--t:9;--tc:#346bf2" x1="338.58" y1="257.40" x2="346.90" y2="260.85"/><line class="hr-tick" style="--t:10;--tc:#326ef1" x1="329.90" y1="275.00" x2="337.70" y2="279.50"/><line class="hr-tick" style="--t:11;--tc:#3170ef" x1="319.00" y1="291.31" x2="326.14" y2="296.79"/><line class="hr-tick" style="--t:13;--tc:#2d75ea" x1="291.31" y1="319.00" x2="296.79" y2="326.14"/><line class="hr-tick" style="--t:14;--tc:#2b78e6" x1="275.00" y1="329.90" x2="279.50" y2="337.70"/><line class="hr-tick" style="--t:15;--tc:#297ce2" x1="257.40" y1="338.58" x2="260.85" y2="346.90"/><line class="hr-tick" style="--t:16;--tc:#277fde" x1="238.82" y1="344.89" x2="241.15" y2="353.58"/><line class="hr-tick" style="--t:17;--tc:#2582da" x1="219.58" y1="348.72" x2="220.75" y2="357.64"/><line class="hr-tick" style="--t:18;--tc:#2485d6" x1="200.00" y1="350.00" x2="200.00" y2="359.00"/><line class="hr-tick" style="--t:19;--tc:#2288d1" x1="180.42" y1="348.72" x2="179.25" y2="357.64"/><line class="hr-tick" style="--t:20;--tc:#208bcd" x1="161.18" y1="344.89" x2="158.85" y2="353.58"/><line class="hr-tick" style="--t:21;--tc:#1e8fc9" x1="142.60" y1="338.58" x2="139.15" y2="346.90"/><line class="hr-tick" style="--t:22;--tc:#1c92c5" x1="125.00" y1="329.90" x2="120.50" y2="337.70"/><line class="hr-tick" style="--t:23;--tc:#1a95c1" x1="108.69" y1="319.00" x2="103.21" y2="326.14"/><line class="hr-tick" style="--t:25;--tc:#1799b8" x1="81.00" y1="291.31" x2="73.86" y2="296.79"/><line class="hr-tick" style="--t:26;--tc:#179bb2" x1="70.10" y1="275.00" x2="62.30" y2="279.50"/><line class="hr-tick" style="--t:27;--tc:#169cad" x1="61.42" y1="257.40" x2="53.10" y2="260.85"/><line class="hr-tick" style="--t:28;--tc:#159da7" x1="55.11" y1="238.82" x2="46.42" y2="241.15"/><line class="hr-tick" style="--t:29;--tc:#149fa2" x1="51.28" y1="219.58" x2="42.36" y2="220.75"/><line class="hr-tick" style="--t:30;--tc:#14a09d" x1="50.00" y1="200.00" x2="41.00" y2="200.00"/><line class="hr-tick" style="--t:31;--tc:#13a197" x1="51.28" y1="180.42" x2="42.36" y2="179.25"/><line class="hr-tick" style="--t:32;--tc:#12a392" x1="55.11" y1="161.18" x2="46.42" y2="158.85"/><line class="hr-tick" style="--t:33;--tc:#11a48c" x1="61.42" y1="142.60" x2="53.10" y2="139.15"/><line class="hr-tick" style="--t:34;--tc:#11a587" x1="70.10" y1="125.00" x2="62.30" y2="120.50"/><line class="hr-tick" style="--t:35;--tc:#10a781" x1="81.00" y1="108.69" x2="73.86" y2="103.21"/><line class="hr-tick" style="--t:37;--tc:#0faa7e" x1="108.69" y1="81.00" x2="103.21" y2="73.86"/><line class="hr-tick" style="--t:38;--tc:#10ad80" x1="125.00" y1="70.10" x2="120.50" y2="62.30"/><line class="hr-tick" style="--t:39;--tc:#10af82" x1="142.60" y1="61.42" x2="139.15" y2="53.10"/><line class="hr-tick" style="--t:40;--tc:#11b183" x1="161.18" y1="55.11" x2="158.85" y2="46.42"/><line class="hr-tick" style="--t:41;--tc:#11b485" x1="180.42" y1="51.28" x2="179.25" y2="42.36"/><line class="hr-tick" style="--t:42;--tc:#12b687" x1="200.00" y1="50.00" x2="200.00" y2="41.00"/><line class="hr-tick" style="--t:43;--tc:#12b889" x1="219.58" y1="51.28" x2="220.75" y2="42.36"/><line class="hr-tick" style="--t:44;--tc:#12bb8b" x1="238.82" y1="55.11" x2="241.15" y2="46.42"/><line class="hr-tick" style="--t:45;--tc:#13bd8d" x1="257.40" y1="61.42" x2="260.85" y2="53.10"/><line class="hr-tick" style="--t:46;--tc:#13bf8e" x1="275.00" y1="70.10" x2="279.50" y2="62.30"/><line class="hr-tick" style="--t:47;--tc:#14c290" x1="291.31" y1="81.00" x2="296.79" y2="73.86"/></g>
+            <path class="hr-seg" style="--q:0" stroke="url(#hrG0)" pathLength="1" d="M324.45 75.55A176 176 0 0 1 324.45 324.45"/>
+            <path class="hr-seg" style="--q:1" stroke="url(#hrG1)" pathLength="1" d="M324.45 324.45A176 176 0 0 1 75.55 324.45"/>
+            <path class="hr-seg" style="--q:2" stroke="url(#hrG2)" pathLength="1" d="M75.55 324.45A176 176 0 0 1 75.55 75.55"/>
+            <path class="hr-seg" style="--q:3" stroke="url(#hrG3)" pathLength="1" d="M75.55 75.55A176 176 0 0 1 324.45 75.55"/>
+          </svg>
+          <button type="button" class="hr-node hr-node--0" style="--a:#4257ff;--ad:#8fa0ff;--k:0" aria-label="Step 01"><b>01</b><span class="hr-label" data-es="Producto y descuento" data-en="Product &amp; discount">Product &amp; discount</span></button>
+          <button type="button" class="hr-node hr-node--1" style="--a:#2f72ee;--ad:#74a6ff;--k:1" aria-label="Step 02"><b>02</b><span class="hr-label" data-es="Abre el grupo" data-en="Opens the group">Opens the group</span></button>
+          <button type="button" class="hr-node hr-node--2" style="--a:#1898bd;--ad:#4fcbe3;--k:2" aria-label="Step 03"><b>03</b><span class="hr-label" data-es="Se une otra persona" data-en="Someone else joins">Someone else joins</span></button>
+          <button type="button" class="hr-node hr-node--3" style="--a:#0fa87c;--ad:#3fe0b0;--k:3" aria-label="Step 04"><b>04</b><span class="hr-label" data-es="Se repite solo" data-en="Repeats on its own">Repeats on its own</span></button>
+          <span class="hr-comet" aria-hidden="true"></span>
         </div>
-        <div class="rescue-fork">
-          <div class="rescue-opt" data-branch="l">
-            <article class="rescue-card">
-              <span class="rescue-mark" aria-hidden="true">1</span>
-              <h3 class="data-side-title" data-i18n="rescue_opt1_title">They keep both units at the same group price.</h3>
-              <p class="data-side-sub" data-i18n="rescue_opt1_sub">You sell two.</p>
-            </article>
+        <ol class="hx-list">
+          <li class="hx-item" style="--a:#4257ff;--ad:#8fa0ff">
+            <button type="button" class="hx-head"><span class="hx-num">01</span><span class="hx-title" data-i18n="step1_title">Pick a product and a discount</span></button>
+            <div class="hx-body"><p data-i18n="step1_desc">Pick one product or as many as you want from your catalogue. You set the discount, and it only applies when there are 2 people.</p></div>
+          </li>
+          <li class="hx-item" style="--a:#2f72ee;--ad:#74a6ff">
+            <button type="button" class="hx-head"><span class="hx-num">02</span><span class="hx-title" data-i18n="step2_title">A customer opens the group</span></button>
+            <div class="hx-body"><p data-i18n="step2_desc">They pay with the discount already applied and have 24 hours to bring one more person. They share it on WhatsApp, or your own traffic brings them.</p></div>
+          </li>
+          <li class="hx-item" style="--a:#1898bd;--ad:#4fcbe3">
+            <button type="button" class="hx-head"><span class="hx-num">03</span><span class="hx-title" data-i18n="step3_title">One person is already in. The second one joins</span></button>
+            <div class="hx-body"><p data-i18n="step3_desc">When the second person joins, the group is complete, the order goes through and Tuko opens a new group. The button never switches off.</p></div>
+          </li>
+          <li class="hx-item" style="--a:#0fa87c;--ad:#3fe0b0">
+            <button type="button" class="hx-head"><span class="hx-num">04</span><span class="hx-title" data-i18n="step4_title">It completes and Tuko opens another group</span></button>
+            <div class="hx-body"><p data-i18n="step4_desc">When the group completes, the orders go through and, 5 minutes later, Tuko publishes a new empty group, ready for the next customer. You don't do a thing: it repeats until you say stop.</p></div>
+          </li>
+        </ol>
+        <span class="hx-rail" aria-hidden="true"><i></i></span>
+        <span class="hx-loop" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M21 4v4.4h-4.4"/></svg></span>
+      </div>
+
+      <div class="hx-stage">
+        <div class="hx-floor" aria-hidden="true"></div>
+        <div class="hx-frame">
+          <!-- Barra de ventana: dónde ocurre cada paso (panel de la tienda / la tienda) -->
+          <div class="hx-bar" aria-hidden="true">
+            <span class="hx-lights"><i></i><i></i><i></i></span>
+            <span class="hx-url">
+              <span class="hx-url-a"><svg viewBox="0 0 16 16"><rect x="2.5" y="2.5" width="4.5" height="4.5" rx="1.2"/><rect x="9" y="2.5" width="4.5" height="4.5" rx="1.2"/><rect x="2.5" y="9" width="4.5" height="4.5" rx="1.2"/><rect x="9" y="9" width="4.5" height="4.5" rx="1.2"/></svg>admin.shopify.com/apps/tuko</span>
+              <span class="hx-url-b"><svg viewBox="0 0 16 16"><rect x="3.5" y="7" width="9" height="6.5" rx="1.6"/><path d="M5.5 7V5.2a2.5 2.5 0 0 1 5 0V7"/></svg>tukostore.com/products/piruleta</span>
+            </span>
           </div>
-          <div class="rescue-opt" data-branch="c">
-            <article class="rescue-card">
-              <span class="rescue-mark" aria-hidden="true">2</span>
-              <h3 class="data-side-title" data-i18n="rescue_opt2_title">They join a new group of the same product automatically.</h3>
-              <p class="data-side-sub" data-i18n="rescue_opt2_sub">Keep trying without starting from scratch.</p>
-            </article>
-          </div>
-          <div class="rescue-opt" data-branch="r">
-            <article class="rescue-card">
-              <span class="rescue-mark" aria-hidden="true">3</span>
-              <h3 class="data-side-title" data-i18n="rescue_opt3_title">Or we refund their money.</h3>
-              <p class="data-side-sub" data-i18n="rescue_opt3_sub">In full, no strings attached.</p>
-            </article>
-          </div>
+          <iframe class="hx-demo" data-src="/landing-demo/animaciones/01-activar-compra/index.html?v=20261002h" src="about:blank" title="Demo: publishing the group in the store" data-w="480" data-h="640" data-bar="1"></iframe>
+          <iframe class="hx-demo" data-src="/landing-demo/animaciones/06-reservar-piruleta/index.html?v=20261024b" src="about:blank" title="Demo: buying the product and sharing" data-w="380" data-h="566" data-bar="1"></iframe>
+          <iframe class="hx-demo" data-src="/landing-demo/animaciones/07-grupo-completado/index.html?v=20261024b" src="about:blank" title="Demo: group completed and stats" data-w="420" data-h="454" data-bar="1"></iframe>
+          <!-- Paso 4: se recorta el margen de la demo para que su tarjeta sea el único marco (sin tarjeta dentro de tarjeta) -->
+          <iframe class="hx-demo" data-src="/landing-demo/animaciones/08-grupo-en-bucle/index.html?v=20261003n" src="about:blank" title="Demo: Tuko opens a new group after each completed group" data-w="420" data-h="454" data-bar="0" data-crop="2 18"></iframe>
         </div>
+        <div class="hx-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
       </div>
     </div>
-    <p class="data-foot fade-up d4" data-i18n="rescue_body">If they choose a refund, Shopify doesn't return the payment gateway fee. We cover it. A group that doesn't close doesn't cost you a single euro.</p>
+  </div>
+</section>
+<script src="/assets/js/home-how-cycle.js?v=da471745" defer></script>
+
+<!-- Y SI NO SE LLENA: el reloj del grupo llega a 00:00:00 y se abren las tres opciones, todas a la vista -->
+<section class="re" id="si-no-se-llena">
+  <div class="re-inner">
+    <h2 class="s-title re-title" data-i18n="rescue_title">What if nobody else joins?</h2>
+    <p class="re-sub" data-i18n="rescue_sub">Your customer chooses, and all three options are good.</p>
+
+    <!-- Retícula técnica muy fina: nace desde el cruce cuando la luz abre la regla y se queda quieta -->
+    <span class="re-grid" aria-hidden="true"></span>
+    <div class="re-fork">
+      <span class="re-clock" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><circle class="re-dial" cx="12" cy="12" r="9.5"/><circle class="re-left" cx="12" cy="12" r="9.5" pathLength="1" transform="rotate(-90 12 12)"/><path class="re-hand" d="M12 7.5V12l2.8 1.8"/></svg>
+        <span class="re-time">24:00:00</span>
+      </span>
+      <span class="re-stem" aria-hidden="true"></span>
+      <span class="re-rule" aria-hidden="true"></span>
+      <!-- Haz de luz: recorre la línea hacia abajo y se abre por la regla hacia los dos lados -->
+      <span class="re-beam re-beam--down" aria-hidden="true"></span>
+      <span class="re-beam re-beam--l" aria-hidden="true"></span>
+      <span class="re-beam re-beam--r" aria-hidden="true"></span>
+    </div>
+
+    <div class="re-cols">
+      <div class="re-col" style="--i:0">
+        <span class="re-label" data-i18n="rescue_opt1_label">Option A</span>
+        <p class="re-win" data-i18n="rescue_opt1_sub">You sell two.</p>
+        <p class="re-who" data-i18n="rescue_opt1_title">They keep both units at the same group price.</p>
+      </div>
+      <div class="re-col" style="--i:1">
+        <span class="re-label" data-i18n="rescue_opt2_label">Option B</span>
+        <p class="re-win" data-i18n="rescue_opt2_sub">Keep trying without starting from scratch.</p>
+        <p class="re-who" data-i18n="rescue_opt2_title">They join a new group of the same product automatically.</p>
+      </div>
+      <div class="re-col" style="--i:2">
+        <span class="re-label" data-i18n="rescue_opt3_label">Option C</span>
+        <p class="re-win" data-i18n="rescue_opt3_sub">In full, no strings attached.</p>
+        <p class="re-who" data-i18n="rescue_opt3_title">Or we refund their money.</p>
+      </div>
+    </div>
+
+    <p class="re-foot" data-i18n="rescue_body">If they choose a refund, Shopify doesn't return the payment gateway fee. We cover it. <b>A group that doesn't close doesn't cost you <span class="re-euro">a single euro.</span></b></p>
   </div>
 </section>
 
-<!-- POR QU� COMPRAN (sustituye a "Beneficios"; se conserva id="beneficios" por los enlaces externos) -->
-<section class="why" id="beneficios">
+<!-- POR QUÉ COMPRAN (sustituye a "Beneficios"; se conserva id="beneficios" por los enlaces externos) -->
+<!-- Tres capítulos alternos dentro de un marco de plano: la frase a dos tonos a un lado y el widget al otro.
+     Una luz baja por el borde y enciende cada capítulo; al final, el marco late. Los widgets y sus animaciones no se tocan. -->
+<section class="why why--chapters" id="beneficios">
   <div class="why-inner">
     <div class="why-intro">
       <div class="fade-up"><span class="s-badge" data-i18n="why_badge">Por qu� funciona</span></div>
       <h2 class="s-title fade-up d1" data-i18n="why_title">Tres cosas que hacen que <em class="title-accent-em">compren ahora</em></h2>
     </div>
 
-    <div class="why-rows">
-
-      <!-- 1 � El reloj -->
-      <div class="why-row fade-up">
-        <div class="why-text">
-          <span class="why-kicker" data-i18n="why1_kicker">El reloj</span>
-          <h3 class="why-title" data-i18n="why1_title">Con 24 horas por delante, compran hoy.</h3>
-          <p class="why-desc" data-i18n="why1_desc">Sin reloj, lo dejan para nunca.</p>
+    <div class="wc-list">
+      <span class="wc-spine" aria-hidden="true"><i></i><b></b></span>
+      <article class="why-row wc fade-up" data-k="1">
+        <div class="wc-text">
+          <span class="wc-head"><span class="wc-num">01</span><span class="why-kicker" data-i18n="why1_kicker">El reloj</span></span>
+          <h3 class="wc-line"><span class="why-title" data-i18n="why1_title">Con 24 horas por delante, compran hoy.</span> <span class="why-desc" data-i18n="why1_desc">Sin reloj, lo dejan para nunca.</span></h3>
         </div>
-        <div class="why-visual" aria-hidden="true">
+        <div class="wc-stage">
+          <span class="wc-halo" aria-hidden="true"></span>
+          <div class="why-visual" aria-hidden="true">
           <div class="why-widget">
             <p class="why-clock-label" data-i18n="why1_w_label">Se cierra en</p>
             <div class="why-clock" data-countdown>
@@ -791,16 +801,16 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- 2 � La persona -->
-      <div class="why-row reversed fade-up">
-        <div class="why-text">
-          <span class="why-kicker" data-i18n="why2_kicker">La persona</span>
-          <h3 class="why-title" data-i18n="why2_title">No le pides que llene un grupo de veinte.</h3>
-          <p class="why-desc" data-i18n="why2_desc">Le pides una persona. Eso s� lo hace.</p>
         </div>
-        <div class="why-visual" aria-hidden="true">
+      </article>
+      <article class="why-row wc fade-up" data-k="2">
+        <div class="wc-text">
+          <span class="wc-head"><span class="wc-num">02</span><span class="why-kicker" data-i18n="why2_kicker">La persona</span></span>
+          <h3 class="wc-line"><span class="why-title" data-i18n="why2_title">No le pides que llene un grupo de veinte.</span> <span class="why-desc" data-i18n="why2_desc">Le pides una persona. Eso s� lo hace.</span></h3>
+        </div>
+        <div class="wc-stage">
+          <span class="wc-halo" aria-hidden="true"></span>
+          <div class="why-visual" aria-hidden="true">
           <div class="why-widget why-widget--race">
             <p class="why-race-label" data-i18n="why2_w_missing">Ya hay 1 dentro. Falta <b>1</b> para que los dos compren con el ?15&nbsp;%</p>
             <div class="why-race" data-why-race>
@@ -847,16 +857,16 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- 3 � El grupo -->
-      <div class="why-row fade-up">
-        <div class="why-text">
-          <span class="why-kicker" data-i18n="why3_kicker">El grupo</span>
-          <h3 class="why-title" data-i18n="why3_title">Ven que alguien ya entr� y pag�.</h3>
-          <p class="why-desc" data-i18n="why3_desc">Eso convence m�s que cualquier cosa que digas t�.</p>
         </div>
-        <div class="why-visual" aria-hidden="true">
+      </article>
+      <article class="why-row wc fade-up" data-k="3">
+        <div class="wc-text">
+          <span class="wc-head"><span class="wc-num">03</span><span class="why-kicker" data-i18n="why3_kicker">El grupo</span></span>
+          <h3 class="wc-line"><span class="why-title" data-i18n="why3_title">Ven que alguien ya entr� y pag�.</span> <span class="why-desc" data-i18n="why3_desc">Eso convence m�s que cualquier cosa que digas t�.</span></h3>
+        </div>
+        <div class="wc-stage">
+          <span class="wc-halo" aria-hidden="true"></span>
+          <div class="why-visual" aria-hidden="true">
           <div class="why-widget why-widget--group">
             <div class="why-group-head">
               <span class="why-group-ppl">
@@ -879,93 +889,142 @@
             <span class="why-group-chip"><i class="avat avat--face" data-why-chip-face><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#F4A261"/><path fill="#E07A3D" d="M6 18L10 4 18 14z"/><path fill="#E07A3D" d="M34 18L30 4 22 14z"/><path fill="#FFD7B8" d="M8.2 16L11 7.5 16 13.5z"/><path fill="#FFD7B8" d="M31.8 16L29 7.5 24 13.5z"/><ellipse cx="20" cy="28.5" rx="9.5" ry="7.2" fill="#FFF4E8"/><ellipse cx="20" cy="26.2" rx="1.7" ry="1.3" fill="#3A2418"/><circle cx="13.8" cy="19.8" r="1.85" fill="#3A2418"/><circle cx="26.2" cy="19.8" r="1.85" fill="#3A2418"/><circle cx="14.3" cy="19.3" r=".45" fill="#fff"/><circle cx="26.7" cy="19.3" r=".45" fill="#fff"/><path d="M16.2 30.4c1.8 1.6 5.8 1.6 7.6 0" fill="none" stroke="#C45D4C" stroke-width="1.3" stroke-linecap="round"/></svg></i><span data-i18n="why3_w_chip">Marta <em>acaba de unirse</em></span></span>
           </div>
         </div>
-      </div>
-
+        </div>
+      </article>
     </div>
   </div>
 </section>
+<script src="/assets/vendor/gsap-3.15.0.min.js" defer></script>
+<script src="/assets/vendor/ScrollTrigger-3.15.0.min.js" defer></script>
+<script src="/assets/vendor/lenis-1.3.27.min.js" defer></script>
+<script src="/assets/js/home-scroll.js?v=48eae506" defer></script>
+<script src="/assets/js/home-why.js?v=02ad860b" defer></script>
 
-<!-- LO QUE NO TE PEDIMOS -->
-<section class="data" id="sin-requisitos">
+<!-- LO QUE NO TE PEDIMOS · lista de comprobación: cinco filas grandes que se marcan al bajar, y un sello 3D encima del título -->
+<section class="data nk" id="sin-requisitos">
   <div class="data-inner">
-    <h2 class="s-title data-headline fade-up d1" data-i18n="noreq_title">Lo que no te pedimos</h2>
-    <ul class="noreq-grid">
-      <li class="noreq-tile fade-up d1">
-        <span class="noreq-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></span>
+    <!-- Sello: pieza de cristal con el logo en relieve (las capas las pone home-noreq.js) -->
+    <div class="nk-seal" aria-hidden="true"><div class="nk-seal-tile" data-nk-seal></div></div>
+    <h2 class="s-title nk-title fade-up" data-i18n="noreq_title">Lo que no te pedimos</h2>
+    <ul class="nk-list">
+      <li class="nk-row" style="--i:0">
+        <span class="nk-ck" aria-hidden="true"><svg viewBox="0 0 24 24"><path pathLength="1" d="M6.5 12.5l3.6 3.6 7.4-8"/></svg></span>
         <p data-i18n="noreq_b1"><b>Ni un ajuste en tu Shopify.</b> Se queda como est�.</p>
       </li>
-      <li class="noreq-tile fade-up d2">
-        <span class="noreq-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+      <li class="nk-row" style="--i:1">
+        <span class="nk-ck" aria-hidden="true"><svg viewBox="0 0 24 24"><path pathLength="1" d="M6.5 12.5l3.6 3.6 7.4-8"/></svg></span>
         <p data-i18n="noreq_b2"><b>No necesitas Shopify Plus.</b> Si lo tienes, tambi�n funciona.</p>
       </li>
-      <li class="noreq-tile fade-up d3">
-        <span class="noreq-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></span>
+      <li class="nk-row" style="--i:2">
+        <span class="nk-ck" aria-hidden="true"><svg viewBox="0 0 24 24"><path pathLength="1" d="M6.5 12.5l3.6 3.6 7.4-8"/></svg></span>
         <p data-i18n="noreq_b3"><b>Ning�n pago a mano.</b> Ni uno.</p>
       </li>
-      <li class="noreq-tile fade-up d4">
-        <span class="noreq-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></span>
+      <li class="nk-row" style="--i:3">
+        <span class="nk-ck" aria-hidden="true"><svg viewBox="0 0 24 24"><path pathLength="1" d="M6.5 12.5l3.6 3.6 7.4-8"/></svg></span>
         <p data-i18n="noreq_b4"><b>Cero comisi�n por vender.</b> Nunca.</p>
       </li>
-      <li class="noreq-tile fade-up d5">
-        <span class="noreq-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+      <li class="nk-row" style="--i:4">
+        <span class="nk-ck" aria-hidden="true"><svg viewBox="0 0 24 24"><path pathLength="1" d="M6.5 12.5l3.6 3.6 7.4-8"/></svg></span>
         <p data-i18n="noreq_b6"><b>Ni un mont�n de tr�fico.</b> Empieza con lo que tengas.</p>
       </li>
     </ul>
   </div>
 </section>
+<script src="/assets/js/home-noreq.js?v=43cc2587" defer></script>
 
-<!-- PLAN PILOTO -->
-<section class="data" id="piloto">
+<!-- PLAN PILOTO · un pase de tienda fundadora en 3D y el trato como un recorrido de 45 días -->
+<section class="data pl" id="piloto">
   <div class="data-inner">
-    <div class="fade-up"><span class="data-trigger" data-i18n="pilot_badge">Piloto</span></div>
-    <h2 class="s-title data-headline fade-up d1" data-i18n="pilot_title">Buscamos 5 tiendas fundadoras</h2>
-    <p class="data-sub fade-up d2" data-i18n="pilot_sub">Tuko es nuevo y lo sabemos. Por eso, las 5 primeras tiendas que se lo tomen en serio y nos ayuden no van a pagar nada. Les daremos durante 45 d�as el plan m�s caro de Tuko, 129 ? al mes, sin coste y sin tarjeta.</p>
-    <div class="pilot-asks fade-up d3">
-      <h3 class="data-side-title pilot-asks-title" data-i18n="pilot_ask_title">A cambio te pedimos tres cosas</h3>
-      <ol class="pilot-asks-grid" id="pilotAsks">
-        <li class="pilot-ask">
-          <span class="pilot-ask-num" aria-hidden="true">1</span>
-          <p data-i18n="pilot_ask1">Que lo uses de verdad. En productos con tr�fico, no en uno perdido del cat�logo.</p>
-        </li>
-        <li class="pilot-ask">
-          <span class="pilot-ask-num" aria-hidden="true">2</span>
-          <p data-i18n="pilot_ask2">Que nos digas qu� falla. Una llamada corta cada dos o tres semanas.</p>
-        </li>
-        <li class="pilot-ask">
-          <span class="pilot-ask-num" aria-hidden="true">3</span>
-          <p data-i18n="pilot_ask3">Que dejes una rese�a honesta en Shopify y nos dejes contar tu caso aqu�.</p>
-        </li>
+    <div class="pl-head">
+      <div class="pl-copy">
+        <div class="fade-up"><span class="pl-badge" data-i18n="pilot_badge">Piloto</span></div>
+        <h2 class="s-title pl-title fade-up d1" data-i18n="pilot_title">Buscamos 5 tiendas <em class="title-accent-em">fundadoras</em></h2>
+        <p class="pl-sub fade-up d2" data-i18n="pilot_sub">Tuko es nuevo y lo sabemos. Por eso, las 5 primeras tiendas que se lo tomen en serio y nos ayuden <b>no van a pagar nada</b>. Les daremos durante 45 días el plan más caro de Tuko, 129 € al mes, sin coste y sin tarjeta.</p>
+      </div>
+
+      <!-- Pase de tienda fundadora: gira hacia el cursor; el número recorre las cinco plazas -->
+      <div class="pl-pass-wrap" aria-hidden="true">
+        <div class="pl-pass" data-pl-pass>
+          <div class="pl-pass-main">
+            <div class="pl-pass-top">
+              <span class="pl-pass-logo"><svg viewBox="44 36 213 249"><ellipse cx="132.298" cy="160.5" rx="32.1333" ry="120.5"/><path d="M164.431 160.5C164.431 227.05 164.431 281 164.431 281C195.488 281 220.664 227.05 220.664 160.5C220.664 93.9497 195.488 40 164.431 40C164.431 40 164.431 93.9497 164.431 160.5Z"/><path d="M220.657 160.497C220.657 204.864 220.657 240.83 220.657 240.83C238.403 240.83 252.79 204.864 252.79 160.497C252.79 116.13 238.403 80.1636 220.657 80.1636C220.657 80.1636 220.657 116.13 220.657 160.497Z"/><ellipse cx="80.0841" cy="160.497" rx="20.0833" ry="80.3333"/></svg>tuko</span>
+              <span class="pl-pass-chip"></span>
+            </div>
+            <p class="pl-pass-kicker" data-pl-t="kicker">Tienda fundadora</p>
+            <p class="pl-pass-plan">Plan Escala</p>
+            <div class="pl-pass-row">
+              <span class="pl-pass-days"><b>45</b> <span data-pl-t="days">días</span></span>
+              <span class="pl-pass-price">0 €</span>
+            </div>
+          </div>
+          <div class="pl-pass-stub">
+            <span class="pl-pass-no">Nº</span>
+            <span class="pl-odo"><span class="pl-odo-col" data-pl-odo><b>01</b><b>02</b><b>03</b><b>04</b><b>05</b></span></span>
+            <span class="pl-pips"><i></i><i></i><i></i><i></i><i></i></span>
+          </div>
+          <span class="pl-holo"></span>
+          <span class="pl-gloss"></span>
+        </div>
+        <span class="pl-pass-floor"></span>
+      </div>
+    </div>
+
+    <!-- El trato: los 45 días como un recorrido; las tres peticiones se encienden cuando la luz llega a su punto -->
+    <div class="pl-deal fade-up">
+      <h3 class="pl-deal-title" data-i18n="pilot_ask_title">A cambio te pedimos tres cosas</h3>
+      <div class="pl-track" aria-hidden="true">
+        <span class="pl-ruler"></span>
+        <span class="pl-fill"></span>
+        <span class="pl-stop" style="--x:0.1667"><i></i></span>
+        <span class="pl-stop pl-stop--call" style="--x:0.3333"><i></i></span>
+        <span class="pl-stop" style="--x:0.5"><i></i></span>
+        <span class="pl-stop pl-stop--call" style="--x:0.6667"><i></i></span>
+        <span class="pl-stop" style="--x:0.8333"><i></i></span>
+        <span class="pl-stop pl-stop--end" style="--x:1"><i></i></span>
+        <span class="pl-day pl-day--a" data-pl-t="d1">Día 1</span>
+        <span class="pl-day pl-day--b" data-pl-t="d45">Día 45</span>
+      </div>
+      <ol class="pl-asks">
+        <li class="pl-ask" data-at="0.1667"><span class="pl-ask-n">01</span><p data-i18n="pilot_ask1"><b>Que lo uses de verdad.</b> En productos con tráfico, no en uno perdido del catálogo.</p></li>
+        <li class="pl-ask" data-at="0.5"><span class="pl-ask-n">02</span><p data-i18n="pilot_ask2"><b>Que nos digas qué falla.</b> Una llamada corta cada dos o tres semanas.</p></li>
+        <li class="pl-ask" data-at="0.8333"><span class="pl-ask-n">03</span><p data-i18n="pilot_ask3"><b>Que dejes una reseña honesta</b> en Shopify y nos dejes contar tu caso aquí.</p></li>
       </ol>
     </div>
-    <div class="hero-actions fade-up d4" style="margin-top:28px">
+
+    <div class="hero-actions pl-actions fade-up d2">
       <a href="#solicitud" class="btn-blue">
         <span data-i18n="pilot_cta">Quiero una de las 5 plazas</span>
-        <span class="hero-cta-arrow" aria-hidden="true">?</span>
+        <span class="hero-cta-arrow" aria-hidden="true">→</span>
       </a>
     </div>
-    <p class="data-foot fade-up d4" data-i18n="pilot_foot">Sin tarjeta, sin permanencia y sin comisiones. Si el d�a 45 quieres seguir usando Tuko, te dejamos el plan Escala a 49 ?/mes de por vida.</p>
+    <p class="data-foot pl-foot fade-up d3" data-i18n="pilot_foot">Sin tarjeta, sin permanencia y sin comisiones. Si el día 45 quieres seguir usando Tuko, te dejamos el plan Escala a <b class="pl-green">49 €/mes de por vida</b>.</p>
   </div>
 </section>
+<script src="/assets/js/home-pilot.js?v=8133a94f" defer></script>
 
-<!-- PRECIOS -->
-<section class="pricing" id="precios">
+<!-- PRECIOS · cuatro tarjetas unidas con lo que añade cada plan; Escala, como el pase fundador -->
+<section class="pricing pr" id="precios">
   <div class="pricing-inner">
     <div class="fade-up"><span class="s-badge" data-i18n="pricing_badge">Precios</span></div>
     <h2 class="s-title fade-up d1" data-i18n="pricing_title">Los planes, cuando salgamos del piloto</h2>
-    <p class="s-sub fade-up d2" data-i18n="pricing_sub">Ninguno tiene comisi�n. Pagas una cuota y ya est�. Ahora mismo no est�n disponibles: la �nica forma de entrar es el piloto.</p>
+    <p class="s-sub fade-up d2" data-i18n="pricing_sub">Ninguno tiene comisión. Pagas una cuota y ya está. Ahora mismo no están disponibles: la única forma de entrar es el piloto.</p>
 
+    <!-- La tabla la construye home-pricing.js con las tarjetas de abajo (ocultas; las traducciones las rellenan) -->
+    <div class="pr-table fade-up d3" data-pr-table></div>
+    <a href="#solicitud" class="pr-cta-src" hidden data-i18n="pilot_cta">Quiero una de las 5 plazas</a>
+    <div class="pr-src" hidden>
     <div class="pricing-grid">
       <article class="pricing-card is-soon fade-up d1">
         <h3 class="pricing-name" data-i18n="pricing_p1_name">Free</h3>
         <div class="pricing-price-row">
-          <span class="pricing-amount" data-i18n="pricing_p1_price">0 ?</span>
+          <span class="pricing-amount" data-i18n="pricing_p1_price">0 €</span>
           <span class="pricing-period" data-i18n="pricing_per_month">/ mes</span>
         </div>
         <ul class="pricing-features" data-i18n="pricing_p1_rows">
-          <li>Comisi�n: 0 %</li>
+          <li>Comisión: 0 %</li>
           <li>Grupos completados al mes: 5</li>
           <li>Productos a la vez: 2</li>
-          <li>Emails de estado de Tuko: S�</li>
+          <li>Emails de estado de Tuko: Sí</li>
           <li class="is-no">Rescate de grupos: No</li>
           <li class="is-no">Email marketing: No</li>
           <li class="is-no">Soporte prioritario: No</li>
@@ -977,17 +1036,17 @@
       </article>
 
       <article class="pricing-card is-soon fade-up d2">
-        <h3 class="pricing-name" data-i18n="pricing_p2_name">B�sico</h3>
+        <h3 class="pricing-name" data-i18n="pricing_p2_name">Básico</h3>
         <div class="pricing-price-row">
-          <span class="pricing-amount" data-i18n="pricing_p2_price">19 ?</span>
+          <span class="pricing-amount" data-i18n="pricing_p2_price">19 €</span>
           <span class="pricing-period" data-i18n="pricing_per_month">/ mes</span>
         </div>
         <ul class="pricing-features" data-i18n="pricing_p2_rows">
-          <li>Comisi�n: 0 %</li>
+          <li>Comisión: 0 %</li>
           <li>Grupos completados al mes: 20</li>
           <li>Productos a la vez: Ilimitados</li>
-          <li>Rescate de grupos: S�</li>
-          <li>Emails de estado de Tuko: S�</li>
+          <li>Rescate de grupos: Sí</li>
+          <li>Emails de estado de Tuko: Sí</li>
           <li class="is-no">Email marketing: No</li>
           <li class="is-no">Soporte prioritario: No</li>
           <li class="is-no">Tuko Marketplace: No</li>
@@ -1000,16 +1059,16 @@
       <article class="pricing-card is-soon fade-up d3">
         <h3 class="pricing-name" data-i18n="pricing_p3_name">Pro</h3>
         <div class="pricing-price-row">
-          <span class="pricing-amount" data-i18n="pricing_p3_price">49 ?</span>
+          <span class="pricing-amount" data-i18n="pricing_p3_price">49 €</span>
           <span class="pricing-period" data-i18n="pricing_per_month">/ mes</span>
         </div>
         <ul class="pricing-features" data-i18n="pricing_p3_rows">
-          <li>Comisi�n: 0 %</li>
+          <li>Comisión: 0 %</li>
           <li>Grupos completados al mes: 50</li>
           <li>Productos a la vez: Ilimitados</li>
-          <li>Rescate de grupos: S�</li>
-          <li>Email marketing: S�</li>
-          <li>Emails de estado de Tuko: S�</li>
+          <li>Rescate de grupos: Sí</li>
+          <li>Email marketing: Sí</li>
+          <li>Emails de estado de Tuko: Sí</li>
           <li class="is-no">Soporte prioritario: No</li>
           <li class="is-no">Tuko Marketplace: No</li>
           <li class="is-no">Tuko AI: No</li>
@@ -1019,34 +1078,36 @@
       </article>
 
       <article class="pricing-card is-gift fade-up d4">
-        <span class="pricing-rec pricing-ribbon" data-i18n="pricing_p4_ribbon">Esto es lo que te regalamos: 45 d�as a las 5 tiendas del piloto</span>
+        <span class="pricing-rec pricing-ribbon" data-i18n="pricing_p4_ribbon">Esto es lo que te regalamos: <b>45 días</b> a las 5 tiendas del piloto</span>
         <h3 class="pricing-name" data-i18n="pricing_p4_name">Escala</h3>
         <div class="pricing-price-row">
-          <span class="pricing-amount" data-i18n="pricing_p4_price">129 ?</span>
+          <span class="pricing-amount" data-i18n="pricing_p4_price">129 €</span>
           <span class="pricing-period" data-i18n="pricing_per_month">/ mes</span>
         </div>
         <ul class="pricing-features" data-i18n="pricing_p4_rows">
-          <li>Comisi�n: 0 %</li>
+          <li>Comisión: 0 %</li>
           <li>Grupos completados al mes: Ilimitados</li>
           <li>Productos a la vez: Ilimitados</li>
-          <li>Rescate de grupos: S�</li>
-          <li>Email marketing: S�</li>
-          <li>Soporte prioritario: S�</li>
-          <li>Tuko Marketplace: S�</li>
-          <li>Tuko AI: S�</li>
-          <li>Emails de estado de Tuko: S�</li>
+          <li>Rescate de grupos: Sí</li>
+          <li>Email marketing: Sí</li>
+          <li>Soporte prioritario: Sí</li>
+          <li>Tuko Marketplace: Sí</li>
+          <li>Tuko AI: Sí</li>
+          <li>Emails de estado de Tuko: Sí</li>
 
         </ul>
         <a href="#solicitud" class="pricing-cta is-secondary" data-i18n="pricing_p4_cta">Elegir plan</a>
       </article>
     </div>
+    </div>
 
     <p class="pricing-legal fade-up" data-i18n="pricing_note_groups">Solo cuentan los grupos que se cierran. Si un grupo no sale, no te consume nada.</p>
     <div class="pricing-links fade-up d1">
-      <a href="#faq" data-i18n="pricing_link_faq">�Te quedan dudas? Mira las preguntas frecuentes</a>
+      <a href="#faq" data-i18n="pricing_link_faq">¿Te quedan dudas? Mira las preguntas frecuentes</a>
     </div>
   </div>
 </section>
+<script src="/assets/js/home-pricing.js?v=8e83d8c8" defer></script>
 
 <!-- FAQ -->
 <!-- tuko:partial:home-faq-en -->
@@ -1158,14 +1219,15 @@
   </div>
 </section>
 <!-- /tuko:partial:home-faq-en -->
+<script src="/assets/js/home-faq.js?v=ce2b3591" defer></script>
 
-<!-- CTA FINAL -->
+<!-- CTA FINAL · el formulario a la izquierda y el logo de Tuko en 3D, que se enciende con cada campo -->
 <section class="final-cta-wrap" id="solicitud">
   <div class="final-cta">
     <canvas id="ctaCanvas"></canvas>
     <div class="final-cta-inner">
       <span class="final-cta-eyebrow fade-up"><i aria-hidden="true"></i><span data-i18n="fcta_eyebrow">Empieza hoy</span></span>
-      <h2 class="fade-up d1" data-i18n="fcta_title">Quedan 5 plazas</h2>
+      <h2 class="fade-up d1" data-i18n="fcta_title">Quedan <em class="title-accent-em">5 plazas</em></h2>
       <p class="fade-up d2" data-i18n="fcta_sub">45 d�as con Tuko completo, gratis. Sin tarjeta y sin permanencia. Si no funciona, lo desinstalas.</p>
       <form class="cta-form fade-up d3" id="pilotForm" name="piloto" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate data-tuko-form>
         <input type="hidden" name="form-name" value="piloto">
@@ -1200,6 +1262,7 @@
     </div>
   </div>
 </section>
+<script src="/assets/js/home-cta.js?v=ce1430c2" defer></script>
 
 </main>
 
@@ -1237,6 +1300,7 @@
   <div class="footer-bottom-inner" data-i18n="footer_copy">© 2026 Tuko. All rights reserved.</div>
 </footer>
 <!-- /tuko:partial:footer-en -->
+<script src="/assets/js/home-footer.js?v=d0cd80af" defer></script>
 
 <!-- CTA fija en m�vil: aparece al pasar el hero, se esconde sobre Precios, el CTA final y el footer -->
 <div class="sticky-cta" id="stickyCta" aria-hidden="true">
@@ -1248,7 +1312,7 @@
 </div>
 
 <script src="/assets/js/home-animations-en.js?v=6e07ac54"></script>
-<script src="/assets/js/home-ui-en.js?v=f859f489"></script>
+<script src="/assets/js/home-ui-en.js?v=ba24795e"></script>
 <script src="../assets/js/tuko-theme.js?v=b2ef7977" defer></script>
 <script src="../assets/js/tuko-form.js?v=ebdb6073" defer></script>
 <script src="../assets/js/ga4-loader.js?v=57d4501d" defer></script>

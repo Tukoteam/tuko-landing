@@ -1,0 +1,275 @@
+/* ══════════════════════════════
+   CTA FINAL — el formulario y el logo de Tuko en 3D
+   La tarjeta se parte en dos: a la izquierda, antetítulo editorial, título con acento y el formulario como una
+   pieza de cristal; a la derecha, el logo de cristal esmerilado bajo un foco de luz. Sus cuatro formas se encienden
+   en blanco con cada campo bien rellenado y, al enviarse, la última y una vuelta entera.
+   Fondo: aurora que deriva, puntos alrededor del logo, haz de luz con polvo y grano. Lo monta home-cta.js.
+══════════════════════════════ */
+/* ── Composición ── */
+.final-cta.fc {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: clamp(28px, 4vw, 56px);
+  padding: clamp(48px, 5vw, 68px) clamp(28px, 4.5vw, 64px);
+  text-align: left;
+  isolation: isolate;
+  background: linear-gradient(160deg, #4a5cff 0%, #3445e6 45%, #2633c4 100%);
+  box-shadow: 0 40px 90px -40px rgba(38, 51, 196, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+/* Oscuro: en vez de un bloque azul que deslumbra, una tarjeta de medianoche; el azul queda en la luz y el logo */
+html[data-theme="dark"] .final-cta.fc {
+  background: linear-gradient(165deg, #1a2160 0%, #10154a 45%, #0a0d2c 100%);
+  box-shadow: inset 0 0 0 1px rgba(143, 160, 255, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 40px 90px -40px rgba(66, 87, 255, 0.45);
+}
+html[data-theme="dark"] .fc-blob--a { background: #4a5cff; opacity: 0.3; }
+html[data-theme="dark"] .fc-blob--b { background: #070a26; }
+html[data-theme="dark"] .fc-dots { opacity: 0.6; }
+.fc #ctaCanvas { display: none; }
+.fc .final-cta-inner { position: relative; z-index: 3; max-width: none; margin: 0; }
+.fc .final-cta-inner > p { margin-left: 0; margin-right: 0; }
+.fc .cta-form { margin: 0; max-width: 420px; }
+.fc .final-cta-trust,
+.fc .final-cta-shopify { justify-content: flex-start; }
+
+/* ── Columna izquierda: menos plantilla ── */
+/* Antetítulo editorial (línea fina + texto), como en las demás secciones */
+.fc .final-cta-eyebrow {
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.85);
+}
+.fc .final-cta-eyebrow i { display: none; }
+.fc .final-cta-eyebrow::before { content: ''; width: 36px; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7)); }
+/* «5 plazas» en serif cursiva, en blanco */
+.fc h2 .title-accent-em { color: #fff; }
+/* Formulario: una sola pieza de cristal con los campos separados por líneas finas */
+.fc .cta-form {
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 24px 50px -30px rgba(10, 14, 60, 0.6);
+}
+.fc .cta-field { gap: 2px; margin: 0; padding: 11px 18px 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.14); transition: background-color 250ms ease; }
+.fc .cta-field:focus-within { background: rgba(255, 255, 255, 0.07); }
+.fc .cta-field label { font-size: 12px; font-weight: 600; letter-spacing: 0.01em; color: rgba(255, 255, 255, 0.65); }
+.fc .cta-input { padding: 2px 0; border-radius: 0; background: transparent; font-size: 15.5px; color: #fff; }
+.fc .cta-input::placeholder { color: rgba(255, 255, 255, 0.42); }
+.fc .cta-input::-webkit-input-placeholder { color: rgba(255, 255, 255, 0.42); }
+.fc .cta-input:focus { box-shadow: none; }
+.fc .cta-input[aria-invalid="true"] { box-shadow: none; }
+.fc .cta-field:has(.cta-input[aria-invalid="true"]) { background: rgba(255, 120, 140, 0.12); }
+.fc .cta-input:-webkit-autofill { -webkit-text-fill-color: #fff; transition: background-color 9999s ease 0s; }
+/* Botón blanco con texto azul y flecha, como los demás CTA */
+.fc .btn-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: calc(100% - 24px);
+  margin: 12px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  background: #fff;
+  font-weight: 700;
+  color: #2b3bd0;
+  box-shadow: 0 12px 26px -12px rgba(10, 14, 60, 0.55);
+  transition: translate 300ms var(--ease-out), box-shadow 300ms ease;
+}
+.fc .btn-submit::after { content: '→'; transition: translate 300ms var(--ease-out); }
+.fc .btn-submit:hover { background: #fff; transform: none; translate: 0 -2px; box-shadow: 0 18px 32px -14px rgba(10, 14, 60, 0.7); }
+.fc .btn-submit:hover::after { translate: 3px 0; }
+.fc .cta-status { margin: 0 12px 12px; }
+/* Confianza: checks pequeños en vez de puntos; Shopify como texto, sin pastilla */
+.fc .final-cta-trust { gap: 18px; margin-top: 20px; }
+.fc .final-cta-trust span::before,
+.fc .final-cta-trust span + span::before {
+  content: '';
+  display: block;
+  margin: 0;
+  opacity: 1;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(20, 196, 146, 0.9) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.4l2.6 2.6L12 5.6' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 11px no-repeat;
+}
+.fc .final-cta-shopify { margin-top: 14px; padding: 0; border: 0; background: none; font-weight: 600; color: rgba(255, 255, 255, 0.8); }
+
+/* ── Fondo ── */
+.fc-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
+.fc-bg > i { position: absolute; display: block; }
+/* Aurora: tres luces grandes y difusas que derivan despacio */
+.fc-blob { border-radius: 50%; filter: blur(60px); opacity: 0.75; }
+.fc-blob--a { width: 520px; height: 520px; right: -120px; top: -180px; background: #7d8cff; animation: fcDriftA 18s ease-in-out infinite; }
+.fc-blob--b { width: 460px; height: 460px; left: -160px; bottom: -220px; background: #1d27a8; opacity: 0.9; animation: fcDriftB 22s ease-in-out infinite; }
+.fc-blob--c { width: 260px; height: 260px; right: 14%; top: 34%; background: #14c492; opacity: 0.14; animation: fcDriftC 20s ease-in-out infinite; }
+@keyframes fcDriftA { 50% { translate: -90px 70px; } }
+@keyframes fcDriftB { 50% { translate: 110px -60px; } }
+@keyframes fcDriftC { 50% { translate: -80px -50px; } }
+/* Puntos alrededor del logo, que se desvanecen */
+.fc-bg { --bx: 72%; }
+.fc-dots {
+  left: calc(var(--bx) - 26%);
+  top: 0;
+  bottom: 0;
+  width: 52%;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.35) 1.1px, transparent 1.7px) 0 0 / 22px 22px;
+  -webkit-mask-image: radial-gradient(closest-side at 50% 50%, #000 20%, transparent 100%);
+  mask-image: radial-gradient(closest-side at 50% 50%, #000 20%, transparent 100%);
+}
+/* Luz que cae desde arriba sobre el logo: un cono nítido y otro más ancho y tenue, con bordes que se funden */
+/* Foco: el punto de luz en el borde de arriba, de donde nace el haz */
+.fc-src {
+  left: calc(var(--bx) - 90px);
+  top: -34px;
+  width: 180px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.85), rgba(200, 210, 255, 0.35) 55%, transparent);
+  filter: blur(6px);
+  animation: fcBeam 7s ease-in-out infinite;
+}
+.fc-beam {
+  left: calc(var(--bx) - 15%);
+  top: -12%;
+  width: 30%;
+  height: 92%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.08) 70%, transparent);
+  clip-path: polygon(40% 0, 60% 0, 100% 100%, 0 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.5) 30%, #000 46%, #000 54%, rgba(0, 0, 0, 0.5) 70%, transparent);
+  mask-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.5) 30%, #000 46%, #000 54%, rgba(0, 0, 0, 0.5) 70%, transparent);
+  filter: blur(16px);
+  animation: fcBeam 7s ease-in-out infinite;
+}
+@keyframes fcBeam { 50% { opacity: 0.6; } }
+.fc-beam--wide { left: calc(var(--bx) - 24%); width: 48%; height: 100%; opacity: 0.45; filter: blur(34px); animation: fcBeamWide 9s ease-in-out infinite; }
+@keyframes fcBeamWide { 50% { opacity: 0.3; } }
+/* Motas de polvo dentro de la luz */
+.fc-dust { left: calc(var(--bx) - 15%); top: 0; width: 30%; height: 80%; }
+.fc-dust b {
+  position: absolute;
+  left: var(--x);
+  bottom: 0;
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+  opacity: 0;
+  animation: fcDust var(--t) linear var(--d) infinite;
+}
+@keyframes fcDust {
+  0% { translate: 0 0; opacity: 0; }
+  15% { opacity: var(--o); }
+  85% { opacity: var(--o); }
+  100% { translate: 18px -320px; opacity: 0; }
+}
+/* Grano muy fino para que no sea un color plano */
+.fc-grain {
+  inset: 0;
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── El logo ── */
+.fc-seal-col { position: relative; z-index: 3; display: grid; place-items: center; min-height: 420px; }
+/* Sombra en el «suelo» que se mueve con la inclinación */
+.fc-seal-col::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  width: 340px;
+  height: 80px;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.08) 60%, transparent);
+  filter: blur(6px);
+}
+.fc-seal-col::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  width: 150px;
+  height: 20px;
+  translate: calc(-50% - var(--ty, 0) * 20px) 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(10, 14, 60, 0.5), transparent);
+  filter: blur(8px);
+}
+.fc-seal { position: relative; perspective: 1000px; opacity: 0; translate: 0 30px; transition: opacity 900ms ease 200ms, translate 1200ms var(--ease-out) 200ms; }
+.fc.is-in .fc-seal { opacity: 1; translate: none; }
+.fc-tile {
+  --ry: -8deg;
+  --rx: 8deg;
+  --spin: 0deg;
+  position: relative;
+  width: clamp(200px, 22vw, 270px);
+  aspect-ratio: 213 / 249;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx)) rotateY(calc(var(--ry) + var(--spin)));
+  animation: fcFloat 6s ease-in-out infinite;
+}
+@keyframes fcFloat { 50% { translate: 0 -10px; } }
+.fc-tile svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; transform: translateZ(var(--z)); }
+.fc-tile svg > * { transition: fill 600ms ease, stroke 600ms ease; }
+/* Apagado: cristal esmerilado; el canto se forma con capas muy tenues */
+.fc-side > * { fill: rgba(255, 255, 255, 0.05); }
+.fc-back > * { fill: rgba(255, 255, 255, 0.08); }
+.fc-front > * { fill: rgba(255, 255, 255, 0.16); stroke: url(#fcRim); stroke-width: 1.6; }
+/* Encendido: blanco con brillo */
+.fc-tile.is-s1 .fc-side .fs-1,
+.fc-tile.is-s2 .fc-side .fs-2,
+.fc-tile.is-s3 .fc-side .fs-3,
+.fc-tile.is-s4 .fc-side .fs-4 { fill: rgba(205, 213, 255, 0.55); }
+.fc-tile.is-s1 .fc-front .fs-1,
+.fc-tile.is-s2 .fc-front .fs-2,
+.fc-tile.is-s3 .fc-front .fs-3,
+.fc-tile.is-s4 .fc-front .fs-4 { fill: #fff; stroke: url(#fcRim); }
+.fc-front { filter: drop-shadow(0 0 0 transparent); transition: filter 600ms ease; }
+.fc-tile.is-s1 .fc-front,
+.fc-tile.is-s2 .fc-front,
+.fc-tile.is-s3 .fc-front { filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.45)); }
+.fc-tile.is-s4 .fc-front { filter: drop-shadow(0 0 22px rgba(255, 255, 255, 0.75)); }
+/* Al encenderse una forma, un pequeño destello */
+.fc-tile.is-pop { animation: fcFloat 6s ease-in-out infinite, fcPop 520ms var(--ease-out); }
+@keyframes fcPop { 40% { scale: 1.04; } }
+
+/* ── Móvil: el logo arriba, más pequeño ── */
+@media (max-width: 900px) {
+  .final-cta.fc { grid-template-columns: minmax(0, 1fr); text-align: center; }
+  .fc .final-cta-inner > p { margin-left: auto; margin-right: auto; }
+  .fc .cta-form { margin: 0 auto; }
+  .fc .final-cta-trust,
+  .fc .final-cta-shopify { justify-content: center; }
+  .fc .final-cta-trust { flex-direction: row; flex-wrap: wrap; gap: 10px 18px; }
+  .fc .final-cta-eyebrow::after { content: ''; width: 36px; height: 1px; background: linear-gradient(90deg, rgba(255, 255, 255, 0.7), transparent); }
+  .fc-seal-col { order: -1; min-height: 230px; }
+  .fc-tile { width: 150px; }
+  .fc-dots { left: 0; width: 100%; height: 300px; bottom: auto; }
+  .fc-beam { left: calc(var(--bx) - 25%); width: 50%; height: 40%; }
+  .fc-beam--wide { left: calc(var(--bx) - 40%); width: 80%; height: 45%; }
+  .fc-dust { left: calc(var(--bx) - 25%); width: 50%; height: 34%; }
+}
+
+/* El tema oscuro (tuko-theme.css, que se carga después) pinta el antetítulo, los campos y el botón a su manera:
+   aquí manda el diseño de cristal, con un punto más de especificidad */
+html[data-theme="dark"] .final-cta.fc .final-cta-eyebrow { background: none; box-shadow: none; color: rgba(255, 255, 255, 0.85); }
+html[data-theme="dark"] .final-cta.fc .cta-input { background: transparent; color: #fff; }
+html[data-theme="dark"] .final-cta.fc .btn-submit,
+html[data-theme="dark"] .final-cta.fc .btn-submit:hover { background: #fff; color: #2b3bd0; }
+html[data-theme="dark"] .final-cta.fc .cta-form label { color: rgba(255, 255, 255, 0.65); }

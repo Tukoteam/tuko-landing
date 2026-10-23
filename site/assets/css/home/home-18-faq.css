@@ -1,0 +1,244 @@
+/* ══════════════════════════════
+   PREGUNTAS FRECUENTES — una conversación con Tuko
+   Las preguntas, a la izquierda, como pastillas numeradas (las hechas, con check); a la derecha, un panel de cristal:
+   la pregunta se escribe en la barra, se envía como tu mensaje, Tuko escribe y responde con su avatar.
+   El acordeón de siempre queda oculto (sigue en el HTML para Google y por si el JS no carga). Lo monta home-faq.js.
+══════════════════════════════ */
+.faq.fq #faqList { display: none; }
+html[data-theme="dark"] .faq.fq { background: transparent; }
+/* Antetítulo editorial, como en las demás secciones */
+.fq .s-badge,
+html[data-theme="dark"] .fq .s-badge {
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  text-transform: none;
+  color: var(--blue);
+}
+html[data-theme="dark"] .fq .s-badge { color: #8fa0ff; }
+.fq .s-badge::before,
+.fq .s-badge::after {
+  content: '';
+  display: inline-block;
+  width: clamp(20px, 4vw, 44px);
+  height: 1px;
+  margin: 0 14px;
+  vertical-align: middle;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, currentColor 45%, transparent));
+}
+.fq .s-badge::after { background: linear-gradient(90deg, color-mix(in srgb, currentColor 45%, transparent), transparent); }
+
+/* ── Composición ── */
+.fq-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  align-items: start;
+  gap: clamp(24px, 4vw, 56px);
+  max-width: 1060px;
+  margin: clamp(36px, 4.5vw, 56px) auto 0;
+  text-align: left;
+}
+
+/* Preguntas: pastillas numeradas */
+.fq-asks { display: grid; gap: 8px; }
+.fq-ask {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid color-mix(in srgb, var(--ink) 9%, transparent);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--ink) 1.5%, transparent);
+  font: inherit;
+  font-size: 15.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: left;
+  color: var(--ink);
+  cursor: pointer;
+  opacity: 0;
+  translate: -10px 0;
+  transition: opacity 600ms ease, translate 700ms var(--ease-out), background-color 250ms ease, border-color 250ms ease, box-shadow 250ms ease;
+}
+.fq.is-in .fq-ask { opacity: 1; translate: none; }
+.fq-ask:nth-child(2) { transition-delay: 60ms; }
+.fq-ask:nth-child(3) { transition-delay: 120ms; }
+.fq-ask:nth-child(4) { transition-delay: 180ms; }
+.fq-ask:nth-child(5) { transition-delay: 240ms; }
+.fq-ask:nth-child(6) { transition-delay: 300ms; }
+.fq-ask:nth-child(7) { transition-delay: 360ms; }
+.fq-n { flex: none; font-size: 12px; font-weight: 800; letter-spacing: 0.04em; color: var(--ink-3); transition: color 250ms ease; }
+.fq-ask:hover { border-color: color-mix(in srgb, var(--blue) 35%, transparent); background: color-mix(in srgb, var(--blue) 4%, transparent); }
+.fq-ask:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.fq-ask { position: relative; overflow: hidden; }
+.fq-ask::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--blue);
+  scale: 1 0;
+  transition: scale 350ms var(--ease-out);
+}
+.fq-ask.is-on {
+  border-color: color-mix(in srgb, var(--blue) 18%, transparent);
+  background: color-mix(in srgb, var(--blue) 7%, transparent);
+}
+.fq-ask.is-on::before { scale: 1 1; }
+/* Hechas: un check verde en lugar del número */
+.fq-ck { display: none; flex: none; place-items: center; width: 20px; height: 20px; margin: 0 -2px; border-radius: 50%; background: color-mix(in srgb, #14c492 16%, transparent); }
+.fq-ck svg { width: 13px; height: 13px; fill: none; stroke: #0e9e76; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+html[data-theme="dark"] .fq-ck svg { stroke: #3fe0b0; }
+.fq-ask.is-done .fq-n { display: none; }
+.fq-ask.is-done .fq-ck { display: grid; animation: fqPop 420ms var(--ease-out); }
+@keyframes fqPop { from { scale: 0.4; opacity: 0; } }
+/* Flechita que invita a enviarla */
+.fq-t { flex: 1; }
+.fq-go { flex: none; font-weight: 700; color: var(--blue); opacity: 0; translate: -6px 0; transition: opacity 250ms ease, translate 300ms var(--ease-out); }
+.fq-ask:hover .fq-go { opacity: 1; translate: none; }
+html[data-theme="dark"] .fq-go { color: #8fa0ff; }
+.fq-ask.is-on .fq-n { color: var(--blue); }
+html[data-theme="dark"] .fq-ask.is-on .fq-n { color: #8fa0ff; }
+
+/* ── Panel de conversación ── */
+.fq-chat {
+  position: sticky;
+  top: 110px;
+  display: flex;
+  flex-direction: column;
+  height: clamp(420px, 44vw, 520px);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--ink) 9%, transparent);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.7);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 40px 80px -46px rgba(40, 55, 200, 0.45), 0 0 90px -24px rgba(66, 87, 255, 0.35);
+  opacity: 0;
+  translate: 0 20px;
+  transition: opacity 700ms ease 120ms, translate 900ms var(--ease-out) 120ms;
+}
+.fq.is-in .fq-chat { opacity: 1; translate: none; }
+html[data-theme="dark"] .fq-chat { background: rgba(255, 255, 255, 0.03); border-color: rgba(143, 160, 255, 0.14); box-shadow: 0 40px 80px -46px rgba(0, 0, 0, 0.9), 0 0 90px -24px rgba(66, 87, 255, 0.35); }
+.fq-chat-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 8%, transparent);
+  font-size: 15px;
+  color: var(--ink);
+}
+.fq-av { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 11px; background: linear-gradient(150deg, #5a6cff, #3445d8); box-shadow: 0 6px 14px -6px rgba(66, 87, 255, 0.8); }
+.fq-av svg { width: 15px; height: auto; }
+.fq-av svg > * { fill: #fff; }
+.fq-live { width: 8px; height: 8px; border-radius: 50%; background: #14c492; box-shadow: 0 0 0 3px rgba(20, 196, 146, 0.18); animation: fqLive 2.4s ease-in-out infinite; }
+@keyframes fqLive { 50% { box-shadow: 0 0 0 6px rgba(20, 196, 146, 0.06); } }
+
+/* Mensajes: anclados abajo, los nuevos empujan hacia arriba */
+.fq-thread {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 28px 20px 18px;
+  overflow: hidden;
+  /* Lo que se va arriba se funde de verdad bajo la cabecera */
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, rgba(0, 0, 0, 0.35) 12%, #000 30%);
+  mask-image: linear-gradient(180deg, transparent 0, rgba(0, 0, 0, 0.35) 12%, #000 30%);
+}
+.fq-row { display: flex; align-items: flex-end; gap: 8px; animation: fqIn 520ms var(--ease-out) both; }
+.fq-row--you { justify-content: flex-end; }
+.fq-row.is-gone { animation: fqOut 400ms ease forwards; }
+.fq-mini { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 9px; background: linear-gradient(150deg, #5a6cff, #3445d8); box-shadow: 0 4px 10px -4px rgba(66, 87, 255, 0.8); }
+.fq-mini svg { width: 11px; height: auto; }
+.fq-mini svg > * { fill: #fff; }
+.fq-msg {
+  max-width: 84%;
+  padding: 12px 16px;
+  border-radius: 20px;
+  font-size: 15.5px;
+  line-height: 1.5;
+}
+@keyframes fqIn { from { opacity: 0; translate: 0 10px; scale: 0.97; } }
+@keyframes fqOut { to { opacity: 0; translate: 0 -8px; } }
+.fq-msg--you {
+  border-bottom-right-radius: 6px;
+  background: linear-gradient(150deg, #5a6cff, #3d50f2);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 10px 22px -14px rgba(66, 87, 255, 0.9);
+}
+.fq-who { display: block; margin-bottom: 2px; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.7; }
+.fq-msg--tuko {
+  border: 1px solid color-mix(in srgb, var(--ink) 8%, transparent);
+  border-bottom-left-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 8px 20px -16px rgba(20, 24, 38, 0.4);
+}
+html[data-theme="dark"] .fq-msg--tuko { background: #1a1d28; border-color: rgba(143, 160, 255, 0.14); }
+.fq-msg--tuko b { font-weight: 700; }
+.fq-row.is-typing .fq-msg { padding: 14px 18px; }
+.fq-dots { display: inline-flex; gap: 5px; }
+.fq-dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-3); opacity: 0.45; animation: fqDot 1s ease-in-out infinite; }
+.fq-dots i:nth-child(2) { animation-delay: 150ms; }
+.fq-dots i:nth-child(3) { animation-delay: 300ms; }
+@keyframes fqDot { 40% { opacity: 1; translate: 0 -3px; } }
+.fq-row.is-in .fq-msg { animation: fqIn 420ms var(--ease-out) both; }
+
+/* Barra de escribir: la pregunta se teclea aquí antes de enviarse */
+.fq-compose {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 14px 14px;
+  padding: 7px 7px 7px 16px;
+  border: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+  border-radius: 999px;
+  background: #fff;
+  transition: border-color 250ms ease, box-shadow 250ms ease;
+}
+html[data-theme="dark"] .fq-compose { background: #161922; border-color: rgba(143, 160, 255, 0.16); }
+.fq-compose.is-typing { border-color: color-mix(in srgb, var(--blue) 45%, transparent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 10%, transparent); }
+.fq-input { position: relative; flex: 1; min-width: 0; height: 22px; overflow: hidden; font-size: 14.5px; line-height: 22px; white-space: nowrap; text-overflow: ellipsis; color: var(--ink); }
+.fq-ph { position: absolute; inset: 0; color: var(--ink-3); transition: opacity 150ms ease; }
+.fq-compose.is-typing .fq-ph { opacity: 0; }
+.fq-compose.is-typing .fq-typed::after { content: ''; display: inline-block; width: 1.5px; height: 1.05em; margin-left: 1px; vertical-align: -2px; background: var(--blue); animation: fqCaret 0.9s steps(1) infinite; }
+@keyframes fqCaret { 50% { opacity: 0; } }
+.fq-send { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: color-mix(in srgb, var(--blue) 18%, transparent); transition: background 250ms ease, scale 300ms var(--ease-out); }
+.fq-send svg { width: 16px; height: 16px; fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.fq-compose.is-typing .fq-send { background: var(--blue); }
+.fq-compose.is-send .fq-send { background: var(--blue); animation: fqSend 380ms var(--ease-out); }
+@keyframes fqSend { 40% { scale: 0.86; } 100% { scale: 1; } }
+
+/* La respuesta desplegada bajo la pregunta solo existe en móvil */
+.fq-inline { display: none; }
+
+/* ── Móvil: las preguntas, una debajo de otra; al pulsar, la respuesta de Tuko se despliega justo debajo ── */
+@media (max-width: 860px) {
+  .fq :has(> .s-badge) { text-align: center; }
+  .fq-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .fq-chat { display: none; }
+  .fq-asks { gap: 8px; }
+  .fq-ask { gap: 12px; padding: 15px 16px; font-size: 15.5px; }
+  .fq-ask .fq-go { margin-left: auto; opacity: 0.55; translate: none; transition: rotate 300ms var(--ease-out), opacity 250ms ease; rotate: 90deg; }
+  .fq-ask.is-on .fq-go { rotate: -90deg; opacity: 1; }
+  .fq-inline { display: grid; grid-template-rows: 0fr; margin-top: -8px; opacity: 0; transition: grid-template-rows 450ms var(--ease-out), opacity 300ms ease, margin 450ms var(--ease-out); }
+  .fq-inline.is-open { grid-template-rows: 1fr; margin-top: 0; opacity: 1; }
+  .fq-inline-in { overflow: hidden; min-height: 0; }
+  .fq-inline .fq-row { padding: 6px 0 14px; }
+  .fq-inline .fq-msg { font-size: 15px; }
+  .fq-inline.is-in .fq-msg { animation: fqIn 420ms var(--ease-out) both; }
+}
