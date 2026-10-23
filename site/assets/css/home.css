@@ -8802,7 +8802,8 @@ html[data-theme="dark"] .final-cta.fc .cta-form label { color: rgba(255, 255, 25
 ══════════════════════════════ */
 footer.ft,
 html[data-theme="dark"] footer.ft {
-  padding-bottom: clamp(150px, 23vw, 320px);
+  /* Bajo para el «tuko» gigante: asoma lo justo para firmar la página sin alargarla */
+  padding-bottom: clamp(96px, 14vw, 200px);
   background: radial-gradient(70% 50% at 50% 120%, rgba(66, 87, 255, 0.12), transparent 70%), #0c0d14;
   isolation: isolate;
 }
@@ -8827,11 +8828,11 @@ footer.ft::before {
 }
 .ft .footer-svg-logo {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1120px;
   max-height: none;
   margin: 0 auto;
   opacity: 1;
-  translate: 0 34%;
+  translate: 0 40%;
   -webkit-mask-image: none;
   mask-image: none;
 }
@@ -8839,7 +8840,7 @@ footer.ft::before {
 .ft .footer-svg-logo > path { fill: url(#ftGrad); }
 
 /* ── Columnas ── */
-.ft .footer-inner { padding-top: clamp(72px, 9vw, 110px); }
+.ft .footer-inner { padding-top: clamp(56px, 6.5vw, 84px); }
 .ft .footer-top { border-bottom-color: rgba(255, 255, 255, 0.08); }
 .ft .footer-brand-mark,
 html[data-theme="dark"] .ft .footer-brand-mark { font-size: 32px; color: #fff; }
@@ -8899,6 +8900,7 @@ html[data-theme="dark"] .ft .footer-bottom-inner {
 /* ── Móvil ── */
 @media (max-width: 700px) {
   footer.ft,
-  html[data-theme="dark"] footer.ft { padding-bottom: 90px; }
-  .ft .footer-svg-logo { width: 130%; margin-left: -15%; }
+  html[data-theme="dark"] footer.ft { padding-bottom: 26vw; }
+  /* Al ancho de la pantalla y asomando más: se lee como firma, no como un trozo gigante cortado */
+  .ft .footer-svg-logo { width: 96%; translate: 0 14%; }
 }

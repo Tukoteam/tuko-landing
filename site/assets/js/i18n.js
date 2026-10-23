@@ -4,10 +4,10 @@ const translations = {
     nav_link_problema: 'El problema',
     nav_link_como_funciona: 'Cómo funciona',
     nav_link_precios: 'Precios',
-    nav_link_beneficios: 'Qué ganas',
+    nav_link_beneficios: 'Por qué funciona',
     nav_link_inicio: 'Inicio',
     nav_link_blog: 'Blog',
-    nav_cta: 'Instalar gratis',
+    nav_cta: 'Acceder al piloto',
     nav_cta_pilot: 'Quiero una de las 5 plazas',
     nav_lang_label: 'Idioma',
     /* TUKO AI */
@@ -33,7 +33,7 @@ const translations = {
     ia_panel_insight: 'Alta probabilidad de conversión en tu tienda',
     ia_panel_price: '€18,90',
     ia_panel_price_lbl: 'Precio grupal',
-    ia_panel_group: '12 pers.',
+    ia_panel_group: '2 pers.',
     ia_panel_group_lbl: 'Tamaño grupo',
     ia_panel_duration: '48 hrs',
     ia_panel_duration_lbl: 'Duración',
@@ -187,7 +187,7 @@ const translations = {
     footer_col2_title: 'Legales',
     footer_privacy: 'Política de privacidad',
     footer_terms: 'Términos y condiciones',
-    footer_tagline: 'Descuentos por objetivo para tiendas Shopify. Vende más unidades sin regalar margen.',
+    footer_tagline: 'Un cliente entra. Trae a otro. Los dos compran.',
     footer_copy: '© 2026 Tuko. Todos los derechos reservados.',
 
     /* BLOG INDEX */
@@ -432,10 +432,10 @@ const translations = {
     nav_link_problema: 'The problem',
     nav_link_como_funciona: 'How it works',
     nav_link_precios: 'Pricing',
-    nav_link_beneficios: 'What you get',
+    nav_link_beneficios: 'Why it works',
     nav_link_inicio: 'Home',
     nav_link_blog: 'Blog',
-    nav_cta: 'Install free',
+    nav_cta: 'Access the pilot',
     nav_cta_pilot: 'Get one of the 5 spots',
     nav_lang_label: 'Language',
     /* TUKO AI */
@@ -461,7 +461,7 @@ const translations = {
     ia_panel_insight: 'Strong fit for your store right now',
     ia_panel_price: '€18.90',
     ia_panel_price_lbl: 'Group price',
-    ia_panel_group: '12 people',
+    ia_panel_group: '2 people',
     ia_panel_group_lbl: 'Group size',
     ia_panel_duration: '48 hrs',
     ia_panel_duration_lbl: 'Duration',
@@ -618,7 +618,7 @@ const translations = {
     footer_col2_title: 'Legal',
     footer_privacy: 'Privacy policy',
     footer_terms: 'Terms and conditions',
-    footer_tagline: 'Goal-based discounts for Shopify stores. Sell more units without giving away margin.',
+    footer_tagline: 'A customer walks in. Brings another. Both buy.',
     footer_copy: '© 2026 Tuko. All rights reserved.',
 
     /* BLOG INDEX */

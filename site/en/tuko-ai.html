@@ -113,12 +113,12 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Roboto+Serif:ital,opsz,wght@1,8..144,400..700&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Roboto+Serif:ital,opsz,wght@1,8..144,400..700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Roboto+Serif:ital,opsz,wght@1,8..144,400..700&display=swap" rel="stylesheet"></noscript>
-<link rel="stylesheet" href="/assets/css/main.css?v=cf0718ce">
-<link rel="stylesheet" href="../assets/css/tuko-theme.css?v=cf1fd4c8">
-  <link rel="stylesheet" href="/assets/css/tuko-ai.css?v=a15d2b18">
+<link rel="stylesheet" href="/assets/css/home.css?v=2319772a">
+<link rel="stylesheet" href="/assets/css/tuko-theme.css?v=cf1fd4c8">
+<link rel="stylesheet" href="/assets/css/tuko-ai.css?v=7a069499">
 </head>
 <body>
-<a class="skip-link" href="#main-content">Saltar al contenido</a>
+<a class="skip-link" href="#main-content">Skip to content</a>
 
 <!-- tuko:partial:nav-en -->
 <!-- NAV -->
@@ -191,303 +191,295 @@
 
 <main id="main-content">
 
-<!-- HERO -->
-<section class="ia-hero">
-  <canvas id="heroCanvas"></canvas>
-  <div class="ia-hero-inner">
-    <div class="ia-hero-copy">
-      <div class="ia-status fade-up">
-        <span class="ia-dot" aria-hidden="true"><i></i></span>
-        <span data-i18n="ia_status">In development</span>
+<!-- HERO «el núcleo»: seis señales alrededor del logo de Tuko; al analizarlas, cada una lanza sus puntos de datos
+     y el logo se forma con ellos en 3D. Lo mueve tuko-ai.js. -->
+<section class="ax-hero" id="ax-hero">
+  <div class="ax-stage">
+    <canvas class="ax-canvas" aria-hidden="true"></canvas>
+    <div class="ax-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="ax-grain" aria-hidden="true"></div>
+
+    <div class="ax-grid">
+      <div class="ax-copy">
+        <div class="ax-status"><span class="ax-dot" aria-hidden="true"></span><span data-i18n="ia_status">In development</span></div>
+        <h1 class="ax-title"><span class="ax-title-in">tuko <b>AI</b></span></h1>
+        <p class="ax-lead" data-i18n="ia_lead"><span class="ia-lead-brand">tuko AI</span> builds your <span class="ia-lead-key">campaigns</span> <em>for you</em>: it reads your store and your market, and decides what to sell, at <span class="ia-lead-key">what price</span> and <span class="ia-lead-key">when</span>.</p>
+        <div class="ax-actions">
+          <a href="#cta" class="ax-cta">
+            <span data-i18n="ia_cta_primary">Join the waitlist</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6.5 18.5 12 13 17.5"/></svg>
+          </a>
+        </div>
+        <p class="ax-note" data-i18n="ia_note">In development<span class="ia-note-sep" aria-hidden="true"></span>Coming inside Tuko</p>
       </div>
-      <h1 class="fade-up d1"><span class="ia-title-sheen"><span class="ia-w1">tuko</span> <span class="ia-w2">AI</span><span class="ia-shine-glint" aria-hidden="true">tuko AI</span></span></h1>
-      <p class="ia-lead fade-up d2" data-i18n="ia_lead"><span class="ia-lead-brand">tuko AI</span> builds your <span class="ia-lead-key">group buying</span> campaigns <em>for you</em>—it reads your store and market, then decides <span class="ia-lead-key">what</span> to group, at <span class="ia-lead-key">what price</span>, and <span class="ia-lead-key">when</span>.</p>
-      <p class="ia-note fade-up d3" data-i18n="ia_note">In development<span class="ia-note-sep" aria-hidden="true"></span>Coming inside Tuko</p>
-      <div class="ia-hero-cta fade-up d4">
-        <a href="#cta" class="btn-blue" id="ia-hero-cta">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-            <path d="M10 17l5-5-5-5"/>
-            <path d="M15 12H3"/>
-          </svg>
-          <span data-i18n="ia_cta_primary">Join the waitlist</span>
-        </a>
-      </div>
-    </div>
 
-    <div class="ia-hero-visual fade-up d2" aria-hidden="true">
-      <div class="ia-panel-glow"></div>
-      <div class="ia-panel-wrap">
-        <div class="ia-panel-plate" aria-hidden="true"></div>
-        <div class="ia-panel-plate-2" aria-hidden="true"></div>
-        <div class="ia-panel" id="ia-panel">
-          <div class="ia-panel-head">
-            <div class="ia-panel-chrome">
-              <div class="ia-panel-chrome-left">
-                <span class="ia-panel-mark" aria-hidden="true">
-                  <svg viewBox="48 35 217 251" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true">
-                    <ellipse cx="132.298" cy="160.5" rx="32.1333" ry="120.5" fill="#fff"/>
-                    <path d="M164.431 160.5C164.431 227.05 164.431 281 164.431 281C195.488 281 220.664 227.05 220.664 160.5C220.664 93.9497 195.488 40 164.431 40C164.431 40 164.431 93.9497 164.431 160.5Z" fill="#fff"/>
-                    <path d="M220.657 160.497C220.657 204.864 220.657 240.83 220.657 240.83C238.403 240.83 252.79 204.864 252.79 160.497C252.79 116.13 238.403 80.1636 220.657 80.1636C220.657 80.1636 220.657 116.13 220.657 160.497Z" fill="#fff"/>
-                    <ellipse cx="80.0841" cy="160.497" rx="20.0833" ry="80.3333" fill="#fff"/>
-                  </svg>
-                </span>
-                <div class="ia-panel-titles">
-                  <span class="ia-panel-name">tuko AI</span>
-                  <span class="ia-panel-sub" id="ia-panel-live-txt" data-i18n="ia_panel_analyzing">Reading your store…</span>
-                </div>
-              </div>
-              <div class="ia-panel-pct" aria-hidden="true">
-                <span class="ia-panel-pct-n" id="ia-panel-pct">0</span>
-                <span class="ia-panel-pct-s">%</span>
-              </div>
-            </div>
-            <div class="ia-panel-progress" aria-hidden="true">
-              <span id="ia-panel-bar"></span>
-            </div>
-          </div>
+      <div class="ax-visual" aria-hidden="true">
+        <!-- Todo el lado del núcleo se inclina con el ratón (con muelle); las etiquetas flotan por delante a distintas alturas -->
+        <div class="ax-tilt">
+        <!-- Cabecera: lo que está haciendo y el porcentaje -->
+        <div class="ax-hud">
+          <span class="ax-hud-mark"><svg viewBox="44 36 213 249"><ellipse cx="132.298" cy="160.5" rx="32.1333" ry="120.5"/><path d="M164.431 160.5C164.431 227.05 164.431 281 164.431 281C195.488 281 220.664 227.05 220.664 160.5C220.664 93.9497 195.488 40 164.431 40C164.431 40 164.431 93.9497 164.431 160.5Z"/><path d="M220.657 160.497C220.657 204.864 220.657 240.83 220.657 240.83C238.403 240.83 252.79 204.864 252.79 160.497C252.79 116.13 238.403 80.1636 220.657 80.1636C220.657 80.1636 220.657 116.13 220.657 160.497Z"/><ellipse cx="80.0841" cy="160.497" rx="20.0833" ry="80.3333"/></svg></span>
+          <span class="ax-hud-txt">
+            <b>tuko AI</b>
+            <span class="ax-hud-state">
+              <span class="ax-hud-a" data-i18n="ia_panel_analyzing">Reading your store…</span>
+              <span class="ax-hud-b" data-i18n="ia_panel_preparing">Building your campaign…</span>
+              <span class="ax-hud-c" data-i18n="ia_panel_ready">Campaign ready</span>
+            </span>
+          </span>
+          <span class="ax-hud-pct"><b class="ax-pct">0</b>%</span>
+          <span class="ax-hud-bar"><i></i></span>
+        </div>
 
-          <div class="ia-panel-signals">
-            <div class="ia-sig-list">
-              <div class="ia-sig-row" data-sig="0">
-                <span class="ia-sig-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                <span class="ia-sig-txt" data-i18n="ia_panel_s1">Market</span>
-              </div>
-              <div class="ia-sig-row" data-sig="1">
-                <span class="ia-sig-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                <span class="ia-sig-txt" data-i18n="ia_panel_s2">Competitors</span>
-              </div>
-              <div class="ia-sig-row" data-sig="2">
-                <span class="ia-sig-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                <span class="ia-sig-txt" data-i18n="ia_panel_s3">Calendar</span>
-              </div>
-              <div class="ia-sig-row" data-sig="3">
-                <span class="ia-sig-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                <span class="ia-sig-txt" data-i18n="ia_panel_s4">Location</span>
-              </div>
-              <div class="ia-sig-row" data-sig="4">
-                <span class="ia-sig-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                <span class="ia-sig-txt" data-i18n="ia_panel_s5">Products</span>
-              </div>
-              <div class="ia-sig-row" data-sig="5">
-                <span class="ia-sig-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                <span class="ia-sig-txt" data-i18n="ia_panel_s6">Sales</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="ia-panel-proposal">
-            <div class="ia-proposal-loading" aria-hidden="true">
-              <div class="ia-proposal-dots">
-                <i></i><i></i><i></i>
-              </div>
-              <span data-i18n="ia_panel_preparing">Building your campaign…</span>
-            </div>
-            <div class="ia-proposal-card">
-              <div class="ia-proposal-head">
-                <p class="ia-panel-label" data-i18n="ia_panel_proposal">Campaign ready</p>
-                <span class="ia-badge-rec" data-i18n="ia_panel_recommended">Recommended</span>
-              </div>
-              <p class="ia-proposal-product" data-i18n="ia_panel_product">Vitamin C Serum 30ml</p>
-              <p class="ia-proposal-insight" data-i18n="ia_panel_insight">Strong fit for your store right now</p>
-              <div class="ia-metrics">
-                <div class="ia-metric">
-                  <strong class="ia-metric-val" data-metric="price" data-target="18.9">€0,00</strong>
-                  <span data-i18n="ia_panel_price_lbl">Group price</span>
-                </div>
-                <div class="ia-metric">
-                  <strong class="ia-metric-val" data-metric="group" data-target="12">0 pers.</strong>
-                  <span data-i18n="ia_panel_group_lbl">Group size</span>
-                </div>
-                <div class="ia-metric">
-                  <strong class="ia-metric-val" data-metric="duration" data-target="48">0 hrs</strong>
-                  <span data-i18n="ia_panel_duration_lbl">Duration</span>
-                </div>
-              </div>
-              <div class="ia-discount">
-                <div>
-                  <p data-i18n="ia_panel_discount">Group discount</p>
-                  <small data-i18n="ia_panel_discount_sub">Unlocks from 5 people</small>
-                </div>
-                <b class="ia-discount-pct" data-target="15">0%</b>
-              </div>
-            </div>
-          </div>
-
-          <div class="ia-panel-foot">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8 19 13"/><path d="M15 9h.01"/><path d="M17.8 6.2 19 5"/><path d="m3 21 9-9"/><path d="M12.2 6.2 11 5"/></svg>
-            <span data-i18n="ia_panel_generated">Generated by tuko AI</span>
-          </div>
+        <!-- El núcleo (lo dibuja el canvas) y las seis señales a su alrededor -->
+        <div class="ax-core"></div>
+        <ul class="ax-sigs">
+          <li class="ax-sig" style="--k:0"><span class="ax-sig-ico"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></span><span data-i18n="ia_panel_s1">Market</span><i class="ax-ck"><svg viewBox="0 0 16 16"><path d="M4 8.4l2.6 2.6L12 5.6"/></svg></i></li>
+          <li class="ax-sig" style="--k:1"><span class="ax-sig-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18M3 12h18"/></svg></span><span data-i18n="ia_panel_s2">Competitors</span><i class="ax-ck"><svg viewBox="0 0 16 16"><path d="M4 8.4l2.6 2.6L12 5.6"/></svg></i></li>
+          <li class="ax-sig" style="--k:2"><span class="ax-sig-ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg></span><span data-i18n="ia_panel_s3">Calendar</span><i class="ax-ck"><svg viewBox="0 0 16 16"><path d="M4 8.4l2.6 2.6L12 5.6"/></svg></i></li>
+          <li class="ax-sig" style="--k:3"><span class="ax-sig-ico"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.7 7-11a7 7 0 1 0-14 0c0 5.3 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></span><span data-i18n="ia_panel_s4">Location</span><i class="ax-ck"><svg viewBox="0 0 16 16"><path d="M4 8.4l2.6 2.6L12 5.6"/></svg></i></li>
+          <li class="ax-sig" style="--k:4"><span class="ax-sig-ico"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/></svg></span><span data-i18n="ia_panel_s5">Products</span><i class="ax-ck"><svg viewBox="0 0 16 16"><path d="M4 8.4l2.6 2.6L12 5.6"/></svg></i></li>
+          <li class="ax-sig" style="--k:5"><span class="ax-sig-ico"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20h-20"/></svg></span><span data-i18n="ia_panel_s6">Sales</span><i class="ax-ck"><svg viewBox="0 0 16 16"><path d="M4 8.4l2.6 2.6L12 5.6"/></svg></i></li>
+        </ul>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- QUÉ ANALIZA -->
-<section class="ia-section ia-signals-section">
-  <div class="ia-section-head fade-up">
-    <span class="ia-eyebrow" data-i18n="ia_signals_eyebrow">What it reads</span>
-    <h2 data-i18n="ia_signals_title">Six signals. <em>One campaign, ready</em></h2>
-    <p data-i18n="ia_signals_sub">tuko AI crosses your store data with market signals to choose the product, the price ladder, and the moment to launch.</p>
+<!-- QUÉ ANALIZA: las seis señales en una rejilla bento; cada tarjeta tiene un mini-gráfico vivo que cuenta su señal
+     (solo formas y números de ejemplo). -->
+<section class="sx" id="senales">
+  <div class="sx-head">
+    <span class="sx-eyebrow" data-i18n="ia_signals_eyebrow">What it reads</span>
+    <h2 class="sx-title" data-i18n="ia_signals_title">Six signals. <em>One campaign, ready</em></h2>
+    <p class="sx-sub" data-i18n="ia_signals_sub">tuko AI crosses your store data with market signals to choose the product, the price ladder, and the moment to launch.</p>
   </div>
 
-  <div class="ia-signals-board fade-up d1">
-    <div class="ia-signals">
-      <article class="ia-signal">
-        <span class="ia-signal-wm" aria-hidden="true">01</span>
-        <div class="ia-signal-top">
-          <div class="ia-signal-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></div>
-        </div>
+  <div class="sx-grid">
+    <!-- 01 Mercado: la demanda de este año (azul) se dibuja sobre la del año pasado; el pico late -->
+    <article class="sx-card sx-card--wide" style="--i:0">
+      <div class="sx-vis sx-market" aria-hidden="true">
+        <svg viewBox="0 0 520 150" preserveAspectRatio="none">
+          <defs><linearGradient id="sxMk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4257ff" stop-opacity=".28"/><stop offset="1" stop-color="#4257ff" stop-opacity="0"/></linearGradient></defs>
+          <g class="sx-gridlines"><path d="M0 37.5H520M0 75H520M0 112.5H520"/></g>
+          <path class="sx-mk-prev" d="M0 118 C40 112 70 108 110 104 S180 96 220 98 S290 84 330 80 S400 70 440 74 S500 66 520 64"/>
+          <path class="sx-mk-area" d="M0 124 C40 116 70 112 110 100 S180 88 220 92 S280 60 330 52 S390 22 430 30 S490 40 520 26 V150 H0 Z" fill="url(#sxMk)"/>
+          <path class="sx-mk-line" pathLength="1" d="M0 124 C40 116 70 112 110 100 S180 88 220 92 S280 60 330 52 S390 22 430 30 S490 40 520 26"/>
+          <line class="sx-mk-peak" x1="412" y1="26" x2="412" y2="150"/>
+        </svg>
+        <i class="sx-mk-dot" style="left:79.2%;top:17%"></i>
+      </div>
+      <div class="sx-copy">
+        <span class="sx-ico"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></span>
         <h3 data-i18n="ia_panel_s1">Market</h3>
         <p data-i18n="ia_sig1_text">Real demand in your category, seasonality, and where prices are heading.</p>
-      </article>
-      <article class="ia-signal">
-        <span class="ia-signal-wm" aria-hidden="true">02</span>
-        <div class="ia-signal-top">
-          <div class="ia-signal-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18M3 12h18"/></svg></div>
+      </div>
+      <span class="sx-n" aria-hidden="true">01</span>
+    </article>
+
+    <!-- 02 Competencia: un eje de descuentos (de 0 % a -40 %); aparecen los de los demás y, entre medias, se ilumina
+         la zona libre: ahí cae el pin de Tuko -->
+    <article class="sx-card" style="--i:1">
+      <div class="sx-vis sx-comp" aria-hidden="true">
+        <div class="sx-axis">
+          <span class="sx-gapzone"></span>
+          <span class="sx-pin" style="--x:22%;--t:0"><b>-15%</b></span>
+          <span class="sx-pin" style="--x:38%;--t:1;--sh:54px"><b>-20%</b></span>
+          <span class="sx-pin" style="--x:92%;--t:2"><b>-35%</b></span>
+          <span class="sx-you" style="--x:66%"><svg viewBox="44 36 213 249"><ellipse cx="132.298" cy="160.5" rx="32.1333" ry="120.5"/><path d="M164.431 160.5C164.431 227.05 164.431 281 164.431 281C195.488 281 220.664 227.05 220.664 160.5C220.664 93.9497 195.488 40 164.431 40C164.431 40 164.431 93.9497 164.431 160.5Z"/><path d="M220.657 160.497C220.657 204.864 220.657 240.83 220.657 240.83C238.403 240.83 252.79 204.864 252.79 160.497C252.79 116.13 238.403 80.1636 220.657 80.1636C220.657 80.1636 220.657 116.13 220.657 160.497Z"/><ellipse cx="80.0841" cy="160.497" rx="20.0833" ry="80.3333"/></svg></span>
+          <i class="sx-tick" style="--x:0%"></i><i class="sx-tick" style="--x:25%"></i><i class="sx-tick" style="--x:50%"></i><i class="sx-tick" style="--x:75%"></i><i class="sx-tick" style="--x:100%"></i>
         </div>
+      </div>
+      <div class="sx-copy">
+        <span class="sx-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18M3 12h18"/></svg></span>
         <h3 data-i18n="ia_panel_s2">Competitors</h3>
         <p data-i18n="ia_sig2_text">What they launch, at what discounts, and where there is room for you to win.</p>
-      </article>
-      <article class="ia-signal">
-        <span class="ia-signal-wm" aria-hidden="true">03</span>
-        <div class="ia-signal-top">
-          <div class="ia-signal-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg></div>
-        </div>
+      </div>
+      <span class="sx-n" aria-hidden="true">02</span>
+    </article>
+
+    <!-- 03 Calendario: el mes se enciende como un mapa de calor y el día pico late -->
+    <article class="sx-card" style="--i:2">
+      <div class="sx-vis sx-cal" aria-hidden="true"></div>
+      <div class="sx-copy">
+        <span class="sx-ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg></span>
         <h3 data-i18n="ia_panel_s3">Calendar</h3>
-        <p data-i18n="ia_sig3_text">Key dates and traffic peaks when a group can fill itself.</p>
-      </article>
-      <article class="ia-signal">
-        <span class="ia-signal-wm" aria-hidden="true">04</span>
-        <div class="ia-signal-top">
-          <div class="ia-signal-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.7 7-11a7 7 0 1 0-14 0c0 5.3 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
-        </div>
+        <p data-i18n="ia_sig3_text">Key dates and traffic peaks when a campaign can fill itself.</p>
+      </div>
+      <span class="sx-n" aria-hidden="true">03</span>
+    </article>
+
+    <!-- 04 Localidad: un mapa de puntos; los compradores se agrupan por zona -->
+    <article class="sx-card" style="--i:3">
+      <div class="sx-vis sx-map" aria-hidden="true">
+        <i class="sx-zone" style="left:26%;top:38%;--z:0"></i>
+        <i class="sx-zone" style="left:64%;top:30%;--z:1"></i>
+        <i class="sx-zone" style="left:52%;top:72%;--z:2"></i>
+      </div>
+      <div class="sx-copy">
+        <span class="sx-ico"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.7 7-11a7 7 0 1 0-14 0c0 5.3 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
         <h3 data-i18n="ia_panel_s4">Location</h3>
-        <p data-i18n="ia_sig4_text">Where your buyers are—so groups form by area and shipping stays efficient.</p>
-      </article>
-      <article class="ia-signal">
-        <span class="ia-signal-wm" aria-hidden="true">05</span>
-        <div class="ia-signal-top">
-          <div class="ia-signal-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/></svg></div>
-        </div>
+        <p data-i18n="ia_sig4_text">Where your buyers are—so orders group by area and shipping stays efficient.</p>
+      </div>
+      <span class="sx-n" aria-hidden="true">04</span>
+    </article>
+
+    <!-- 05 Productos: barras de margen; la que aguanta el descuento se queda en verde -->
+    <article class="sx-card" style="--i:4">
+      <div class="sx-vis sx-prod" aria-hidden="true">
+        <span style="--w:46%;--b:0"></span>
+        <span style="--w:78%;--b:1" class="is-pick"><i><svg viewBox="0 0 16 16"><path d="M4 8.4l2.6 2.6L12 5.6"/></svg></i></span>
+        <span style="--w:30%;--b:2"></span>
+        <span style="--w:58%;--b:3"></span>
+      </div>
+      <div class="sx-copy">
+        <span class="sx-ico"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/></svg></span>
         <h3 data-i18n="ia_panel_s5">Products</h3>
         <p data-i18n="ia_sig5_text">Margins, idle stock, and which items can carry a volume discount.</p>
-      </article>
-      <article class="ia-signal">
-        <span class="ia-signal-wm" aria-hidden="true">06</span>
-        <div class="ia-signal-top">
-          <div class="ia-signal-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20h-20"/></svg></div>
+      </div>
+      <span class="sx-n" aria-hidden="true">05</span>
+    </article>
+
+    <!-- 06 Ventas: las semanas crecen en barras y dos productos que se compran juntos se enlazan -->
+    <article class="sx-card sx-card--wide" style="--i:5">
+      <div class="sx-vis sx-sales" aria-hidden="true">
+        <div class="sx-bars"></div>
+        <div class="sx-pair">
+          <span class="sx-pp"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+          <span class="sx-link"><i></i></span>
+          <span class="sx-pp sx-pp--b"><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="3"/><path d="M10 7h4"/></svg></span>
         </div>
+      </div>
+      <div class="sx-copy">
+        <span class="sx-ico"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20h-20"/></svg></span>
         <h3 data-i18n="ia_panel_s6">Sales</h3>
         <p data-i18n="ia_sig6_text">What sells together, how often, and at what price it actually converts.</p>
-      </article>
-    </div>
+      </div>
+      <span class="sx-n" aria-hidden="true">06</span>
+    </article>
   </div>
 </section>
 
-<!-- CÓMO FUNCIONARÁ -->
-<section class="ia-section ia-flow-section">
-  <div class="ia-section-head fade-up">
-    <span class="ia-eyebrow" data-i18n="ia_flow_eyebrow">How it will work</span>
-    <h2 data-i18n="ia_flow_title">From zero to <em>campaign</em>—without the research grind</h2>
-    <p data-i18n="ia_flow_sub">Today, launching a group buy means picking products, discounts, and minimums by hand. tuko AI does that work for you.</p>
+<!-- CÓMO FUNCIONARÁ: una escena fija mientras haces scroll construye la campaña de cero (Conecta → Propone →
+     Aprende) y se puede rebobinar. -->
+<section class="fz" id="como-funcionara">
+  <div class="sx-head">
+    <span class="sx-eyebrow" data-i18n="ia_flow_eyebrow">How it will work</span>
+    <h2 class="sx-title" data-i18n="ia_flow_title">From zero to <em>campaign</em>—without the research grind</h2>
+    <p class="sx-sub" data-i18n="ia_flow_sub">Today, launching a campaign means picking products, discounts, and minimums by hand. tuko AI does that work for you.</p>
   </div>
 
-  <div class="ia-flow-board">
-    <div class="ia-flow">
-      <div class="ia-flow-spine" aria-hidden="true"><i></i></div>
+  <div class="fz-track">
+    <div class="fz-sticky">
+      <div class="fz-grid">
+        <ol class="fz-steps">
+          <li class="fz-step"><span class="fz-bar"><i></i></span><p class="fx-meta" data-i18n="ia_step1_meta">Shopify · no forms</p><h3><span class="fz-n">01</span><span data-i18n="ia_step1_title">Connect</span></h3><p class="fz-txt" data-i18n="ia_step1_text">Install Tuko on Shopify. tuko AI reads your catalogue and sales history—nothing to fill in.</p></li>
+          <li class="fz-step"><span class="fz-bar"><i></i></span><p class="fx-meta" data-i18n="ia_step2_meta">Campaign ready</p><h3><span class="fz-n">02</span><span data-i18n="ia_step2_title">Propose</span></h3><p class="fz-txt" data-i18n="ia_step2_text">You get a ready-made campaign: which product, which discounts, how many units, and how long it runs.</p></li>
+          <li class="fz-step"><span class="fz-bar"><i></i></span><p class="fx-meta" data-i18n="ia_step3_meta">Gets sharper over time</p><h3><span class="fz-n">03</span><span data-i18n="ia_step3_title">Learn</span></h3><p class="fz-txt" data-i18n="ia_step3_text">Every completed campaign makes the next one better—tuned to how your buyers actually behave.</p></li>
+        </ol>
 
-      <article class="ia-flow-step">
-        <div class="ia-flow-card">
-          <div class="ia-flow-card-top">
-            <div class="ia-flow-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l1.92-1.92a5 5 0 0 0-7.07-7.07L10.7 6.24"/><path d="M14 11a5 5 0 0 0-7.54-.54L4.54 12.4a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        <div class="fz-stage" aria-hidden="true">
+          <div class="fz-aurora"><i></i><i></i></div>
+          <!-- La escena mide 560×460 y se escala para caber -->
+          <div class="fz-scene">
+            <div class="fz-tiles"></div>
+            <span class="fz-scan"></span>
+
+            <!-- Detrás: las campañas siguientes que se apilan (Aprende) -->
+            <span class="fz-ghost fz-ghost--2"></span>
+            <span class="fz-ghost fz-ghost--1"></span>
+
+            <!-- La propuesta que se monta alrededor del producto elegido -->
+            <div class="fz-card">
+              <div class="ax-card-head">
+                <p data-i18n="ia_panel_proposal">Campaign ready</p>
+                <span class="ax-rec" data-i18n="ia_panel_recommended">Recommended</span>
+              </div>
+              <div class="fz-prod">
+                <span class="fz-prod-slot"><svg viewBox="0 0 24 24"><path d="M10.5 2h3a1 1 0 0 1 1 1v3h-5V3a1 1 0 0 1 1-1Z"/><path d="M9 6h6v2.5H9z"/><path d="M8 8.5h8V19a3 3 0 0 1-3 3h-2a3 3 0 0 1-3-3Z"/><path d="M8 13.5h8"/></svg></span>
+                <div><p class="ax-product" data-i18n="ia_panel_product">Vitamin C Serum 30ml</p><p class="ax-insight" data-i18n="ia_panel_insight">Strong fit for your store right now</p></div>
+              </div>
+              <div class="fz-slots">
+                <div class="fz-slot"><b class="fz-val" data-i18n="ia_panel_price">€18.90</b><span data-i18n="ia_panel_price_lbl">Group price</span></div>
+                <div class="fz-slot"><b class="fz-val" data-i18n="ia_panel_group">2 people</b><span data-i18n="ia_panel_group_lbl">Group size</span></div>
+                <div class="fz-slot"><b class="fz-val" data-i18n="ia_panel_duration">48 hrs</b><span data-i18n="ia_panel_duration_lbl">Duration</span></div>
+                <div class="fz-slot fz-slot--pct"><b class="fz-val">15%</b><span data-i18n="ia_panel_discount">Group discount</span></div>
+              </div>
+              <!-- Aprende: el grupo se llena de compradores -->
+              <div class="fz-group"></div>
             </div>
-            <div class="ia-flow-card-copy">
-              <h3 data-i18n="ia_step1_title">Connect</h3>
-              <p class="ia-flow-meta" data-i18n="ia_step1_meta">Shopify · no forms</p>
+
+            <!-- Las piezas que vuelan a su hueco -->
+            <b class="fz-piece" data-k="0" data-i18n="ia_panel_price">€18.90</b>
+            <b class="fz-piece" data-k="1" data-i18n="ia_panel_group">2 people</b>
+            <b class="fz-piece" data-k="2" data-i18n="ia_panel_duration">48 hrs</b>
+            <b class="fz-piece fz-piece--pct" data-k="3">15%</b>
+
+            <!-- El producto elegido (vuela desde el catálogo a la tarjeta) -->
+            <span class="fz-hero-tile"><svg viewBox="0 0 24 24"><path d="M10.5 2h3a1 1 0 0 1 1 1v3h-5V3a1 1 0 0 1 1-1Z"/><path d="M9 6h6v2.5H9z"/><path d="M8 8.5h8V19a3 3 0 0 1-3 3h-2a3 3 0 0 1-3-3Z"/><path d="M8 13.5h8"/></svg></span>
+
+            <!-- Aprende: cada campaña, un poco mejor -->
+            <div class="fz-learn">
+              <span class="fz-loop"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M21 4v4.4h-4.4"/></svg></span>
+              <span class="fz-spark"><i></i><i></i><i></i><i></i></span>
             </div>
           </div>
-          <p class="ia-flow-body" data-i18n="ia_step1_text">Install Tuko on Shopify. tuko AI reads your catalogue and sales history—nothing to fill in.</p>
         </div>
-        <div class="ia-flow-marker" aria-hidden="true"><i class="ia-flow-marker-ring"></i><span>01</span></div>
-        <div class="ia-flow-spacer" aria-hidden="true"></div>
-      </article>
-
-      <article class="ia-flow-step">
-        <div class="ia-flow-spacer" aria-hidden="true"></div>
-        <div class="ia-flow-marker" aria-hidden="true"><i class="ia-flow-marker-ring"></i><span>02</span></div>
-        <div class="ia-flow-card">
-          <div class="ia-flow-card-top">
-            <div class="ia-flow-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/><path d="m9 14 2 2 4-4"/></svg>
-            </div>
-            <div class="ia-flow-card-copy">
-              <h3 data-i18n="ia_step2_title">Propose</h3>
-              <p class="ia-flow-meta" data-i18n="ia_step2_meta">Campaign ready</p>
-            </div>
-          </div>
-          <p class="ia-flow-body" data-i18n="ia_step2_text">You get a ready-made campaign: which product, which discounts, how many people, and how long it runs.</p>
-        </div>
-      </article>
-
-      <article class="ia-flow-step">
-        <div class="ia-flow-card">
-          <div class="ia-flow-card-top">
-            <div class="ia-flow-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
-            </div>
-            <div class="ia-flow-card-copy">
-              <h3 data-i18n="ia_step3_title">Learn</h3>
-              <p class="ia-flow-meta" data-i18n="ia_step3_meta">Gets sharper over time</p>
-            </div>
-          </div>
-          <p class="ia-flow-body" data-i18n="ia_step3_text">Every completed group makes the next one better—tuned to how your buyers actually behave.</p>
-        </div>
-        <div class="ia-flow-marker" aria-hidden="true"><i class="ia-flow-marker-ring"></i><span>03</span></div>
-        <div class="ia-flow-spacer" aria-hidden="true"></div>
-      </article>
+      </div>
     </div>
-
-    <p class="ia-soon">
-      <span class="ia-soon-tag" data-i18n="ia_soon_tag">Soon</span>
-      <span data-i18n="ia_soon_text">It will also suggest which creators to work with—and where to grow next.</span>
-    </p>
   </div>
+
+  <p class="fx-soon">
+    <span class="fx-soon-tag" data-i18n="ia_soon_tag">Soon</span>
+    <span data-i18n="ia_soon_text">It will also suggest which creators to work with—and where to grow next.</span>
+  </p>
 </section>
 
-<!-- LISTA DE ESPERA / CONTACTO -->
-<section class="cta-wrap" id="cta">
-  <div class="cta-inner">
-    <canvas id="ctaCanvas"></canvas>
-    <h2 class="fade-up" data-i18n="ia_form_title">Join the <span class="cta-brand">tuko AI<span class="cta-brand-glint" aria-hidden="true"></span></span> waitlist</h2>
-    <p class="ia-form-intro fade-up d1" data-i18n="ia_form_intro">We will email you when early access opens. No spam.</p>
-    <form class="cta-form fade-up d2" id="ia-waitlist-form" name="lista-espera-tuko-ai" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate data-tuko-form>
-      <input type="hidden" name="form-name" value="lista-espera-tuko-ai">
-      <input type="hidden" name="subject" data-remove-prefix value="Una tienda se quiere unir a la lista de espera de Tuko AI">
-      <input type="hidden" name="Formulario" value="Lista de espera Tuko AI">
-      <input type="hidden" name="Pagina" value="">
-      <input type="hidden" name="Idioma" value="English">
-      <p class="cta-hp" hidden style="display:none"><label>No rellenar / Leave empty: <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label></p>
-      <div class="cta-field cta-field--full">
-        <label for="cta-web" data-i18n="pilot_form_web_label">Link to your website</label>
-        <input class="cta-input" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" id="cta-web" name="web" required data-validate="web" data-i18n="pilot_form_web_ph" placeholder="https://yourstore.com">
+<!-- LISTA DE ESPERA: el logo de puntos se enciende con tus datos; el formulario es el de siempre (Netlify, tuko-form.js). -->
+<section class="wx" id="cta">
+  <div class="wx-stage">
+    <canvas class="wx-canvas" aria-hidden="true"></canvas>
+    <div class="ax-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="ax-grain" aria-hidden="true"></div>
+
+    <div class="wx-grid">
+      <div class="wx-copy">
+        <h2 class="wx-title" data-i18n="ia_form_title">Join the <span class="cta-brand">tuko AI<span class="cta-brand-glint" aria-hidden="true"></span></span> waitlist</h2>
+        <p class="wx-intro" data-i18n="ia_form_intro">We will email you when early access opens. No spam.</p>
+
+        <form class="cta-form wx-form" id="ia-waitlist-form" name="lista-espera-tuko-ai" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate data-tuko-form>
+          <input type="hidden" name="form-name" value="lista-espera-tuko-ai">
+          <input type="hidden" name="subject" data-remove-prefix value="Una tienda se quiere unir a la lista de espera de Tuko AI">
+          <input type="hidden" name="Formulario" value="Lista de espera Tuko AI">
+          <input type="hidden" name="Pagina" value="">
+          <input type="hidden" name="Idioma" value="Español">
+          <p class="cta-hp" hidden style="display:none"><label>No rellenar / Leave empty: <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <div class="cta-field cta-field--full">
+            <label for="cta-web" data-i18n="pilot_form_web_label">Link to your website</label>
+            <input class="cta-input" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" id="cta-web" name="web" required data-validate="web" data-i18n="pilot_form_web_ph" placeholder="https://yourstore.com">
+          </div>
+          <div class="cta-field">
+            <label for="cta-name" data-i18n="pilot_form_name_label">Full name</label>
+            <input class="cta-input" type="text" id="cta-name" name="nombre" required autocomplete="name" data-validate="required" data-i18n="pilot_form_name_ph" placeholder="Full name">
+          </div>
+          <div class="cta-field">
+            <label for="cta-email" data-i18n="pilot_form_email_label">Contact email</label>
+            <input class="cta-input" type="email" id="cta-email" name="email" required autocomplete="email" autocapitalize="off" spellcheck="false" data-validate="email" data-i18n="pilot_form_email_ph" placeholder="you@email.com">
+          </div>
+          <button class="btn-submit wx-submit" id="cta-submit-btn" type="submit">
+            <span data-i18n="ia_form_submit">Join the waitlist</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6.5 18.5 12 13 17.5"/></svg>
+          </button>
+          <p class="cta-status" role="status" aria-live="polite" data-form-status hidden></p>
+        </form>
       </div>
-      <div class="cta-field">
-        <label for="cta-name" data-i18n="pilot_form_name_label">Full name</label>
-        <input class="cta-input" type="text" id="cta-name" name="nombre" required autocomplete="name" data-validate="required" data-i18n="pilot_form_name_ph" placeholder="Full name">
+
+      <!-- El logo que se forma con tus datos (lo dibuja el canvas) -->
+      <div class="wx-visual" aria-hidden="true">
+        <div class="wx-core"></div>
       </div>
-      <div class="cta-field">
-        <label for="cta-email" data-i18n="pilot_form_email_label">Contact email</label>
-        <input class="cta-input" type="email" id="cta-email" name="email" required autocomplete="email" autocapitalize="off" spellcheck="false" data-validate="email" data-i18n="pilot_form_email_ph" placeholder="you@email.com">
-      </div>
-      <button class="btn-submit" id="cta-submit-btn" type="submit">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-        <span data-i18n="ia_form_submit">Join the waitlist</span>
-      </button>
-      <p class="cta-status" role="status" aria-live="polite" data-form-status hidden></p>
-    </form>
+    </div>
   </div>
 </section>
 
@@ -529,13 +521,16 @@
 </footer>
 <!-- /tuko:partial:footer-en -->
 
-<script src="../assets/js/main.js?v=e8c1067a" defer></script>
-<script src="../assets/js/tuko-theme.js?v=b2ef7977" defer></script>
-<script src="/assets/js/tuko-ai.js?v=5df19294" defer></script>
-<script src="../assets/js/i18n.js?v=7524e32c" defer></script>
-<script src="../assets/js/tuko-form.js?v=ebdb6073" defer></script>
-<script src="../assets/js/ga4-loader.js?v=57d4501d" defer></script>
-<link rel="stylesheet" href="../assets/css/cookie-consent.css?v=165383de">
-<script src="../assets/js/cookie-consent.js?v=0a330a93" defer></script>
+<script src="/assets/js/main.js?v=e8c1067a" defer></script>
+<script src="/assets/js/tuko-theme.js?v=b2ef7977" defer></script>
+<script src="/assets/js/i18n.js?v=a86e2a28" defer></script>
+<script src="/assets/js/tuko-form.js?v=ebdb6073" defer></script>
+<script src="/assets/js/home-footer.js?v=d0cd80af" defer></script>
+<script src="/assets/js/tuko-ai.js?v=ef13f33a" defer></script>
+<script src="/assets/js/local-landing-label.js?v=545496da"></script>
+
+<script src="/assets/js/ga4-loader.js?v=57d4501d" defer></script>
+<link rel="stylesheet" href="/assets/css/cookie-consent.css?v=165383de">
+<script src="/assets/js/cookie-consent.js?v=0a330a93" defer></script>
 </body>
 </html>

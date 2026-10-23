@@ -1,0 +1,330 @@
+/* ══════════════════════════════
+   TUKO AI · HERO «el núcleo»
+   Un escenario oscuro (también en modo claro) con aurora, grano y un canvas: seis señales alrededor del logo de Tuko;
+   cada una lanza sus puntos de datos y el logo se forma con ellos en 3D. Lo mueve tuko-ai.js. Siempre animado.
+══════════════════════════════ */
+body { background: var(--hero-ground); }
+/* Enlace para saltar al contenido: oculto hasta que se llega con el teclado */
+.skip-link { position: absolute; z-index: 9999; left: -9999px; top: 8px; padding: 8px 16px; border-radius: 8px; background: var(--blue); color: #fff; font-weight: 600; text-decoration: none; }
+.skip-link:focus { left: 8px; }
+
+/* ── Escenario ── */
+.ax-hero { padding: calc(var(--nav-h, 72px) + 6px) 16px 0; }
+.ax-stage {
+  --ax-ink: #f3f5ff;
+  --ax-ink-2: rgba(225, 230, 255, 0.72);
+  --ax-ink-3: rgba(200, 208, 245, 0.5);
+  --ax-line: rgba(143, 160, 255, 0.16);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  max-width: 1480px;
+  min-height: clamp(700px, calc(100svh - var(--nav-h, 72px) - 22px), 900px);
+  margin: 0 auto;
+  border-radius: 32px;
+  background:
+    radial-gradient(90% 70% at 72% 40%, #111845 0%, transparent 70%),
+    linear-gradient(180deg, #080a1d 0%, #05060f 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(143, 160, 255, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 40px 90px -50px rgba(20, 30, 120, 0.55);
+  color: var(--ax-ink);
+}
+html[data-theme="dark"] .ax-stage { box-shadow: inset 0 0 0 1px rgba(143, 160, 255, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 40px 90px -50px rgba(0, 0, 0, 0.9); }
+.ax-canvas { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; display: block; }
+
+/* Aurora: tres luces difusas que derivan despacio, detrás del núcleo */
+.ax-aurora { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.ax-aurora i { position: absolute; border-radius: 50%; filter: blur(90px); }
+.ax-aurora i:nth-child(1) { width: 560px; height: 560px; right: 8%; top: -12%; background: #3445e6; opacity: 0.55; animation: axDriftA 18s ease-in-out infinite; }
+.ax-aurora i:nth-child(2) { width: 420px; height: 420px; right: 30%; bottom: -28%; background: #6d4dff; opacity: 0.32; animation: axDriftB 22s ease-in-out infinite; }
+.ax-aurora i:nth-child(3) { width: 300px; height: 300px; right: -6%; bottom: 6%; background: #14c492; opacity: 0.16; animation: axDriftC 20s ease-in-out infinite; }
+@keyframes axDriftA { 50% { transform: translate3d(-70px, 50px, 0) scale(1.1); } }
+@keyframes axDriftB { 50% { transform: translate3d(90px, -40px, 0) scale(0.92); } }
+@keyframes axDriftC { 50% { transform: translate3d(-50px, -60px, 0) scale(1.15); } }
+/* Grano fino para que el oscuro no sea plano */
+.ax-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Composición: texto a la izquierda, núcleo a la derecha ── */
+.ax-grid {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+  align-items: center;
+  gap: clamp(40px, 5vw, 84px);
+  max-width: 1320px;
+  min-height: inherit;
+  margin: 0 auto;
+  padding: clamp(40px, 5vw, 72px) clamp(28px, 4.5vw, 64px);
+}
+
+/* ── Texto ── */
+.ax-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 14px 7px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ax-ink-2);
+  animation: axRise 700ms var(--ease-out) 100ms both;
+}
+.ax-dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #3fe0b0; box-shadow: 0 0 10px #14c492; }
+.ax-dot::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1px solid #3fe0b0; animation: axPing 2s var(--ease-out) infinite; }
+@keyframes axPing { from { opacity: 0.9; scale: 0.6; } to { opacity: 0; scale: 1.8; } }
+
+.ax-title {
+  margin: 22px 0 0;
+  font-size: clamp(76px, 9.4vw, 140px);
+  font-weight: 800;
+  font-stretch: 112%;
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+  color: var(--ax-ink);
+}
+.ax-title-in { display: inline-block; animation: axFocus 1100ms var(--ease-out) 160ms both; }
+/* «AI» con un degradado de la marca que recorre las letras: muy ancho y con tonos vecinos, para que en las dos
+   letras solo se vea un paso suave de un color al siguiente (sin cortes entre la A y la I) */
+.ax-title b {
+  font-weight: inherit;
+  color: transparent;
+  background: linear-gradient(90deg, #8fa0ff 0%, #6f82ff 16%, #9b7bff 33%, #7fb8ff 50%, #3fe0b0 66%, #7fb8ff 83%, #8fa0ff 100%) 0 0 / 500% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: axSheen 14s linear infinite;
+}
+/* Con un fondo de 5× el ancho, -125 % desplaza justo un ciclo entero: el bucle no da salto */
+@keyframes axSheen { to { background-position: -125% 0; } }
+
+.ax-lead {
+  max-width: 30em;
+  margin: 26px 0 0;
+  font-size: clamp(18px, 1.5vw, 21px);
+  line-height: 1.5;
+  color: var(--ax-ink-2);
+  text-wrap: pretty;
+  animation: axRise 800ms var(--ease-out) 380ms both;
+}
+.ax-stage .ax-lead .ia-lead-brand,
+html[data-theme="dark"] .ax-stage .ax-lead .ia-lead-brand { font-weight: 700; color: var(--ax-ink); }
+.ax-stage .ax-lead .ia-lead-key,
+html[data-theme="dark"] .ax-stage .ax-lead .ia-lead-key { color: var(--ax-ink); font-weight: 600; }
+.ax-lead em { font-family: 'Roboto Serif', Georgia, serif; font-style: italic; font-weight: 500; color: #a9b6ff; }
+
+.ax-actions { margin-top: 34px; animation: axRise 800ms var(--ease-out) 480ms both; }
+.ax-cta {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 56px;
+  padding: 0 24px 0 28px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  font-stretch: 105%;
+  letter-spacing: -0.015em;
+  color: #10142e;
+  text-decoration: none;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4), 0 14px 40px -12px rgba(120, 140, 255, 0.7);
+  transition: transform 160ms var(--ease-out), box-shadow 250ms ease;
+}
+.ax-cta svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 200ms var(--ease-out); }
+/* Un brillo cruza el botón de vez en cuando */
+.ax-cta::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(66, 87, 255, 0.18) 50%, transparent 65%) -100% 0 / 200% 100% no-repeat;
+  animation: axCtaShine 5s ease-in-out 2s infinite;
+}
+@keyframes axCtaShine { 0%, 70% { background-position: 150% 0; } 100% { background-position: -50% 0; } }
+.ax-cta:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .ax-cta:hover { box-shadow: 0 0 0 1px #fff, 0 18px 48px -12px rgba(120, 140, 255, 0.95); }
+  .ax-cta:hover svg { transform: translateX(3px); }
+}
+.ax-cta:focus-visible { outline: 2px solid #8fa0ff; outline-offset: 3px; }
+
+.ax-note { display: flex; align-items: center; gap: 10px; margin: 20px 0 0; font-size: 14px; color: var(--ax-ink-3); animation: axRise 800ms var(--ease-out) 560ms both; }
+.ax-note .ia-note-sep { width: 4px; height: 4px; border-radius: 50%; background: currentColor; opacity: 0.6; }
+
+@keyframes axRise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes axFocus { from { opacity: 0.1; filter: blur(14px); transform: translateY(0.08em); } to { opacity: 1; filter: blur(0); transform: none; } }
+
+/* ── Lado del núcleo ── */
+.ax-visual { --cy: 54%; --cs: 1; position: relative; align-self: stretch; min-height: 600px; perspective: 1100px; }
+.ax-tilt { position: absolute; inset: 0; transform-style: preserve-3d; }
+.ax-sigs { transform-style: preserve-3d; }
+
+/* Cabecera de estado: qué hace tuko AI y el porcentaje */
+.ax-hud {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  /* Más cerca del logo: sin tanto hueco entre la cabecera y el núcleo */
+  top: 9%;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  width: min(380px, 100%);
+  padding: 10px 16px 12px 10px;
+  translate: -50% 0;
+  border-radius: 16px;
+  background: rgba(14, 18, 44, 0.55);
+  box-shadow: inset 0 0 0 1px var(--ax-line), 0 20px 40px -24px rgba(0, 0, 0, 0.6);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  transform: translateZ(40px);
+  animation: axRiseZ 800ms var(--ease-out) 300ms both;
+}
+@keyframes axRiseZ { from { opacity: 0; transform: translateZ(40px) translateY(12px); } to { opacity: 1; transform: translateZ(40px); } }
+.ax-hud-mark { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(150deg, #5a6cff, #3445d8); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 6px 16px -6px rgba(66, 87, 255, 0.9); }
+.ax-hud-mark svg { width: 17px; height: 19px; fill: #fff; }
+.ax-hud-txt { display: grid; gap: 1px; min-width: 0; }
+.ax-hud-txt b { font-size: 14px; font-weight: 700; color: var(--ax-ink); }
+.ax-hud-state { position: relative; display: grid; font-size: 13px; font-weight: 500; color: var(--ax-ink-2); }
+.ax-hud-state > span { grid-area: 1 / 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: opacity 400ms ease, translate 500ms var(--ease-out); }
+.ax-hud-b, .ax-hud-c { opacity: 0; translate: 0 6px; }
+.ax-stage.is-preparing .ax-hud-a, .ax-stage.is-ready .ax-hud-a { opacity: 0; translate: 0 -6px; }
+.ax-stage.is-preparing .ax-hud-b { opacity: 1; translate: none; }
+.ax-stage.is-ready .ax-hud-b { opacity: 0; translate: 0 -6px; }
+.ax-stage.is-ready .ax-hud-c { opacity: 1; translate: none; color: #3fe0b0; }
+/* Texto que «piensa»: un brillo recorre la frase mientras analiza */
+.ax-hud-a, .ax-hud-b {
+  color: transparent;
+  /* Más legible: la frase va en un blanco suave y el brillo que «piensa» la recorre en blanco puro */
+  background: linear-gradient(90deg, rgba(225, 230, 255, 0.82) 0 40%, #fff 50%, rgba(225, 230, 255, 0.82) 60% 100%) 0 0 / 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: axThink 1.8s linear infinite;
+}
+@keyframes axThink { from { background-position: 100% 0; } to { background-position: -150% 0; } }
+.ax-hud-pct { font-size: 22px; font-weight: 700; font-stretch: 110%; letter-spacing: -0.03em; color: var(--ax-ink); }
+.ax-hud-pct b { font-weight: inherit; }
+.ax-hud-bar { position: absolute; left: 14px; right: 14px; bottom: 5px; height: 2px; border-radius: 2px; background: rgba(143, 160, 255, 0.14); overflow: hidden; }
+.ax-hud-bar i { position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(90deg, #4257ff, #9b7bff, #3fe0b0); transform-origin: left; transform: scaleX(var(--ax-p, 0)); box-shadow: 0 0 8px rgba(120, 140, 255, 0.8); }
+
+/* El núcleo: solo marca dónde y de qué tamaño dibuja el canvas */
+.ax-core { position: absolute; left: 50%; top: var(--cy); width: 0; height: calc(min(430px, 62%) * var(--cs)); translate: 0 -50%; pointer-events: none; }
+
+/* Las seis señales, en dos arcos a los lados del núcleo */
+.ax-sigs { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; pointer-events: none; }
+.ax-sig {
+  --rx: min(272px, 42%);
+  --ry: 190px;
+  position: absolute;
+  left: calc(50% + cos(var(--a)) * var(--rx));
+  top: calc(var(--cy) + sin(var(--a)) * var(--ry) * var(--cs));
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 12px 8px 8px;
+  translate: -50% -50%;
+  border-radius: 14px;
+  background: rgba(14, 18, 44, 0.5);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  font-size: 13.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--ax-ink-3);
+  /* Flotan por delante del logo, cada una a su altura: con la inclinación se separan en profundidad */
+  transform: translateZ(var(--z, 80px));
+  box-shadow: inset 0 0 0 1px var(--ax-line), 0 18px 32px -18px rgba(0, 0, 0, 0.75);
+  opacity: 0;
+  scale: 0.9;
+  transition: opacity 500ms ease, scale 600ms var(--ease-out), color 300ms ease, box-shadow 400ms ease, background-color 400ms ease;
+  transition-delay: calc(240ms + var(--k) * 70ms);
+}
+/* Las de la izquierda flotan menos (al lado está el texto); las de la derecha, más */
+.ax-sig:nth-child(1) { --a: 207deg; --z: 55px; }
+.ax-sig:nth-child(2) { --a: -27deg; --z: 100px; }
+.ax-sig:nth-child(3) { --a: 180deg; --z: 40px; }
+.ax-sig:nth-child(4) { --a: 0deg; --z: 80px; }
+.ax-sig:nth-child(5) { --a: 153deg; --z: 70px; }
+.ax-sig:nth-child(6) { --a: 27deg; --z: 120px; }
+.ax-stage.is-on .ax-sig { opacity: 1; scale: 1; }
+.ax-sig-ico { position: relative; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 9px; background: rgba(143, 160, 255, 0.1); }
+.ax-sig-ico svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+/* Analizando: un arco gira alrededor del icono */
+.ax-sig-ico::after { content: ''; position: absolute; inset: -3px; border-radius: 11px; border: 1.5px solid transparent; border-top-color: #8fa0ff; border-right-color: #8fa0ff; opacity: 0; }
+.ax-sig.is-scan { color: var(--ax-ink); background: rgba(40, 52, 140, 0.45); box-shadow: inset 0 0 0 1px rgba(143, 160, 255, 0.45), 0 0 30px -8px rgba(90, 108, 255, 0.8), 0 18px 32px -18px rgba(0, 0, 0, 0.75); transition-delay: 0s; }
+.ax-sig.is-scan .ax-sig-ico::after { opacity: 1; animation: axSpin 700ms linear infinite; }
+@keyframes axSpin { to { rotate: 360deg; } }
+.ax-sig.is-done { color: var(--ax-ink-2); transition-delay: 0s; }
+.ax-sig.is-done .ax-sig-ico { color: #3fe0b0; background: rgba(20, 196, 146, 0.14); }
+.ax-ck { display: grid; place-items: center; width: 0; height: 16px; overflow: hidden; border-radius: 50%; background: #14c492; opacity: 0; transition: width 350ms var(--ease-out), opacity 300ms ease, margin 350ms var(--ease-out); }
+.ax-ck svg { width: 11px; height: 11px; fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.ax-sig.is-done .ax-ck { width: 16px; opacity: 1; margin-left: 2px; }
+
+/* ── Tablet y móvil: texto arriba; debajo, las señales en rejilla, el núcleo y la propuesta ── */
+@media (max-width: 960px) {
+  .ax-grid { grid-template-columns: minmax(0, 1fr); padding: 44px 22px 22px; text-align: center; }
+  .ax-copy { display: grid; justify-items: center; }
+  .ax-lead { margin-left: auto; margin-right: auto; }
+  .ax-note { justify-content: center; }
+  .ax-visual { min-height: 0; height: 560px; margin-top: 14px; }
+  .ax-hud { top: 0; width: 100%; text-align: left; }
+  .ax-sigs { position: absolute; inset: 74px 0 auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .ax-sig { position: static; justify-content: center; padding: 7px 8px; translate: none; transform: none; font-size: 12.5px; }
+  .ax-sig-ico { width: 24px; height: 24px; }
+  .ax-ck { display: none; }
+  /* El logo, algo más abajo: que no toque la fila de señales */
+  .ax-visual { --cy: 67%; }
+  .ax-core { height: 260px; }
+}
+@media (max-width: 520px) {
+  .ax-hero { padding-left: 8px; padding-right: 8px; }
+  .ax-stage { border-radius: 26px; }
+  .ax-grid { padding: 36px 14px 14px; }
+  .ax-title { font-size: clamp(64px, 21vw, 92px); }
+  .ax-sig { flex-direction: column; gap: 5px; padding: 9px 4px 8px; }
+  .ax-visual { height: 540px; }
+  .ax-sigs { inset: 70px 0 auto; }
+  .ax-visual { --cy: 68%; }
+  .ax-core { height: 230px; }
+}
+
+/* ── A pantalla completa, como Inicio: el oscuro llega a los bordes y queda detrás del nav; mientras el nav
+   está sobre él (sin scroll), sus textos y el logo pasan a blanco. Al bajar, vuelve a su cápsula de siempre. ── */
+.ax-hero { padding: 0; }
+.ax-stage { max-width: none; min-height: max(720px, 100svh); border-radius: 0; box-shadow: none; }
+.ax-grid { padding-top: calc(var(--nav-h, 72px) + clamp(24px, 3vw, 48px)); }
+/* Cómo termina: en claro, como una lámina oscura con las esquinas de abajo redondeadas (un degradado de oscuro
+   a claro queda gris); en oscuro, se funde con el fondo de la página */
+html:not([data-theme="dark"]) .ax-stage { border-radius: 0 0 clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px); box-shadow: 0 40px 80px -50px rgba(20, 30, 120, 0.5); }
+/* En oscuro: el fondo del hero termina en el mismo color que la página y una capa alta y suave tapa la aurora de
+   abajo, así la luz no se corta en el borde */
+/* Sin borde ni sombra (los del contenedor marcaban una línea y una franja oscura en el borde de abajo) */
+html[data-theme="dark"] .ax-stage { background: radial-gradient(90% 70% at 72% 40%, #111845 0%, transparent 70%), linear-gradient(180deg, #080a1d 0%, var(--hero-ground) 100%); box-shadow: none; }
+/* El grano también se desvanece abajo, para que la textura no marque el final */
+html[data-theme="dark"] .ax-grain { -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent); mask-image: linear-gradient(180deg, #000 55%, transparent); }
+html[data-theme="dark"] .ax-stage::after { content: ''; position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; height: 320px; background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--hero-ground) 35%, transparent) 35%, color-mix(in srgb, var(--hero-ground) 80%, transparent) 70%, var(--hero-ground) 100%); pointer-events: none; }
+header > nav:not(.is-scrolled) { --ink: #f3f5ff; --hover-fill: rgba(255, 255, 255, 0.08); }
+header > nav:not(.is-scrolled) .nav-logo img { filter: brightness(0) invert(1); }
+header > nav:not(.is-scrolled) .lang-opt { color: rgba(243, 245, 255, 0.75); }
+html:not([data-theme="dark"]) header > nav:not(.is-scrolled) .lang-opt.active { color: #10142e; }
+@media (max-width: 960px) {
+  .ax-grid { padding: calc(var(--nav-h, 64px) + 28px) 20px 24px; }
+}

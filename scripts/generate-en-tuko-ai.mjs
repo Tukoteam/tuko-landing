@@ -152,6 +152,10 @@ function rewritePaths(html) {
     '$1 active$2'
   );
   h = h.replace(/data-active="es"/g, 'data-active="en"');
+  // Nav y footer en inglés (los mismos parciales que la home EN)
+  h = h.replace(/tuko:partial:nav-es/g, 'tuko:partial:nav-en');
+  h = h.replace(/tuko:partial:footer-es/g, 'tuko:partial:footer-en');
+  h = h.replace('>Saltar al contenido</a>', '>Skip to content</a>');
   return h;
 }
 

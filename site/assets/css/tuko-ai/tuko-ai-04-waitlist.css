@@ -1,0 +1,94 @@
+/* ══════════════════════════════
+   TUKO AI · LISTA DE ESPERA — el logo se enciende con tus datos
+   Escenario oscuro como el hero: a la izquierda el formulario de cristal, a la derecha el logo de puntos en 3D.
+   El logo aparece entero; cada campo válido lo enciende un poco más y, al enviar (status «ok»), late. Lo mueve tuko-ai.js.
+══════════════════════════════ */
+.wx { padding: clamp(20px, 3vw, 36px) 16px clamp(80px, 9vw, 120px); }
+.wx-stage {
+  --ax-ink: #f3f5ff;
+  /* Textos del formulario bien legibles sobre el oscuro */
+  --ax-ink-2: rgba(232, 236, 255, 0.9);
+  --ax-ink-3: rgba(222, 228, 255, 0.84);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  max-width: 1240px;
+  margin: 0 auto;
+  border-radius: 32px;
+  background: radial-gradient(80% 70% at 75% 40%, #141b4d, transparent 70%), linear-gradient(180deg, #090b1f, #05060f);
+  box-shadow: inset 0 0 0 1px rgba(143, 160, 255, 0.16), 0 30px 70px -30px rgba(52, 69, 216, 0.45), 0 60px 120px -60px rgba(66, 87, 255, 0.4);
+  color: var(--ax-ink);
+}
+html[data-theme="dark"] .wx-stage { box-shadow: inset 0 0 0 1px rgba(143, 160, 255, 0.18), 0 40px 80px -50px rgba(0, 0, 0, 0.9); }
+.wx-canvas { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; display: block; pointer-events: none; }
+.wx-grid { position: relative; z-index: 3; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); align-items: center; gap: clamp(28px, 4vw, 64px); min-height: 600px; padding: clamp(40px, 5vw, 72px); }
+
+.wx-title { margin: 0; font-size: clamp(32px, 3.8vw, 50px); font-weight: 700; font-stretch: 105%; line-height: 1.06; letter-spacing: -0.035em; color: var(--ax-ink); text-wrap: balance; }
+/* «tuko AI» con el mismo degradado vivo que el título del hero (el brillo antiguo no hace falta) */
+.wx-title .cta-brand { color: transparent; background: linear-gradient(90deg, #8fa0ff 0%, #6f82ff 16%, #9b7bff 33%, #7fb8ff 50%, #3fe0b0 66%, #7fb8ff 83%, #8fa0ff 100%) 0 0 / 500% 100%; -webkit-background-clip: text; background-clip: text; animation: axSheen 14s linear infinite; }
+.wx-title .cta-brand-glint { display: none; }
+.wx-intro { max-width: 34em; margin: 16px 0 0; font-size: 17px; line-height: 1.55; color: var(--ax-ink-2); }
+
+/* Formulario de cristal (mismo patrón que el de Inicio) */
+.wx .wx-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; max-width: 520px; margin: 30px 0 0; overflow: hidden; border-radius: 20px; background: rgba(255, 255, 255, 0.05); box-shadow: inset 0 0 0 1px rgba(143, 160, 255, 0.22); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.wx .cta-field { display: grid; gap: 4px; margin: 0; padding: 14px 18px; border-bottom: 1px solid rgba(143, 160, 255, 0.14); transition: background-color 250ms ease; }
+.wx .cta-field--full { grid-column: 1 / -1; }
+.wx .cta-field + .cta-field:not(.cta-field--full) { border-left: 1px solid rgba(143, 160, 255, 0.14); }
+.wx .cta-field:focus-within { background: rgba(143, 160, 255, 0.07); }
+.wx .cta-field label { font-size: 12px; font-weight: 600; letter-spacing: 0.01em; color: var(--ax-ink-3); }
+.wx .cta-input,
+html[data-theme="dark"] .wx .cta-input { width: 100%; padding: 2px 0; border: 0; border-radius: 0; outline: 0; background: transparent; box-shadow: none; font: inherit; font-size: 15.5px; color: #fff; }
+.wx .cta-input::placeholder { color: rgba(222, 228, 255, 0.6); }
+/* Campo válido: un punto verde a la derecha de la etiqueta */
+.wx .cta-field { position: relative; }
+.wx .cta-field::after { content: ''; position: absolute; right: 16px; top: 18px; width: 7px; height: 7px; border-radius: 50%; background: #14c492; box-shadow: 0 0 8px #14c492; scale: 0; transition: scale 300ms var(--ease-out); }
+.wx .cta-field.is-valid::after { scale: 1; }
+.wx .cta-field:has(.cta-input[aria-invalid="true"]) { background: rgba(255, 120, 140, 0.1); }
+.wx .cta-err,
+.wx .cta-field [id$="-error"] { font-size: 12px; color: #ff9db0; }
+.wx .wx-submit,
+html[data-theme="dark"] .wx .wx-submit {
+  grid-column: 1 / -1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: auto;
+  height: 54px;
+  margin: 14px;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #10142e;
+  cursor: pointer;
+  box-shadow: 0 14px 40px -12px rgba(120, 140, 255, 0.7);
+  transition: transform 160ms var(--ease-out), box-shadow 250ms ease;
+}
+.wx .wx-submit svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 200ms var(--ease-out); }
+.wx .wx-submit:active { transform: scale(0.98); }
+@media (hover: hover) and (pointer: fine) {
+  .wx .wx-submit:hover { box-shadow: 0 18px 48px -12px rgba(120, 140, 255, 0.95); }
+  .wx .wx-submit:hover svg { transform: translateX(3px); }
+}
+.wx .cta-status { grid-column: 1 / -1; margin: 0 14px 14px; font-size: 14px; color: var(--ax-ink-2); }
+.wx .cta-status[data-state="ok"] { color: #3fe0b0; }
+.wx .cta-status[data-state="error"] { color: #ff9db0; }
+
+/* El logo */
+.wx-visual { position: relative; align-self: stretch; min-height: 460px; }
+.wx-core { position: absolute; left: 50%; top: 50%; width: 0; height: min(380px, 74%); translate: 0 -50%; }
+
+@media (max-width: 900px) {
+  .wx { padding-left: 8px; padding-right: 8px; }
+  .wx-stage { border-radius: 26px; }
+  .wx-grid { grid-template-columns: minmax(0, 1fr); min-height: 0; padding: 36px 18px 22px; text-align: center; }
+  .wx-intro { margin-left: auto; margin-right: auto; }
+  .wx-visual { order: -1; min-height: 260px; }
+  .wx-core { height: 210px; top: 44%; }
+  .wx .wx-form { margin-left: auto; margin-right: auto; text-align: left; grid-template-columns: minmax(0, 1fr); }
+  .wx .cta-field + .cta-field:not(.cta-field--full) { border-left: 0; }
+}

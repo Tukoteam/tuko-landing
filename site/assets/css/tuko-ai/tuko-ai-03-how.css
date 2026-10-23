@@ -1,0 +1,200 @@
+/* ══════════════════════════════
+   TUKO AI · CÓMO FUNCIONARÁ — «la campaña se construye ante tus ojos»
+   Pista alta con una escena fija (sticky). El avance del scroll (0…1) mueve todo desde tuko-ai.js:
+   Conecta 0–0,33 · Propone 0,33–0,66 · Aprende 0,66–1. La escena mide 560×460 y se escala (--k) para caber.
+══════════════════════════════ */
+.fz { padding: clamp(24px, 4vw, 48px) 20px clamp(36px, 4vw, 52px); }
+/* «Pronto» va justo después de la escena (bajo el escenario ya queda aire de la parte fija) */
+.fz .fx-soon { margin-top: 0; }
+.fz-track { position: relative; height: 340vh; margin-top: 8px; }
+/* El escenario arriba (justo bajo el nav), no centrado: así no queda hueco bajo el título al llegar */
+.fz-sticky { position: sticky; top: 0; height: 100svh; display: flex; align-items: flex-start; }
+.fz-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  align-items: center;
+  gap: clamp(28px, 4vw, 64px);
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-top: calc(var(--nav-h, 72px) + 20px);
+}
+
+/* Los tres pasos: el activo se enciende y su barra se llena con el avance de su tramo (--sp) */
+.fz-steps { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.fz-step { position: relative; padding: 18px 20px 18px 26px; border-radius: 20px; opacity: 0.42; transition: opacity 400ms ease, background-color 400ms ease, box-shadow 400ms ease; }
+.fz-step.is-on { opacity: 1; background: rgba(255, 255, 255, 0.66); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 8%, transparent), 0 20px 40px -30px rgba(20, 24, 38, 0.35); }
+html[data-theme="dark"] .fz-step.is-on { background: rgba(255, 255, 255, 0.04); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08); }
+.fz-bar { position: absolute; left: 10px; top: 18px; bottom: 18px; width: 3px; border-radius: 3px; background: color-mix(in srgb, var(--ink) 10%, transparent); overflow: hidden; }
+.fz-bar i { position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(180deg, #4257ff, #14c492); transform: scaleY(var(--sp, 0)); transform-origin: top; }
+.fz-step h3 { display: flex; align-items: baseline; gap: 10px; margin: 6px 0 0; font-size: 22px; font-weight: 700; letter-spacing: -0.025em; color: var(--ink); }
+.fz-n { font-size: 13px; font-weight: 700; color: var(--blue); }
+html[data-theme="dark"] .fz-n { color: #8fa0ff; }
+/* El texto del paso solo se despliega en el activo */
+.fz-txt { max-height: 0; margin: 0; overflow: hidden; font-size: 15px; line-height: 1.55; color: var(--ink-2); opacity: 0; transition: max-height 500ms var(--ease-out), margin 500ms var(--ease-out), opacity 400ms ease; }
+.fz-step.is-on .fz-txt { max-height: 8em; margin-top: 8px; opacity: 1; }
+
+/* ── El escenario: oscuro como el hero ── */
+.fz-stage {
+  --ax-ink: #f3f5ff;
+  /* Etiquetas de la tarjeta más legibles que en el resto de oscuros */
+  --ax-ink-3: rgba(214, 221, 255, 0.78);
+  --ax-line: rgba(143, 160, 255, 0.16);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  height: min(600px, calc(100svh - var(--nav-h, 72px) - 70px));
+  border-radius: 30px;
+  background: radial-gradient(80% 70% at 60% 30%, #141b4d, transparent 70%), linear-gradient(180deg, #090b1f, #05060f);
+  /* En claro, una sombra azulada y difusa: parece una pantalla que flota, no un bloque pegado */
+  box-shadow: inset 0 0 0 1px rgba(143, 160, 255, 0.16), 0 30px 70px -30px rgba(52, 69, 216, 0.45), 0 60px 120px -60px rgba(66, 87, 255, 0.4);
+}
+html[data-theme="dark"] .fz-stage { box-shadow: inset 0 0 0 1px rgba(143, 160, 255, 0.18), 0 40px 80px -50px rgba(0, 0, 0, 0.9); }
+.fz-aurora i { position: absolute; z-index: -1; border-radius: 50%; filter: blur(80px); }
+.fz-aurora i:nth-child(1) { width: 420px; height: 420px; right: -10%; top: -20%; background: #3445e6; opacity: 0.45; animation: axDriftA 18s ease-in-out infinite; }
+.fz-aurora i:nth-child(2) { width: 320px; height: 320px; left: -10%; bottom: -25%; background: #14c492; opacity: 0.12; animation: axDriftC 20s ease-in-out infinite; }
+.fz-scene { position: absolute; left: 50%; top: 50%; width: 560px; height: 460px; margin: -230px 0 0 -280px; transform: scale(var(--k, 1)); }
+.fz-scene > * { position: absolute; }
+
+/* Conecta: el catálogo (12 productos; los monta el JS) */
+.fz-tiles { inset: 0; }
+.fz-tile {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(143, 160, 255, 0.16);
+  color: rgba(200, 208, 245, 0.6);
+  will-change: transform, opacity;
+}
+.fz-tile svg { width: 34px; height: 34px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+/* La nota que deja el escaneo: verde si vale para campaña, gris si no */
+.fz-tile::after { content: ''; position: absolute; right: 10px; top: 10px; width: 8px; height: 8px; border-radius: 50%; background: rgba(200, 208, 245, 0.3); scale: 0; transition: scale 300ms var(--ease-out); }
+.fz-tile.is-scored::after { scale: 1; }
+.fz-tile.is-good::after { background: #3fe0b0; box-shadow: 0 0 8px #14c492; }
+.fz-scan { left: 50px; right: 50px; top: 0; height: 2px; border-radius: 2px; background: linear-gradient(90deg, transparent, #8fa0ff 20%, #fff 50%, #8fa0ff 80%, transparent); box-shadow: 0 0 16px 3px rgba(120, 140, 255, 0.6); opacity: 0; will-change: transform, opacity; }
+
+/* El producto elegido: empieza en su sitio del catálogo y vuela a la tarjeta */
+.fz-hero-tile {
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 20px;
+  background: linear-gradient(150deg, rgba(90, 108, 255, 0.35), rgba(52, 69, 216, 0.25));
+  box-shadow: inset 0 0 0 1.5px rgba(143, 160, 255, 0.55), 0 0 30px -6px rgba(90, 108, 255, 0.7);
+  color: #e6ebff;
+  transform-origin: 0 0;
+  will-change: transform, opacity;
+}
+.fz-hero-tile svg { width: 36px; height: 36px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Propone: la tarjeta (mismos estilos que la propuesta) */
+.fz-card {
+  left: 90px;
+  top: 104px;
+  width: 380px;
+  padding: 18px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(24, 30, 72, 0.92), rgba(11, 14, 38, 0.95));
+  box-shadow: inset 0 0 0 1px rgba(143, 160, 255, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 30px 60px -30px rgba(0, 0, 0, 0.9), 0 0 70px -24px rgba(66, 87, 255, 0.6);
+  transform-origin: 50% 0;
+  will-change: transform, opacity;
+}
+.fz-card.is-done { box-shadow: inset 0 0 0 1.5px rgba(63, 224, 176, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 30px 60px -30px rgba(0, 0, 0, 0.9), 0 0 70px -18px rgba(20, 196, 146, 0.6); transition: box-shadow 500ms ease; }
+.fz-card .ax-card-head,
+.fz-card .fz-prod > div { will-change: opacity; }
+.fz-prod { display: grid; grid-template-columns: 56px minmax(0, 1fr); align-items: center; gap: 12px; margin-top: 14px; }
+.fz-prod-slot { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 14px; box-shadow: inset 0 0 0 1.5px rgba(143, 160, 255, 0.2); color: #e6ebff; }
+.fz-prod-slot svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
+/* Cuando llega el producto, se queda dentro de la tarjeta (así se mueve con ella) */
+.fz-prod-slot.is-filled { background: linear-gradient(150deg, rgba(90, 108, 255, 0.35), rgba(52, 69, 216, 0.25)); box-shadow: inset 0 0 0 1.5px rgba(143, 160, 255, 0.55); }
+.fz-prod-slot.is-filled svg { opacity: 1; }
+.fz-prod .ax-product { margin: 0; }
+.fz-slots { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
+.fz-slot { display: grid; gap: 6px; }
+/* El hueco de cada dato: discontinuo y vacío; al encajar su pieza, el valor queda dentro de la tarjeta */
+.fz-val { box-sizing: border-box; display: grid; place-items: center; height: 28px; border-radius: 9px; border: 1.5px dashed rgba(143, 160, 255, 0.35); font-size: 14px; font-weight: 700; letter-spacing: -0.02em; color: transparent; }
+.fz-slot.is-filled .fz-val { border: 0; background: rgba(40, 52, 140, 0.9); box-shadow: inset 0 0 0 1px rgba(143, 160, 255, 0.5); color: #fff; }
+.fz-slot--pct.is-filled .fz-val { background: rgba(12, 70, 58, 0.9); box-shadow: inset 0 0 0 1px rgba(63, 224, 176, 0.5); color: #3fe0b0; font-size: 16px; }
+.fz-slot span { font-size: 11px; font-weight: 500; line-height: 1.2; color: var(--ax-ink-3); }
+
+/* Las piezas: viajan desde fuera y encajan en su hueco */
+.fz-piece {
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 80px;
+  height: 28px;
+  border-radius: 9px;
+  background: rgba(40, 52, 140, 0.9);
+  box-shadow: inset 0 0 0 1px rgba(143, 160, 255, 0.5), 0 10px 24px -8px rgba(66, 87, 255, 0.9);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+  will-change: transform, opacity;
+}
+.fz-piece--pct { color: #3fe0b0; background: rgba(12, 70, 58, 0.9); box-shadow: inset 0 0 0 1px rgba(63, 224, 176, 0.5), 0 10px 24px -8px rgba(20, 196, 146, 0.8); font-size: 16px; }
+
+/* Aprende: las dos plazas del grupo se llenan, una persona y luego la otra */
+.fz-group { display: flex; gap: 10px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--ax-line); }
+.fz-group i { flex: 1; display: grid; place-items: center; height: 34px; border-radius: 11px; border: 1.5px dashed rgba(143, 160, 255, 0.3); color: transparent; transition: background-color 300ms ease, box-shadow 300ms ease, border-color 300ms ease, color 300ms ease; }
+.fz-group i svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.fz-group i.is-in { border-color: transparent; color: #fff; }
+.fz-group i.is-in { background: linear-gradient(180deg, #6f82ff, #4257ff); box-shadow: 0 0 10px rgba(66, 87, 255, 0.5); }
+.fz-card.is-done .fz-group i { background: linear-gradient(180deg, #3fe0b0, #14c492); box-shadow: 0 0 10px rgba(20, 196, 146, 0.5); }
+
+/* Las campañas siguientes, apiladas detrás: el mismo cristal que la tarjeta, con su borde verde de completada */
+.fz-ghost { left: 90px; top: 104px; width: 380px; height: 236px; transform-origin: 50% 0; border-radius: 22px; background: linear-gradient(180deg, #1a2050, #0d1130); box-shadow: inset 0 0 0 1px rgba(63, 224, 176, 0.3), 0 -10px 30px -16px rgba(20, 196, 146, 0.5); opacity: 0; will-change: transform, opacity; }
+
+/* Cada campaña, un poco mejor: barras que suben y el bucle que gira */
+.fz-learn { right: 26px; bottom: 22px; display: flex; align-items: flex-end; gap: 12px; padding: 12px 14px; border-radius: 16px; background: rgba(14, 18, 44, 0.75); box-shadow: inset 0 0 0 1px rgba(143, 160, 255, 0.2); opacity: 0; will-change: transform, opacity; }
+.fz-loop { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 11px; background: rgba(20, 196, 146, 0.14); color: #3fe0b0; }
+.fz-loop svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; animation: fxSpin 3s var(--ease-in-out) infinite; }
+.fz-spark { display: flex; align-items: flex-end; gap: 5px; height: 34px; }
+.fz-spark i { width: 9px; border-radius: 3px; background: linear-gradient(180deg, #6f82ff, #4257ff); transform-origin: bottom; }
+.fz-spark i:nth-child(1) { height: 30%; }
+.fz-spark i:nth-child(2) { height: 48%; }
+.fz-spark i:nth-child(3) { height: 70%; }
+.fz-spark i:nth-child(4) { height: 100%; background: linear-gradient(180deg, #3fe0b0, #14c492); box-shadow: 0 0 10px rgba(20, 196, 146, 0.6); }
+
+/* ── Móvil: arriba solo el paso activo; debajo, el escenario ── */
+@media (max-width: 900px) {
+  .fz-track { height: 360vh; }
+  /* La parte fija mide lo que su contenido: al soltarse no deja pantalla vacía antes de «Pronto» */
+  .fz-sticky { height: auto; padding-bottom: 20px; }
+  .fz-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; padding-top: calc(var(--nav-h, 64px) + 8px); }
+  .fz-steps { display: block; min-height: 9.2em; }
+  .fz-step { display: none; padding: 4px 4px 0 16px; background: none !important; box-shadow: none !important; }
+  .fz-step.is-on { display: block; animation: hxIn 420ms var(--ease-out) both; }
+  .fz-bar { left: 0; top: 6px; bottom: 6px; }
+  .fz-step h3 { font-size: 20px; }
+  .fz-txt { font-size: 14.5px; }
+  .fz-step.is-on .fz-txt { max-height: none; }
+  .fz-stage { height: min(380px, 50svh); border-radius: 24px; }
+  .fz-learn { right: auto; left: 50%; bottom: 14px; translate: -50% 0; }
+}
+
+/* Antetítulo de cada paso */
+.fx-meta { margin: 0; font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--blue); }
+html[data-theme="dark"] .fx-meta { color: #8fa0ff; }
+/* La tarjeta de la propuesta: cabecera, producto y frase */
+.ax-card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.ax-card-head p { margin: 0; white-space: nowrap; font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ax-ink-3); }
+.ax-rec { padding: 4px 10px; border-radius: 999px; background: rgba(20, 196, 146, 0.16); box-shadow: inset 0 0 0 1px rgba(63, 224, 176, 0.3); font-size: 11px; font-weight: 700; color: #3fe0b0; }
+.ax-product { margin: 9px 0 0; font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: var(--ax-ink); }
+.ax-insight { margin: 2px 0 0; font-size: 12.5px; color: var(--ax-ink-3); }
+/* «Pronto»: una cápsula con brillo debajo de los pasos */
+.fx-soon { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px; max-width: 640px; margin: clamp(48px, 6vw, 72px) auto 0; padding: 12px 18px 12px 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.6); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 8%, transparent); font-size: 15px; color: var(--ink-2); text-align: center; }
+html[data-theme="dark"] .fx-soon { background: rgba(255, 255, 255, 0.03); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07); }
+.fx-soon-tag { padding: 5px 12px; border-radius: 999px; background: linear-gradient(100deg, #4257ff, #9b7bff); font-size: 12.5px; font-weight: 700; color: #fff; box-shadow: 0 6px 16px -6px rgba(110, 90, 255, 0.8); }
+@media (max-width: 900px) {
+  .fx-soon { border-radius: 22px; }
+}
