@@ -5176,6 +5176,10 @@
   background-clip: text;
   transition: background-position 520ms ease;
 }
+/* Con el espaciado negativo, el punto final se sale un poco de la caja y el degradado (pintado solo dentro) lo cortaba:
+   un pelín de aire a la derecha, compensado con margen negativo para que el texto no se mueva */
+.hero--guion .hero-line,
+.hero--guion .hero-accent { padding-right: 0.08em; margin-right: -0.08em; }
 .hero--guion[data-line="1"] .hero-line:nth-child(1),
 .hero--guion[data-line="2"] .hero-line:nth-child(-n+2),
 .hero--guion[data-line="3"] .hero-line {
@@ -5194,7 +5198,9 @@ html[data-theme="dark"] .hero--guion .hero-accent {
   transition: background-position 400ms ease;
 }
 html[data-theme="dark"] .hero--guion .hero-accent { --hg-accent: #8fa0ff; }
-.hero--guion[data-line="3"] .hero-accent {
+/* También en oscuro: la regla de arriba con html[data-theme="dark"] pesa más y dejaba «compran.» en gris */
+.hero--guion[data-line="3"] .hero-accent,
+html[data-theme="dark"] .hero--guion[data-line="3"] .hero-accent {
   background-position: 0 0;
   transition: background-position 760ms var(--ease-out) 560ms;
 }
