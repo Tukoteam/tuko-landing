@@ -1,0 +1,39 @@
+  /* ══════════════════════════════
+     LUZ AMBIENTAL — dos luces difusas fijas que acompañan el scroll (las mueve y colorea home-sections.js)
+     Van por encima de los fondos y se mezclan con ellos: en claro tiñen el blanco (multiply),
+     en oscuro iluminan el negro (screen). El texto apenas cambia.
+  ══════════════════════════════ */
+  @property --amb-a { syntax: '<color>'; inherits: true; initial-value: #4257ff; }
+  @property --amb-b { syntax: '<color>'; inherits: true; initial-value: #14c492; }
+  .amb {
+    --amb-k: 10%;
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    transition: --amb-a 1400ms ease, --amb-b 1400ms ease;
+  }
+  .amb i {
+    position: absolute;
+    width: 72vmax;
+    height: 72vmax;
+    border-radius: 50%;
+    will-change: transform;
+  }
+  .amb i:first-child {
+    top: -18vmax;
+    left: -26vmax;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--amb-a) var(--amb-k), transparent), transparent);
+  }
+  .amb i:last-child {
+    bottom: -22vmax;
+    right: -26vmax;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--amb-b) var(--amb-k), transparent), transparent);
+  }
+  html[data-theme="dark"] .amb { --amb-k: 16%; mix-blend-mode: screen; }
+  @media (max-width: 640px) {
+    .amb i { width: 110vmax; height: 110vmax; }
+  }

@@ -536,19 +536,6 @@
       box-shadow: 0 18px 42px rgba(66, 87, 255, 0.22);
     }
   }
-  @media (prefers-reduced-motion: reduce) {
-    .pilot-ask,
-    .pilot-ask-num { transition: none; }
-    .pilot-ask {
-      opacity: 1;
-      filter: none;
-      transform: none;
-      border-color: var(--blue);
-      box-shadow: 0 14px 36px rgba(66, 87, 255, 0.16);
-    }
-    .pilot-ask .pilot-ask-num { background: var(--blue); color: #fff; box-shadow: 0 0 0 4px rgba(66, 87, 255, 0.16); }
-    .pilot-ask p { color: var(--black); }
-  }
   @media (max-width: 960px) {
     .data { padding: 64px 18px 40px; }
     .data-sub { font-size: 17px; }

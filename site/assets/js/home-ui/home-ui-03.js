@@ -273,8 +273,7 @@
   const grid = document.getElementById('pilotAsks');
   if (!grid) return;
   const cards = Array.from(grid.querySelectorAll('.pilot-ask'));
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce || !('IntersectionObserver' in window)) {
+  if (!('IntersectionObserver' in window)) {
     cards.forEach(c => c.classList.add('is-lit'));
     return;
   }

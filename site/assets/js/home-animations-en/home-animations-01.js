@@ -155,7 +155,6 @@ if (ctaCanvas) {
   const pad = (n) => String(n).padStart(2, '0');
   const clocks = document.querySelectorAll('[data-countdown]');
   if (!clocks.length) return;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const DURS = [23 * 3600 + 59 * 60 + 59, 14 * 3600 + 49 * 60 + 25];
   const ends = Array.from(clocks).map((_, i) => Date.now() + (DURS[i] || DURS[0]) * 1000);
   function setClock(root, total) {
@@ -168,7 +167,7 @@ if (ctaCanvas) {
       const next = pad(v);
       if (el.textContent === next) return;
       el.textContent = next;
-      if (k === 's' && !reduce) {
+      if (k === 's') {
         el.classList.remove('is-tick');
         void el.offsetWidth;
         el.classList.add('is-tick');

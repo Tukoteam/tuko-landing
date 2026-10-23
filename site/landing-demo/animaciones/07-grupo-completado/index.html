@@ -557,7 +557,7 @@
       const viewport = $('viewport');
       const fitEl = $('gbFit');
       const card = $('gbCard');
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const reduceMotion = false; /* Siempre animado: la demo se ve igual aunque el sistema pida «menos movimiento» */
 
       const COPY = {
         es: {

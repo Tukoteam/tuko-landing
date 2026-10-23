@@ -93,71 +93,7 @@
 
     .how-intro { padding: 28px 16px 18px; }
 
-    /* ── Carrusel logos móvil: fluido, sin parpadeo ── */
-    .logos-track {
-      gap: 4px;
-      animation-name: logos-scroll-mobile;
-      animation-duration: 26s;
-    }
-    .logos-section .logo-pill {
-      flex: 0 0 200px;
-      width: 200px;
-      max-width: 200px;
-    }
-    .logo-pill img {
-      height: 56px;
-      max-width: 170px;
-    }
-    .logos-section .logo-pill img {
-      max-width: min(170px, 100%);
-    }
-    .logos-section .logo-pill img[src*="Saper - Logo"] {
-      height: 70px;
-      max-width: min(190px, 100%);
-    }
-    .logos-overflow::before,
-    .logos-overflow::after { width: 60px; }
 
-    nav { padding: 0 16px 0 12px; }
-    .nav-logo img { height: 28px; }
-    .nav-links { display: none; }
-    /* Header limpio: logo + hamburguesa (idiomas dentro del menú) */
-    nav > .lang-switcher { display: none; }
-    .nav-hamburger {
-      display: flex;
-      position: static;
-      transform: none;
-      margin-left: auto;
-    }
-
-    .hero {
-      height: auto;
-      min-height: 0;
-      padding: 0;
-    }
-    .hero-sky {
-      min-height: 100svh;
-      padding: calc(72px + env(safe-area-inset-top, 0px)) 16px max(32px, env(safe-area-inset-bottom, 0px));
-    }
-    .hero-copy { padding-top: 4px; }
-    .hero h1 {
-      font-size: clamp(30px, 8.4vw, 44px);
-      overflow-wrap: normal;
-      word-break: normal;
-      hyphens: none;
-      text-align: center;
-      width: 100%;
-    }
-    .hero-line { gap: 0 0.2em; }
-    .hero-copy > p {
-      overflow-wrap: break-word;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-      max-width: 46ch;
-      width: 100%;
-      margin-top: 28px;
-    }
     .hero-actions {
       flex-direction: column;
       gap: 16px;
@@ -165,14 +101,6 @@
       width: 100%;
       align-items: center;
     }
-    .hero-trust {
-      justify-content: center;
-      gap: 6px 14px;
-      margin-top: 20px;
-      font-size: 12.5px;
-    }
-    .hero-appstore { margin-top: 22px; font-size: 12.5px; }
-    .hero-trust-dot { display: none; }
     .hero-actions .btn-blue {
       width: 100%;
       max-width: 320px;
@@ -185,21 +113,6 @@
       max-width: none;
     }
 
-    .badge {
-      max-width: fit-content;
-      width: auto;
-      flex-wrap: nowrap;
-      justify-content: center;
-      align-items: center;
-      padding: 6px 12px 6px 8px;
-      margin-bottom: 28px;
-      font-size: 11.5px;
-      letter-spacing: -0.005em;
-    }
-    .hero-pilot-note {
-      font-size: 10.5px;
-      margin-bottom: 12px;
-    }
     .btn-blue {
       width: 100%;
       max-width: 300px;
@@ -208,7 +121,7 @@
       box-sizing: border-box;
     }
 
-    .logos-section, .cta-wrap { padding: 72px 16px; }
+    .cta-wrap { padding: 72px 16px; }
     .s-title, .s-sub { overflow-wrap: anywhere; }
     /* Títulos: un poco más de aire entre líneas; título→texto > texto→texto */
     .data .s-title,
@@ -465,7 +378,6 @@
   }
 
   @media (max-width: 418px) {
-    nav { padding: 0 10px 0 8px; }
     .lang-opt-label { display: none; }
     .lang-opt { padding: 6px 7px; }
   }

@@ -352,10 +352,6 @@
   }
   .gb-counter-num.pop { animation: numPop 0.6s cubic-bezier(0.2, 0.95, 0.15, 1); }
 
-  @media (prefers-reduced-motion: reduce) {
-    .gb-fit, .gb-swap, .st-inner, .gb-tag, .gb-status, .gb-dot, .gb-dot svg, .gb-line-fill, .gb-count span { transition: none !important; }
-    .pop { animation: none !important; }
-  }
 </style>
 <link rel="stylesheet" href="/landing-demo/animaciones/tuko-anim-dark.css?v=20261003n">
 <script src="/landing-demo/animaciones/tuko-anim-theme.js?v=20261002d"></script>
@@ -402,7 +398,7 @@
       const viewport = $('viewport');
       const fitEl = $('gbFit');
       const card = $('gbCard');
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const reduceMotion = false; /* Siempre animado: la demo se ve igual aunque el sistema pida «menos movimiento» */
 
       const COPY = {
         es: {

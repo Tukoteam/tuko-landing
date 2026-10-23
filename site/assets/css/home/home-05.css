@@ -62,11 +62,6 @@
     .why-clock i { font-size: 12px; }
     .why-clock-label { font-size: 14px; margin-bottom: 12px; }
   }
-  @media (prefers-reduced-motion: reduce) {
-    .why-widget { transition: none; opacity: 1; transform: none; }
-    /* Las demos de La meta / El grupo se mantienen a propósito en desktop:
-       Windows suele tener “preferir menos movimiento” y las dejaba congeladas. */
-  }
 
 
   /* ══════════════════════════════
@@ -136,9 +131,6 @@
   @keyframes fctaPulse {
     0% { transform: scale(1); opacity: 0.5; }
     70%, 100% { transform: scale(2.8); opacity: 0; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .final-cta-eyebrow i::after { animation: none; }
   }
   .final-cta h2 {
     font-size: var(--section-title-size);
@@ -614,20 +606,6 @@
       transform: translate3d(0, -5px, 0);
       border-color: rgba(61, 80, 242, 0.22);
       box-shadow: 0 16px 36px rgba(20, 24, 38, 0.09);
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    /* Entrada al scroll: se mantiene (más corta). Solo se desactiva el resto de motion. */
-    .fade-up {
-      transition-duration: 0.4s !important;
-    }
-    .pricing-card.fade-up {
-      transition:
-        opacity 0.4s ease,
-        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-        box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-        border-color 0.55s ease !important;
-      transition-delay: 0s !important;
     }
   }
 

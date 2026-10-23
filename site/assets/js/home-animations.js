@@ -156,7 +156,6 @@ if (ctaCanvas) {
   const pad = (n) => String(n).padStart(2, '0');
   const clocks = document.querySelectorAll('[data-countdown]');
   if (!clocks.length) return;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const DURS = [23 * 3600 + 59 * 60 + 59, 14 * 3600 + 49 * 60 + 25];
   const ends = Array.from(clocks).map((_, i) => Date.now() + (DURS[i] || DURS[0]) * 1000);
   function setClock(root, total) {
@@ -169,7 +168,7 @@ if (ctaCanvas) {
       const next = pad(v);
       if (el.textContent === next) return;
       el.textContent = next;
-      if (k === 's' && !reduce) {
+      if (k === 's') {
         el.classList.remove('is-tick');
         void el.offsetWidth;
         el.classList.add('is-tick');
@@ -930,7 +929,7 @@ if (ctaCanvas) {
 
     var third = l3b.map(word);
     var acc = '<span class="hero-accent">' + esc(accent);
-    acc += '<span class="hero-accent-line" aria-hidden="true"><svg viewBox="0 0 120 14" preserveAspectRatio="none"><defs><linearGradient id="tukoHeroShineGrad" gradientUnits="userSpaceOnUse" x1="-120" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.28" stop-color="#e8eeff" stop-opacity="0.05"/><stop offset="0.45" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0.42"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="0.72" stop-color="#e8eeff" stop-opacity="0.05"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs><path class="hero-accent-base" d="M4 10.5 Q60 3.2 116 10.5"/><path class="hero-accent-glow" d="M4 10.5 Q60 3.2 116 10.5"/></svg></span>';
+    acc += '<span class="hero-accent-line" aria-hidden="true"><svg viewBox="0 0 120 14" preserveAspectRatio="none"><path pathLength="1" d="M4 10.5 Q60 3.2 116 10.5"/></svg></span>';
     acc += '</span>';
     third.push(acc);
     third = third.concat(l3a.map(word));

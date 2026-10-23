@@ -1,54 +1,225 @@
-<section class="hero" id="inicio">
+<section class="hero hero--guion" id="inicio" data-step="0" data-line="0">
   <div class="hero-sky">
-    <div class="hero-blob hero-blob-a" aria-hidden="true"></div>
-    <div class="hero-blob hero-blob-b" aria-hidden="true"></div>
-    <div class="hero-blob hero-blob-c" aria-hidden="true"></div>
-    <div class="hero-sheen" aria-hidden="true"></div>
-    <div class="hero-veil" aria-hidden="true"></div>
-    <canvas id="heroCanvas"></canvas>
-    <div class="hero-copy">
-      <div class="hero-pilot-note">
-        <span data-i18n="hero_badge_pilot">Plan piloto · 5 plazas · 45 días gratis</span>
+    <div class="hero-aurora" aria-hidden="true"><canvas id="heroAurora" data-meet=".hg-phone" data-calm></canvas></div>
+    <canvas class="hg-dots" aria-hidden="true"></canvas>
+    <div class="hg-grid">
+      <div class="hero-copy">
+        <div class="hero-meta">
+          <div class="hero-pilot-note">
+            <span data-i18n="hero_badge_pilot">Plan piloto · 5 plazas · 45 días gratis</span>
+          </div>
+          <div class="badge">
+            <span class="badge-xiji" aria-hidden="true">
+              <img src="assets/images/xiji-x-mark.png" alt="" width="18" height="18" decoding="async">
+            </span>
+            <span data-i18n="hero_badge">Con el respaldo de Xiji Incubator</span>
+          </div>
+        </div>
+        <h1 class="hero-title" data-lcp="1" data-lang="es">
+          <span class="hero-line">
+            <span class="hero-word">Un</span>
+            <span class="hero-word">cliente</span>
+            <span class="hero-word">entra.</span>
+          </span>
+          <span class="hero-line">
+            <span class="hero-word">Trae</span>
+            <span class="hero-word">a</span>
+            <span class="hero-word">otro.</span>
+          </span>
+          <span class="hero-line">
+            <span class="hero-word">Los</span>
+            <span class="hero-word">dos</span>
+            <span class="hero-accent">compran.<span class="hero-accent-line" aria-hidden="true"><svg viewBox="0 0 120 14" preserveAspectRatio="none"><path pathLength="1" d="M4 10.5 Q60 3.2 116 10.5"/></svg></span></span>
+          </span>
+        </h1>
+        <p data-i18n="hero_subtitle">Tuko pone un botón en tus productos. Quien lo pulsa paga con descuento y tiene 24 horas para atraer a un comprador más.</p>
+        <div class="hero-actions">
+          <a href="#solicitud" class="btn-blue hero-cta">
+            <span data-i18n="hero_cta">Quiero una de las 5 plazas</span>
+            <svg class="hero-cta-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M4.5 10h10.5M10.5 5.5 15 10l-4.5 4.5"/></svg>
+          </a>
+          <a href="#como-funciona" class="btn-ghost">
+            <span data-i18n="hero_cta2">Ver cómo funciona</span>
+          </a>
+        </div>
+        <div class="hero-appstore"><a href="https://apps.shopify.com/tuko?locale=es&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" target="_blank" rel="noopener" data-i18n="hero_appstore">Disponible en la Shopify App Store</a></div>
+        <div class="hero-trust">
+          <span class="hero-trust-note" data-i18n="hero_trust_note">Sin tarjeta. Sin permanencia. Sin comisiones.</span>
+        </div>
       </div>
-      <div class="badge">
-        <span class="badge-xiji" aria-hidden="true">
-          <img src="assets/images/xiji-x-mark.png" alt="" width="18" height="18" decoding="async">
-        </span>
-        <span data-i18n="hero_badge">Con el respaldo de Xiji Incubator</span>
-      </div>
-      <h1 class="hero-title" data-lcp="1" data-lang="es">
-        <span class="hero-line">
-          <span class="hero-word">Un</span>
-          <span class="hero-word">cliente</span>
-          <span class="hero-word">entra.</span>
-        </span>
-        <span class="hero-line">
-          <span class="hero-word">Trae</span>
-          <span class="hero-word">a</span>
-          <span class="hero-word">otro.</span>
-        </span>
-        <span class="hero-line">
-          <span class="hero-word">Los</span>
-          <span class="hero-word">dos</span>
-          <span class="hero-accent">compran.<span class="hero-accent-line" aria-hidden="true"><svg viewBox="0 0 120 14" preserveAspectRatio="none"><defs><linearGradient id="tukoHeroShineGrad" gradientUnits="userSpaceOnUse" x1="-120" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.28" stop-color="#e8eeff" stop-opacity="0.05"/><stop offset="0.45" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0.42"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="0.72" stop-color="#e8eeff" stop-opacity="0.05"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs><path class="hero-accent-base" d="M4 10.5 Q60 3.2 116 10.5"/><path class="hero-accent-glow" d="M4 10.5 Q60 3.2 116 10.5"/></svg></span></span>
-        </span>
-      </h1>
-      <p data-i18n="hero_subtitle">Tuko pone un botón en tus productos. Quien lo pulsa paga con descuento y tiene 24 horas para atraer a un comprador más.</p>
-      <div class="hero-actions">
-        <a href="#solicitud" class="btn-blue">
-          <span data-i18n="hero_cta">Quiero una de las 5 plazas</span>
-          <span class="hero-cta-arrow" aria-hidden="true">→</span>
-        </a>
-        <a href="#como-funciona" class="btn-ghost">
-          <span data-i18n="hero_cta2">Ver cómo funciona</span>
-        </a>
-      </div>
-      <div class="hero-appstore"><a href="https://apps.shopify.com/tuko?locale=es&amp;search_id=1e86c1c1-567f-4a70-956c-db4cce59af83&amp;surface_detail=tuko&amp;surface_inter_position=1&amp;surface_intra_position=4&amp;surface_type=search" target="_blank" rel="noopener" data-i18n="hero_appstore">Disponible en la Shopify App Store</a></div>
-      <div class="hero-trust">
-        <span class="hero-trust-note" data-i18n="hero_trust_note">Sin tarjeta. Sin permanencia. Sin comisiones.</span>
+
+      <div class="hg-stage" role="img" aria-label="Demo: una clienta pulsa el botón de Tuko, comparte por WhatsApp, entra una segunda persona y los dos compran con descuento.">
+        <div class="hg-tilt">
+          <div class="hg-phone">
+            <div class="hg-screen">
+              <span class="hg-island"></span>
+              <i class="hg-touch"></i>
+              <span class="hg-glare"></span>
+              <div class="hg-statusbar">
+                <b>9:41</b>
+                <span class="hg-sys"><svg class="hg-sig" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg class="hg-wifi" viewBox="0 0 18 13"><path d="M1.6 4.7a10.4 10.4 0 0 1 14.8 0M4.4 7.6a6.4 6.4 0 0 1 9.2 0" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/><circle cx="9" cy="11" r="1.6"/></svg><svg class="hg-bat" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.5" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="20" height="9" rx="2"/><path d="M25 4.5v4a2 2 0 0 0 0-4z" opacity=".45"/></svg></span>
+              </div>
+              <div class="hg-store">
+                <b>Tuko Store</b>
+                <span class="hg-store-icons"><svg viewBox="0 0 20 20"><circle cx="9" cy="9" r="5.5"/><path d="M13 13l4 4"/></svg><svg viewBox="0 0 20 20"><circle cx="10" cy="7" r="3.5"/><path d="M3.5 17.5c.9-3.3 3.4-5 6.5-5s5.6 1.7 6.5 5"/></svg><svg viewBox="0 0 20 20"><path d="M4 6h12l-1.2 10H5.2z"/><path d="M7.5 6V5a2.5 2.5 0 0 1 5 0v1"/></svg></span>
+              </div>
+              <div class="hg-page">
+              <div class="hg-product">
+                <div class="hg-shot"><img src="/landing-demo/animaciones/01-activar-compra/piruletas.jpg" alt="" width="500" height="500" decoding="async"></div>
+                <p class="hg-name">Piruleta Pirulín</p>
+                <p class="hg-price">80,00 € <span>Impuestos incluidos.</span></p>
+                <p class="hg-opt-label">Sabor</p>
+                <div class="hg-opts"><span>Fresa</span><span>Limón</span><span class="is-on">Mix</span></div>
+                <div class="hg-buy-row">
+                  <span class="hg-qty"><i>−</i><b>1</b><i>+</i></span>
+                  <span class="hg-btn hg-btn--cart">Añadir al carrito</span>
+                </div>
+                <span class="hg-btn hg-btn--tuko"><span>Precio grupal 68,00 €</span><i class="hg-tap"></i></span>
+                <div class="hg-acc"><span>Descripción</span><span>Envío y devoluciones</span></div>
+              </div>
+              </div>
+
+              <span class="hg-fsp-dim"></span>
+              <div class="hg-fsp">
+                <span class="hg-tag"><span class="hg-tag-in">Dentro</span><span class="hg-tag-done">Cerrado</span></span>
+                <span class="hg-fsp-x"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></span>
+                <div class="hg-fsp-scroll">
+                  <div class="hg-z1">
+                    <div class="hg-v hg-v0">
+                      <p class="hg-lead"><s>80,00 €</s><span>Hoy <b>68,00 €</b></span></p>
+                      <p class="hg-sub">Sé el primero de 2</p>
+                    </div>
+                    <div class="hg-v hg-v1">
+                      <p class="hg-title">Ya estás dentro</p>
+                      <p class="hg-sub">Falta <b>1 persona</b> para cerrar este grupo</p>
+                    </div>
+                    <div class="hg-v hg-v2">
+                      <p class="hg-title hg-title--done">Grupo cerrado</p>
+                    </div>
+                  </div>
+                  <div class="hg-goal">
+                    <p class="hg-count"><b class="hg-odo" data-odo="n">0</b><span class="hg-de">de</span><span class="hg-tot">2</span></p>
+                    <div class="hg-gdots">
+                      <span class="hg-dot hg-dot--1"><svg class="hg-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20.5c.9-4 4-6.5 8-6.5s7.1 2.5 8 6.5z"/></svg><svg class="hg-check" viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9"/></svg></span>
+                      <span class="hg-bar"><i></i></span>
+                      <span class="hg-dot hg-dot--2"><svg class="hg-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20.5c.9-4 4-6.5 8-6.5s7.1 2.5 8 6.5z"/></svg><svg class="hg-check" viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9"/></svg></span>
+                      <span class="hg-bloom"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                    </div>
+                  </div>
+                  <div class="hg-timer">
+                    <p class="hg-timer-t"><span class="hg-w0">El reloj arranca <em>contigo</em></span><span class="hg-w1">Se cierra en</span></p>
+                    <div class="hg-tbox"><span><b class="hg-odo" data-odo="h">24</b><i>Horas</i></span><span><b class="hg-odo" data-odo="m">00</b><i>Minutos</i></span><span><b class="hg-odo" data-odo="s">00</b><i>Segundos</i></span></div>
+                    <p class="hg-timer-sub"><span class="hg-w0">Entras tú, y tienes 24 h para que entre otra persona.</span><span class="hg-w1">La primera persona que entre por tu enlace cierra el grupo y <b>los dos pagáis 68,00 €</b></span></p>
+                  </div>
+                  <div class="hg-done">
+                    <p class="hg-done-t">¡Lo conseguisteis! Grupo completo.</p>
+                    <div class="hg-done-row">
+                      <img src="/landing-demo/animaciones/01-activar-compra/piruletas.jpg" alt="" width="500" height="500" decoding="async">
+                      <p><b>Piruleta Pirulín</b><span><s>80,00 €</s> <strong>68,00 €</strong> <em>-15%</em></span></p>
+                    </div>
+                    <p class="hg-done-box">El próximo grupo abre automáticamente en unos minutos.</p>
+                  </div>
+                  <div class="hg-how">
+                    <p class="hg-how-t">¿Cómo funciona?</p>
+                    <span class="hg-how-i"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+                    <p class="hg-how-h">Entras y pagas 68,00 €</p>
+                    <p class="hg-how-p">Ahora, en el checkout de la tienda.</p>
+                  </div>
+                </div>
+                <div class="hg-foot">
+                  <span class="hg-cta"><span class="hg-c0">Entrar por 68,00 €</span><span class="hg-c1"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.3 10.7l7.4-4.4M8.3 13.3l7.4 4.4"/></svg>Compartir y cerrar el grupo</span></span>
+                  <span class="hg-cancel">Cancelar reserva</span>
+                </div>
+              </div>
+
+              <span class="hg-m-dim"></span>
+              <div class="hg-join">
+                <span class="hg-join-x"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></span>
+                <p class="hg-join-t">Tus datos</p>
+                <p class="hg-join-s">Te avisamos por email de cómo va el grupo.</p>
+                <label class="hg-f"><span>Nombre</span><i class="hg-in" data-fill="Lucía">Tu nombre</i></label>
+                <label class="hg-f"><span>Apellido</span><i class="hg-in" data-fill="García">Tu apellido</i></label>
+                <label class="hg-f"><span>Email</span><i class="hg-in" data-fill="lucia@ejemplo.com">tu@email.com</i></label>
+                <p class="hg-chk hg-chk--req"><i></i>He leído y acepto las <u>Condiciones de la Oferta TUKO</u> y declaro que soy mayor de 18 años y tengo capacidad para contratar.</p>
+                <p class="hg-chk"><i></i>Quiero recibir novedades de TUKO: nuevos grupos y ofertas. Puedo darme de baja cuando quiera.</p>
+                <span class="hg-pay"><span class="hg-p-a">Continuar al pago</span><span class="hg-p-b">Preparando…</span></span>
+                <span class="hg-back">Volver</span>
+              </div>
+              <div class="hg-redirect">
+                <i class="hg-spin"></i>
+                <b>Abriendo el pago…</b>
+                <span>No cierres esta ventana.</span>
+              </div>
+              <div class="hg-ok">
+                <span class="hg-ok-i"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9"/></svg></span>
+                <p class="hg-ok-t">Pago completado</p>
+                <p class="hg-ok-s">Ya tienes tu plaza en el grupo de 2.</p>
+                <div class="hg-done-row">
+                  <img src="/landing-demo/animaciones/01-activar-compra/piruletas.jpg" alt="" width="500" height="500" decoding="async">
+                  <p><b>Piruleta Pirulín</b><span><s>80,00 €</s> <strong>68,00 €</strong> <em>-15%</em></span></p>
+                </div>
+                <p class="hg-ok-n">Te avisamos por email de cómo va el grupo.</p>
+              </div>
+
+              <span class="hg-ss-dim"></span>
+              <div class="hg-ss">
+                <div class="hg-ss-photo">
+                  <img src="/landing-demo/animaciones/01-activar-compra/piruletas.jpg" alt="" width="500" height="500" decoding="async">
+                  <span class="hg-ss-grab"></span>
+                  <span class="hg-ss-x"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></span>
+                  <span class="hg-ss-badge"><span><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.3 10.7l7.4-4.4M8.3 13.3l7.4 4.4"/></svg></span></span>
+                </div>
+                <div class="hg-ss-body">
+                  <p class="hg-ss-title">Comparte el grupo<br><em>y pagad menos.</em></p>
+                  <p class="hg-ss-text"><b>Si se une alguien, los dos lo pagáis a 68,00 €</b> en vez de <s>80,00 €</s>.</p>
+                  <div class="hg-ss-nets">
+                    <span class="hg-net hg-net--fb"><i></i><em>Facebook</em></span>
+                    <span class="hg-net hg-net--wa"><i></i><em>WhatsApp</em></span>
+                    <span class="hg-net hg-net--x"><i></i><em>X</em></span>
+                    <span class="hg-net hg-net--ig"><i></i><em>Instagram</em></span>
+                    <span class="hg-net hg-net--tg"><i></i><em>Telegram</em></span>
+                  </div>
+                  <span class="hg-ss-copy"><svg viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/></svg>Copiar enlace</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <span class="hg-floor"></span>
+          <div class="hg-chat">
+            <div class="hg-wa">
+              <div class="hg-wa-head">
+                <span class="hg-wa-av">L</span>
+                <p><b>Laura</b><span class="hg-wa-on">en línea</span><span class="hg-wa-typing-txt">escribiendo…</span></p>
+              </div>
+              <div class="hg-wa-body">
+                <div class="hg-wa-msg hg-wa-msg--out hg-wa-m1">
+                  <span class="hg-wa-card">
+                    <img src="/landing-demo/animaciones/01-activar-compra/piruletas.jpg" alt="" width="500" height="500" decoding="async">
+                    <span class="hg-wa-card-txt"><b>Piruleta Pirulín</b><span>Tuko Store · Hoy 68,00 € si somos dos</span></span>
+                  </span>
+                  <span class="hg-wa-text">¡Entra conmigo! Estoy en el grupo de Piruleta Pirulín a 68,00 €. Solo falta 1 persona. Si entras tú, los dos pagamos ese precio.</span>
+                  <span class="hg-wa-meta">12:04 <svg class="hg-wa-tick" viewBox="0 0 18 11"><path class="t1" d="M1 5.8l3.2 3.2L11 2"/><path class="t2" d="M6.6 9l.4.4L13.8 2"/></svg></span>
+                </div>
+                <div class="hg-wa-msg hg-wa-msg--in hg-wa-typing"><i></i><i></i><i></i></div>
+                <div class="hg-wa-msg hg-wa-msg--in hg-wa-m2">
+                  <span class="hg-wa-text">¡Venga, me uno!</span>
+                  <span class="hg-wa-meta">12:05</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hg-progress" aria-hidden="true">
+          <span><i></i><b>1</b></span>
+          <span><i></i><b>2</b></span>
+          <span><i></i><b>3</b></span>
+        </div>
       </div>
     </div>
   </div>
+  <script src="/assets/js/home-hero.js" defer></script>
+  <script src="/assets/js/home-hero-guion.js" defer></script>
 </section>
 
 <!-- LOGOS -->
@@ -84,8 +255,8 @@
 <!-- DATOS — trigger + comparativa (se conserva id="problema" por los enlaces externos) -->
 <section class="data" id="problema">
   <div class="data-inner">
-    <div class="fade-up"><span class="data-trigger" data-i18n="data_trigger">Antes de lanzar otro -20 %, mira esto.</span></div>
-    <h2 class="s-title data-headline fade-up d1" data-i18n="data_title">El descuento no debería regalar margen. <span class="title-accent-red">Debería traer clientes nuevos.</span></h2>
+    <div class="fade-up"><span class="data-trigger" data-i18n="data_trigger">Antes de lanzar otro <span class="data-tag">-20 %</span>, mira esto.</span></div>
+    <h2 class="s-title data-headline fade-up d1" data-i18n="data_title">El descuento no debería regalar margen. <span class="title-accent-red">Debería traer <span class="data-grow">clientes nuevos.</span></span></h2>
     <p class="data-sub fade-up d2" data-i18n="data_sub">Compara los dos modelos antes de activar tu campaña.</p>
     <div class="data-compare fade-up d3">
       <article class="data-card data-card--bad">
@@ -98,6 +269,7 @@
         </div>
         <div class="data-kpi">
           <p class="data-num" data-count="68" aria-label="68 %">0 %</p>
+          <span class="data-dots" aria-hidden="true"></span>
         </div>
         <p class="data-num-note" data-i18n="data_num_note">de los pedidos con descuento pueden venir de clientes que ya te compraban.</p>
         <h3 class="data-side-title" data-i18n="data_bad_title">Pagas por atraer y rebajas ventas que ya eran tuyas.</h3>
@@ -118,6 +290,7 @@
             <path d="M17.3 14.3h4.2M19.4 12.2v4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
           </svg>
         </div>
+        <svg class="data-chain" viewBox="0 0 320 160" aria-hidden="true"><g class="data-chain-links"><path style="--d:0" d="M24 80C68 80 68 44 112 44"/><path style="--d:30" d="M24 80C68 80 68 116 112 116"/><path style="--d:260" d="M112 44C156 44 156 24 200 24"/><path style="--d:290" d="M112 44C156 44 156 61.3 200 61.3"/><path style="--d:320" d="M112 116C156 116 156 98.7 200 98.7"/><path style="--d:350" d="M112 116C156 116 156 136 200 136"/><path style="--d:520" d="M200 24C244 24 244 12 288 12"/><path style="--d:550" d="M200 24C244 24 244 31.4 288 31.4"/><path style="--d:580" d="M200 61.3C244 61.3 244 50.9 288 50.9"/><path style="--d:610" d="M200 61.3C244 61.3 244 70.3 288 70.3"/><path style="--d:640" d="M200 98.7C244 98.7 244 89.7 288 89.7"/><path style="--d:670" d="M200 98.7C244 98.7 244 109.1 288 109.1"/><path style="--d:700" d="M200 136C244 136 244 128.6 288 128.6"/><path style="--d:730" d="M200 136C244 136 244 148 288 148"/></g><g class="data-chain-nodes"><circle class="n0" style="--d:0" cx="24" cy="80" r="9"/><circle class="n1" style="--d:440" cx="112" cy="44" r="7.5"/><circle class="n1" style="--d:470" cx="112" cy="116" r="7.5"/><circle class="n2" style="--d:700" cx="200" cy="24" r="6.5"/><circle class="n2" style="--d:730" cx="200" cy="61.3" r="6.5"/><circle class="n2" style="--d:760" cx="200" cy="98.7" r="6.5"/><circle class="n2" style="--d:790" cx="200" cy="136" r="6.5"/><circle class="n3" style="--d:960" cx="288" cy="12" r="5.5"/><circle class="n3" style="--d:990" cx="288" cy="31.4" r="5.5"/><circle class="n3" style="--d:1020" cx="288" cy="50.9" r="5.5"/><circle class="n3" style="--d:1050" cx="288" cy="70.3" r="5.5"/><circle class="n3" style="--d:1080" cx="288" cy="89.7" r="5.5"/><circle class="n3" style="--d:1110" cx="288" cy="109.1" r="5.5"/><circle class="n3" style="--d:1140" cx="288" cy="128.6" r="5.5"/><circle class="n3" style="--d:1170" cx="288" cy="148" r="5.5"/></g></svg>
         <h3 class="data-side-title" data-i18n="data_good_title">Cada compra puede atraer la siguiente.</h3>
         <ul class="data-list">
           <li data-i18n="data_good_b1">Tus clientes comparten para completar la meta.</li>
@@ -127,8 +300,10 @@
         <p class="data-side-sub" data-i18n="data_good_sub">La rebaja solo se activa si se cumple <span class="data-nowrap">la <em>meta</em>.</span></p>
       </article>
     </div>
-    <p class="data-foot fade-up d4" data-i18n="data_foot">No es bajar más el precio. <b>Es hacer que cada venta traiga otra.</b></p>
+    <p class="data-foot fade-up d4" data-i18n="data_foot">No es bajar más el precio. <b>Es hacer que cada venta <span class="data-win">traiga otra.</span></b></p>
   </div>
 </section>
+
+<script src="/assets/js/home-sections.js" defer></script>
 
 <!-- HOW IT WORKS — INTRO -->

@@ -842,9 +842,3 @@ html[data-theme="dark"] .bp-media { background: #12141c; }
 /* ═══════════════════════════════════════════
    HOME / LANDING — modo oscuro
 ═══════════════════════════════════════════ */
-html[data-theme="dark"] .hero {
-  background:
-    radial-gradient(ellipse 90% 60% at 50% 18%, rgba(61, 80, 242, 0.16), transparent 58%),
-    #0b0d14;
-}
-html[data-theme="dark"] .hero-blob-a {

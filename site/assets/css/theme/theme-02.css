@@ -1,63 +1,3 @@
-  background: radial-gradient(circle, rgba(61, 80, 242, 0.28), rgba(61, 80, 242, 0) 62%);
-  opacity: 0.85;
-}
-html[data-theme="dark"] .hero-blob-b {
-  background: radial-gradient(circle, rgba(20, 196, 146, 0.12), rgba(20, 196, 146, 0) 62%);
-  opacity: 0.7;
-}
-html[data-theme="dark"] .hero-blob-c {
-  background: radial-gradient(circle, rgba(206, 51, 51, 0.08), rgba(206, 51, 51, 0) 60%);
-  opacity: 0.55;
-}
-html[data-theme="dark"] .hero-sheen {
-  opacity: 0.14;
-  background: conic-gradient(from 0deg, rgba(90,110,180,0) 0deg, rgba(90,110,180,.28) 40deg, rgba(90,110,180,0) 120deg, rgba(110,130,200,.16) 220deg, rgba(90,110,180,0) 320deg);
-}
-html[data-theme="dark"] .hero-veil {
-  /* Solo funde el borde inferior: sin corte a media altura */
-  background: linear-gradient(
-    180deg,
-    rgba(11, 13, 20, 0) 0%,
-    rgba(11, 13, 20, 0) 78%,
-    rgba(11, 13, 20, 0.5) 92%,
-    #0b0d14 100%
-  );
-}
-html[data-theme="dark"] #heroCanvas {
-  opacity: 0.42;
-  -webkit-mask-image: none;
-  mask-image: none;
-}
-html[data-theme="dark"] .hero-blob-a,
-html[data-theme="dark"] .hero-blob-b,
-html[data-theme="dark"] .hero-blob-c,
-html[data-theme="dark"] .hero-sheen {
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 75%, transparent 100%);
-  mask-image: linear-gradient(180deg, #000 0%, #000 75%, transparent 100%);
-}
-/* Más aire abajo en móvil para que no “corte” contra la siguiente sección */
-@media (max-width: 720px) {
-  html[data-theme="dark"] .hero-sky {
-    padding-bottom: max(88px, calc(56px + env(safe-area-inset-bottom, 0px)));
-  }
-}
-html[data-theme="dark"] .hero h1,
-html[data-theme="dark"] .hero-title,
-html[data-theme="dark"] .hero-word {
-  color: #f2f3f7;
-}
-html[data-theme="dark"] .hero-accent {
-  color: #8fa0ff;
-}
-html[data-theme="dark"] .hero-copy > p,
-html[data-theme="dark"] .hero-trust-note,
-html[data-theme="dark"] .hero-appstore a,
-html[data-theme="dark"] .hero-trust {
-  color: #d0d5e0;
-}
-html[data-theme="dark"] .hero-pilot-note {
-  color: #e8ebf5;
-}
 html[data-theme="dark"] .btn-ghost,
 html[data-theme="dark"] .link-how {
   color: #d0d5e0;
@@ -69,18 +9,6 @@ html[data-theme="dark"] .link-how:hover {
   color: #f2f3f7;
   border-bottom-color: rgba(242, 243, 247, 0.7);
   background: none;
-}
-html[data-theme="dark"] .badge {
-  background: rgba(22, 26, 40, 0.92);
-  border-color: rgba(123, 140, 255, 0.28);
-  color: #d7dbe6;
-  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.28);
-}
-/* Logo Xiji oscuro → blanco en noche */
-html[data-theme="dark"] .badge-xiji img,
-html[data-theme="dark"] .badge-xiji svg {
-  filter: invert(1) brightness(1.15);
-  opacity: 0.95;
 }
 
 /* Etiquetas / acentos: mismo azul legible que tuko AI */
@@ -208,85 +136,6 @@ html[data-theme="dark"] .rescue-tree-stem,
 html[data-theme="dark"] .rescue-tree-bar,
 html[data-theme="dark"] .rescue-tree-drop {
   background: rgba(123, 140, 255, 0.45);
-}
-
-html[data-theme="dark"] .logos-section {
-  background: #0b0d14;
-  border-bottom: none;
-  padding-top: 40px;
-  padding-bottom: 64px;
-}
-/* Misma azul legible que etiquetas tuko AI */
-html[data-theme="dark"] .logos-section > p {
-  color: #8fa0ff;
-  opacity: 1;
-}
-html[data-theme="dark"] .logos-overflow {
-  /* Evita que el overflow recorte la sombra inferior de las placas */
-  padding: 10px 0 18px;
-  margin: -10px 0 -6px;
-}
-html[data-theme="dark"] .logos-overflow::before {
-  background: linear-gradient(90deg, #0b0d14, transparent);
-}
-html[data-theme="dark"] .logos-overflow::after {
-  background: linear-gradient(270deg, #0b0d14, transparent);
-}
-/* Placas claras + multiply: el fondo blanco del PNG (Ocea/Bio) desaparece */
-html[data-theme="dark"] .logos-track {
-  gap: 28px;
-}
-html[data-theme="dark"] .logo-pill {
-  background: #c5cad8;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 14px;
-  filter: none;
-  opacity: 1;
-  height: 112px;
-  padding: 16px 20px;
-  box-sizing: border-box;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
-  overflow: hidden;
-  isolation: isolate;
-}
-html[data-theme="dark"] .logo-pill:hover {
-  opacity: 1;
-  background: #d0d5e2;
-}
-html[data-theme="dark"] .logo-pill img {
-  filter: none;
-  opacity: 1;
-  mix-blend-mode: multiply;
-  height: 68px !important;
-  max-height: 68px;
-  max-width: min(220px, 100%) !important;
-  width: auto;
-  object-fit: contain;
-}
-/* Saper trae más aire en el PNG: un poco más grande para igualar visualmente */
-html[data-theme="dark"] .logo-pill img[src*="Saper"] {
-  height: 86px !important;
-  max-height: 86px;
-  max-width: min(240px, 100%) !important;
-}
-@media (max-width: 720px) {
-  html[data-theme="dark"] .logos-track {
-    gap: 18px;
-  }
-  html[data-theme="dark"] .logo-pill {
-    height: 92px;
-    padding: 12px 14px;
-  }
-  html[data-theme="dark"] .logo-pill img {
-    height: 54px !important;
-    max-height: 54px;
-    max-width: min(160px, 100%) !important;
-  }
-  html[data-theme="dark"] .logo-pill img[src*="Saper"] {
-    height: 70px !important;
-    max-height: 70px;
-    max-width: min(180px, 100%) !important;
-  }
 }
 
 html[data-theme="dark"] .data,

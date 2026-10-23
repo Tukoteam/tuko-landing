@@ -204,8 +204,8 @@ const translations = {
     logo_saper: 'Sáper Organic',
 
     /* DATOS (trigger + comparativa) */
-    data_trigger: 'Antes de lanzar otro -20 %, mira esto.',
-    data_title: 'El descuento no debería regalar margen. <span class="title-accent-red">Debería traer clientes nuevos.</span>',
+    data_trigger: 'Antes de lanzar otro <span class="data-tag">-20 %</span>, mira esto.',
+    data_title: 'El descuento no debería regalar margen. <span class="title-accent-red">Debería traer <span class="data-grow">clientes nuevos.</span></span>',
     data_sub: 'Compara los dos modelos antes de activar tu campaña.',
     data_bad_label: 'El camino caro',
     data_num: '68 %',
@@ -220,7 +220,7 @@ const translations = {
     data_good_b2: 'El grupo convierte una venta en difusión.',
     data_good_b3: 'Con el tiempo, baja tu coste por cliente nuevo.',
     data_good_sub: 'La rebaja solo se activa si se cumple <span class="data-nowrap">la <em>meta</em>.</span>',
-    data_foot: 'No es bajar más el precio. <b>Es hacer que cada venta traiga otra.</b>',
+    data_foot: 'No es bajar más el precio. <b>Es hacer que cada venta <span class="data-win">traiga otra.</span></b>',
     data_src: 'Klaviyo · ProfitPeak, 2025',
 
     /* HERO — MOCKUP */
@@ -803,8 +803,8 @@ const translations = {
     logo_saper: 'Sáper Organic',
 
     /* DATA (trigger + comparison) */
-    data_trigger: 'Before launching another -20%, look at this.',
-    data_title: 'Discount should not give margin away. <span class="title-accent-red">It should bring new customers.</span>',
+    data_trigger: 'Before launching another <span class="data-tag">-20%</span>, look at this.',
+    data_title: 'Discount should not give margin away. <span class="title-accent-red">It should bring <span class="data-grow">new customers.</span></span>',
     data_sub: 'Compare the two models before activating your campaign.',
     data_bad_label: 'The expensive way',
     data_num: '68%',
@@ -819,7 +819,7 @@ const translations = {
     data_good_b2: 'One purchase turns into distribution.',
     data_good_b3: 'Over time, your cost per new customer drops.',
     data_good_sub: 'The discount only activates if <span class="data-nowrap">the <em>goal</em></span> is met.',
-    data_foot: 'It is not about lowering price more. <b>It is about making each sale bring the next one.</b>',
+    data_foot: 'It is not about lowering price more. <b>It is about making each sale <span class="data-win">bring the next one.</span></b>',
     data_src: 'Klaviyo · ProfitPeak, 2025',
 
     /* HERO — MOCKUP */
@@ -1997,8 +1997,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const grid = document.getElementById('pilotAsks');
   if (!grid) return;
   const cards = Array.from(grid.querySelectorAll('.pilot-ask'));
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce || !('IntersectionObserver' in window)) {
+  if (!('IntersectionObserver' in window)) {
     cards.forEach(c => c.classList.add('is-lit'));
     return;
   }
