@@ -11,7 +11,6 @@
   var hero = document.querySelector('.hero--guion');
   if (!hero) return;
   var stage = hero.querySelector('.hg-stage');
-  var tilt = hero.querySelector('.hg-tilt');
   var phone = hero.querySelector('.hg-phone');
   var screen = hero.querySelector('.hg-screen');
   var finger = hero.querySelector('.hg-touch');
@@ -317,8 +316,9 @@
      Solo una vez: al cargar o, si el móvil queda más abajo (pantallas pequeñas), al aparecer. Siempre animado. */
   var phone = hero.querySelector('.hg-phone');
   if (phone && stage) {
-    var SPIN_MS = 1500, SPIN_DELAY = 420, spinT0 = 0;
-    var spinEase = function (k) { return 1 - Math.pow(1 - k, 4); };
+    /* Vuelta tranquila: 2,4 s y una curva suave (empieza con calma y se posa despacio) */
+    var SPIN_MS = 2400, SPIN_DELAY = 420, spinT0 = 0;
+    var spinEase = function (k) { return k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; };
     var spinStep = function (now) {
       if (!spinT0) spinT0 = now;
       var k = Math.min(1, (now - spinT0) / SPIN_MS);
@@ -348,32 +348,5 @@
     }
   }
 
-  /* ── Giro 3D del móvil con muelle: recto en reposo, sigue al ratón y vuelve al salir ── */
-  if (tilt && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    var rx = 0, ry = 0, vx = 0, vy = 0, tx = 0, ty = 0, raf = 0, last = 0;
-    var K = 48, C = 2 * Math.sqrt(K);
-    var step = function (now) {
-      var dt = Math.min(0.05, last ? (now - last) / 1000 : 0.016);
-      last = now;
-      vx += ((tx - rx) * K - vx * C) * dt;
-      vy += ((ty - ry) * K - vy * C) * dt;
-      rx += vx * dt;
-      ry += vy * dt;
-      tilt.style.transform = 'rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
-      if (Math.abs(tx - rx) + Math.abs(ty - ry) + Math.abs(vx) + Math.abs(vy) > 0.02) raf = requestAnimationFrame(step);
-      else { raf = 0; last = 0; }
-    };
-    var aim = function (x, y) {
-      tx = x;
-      ty = y;
-      if (!raf) raf = requestAnimationFrame(step);
-    };
-    hero.addEventListener('pointermove', function (e) {
-      var r = stage.getBoundingClientRect();
-      var px = (e.clientX - (r.left + r.width / 2)) / (r.width * 1.1);
-      var py = (e.clientY - (r.top + r.height / 2)) / (r.height * 0.9);
-      aim(Math.max(-1, Math.min(1, py)) * -7, Math.max(-1, Math.min(1, px)) * 12);
-    }, { passive: true });
-    hero.addEventListener('pointerleave', function () { aim(0, 0); });
-  }
+  /* El móvil ya no se inclina siguiendo al ratón: se queda recto (solo flota suave, con hgFloat) */
 })();

@@ -273,7 +273,7 @@
       ['.logos-section', '#4257ff', '#14c492'],
       ['#problema', '#e54848', '#14c492'],
       ['#como-funciona', '#4257ff', '#8b5cf6'],
-      ['.hx', '#4257ff', '#14c492'],
+      ['.cs', '#4257ff', '#14c492'],
       ['#si-no-se-llena', '#14c492', '#38bdf8'],
       ['#beneficios', '#14c492', '#4257ff'],
       ['#sin-requisitos', '#38bdf8', '#4257ff'],

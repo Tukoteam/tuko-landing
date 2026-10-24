@@ -112,9 +112,9 @@
   }, { passive: true });
   document.addEventListener('pointerleave', function () { mx = 0; my = 0; });
 
-  /* ── Inclinación 3D del lado del núcleo (como el móvil de Inicio): muelle, recto en reposo, sigue al ratón ──
-     Las etiquetas flotan a distintas alturas (translateZ), así que al inclinarse se separan del logo. */
-  var tiltEl = stage.querySelector('.ax-tilt');
+  /* ── Inclinación 3D de las etiquetas y la cabecera: desactivada, se quedan planas.
+     Solo el logo (el núcleo del lienzo) se gira hacia el cursor. */
+  var tiltEl = null;
   var fine = window.matchMedia('(hover: hover) and (pointer: fine)');
   var trx = 0, try_ = 0, vrx = 0, vry = 0, aimX = 0, aimY = 0, tLast = 0;
   var K = 48, C = 2 * Math.sqrt(K);

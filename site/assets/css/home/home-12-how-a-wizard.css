@@ -1,0 +1,926 @@
+/* Cómo funciona · el asistente «Publicar grupo» de la app. Copiado de landing-demo/animaciones/01-activar-compra (asistente «Publicar grupo»), dentro de .cs-wiz */
+.cs-wiz {
+      --n-white: #ffffff;
+      --n-50: #f5f5f5;
+      --n-100: #f1f5f9;
+      --n-200: #e2e8f0;
+      --n-300: #cbd5e1;
+      --n-400: #94a3b8;
+      --n-500: #64748b;
+      --n-600: #475569;
+      --n-800: #1e293b;
+      --n-900: #0f172a;
+      --azul-primario: #3d50f2;
+      --indigo-2: #6366f1;
+      --violet: #7c3aed;
+      --emerald: #10b981;
+      --emerald-2: #059669;
+      --shadow: 0 10px 40px rgba(20, 24, 38, 0.08);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; }
+.cs-wiz * { margin: 0; padding: 0; box-sizing: border-box; }
+html[data-theme="dark"] .cs-wiz {
+  color-scheme: dark;
+  --n-white: #1a1f2e;
+  --n-50: #12141c;
+  --n-100: #161922;
+  --n-200: #2a2e3a;
+  --n-300: #3a4050;
+  --n-400: #8b92a5;
+  --n-500: #a8aebc;
+  --n-600: #c2c8d6;
+  --n-700: #d0d5e0;
+  --n-800: #e8ebf5;
+  --n-900: #f2f3f7;
+  --slate-300: #3a4050;
+  --slate-400: #8b92a5;
+  --slate-500: #a8aebc;
+  --slate-600: #c2c8d6;
+  --slate-900: #f2f3f7;
+  --shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+.cs-wiz 0, .cs-wiz 500;0, .cs-wiz 600;0, .cs-wiz 700;0, .cs-wiz 800&display=swap');
+
+    :root {
+      --n-white: #ffffff;
+      --n-50: #f5f5f5;
+      --n-100: #f1f5f9;
+      --n-200: #e2e8f0;
+      --n-300: #cbd5e1;
+      --n-400: #94a3b8;
+      --n-500: #64748b;
+      --n-600: #475569;
+      --n-800: #1e293b;
+      --n-900: #0f172a;
+      --azul-primario: #3d50f2;
+      --indigo-2: #6366f1;
+      --violet: #7c3aed;
+      --emerald: #10b981;
+      --emerald-2: #059669;
+      --shadow: 0 10px 40px rgba(20, 24, 38, 0.08);
+    }
+.cs-wiz * { margin: 0; padding: 0; box-sizing: border-box; }
+.cs-wiz .wizard {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      background: var(--n-white);
+      border-radius: 20px;
+      border: 1px solid rgba(226, 232, 240, 0.98);
+      box-shadow:
+        0 4px 6px rgba(15, 23, 42, 0.03),
+        0 20px 60px rgba(15, 23, 42, 0.10);
+      padding: 20px 22px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+.cs-wiz .w-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+.cs-wiz .w-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--n-900);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+.cs-wiz .w-sub {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--n-500);
+      margin-top: 3px;
+      line-height: 1.35;
+    }
+.cs-wiz .w-close {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+.cs-wiz .w-close svg { width: 100%; height: 100%; stroke: var(--n-400); stroke-width: 1.8; fill: none; stroke-linecap: round; }
+.cs-wiz .stepper {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2px 0 0;
+    }
+.cs-wiz .step-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+      width: 64px;
+    }
+.cs-wiz .step-circle {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      border: 1.5px solid #e2e8f0;
+      color: var(--n-400);
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+.cs-wiz .step-circle svg {
+      width: 12px;
+      height: 12px;
+      stroke: var(--emerald);
+      fill: none;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0;
+      position: absolute;
+      transition: opacity 0.3s ease;
+    }
+.cs-wiz .step-num { transition: opacity 0.2s ease; }
+.cs-wiz .step-item.active .step-circle {
+      background: var(--azul-primario);
+      border-color: var(--azul-primario);
+      color: #fff;
+      box-shadow: 0 0 0 4px rgba(61, 80, 242, 0.14);
+    }
+.cs-wiz .step-item.done .step-circle {
+      background: #fff;
+      border-color: var(--emerald);
+    }
+.cs-wiz .step-item.done .step-circle svg { opacity: 1; }
+.cs-wiz .step-item.done .step-num { opacity: 0; }
+.cs-wiz .step-label {
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--n-400);
+      transition: color 0.35s ease;
+    }
+.cs-wiz .step-item.active .step-label { color: var(--azul-primario); }
+.cs-wiz .step-item.done .step-label { color: var(--emerald-2); }
+.cs-wiz .step-bar {
+      width: 54px;
+      height: 3px;
+      border-radius: 2px;
+      background: #e2e8f0;
+      margin-top: 12px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+.cs-wiz .step-bar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--azul-primario);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+.cs-wiz .step-bar.filled::after { transform: scaleX(1); }
+.cs-wiz .info-banner {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #f8fafc;
+      border: 1px solid #eef2f6;
+    }
+.cs-wiz .info-ic {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #10b981 0%, #3d50f2 52%, #f5b942 100%);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 3px 10px rgba(61, 80, 242, 0.22);
+    }
+.cs-wiz .info-ic svg { width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; display: none; }
+.cs-wiz .info-ic[data-ic="1"] .ic-1, .cs-wiz .info-ic[data-ic="2"] .ic-2, .cs-wiz .info-ic[data-ic="3"] .ic-3 { display: block; }
+.cs-wiz .info-title { font-size: 12.5px; font-weight: 700; color: var(--n-900); letter-spacing: -0.01em; }
+.cs-wiz .info-sub { font-size: 10.5px; font-weight: 500; color: var(--n-500); margin-top: 2px; line-height: 1.35; }
+.cs-wiz .info-txt { transition: opacity 0.3s ease; }
+.cs-wiz .panels {
+      display: grid;
+      position: relative;
+    }
+.cs-wiz .panel {
+      grid-area: 1 / 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      opacity: 0;
+      transform: translateX(32px);
+      pointer-events: none;
+      transition: opacity 0.9s ease, transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+.cs-wiz .panel.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+.cs-wiz .panel.exit-left {
+      opacity: 0;
+      transform: translateX(-32px);
+    }
+.cs-wiz .field-label {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--n-800);
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+.cs-wiz .field-help {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--n-500);
+      margin: -3px 0 6px;
+    }
+.cs-wiz .product-card {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 9px 12px;
+      border-radius: 12px;
+      background: #fff;
+      border: 1.5px dashed rgba(61, 80, 242, 0.3);
+    }
+.cs-wiz .product-thumb {
+      width: 40px; height: 40px;
+      flex-shrink: 0;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+.cs-wiz .product-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.cs-wiz .product-thumb.framed {
+      width: 38px; height: 38px;
+      border-radius: 9px;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      padding: 2px;
+    }
+.cs-wiz .product-name { font-size: 12.5px; font-weight: 700; color: var(--n-900); letter-spacing: -0.01em; }
+.cs-wiz .product-price { font-size: 10.5px; font-weight: 500; color: var(--n-500); margin-top: 1px; }
+.cs-wiz .add-products {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11.5px; font-weight: 700; color: var(--azul-primario);
+      margin: 2px 0 0 10px;
+    }
+.cs-wiz .add-products span:first-child { font-size: 15px; font-weight: 500; line-height: 1; }
+.cs-wiz .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+.cs-wiz .field { display: flex; flex-direction: column; }
+.cs-wiz .input {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 12px;
+      height: 35px;
+      border: 1px solid var(--n-200);
+      border-radius: 10px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--n-900);
+      background: var(--n-white);
+    }
+.cs-wiz .input.strong { border: 1.5px solid #d4d9e1; }
+.cs-wiz .input.placeholder { color: var(--n-400); }
+.cs-wiz .chev { width: 12px; height: 12px; stroke: var(--n-600); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.cs-wiz .hint {
+      font-size: 10.5px;
+      font-weight: 500;
+      color: var(--emerald-2);
+      margin-top: -4px;
+      line-height: 1.35;
+    }
+.cs-wiz .preview-card {
+      padding: 13px 14px 16px;
+      border-radius: 14px;
+      background: #f8faff;
+      border: 1px solid #e6ebf5;
+    }
+.cs-wiz .preview-title {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.08em;
+      color: var(--n-600); text-transform: uppercase;
+    }
+.cs-wiz .preview-sub { font-size: 10px; font-weight: 500; color: var(--n-500); margin-top: 2px; }
+.cs-wiz .store-btn {
+      margin-top: 16px;
+      height: 42px;
+      border-radius: 999px;
+      background: #111827;
+      border: 2px solid #3f4754;
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.01em;
+    }
+.cs-wiz .theme-picker {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+.cs-wiz .theme-card {
+      padding: 6px 6px 7px;
+      border-radius: 11px;
+      border: 1.5px solid var(--n-200);
+      background: var(--n-white);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+.cs-wiz .theme-card.selected {
+      border-color: var(--azul-primario);
+      background: #f5f7ff;
+      box-shadow: 0 0 0 3px rgba(61, 80, 242, 0.12);
+    }
+.cs-wiz .swatch { height: 22px; border-radius: 6px; border: 1px solid #e2e8f0; }
+.cs-wiz .swatch.light { background: #fff; }
+.cs-wiz .swatch.dark { background: #111827; border-color: #1f2937; }
+.cs-wiz .swatch.custom { background: linear-gradient(90deg, #10b981 0%, #f59e0b 45%, #ec4899 75%, #8b5cf6 100%); border-color: transparent; }
+.cs-wiz .theme-name { font-size: 9.5px; font-weight: 500; color: var(--n-600); text-align: center; }
+.cs-wiz .when-card {
+      padding: 11px 12px 12px;
+      border-radius: 14px;
+      background: #f8faff;
+      border: 1px solid #e6ebf5;
+    }
+.cs-wiz .when-title {
+      font-size: 9px; font-weight: 800; letter-spacing: 0.08em;
+      color: var(--n-600); text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+.cs-wiz .publish-picker {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+.cs-wiz .pub-card {
+      display: flex; gap: 9px; align-items: center;
+      padding: 9px 10px;
+      border-radius: 11px;
+      border: 1.5px solid var(--n-200);
+      background: var(--n-white);
+    }
+.cs-wiz .pub-card.selected { border-color: var(--azul-primario); box-shadow: 0 0 0 3px rgba(61, 80, 242, 0.12); }
+.cs-wiz .pub-ic {
+      width: 26px; height: 26px; border-radius: 7px;
+      background: #eef2ff;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+.cs-wiz .pub-ic svg { width: 14px; height: 14px; stroke: var(--azul-primario); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.cs-wiz .pub-title { font-size: 11px; font-weight: 700; color: var(--n-900); letter-spacing: -0.01em; }
+.cs-wiz .pub-sub { font-size: 8.5px; font-weight: 500; color: var(--n-500); margin-top: 1px; line-height: 1.3; }
+.cs-wiz .summary {
+      padding: 12px 12px 12px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid #e6ebf5;
+      display: flex; flex-direction: column;
+    }
+.cs-wiz .summary-head { display: flex; gap: 10px; align-items: center; padding-bottom: 10px; border-bottom: 1px solid #eef2f6; }
+.cs-wiz .summary-meta { font-size: 10px; font-weight: 500; color: var(--n-500); margin-top: 10px; }
+.cs-wiz .summary-goal-lbl { font-size: 8.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--n-500); margin-top: 8px; text-transform: uppercase; }
+.cs-wiz .goal-row {
+      display: flex; align-items: center; gap: 10px;
+      margin-top: 6px;
+      padding: 9px 12px 9px 10px;
+      background: #f8fafc;
+      border: 1px solid #eef2f6;
+      border-radius: 10px;
+    }
+.cs-wiz .goal-tgt {
+      width: 26px; height: 26px; border-radius: 7px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+.cs-wiz .goal-tgt svg { width: 14px; height: 14px; stroke: var(--n-600); fill: none; stroke-width: 1.8; }
+.cs-wiz .goal-txt { flex: 1; }
+.cs-wiz .goal-main { font-size: 12px; font-weight: 700; color: var(--n-900); display: flex; align-items: center; gap: 6px; }
+.cs-wiz .badge-disc {
+      background: #d1fae5; color: var(--emerald-2);
+      padding: 2px 6px; border-radius: 999px;
+      font-size: 9px; font-weight: 700;
+    }
+.cs-wiz .goal-hint { font-size: 9.5px; font-weight: 500; color: var(--n-500); margin-top: 1px; }
+.cs-wiz .goal-price-box { display: flex; align-items: baseline; gap: 6px; }
+.cs-wiz .goal-price { font-size: 12px; font-weight: 800; color: var(--n-900); }
+.cs-wiz .goal-save { font-size: 10px; font-weight: 700; color: var(--emerald-2); }
+.cs-wiz .w-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin: 4px -22px 0;
+      padding: 12px 22px 14px;
+      border-top: 1px solid #eef2f6;
+      background: #ffffff;
+    }
+.cs-wiz .btn-back {
+      background: transparent; border: none;
+      color: var(--n-500);
+      font-size: 12px; font-weight: 600;
+      font-family: inherit;
+      display: flex; align-items: center; gap: 6px;
+      transition: opacity 0.3s ease;
+    }
+.cs-wiz .btn-back svg { width: 11px; height: 11px; stroke: currentColor; stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.cs-wiz .btn-back.hidden { opacity: 0; }
+.cs-wiz .btn-primary {
+      padding: 0 16px 0 18px;
+      height: 34px;
+      border-radius: 10px;
+      border: none;
+      background: var(--azul-primario);
+      color: #fff;
+      font-family: inherit;
+      font-size: 12.5px; font-weight: 700;
+      letter-spacing: -0.01em;
+      display: flex; align-items: center; gap: 8px;
+      box-shadow: 0 6px 16px rgba(61, 80, 242, 0.32);
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease;
+    }
+.cs-wiz .btn-primary svg { width: 11px; height: 11px; stroke: #fff; stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.cs-wiz .btn-primary.hover, .cs-wiz .btn-start.hover, .cs-wiz .btn-yes.hover { transform: scale(1.04); }
+.cs-wiz .btn-primary.pressed, .cs-wiz .btn-start.pressed, .cs-wiz .btn-yes.pressed { transform: scale(0.94); }
+.cs-wiz .intro {
+      position: absolute;
+      inset: 0;
+      z-index: 30;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 0 26px 64px;
+      background:
+        radial-gradient(60% 45% at 78% 6%, rgba(203, 210, 250, 0.45), transparent 70%),
+        radial-gradient(55% 40% at 12% 70%, rgba(214, 219, 248, 0.35), transparent 70%),
+        #f5f5f7;
+      transition: opacity 0.7s ease;
+    }
+.cs-wiz .intro.is-hidden { opacity: 0; pointer-events: none; }
+.cs-wiz .intro-art { width: 210px; height: auto; display: block; }
+.cs-wiz .intro-title {
+      margin-top: 26px;
+      font-size: 24px; font-weight: 800; color: var(--n-900);
+      letter-spacing: -0.035em; line-height: 1.1;
+    }
+.cs-wiz .intro-sub {
+      margin-top: 10px;
+      max-width: 340px;
+      font-size: 13px; font-weight: 500; color: var(--n-500);
+      line-height: 1.55;
+    }
+.cs-wiz .btn-start {
+      margin-top: 24px;
+      height: 40px;
+      padding: 0 34px;
+      border: none;
+      border-radius: 12px;
+      background: var(--azul-primario);
+      color: #fff;
+      font-family: inherit;
+      font-size: 14px; font-weight: 600;
+      display: flex; align-items: center; gap: 10px;
+      box-shadow: 0 10px 24px rgba(61, 80, 242, 0.3);
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+.cs-wiz .btn-start svg { width: 15px; height: 15px; stroke: #fff; stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.cs-wiz .confirm-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 40;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(30, 41, 59, 0.42);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+.cs-wiz .confirm-overlay.visible { opacity: 1; }
+.cs-wiz .confirm-box {
+      position: relative;
+      width: 68%;
+      padding: 24px 18px 18px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, #ecebfd 0%, #fbfbfe 42%, #ffffff 100%);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 30px 70px rgba(15, 23, 42, 0.28);
+      text-align: center;
+      transform: scale(0.92) translateY(10px);
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+.cs-wiz .confirm-overlay.visible .confirm-box { transform: scale(1) translateY(0); }
+.cs-wiz .confirm-x {
+      position: absolute; top: 14px; right: 14px;
+      width: 16px; height: 16px;
+    }
+.cs-wiz .confirm-x svg { width: 100%; height: 100%; stroke: var(--n-500); stroke-width: 2; fill: none; stroke-linecap: round; }
+.cs-wiz .confirm-art { width: 70px; height: 50px; display: block; margin: 0 auto 10px; }
+.cs-wiz .confirm-stack { display: grid; }
+.cs-wiz .confirm-stack > * { grid-area: 1 / 1; transition: opacity 0.4s ease; }
+.cs-wiz .confirm-success { display: flex; flex-direction: column; justify-content: center; opacity: 0; }
+.cs-wiz .confirm-box.is-success .confirm-ask { opacity: 0; }
+.cs-wiz .confirm-box.is-success .confirm-success { opacity: 1; }
+.cs-wiz .confirm-title {
+      font-size: 16px; font-weight: 800; color: var(--n-900);
+      letter-spacing: -0.025em; line-height: 1.28;
+    }
+.cs-wiz .confirm-sub { margin-top: 8px; font-size: 10.5px; font-weight: 500; color: var(--n-500); line-height: 1.4; }
+.cs-wiz .confirm-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 20px;
+    }
+.cs-wiz .btn-cancel, .cs-wiz .btn-yes {
+      height: 36px;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 11.5px; font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
+    }
+.cs-wiz .btn-cancel {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      color: var(--n-600);
+    }
+.cs-wiz .btn-yes {
+      border: none;
+      color: #fff;
+      background: linear-gradient(90deg, #6366f1 0%, #7c3aed 100%);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.32);
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+.cs-wiz .cursor {
+      position: absolute;
+      width: 26px; height: 26px;
+      z-index: 100; pointer-events: none;
+      opacity: 0;
+      filter: drop-shadow(0 3px 8px rgba(20, 24, 38, 0.18));
+      transition: opacity 0.35s ease;
+    }
+.cs-wiz .cursor.visible { opacity: 1; }
+.cs-wiz .cursor.clicking {
+      transform: scale(0.88);
+      transition: transform 0.1s ease;
+    }
+.cs-wiz .click-ripple {
+      position: absolute;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      left: 50%; top: 50%;
+      margin-left: -20px; margin-top: -20px;
+      border: 2px solid rgba(99, 102, 241, 0.55);
+      pointer-events: none;
+      transform: scale(0);
+      opacity: 0.6;
+    }
+@keyframes cs-wiz-ripple-out {
+      to { transform: scale(2.6); opacity: 0; }
+    }
+.cs-wiz .click-ripple.active { animation: cs-wiz-ripple-out 0.55s ease-out forwards; }
+
+/* Tema oscuro (de tuko-anim-dark.css, solo lo del asistente) */
+html[data-theme="dark"] .cs-wiz, html[data-theme="dark"] .cs-wiz .embedded, html[data-theme="dark"] .cs-wiz .embedded body {
+  background: #161922 !important;
+  color: #e8ebf5 !important;
+}
+html[data-theme="dark"] .cs-wiz .embedded .animation-viewport {
+  background: #161922 !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .cs-wiz .wizard, html[data-theme="dark"] .cs-wiz .embedded .wizard, html[data-theme="dark"] .cs-wiz .wizard, html[data-theme="dark"] .cs-wiz .card, html[data-theme="dark"] .cs-wiz .gb-card, html[data-theme="dark"] .cs-wiz .modal-box, html[data-theme="dark"] .cs-wiz .embedded .wizard, html[data-theme="dark"] .cs-wiz .embedded .card {
+  background: #1a1f2e !important;
+  border-color: rgba(123, 140, 255, 0.16) !important;
+  color: #e8ebf5 !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-fit {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .cs-wiz .embedded .gb-card {
+  border-radius: 28px !important;
+  overflow: hidden !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-tag, html[data-theme="dark"] .cs-wiz .embedded .gb-tag {
+  /* No poner 28px aquí: con altura ~31px el azul se ve pastilla recta */
+  border-radius: 0 0 14px 0 !important;
+}
+html[data-theme="dark"] .cs-wiz .intro, html[data-theme="dark"] .cs-wiz .intro {
+  background:
+    radial-gradient(60% 45% at 78% 6%, rgba(61, 80, 242, 0.18), transparent 70%),
+    radial-gradient(55% 40% at 12% 70%, rgba(61, 80, 242, 0.1), transparent 70%),
+    #161922 !important;
+}
+html[data-theme="dark"] .cs-wiz .intro-title, html[data-theme="dark"] .cs-wiz .w-title, html[data-theme="dark"] .cs-wiz .info-title, html[data-theme="dark"] .cs-wiz .product-name, html[data-theme="dark"] .cs-wiz .field-label, html[data-theme="dark"] .cs-wiz .confirm-title, html[data-theme="dark"] .cs-wiz .preview-title, html[data-theme="dark"] .cs-wiz .pub-title, html[data-theme="dark"] .cs-wiz .goal-main, html[data-theme="dark"] .cs-wiz .goal-price, html[data-theme="dark"] .cs-wiz .intro-title, html[data-theme="dark"] .cs-wiz .w-title, html[data-theme="dark"] .cs-wiz .info-title, html[data-theme="dark"] .cs-wiz .product-name, html[data-theme="dark"] .cs-wiz .field-label, html[data-theme="dark"] .cs-wiz .shop-brand, html[data-theme="dark"] .cs-wiz .shop-title, html[data-theme="dark"] .cs-wiz .shop-price, html[data-theme="dark"] .cs-wiz .shop-qty-num, html[data-theme="dark"] .cs-wiz .sh-title, html[data-theme="dark"] .cs-wiz .gb-title, html[data-theme="dark"] .cs-wiz .gb-today, html[data-theme="dark"] .cs-wiz .gb-sub {
+  color: #f2f3f7 !important;
+}
+html[data-theme="dark"] .cs-wiz .intro-sub, html[data-theme="dark"] .cs-wiz .w-sub, html[data-theme="dark"] .cs-wiz .info-sub, html[data-theme="dark"] .cs-wiz .product-price, html[data-theme="dark"] .cs-wiz .field-help, html[data-theme="dark"] .cs-wiz .hint, html[data-theme="dark"] .cs-wiz .confirm-sub, html[data-theme="dark"] .cs-wiz .preview-sub, html[data-theme="dark"] .cs-wiz .pub-sub, html[data-theme="dark"] .cs-wiz .goal-hint, html[data-theme="dark"] .cs-wiz .summary-meta, html[data-theme="dark"] .cs-wiz .intro-sub, html[data-theme="dark"] .cs-wiz .w-sub, html[data-theme="dark"] .cs-wiz .info-sub, html[data-theme="dark"] .cs-wiz .product-price, html[data-theme="dark"] .cs-wiz .shop-taxes, html[data-theme="dark"] .cs-wiz .hint, html[data-theme="dark"] .cs-wiz .gb-note {
+  color: #b8bfce !important;
+}
+html[data-theme="dark"] .cs-wiz .product-thumb, html[data-theme="dark"] .cs-wiz .info-banner, html[data-theme="dark"] .cs-wiz .product-card, html[data-theme="dark"] .cs-wiz .preview-card, html[data-theme="dark"] .cs-wiz .input, html[data-theme="dark"] .cs-wiz .summary-card, html[data-theme="dark"] .cs-wiz .goal-tgt, html[data-theme="dark"] .cs-wiz .panel-box, html[data-theme="dark"] .cs-wiz .shop-image-box, html[data-theme="dark"] .cs-wiz .info-banner, html[data-theme="dark"] .cs-wiz .product-card, html[data-theme="dark"] .cs-wiz .input, html[data-theme="dark"] .cs-wiz .shop-qty-stepper, html[data-theme="dark"] .cs-wiz .shop-addcart, html[data-theme="dark"] .cs-wiz .shop-buynow, html[data-theme="dark"] .cs-wiz .product-thumb {
+  background: #12141c !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #e8ebf5 !important;
+}
+html[data-theme="dark"] .cs-wiz .shop-topbar {
+  background: #2a2410 !important;
+  color: #f5e6a8 !important;
+}
+html[data-theme="dark"] .cs-wiz .shop-nav {
+  background: transparent !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+html[data-theme="dark"] .cs-wiz .btn-primary, html[data-theme="dark"] .cs-wiz .btn-want, html[data-theme="dark"] .cs-wiz .btn-start, html[data-theme="dark"] .cs-wiz .btn-continue, html[data-theme="dark"] .cs-wiz .btn-copy, html[data-theme="dark"] .cs-wiz .btn-yes, html[data-theme="dark"] .cs-wiz .store-btn, html[data-theme="dark"] .cs-wiz .btn-primary, html[data-theme="dark"] .cs-wiz .btn-want, html[data-theme="dark"] .cs-wiz .btn-start, html[data-theme="dark"] .cs-wiz .btn-continue, html[data-theme="dark"] .cs-wiz .gb-btn, html[data-theme="dark"] .cs-wiz .store-btn {
+  background: #3D50F2 !important;
+  color: #fff !important;
+}
+html[data-theme="dark"] .cs-wiz .add-products, html[data-theme="dark"] .cs-wiz .add-link, html[data-theme="dark"] .cs-wiz .add-products {
+  color: #8fa0ff !important;
+}
+html[data-theme="dark"] .cs-wiz .w-close svg, html[data-theme="dark"] .cs-wiz .shop-nav-icons svg, html[data-theme="dark"] .cs-wiz .w-close svg, html[data-theme="dark"] .cs-wiz .chev {
+  stroke: #e8ebf5 !important;
+}
+html[data-theme="dark"] .cs-wiz .step-bar, html[data-theme="dark"] .cs-wiz .divider, html[data-theme="dark"] .cs-wiz .gb-line, html[data-theme="dark"] .cs-wiz .step-bar {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-dot {
+  background: #1e2436 !important;
+  border-color: rgba(143, 160, 255, 0.22) !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-dot.is-next {
+  background: #24304a !important;
+  border-color: rgba(143, 160, 255, 0.4) !important;
+  box-shadow: 0 0 0 5px rgba(143, 160, 255, 0.08) !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-dot .gb-ic-user {
+  fill: #6b738a !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-dot.is-next .gb-ic-user {
+  fill: #a8b0c4 !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-dot.is-done {
+  background: #14C492 !important;
+  border-color: #14C492 !important;
+  /* Sin halo claro: mismo verde plano que la línea */
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-dot.is-done .gb-ic-check {
+  stroke: #ffffff !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-line-fill {
+  background: #14C492 !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-tag.is-closed {
+  background: #14C492 !important;
+}
+html[data-theme="dark"] .cs-wiz .step-label, html[data-theme="dark"] .cs-wiz .step-label {
+  color: #a8aebc !important;
+}
+html[data-theme="dark"] .cs-wiz .step-item.active .step-label, html[data-theme="dark"] .cs-wiz .step-item.active .step-label {
+  color: #8fa0ff !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-old, html[data-theme="dark"] .cs-wiz .gb-sep {
+  color: #8b92a5 !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-new, html[data-theme="dark"] .cs-wiz .gb-sub b {
+  color: #8fa0ff !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-price-c .gb-new {
+  color: #f2f3f7 !important;
+}
+html[data-theme="dark"] .cs-wiz .modal-overlay {
+  background: rgba(4, 6, 12, 0.72) !important;
+}
+html[data-theme="dark"] .cs-wiz .info-ic, html[data-theme="dark"] .cs-wiz .info-ic {
+  background: rgba(143, 160, 255, 0.14) !important;
+  color: #8fa0ff !important;
+}
+html[data-theme="dark"] .cs-wiz .panels, html[data-theme="dark"] .cs-wiz .panel, html[data-theme="dark"] .cs-wiz .w-footer, html[data-theme="dark"] .cs-wiz .panels, html[data-theme="dark"] .cs-wiz .panel, html[data-theme="dark"] .cs-wiz .w-footer {
+  background: transparent !important;
+  color: #e8ebf5 !important;
+}
+html[data-theme="dark"] .cs-wiz .intro-art .intro-base, html[data-theme="dark"] .cs-wiz .intro-art .intro-base {
+  fill: rgba(143, 160, 255, 0.14) !important;
+}
+html[data-theme="dark"] .cs-wiz .intro-art .intro-dot, html[data-theme="dark"] .cs-wiz .intro-art .intro-dot {
+  fill: rgba(143, 160, 255, 0.5) !important;
+}
+html[data-theme="dark"] .cs-wiz .intro-art .intro-dash, html[data-theme="dark"] .cs-wiz .intro-art .intro-dash {
+  stroke: rgba(143, 160, 255, 0.4) !important;
+}
+html[data-theme="dark"] .cs-wiz .intro-art .intro-frame, html[data-theme="dark"] .cs-wiz .intro-art .intro-frame {
+  fill: #1e2436 !important;
+  stroke: rgba(143, 160, 255, 0.35) !important;
+}
+html[data-theme="dark"] .cs-wiz .intro-art .intro-photo, html[data-theme="dark"] .cs-wiz .intro-art .intro-photo {
+  fill: #2f3a5c !important;
+  stroke: rgba(143, 160, 255, 0.45) !important;
+}
+html[data-theme="dark"] .cs-wiz .intro-art .intro-plus-bg, html[data-theme="dark"] .cs-wiz .intro-art .intro-plus-bg {
+  fill: rgba(143, 160, 255, 0.22) !important;
+}
+html[data-theme="dark"] .cs-wiz .intro-art .intro-plus, html[data-theme="dark"] .cs-wiz .intro-art .intro-plus {
+  stroke: #8fa0ff !important;
+}
+html[data-theme="dark"] .cs-wiz .intro-art .intro-bar, html[data-theme="dark"] .cs-wiz .intro-art .intro-bar {
+  fill: rgba(143, 160, 255, 0.35) !important;
+}
+html[data-theme="dark"] .cs-wiz .intro-art .intro-avatar > circle:first-child, html[data-theme="dark"] .cs-wiz .intro-art .intro-avatar > circle:first-child {
+  fill: #252b3d !important;
+  stroke: rgba(143, 160, 255, 0.45) !important;
+}
+html[data-theme="dark"] .cs-wiz .intro-art .intro-avatar > circle:nth-child(2), html[data-theme="dark"] .cs-wiz .intro-art .intro-avatar > circle:nth-child(2) {
+  fill: #8fa0ff !important;
+}
+html[data-theme="dark"] .cs-wiz .intro-art .intro-avatar > path, html[data-theme="dark"] .cs-wiz .intro-art .intro-avatar > path {
+  stroke: #8fa0ff !important;
+}
+html[data-theme="dark"] .cs-wiz .step-circle, html[data-theme="dark"] .cs-wiz .step-circle {
+  background: #1e2436 !important;
+  border-color: rgba(143, 160, 255, 0.28) !important;
+  color: #8b92a5 !important;
+}
+html[data-theme="dark"] .cs-wiz .step-item.active .step-circle, html[data-theme="dark"] .cs-wiz .step-item.active .step-circle {
+  background: #3D50F2 !important;
+  border-color: #3D50F2 !important;
+  color: #fff !important;
+  box-shadow: 0 0 0 4px rgba(61, 80, 242, 0.28) !important;
+}
+html[data-theme="dark"] .cs-wiz .step-item.done .step-circle, html[data-theme="dark"] .cs-wiz .step-item.done .step-circle {
+  background: rgba(20, 196, 146, 0.16) !important;
+  border-color: #14C492 !important;
+  color: #14C492 !important;
+}
+html[data-theme="dark"] .cs-wiz .step-item.done .step-circle svg, html[data-theme="dark"] .cs-wiz .step-item.done .step-circle svg {
+  stroke: #14C492 !important;
+}
+html[data-theme="dark"] .cs-wiz .step-item.done .step-label, html[data-theme="dark"] .cs-wiz .step-item.done .step-label {
+  color: #14C492 !important;
+}
+html[data-theme="dark"] .cs-wiz .step-item.active .step-label, html[data-theme="dark"] .cs-wiz .step-item.active .step-label {
+  color: #8fa0ff !important;
+}
+html[data-theme="dark"] .cs-wiz .step-bar, html[data-theme="dark"] .cs-wiz .step-bar {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+html[data-theme="dark"] .cs-wiz .step-bar::after, html[data-theme="dark"] .cs-wiz .step-bar::after {
+  background: #3D50F2 !important;
+}
+html[data-theme="dark"] .cs-wiz .preview-card, html[data-theme="dark"] .cs-wiz .when-card, html[data-theme="dark"] .cs-wiz .summary, html[data-theme="dark"] .cs-wiz .theme-card, html[data-theme="dark"] .cs-wiz .pub-card, html[data-theme="dark"] .cs-wiz .preview-card, html[data-theme="dark"] .cs-wiz .when-card, html[data-theme="dark"] .cs-wiz .summary, html[data-theme="dark"] .cs-wiz .theme-card, html[data-theme="dark"] .cs-wiz .pub-card {
+  background: #12141c !important;
+  border-color: rgba(123, 140, 255, 0.16) !important;
+  color: #e8ebf5 !important;
+}
+html[data-theme="dark"] .cs-wiz .theme-card.selected, html[data-theme="dark"] .cs-wiz .pub-card.selected, html[data-theme="dark"] .cs-wiz .theme-card.selected, html[data-theme="dark"] .cs-wiz .pub-card.selected {
+  background: #1a2033 !important;
+  border-color: #3D50F2 !important;
+  box-shadow: 0 0 0 3px rgba(61, 80, 242, 0.22) !important;
+}
+html[data-theme="dark"] .cs-wiz .theme-name, html[data-theme="dark"] .cs-wiz .preview-title, html[data-theme="dark"] .cs-wiz .preview-sub, html[data-theme="dark"] .cs-wiz .when-title, html[data-theme="dark"] .cs-wiz .summary-meta, html[data-theme="dark"] .cs-wiz .summary-goal-lbl, html[data-theme="dark"] .cs-wiz .theme-name, html[data-theme="dark"] .cs-wiz .preview-title, html[data-theme="dark"] .cs-wiz .preview-sub, html[data-theme="dark"] .cs-wiz .when-title, html[data-theme="dark"] .cs-wiz .summary-meta, html[data-theme="dark"] .cs-wiz .summary-goal-lbl {
+  color: #c2c8d6 !important;
+}
+html[data-theme="dark"] .cs-wiz .summary-head, html[data-theme="dark"] .cs-wiz .summary-head {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+html[data-theme="dark"] .cs-wiz .summary .product-name, html[data-theme="dark"] .cs-wiz .summary .product-price, html[data-theme="dark"] .cs-wiz .goal-main, html[data-theme="dark"] .cs-wiz .goal-price, html[data-theme="dark"] .cs-wiz .summary .product-name, html[data-theme="dark"] .cs-wiz .summary .product-price, html[data-theme="dark"] .cs-wiz .goal-main, html[data-theme="dark"] .cs-wiz .goal-price {
+  color: #f2f3f7 !important;
+}
+html[data-theme="dark"] .cs-wiz .goal-row, html[data-theme="dark"] .cs-wiz .goal-row {
+  background: #1a1f2e !important;
+  border-color: rgba(123, 140, 255, 0.14) !important;
+}
+html[data-theme="dark"] .cs-wiz .goal-tgt, html[data-theme="dark"] .cs-wiz .goal-tgt {
+  background: #12141c !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+html[data-theme="dark"] .cs-wiz .goal-tgt svg, html[data-theme="dark"] .cs-wiz .goal-tgt svg {
+  stroke: #8fa0ff !important;
+}
+html[data-theme="dark"] .cs-wiz .pub-ic, html[data-theme="dark"] .cs-wiz .pub-ic {
+  background: rgba(143, 160, 255, 0.14) !important;
+}
+html[data-theme="dark"] .cs-wiz .pub-ic svg, html[data-theme="dark"] .cs-wiz .pub-ic svg {
+  stroke: #8fa0ff !important;
+}
+html[data-theme="dark"] .cs-wiz .swatch, html[data-theme="dark"] .cs-wiz .swatch {
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+html[data-theme="dark"] .cs-wiz .swatch.light, html[data-theme="dark"] .cs-wiz .swatch.light {
+  background: #f2f3f7 !important;
+}
+html[data-theme="dark"] .cs-wiz .swatch.dark, html[data-theme="dark"] .cs-wiz .swatch.dark {
+  background: #0b0d14 !important;
+  border-color: rgba(143, 160, 255, 0.25) !important;
+}
+html[data-theme="dark"] .cs-wiz .confirm-overlay, html[data-theme="dark"] .cs-wiz .confirm-overlay {
+  background: rgba(4, 6, 12, 0.72) !important;
+}
+html[data-theme="dark"] .cs-wiz .confirm-box, html[data-theme="dark"] .cs-wiz .confirm-box {
+  background: linear-gradient(180deg, #1e2436 0%, #161922 48%, #12141c 100%) !important;
+  border: 1px solid rgba(123, 140, 255, 0.22) !important;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45) !important;
+  color: #e8ebf5 !important;
+}
+html[data-theme="dark"] .cs-wiz .confirm-title, html[data-theme="dark"] .cs-wiz .confirm-title {
+  color: #f2f3f7 !important;
+}
+html[data-theme="dark"] .cs-wiz .confirm-sub, html[data-theme="dark"] .cs-wiz .confirm-sub {
+  color: #b8bfce !important;
+}
+html[data-theme="dark"] .cs-wiz .confirm-x svg, html[data-theme="dark"] .cs-wiz .confirm-x svg {
+  stroke: #c2c8d6 !important;
+}
+html[data-theme="dark"] .cs-wiz .btn-cancel, html[data-theme="dark"] .cs-wiz .btn-cancel {
+  background: #1a1f2e !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  color: #e8ebf5 !important;
+}
+html[data-theme="dark"] .cs-wiz .btn-yes, html[data-theme="dark"] .cs-wiz .btn-yes {
+  background: linear-gradient(90deg, #3D50F2 0%, #6366f1 100%) !important;
+  color: #fff !important;
+}
+html[data-theme="dark"] .cs-wiz .confirm-art circle, html[data-theme="dark"] .cs-wiz .confirm-art circle {
+  fill: rgba(143, 160, 255, 0.45) !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-closes, html[data-theme="dark"] .cs-wiz .co-close-lbl {
+  color: #e8ebf5 !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-closes b, html[data-theme="dark"] .cs-wiz .co-close-lbl b, html[data-theme="dark"] .cs-wiz .gb-sub b, html[data-theme="dark"] .cs-wiz .gb-lead b {
+  color: #8fa0ff !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-cd {
+  background: #12141c !important;
+  border-color: rgba(123, 140, 255, 0.18) !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-cd-cell + .gb-cd-cell {
+  border-left-color: rgba(255, 255, 255, 0.12) !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-cd-num {
+  color: #f2f3f7 !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-cd-lbl, html[data-theme="dark"] .cs-wiz .co-cd-lbl {
+  color: #b8bfce !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-status {
+  background: #12141c !important;
+  border-color: rgba(123, 140, 255, 0.18) !important;
+  color: #e8ebf5 !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-status b {
+  color: #8fa0ff !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-status.is-ok {
+  background: rgba(20, 196, 146, 0.12) !important;
+  border-color: rgba(20, 196, 146, 0.35) !important;
+  color: #3ddbb0 !important;
+}
+html[data-theme="dark"] .cs-wiz .st-wait-lbl {
+  color: #b8bfce !important;
+}
+html[data-theme="dark"] .cs-wiz .st-wait-num {
+  color: #f2f3f7 !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-counter {
+  color: #d0d5e0 !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-counter-num {
+  background: rgba(143, 160, 255, 0.2) !important;
+  color: #8fa0ff !important;
+  border: 1px solid rgba(143, 160, 255, 0.35);
+}
+html[data-theme="dark"] .cs-wiz .gb-count span {
+  color: #c2c8d6 !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-card.is-joined #coN, html[data-theme="dark"] .cs-wiz .gb-card[data-state="b"] #cntN, html[data-theme="dark"] .cs-wiz .gb-card[data-state="c"] .gb-count span, html[data-theme="dark"] .cs-wiz .gb-card[data-state="p1"] #cntN, html[data-theme="dark"] .cs-wiz .gb-card[data-state="p2"] .gb-count span {
+  color: #8fa0ff !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-card.is-joined #coOf, html[data-theme="dark"] .cs-wiz .gb-card[data-state="p1"] #cntOf {
+  color: #8b92a5 !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-sub, html[data-theme="dark"] .cs-wiz .gb-lead {
+  color: #d0d5e0 !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-foot {
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+html[data-theme="dark"] .cs-wiz .gb-new {
+  color: #8fa0ff !important;
+}

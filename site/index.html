@@ -252,8 +252,8 @@
   ]
 }
 </script>
-<link rel="preload" as="style" href="/assets/css/home.css?v=a5a15b54">
-<link rel="stylesheet" href="/assets/css/home.css?v=a5a15b54">
+<link rel="preload" as="style" href="/assets/css/home.css?v=02f760d2">
+<link rel="stylesheet" href="/assets/css/home.css?v=02f760d2">
 <link rel="stylesheet" href="/assets/css/tuko-theme.css?v=cf1fd4c8">
 <link rel="prefetch" href="blog/" as="document">
 <link rel="prefetch" href="tuko-ai.html" as="document">
@@ -558,7 +558,7 @@
     </div>
   </div>
   <script src="/assets/js/home-hero.js?v=5d868ce8" defer></script>
-  <script src="/assets/js/home-hero-guion.js?v=ef8b4b15" defer></script>
+  <script src="/assets/js/home-hero-guion.js?v=589a87e9" defer></script>
 </section>
 
 <!-- LOGOS -->
@@ -643,7 +643,7 @@
   </div>
 </section>
 
-<script src="/assets/js/home-sections.js?v=fb42fcff" defer></script>
+<script src="/assets/js/home-sections.js?v=1eb91dbd" defer></script>
 
 <!-- HOW IT WORKS — INTRO -->
 <!-- /tuko:partial:home-hero-es -->
@@ -654,81 +654,630 @@
   <p class="s-sub fade-up d2" data-i18n="how_sub">Tú fijas el descuento, la meta y la fecha. Se inicia cuando el primero se une y tiene 24 horas para meter a otra persona.</p>
 </section>
 
-<!-- El ciclo: los 4 pasos en un anillo que se rellena con el scroll y se cierra al volver al 01 -->
-<section class="hx hx--ring" data-step="0">
-  <div class="hx-sticky">
-    <!-- Fondo: dos luces suaves; la del escenario toma el color del paso -->
-    <div class="hx-bg" aria-hidden="true">
-      <i class="hx-glow hx-glow--a"></i>
-      <i class="hx-glow hx-glow--b"></i>
-    </div>
-    <div class="hx-grid">
-      <div class="hx-side">
-        <!-- El anillo: esfera con marcas, arco que se rellena y cuatro nudos con su título corto (se pueden pulsar) -->
-        <div class="hr-ring">
-          <span class="hr-disc" aria-hidden="true"></span>
-          <!-- El arco va en 4 tramos (uno por paso), cada uno con su degradado: el color sigue el recorrido -->
-          <svg viewBox="0 0 400 400" aria-hidden="true">
-            <defs><linearGradient id="hrG0" gradientUnits="userSpaceOnUse" x1="324.45" y1="75.55" x2="324.45" y2="324.45"><stop offset="0" stop-color="#4257ff"/><stop offset="1" stop-color="#2f72ee"/></linearGradient><linearGradient id="hrG1" gradientUnits="userSpaceOnUse" x1="324.45" y1="324.45" x2="75.55" y2="324.45"><stop offset="0" stop-color="#2f72ee"/><stop offset="1" stop-color="#1898bd"/></linearGradient><linearGradient id="hrG2" gradientUnits="userSpaceOnUse" x1="75.55" y1="324.45" x2="75.55" y2="75.55"><stop offset="0" stop-color="#1898bd"/><stop offset="1" stop-color="#0fa87c"/></linearGradient><linearGradient id="hrG3" gradientUnits="userSpaceOnUse" x1="75.55" y1="75.55" x2="324.45" y2="75.55"><stop offset="0" stop-color="#0fa87c"/><stop offset="1" stop-color="#14c492"/></linearGradient></defs>
-            <circle class="hr-track" cx="200" cy="200" r="176"/>
-            <!-- Rayitas por dentro del arco: se encienden con el color de su tramo cuando el arco pasa por ellas -->
-            <g class="hr-ticks"><line class="hr-tick" style="--t:1;--tc:#4059fe" x1="319.00" y1="108.69" x2="326.14" y2="103.21"/><line class="hr-tick" style="--t:2;--tc:#3f5cfc" x1="329.90" y1="125.00" x2="337.70" y2="120.50"/><line class="hr-tick" style="--t:3;--tc:#3d5efb" x1="338.58" y1="142.60" x2="346.90" y2="139.15"/><line class="hr-tick" style="--t:4;--tc:#3c60f9" x1="344.89" y1="161.18" x2="353.58" y2="158.85"/><line class="hr-tick" style="--t:5;--tc:#3a62f8" x1="348.72" y1="180.42" x2="357.64" y2="179.25"/><line class="hr-tick" style="--t:6;--tc:#3965f7" x1="350.00" y1="200.00" x2="359.00" y2="200.00"/><line class="hr-tick" style="--t:7;--tc:#3767f5" x1="348.72" y1="219.58" x2="357.64" y2="220.75"/><line class="hr-tick" style="--t:8;--tc:#3569f4" x1="344.89" y1="238.82" x2="353.58" y2="241.15"/><line class="hr-tick" style="--t:9;--tc:#346bf2" x1="338.58" y1="257.40" x2="346.90" y2="260.85"/><line class="hr-tick" style="--t:10;--tc:#326ef1" x1="329.90" y1="275.00" x2="337.70" y2="279.50"/><line class="hr-tick" style="--t:11;--tc:#3170ef" x1="319.00" y1="291.31" x2="326.14" y2="296.79"/><line class="hr-tick" style="--t:13;--tc:#2d75ea" x1="291.31" y1="319.00" x2="296.79" y2="326.14"/><line class="hr-tick" style="--t:14;--tc:#2b78e6" x1="275.00" y1="329.90" x2="279.50" y2="337.70"/><line class="hr-tick" style="--t:15;--tc:#297ce2" x1="257.40" y1="338.58" x2="260.85" y2="346.90"/><line class="hr-tick" style="--t:16;--tc:#277fde" x1="238.82" y1="344.89" x2="241.15" y2="353.58"/><line class="hr-tick" style="--t:17;--tc:#2582da" x1="219.58" y1="348.72" x2="220.75" y2="357.64"/><line class="hr-tick" style="--t:18;--tc:#2485d6" x1="200.00" y1="350.00" x2="200.00" y2="359.00"/><line class="hr-tick" style="--t:19;--tc:#2288d1" x1="180.42" y1="348.72" x2="179.25" y2="357.64"/><line class="hr-tick" style="--t:20;--tc:#208bcd" x1="161.18" y1="344.89" x2="158.85" y2="353.58"/><line class="hr-tick" style="--t:21;--tc:#1e8fc9" x1="142.60" y1="338.58" x2="139.15" y2="346.90"/><line class="hr-tick" style="--t:22;--tc:#1c92c5" x1="125.00" y1="329.90" x2="120.50" y2="337.70"/><line class="hr-tick" style="--t:23;--tc:#1a95c1" x1="108.69" y1="319.00" x2="103.21" y2="326.14"/><line class="hr-tick" style="--t:25;--tc:#1799b8" x1="81.00" y1="291.31" x2="73.86" y2="296.79"/><line class="hr-tick" style="--t:26;--tc:#179bb2" x1="70.10" y1="275.00" x2="62.30" y2="279.50"/><line class="hr-tick" style="--t:27;--tc:#169cad" x1="61.42" y1="257.40" x2="53.10" y2="260.85"/><line class="hr-tick" style="--t:28;--tc:#159da7" x1="55.11" y1="238.82" x2="46.42" y2="241.15"/><line class="hr-tick" style="--t:29;--tc:#149fa2" x1="51.28" y1="219.58" x2="42.36" y2="220.75"/><line class="hr-tick" style="--t:30;--tc:#14a09d" x1="50.00" y1="200.00" x2="41.00" y2="200.00"/><line class="hr-tick" style="--t:31;--tc:#13a197" x1="51.28" y1="180.42" x2="42.36" y2="179.25"/><line class="hr-tick" style="--t:32;--tc:#12a392" x1="55.11" y1="161.18" x2="46.42" y2="158.85"/><line class="hr-tick" style="--t:33;--tc:#11a48c" x1="61.42" y1="142.60" x2="53.10" y2="139.15"/><line class="hr-tick" style="--t:34;--tc:#11a587" x1="70.10" y1="125.00" x2="62.30" y2="120.50"/><line class="hr-tick" style="--t:35;--tc:#10a781" x1="81.00" y1="108.69" x2="73.86" y2="103.21"/><line class="hr-tick" style="--t:37;--tc:#0faa7e" x1="108.69" y1="81.00" x2="103.21" y2="73.86"/><line class="hr-tick" style="--t:38;--tc:#10ad80" x1="125.00" y1="70.10" x2="120.50" y2="62.30"/><line class="hr-tick" style="--t:39;--tc:#10af82" x1="142.60" y1="61.42" x2="139.15" y2="53.10"/><line class="hr-tick" style="--t:40;--tc:#11b183" x1="161.18" y1="55.11" x2="158.85" y2="46.42"/><line class="hr-tick" style="--t:41;--tc:#11b485" x1="180.42" y1="51.28" x2="179.25" y2="42.36"/><line class="hr-tick" style="--t:42;--tc:#12b687" x1="200.00" y1="50.00" x2="200.00" y2="41.00"/><line class="hr-tick" style="--t:43;--tc:#12b889" x1="219.58" y1="51.28" x2="220.75" y2="42.36"/><line class="hr-tick" style="--t:44;--tc:#12bb8b" x1="238.82" y1="55.11" x2="241.15" y2="46.42"/><line class="hr-tick" style="--t:45;--tc:#13bd8d" x1="257.40" y1="61.42" x2="260.85" y2="53.10"/><line class="hr-tick" style="--t:46;--tc:#13bf8e" x1="275.00" y1="70.10" x2="279.50" y2="62.30"/><line class="hr-tick" style="--t:47;--tc:#14c290" x1="291.31" y1="81.00" x2="296.79" y2="73.86"/></g>
-            <path class="hr-seg" style="--q:0" stroke="url(#hrG0)" pathLength="1" d="M324.45 75.55A176 176 0 0 1 324.45 324.45"/>
-            <path class="hr-seg" style="--q:1" stroke="url(#hrG1)" pathLength="1" d="M324.45 324.45A176 176 0 0 1 75.55 324.45"/>
-            <path class="hr-seg" style="--q:2" stroke="url(#hrG2)" pathLength="1" d="M75.55 324.45A176 176 0 0 1 75.55 75.55"/>
-            <path class="hr-seg" style="--q:3" stroke="url(#hrG3)" pathLength="1" d="M75.55 75.55A176 176 0 0 1 324.45 75.55"/>
-          </svg>
-          <button type="button" class="hr-node hr-node--0" style="--a:#4257ff;--ad:#8fa0ff;--k:0" aria-label="Paso 01"><b>01</b><span class="hr-label" data-es="Producto y descuento" data-en="Product &amp; discount">Producto y descuento</span></button>
-          <button type="button" class="hr-node hr-node--1" style="--a:#2f72ee;--ad:#74a6ff;--k:1" aria-label="Paso 02"><b>02</b><span class="hr-label" data-es="Abre el grupo" data-en="Opens the group">Abre el grupo</span></button>
-          <button type="button" class="hr-node hr-node--2" style="--a:#1898bd;--ad:#4fcbe3;--k:2" aria-label="Paso 03"><b>03</b><span class="hr-label" data-es="Se une otra persona" data-en="Someone else joins">Se une otra persona</span></button>
-          <button type="button" class="hr-node hr-node--3" style="--a:#0fa87c;--ad:#3fe0b0;--k:3" aria-label="Paso 04"><b>04</b><span class="hr-label" data-es="Se repite solo" data-en="Repeats on its own">Se repite solo</span></button>
-          <span class="hr-comet" aria-hidden="true"></span>
-        </div>
-        <ol class="hx-list">
-          <li class="hx-item" style="--a:#4257ff;--ad:#8fa0ff">
-            <button type="button" class="hx-head"><span class="hx-num">01</span><span class="hx-title" data-i18n="step1_title">Elige producto y descuento</span></button>
-            <div class="hx-body"><p data-i18n="step1_desc">Elige un producto o todos los que quieras de tu catálogo. Decides el descuento y solo se aplica cuando hay 2 personas.</p></div>
-          </li>
-          <li class="hx-item" style="--a:#2f72ee;--ad:#74a6ff">
-            <button type="button" class="hx-head"><span class="hx-num">02</span><span class="hx-title" data-i18n="step2_title">Un cliente abre el grupo</span></button>
-            <div class="hx-body"><p data-i18n="step2_desc">Paga con el descuento ya aplicado y tiene 24 horas para traer a una persona más. La comparte por WhatsApp o la trae tu propio tráfico.</p></div>
-          </li>
-          <li class="hx-item" style="--a:#1898bd;--ad:#4fcbe3">
-            <button type="button" class="hx-head"><span class="hx-num">03</span><span class="hx-title" data-i18n="step3_title">Ya hay una persona dentro. Se une la segunda</span></button>
-            <div class="hx-body"><p data-i18n="step3_desc">Cuando se une la segunda persona, el grupo se completa, se ejecuta el pedido y Tuko abre un grupo nuevo. El botón nunca se apaga.</p></div>
-          </li>
-          <li class="hx-item" style="--a:#0fa87c;--ad:#3fe0b0">
-            <button type="button" class="hx-head"><span class="hx-num">04</span><span class="hx-title" data-i18n="step4_title">Se completa y Tuko abre otro grupo</span></button>
-            <div class="hx-body"><p data-i18n="step4_desc">Cuando el grupo se completa, se ejecutan los pedidos y, a los 5 minutos, Tuko publica un grupo nuevo vacío, listo para el siguiente cliente. Tú no haces nada: se repite hasta que tú digas basta.</p></div>
-          </li>
-        </ol>
-        <span class="hx-rail" aria-hidden="true"><i></i></span>
-        <span class="hx-loop" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M21 4v4.4h-4.4"/></svg></span>
+<!-- El ciclo como una escena fija en 3D que avanza con el scroll (home-how-scene.js): el portátil de la tienda y los móviles de
+     las dos clientas, con la interfaz real de Tuko (asistente «Publicar grupo», popups del móvil del inicio y Estadísticas) -->
+<section class="cs" aria-label="Cómo funciona, paso a paso">
+  <div class="cs-track">
+    <div class="cs-sticky">
+      <!-- Fondo: aurora que toma el color del paso, grano fino y viñeta -->
+      <div class="cs-bg" aria-hidden="true">
+        <i class="cs-aur cs-aur--a"></i><i class="cs-aur cs-aur--b"></i><i class="cs-aur cs-aur--c"></i>
+        <i class="cs-grain"></i>
       </div>
 
-      <div class="hx-stage">
-        <div class="hx-floor" aria-hidden="true"></div>
-        <div class="hx-frame">
-          <!-- Barra de ventana: dónde ocurre cada paso (panel de la tienda / la tienda) -->
-          <div class="hx-bar" aria-hidden="true">
-            <span class="hx-lights"><i></i><i></i><i></i></span>
-            <span class="hx-url">
-              <span class="hx-url-a"><svg viewBox="0 0 16 16"><rect x="2.5" y="2.5" width="4.5" height="4.5" rx="1.2"/><rect x="9" y="2.5" width="4.5" height="4.5" rx="1.2"/><rect x="2.5" y="9" width="4.5" height="4.5" rx="1.2"/><rect x="9" y="9" width="4.5" height="4.5" rx="1.2"/></svg>admin.shopify.com/apps/tuko</span>
-              <span class="hx-url-b"><svg viewBox="0 0 16 16"><rect x="3.5" y="7" width="9" height="6.5" rx="1.6"/><path d="M5.5 7V5.2a2.5 2.5 0 0 1 5 0V7"/></svg>tukostore.com/products/piruleta</span>
-            </span>
-          </div>
-          <iframe class="hx-demo" data-src="/landing-demo/animaciones/01-activar-compra/index.html?v=20261002h" src="about:blank" title="Demo: publicar el grupo en la tienda" data-w="480" data-h="640" data-bar="1"></iframe>
-          <iframe class="hx-demo" data-src="/landing-demo/animaciones/06-reservar-piruleta/index.html?v=20261024b" src="about:blank" title="Demo: comprar el producto y compartir" data-w="380" data-h="566" data-bar="1"></iframe>
-          <iframe class="hx-demo" data-src="/landing-demo/animaciones/07-grupo-completado/index.html?v=20261024b" src="about:blank" title="Demo: grupo completado y estadísticas" data-w="420" data-h="454" data-bar="1"></iframe>
-          <!-- Paso 4: se recorta el margen de la demo para que su tarjeta sea el único marco (sin tarjeta dentro de tarjeta) -->
-          <iframe class="hx-demo" data-src="/landing-demo/animaciones/08-grupo-en-bucle/index.html?v=20261003n" src="about:blank" title="Demo: Tuko abre un grupo nuevo tras cada grupo completado" data-w="420" data-h="454" data-bar="0" data-crop="2 18"></iframe>
+      <div class="cs-grid">
+        <div class="cs-side">
+          <p class="cs-count" aria-hidden="true"><span class="cs-mprog"><i></i><i></i><i></i><i></i></span><b class="cs-count-n">01</b><span>/ 04</span></p>
+          <!-- Los cuatro pasos (mismos textos que ahora). Cada número lleva un anillo que se llena con el scroll -->
+          <ol class="cs-steps">
+            <li class="cs-step" style="--a:#4257ff;--ad:#8fa0ff">
+              <button type="button" class="cs-head"><span class="cs-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="16"/><circle class="cs-ring-on" cx="18" cy="18" r="16" pathLength="1"/></svg><b>01</b></span><span class="cs-t" data-i18n="step1_title">Elige producto y descuento</span></button>
+              <div class="cs-body"><p data-i18n="step1_desc">Elige un producto o todos los que quieras de tu catálogo. Decides el descuento y solo se aplica cuando hay 2 personas.</p></div>
+            </li>
+            <li class="cs-step" style="--a:#2f72ee;--ad:#74a6ff">
+              <button type="button" class="cs-head"><span class="cs-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="16"/><circle class="cs-ring-on" cx="18" cy="18" r="16" pathLength="1"/></svg><b>02</b></span><span class="cs-t" data-i18n="step2_title">Un cliente abre el grupo</span></button>
+              <div class="cs-body"><p data-i18n="step2_desc">Paga con el descuento ya aplicado y tiene 24 horas para traer a una persona más. La comparte por WhatsApp o la trae tu propio tráfico.</p></div>
+            </li>
+            <li class="cs-step" style="--a:#1898bd;--ad:#4fcbe3">
+              <button type="button" class="cs-head"><span class="cs-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="16"/><circle class="cs-ring-on" cx="18" cy="18" r="16" pathLength="1"/></svg><b>03</b></span><span class="cs-t" data-i18n="step3_title">Ya hay una persona dentro. Se une la segunda</span></button>
+              <div class="cs-body"><p data-i18n="step3_desc">Cuando se une la segunda persona, el grupo se completa, se ejecuta el pedido y Tuko abre un grupo nuevo. El botón nunca se apaga.</p></div>
+            </li>
+            <li class="cs-step" style="--a:#0fa87c;--ad:#3fe0b0">
+              <button type="button" class="cs-head"><span class="cs-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="16"/><circle class="cs-ring-on" cx="18" cy="18" r="16" pathLength="1"/></svg><b>04</b></span><span class="cs-t" data-i18n="step4_title">Se completa y Tuko abre otro grupo</span></button>
+              <div class="cs-body"><p data-i18n="step4_desc">Cuando el grupo se completa, se ejecutan los pedidos y, a los 5 minutos, Tuko publica un grupo nuevo vacío, listo para el siguiente cliente. Tú no haces nada: se repite hasta que tú digas basta.</p></div>
+            </li>
+          </ol>
         </div>
-        <div class="hx-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+        <div class="cs-stage" aria-hidden="true">
+          <!-- El mundo mide 900×600; la cámara (como-funciona.js) lo escala, lo desplaza y lo gira en 3D -->
+          <div class="cs-world">
+
+            <!-- El suelo: un plano horizontal con un foco de luz, rejilla que se desvanece y las sombras de contacto -->
+            <div class="cs-floor">
+              <i class="cs-spot"></i>
+              <i class="cs-shadow cs-shadow--laptop"></i>
+              <i class="cs-shadow cs-shadow--a"></i>
+              <i class="cs-shadow cs-shadow--b"></i>
+            </div>
+
+            <!-- ── EL PORTÁTIL: la tienda ── -->
+            <div class="cs-laptop">
+              <!-- La base: el teclado visto en perspectiva y el canto delantero -->
+              <div class="cs-deck"><i class="cs-keys"></i><i class="cs-pad"></i></div>
+              <div class="cs-lip"><i></i></div>
+
+              <!-- La tapa: por delante la pantalla, por detrás el aluminio con el logo de Tuko -->
+              <div class="cs-lid">
+                <div class="cs-lid-back"><img src="/assets/favicon.svg" alt="" width="64" height="64"></div>
+                <div class="cs-lid-front">
+                  <span class="cs-cam-dot"></span>
+                  <div class="cs-screen">
+                    <div class="cs-wbar">
+                      <span class="cs-lights"><i></i><i></i><i></i></span>
+                      <span class="cs-url">
+                        <span class="cs-url-x" data-v="admin"><svg viewBox="0 0 16 16"><rect x="3.5" y="7" width="9" height="6.5" rx="1.6"/><path d="M5.5 7V5.2a2.5 2.5 0 0 1 5 0V7"/></svg>admin.shopify.com/apps/tuko</span>
+                        <span class="cs-url-x" data-v="store"><svg viewBox="0 0 16 16"><rect x="3.5" y="7" width="9" height="6.5" rx="1.6"/><path d="M5.5 7V5.2a2.5 2.5 0 0 1 5 0V7"/></svg>tukostore.com/products/piruleta</span>
+                        <span class="cs-url-x" data-v="orders"><svg viewBox="0 0 16 16"><rect x="3.5" y="7" width="9" height="6.5" rx="1.6"/><path d="M5.5 7V5.2a2.5 2.5 0 0 1 5 0V7"/></svg>admin.shopify.com/apps/tuko/estadisticas</span>
+                      </span>
+                    </div>
+
+                    <!-- 01 · La app de Tuko dentro de Shopify: el asistente real «Publicar grupo» (Empezar → Grupo → Apariencia → Publicar) -->
+                    <div class="cs-view cs-admin" data-view="admin">
+                      <div class="cs-topbar"><span class="cs-store-mark">T</span><b>Tuko Store</b><span class="cs-search">Buscar</span></div>
+                      <aside class="cs-nav">
+                        <span>Inicio</span><span>Pedidos</span><span>Productos</span><span>Clientes</span>
+                        <span class="cs-nav-app is-on"><i></i>Tuko</span>
+                      </aside>
+                      <div class="cs-main cs-main--app">
+                        <div class="cs-wiz">
+                                <div class="wizard">                          
+                                  <div class="w-header">                          
+                                    <div>                          
+                                      <div class="w-title" data-t="wTitle">Publicar grupo</div>                          
+                                      <div class="w-sub" data-t="wSub">Completa los pasos y publica en tu tienda</div>                          
+                                    </div>                          
+                                    <div class="w-close" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div>                          
+                                  </div>                          
+                                                    
+                                  <div class="stepper">                          
+                                    <div class="step-item active">                          
+                                      <div class="step-circle">                          
+                                        <span class="step-num">1</span>                          
+                                        <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>                          
+                                      </div>                          
+                                      <div class="step-label" data-t="step1">GRUPO</div>                          
+                                    </div>                          
+                                    <div class="step-bar"></div>                          
+                                    <div class="step-item">                          
+                                      <div class="step-circle">                          
+                                        <span class="step-num">2</span>                          
+                                        <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>                          
+                                      </div>                          
+                                      <div class="step-label" data-t="step2">APARIENCIA</div>                          
+                                    </div>                          
+                                    <div class="step-bar"></div>                          
+                                    <div class="step-item">                          
+                                      <div class="step-circle">                          
+                                        <span class="step-num">3</span>                          
+                                        <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>                          
+                                      </div>                          
+                                      <div class="step-label" data-t="step3">PUBLICAR</div>                          
+                                    </div>                          
+                                  </div>                          
+                                                    
+                                  <div class="info-banner">                          
+                                    <div class="info-ic" data-ic="1" aria-hidden="true">                          
+                                      <svg class="ic-1" viewBox="0 0 24 24">                          
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>                          
+                                        <circle cx="9" cy="7" r="4"/>                          
+                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>                          
+                                      </svg>                          
+                                      <svg class="ic-2" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.83 2.83 0 0 0-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg>                          
+                                      <svg class="ic-3" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.2l2.4 2.4 4.6-4.8"/></svg>                          
+                                    </div>                          
+                                    <div class="info-txt">                          
+                                      <div class="info-title">Configura tu grupo de compra</div>                          
+                                      <div class="info-sub">Elige el producto, las personas, el descuento y el tiempo.</div>                          
+                                    </div>                          
+                                  </div>                          
+                                                    
+                                  <div class="panels">                          
+                                    <!-- PASO 1 · GRUPO -->                          
+                                    <div class="panel active">                          
+                                      <div>                          
+                                        <div class="field-label" data-t="productLabel">Producto</div>                          
+                                        <div class="product-card">                          
+                                          <div class="product-thumb"><img src="/landing-demo/animaciones/01-activar-compra/piruletas.jpg" alt="" width="40" height="40"></div>                          
+                                          <div>                          
+                                            <div class="product-name" data-t="productName">Pack de Piruletas</div>                          
+                                            <div class="product-price" data-t="price">80,00 €</div>                          
+                                          </div>                          
+                                        </div>                          
+                                        <div class="add-products" style="margin-top:10px"><span>+</span><span data-t="addProducts">Añadir productos</span></div>                          
+                                      </div>                          
+                                                    
+                                      <div class="row-2">                          
+                                        <div class="field">                          
+                                          <div class="field-label" data-t="sizeLabel">Tamaño del grupo</div>                          
+                                          <div class="input"><span>2</span><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>                          
+                                        </div>                          
+                                        <div class="field">                          
+                                          <div class="field-label" data-t="discLabel">Porcentaje de descuento</div>                          
+                                          <div class="input strong"><span>15</span></div>                          
+                                        </div>                          
+                                      </div>                          
+                                                    
+                                      <div class="hint" data-t="hint">Con 2 personas, el descuento será del 15% · Precio final 68,00 €</div>                          
+                                                    
+                                      <div>                          
+                                        <div class="field-label" data-t="timeLabel">Tiempo límite</div>                          
+                                        <div class="field-help" data-t="timeHelp">El reloj arranca cuando entra el primer comprador.</div>                          
+                                        <div class="input"><span>24 h</span><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>                          
+                                      </div>                          
+                                    </div>                          
+                                                    
+                                    <!-- PASO 2 · APARIENCIA -->                          
+                                    <div class="panel">                          
+                                      <div class="preview-card">                          
+                                        <div class="preview-title" data-t="previewTitle">Vista previa del botón</div>                          
+                                        <div class="preview-sub" data-t="previewSub">Así se verá en tu tienda</div>                          
+                                        <div class="store-btn" data-t="storeBtn">Cómpralo por 68,00€</div>                          
+                                      </div>                          
+                                      <div>                          
+                                        <div class="field-label" data-t="styleLabel">Estilo del botón</div>                          
+                                        <div class="theme-picker">                          
+                                          <div class="theme-card">                          
+                                            <div class="swatch light"></div>                          
+                                            <div class="theme-name" data-t="themeLight">Tema claro</div>                          
+                                          </div>                          
+                                          <div class="theme-card selected">                          
+                                            <div class="swatch dark"></div>                          
+                                            <div class="theme-name" data-t="themeDark">Tema oscuro</div>                          
+                                          </div>                          
+                                          <div class="theme-card">                          
+                                            <div class="swatch custom"></div>                          
+                                            <div class="theme-name" data-t="themeCustom">Personalizado</div>                          
+                                          </div>                          
+                                        </div>                          
+                                      </div>                          
+                                      <div>                          
+                                        <div class="field-label" data-t="textLabel">Texto del botón</div>                          
+                                        <div class="input placeholder"><span data-t="storeBtn">Cómpralo por 68,00€</span></div>                          
+                                      </div>                          
+                                    </div>                          
+                                                    
+                                    <!-- PASO 3 · PUBLICAR -->                          
+                                    <div class="panel">                          
+                                      <div class="when-card">                          
+                                        <div class="when-title" data-t="when">¿Cuándo quieres activarlo?</div>                          
+                                        <div class="publish-picker">                          
+                                          <div class="pub-card selected">                          
+                                            <div class="pub-ic">                          
+                                              <svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>                          
+                                            </div>                          
+                                            <div>                          
+                                              <div class="pub-title" data-t="pubNow">Publicar ahora</div>                          
+                                              <div class="pub-sub" data-t="pubNowSub">Visible en tu tienda al instante</div>                          
+                                            </div>                          
+                                          </div>                          
+                                          <div class="pub-card">                          
+                                            <div class="pub-ic">                          
+                                              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>                          
+                                            </div>                          
+                                            <div>                          
+                                              <div class="pub-title" data-t="schedule">Programar</div>                          
+                                              <div class="pub-sub" data-t="scheduleSub">Elige fecha y hora de inicio</div>                          
+                                            </div>                          
+                                          </div>                          
+                                        </div>                          
+                                      </div>                          
+                                                    
+                                      <div class="summary">                          
+                                        <div class="summary-head">                          
+                                          <div class="product-thumb framed"><img src="/landing-demo/animaciones/01-activar-compra/piruletas.jpg" alt="" width="34" height="34"></div>                          
+                                          <div>                          
+                                            <div class="product-name" data-t="productName">Pack de Piruletas</div>                          
+                                            <div class="product-price" data-t="price">80,00 €</div>                          
+                                          </div>                          
+                                        </div>                          
+                                        <div class="summary-meta" data-t="summaryMeta">2 personas · 24 h · Tema oscuro</div>                          
+                                        <div class="summary-goal-lbl" data-t="goalLbl">Objetivo</div>                          
+                                        <div class="goal-row">                          
+                                          <div class="goal-tgt">                          
+                                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>                          
+                                          </div>                          
+                                          <div class="goal-txt">                          
+                                            <div class="goal-main"><span data-t="goalMain">2 personas</span> <span class="badge-disc">−15%</span></div>                          
+                                            <div class="goal-hint" data-t="goalHint">Si se llena</div>                          
+                                          </div>                          
+                                          <div class="goal-price-box">                          
+                                            <span class="goal-price" data-t="finalPrice">68,00 €</span>                          
+                                            <span class="goal-save" data-t="save">−12,00 €</span>                          
+                                          </div>                          
+                                        </div>                          
+                                      </div>                          
+                                    </div>                          
+                                  </div>                          
+                                                    
+                                  <div class="w-footer">                          
+                                    <span class="btn-back hidden"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg><span data-t="back">Atrás</span></span>                          
+                                    <span class="btn-primary">                          
+                                      <span>Continuar</span>                          
+                                      <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>                          
+                                    </span>                          
+                                  </div>                          
+                                                    
+                                  <!-- Intro -->                          
+                                  <div class="intro">                          
+                                    <svg class="intro-art" viewBox="0 0 210 150" aria-hidden="true">                          
+                                      <circle class="intro-dot" cx="22" cy="28" r="3.2" fill="#c9cff6"/>                          
+                                      <circle class="intro-dot" cx="186" cy="42" r="3.2" fill="#c9cff6"/>                          
+                                      <ellipse class="intro-base" cx="105" cy="138" rx="86" ry="9" fill="#e4e6f6"/>                          
+                                      <path class="intro-dash" d="M40 76 Q48 54 70 48" fill="none" stroke="#b8bff0" stroke-width="1.6" stroke-dasharray="4 4"/>                          
+                                      <rect class="intro-frame" x="70" y="38" width="70" height="74" rx="11" fill="#fff" stroke="#dde1fb" stroke-width="2"/>                          
+                                      <rect class="intro-photo" x="78" y="46" width="54" height="42" rx="7" fill="#eef0fd" stroke="#c6ccf4" stroke-width="1.5"/>                          
+                                      <circle class="intro-plus-bg" cx="105" cy="67" r="9" fill="#dde1f6"/>                          
+                                      <path class="intro-plus" d="M105 62v10M100 67h10" stroke="#8a91b4" stroke-width="1.6" stroke-linecap="round"/>                          
+                                      <rect class="intro-bar" x="89" y="96" width="32" height="5" rx="2.5" fill="#dde1f6"/>                          
+                                      <g class="intro-avatar">                          
+                                        <circle cx="105" cy="14" r="12" fill="#f6f7fc" stroke="#d6daf1" stroke-width="1.4"/>                          
+                                        <circle cx="105" cy="11" r="4" fill="#d2d6e2"/>                          
+                                        <path d="M97 22c1.4-3.6 4.2-5 8-5s6.6 1.4 8 5" fill="none" stroke="#d2d6e2" stroke-width="2"/>                          
+                                      </g>                          
+                                      <g class="intro-avatar">                          
+                                        <circle cx="34" cy="90" r="14" fill="#f6f7fc" stroke="#d6daf1" stroke-width="1.4"/>                          
+                                        <circle cx="34" cy="86.5" r="4.6" fill="#d2d6e2"/>                          
+                                        <path d="M24.5 100c1.6-4 4.8-5.8 9.5-5.8s7.9 1.8 9.5 5.8" fill="none" stroke="#d2d6e2" stroke-width="2.2"/>                          
+                                      </g>                          
+                                      <g class="intro-avatar">                          
+                                        <circle cx="176" cy="90" r="14" fill="#f6f7fc" stroke="#d6daf1" stroke-width="1.4"/>                          
+                                        <circle cx="176" cy="86.5" r="4.6" fill="#d2d6e2"/>                          
+                                        <path d="M166.5 100c1.6-4 4.8-5.8 9.5-5.8s7.9 1.8 9.5 5.8" fill="none" stroke="#d2d6e2" stroke-width="2.2"/>                          
+                                      </g>                          
+                                    </svg>                          
+                                    <div class="intro-title" data-t="wTitle">Publicar grupo</div>                          
+                                    <div class="intro-sub" data-t="introSub">Configura y publica una compra colectiva en pocos pasos. Simple, guiado y listo para tu tienda.</div>                          
+                                    <span class="btn-start">                          
+                                      <span data-t="start">Empezar</span>                          
+                                      <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>                          
+                                    </span>                          
+                                  </div>                          
+                                                    
+                                  <!-- Confirmación -->                          
+                                  <div class="confirm-overlay">                          
+                                    <div class="confirm-box">                          
+                                      <div class="confirm-x" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div>                          
+                                      <svg class="confirm-art" viewBox="0 0 70 50" aria-hidden="true">                          
+                                        <defs>                          
+                                          <linearGradient id="csRkGrad" x1="0" y1="1" x2="1" y2="0">                          
+                                            <stop offset="0" stop-color="#6366f1"/>                          
+                                            <stop offset="1" stop-color="#a855f7"/>                          
+                                          </linearGradient>                          
+                                        </defs>                          
+                                        <circle cx="10" cy="14" r="2" fill="#c4b5fd"/>                          
+                                        <circle cx="60" cy="26" r="2" fill="#c4b5fd"/>                          
+                                        <circle cx="16" cy="44" r="1.4" fill="#ddd6fe"/>                          
+                                        <g transform="translate(21 4) scale(1.75)" fill="none" stroke="url(#csRkGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">                          
+                                          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>                          
+                                          <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>                          
+                                          <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>                          
+                                          <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>                          
+                                        </g>                          
+                                      </svg>                          
+                                      <div class="confirm-stack">                          
+                                        <div class="confirm-ask">                          
+                                          <div class="confirm-title" data-t="confirmTitle">¿Estás seguro de que quieres activar el grupo?</div>                          
+                                          <div class="confirm-sub" data-t="confirmSub">Los clientes podrán unirse desde tu tienda.</div>                          
+                                          <div class="confirm-actions">                          
+                                            <div class="btn-cancel" data-t="cancel">Cancelar</div>                          
+                                            <div class="btn-yes" data-t="yes">Sí, activar grupo</div>                          
+                                          </div>                          
+                                        </div>                          
+                                        <div class="confirm-success">                          
+                                          <div class="confirm-title" data-t="successTitle">Se ha activado el grupo exitosamente</div>                          
+                                          <div class="confirm-sub" data-t="successSub">Míralo en tu tienda.</div>                          
+                                        </div>                          
+                                      </div>                          
+                                    </div>                          
+                                  </div>                          
+                                </div>
+                        </div>
+                      </div>
+                      <span class="cs-cursor"><svg viewBox="0 0 24 24"><path d="M5 3l14 8-6.2 1.6L10 19z"/></svg><i></i></span>
+                    </div>
+
+                    <!-- 02-03 · La ficha del producto en la tienda (tema Dawn), con el botón real de Tuko -->
+                    <div class="cs-view cs-store" data-view="store">
+                      <div class="cs-shop"><b>Tuko Store</b><span><svg viewBox="0 0 20 20"><circle cx="9" cy="9" r="5.5"/><path d="M13 13l4 4"/></svg><svg viewBox="0 0 20 20"><circle cx="10" cy="7" r="3.5"/><path d="M3.5 17.5c.9-3.3 3.4-5 6.5-5s5.6 1.7 6.5 5"/></svg><svg viewBox="0 0 20 20"><path d="M4 7h12l-1 10H5Z"/><path d="M7.5 7V5.5a2.5 2.5 0 0 1 5 0V7"/></svg></span></div>
+                      <div class="cs-pdp">
+                        <div class="cs-pdp-img"><img src="/landing-demo/animaciones/01-activar-compra/piruletas.jpg" alt="" width="200" height="200"></div>
+                        <div class="cs-pdp-info">
+                          <p class="cs-pdp-name">Piruleta Pirulín</p>
+                          <p class="cs-pdp-price">80,00 € <span>Impuestos incluidos.</span></p>
+                          <p class="cs-opt-l">Sabor</p>
+                          <div class="cs-opts"><span>Fresa</span><span>Limón</span><span class="is-on">Mix</span></div>
+                          <div class="cs-buy"><span class="cs-qty"><i>−</i><b>1</b><i>+</i></span><span class="cs-cart">Añadir al carrito</span></div>
+                          <span class="cs-tuko-btn">Precio grupal 68,00 €</span>
+                          <div class="cs-acc"><span>Descripción</span><span>Envío y devoluciones</span></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 04 · Estadísticas de la app de Tuko (la pantalla real): el grupo cerrado sube los números y el gráfico -->
+                    <div class="cs-view cs-orders cs-stats" data-view="orders">
+                      <div class="cs-topbar"><span class="cs-store-mark">T</span><b>Tuko Store</b><span class="cs-search">Buscar</span></div>
+                      <div class="cs-st">
+                        <p class="cs-st-h">Estadísticas</p>
+                        <p class="cs-st-s">Visualiza el rendimiento de tus grupos de compra grupal</p>
+                        <div class="cs-st-pills"><span>Hoy</span><span>Esta semana</span><span>Este mes</span><span class="is-on">Todo</span></div>
+                        <div class="cs-kpis">
+                          <div class="cs-kpi" data-k="0"><span class="cs-kpi-l">Grupos activos</span><i class="cs-ki cs-ki--blue"><svg viewBox="0 0 24 24"><path d="M12 3 3 7.5l9 4.5 9-4.5z"/><path d="m3 12 9 4.5 9-4.5"/><path d="m3 16.5 9 4.5 9-4.5"/></svg></i><b class="cs-kv">1</b><em class="cs-kpi-tag">Programados: 0</em></div>
+                          <div class="cs-kpi" data-k="1"><span class="cs-kpi-l">Grupos exitosos</span><i class="cs-ki cs-ki--green"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12.3 2.8 2.8L16 9.6"/></svg></i><b class="cs-kv">38</b></div>
+                          <div class="cs-kpi" data-k="2"><span class="cs-kpi-l">Personas totales</span><i class="cs-ki cs-ki--violet"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><path d="M15.5 5.2a3 3 0 0 1 0 5.6M17.5 14.7c1.6.6 2.7 2.2 3 4.8"/></svg></i><b class="cs-kv">76</b></div>
+                          <div class="cs-kpi" data-k="3"><span class="cs-kpi-l">Ingresos generados</span><i class="cs-ki cs-ki--orange"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M16.5 7.5c-.6-1.4-2.3-2.3-4.5-2.3-2.6 0-4.3 1.3-4.3 3.2 0 4.4 9 2.4 9 6.9 0 2-1.9 3.4-4.7 3.4-2.4 0-4.3-1-4.9-2.7"/></svg></i><b class="cs-kv">5.168,00 €</b></div>
+                          <div class="cs-kpi" data-k="4"><span class="cs-kpi-l">Tasa de éxito</span><i class="cs-ki cs-ki--teal"><svg viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></i><b class="cs-kv">90%</b></div>
+                        </div>
+                        <div class="cs-chart">
+                          <div class="cs-chart-top"><b>Grupos exitosos por mes</b><span class="cs-seg"><i>Semanal</i><i class="is-on">Mensual</i><i>Anual</i></span></div>
+                          <div class="cs-plot">
+                            <span class="cs-gl" style="--y:0"></span><span class="cs-gl" style="--y:0.5"></span><span class="cs-gl" style="--y:1"></span>
+                            <div class="cs-bars">
+                              <span class="cs-bar"><i></i><em>May</em></span><span class="cs-bar"><i></i><em>Jun</em></span><span class="cs-bar"><i></i><em>Jul</em></span>
+                              <span class="cs-bar"><i></i><em>Ago</em></span><span class="cs-bar"><i></i><em>Sep</em></span>
+                              <span class="cs-bar cs-bar--now"><i></i><b class="cs-tip">8 grupos exitosos</b><em>Oct</em></span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <span class="cs-dim"></span>
+                    <span class="cs-glare"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- El enlace de WhatsApp sale del botón de Lucía y vuela, por delante de los dos móviles, hasta el chat de Marta -->
+            <div class="cs-trail"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="cs-fly">
+              <i class="cs-fly-wa"><svg viewBox="0 0 24 24"><path class="wa-b" d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.9 21l4.4-1.1A9.2 9.2 0 1 0 12 2.8z"/><path class="wa-p" d="M9.2 7.6c.3 0 .5 0 .7.5l.7 1.6c.1.3 0 .5-.1.7l-.5.6c-.1.2-.1.4 0 .5.6 1.1 1.5 2 2.6 2.6.2.1.4.1.5-.1l.6-.7c.2-.2.4-.2.6-.1l1.6.8c.3.1.4.3.4.5 0 .9-.7 1.7-1.6 1.8-.8.1-2.6-.3-4.4-2.1S8 10.2 8.1 9.4c.1-.9.6-1.8 1.1-1.8z"/></svg></i>
+              <img src="/landing-demo/animaciones/01-activar-compra/piruletas.jpg" alt="" width="34" height="34">
+              <span><b>Piruleta Pirulín</b>Hoy 68,00 € si somos dos</span>
+            </div>
+
+            <!-- ── MÓVIL A: Lucía, la primera clienta (interfaz real de Tuko: ficha, popup, pago y compartir) ── -->
+            <div class="cs-phone cs-phone--a">
+              <div class="cs-hg hero--guion" data-step="0">
+                <div class="hg-phone">
+                  <div class="hg-screen">
+                    <span class="hg-island"></span>
+                    <span class="hg-glare"></span>
+                    <div class="hg-statusbar">
+                      <b>9:41</b>
+                      <span class="hg-sys"><svg class="hg-sig" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg class="hg-wifi" viewBox="0 0 18 13"><path d="M1.6 4.7a10.4 10.4 0 0 1 14.8 0M4.4 7.6a6.4 6.4 0 0 1 9.2 0" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/><circle cx="9" cy="11" r="1.6"/></svg><svg class="hg-bat" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.5" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="20" height="9" rx="2"/><path d="M25 4.5v4a2 2 0 0 0 0-4z" opacity=".45"/></svg></span>
+                    </div>
+                    <div class="hg-store">
+                      <b>Tuko Store</b>
+                      <span class="hg-store-icons"><svg viewBox="0 0 20 20"><circle cx="9" cy="9" r="5.5"/><path d="M13 13l4 4"/></svg><svg viewBox="0 0 20 20"><circle cx="10" cy="7" r="3.5"/><path d="M3.5 17.5c.9-3.3 3.4-5 6.5-5s5.6 1.7 6.5 5"/></svg><svg viewBox="0 0 20 20"><path d="M4 6h12l-1.2 10H5.2z"/><path d="M7.5 6V5a2.5 2.5 0 0 1 5 0v1"/></svg></span>
+                    </div>
+                    <div class="hg-page">
+                    <div class="hg-product">
+                      <div class="hg-shot"><img src="/landing-demo/animaciones/01-activar-compra/piruletas.jpg" alt="" width="500" height="500" decoding="async"></div>
+                      <p class="hg-name">Piruleta Pirulín</p>
+                      <p class="hg-price">80,00 € <span>Impuestos incluidos.</span></p>
+                      <p class="hg-opt-label">Sabor</p>
+                      <div class="hg-opts"><span>Fresa</span><span>Limón</span><span class="is-on">Mix</span></div>
+                      <div class="hg-buy-row">
+                        <span class="hg-qty"><i>−</i><b>1</b><i>+</i></span>
+                        <span class="hg-btn hg-btn--cart">Añadir al carrito</span>
+                      </div>
+                      <span class="hg-btn hg-btn--tuko"><span>Precio grupal 68,00 €</span><i class="hg-tap"></i></span>
+                      <div class="hg-acc"><span>Descripción</span><span>Envío y devoluciones</span></div>
+                    </div>
+                    </div>
+                  
+                    <span class="hg-fsp-dim"></span>
+                    <div class="hg-fsp">
+                      <span class="hg-tag"><span class="hg-tag-in">Dentro</span><span class="hg-tag-done">Cerrado</span></span>
+                      <span class="hg-fsp-x"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></span>
+                      <div class="hg-fsp-scroll">
+                        <div class="hg-z1">
+                          <div class="hg-v hg-v0">
+                            <p class="hg-lead"><s>80,00 €</s><span>Hoy <b>68,00 €</b></span></p>
+                            <p class="hg-sub">Sé el primero de 2</p>
+                          </div>
+                          <div class="hg-v hg-v1">
+                            <p class="hg-title">Ya estás dentro</p>
+                            <p class="hg-sub">Falta <b>1 persona</b> para cerrar este grupo</p>
+                          </div>
+                          <div class="hg-v hg-v2">
+                            <p class="hg-title hg-title--done">Grupo cerrado</p>
+                          </div>
+                        </div>
+                        <div class="hg-goal">
+                          <p class="hg-count"><b class="hg-odo" data-odo="n">0</b><span class="hg-de">de</span><span class="hg-tot">2</span></p>
+                          <div class="hg-gdots">
+                            <span class="hg-dot hg-dot--1"><svg class="hg-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20.5c.9-4 4-6.5 8-6.5s7.1 2.5 8 6.5z"/></svg><svg class="hg-check" viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9"/></svg></span>
+                            <span class="hg-bar"><i></i></span>
+                            <span class="hg-dot hg-dot--2"><svg class="hg-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20.5c.9-4 4-6.5 8-6.5s7.1 2.5 8 6.5z"/></svg><svg class="hg-check" viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9"/></svg></span>
+                            <span class="hg-bloom"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                          </div>
+                        </div>
+                        <div class="hg-timer">
+                          <p class="hg-timer-t"><span class="hg-w0">El reloj arranca <em>contigo</em></span><span class="hg-w1">Se cierra en</span></p>
+                          <div class="hg-tbox"><span><b class="hg-odo" data-odo="h">24</b><i>Horas</i></span><span><b class="hg-odo" data-odo="m">00</b><i>Minutos</i></span><span><b class="hg-odo" data-odo="s">00</b><i>Segundos</i></span></div>
+                          <p class="hg-timer-sub"><span class="hg-w0">Entras tú, y tienes 24 h para que entre otra persona.</span><span class="hg-w1">La primera persona que entre por tu enlace cierra el grupo y <b>los dos pagáis 68,00 €</b></span></p>
+                        </div>
+                        <div class="hg-done">
+                          <p class="hg-done-t">¡Lo conseguisteis! Grupo completo.</p>
+                          <div class="hg-done-row">
+                            <img src="/landing-demo/animaciones/01-activar-compra/piruletas.jpg" alt="" width="500" height="500" decoding="async">
+                            <p><b>Piruleta Pirulín</b><span><s>80,00 €</s> <strong>68,00 €</strong> <em>-15%</em></span></p>
+                          </div>
+                          <p class="hg-done-box">El próximo grupo abre automáticamente en unos minutos.</p>
+                        </div>
+                        <div class="hg-how">
+                          <p class="hg-how-t">¿Cómo funciona?</p>
+                          <span class="hg-how-i"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+                          <p class="hg-how-h">Entras y pagas 68,00 €</p>
+                          <p class="hg-how-p">Ahora, en el checkout de la tienda.</p>
+                        </div>
+                      </div>
+                      <div class="hg-foot">
+                        <span class="hg-cta"><span class="hg-c0">Entrar por 68,00 €</span><span class="hg-c1"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.3 10.7l7.4-4.4M8.3 13.3l7.4 4.4"/></svg>Compartir y cerrar el grupo</span></span>
+                        <span class="hg-cancel">Cancelar reserva</span>
+                      </div>
+                    </div>
+                  
+                    <span class="hg-m-dim"></span>
+                    <div class="hg-ok">
+                      <span class="hg-ok-i"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9"/></svg></span>
+                      <p class="hg-ok-t">Pago completado</p>
+                      <p class="hg-ok-s">Ya tienes tu plaza en el grupo de 2.</p>
+                      <div class="hg-done-row">
+                        <img src="/landing-demo/animaciones/01-activar-compra/piruletas.jpg" alt="" width="500" height="500" decoding="async">
+                        <p><b>Piruleta Pirulín</b><span><s>80,00 €</s> <strong>68,00 €</strong> <em>-15%</em></span></p>
+                      </div>
+                      <p class="hg-ok-n">Te avisamos por email de cómo va el grupo.</p>
+                    </div>
+                  
+                    <span class="hg-ss-dim"></span>
+                    <div class="hg-ss">
+                      <div class="hg-ss-photo">
+                        <img src="/landing-demo/animaciones/01-activar-compra/piruletas.jpg" alt="" width="500" height="500" decoding="async">
+                        <span class="hg-ss-grab"></span>
+                        <span class="hg-ss-x"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></span>
+                        <span class="hg-ss-badge"><span><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.3 10.7l7.4-4.4M8.3 13.3l7.4 4.4"/></svg></span></span>
+                      </div>
+                      <div class="hg-ss-body">
+                        <p class="hg-ss-title">Comparte el grupo<br><em>y pagad menos.</em></p>
+                        <p class="hg-ss-text"><b>Si se une alguien, los dos lo pagáis a 68,00 €</b> en vez de <s>80,00 €</s>.</p>
+                        <div class="hg-ss-nets">
+                          <span class="hg-net hg-net--fb"><i></i><em>Facebook</em></span>
+                          <span class="hg-net hg-net--wa"><i></i><em>WhatsApp</em></span>
+                          <span class="hg-net hg-net--x"><i></i><em>X</em></span>
+                          <span class="hg-net hg-net--ig"><i></i><em>Instagram</em></span>
+                          <span class="hg-net hg-net--tg"><i></i><em>Telegram</em></span>
+                        </div>
+                        <span class="hg-ss-copy"><svg viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/></svg>Copiar enlace</span>
+                      </div>
+                    </div>
+                    <span class="cs-touch"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── MÓVIL B: Marta, la segunda (WhatsApp y el mismo popup, ya en 1 de 2) ── -->
+            <div class="cs-phone cs-phone--b">
+              <div class="cs-hg cs-guest hero--guion" data-step="0">
+                <div class="hg-phone">
+                  <div class="hg-screen">
+                    <span class="hg-island"></span>
+                    <span class="hg-glare"></span>
+                    <div class="hg-statusbar">
+                      <b>9:41</b>
+                      <span class="hg-sys"><svg class="hg-sig" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg class="hg-wifi" viewBox="0 0 18 13"><path d="M1.6 4.7a10.4 10.4 0 0 1 14.8 0M4.4 7.6a6.4 6.4 0 0 1 9.2 0" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/><circle cx="9" cy="11" r="1.6"/></svg><svg class="hg-bat" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.5" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="20" height="9" rx="2"/><path d="M25 4.5v4a2 2 0 0 0 0-4z" opacity=".45"/></svg></span>
+                    </div>
+                    <div class="hg-store">
+                      <b>Tuko Store</b>
+                      <span class="hg-store-icons"><svg viewBox="0 0 20 20"><circle cx="9" cy="9" r="5.5"/><path d="M13 13l4 4"/></svg><svg viewBox="0 0 20 20"><circle cx="10" cy="7" r="3.5"/><path d="M3.5 17.5c.9-3.3 3.4-5 6.5-5s5.6 1.7 6.5 5"/></svg><svg viewBox="0 0 20 20"><path d="M4 6h12l-1.2 10H5.2z"/><path d="M7.5 6V5a2.5 2.5 0 0 1 5 0v1"/></svg></span>
+                    </div>
+                    <div class="hg-page">
+                    <div class="hg-product">
+                      <div class="hg-shot"><img src="/landing-demo/animaciones/01-activar-compra/piruletas.jpg" alt="" width="500" height="500" decoding="async"></div>
+                      <p class="hg-name">Piruleta Pirulín</p>
+                      <p class="hg-price">80,00 € <span>Impuestos incluidos.</span></p>
+                      <p class="hg-opt-label">Sabor</p>
+                      <div class="hg-opts"><span>Fresa</span><span>Limón</span><span class="is-on">Mix</span></div>
+                      <div class="hg-buy-row">
+                        <span class="hg-qty"><i>−</i><b>1</b><i>+</i></span>
+                        <span class="hg-btn hg-btn--cart">Añadir al carrito</span>
+                      </div>
+                      <span class="hg-btn hg-btn--tuko"><span>Precio grupal 68,00 €</span><i class="hg-tap"></i></span>
+                      <div class="hg-acc"><span>Descripción</span><span>Envío y devoluciones</span></div>
+                    </div>
+                    </div>
+                  
+                    <span class="hg-fsp-dim"></span>
+                    <div class="hg-fsp">
+                      <span class="hg-tag"><span class="hg-tag-in">Dentro</span><span class="hg-tag-done">Cerrado</span></span>
+                      <span class="hg-fsp-x"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></span>
+                      <div class="hg-fsp-scroll">
+                        <div class="hg-z1">
+                          <div class="hg-v hg-v0">
+                            <p class="hg-lead"><s>80,00 €</s><span>Hoy <b>68,00 €</b></span></p>
+                            <p class="hg-sub">Falta <b>1 persona</b> para cerrar este grupo</p>
+                          </div>
+                          <div class="hg-v hg-v1">
+                            <p class="hg-title">Ya estás dentro</p>
+                            <p class="hg-sub">Falta <b>1 persona</b> para cerrar este grupo</p>
+                          </div>
+                          <div class="hg-v hg-v2">
+                            <p class="hg-title hg-title--done">Grupo cerrado</p>
+                          </div>
+                        </div>
+                        <div class="hg-goal">
+                          <p class="hg-count"><b class="hg-odo" data-odo="n">1</b><span class="hg-de">de</span><span class="hg-tot">2</span></p>
+                          <div class="hg-gdots">
+                            <span class="hg-dot hg-dot--1"><svg class="hg-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20.5c.9-4 4-6.5 8-6.5s7.1 2.5 8 6.5z"/></svg><svg class="hg-check" viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9"/></svg></span>
+                            <span class="hg-bar"><i></i></span>
+                            <span class="hg-dot hg-dot--2"><svg class="hg-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20.5c.9-4 4-6.5 8-6.5s7.1 2.5 8 6.5z"/></svg><svg class="hg-check" viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9"/></svg></span>
+                            <span class="hg-bloom"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                          </div>
+                        </div>
+                        <div class="hg-timer">
+                          <p class="hg-timer-t"><span class="hg-w0">Se cierra en</span><span class="hg-w1">Se cierra en</span></p>
+                          <div class="hg-tbox"><span><b class="hg-odo" data-odo="h">24</b><i>Horas</i></span><span><b class="hg-odo" data-odo="m">00</b><i>Minutos</i></span><span><b class="hg-odo" data-odo="s">00</b><i>Segundos</i></span></div>
+                          <p class="hg-timer-sub"><span class="hg-w0">Si entras tú, se cierra el grupo y <b>los dos pagáis 68,00 €</b></span><span class="hg-w1">La primera persona que entre por tu enlace cierra el grupo y <b>los dos pagáis 68,00 €</b></span></p>
+                        </div>
+                        <div class="hg-done">
+                          <p class="hg-done-t">¡Lo conseguisteis! Grupo completo.</p>
+                          <div class="hg-done-row">
+                            <img src="/landing-demo/animaciones/01-activar-compra/piruletas.jpg" alt="" width="500" height="500" decoding="async">
+                            <p><b>Piruleta Pirulín</b><span><s>80,00 €</s> <strong>68,00 €</strong> <em>-15%</em></span></p>
+                          </div>
+                          <p class="hg-done-box">El próximo grupo abre automáticamente en unos minutos.</p>
+                        </div>
+                        <div class="hg-how">
+                          <p class="hg-how-t">¿Cómo funciona?</p>
+                          <span class="hg-how-i"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+                          <p class="hg-how-h">Entras y pagas 68,00 €</p>
+                          <p class="hg-how-p">Ahora, en el checkout de la tienda.</p>
+                        </div>
+                      </div>
+                      <div class="hg-foot">
+                        <span class="hg-cta"><span class="hg-c0">Entrar por 68,00 €</span><span class="hg-c1"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.3 10.7l7.4-4.4M8.3 13.3l7.4 4.4"/></svg>Compartir y cerrar el grupo</span></span>
+                        <span class="hg-cancel">Cancelar reserva</span>
+                      </div>
+                    </div>
+                    <!-- WhatsApp: le llega el enlace de Lucía -->
+                    <div class="cs-pv cs-pv--chat">
+                      <div class="cs-wa-head"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg><span class="cs-av">L</span><div><b>Lucía</b><span class="cs-wa-st">en línea</span></div></div>
+                      <div class="cs-wa-body">
+                        <span class="cs-wa-day">Hoy</span>
+                        <div class="cs-bubble">
+                          <span class="cs-preview"><img src="/landing-demo/animaciones/01-activar-compra/piruletas.jpg" alt="" width="160" height="70"><span><b>Piruleta Pirulín</b><em>Tuko Store · Hoy 68,00 € si somos dos</em></span><i class="cs-ripple"></i></span>
+                          <p>¡Entra conmigo! Estoy en el grupo de Piruleta Pirulín a 68,00 €. Solo falta 1 persona.<time>12:04</time></p>
+                        </div>
+                      </div>
+                      <div class="cs-wa-input"><span>Mensaje</span><i><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></i></div>
+                    </div>
+                    <span class="cs-touch"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
-<script src="/assets/js/home-how-cycle.js?v=da471745" defer></script>
+<script src="/assets/js/home-how-scene.js?v=b5c762b3" defer></script>
 
 <!-- Y SI NO SE LLENA: el reloj del grupo llega a 00:00:00 y se abren las tres opciones, todas a la vista -->
 <section class="re" id="si-no-se-llena">
