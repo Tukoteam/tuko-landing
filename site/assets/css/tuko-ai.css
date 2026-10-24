@@ -588,7 +588,8 @@ html[data-theme="dark"] .sx-pp--b { color: #3fe0b0; }
 .fz .fx-soon { margin-top: 0; }
 .fz-track { position: relative; height: 340vh; margin-top: 8px; }
 /* El escenario arriba (justo bajo el nav), no centrado: así no queda hueco bajo el título al llegar */
-.fz-sticky { position: sticky; top: 0; height: 100svh; display: flex; align-items: flex-start; }
+/* El bloque va centrado en vertical (debajo del menú): en pantallas altas no queda pegado arriba con media pantalla vacía */
+.fz-sticky { position: sticky; top: 0; height: 100svh; display: flex; align-items: center; padding-bottom: 20px; box-sizing: border-box; }
 .fz-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
