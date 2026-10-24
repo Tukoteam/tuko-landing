@@ -252,8 +252,8 @@
   ]
 }
 </script>
-<link rel="preload" as="style" href="/assets/css/home.css?v=a940cefa">
-<link rel="stylesheet" href="/assets/css/home.css?v=a940cefa">
+<link rel="preload" as="style" href="/assets/css/home.css?v=82de129b">
+<link rel="stylesheet" href="/assets/css/home.css?v=82de129b">
 <link rel="stylesheet" href="../assets/css/tuko-theme.css?v=cf1fd4c8">
 <link rel="prefetch" href="blog/" as="document">
 <link rel="prefetch" href="tuko-ai" as="document">
@@ -665,6 +665,14 @@
       </div>
 
       <div class="cs-grid">
+        <!-- Móvil: versión ligera, sin 3D y con un aparato cada vez. home-how-scene.js mueve aquí el asistente, los dos móviles
+             y las estadísticas (los mismos de escritorio, no se duplican) -->
+        <div class="cm" aria-hidden="true">
+          <div class="cm-slot cm-win"><div class="cm-card"><p class="cm-url"><svg viewBox="0 0 16 16"><rect x="3.5" y="7" width="9" height="6.5" rx="1.6"/><path d="M5.5 7V5.2a2.5 2.5 0 0 1 5 0V7"/></svg>admin.shopify.com/apps/tuko</p><div class="cm-body cm-body--wiz"></div></div></div>
+          <div class="cm-slot cm-pa"></div>
+          <div class="cm-slot cm-pb"></div>
+          <div class="cm-slot cm-stat"><div class="cm-card"><p class="cm-url"><svg viewBox="0 0 16 16"><rect x="3.5" y="7" width="9" height="6.5" rx="1.6"/><path d="M5.5 7V5.2a2.5 2.5 0 0 1 5 0V7"/></svg>admin.shopify.com/apps/tuko/statistics</p><div class="cm-body cm-body--stat cs-stats"></div></div></div>
+        </div>
         <div class="cs-side">
           <p class="cs-count" aria-hidden="true"><span class="cs-mprog"><i></i><i></i><i></i><i></i></span><b class="cs-count-n">01</b><span>/ 04</span></p>
           <!-- Los cuatro pasos (mismos textos que ahora). Cada número lleva un anillo que se llena con el scroll -->
@@ -1275,7 +1283,7 @@
     </div>
   </div>
 </section>
-<script src="/assets/js/home-how-scene.js?v=b5c762b3" defer></script>
+<script src="/assets/js/home-how-scene.js?v=b5616862" defer></script>
 
 <!-- Y SI NO SE LLENA: el reloj del grupo llega a 00:00:00 y se abren las tres opciones, todas a la vista -->
 <section class="re" id="si-no-se-llena">
@@ -1860,7 +1868,7 @@
 </div>
 
 <script src="/assets/js/home-animations-en.js?v=6e07ac54"></script>
-<script src="/assets/js/home-ui-en.js?v=3414d19c"></script>
+<script src="/assets/js/home-ui-en.js?v=f48364ff"></script>
 <script src="../assets/js/tuko-theme.js?v=b2ef7977" defer></script>
 <script src="../assets/js/tuko-form.js?v=ebdb6073" defer></script>
 <script src="../assets/js/ga4-loader.js?v=57d4501d" defer></script>

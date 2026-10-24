@@ -1496,10 +1496,12 @@ function setLanguage(lang, opts) {
   if (dest) {
     var herePath = location.pathname.replace(/\/$/, '') || '/';
     var destPath = dest.pathname.replace(/\/$/, '') || '/';
-    var isLocal = /^(localhost|127\.0\.0\.1|::1)$/.test(location.hostname);
-    if (destPath !== herePath && !isLocal) {
+    /* En local (también desde el móvil por la red de casa) se va a la misma ruta del servidor local, no a la web
+       publicada: así cada idioma carga su página entera, como en producción, y nunca se mezclan textos */
+    var isLocal = /^(localhost|127\.0\.0\.1|::1)$/.test(location.hostname) || /^(192\.168|10)\./.test(location.hostname);
+    if (destPath !== herePath) {
       localStorage.setItem('tuko_lang', lang);
-      location.href = dest.href;
+      location.href = isLocal ? dest.pathname : dest.href;
       return;
     }
   }

@@ -312,7 +312,7 @@ html[data-theme="dark"] .cs-tip { background: #eef0f6; color: #0f172a; }
 .cs .cs-hg { --pw: 190px; overflow: visible; }
 .cs .cs-hg .hg-phone { transition: box-shadow 600ms ease; }
 /* Al completarse el grupo, los dos móviles se encienden en verde un momento */
-.cs-phone.is-win .hg-phone { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), inset 0 0 0 2.5px rgba(0, 0, 0, 0.7), 0 0 0 4px rgba(34, 197, 94, 0.28), 0 0 60px -6px rgba(34, 197, 94, 0.6), 0 24px 48px -18px rgba(20, 24, 38, 0.45); }
+.cs-phone.is-win .hg-phone, .cs-hg.is-win .hg-phone { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), inset 0 0 0 2.5px rgba(0, 0, 0, 0.7), 0 0 0 4px rgba(34, 197, 94, 0.28), 0 0 60px -6px rgba(34, 197, 94, 0.6), 0 24px 48px -18px rgba(20, 24, 38, 0.45); }
 /* Marta entra con Lucía ya dentro: su primer puesto ya está hecho y el segundo «llama» */
 .cs-guest:not(.is-joined) .hg-dot--1 { border-color: #22c55e; background: #22c55e; color: #fff; box-shadow: 0 4px 14px rgba(34, 197, 94, 0.28), 0 0 0 3px rgba(34, 197, 94, 0.1); animation: none; }
 .cs-guest:not(.is-joined) .hg-dot--1 .hg-person { opacity: 0; }
@@ -423,4 +423,50 @@ html[data-theme="dark"] .cs-tip { background: #eef0f6; color: #0f172a; }
   .cs-ring { width: 28px; height: 28px; }
   .cs-step.is-on .cs-t { font-size: 17px; }
   .cs-body > p { font-size: 13.5px; line-height: 1.5; }
+}
+
+/* ══════════════════════════════
+   MÓVIL LIGERO: sin el mundo 3D. Un aparato cada vez (el asistente, el móvil de Lucía, el de Marta, las estadísticas),
+   grande y legible, que entra y sale solo con opacidad y desplazamiento. home-how-scene.js mueve a .cm los mismos
+   elementos de escritorio. Fuera también lo caro para un móvil: desenfoques animados, grano mezclado y el cristal de la tarjeta.
+══════════════════════════════ */
+.cm { display: none; }
+@media (max-width: 900px) {
+  .cs-track { height: 340vh; }
+  .cs-stage { display: none; }
+  .cs-aur { animation: none; filter: blur(60px); }
+  .cs-grain { display: none; }
+  .cs-side { -webkit-backdrop-filter: none; backdrop-filter: none; background: color-mix(in srgb, var(--hero-fade) 94%, transparent); }
+  .cm { display: block; position: absolute; left: 0; right: 0; top: calc(var(--nav-h, 64px) + var(--card-h, 200px) + 4px); bottom: 10px; }
+  .cm-slot { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; pointer-events: none; will-change: transform, opacity; }
+  .cm-card { transform-origin: 50% 50%; width: min(calc(100% - 28px), 440px); overflow: hidden; border-radius: 18px; background: var(--cs-paper); box-shadow: 0 0 0 1px var(--cs-line), 0 24px 50px -24px rgba(20, 24, 60, 0.4); }
+  html[data-theme="dark"] .cm-card { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 24px 50px -24px rgba(0, 0, 0, 0.75); }
+  .cm-url { display: flex; align-items: center; justify-content: center; gap: 6px; height: 30px; margin: 0; border-bottom: 1px solid var(--cs-line); background: var(--cs-card); font: 500 10.5px/1 'Mona Sans', sans-serif; color: var(--cs-muted); }
+  .cm-url svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 1.4; }
+  /* El asistente, a la medida de la tarjeta (la escala la pone el JS) */
+  .cm-body--wiz { position: relative; height: var(--wiz-h, 480px); overflow: hidden; }
+  .cm .cs-wiz { left: 0; top: 0; margin: 0; transform-origin: 0 0; }
+  /* El asistente llena la tarjeta: sin su propio marco ni esquinas (si no, se ven dos bordes que no casan) */
+  .cm .cs-wiz .wizard { border: 0; border-radius: 0; box-shadow: none; }
+  /* Los móviles: los de verdad, grandes (--cm-pw lo calcula el JS para que quepan en alto) y sin flotar */
+  .cm .cs-hg { --pw: var(--cm-pw, 230px); }
+  .cm .hg-phone { animation: none; }
+  /* Estadísticas recolocadas para móvil: dos columnas y textos más grandes */
+  .cm .cs-st { position: static; padding: 14px 14px 12px; }
+  .cm .cs-st-h { font-size: 20px; }
+  .cm .cs-st-s { font-size: 11px; }
+  .cm .cs-st-pills span { padding: 4px 10px; font-size: 10.5px; }
+  .cm .cs-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .cm .cs-kpi { min-height: 0; padding: 10px 11px; }
+  .cm .cs-kpi:last-child { grid-column: span 2; }
+  .cm .cs-kpi-l { font-size: 8.5px; }
+  .cm .cs-ki { width: 20px; height: 20px; }
+  .cm .cs-ki svg { width: 12px; height: 12px; }
+  .cm .cs-kv { margin-top: 6px; font-size: 20px; }
+  .cm .cs-kpi-tag { font-size: 8px; }
+  .cm .cs-chart { padding: 12px 12px 8px; }
+  .cm .cs-chart-top b { font-size: 12.5px; }
+  .cm .cs-seg i { font-size: 9px; }
+  .cm .cs-bar em { font-size: 9px; }
+  .cm .cs-tip { font-size: 9px; }
 }

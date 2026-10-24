@@ -7,7 +7,9 @@
       «Pago completado», «Ya estás dentro» (1 de 2, el reloj corre) y abre la hoja de compartir;
    03 (0,5–0,75) elige WhatsApp: el enlace vuela al móvil de Marta, lo abre, entra y el grupo se cierra (2 de 2);
    04 (0,75–1) los móviles se van y la cámara vuelve a la pantalla: en Estadísticas suben los grupos exitosos, las personas, los ingresos y el gráfico.
-   Con el ratón la cámara se inclina un poco. Siempre animado; el scroll de la página no se toca, la escena solo lo sigue. */
+   Con el ratón la cámara se inclina un poco. Siempre animado; el scroll de la página no se toca, la escena solo lo sigue.
+   En móvil no hay 3D: un aparato cada vez (el asistente, el móvil de Lucía, el de Marta, las estadísticas), grande y
+   solo con opacidad y desplazamiento. Se mueven a .cm los mismos elementos; las pantallas cambian igual en los dos. */
 (function () {
   'use strict';
 
@@ -78,6 +80,20 @@
   var touchA = $('.cs-touch', phA), touchB = $('.cs-touch', phB);
   var chat = $('.cs-pv--chat'), waSt = $('.cs-wa-st'), bubble = $('.cs-bubble'), preview = $('.cs-preview');
   var fly = $('.cs-fly'), trail = $$('.cs-trail i');
+
+  /* Móvil ligero: sus huecos y lo que se mueve a ellos (y de vuelta al pasar a escritorio) */
+  var cm = $('.cm'), cmWin = $('.cm-win'), cmPa = $('.cm-pa'), cmPb = $('.cm-pb'), cmStat = $('.cm-stat');
+  var cmWizBody = $('.cm-body--wiz'), stContent = $('.cs-st');
+  var MOVES = [[wz, cmWizBody], [stContent, $('.cm-body--stat')], [hgA, cmPa], [hgB, cmPb]].map(function (m) {
+    return { el: m[0], to: m[1], home: m[0].parentNode, next: m[0].nextSibling };
+  });
+  var placedMobile = false;
+  var place = function (mobile) {
+    if (mobile === placedMobile) return;
+    MOVES.forEach(function (m) { if (mobile) m.to.appendChild(m.el); else m.home.insertBefore(m.el, m.next); });
+    placedMobile = mobile;
+    spots.clear();
+  };
 
   /* Tramo local 0…1 de [a, b], con curva suave */
   var seg = function (p, a, b) { return Math.max(0, Math.min(1, (p - a) / (b - a))); };
@@ -201,36 +217,71 @@
   var K = 1, MOBILE = false;
   var mouse = { x: 0, y: 0, cx: 0, cy: 0 };
 
+  /* ── Móvil: qué aparato se ve en cada momento (solo opacidad y desplazamiento, sin 3D) ── */
+  var CMW = 375;
+  var slot = function (el, op, x, y, sc) {
+    el.style.opacity = op.toFixed(3);
+    /* El que no se ve, oculto del todo: el móvil no lo pinta */
+    el.style.visibility = op > 0.002 ? 'visible' : 'hidden';
+    el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0) scale(' + sc.toFixed(3) + ')';
+  };
+  var layoutMobile = function (p) {
+    var e = function (a, b) { return ease(seg(p, a, b)); };
+    /* 01 · El asistente */
+    var wOut = e(0.235, 0.27);
+    slot(cmWin, 1 - wOut, 0, -wOut * 24, 1 - wOut * 0.04);
+    /* 02-03 · Lucía entra; al compartir se desliza a la izquierda (el enlace «se va» con ella) y vuelve en pequeño para el «2 de 2» */
+    var aIn = e(0.25, 0.29), away = e(0.5, 0.545), back = e(0.68, 0.71), out = e(0.75, 0.785);
+    var aX = p < 0.68 ? -1.15 * CMW * away : lerp(-1.15 * CMW, -0.26 * CMW, back);
+    var aOp = (p < 0.68 ? aIn * (1 - away) : back) * (1 - out);
+    slot(cmPa, aOp, aX, (1 - aIn) * 40 - out * 20, p < 0.68 ? 1 : lerp(1, 0.6, back));
+    /* Marta entra desde la derecha y, al cerrarse el grupo, se coloca a la derecha de Lucía */
+    var bIn = e(0.5, 0.545);
+    slot(cmPb, bIn * (1 - out), lerp(1.15 * CMW, 0, bIn) + 0.26 * CMW * back, -out * 20, lerp(1, 0.6, back));
+    /* 04 · Estadísticas */
+    var sIn = e(0.77, 0.81);
+    slot(cmStat, sIn, 0, (1 - sIn) * 30, 0.97 + sIn * 0.03);
+  };
+
+  /* La línea que une los pasos (escritorio): se mide al cambiar de tamaño o de paso, no en cada fotograma */
+  var measureRail = function () {
+    if (MOBILE) return;
+    var lastHead = steps[3].querySelector('.cs-head');
+    stepsList.style.setProperty('--rh', Math.max(0, steps[3].offsetTop + lastHead.offsetTop + lastHead.offsetHeight / 2 - 28) + 'px');
+  };
+
   var render = function (p) {
     var pp = Math.max(0, p);
 
-    /* ── Cámara ── */
-    var c = camAt(p);
-    var ry = c.ry + mouse.cx * 3.2, rx = c.rx - mouse.cy * 2;
-    /* Sin zoom extra en móvil: con la perspectiva, los móviles (delante) ya se ven más grandes y se saldrían por los lados */
-    /* En móvil, los planos cerca del portátil (01 y 04) un poco más lejos: si no, el portátil se sale por los lados */
-    var s = c.s * K * (MOBILE ? 1 - 0.18 * seg(c.s, 0.95, 1.3) : 1);
-    world.style.transform = 'perspective(1900px) translate3d(' + (c.tx * s).toFixed(1) + 'px,' + (c.ty * s).toFixed(1) + 'px,0) scale(' + s.toFixed(4) + ') rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
-    glares.forEach(function (g) { g.style.setProperty('--gx', (50 - ry * 4).toFixed(1) + '%'); });
-
-    /* ── El portátil: se abre al entrar y se queda un poco atrás mientras mandan los móviles ── */
-    /* Se abre justo cuando la sección se queda fija (un poco tarde: se ve el gesto) */
-    var open = ease(seg(p, -0.12, 0.015));
-    lid.style.transform = 'rotateX(' + ((1 - open) * -90).toFixed(2) + 'deg)';
-    var back = ease(seg(p, 0.25, 0.31)) * (1 - ease(seg(p, 0.75, 0.81)));
-    laptop.style.transform = 'translate3d(0,0,' + (back * -90).toFixed(1) + 'px)';
-    dim.style.opacity = (back * 0.28).toFixed(3);
-
-    /* Qué se ve en la pantalla: la app → la tienda → los grupos */
-    var toStore = ease(seg(p, 0.25, 0.3)), toOrders = ease(seg(p, 0.76, 0.8));
-    var vA = 1 - toStore, vS = toStore * (1 - toOrders), vO = toOrders;
-    views.admin.style.opacity = vA.toFixed(3);
-    views.store.style.opacity = vS.toFixed(3);
-    views.orders.style.opacity = vO.toFixed(3);
-    urls.admin.style.opacity = vA.toFixed(3);
-    urls.store.style.opacity = vS.toFixed(3);
-    urls.orders.style.opacity = vO.toFixed(3);
-
+    if (!MOBILE) {
+      /* ── Cámara ── */
+      var c = camAt(p);
+      var ry = c.ry + mouse.cx * 3.2, rx = c.rx - mouse.cy * 2;
+      /* Sin zoom extra en móvil: con la perspectiva, los móviles (delante) ya se ven más grandes y se saldrían por los lados */
+      /* En móvil, los planos cerca del portátil (01 y 04) un poco más lejos: si no, el portátil se sale por los lados */
+      var s = c.s * K * (MOBILE ? 1 - 0.18 * seg(c.s, 0.95, 1.3) : 1);
+      world.style.transform = 'perspective(1900px) translate3d(' + (c.tx * s).toFixed(1) + 'px,' + (c.ty * s).toFixed(1) + 'px,0) scale(' + s.toFixed(4) + ') rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
+      glares.forEach(function (g) { g.style.setProperty('--gx', (50 - ry * 4).toFixed(1) + '%'); });
+  
+      /* ── El portátil: se abre al entrar y se queda un poco atrás mientras mandan los móviles ── */
+      /* Se abre justo cuando la sección se queda fija (un poco tarde: se ve el gesto) */
+      var open = ease(seg(p, -0.12, 0.015));
+      lid.style.transform = 'rotateX(' + ((1 - open) * -90).toFixed(2) + 'deg)';
+      var back = ease(seg(p, 0.25, 0.31)) * (1 - ease(seg(p, 0.75, 0.81)));
+      laptop.style.transform = 'translate3d(0,0,' + (back * -90).toFixed(1) + 'px)';
+      dim.style.opacity = (back * 0.28).toFixed(3);
+  
+      /* Qué se ve en la pantalla: la app → la tienda → los grupos */
+      var toStore = ease(seg(p, 0.25, 0.3)), toOrders = ease(seg(p, 0.76, 0.8));
+      var vA = 1 - toStore, vS = toStore * (1 - toOrders), vO = toOrders;
+      views.admin.style.opacity = vA.toFixed(3);
+      views.store.style.opacity = vS.toFixed(3);
+      views.orders.style.opacity = vO.toFixed(3);
+      urls.admin.style.opacity = vA.toFixed(3);
+      urls.store.style.opacity = vS.toFixed(3);
+      urls.orders.style.opacity = vO.toFixed(3);
+  
+    }
     /* ── 01 · El asistente «Publicar grupo» ── */
     var S = p < 0.032 ? 0 : p < 0.116 ? 1 : p < 0.16 ? 2 : 3;
     var St = Math.max(1, S);
@@ -259,18 +310,22 @@
     on(confirmOv, within(p, 0.197, 0.27), 'visible');
     on(confirmBox, p >= 0.218, 'is-success');
 
-    wScroll = wizScroll(p);
-    wz.style.transform = 'translateY(' + (-wScroll).toFixed(1) + 'px) scale(' + WK + ')';
-    var cu = cursorAt(pp);
-    cursor.style.opacity = (seg(p, 0.014, 0.024) * (1 - seg(p, 0.235, 0.25))).toFixed(3);
-    cursor.style.transform = 'translate(' + cu.x.toFixed(1) + 'px,' + cu.y.toFixed(1) + 'px)';
-    CUR.forEach(function (k) { if (k.click && crossed(p, k.click)) replay(cursor, 'is-click'); });
-
+    if (!MOBILE) {
+      wScroll = wizScroll(p);
+      wz.style.transform = 'translateY(' + (-wScroll).toFixed(1) + 'px) scale(' + WK + ')';
+      var cu = cursorAt(pp);
+      cursor.style.opacity = (seg(p, 0.014, 0.024) * (1 - seg(p, 0.235, 0.25))).toFixed(3);
+      cursor.style.transform = 'translate(' + cu.x.toFixed(1) + 'px,' + cu.y.toFixed(1) + 'px)';
+      CUR.forEach(function (k) { if (k.click && crossed(p, k.click)) replay(cursor, 'is-click'); });
+  
+    }
     /* ── 02 · Lucía: «Precio grupal» → entra → pago completado → dentro → compartir ── */
-    var aU = ease(seg(p, 0.27, 0.34)), aOut = ease(seg(p, 0.75, 0.81));
-    phA.style.opacity = (aU * (1 - aOut)).toFixed(3);
-    phA.style.transform = 'translate3d(' + (aOut * 90).toFixed(1) + 'px,' + ((1 - aU) * 180 + aOut * 40).toFixed(1) + 'px,' + (175 + (1 - aU) * 140).toFixed(1) + 'px) rotateY(' + (-14 - (1 - aU) * 24).toFixed(2) + 'deg) rotateX(' + ((1 - aU) * 18).toFixed(2) + 'deg)';
-    shA.style.opacity = (aU * (1 - aOut) * 0.9).toFixed(3);
+    if (!MOBILE) {
+      var aU = ease(seg(p, 0.27, 0.34)), aOut = ease(seg(p, 0.75, 0.81));
+      phA.style.opacity = (aU * (1 - aOut)).toFixed(3);
+      phA.style.transform = 'translate3d(' + (aOut * 90).toFixed(1) + 'px,' + ((1 - aU) * 180 + aOut * 40).toFixed(1) + 'px,' + (175 + (1 - aU) * 140).toFixed(1) + 'px) rotateY(' + (-14 - (1 - aU) * 24).toFixed(2) + 'deg) rotateX(' + ((1 - aU) * 18).toFixed(2) + 'deg)';
+      shA.style.opacity = (aU * (1 - aOut) * 0.9).toFixed(3);
+    }
     var joined = p >= 0.415, full = p >= 0.68;
     on(hgA, within(p, 0.328, 0.345), 'is-call');
     on(hgA, within(p, 0.345, 0.356), 'is-tap');
@@ -292,28 +347,30 @@
     setText(oB.n, full ? '2' : '1');
 
     /* ── 03 · El enlace vuela a Marta, lo abre, entra y se cierra el grupo ── */
-    var bU = ease(seg(p, 0.46, 0.52)), bOut = ease(seg(p, 0.75, 0.81));
-    phB.style.opacity = (bU * (1 - bOut)).toFixed(3);
-    phB.style.transform = 'translate3d(' + (-bOut * 90).toFixed(1) + 'px,' + ((1 - bU) * 180 + bOut * 40).toFixed(1) + 'px,' + (175 + (1 - bU) * 140).toFixed(1) + 'px) rotateY(' + (14 + (1 - bU) * 24).toFixed(2) + 'deg) rotateX(' + ((1 - bU) * 18).toFixed(2) + 'deg)';
-    shB.style.opacity = (bU * (1 - bOut) * 0.9).toFixed(3);
-
-    var f = seg(p, 0.505, 0.585), fe = ease(f);
-    var oa = phoneOrigin(phA), ob = phoneOrigin(phB);
-    var wq = spotIn(waNet, null), bq = spotIn(bubble, null);
-    var F = { x: oa.x + wq.x, y: oa.y + wq.y, z: 205 }, T = { x: ob.x + bq.x, y: ob.y + bq.y, z: 215 };
-    var at = arc(fe, F, T);
-    /* Nace pequeña sobre el botón de WhatsApp, crece en el aire y se encoge al llegar al chat (donde aparece el mensaje) */
-    var vis = f > 0 && f < 1 ? Math.min(1, f / 0.1) * Math.min(1, (1 - f) / 0.12) : 0;
-    var sc = lerp(0.45, 1.06, ease(seg(f, 0, 0.4))) - 0.22 * ease(seg(f, 0.7, 1));
-    fly.style.opacity = vis.toFixed(3);
-    fly.style.transform = 'translate3d(' + (at.x - 88).toFixed(1) + 'px,' + (at.y - 22).toFixed(1) + 'px,' + at.z.toFixed(1) + 'px) rotateY(' + ((0.5 - fe) * 26).toFixed(1) + 'deg) rotateZ(' + ((0.5 - fe) * -7).toFixed(1) + 'deg) scale(' + sc.toFixed(3) + ')';
-    trail.forEach(function (t, i) {
-      var tu = Math.max(0, fe - (i + 1) * 0.035);
-      var tp = arc(tu, F, T);
-      t.style.opacity = (f > 0 && f < 1 && tu > 0 ? vis * (1 - i / trail.length) * 0.9 : 0).toFixed(3);
-      t.style.transform = 'translate3d(' + tp.x.toFixed(1) + 'px,' + tp.y.toFixed(1) + 'px,' + tp.z.toFixed(1) + 'px) scale(' + (1 - i / trail.length * 0.7).toFixed(3) + ')';
-    });
-
+    if (!MOBILE) {
+      var bU = ease(seg(p, 0.46, 0.52)), bOut = ease(seg(p, 0.75, 0.81));
+      phB.style.opacity = (bU * (1 - bOut)).toFixed(3);
+      phB.style.transform = 'translate3d(' + (-bOut * 90).toFixed(1) + 'px,' + ((1 - bU) * 180 + bOut * 40).toFixed(1) + 'px,' + (175 + (1 - bU) * 140).toFixed(1) + 'px) rotateY(' + (14 + (1 - bU) * 24).toFixed(2) + 'deg) rotateX(' + ((1 - bU) * 18).toFixed(2) + 'deg)';
+      shB.style.opacity = (bU * (1 - bOut) * 0.9).toFixed(3);
+  
+      var f = seg(p, 0.505, 0.585), fe = ease(f);
+      var oa = phoneOrigin(phA), ob = phoneOrigin(phB);
+      var wq = spotIn(waNet, null), bq = spotIn(bubble, null);
+      var F = { x: oa.x + wq.x, y: oa.y + wq.y, z: 205 }, T = { x: ob.x + bq.x, y: ob.y + bq.y, z: 215 };
+      var at = arc(fe, F, T);
+      /* Nace pequeña sobre el botón de WhatsApp, crece en el aire y se encoge al llegar al chat (donde aparece el mensaje) */
+      var vis = f > 0 && f < 1 ? Math.min(1, f / 0.1) * Math.min(1, (1 - f) / 0.12) : 0;
+      var sc = lerp(0.45, 1.06, ease(seg(f, 0, 0.4))) - 0.22 * ease(seg(f, 0.7, 1));
+      fly.style.opacity = vis.toFixed(3);
+      fly.style.transform = 'translate3d(' + (at.x - 88).toFixed(1) + 'px,' + (at.y - 22).toFixed(1) + 'px,' + at.z.toFixed(1) + 'px) rotateY(' + ((0.5 - fe) * 26).toFixed(1) + 'deg) rotateZ(' + ((0.5 - fe) * -7).toFixed(1) + 'deg) scale(' + sc.toFixed(3) + ')';
+      trail.forEach(function (t, i) {
+        var tu = Math.max(0, fe - (i + 1) * 0.035);
+        var tp = arc(tu, F, T);
+        t.style.opacity = (f > 0 && f < 1 && tu > 0 ? vis * (1 - i / trail.length) * 0.9 : 0).toFixed(3);
+        t.style.transform = 'translate3d(' + tp.x.toFixed(1) + 'px,' + tp.y.toFixed(1) + 'px,' + tp.z.toFixed(1) + 'px) scale(' + (1 - i / trail.length * 0.7).toFixed(3) + ')';
+      });
+  
+    }
     var opened = p >= 0.635;
     on(chat, !opened);
     on(bubble, p >= 0.582);
@@ -324,8 +381,7 @@
     on(hgB, within(p, 0.655, 0.665), 'is-cta');
     on(hgB, full, 'is-joined');
     hgB.setAttribute('data-step', full ? '3' : '0');
-    on(phA, within(p, 0.68, 0.74), 'is-win');
-    on(phB, within(p, 0.68, 0.74), 'is-win');
+    [phA, phB, hgA, hgB].forEach(function (el) { on(el, within(p, 0.68, 0.74), 'is-win'); });
 
     /* El dedo de cada móvil */
     if (p < 0.37) touch(touchA, tukoA, p, 0.345);
@@ -363,26 +419,43 @@
     setText(countN, '0' + (active + 1));
     mprog.forEach(function (g, i) { g.style.setProperty('--sp', seg(p, i / 4, (i + 1) / 4).toFixed(3)); });
     stepsList.style.setProperty('--tp', Math.min(1, pp / 0.75).toFixed(4));
-    var lastHead = steps[3].querySelector('.cs-head');
-    stepsList.style.setProperty('--rh', Math.max(0, steps[3].offsetTop + lastHead.offsetTop + lastHead.offsetHeight / 2 - 28) + 'px');
     sec.style.setProperty('--cc', COLORS[active]);
+    if (MOBILE) layoutMobile(p);
     lastP = p;
   };
 
-  /* El mundo (900×600) se escala para caber en el escenario */
+  /* Escritorio: el mundo (900×600) se escala para caber en el escenario.
+     Móvil: los elementos pasan a .cm y se dimensionan para caber (el móvil de verdad en alto, el asistente en ancho) */
   var fit = function () {
     spots.clear();
     MOBILE = window.matchMedia('(max-width: 900px)').matches;
-    /* En móvil la escena llena lo que queda por debajo de la tarjeta de los pasos */
-    stepsList.style.setProperty('--steps-h', MOBILE ? Math.max.apply(null, steps.map(function (st) { return st.offsetHeight; })) + 'px' : '');
+    place(MOBILE);
     var side = $('.cs-side');
+    stepsList.style.setProperty('--steps-h', MOBILE ? Math.max.apply(null, steps.map(function (st) { return st.offsetHeight; })) + 'px' : '');
     sec.style.setProperty('--card-h', MOBILE ? (side.offsetHeight + 16) + 'px' : '');
-    /* La tarjeta y la escena, juntas y centradas: el sitio que sobra se reparte arriba y abajo */
-    var navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 64;
-    var sceneH = 600 * (stage.clientWidth / 900) * 0.9;
-    var free = window.innerHeight - navH - 8 - side.offsetHeight - 16 - sceneH - 12;
-    sec.style.setProperty('--card-top', MOBILE ? Math.max(0, free * 0.3).toFixed(0) + 'px' : '');
-    K = Math.min(stage.clientWidth / 900, stage.clientHeight / 600);
+    sec.style.setProperty('--card-top', MOBILE ? '0px' : '');
+    if (MOBILE) {
+      CMW = cm.clientWidth;
+      var cmH = cm.clientHeight;
+      sec.style.setProperty('--cm-pw', Math.round(Math.min(CMW * 0.64, (cmH - 12) * 9 / 19.3)) + 'px');
+      var cardW = Math.min(CMW - 28, 440);
+      wz.style.transform = 'none';
+      var mk = Math.min(cardW / 400, (cmH - 30 - 8) / wz.offsetHeight);
+      wz.style.transform = 'scale(' + mk.toFixed(4) + ')';
+      /* La tarjeta mide justo lo que el asistente reducido: sin huecos a los lados */
+      wz.style.left = '0px';
+      cmWin.firstElementChild.style.width = Math.floor(400 * mk) + 'px';
+      sec.style.setProperty('--wiz-h', Math.round(wz.offsetHeight * mk) + 'px');
+      /* Las estadísticas, si no caben en alto, se reducen un poco */
+      var statCard = cmStat.firstElementChild;
+      statCard.style.transform = '';
+      var sh = statCard.offsetHeight;
+      statCard.style.transform = sh > cmH - 8 ? 'scale(' + ((cmH - 8) / sh).toFixed(4) + ')' : '';
+    } else {
+      wz.style.left = '';
+      K = Math.min(stage.clientWidth / 900, stage.clientHeight / 600);
+    }
+    measureRail();
   };
 
   /* Avance del scroll y ratón, suavizados (sin tirones) */
@@ -394,7 +467,8 @@
   var loop = function () {
     raf = 0;
     if (cur === null) cur = target;
-    cur += (target - cur) * 0.14;
+    /* En móvil sigue al dedo más de cerca (el scroll táctil ya viene suavizado) */
+    cur += (target - cur) * (MOBILE ? 0.32 : 0.14);
     if (Math.abs(target - cur) < 0.0004) cur = target;
     mouse.cx += (mouse.x - mouse.cx) * 0.08;
     mouse.cy += (mouse.y - mouse.cy) * 0.08;
@@ -423,7 +497,7 @@
   }
 
   /* La línea de los pasos se vuelve a medir cuando termina de abrirse o cerrarse una descripción */
-  stepsList.addEventListener('transitionend', function () { if (!raf) raf = requestAnimationFrame(loop); });
+  stepsList.addEventListener('transitionend', function () { measureRail(); });
   window.addEventListener('scroll', kick, { passive: true });
   window.addEventListener('resize', function () { fit(); kick(); });
   /* Las medidas dependen de las fuentes: se vuelven a tomar cuando han cargado */
