@@ -243,13 +243,6 @@
     slot(cmStat, sIn, 0, (1 - sIn) * 30, 0.97 + sIn * 0.03);
   };
 
-  /* La línea que une los pasos (escritorio): se mide al cambiar de tamaño o de paso, no en cada fotograma */
-  var measureRail = function () {
-    if (MOBILE) return;
-    var lastHead = steps[3].querySelector('.cs-head');
-    stepsList.style.setProperty('--rh', Math.max(0, steps[3].offsetTop + lastHead.offsetTop + lastHead.offsetHeight / 2 - 28) + 'px');
-  };
-
   var render = function (p) {
     var pp = Math.max(0, p);
 
@@ -410,6 +403,7 @@
     on(kpis[3], within(p, 0.91, 0.95), 'is-hot');
     on(kpis[4], within(p, 0.915, 0.955), 'is-hot');
 
+
     /* ── Pasos y color ── */
     var active = Math.max(0, Math.min(3, Math.floor(pp * 4)));
     steps.forEach(function (st, i) {
@@ -418,7 +412,6 @@
     });
     setText(countN, '0' + (active + 1));
     mprog.forEach(function (g, i) { g.style.setProperty('--sp', seg(p, i / 4, (i + 1) / 4).toFixed(3)); });
-    stepsList.style.setProperty('--tp', Math.min(1, pp / 0.75).toFixed(4));
     sec.style.setProperty('--cc', COLORS[active]);
     if (MOBILE) layoutMobile(p);
     lastP = p;
@@ -455,7 +448,6 @@
       wz.style.left = '';
       K = Math.min(stage.clientWidth / 900, stage.clientHeight / 600);
     }
-    measureRail();
   };
 
   /* Avance del scroll y ratón, suavizados (sin tirones) */
@@ -496,8 +488,6 @@
     sec.addEventListener('pointerleave', function () { mouse.x = 0; mouse.y = 0; kick(); });
   }
 
-  /* La línea de los pasos se vuelve a medir cuando termina de abrirse o cerrarse una descripción */
-  stepsList.addEventListener('transitionend', function () { measureRail(); });
   window.addEventListener('scroll', kick, { passive: true });
   window.addEventListener('resize', function () { fit(); kick(); });
   /* Las medidas dependen de las fuentes: se vuelven a tomar cuando han cargado */

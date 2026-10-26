@@ -82,11 +82,13 @@ html[data-theme="dark"] .cs-grain { opacity: 0.08; }
 html[data-theme="dark"] .cs-count b { filter: brightness(1.35); }
 .cs-steps { position: relative; list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
 /* Una línea une los cuatro anillos y se llena con el scroll, con el color de cada paso: un único recorrido */
-/* Va del centro del anillo 1 al del 4 (--rh lo mide el JS: la descripción del paso 4 queda por debajo) */
-.cs-steps::before, .cs-steps::after { content: ''; position: absolute; left: 23px; top: 28px; height: var(--rh, 0px); width: 2px; border-radius: 2px; pointer-events: none; }
-.cs-steps::before { background: var(--hairline); }
-.cs-steps::after { background: linear-gradient(180deg, #4257ff, #2f72ee 35%, #1898bd 68%, #0fa87c); transform-origin: 50% 0; transform: scaleY(var(--tp, 0)); }
-html[data-theme="dark"] .cs-steps::after { background: linear-gradient(180deg, #8fa0ff, #74a6ff 35%, #4fcbe3 68%, #3fe0b0); }
+/* La línea que une los anillos: un tramo por paso, del centro de su anillo al del siguiente (el último no lleva).
+   Va pegado a la lista, así sigue sola a las descripciones al abrirse o cerrarse y nunca se pasa del 04.
+   Se llena con el avance de su paso (--sp), con el color de ese paso */
+.cs-step:not(:last-child)::before, .cs-step:not(:last-child)::after { content: ''; position: absolute; left: 23px; top: 28px; bottom: -32px; width: 2px; pointer-events: none; }
+.cs-step:not(:last-child)::before { background: var(--hairline); }
+.cs-step:not(:last-child)::after { background: var(--a); transform-origin: 50% 0; transform: scaleY(var(--sp, 0)); }
+html[data-theme="dark"] .cs-step:not(:last-child)::after { background: var(--ad); }
 .cs-step { position: relative; }
 .cs-head {
   position: relative; display: flex; align-items: center; gap: 14px; width: 100%;
@@ -383,7 +385,7 @@ html[data-theme="dark"] .cs-tip { background: #eef0f6; color: #0f172a; }
   .cs-track { height: 460vh; }
   .cs-grid { grid-template-columns: 1fr; grid-template-rows: auto 1fr; align-items: stretch; gap: 4px; padding: calc(var(--nav-h, 64px) + 8px) 18px 10px; }
   .cs-count { display: flex; margin-bottom: 6px; }
-  .cs-steps::before, .cs-steps::after { display: none; }
+  .cs-step::before, .cs-step::after { display: none; }
   .cs-steps { position: relative; display: block; min-height: 128px; }
   .cs-step { position: absolute; inset: 0 0 auto; opacity: 0; transform: translateY(10px); transition: opacity 320ms ease, transform 450ms var(--ease-out, ease); pointer-events: none; }
   .cs-step.is-on { opacity: 1; transform: none; pointer-events: auto; }

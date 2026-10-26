@@ -1,0 +1,381 @@
+  /* ══════════════════════════════
+     PROBLEMA — «el mismo descuento, dos resultados»: un solo escenario con un interruptor.
+     En el camino caro, 100 puntos y 68 se tiñen de rojo (ya te compraban); al pasar al camino que se multiplica,
+     esos mismos puntos vuelan y forman el árbol 1 → 2 → 4 → 8. home-sections.js crea los puntos y cambia data-mode.
+  ══════════════════════════════ */
+  @property --acc {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #c93030;
+  }
+
+  #problema .dx {
+    --red: #c93030;
+    --grn: #0a9a71;
+    --acc: var(--red);
+    --dot-off: rgba(20, 24, 38, 0.11);
+    position: relative;
+    isolation: isolate;
+    margin-top: clamp(40px, 5.5vw, 64px);
+    padding: clamp(12px, 1.6vw, 20px);
+    border-radius: 34px;
+    text-align: left;
+    background: linear-gradient(180deg, #ffffff, #fafbfd);
+    box-shadow:
+      inset 0 0 0 1px rgba(20, 24, 38, 0.07),
+      0 1px 2px rgba(20, 24, 38, 0.04),
+      0 40px 80px -48px rgba(20, 24, 38, 0.3);
+    transition: --acc 700ms ease;
+  }
+  #problema .dx[data-mode="good"] { --acc: var(--grn); }
+
+  /* Halo por fuera del escenario: rojo en el camino caro, verde en el que se multiplica */
+  #problema .dx::before,
+  #problema .dx::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -12% -8%;
+    pointer-events: none;
+    transition: opacity 900ms ease;
+  }
+  #problema .dx::before { background: radial-gradient(42% 52% at 24% 50%, rgba(229, 72, 72, 0.16), transparent 72%); }
+  #problema .dx::after { background: radial-gradient(42% 52% at 76% 50%, rgba(20, 196, 146, 0.2), transparent 72%); opacity: 0; }
+  #problema .dx[data-mode="good"]::before { opacity: 0; }
+  #problema .dx[data-mode="good"]::after { opacity: 1; }
+
+  /* ── Interruptor: una pastilla que se desliza al camino elegido y toma su color ── */
+  #problema .dx-switch {
+    position: relative;
+    display: flex;
+    width: max-content;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 5px;
+    border-radius: 999px;
+    background: rgba(20, 24, 38, 0.045);
+    box-shadow: inset 0 0 0 1px rgba(20, 24, 38, 0.06);
+  }
+  #problema .dx-thumb {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: var(--tl, 5px);
+    width: var(--tw, calc(50% - 5px));
+    border-radius: 999px;
+    background: #ffffff;
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--acc) 24%, transparent),
+      0 10px 24px -10px color-mix(in srgb, var(--acc) 55%, transparent),
+      0 1px 2px rgba(20, 24, 38, 0.08);
+    transition: left 560ms var(--ease-out), width 560ms var(--ease-out);
+  }
+  #problema .dx-tab {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 11px 20px;
+    border: 0;
+    border-radius: 999px;
+    background: none;
+    font: inherit;
+    font-size: 14.5px;
+    font-weight: 600;
+    font-stretch: 100%;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    color: var(--ink-3);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 300ms ease, scale 160ms var(--ease-out);
+  }
+  #problema .dx-tab[aria-selected="true"] { color: var(--acc); }
+  #problema .dx-tab:active { scale: 0.97; }
+  #problema .dx-tab:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+  @media (hover: hover) and (pointer: fine) {
+    #problema .dx-tab[aria-selected="false"]:hover { color: var(--ink); }
+  }
+  #problema .dx-ico { width: 18px; height: 18px; flex: 0 0 auto; }
+  /* Mientras espera para pasar solo al camino que se multiplica, una línea se llena bajo esa pestaña */
+  #problema .dx-timer {
+    position: absolute;
+    left: 22px;
+    right: 22px;
+    bottom: 4px;
+    height: 2px;
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--grn) 70%, transparent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    opacity: 0;
+    transition: opacity 200ms ease;
+  }
+  #problema .dx.is-auto .dx-timer { opacity: 1; transform: scaleX(1); transition: transform var(--auto, 4s) linear, opacity 200ms ease; }
+
+  /* ── Escenario: el texto a la izquierda, los puntos a la derecha ── */
+  #problema .dx-stage {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: clamp(16px, 2.4vw, 32px);
+    align-items: center;
+    margin-top: clamp(12px, 1.6vw, 18px);
+  }
+  #problema .dx-viz {
+    order: 2;
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    border-radius: 24px;
+    background: #f6f7fb;
+    box-shadow: inset 0 0 0 1px rgba(20, 24, 38, 0.06);
+  }
+  /* Fondo: una malla de puntos muy suave y una luz del color del camino, que cambia con él */
+  #problema .dx-viz::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(55% 60% at 58% 52%, color-mix(in srgb, var(--acc) 13%, transparent), transparent 72%),
+      radial-gradient(circle, rgba(20, 24, 38, 0.07) 1px, transparent 1.3px) 0 0 / 18px 18px;
+    -webkit-mask: radial-gradient(85% 85% at 50% 50%, #000 55%, transparent);
+    mask: radial-gradient(85% 85% at 50% 50%, #000 55%, transparent);
+    pointer-events: none;
+  }
+  /* Con el ratón, una luz sigue al cursor por el escenario */
+  #problema .dx-viz::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--acc) 12%, transparent), transparent 65%);
+    opacity: 0;
+    transition: opacity 300ms ease;
+    pointer-events: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    #problema .dx-viz:hover::after { opacity: 1; }
+  }
+  #problema .dx-svg { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; overflow: visible; }
+
+  /* Los 100 puntos: en la cuadrícula (--gx/--gy) o en el árbol (--tx/--ty), con una ola de izquierda a derecha (--dl) */
+  #problema .dx-dot {
+    fill: var(--dot-off);
+    transform: translate(calc(var(--gx) * 1px), calc(var(--gy) * 1px)) scale(6.2);
+    transition:
+      transform 1100ms var(--ease-in-out) var(--dl),
+      fill 420ms ease var(--dl),
+      opacity 600ms ease var(--dl);
+  }
+  #problema .dx-dot.on { fill: var(--red); transition-delay: var(--dl), 0ms, var(--dl); }
+  #problema .dx[data-mode="good"] .dx-dot {
+    fill: var(--grn);
+    opacity: var(--to, 1);
+    transform: translate(calc(var(--tx) * 1px), calc(var(--ty) * 1px)) scale(var(--ts));
+  }
+  #problema .dx[data-mode="good"] .dx-dot.is-root { fill: var(--blue); }
+
+  #problema .dx-link {
+    fill: none;
+    stroke: color-mix(in srgb, var(--grn) 42%, transparent);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 300ms ease;
+  }
+  #problema .dx[data-mode="good"] .dx-link {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 700ms var(--ease-in-out) calc(900ms + var(--lv) * 180ms);
+  }
+
+  /* Ya formado el árbol, una onda recorre cada generación: cada compra trae la siguiente */
+  #problema .dx-halo {
+    fill: none;
+    stroke: var(--grn);
+    stroke-width: 1.4;
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  #problema .dx-halo.is-root { stroke: var(--blue); }
+  #problema .dx[data-mode="good"] .dx-halo {
+    animation: dxHalo 3.6s var(--ease-out) infinite;
+    animation-delay: calc(1700ms + var(--lv) * 380ms);
+  }
+  @keyframes dxHalo {
+    0% { opacity: 0; transform: scale(1); }
+    6% { opacity: 0.6; }
+    38%, 100% { opacity: 0; transform: scale(2.7); }
+  }
+
+  /* ── Texto de cada camino: los dos ocupan la misma celda y se cruzan al cambiar ── */
+  #problema .dx-panels { order: 1; display: grid; padding: clamp(10px, 2vw, 26px) clamp(8px, 1.6vw, 22px); }
+  #problema .dx-panel {
+    grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    transition: opacity 420ms ease 180ms, translate 620ms var(--ease-out) 180ms, visibility 0s 0s;
+  }
+  #problema .dx-panel[inert] {
+    opacity: 0;
+    translate: 0 12px;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 220ms ease, translate 320ms ease, visibility 0s 320ms;
+  }
+  #problema .dx-panel .data-list li { transition: opacity 420ms ease, translate 560ms var(--ease-out); transition-delay: calc(260ms + var(--k, 0) * 70ms); }
+  #problema .dx-panel .data-list li:nth-child(2) { --k: 1; }
+  #problema .dx-panel .data-list li:nth-child(3) { --k: 2; }
+  #problema .dx-panel[inert] .data-list li { opacity: 0; translate: 12px 0; transition-delay: 0s; }
+
+  /* 68 %: la cifra cuenta y, a la vez, los puntos se tiñen */
+  #problema .data-num {
+    margin: 0;
+    font-size: clamp(76px, 8.4vw, 124px);
+    font-weight: 800;
+    font-stretch: 75%;
+    line-height: 0.86;
+    letter-spacing: -0.03em;
+    color: var(--red);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  #problema .data-num-note {
+    max-width: 34ch;
+    margin: 14px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-3);
+  }
+  #problema .data-side-title {
+    max-width: 20ch;
+    margin: 26px 0 0;
+    font-size: clamp(22px, 2.1vw, 28px);
+    font-weight: 700;
+    font-stretch: 105%;
+    line-height: 1.14;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  #problema .dx-panel--good .data-side-title { margin-top: 0; font-size: clamp(26px, 2.6vw, 36px); }
+  #problema .data-list { display: grid; gap: 10px; margin: 18px 0 0; padding: 0; list-style: none; }
+  #problema .data-list li {
+    position: relative;
+    margin: 0;
+    padding-left: 28px;
+    font-size: 15.5px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  #problema .data-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 10px 10px;
+  }
+  #problema .dx-panel--bad .data-list li::before {
+    background-color: rgba(201, 48, 48, 0.12);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 5h6' stroke='%23c93030' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+  }
+  #problema .dx-panel--good .data-list li::before {
+    background-color: rgba(10, 154, 113, 0.14);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 5.2l2 2 4-4.4' fill='none' stroke='%230a9a71' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+  #problema .data-src { margin: 0; padding-top: 22px; font-size: 12.5px; }
+  #problema .data-src a {
+    color: var(--ink-3);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+    text-underline-offset: 3px;
+    transition: color 160ms ease;
+  }
+  #problema .data-src a:hover { color: var(--ink); }
+  #problema .data-side-sub {
+    margin: 0;
+    padding-top: 22px;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--ink-3);
+  }
+  #problema .data-side-sub em {
+    font-family: inherit;
+    font-style: normal;
+    font-stretch: inherit;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--green);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  /* ── Modo oscuro ── */
+  html[data-theme="dark"] #problema .dx {
+    --red: #ff7d7d;
+    --grn: #3fe0b0;
+    --dot-off: rgba(255, 255, 255, 0.13);
+    background: linear-gradient(180deg, #12141d, #0e1017);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07), 0 40px 80px -48px rgba(0, 0, 0, 0.85);
+  }
+  html[data-theme="dark"] #problema .dx::before { background: radial-gradient(42% 52% at 24% 50%, rgba(255, 110, 110, 0.14), transparent 72%); }
+  html[data-theme="dark"] #problema .dx::after { background: radial-gradient(42% 52% at 76% 50%, rgba(63, 224, 176, 0.16), transparent 72%); }
+  html[data-theme="dark"] #problema .dx-switch { background: rgba(255, 255, 255, 0.05); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06); }
+  html[data-theme="dark"] #problema .dx-thumb {
+    background: #1c1f2b;
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--acc) 34%, transparent),
+      0 10px 26px -10px color-mix(in srgb, var(--acc) 60%, transparent);
+  }
+  html[data-theme="dark"] #problema .dx-viz { background: #0b0d14; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06); }
+  html[data-theme="dark"] #problema .dx-viz::before {
+    background:
+      radial-gradient(55% 60% at 58% 52%, color-mix(in srgb, var(--acc) 16%, transparent), transparent 72%),
+      radial-gradient(circle, rgba(255, 255, 255, 0.06) 1px, transparent 1.3px) 0 0 / 18px 18px;
+  }
+  html[data-theme="dark"] #problema .dx[data-mode="good"] .dx-dot.is-root,
+  html[data-theme="dark"] #problema .dx-halo.is-root { fill: #8fa0ff; stroke: #8fa0ff; }
+  html[data-theme="dark"] #problema .dx-halo:not(.is-root) { fill: none; }
+  html[data-theme="dark"] #problema .dx-panel--bad .data-list li::before { background-color: rgba(255, 125, 125, 0.14); }
+  html[data-theme="dark"] #problema .dx-panel--good .data-list li::before { background-color: rgba(63, 224, 176, 0.14); }
+
+  /* ── Móvil: interruptor a lo ancho, los puntos arriba y el texto debajo ── */
+  @media (max-width: 860px) {
+    #problema .dx-stage { grid-template-columns: 1fr; gap: 6px; }
+    #problema .dx-viz { order: 0; }
+    /* La caja del texto mide lo que el camino activo (--ph, lo pone home-sections.js) y cambia de alto con suavidad:
+       el camino que se multiplica tiene menos texto y no deja hueco debajo */
+    #problema .dx-panels {
+      position: relative;
+      order: 1;
+      height: var(--ph, auto);
+      align-items: start;
+      padding: 18px 10px 12px;
+      overflow: clip;
+      transition: height 560ms var(--ease-out);
+    }
+    #problema .dx-panel { justify-content: flex-start; }
+    #problema .dx-panel[inert] { position: absolute; top: 18px; left: 10px; right: 10px; }
+    #problema .dx-switch { width: 100%; }
+    #problema .dx-tab { flex: 1 1 0; padding: 11px 12px; text-align: center; }
+  }
+  @media (max-width: 640px) {
+    #problema .dx { padding: 8px; border-radius: 28px; }
+    #problema .dx-viz { border-radius: 21px; }
+    #problema .dx-tab { gap: 7px; padding: 10px 8px; font-size: 13.5px; }
+    #problema .data-num { font-size: clamp(68px, 21vw, 92px); }
+  }
+  @media (max-width: 420px) {
+    #problema .dx-ico { display: none; }
+  }

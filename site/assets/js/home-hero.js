@@ -174,7 +174,8 @@
     var MERGE_DELAY = 620;
     var MERGE_DUR = 1700;
     var pulse = 0;
-    var dark = root.getAttribute('data-theme') === 'dark' ? 1 : 0;
+    /* La cabecera es un escenario oscuro en los dos modos: la luz se pinta siempre en su versión de oscuro */
+    var dark = 1;
     var meet = [0, 0];
     var unit = 1;
     var mouse = { x: 0, y: 0, vx: 0, vy: 0, tx: 0, ty: 0 };
@@ -227,7 +228,7 @@
 
       pulse *= Math.exp(-dt * 1.4);
 
-      var darkTarget = root.getAttribute('data-theme') === 'dark' ? 1 : 0;
+      var darkTarget = 1;
       dark += (darkTarget - dark) * Math.min(1, dt * 5);
 
       /* Muelle crítico: el ratón tira de las luces con inercia */

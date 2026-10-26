@@ -2,35 +2,20 @@
 (function () {
   'use strict';
 
-  /* 68 %: 100 puntos que se tiñen al ritmo del contador (lo anima home-ui-03.js) */
-  document.querySelectorAll('.data-dots').forEach(function (grid) {
-    var num = grid.parentNode && grid.parentNode.querySelector('.data-num');
-    if (!num) return;
-    var frag = document.createDocumentFragment();
-    var dots = [];
-    for (var i = 0; i < 100; i++) {
-      var d = document.createElement('i');
-      dots.push(d);
-      frag.appendChild(d);
-    }
-    grid.appendChild(frag);
-
-    var lit = 0;
-    function sync() {
-      var n = Math.max(0, Math.min(100, parseInt(num.textContent, 10) || 0));
-      if (n === lit) return;
-      var from = Math.min(n, lit);
-      var to = Math.max(n, lit);
-      for (var j = from; j < to; j++) dots[j].classList.toggle('on', j < n);
-      lit = n;
-    }
-    new MutationObserver(sync).observe(num, { childList: true, characterData: true, subtree: true });
-    sync();
-  });
-
   /* Logos «Con el apoyo de»: cinta en bucle con inercia.
      Al hacer scroll acelera un momento; con el ratón encima frena suave (no se para en seco);
      el logo que pasa por el centro se enciende en color, y el que señalas muestra su nombre. */
+  /* En claro, el fondo oscuro de la tira de logos lo pone la cabecera (un fondo que baja por detrás de la tira):
+     así el brillo del móvil se difumina encima en vez de cortarse. Aquí se mide cuánto tiene que bajar */
+  (function () {
+    var hero = document.getElementById('inicio'), strip = document.querySelector('.logos-section');
+    if (!hero || !strip) return;
+    var size = function () { hero.style.setProperty('--logos-h', strip.offsetHeight + 'px'); };
+    size();
+    window.addEventListener('resize', size);
+    window.addEventListener('load', size);
+  })();
+
   document.querySelectorAll('.logos-overflow').forEach(function (box) {
     var track = box.querySelector('.logos-track');
     var pills = Array.prototype.slice.call(box.querySelectorAll('.logo-pill'));
@@ -45,7 +30,8 @@
       });
     }
     function syncLogos() {
-      var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      /* La tira de logos va siempre sobre el escenario oscuro de la cabecera: siempre las versiones blancas */
+      var dark = true;
       imgs.forEach(function (img) {
         if (!img.dataset.light) img.dataset.light = img.getAttribute('src');
         var want = dark ? darkSrc(img.dataset.light) : img.dataset.light;
@@ -132,9 +118,7 @@
     }
   });
 
-  /* ── Problema: la sección avanza con el scroll ──
-     El titular y el cierre se encienden palabra a palabra (--p), y las dos tarjetas llegan desde los lados
-     mientras la luz pasa del rojo (camino caro) al verde (el que se multiplica) (--q). */
+  /* ── Problema: el titular y el cierre se encienden palabra a palabra con el scroll (--p) ── */
   var data = document.getElementById('problema');
   if (data) {
     /* Cada palabra en su <span class="w">, sin tocar los <span>/<b> que ya trae el texto */
@@ -162,7 +146,6 @@
     };
     var headline = data.querySelector('.data-headline');
     var foot = data.querySelector('.data-foot');
-    var compare = data.querySelector('.data-compare');
     var howTitle = document.querySelector('.how-intro .s-title');
     /* Las traducciones (home-ui.js) reescriben estos textos al cargar o al cambiar de idioma: se vuelven a partir */
     [headline, foot, howTitle].forEach(function (el) {
@@ -172,15 +155,6 @@
         if (!el.querySelector('.w')) { split(el); update(); }
       }).observe(el, { childList: true });
     });
-    /* Entre las dos tarjetas: una flecha que lleva del camino caro al que se multiplica */
-    if (compare) {
-      var bridge = document.createElement('span');
-      bridge.className = 'data-bridge';
-      bridge.setAttribute('aria-hidden', 'true');
-      bridge.innerHTML = '<svg viewBox="0 0 24 24"><path d="M5 12h13M13 6.5 18.5 12 13 17.5"/></svg>';
-      compare.appendChild(bridge);
-    }
-
     /* Progreso 0…1 mientras el borde superior va de «from» a «to» (fracciones de la altura de la ventana) */
     var prog = function (el, from, to) {
       var vh = window.innerHeight;
@@ -193,9 +167,6 @@
       if (headline) headline.style.setProperty('--p', prog(headline, 0.9, 0.38).toFixed(3));
       if (foot) foot.style.setProperty('--p', prog(foot, 0.94, 0.6).toFixed(3));
       if (howTitle) howTitle.style.setProperty('--p', prog(howTitle, 0.92, 0.5).toFixed(3));
-      if (compare) compare.style.setProperty('--q', prog(compare, 1, 0.2).toFixed(3));
-      /* En móvil van una debajo de otra: cada tarjeta entra por su lado cuando le toca (--ec) */
-      if (compare) Array.prototype.forEach.call(compare.querySelectorAll('.data-card'), function (c) { c.style.setProperty('--ec', prog(c, 1, 0.62).toFixed(3)); });
     };
     var onScroll = function () {
       if (!ticking) { ticking = true; requestAnimationFrame(update); }
@@ -204,19 +175,173 @@
     window.addEventListener('resize', onScroll);
     update();
 
-    /* Tarjetas: una luz sigue al ratón por dentro y por el borde */
-    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-      data.querySelectorAll('.data-card').forEach(function (card) {
-        var rim = document.createElement('span');
-        rim.className = 'data-rim';
-        rim.setAttribute('aria-hidden', 'true');
-        card.appendChild(rim);
-        card.addEventListener('pointermove', function (e) {
-          var r = card.getBoundingClientRect();
-          card.style.setProperty('--mx', (e.clientX - r.left).toFixed(0) + 'px');
-          card.style.setProperty('--my', (e.clientY - r.top).toFixed(0) + 'px');
-        }, { passive: true });
+    var dx = data.querySelector('.dx');
+    if (dx) dxScene(dx);
+  }
+
+  /* ── «El mismo descuento, dos resultados» ──
+     100 puntos: en el camino caro, una cuadrícula donde 68 se tiñen de rojo al ritmo del contador (home-ui-03.js);
+     en el que se multiplica, esos mismos puntos vuelan a un árbol 1 → 2 → 4 → 8 (15 nodos y el resto, en las ramas).
+     Al entrar en pantalla, espera un momento y pasa sola al camino que se multiplica (una vez; si tocas, manda el usuario). */
+  function dxScene(dx) {
+    var SVG = 'http://www.w3.org/2000/svg';
+    var AUTO = 4200;
+    var svg = dx.querySelector('.dx-svg');
+    var tabs = Array.prototype.slice.call(dx.querySelectorAll('.dx-tab'));
+    var sw = dx.querySelector('.dx-switch');
+    var num = dx.querySelector('.data-num');
+    var panels = { bad: dx.querySelector('.dx-panel--bad'), good: dx.querySelector('.dx-panel--good') };
+    if (!svg || !sw || tabs.length < 2) return;
+    var el = function (tag, attrs) {
+      var n = document.createElementNS(SVG, tag);
+      for (var k in attrs) n.setAttribute(k, attrs[k]);
+      return n;
+    };
+
+    /* El árbol: nodos por generación y sus ramas (curvas entre padre e hijo) */
+    var X = [44, 150, 256, 356];
+    var leaves = [20, 57, 94, 131, 169, 206, 243, 280];
+    var levels = [leaves];
+    while (levels[0].length > 1) {
+      var up = [];
+      for (var p = 0; p < levels[0].length; p += 2) up.push((levels[0][p] + levels[0][p + 1]) / 2);
+      levels.unshift(up);
+    }
+    var SIZE = [10, 8, 7, 6];
+    var targets = [];
+    var links = [];
+    levels.forEach(function (ys, lv) {
+      ys.forEach(function (y, i) {
+        targets.push({ x: X[lv], y: y, s: SIZE[lv], o: 1, lv: lv, node: true });
+        if (lv) links.push({ lv: lv - 1, a: [X[lv - 1], levels[lv - 1][i >> 1]], b: [X[lv], y] });
       });
+    });
+    /* Los otros 85 puntos, repartidos por las ramas como un trazo punteado */
+    var per = [8, 7, 5];
+    links.forEach(function (l, li) {
+      var n = per[l.lv] + (li === 0 ? 1 : 0);
+      var mx = (l.a[0] + l.b[0]) / 2;
+      for (var k = 1; k <= n; k++) {
+        var t = k / (n + 1), u = 1 - t;
+        targets.push({
+          x: u * u * u * l.a[0] + 3 * u * u * t * mx + 3 * u * t * t * mx + t * t * t * l.b[0],
+          y: u * u * u * l.a[1] + 3 * u * u * t * l.a[1] + 3 * u * t * t * l.b[1] + t * t * t * l.b[1],
+          s: 2.1, o: 0.6, lv: l.lv, node: false
+        });
+      }
+      svg.querySelector('.dx-links').appendChild(el('path', {
+        class: 'dx-link', pathLength: 1, style: '--lv:' + l.lv,
+        d: 'M' + l.a[0] + ' ' + l.a[1] + 'C' + mx + ' ' + l.a[1] + ' ' + mx + ' ' + l.b[1] + ' ' + l.b[0] + ' ' + l.b[1]
+      }));
+    });
+    targets.forEach(function (t) {
+      if (!t.node) return;
+      svg.querySelector('.dx-halos').appendChild(el('circle', {
+        class: 'dx-halo' + (t.lv ? '' : ' is-root'), cx: t.x, cy: t.y, r: t.s, style: '--lv:' + t.lv
+      }));
+    });
+
+    /* Cada punto de la cuadrícula va al destino que le toca por posición: de izquierda a derecha, sin cruzarse */
+    var byPos = function (a, b) { return a.x - b.x || a.y - b.y; };
+    targets.sort(byPos);
+    var grid = [];
+    for (var i = 0; i < 100; i++) grid.push({ i: i, x: 92 + (i % 10) * 24, y: 42 + Math.floor(i / 10) * 24 });
+    var order = grid.slice().sort(byPos);
+    var dots = [];
+    var frag = document.createDocumentFragment();
+    order.forEach(function (g, k) {
+      var t = targets[k];
+      var c = el('circle', { class: 'dx-dot' + (t.node && !t.lv ? ' is-root' : ''), r: 1 });
+      var delay = Math.round((t.x - 44) / 312 * 520 + ((g.i * 37) % 9) * 10);
+      c.setAttribute('style', '--gx:' + g.x + ';--gy:' + g.y + ';--tx:' + t.x.toFixed(1) + ';--ty:' + t.y.toFixed(1) +
+        ';--ts:' + t.s + ';--to:' + t.o + ';--dl:' + delay + 'ms');
+      dots[g.i] = c;
+      frag.appendChild(c);
+    });
+    svg.querySelector('.dx-dots').appendChild(frag);
+
+    /* 68 %: se tiñen tantos puntos como marque el contador, en orden de lectura */
+    var lit = 0;
+    var sync = function () {
+      var n = num ? Math.max(0, Math.min(100, parseInt(num.textContent, 10) || 0)) : 68;
+      if (n === lit) return;
+      for (var j = Math.min(n, lit); j < Math.max(n, lit); j++) dots[j].classList.toggle('on', j < n);
+      lit = n;
+    };
+    if (num) new MutationObserver(sync).observe(num, { childList: true, characterData: true, subtree: true });
+    sync();
+
+    /* Interruptor: la pastilla se coloca bajo la pestaña activa.
+       En móvil, además, la caja del texto toma el alto del camino activo (--ph) */
+    var box = dx.querySelector('.dx-panels');
+    var narrow = window.matchMedia('(max-width: 860px)');
+    var place = function () {
+      var on = tabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0] || tabs[0];
+      sw.style.setProperty('--tl', on.offsetLeft + 'px');
+      sw.style.setProperty('--tw', on.offsetWidth + 'px');
+      var active = panels[dx.getAttribute('data-mode')];
+      if (!box || !active) return;
+      if (!narrow.matches) { box.style.removeProperty('--ph'); return; }
+      var cs = getComputedStyle(box);
+      box.style.setProperty('--ph', active.offsetHeight + parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom) + 'px');
+    };
+    var touched = false, timer = 0;
+    var stopAuto = function () {
+      clearTimeout(timer);
+      timer = 0;
+      dx.classList.remove('is-auto');
+    };
+    var setMode = function (mode, byUser) {
+      if (byUser) { touched = true; stopAuto(); }
+      dx.setAttribute('data-mode', mode);
+      tabs.forEach(function (t) {
+        var on = t.getAttribute('data-mode') === mode;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+      });
+      for (var m in panels) if (panels[m]) panels[m].inert = m !== mode;
+      place();
+    };
+    tabs.forEach(function (t, k) {
+      t.addEventListener('click', function () { setMode(t.getAttribute('data-mode'), true); });
+      t.addEventListener('keydown', function (e) {
+        var to = { ArrowRight: k + 1, ArrowLeft: k - 1, Home: 0, End: tabs.length - 1 }[e.key];
+        if (to === undefined) return;
+        e.preventDefault();
+        var next = tabs[(to + tabs.length) % tabs.length];
+        setMode(next.getAttribute('data-mode'), true);
+        next.focus();
+      });
+    });
+    place();
+    window.addEventListener('resize', place);
+    if ('ResizeObserver' in window) {
+      var ro = new ResizeObserver(place);
+      ro.observe(sw);
+      for (var pm in panels) if (panels[pm]) ro.observe(panels[pm]);
+    }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+
+    /* Paso automático al camino que se multiplica: la línea bajo su pestaña marca cuánto falta */
+    if ('IntersectionObserver' in window) {
+      dx.style.setProperty('--auto', AUTO + 'ms');
+      new IntersectionObserver(function (e) {
+        if (touched || dx.getAttribute('data-mode') !== 'bad') return;
+        if (e[0].isIntersecting && !timer) {
+          requestAnimationFrame(function () { dx.classList.add('is-auto'); });
+          timer = setTimeout(function () { stopAuto(); setMode('good'); }, AUTO);
+        } else if (!e[0].isIntersecting) stopAuto();
+      }, { threshold: 0.5 }).observe(dx);
+    }
+
+    /* Con el ratón, una luz sigue al cursor por el escenario */
+    var viz = dx.querySelector('.dx-viz');
+    if (viz && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      viz.addEventListener('pointermove', function (e) {
+        var r = viz.getBoundingClientRect();
+        viz.style.setProperty('--mx', (e.clientX - r.left).toFixed(0) + 'px');
+        viz.style.setProperty('--my', (e.clientY - r.top).toFixed(0) + 'px');
+      }, { passive: true });
     }
   }
 

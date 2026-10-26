@@ -1,0 +1,106 @@
+/* ══════════════════════════════
+   INICIO EN CLARO — como Blog y Tuko AI: la cabecera es un escenario oscuro (el mismo que en modo oscuro) que
+   termina con las esquinas de abajo redondeadas, con la tira de logos dentro; debajo, el contenido en claro con
+   ritmo (bandas suaves que alternan blanco y un gris azulado) y «Cómo funciona» con aspecto de estudio.
+   En modo oscuro no cambia nada: todo va con html:not([data-theme="dark"]).
+══════════════════════════════ */
+
+/* ── 1 · El escenario: la cabecera y la tira de logos usan los colores del modo oscuro ── */
+html:not([data-theme="dark"]) #inicio,
+html:not([data-theme="dark"]) .logos-section {
+  --ink: #f2f3f7;
+  --ink-2: #c3c8d6;
+  --ink-3: #9aa1b4;
+  --hero-ground: #0b0d14;
+  --hero-fade: #0b0d14;
+  --hero-grid: rgba(255, 255, 255, 0.045);
+  --glass: rgba(20, 23, 34, 0.62);
+  --glass-strong: rgba(22, 25, 38, 0.86);
+  --glass-edge: rgba(255, 255, 255, 0.07);
+  --hairline: rgba(0, 0, 0, 0.5);
+  --hover-fill: rgba(255, 255, 255, 0.07);
+  --shadow-float: 0 1px 2px rgba(0, 0, 0, 0.3), 0 16px 40px -12px rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}
+/* El escenario baja por detrás de la tira de logos (un fondo de la cabecera, debajo de todo lo suyo): la tira queda
+   transparente y el brillo del móvil se difumina sobre ese fondo, sin cortarse. Cierra con las esquinas redondeadas */
+html:not([data-theme="dark"]) #inicio::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: var(--logos-h, 220px);
+  background: #0b0d14;
+  border-radius: 0 0 clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px);
+  box-shadow: 0 44px 90px -54px rgba(20, 30, 120, 0.55);
+  pointer-events: none;
+}
+html:not([data-theme="dark"]) .logos-section { position: relative; z-index: 2; }
+
+/* Lo que en oscuro tiene regla propia, igual en el escenario */
+html:not([data-theme="dark"]) .hero .hero-accent { color: #8fa0ff; }
+html:not([data-theme="dark"]) .hero--guion .hero-accent { --hg-accent: #8fa0ff; }
+html:not([data-theme="dark"]) .hero .hero-accent-line path { stroke: #8fa0ff; }
+html:not([data-theme="dark"]) #inicio .badge-xiji img { filter: invert(1) brightness(1.15); }
+html:not([data-theme="dark"]) .hg-floor { background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.25) 45%, transparent 72%); }
+html:not([data-theme="dark"]) .logos-section .logo-pill img { filter: none; mix-blend-mode: normal; opacity: 0.62; }
+html:not([data-theme="dark"]) .logos-track.is-js .logo-pill img { filter: none; mix-blend-mode: normal; opacity: calc(0.32 + 0.68 * var(--f, 0)); }
+@media (hover: hover) and (pointer: fine) {
+  html:not([data-theme="dark"]) .logos-section .logo-pill:hover img,
+  html:not([data-theme="dark"]) .logos-track.is-js .logo-pill:hover img { filter: none; opacity: 1; }
+}
+
+/* ── 2 · El menú sobre el escenario: mientras no se ha bajado, logo y textos en blanco (como en Tuko AI) ── */
+html:not([data-theme="dark"]) body:has(#inicio) header > nav:not(.is-scrolled) { --ink: #f3f5ff; --hover-fill: rgba(255, 255, 255, 0.08); }
+html:not([data-theme="dark"]) body:has(#inicio) header > nav:not(.is-scrolled) .nav-logo img { filter: brightness(0) invert(1); }
+html:not([data-theme="dark"]) body:has(#inicio) header > nav:not(.is-scrolled) .lang-opt { color: rgba(243, 245, 255, 0.75); }
+html:not([data-theme="dark"]) body:has(#inicio) header > nav:not(.is-scrolled) .lang-opt.active { color: #10142e; }
+
+/* ── 3 · Ritmo: bandas que alternan blanco y un gris azulado muy suave, con los bordes difuminados (sin líneas) ── */
+html:not([data-theme="dark"]) body:has(#inicio) {
+  --band: #f3f5fb;
+}
+html:not([data-theme="dark"]) #como-funciona,
+html:not([data-theme="dark"]) .cs,
+html:not([data-theme="dark"]) #beneficios,
+html:not([data-theme="dark"]) #piloto,
+html:not([data-theme="dark"]) #faq { background-color: transparent; }
+html:not([data-theme="dark"]) #como-funciona { background: linear-gradient(180deg, #fff 0, var(--band) 160px); }
+html:not([data-theme="dark"]) .cs { background: linear-gradient(180deg, var(--band) 0, var(--band) calc(100% - 200px), #fff 100%); }
+html:not([data-theme="dark"]) #beneficios,
+html:not([data-theme="dark"]) #piloto { background: linear-gradient(180deg, #fff 0, var(--band) 180px, var(--band) calc(100% - 180px), #fff 100%); }
+html:not([data-theme="dark"]) #faq { background: radial-gradient(ellipse 60% 16% at 50% 20%, rgba(66, 87, 255, 0.08), transparent 100%), linear-gradient(180deg, #fff 0, var(--band) 180px, var(--band) calc(100% - 180px), #fff 100%); }
+/* Precios, con el mismo ritmo de bandas; su luz azul, más adentro, para que no toque el borde de arriba */
+html:not([data-theme="dark"]) #precios { background: radial-gradient(ellipse 60% 16% at 50% 20%, rgba(66, 87, 255, 0.09), transparent 100%), radial-gradient(ellipse 40% 14% at 8% 80%, rgba(66, 87, 255, 0.05), transparent 100%), linear-gradient(180deg, #fff 0, #f7f8fc 180px, #f7f8fc calc(100% - 180px), #fff 100%); }
+/* Entre secciones, sin cortes: todas empiezan y acaban en blanco, y el grano de Precios y Preguntas frecuentes se apaga
+   antes de llegar al borde (si no, su textura marca la línea donde termina la sección) */
+html:not([data-theme="dark"]) #precios::before,
+html:not([data-theme="dark"]) #faq::before {
+  -webkit-mask: linear-gradient(180deg, transparent, #000 200px, #000 calc(100% - 200px), transparent);
+  mask: linear-gradient(180deg, transparent, #000 200px, #000 calc(100% - 200px), transparent);
+}
+/* Las luces de ambiente, un punto más de color (se veían como manchas grises) */
+html:not([data-theme="dark"]) .amb { --amb-k: 15%; }
+
+/* ── 4 · «Cómo funciona» como un estudio de producto: luz azulada detrás, sombras más marcadas y aluminio más definido ── */
+html:not([data-theme="dark"]) .cs { --alu-1: #eceef3; --alu-2: #b6bbc6; --alu-3: #969ba8; }
+html:not([data-theme="dark"]) .cs-aur--a { opacity: 0.24; }
+html:not([data-theme="dark"]) .cs-aur--b { opacity: 0.12; }
+html:not([data-theme="dark"]) .cs-aur--c { opacity: 0.14; }
+html:not([data-theme="dark"]) .cs-stage::before {
+  content: '';
+  position: absolute;
+  inset: -6% -8%;
+  pointer-events: none;
+  background: radial-gradient(52% 50% at 54% 52%, rgba(66, 87, 255, 0.13), rgba(66, 87, 255, 0.04) 55%, transparent 75%);
+}
+html:not([data-theme="dark"]) .cs-spot { background: radial-gradient(closest-side, color-mix(in srgb, var(--cc) 30%, transparent), transparent); }
+html:not([data-theme="dark"]) .cs-shadow { background: radial-gradient(closest-side, rgba(12, 16, 48, 0.5), transparent); }
+html:not([data-theme="dark"]) .cs-lid-front { box-shadow: 0 0 0 1.5px var(--alu-2), 0 0 0 2.5px var(--alu-3), 0 60px 110px -44px rgba(20, 24, 80, 0.6); }
+html:not([data-theme="dark"]) .cs-deck { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5), inset 0 -10px 24px -10px rgba(20, 24, 60, 0.12); }
+/* La tarjeta de pasos en móvil, sobre la banda */
+@media (max-width: 900px) {
+  html:not([data-theme="dark"]) .cs-side { background: color-mix(in srgb, #fff 94%, transparent); }
+}

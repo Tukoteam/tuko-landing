@@ -137,7 +137,10 @@ html[data-theme="dark"] .why--chapters .why-row.wc::before {
   isolation: isolate;
   border-left: 1px solid var(--rule);
 }
-.wc:nth-of-type(even) .wc-stage { border-left: 0; border-right: 1px solid var(--rule); }
+/* En los capítulos pares las columnas van al revés: la línea la lleva el texto (que queda a la derecha), así está
+   siempre en el mismo borde, el de la columna derecha, y no salta un píxel de una fila a otra */
+.wc:nth-of-type(even) .wc-stage { border-left: 0; }
+.wc:nth-of-type(even) .wc-text { border-left: 1px solid var(--rule); align-self: stretch; display: flex; flex-direction: column; justify-content: center; }
 
 .wc-head { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
 .wc-num {
@@ -159,6 +162,25 @@ html[data-theme="dark"] .why--chapters .why-row.wc::before {
 html[data-theme="dark"] .wc-num { color: color-mix(in srgb, #fff calc(var(--hit) * 100%), #8fa0ff); border-color: rgba(143, 160, 255, 0.3); }
 .why--chapters .wc .why-kicker { margin: 0; font-size: 12.5px; letter-spacing: 0.1em; color: var(--ink-3); }
 .why--chapters .wc .why-kicker::after { display: none; }
+/* El número, sin pastilla, como en una publicación: «01 —— EL RELOJ». La cifra y el filete se encienden en azul
+   cuando la luz llega al capítulo (--hit); el nombre, sobrio */
+.wc-head { gap: 12px; }
+.wc-num {
+  display: inline; min-width: 0; height: auto; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--blue) calc(var(--hit) * 100%), var(--ink-3));
+}
+html[data-theme="dark"] .wc-num { color: color-mix(in srgb, #8fa0ff calc(var(--hit) * 100%), var(--ink-3)); border: 0; }
+.why--chapters .wc .why-kicker {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-weight: 600; letter-spacing: 0.14em; color: var(--ink-2);
+}
+.why--chapters .wc .why-kicker::before {
+  content: ''; width: 28px; height: 1px; border-radius: 1px;
+  background: color-mix(in srgb, var(--blue) calc(30% + var(--hit) * 70%), transparent);
+  box-shadow: 0 0 calc(var(--hit) * 10px) color-mix(in srgb, var(--blue) calc(var(--hit) * 60%), transparent);
+}
+html[data-theme="dark"] .why--chapters .wc .why-kicker::before { background: color-mix(in srgb, #8fa0ff calc(30% + var(--hit) * 70%), transparent); }
 
 /* Frase a dos tonos: el título en tinta y la continuación, al mismo tamaño, en gris */
 .why--chapters .wc-line {
@@ -261,6 +283,7 @@ html[data-theme="dark"] .why--chapters .wc .why-widget { box-shadow: 0 30px 70px
   .why--chapters .wc-line { font-size: 26px; max-width: none; text-align: left; }
   .wc-stage,
   .wc:nth-of-type(even) .wc-stage { height: 300px; border: 0; }
+  .wc:nth-of-type(even) .wc-text { border-left: 0; }
   .why--chapters .wc .why-visual { scale: 0.95; }
   .why--chapters .wc[data-k="2"] .why-visual { scale: 0.9; }
 }

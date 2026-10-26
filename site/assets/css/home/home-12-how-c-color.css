@@ -1,0 +1,9 @@
+/* ══════════════════════════════
+   CÓMO FUNCIONA — el color del paso (--cc, lo pone home-how-scene.js) se funde de un paso a otro en vez de saltar
+══════════════════════════════ */
+@property --cc {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #4257ff;
+}
+.cs { transition: --cc 900ms ease; }

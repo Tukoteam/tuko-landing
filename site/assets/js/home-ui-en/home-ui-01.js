@@ -293,7 +293,7 @@ const translations = {
     pilot_ask_title: 'A cambio te pedimos tres cosas',
     pilot_ask1: '<b>Que lo uses de verdad.</b> En productos con tráfico, no en uno perdido del catálogo.',
     pilot_ask2: '<b>Que nos digas qué falla.</b> Una llamada corta cada dos o tres semanas.',
-    pilot_ask3: '<b>Que dejes una reseña honesta</b> en Shopify y nos dejes contar tu caso aquí.',
+    pilot_ask3: '<b>Que nos dejes contar tu caso</b> aquí.',
     pilot_cta: 'Quiero una de las 5 plazas',
     pilot_foot: 'Sin tarjeta, sin permanencia y sin comisiones. Si el día 45 quieres seguir usando Tuko, te dejamos el plan Escala a <b class="pl-green">49 €/mes de por vida</b>.',
     pilot_form_title: 'Quiero una de las 5 plazas',

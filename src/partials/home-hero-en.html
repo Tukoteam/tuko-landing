@@ -258,48 +258,38 @@
   <div class="data-inner">
     <div class="fade-up"><span class="data-trigger" data-i18n="data_trigger">Before launching another <span class="data-tag">-20%</span>, look at this.</span></div>
     <h2 class="s-title data-headline fade-up d1" data-i18n="data_title">Discount should not give margin away. <span class="title-accent-red">It should bring <span class="data-grow">new customers.</span></span></h2>
-    <p class="data-sub fade-up d2" data-i18n="data_sub">Compare the two models before activating your campaign.</p>
-    <div class="data-compare fade-up d3">
-      <article class="data-card data-card--bad">
-        <div class="data-card-head">
-          <p class="data-label" data-i18n="data_bad_label">The expensive way</p>
-          <svg class="data-icon data-icon--left" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M20 12a8 8 0 1 1-2.34-5.66" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M21 4v4.4h-4.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+    <p class="data-sub fade-up d2" id="dx-sub" data-i18n="data_sub">Compare the two models before activating your campaign.</p>
+    <div class="dx fade-up d3" data-mode="bad">
+      <div class="dx-switch" role="tablist" aria-labelledby="dx-sub">
+        <span class="dx-thumb" aria-hidden="true"></span>
+        <button class="dx-tab dx-tab--bad" type="button" role="tab" id="dx-tab-bad" aria-selected="true" aria-controls="dx-panel-bad" data-mode="bad"><svg class="dx-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M21 4v4.4h-4.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="data_bad_label">The expensive way</span></button>
+        <button class="dx-tab dx-tab--good" type="button" role="tab" id="dx-tab-good" aria-selected="false" aria-controls="dx-panel-good" data-mode="good" tabindex="-1"><svg class="dx-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="8" cy="9" r="2.4" stroke="currentColor" stroke-width="1.8"/><circle cx="16.5" cy="8.2" r="1.8" stroke="currentColor" stroke-width="1.8"/><path d="M4.5 18c.6-2.6 2.6-4.2 5.4-4.2s4.8 1.6 5.4 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M17.3 14.3h4.2M19.4 12.2v4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="data_good_label">The multiplying way</span><i class="dx-timer" aria-hidden="true"></i></button>
+      </div>
+      <div class="dx-stage">
+        <div class="dx-viz" aria-hidden="true"><svg class="dx-svg" viewBox="0 0 400 300"><g class="dx-links"></g><g class="dx-halos"></g><g class="dx-dots"></g></svg></div>
+        <div class="dx-panels">
+          <div class="dx-panel dx-panel--bad" role="tabpanel" id="dx-panel-bad" aria-labelledby="dx-tab-bad">
+            <p class="data-num" data-count="68" aria-label="68 %">0 %</p>
+            <p class="data-num-note" data-i18n="data_num_note">of discounted orders can come from customers who were already buying from you.</p>
+            <h3 class="data-side-title" data-i18n="data_bad_title">You pay to acquire and you also pay in discounts.</h3>
+            <ul class="data-list">
+              <li data-i18n="data_bad_b1">Each new customer costs more in paid ads.</li>
+              <li data-i18n="data_bad_b2">Discounts also hit orders that were already yours.</li>
+              <li data-i18n="data_bad_b3">To grow, you keep increasing ad spend.</li>
+            </ul>
+            <p class="data-src"><a href="https://www.klaviyo.com/blog/discount-pricing-strategies" target="_blank" rel="noopener" data-i18n="data_src">Klaviyo · ProfitPeak, 2025</a></p>
+          </div>
+          <div class="dx-panel dx-panel--good" role="tabpanel" id="dx-panel-good" aria-labelledby="dx-tab-good" inert>
+            <h3 class="data-side-title" data-i18n="data_good_title">Each purchase can bring the next one.</h3>
+            <ul class="data-list">
+              <li data-i18n="data_good_b1">Customers share to complete the group goal.</li>
+              <li data-i18n="data_good_b2">One purchase turns into distribution.</li>
+              <li data-i18n="data_good_b3">Over time, your cost per new customer drops.</li>
+            </ul>
+            <p class="data-side-sub" data-i18n="data_good_sub">The discount only activates if <span class="data-nowrap">the <em>goal</em></span> is met.</p>
+          </div>
         </div>
-        <div class="data-kpi">
-          <p class="data-num" data-count="68" aria-label="68 %">0 %</p>
-          <span class="data-dots" aria-hidden="true"></span>
-        </div>
-        <p class="data-num-note" data-i18n="data_num_note">of discounted orders can come from customers who were already buying from you.</p>
-        <h3 class="data-side-title" data-i18n="data_bad_title">You pay to acquire and you also pay in discounts.</h3>
-        <ul class="data-list">
-          <li data-i18n="data_bad_b1">Each new customer costs more in paid ads.</li>
-          <li data-i18n="data_bad_b2">Discounts also hit orders that were already yours.</li>
-          <li data-i18n="data_bad_b3">To grow, you keep increasing ad spend.</li>
-        </ul>
-        <p class="data-src"><a href="https://www.klaviyo.com/blog/discount-pricing-strategies" target="_blank" rel="noopener" data-i18n="data_src">Klaviyo · ProfitPeak, 2025</a></p>
-      </article>
-      <article class="data-card data-card--good">
-        <div class="data-card-head">
-          <p class="data-label" data-i18n="data_good_label">The multiplying way</p>
-          <svg class="data-icon data-icon--right" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="8" cy="9" r="2.4" stroke="currentColor" stroke-width="1.8"/>
-            <circle cx="16.5" cy="8.2" r="1.8" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M4.5 18c.6-2.6 2.6-4.2 5.4-4.2s4.8 1.6 5.4 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M17.3 14.3h4.2M19.4 12.2v4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <svg class="data-chain" viewBox="0 0 320 160" aria-hidden="true"><g class="data-chain-links"><path style="--d:0" d="M24 80C68 80 68 44 112 44"/><path style="--d:30" d="M24 80C68 80 68 116 112 116"/><path style="--d:260" d="M112 44C156 44 156 24 200 24"/><path style="--d:290" d="M112 44C156 44 156 61.3 200 61.3"/><path style="--d:320" d="M112 116C156 116 156 98.7 200 98.7"/><path style="--d:350" d="M112 116C156 116 156 136 200 136"/><path style="--d:520" d="M200 24C244 24 244 12 288 12"/><path style="--d:550" d="M200 24C244 24 244 31.4 288 31.4"/><path style="--d:580" d="M200 61.3C244 61.3 244 50.9 288 50.9"/><path style="--d:610" d="M200 61.3C244 61.3 244 70.3 288 70.3"/><path style="--d:640" d="M200 98.7C244 98.7 244 89.7 288 89.7"/><path style="--d:670" d="M200 98.7C244 98.7 244 109.1 288 109.1"/><path style="--d:700" d="M200 136C244 136 244 128.6 288 128.6"/><path style="--d:730" d="M200 136C244 136 244 148 288 148"/></g><g class="data-chain-nodes"><circle class="n0" style="--d:0" cx="24" cy="80" r="9"/><circle class="n1" style="--d:440" cx="112" cy="44" r="7.5"/><circle class="n1" style="--d:470" cx="112" cy="116" r="7.5"/><circle class="n2" style="--d:700" cx="200" cy="24" r="6.5"/><circle class="n2" style="--d:730" cx="200" cy="61.3" r="6.5"/><circle class="n2" style="--d:760" cx="200" cy="98.7" r="6.5"/><circle class="n2" style="--d:790" cx="200" cy="136" r="6.5"/><circle class="n3" style="--d:960" cx="288" cy="12" r="5.5"/><circle class="n3" style="--d:990" cx="288" cy="31.4" r="5.5"/><circle class="n3" style="--d:1020" cx="288" cy="50.9" r="5.5"/><circle class="n3" style="--d:1050" cx="288" cy="70.3" r="5.5"/><circle class="n3" style="--d:1080" cx="288" cy="89.7" r="5.5"/><circle class="n3" style="--d:1110" cx="288" cy="109.1" r="5.5"/><circle class="n3" style="--d:1140" cx="288" cy="128.6" r="5.5"/><circle class="n3" style="--d:1170" cx="288" cy="148" r="5.5"/></g></svg>
-        <h3 class="data-side-title" data-i18n="data_good_title">Each purchase can bring the next one.</h3>
-        <ul class="data-list">
-          <li data-i18n="data_good_b1">Customers share to complete the group goal.</li>
-          <li data-i18n="data_good_b2">One purchase turns into distribution.</li>
-          <li data-i18n="data_good_b3">Over time, your cost per new customer drops.</li>
-        </ul>
-        <p class="data-side-sub" data-i18n="data_good_sub">The discount only activates if <span class="data-nowrap">the <em>goal</em></span> is met.</p>
-      </article>
+      </div>
     </div>
     <p class="data-foot fade-up d4" data-i18n="data_foot">It is not about lowering price more. <b>It is about making each sale <span class="data-win">bring the next one.</span></b></p>
   </div>

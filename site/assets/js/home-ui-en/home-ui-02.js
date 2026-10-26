@@ -42,7 +42,7 @@
     pilot_ask_title: 'In return we ask you for three things',
     pilot_ask1: '<b>That you really use it.</b> On products with traffic, not on a forgotten one in the catalogue.',
     pilot_ask2: '<b>That you tell us what fails.</b> A short call every two or three weeks.',
-    pilot_ask3: '<b>That you leave an honest review</b> on Shopify and let us tell your story here.',
+    pilot_ask3: '<b>That you let us tell your story</b> here.',
     pilot_cta: 'Get one of the 5 spots',
     pilot_foot: 'No card, no lock-in and no commissions. If on day 45 you want to keep using Tuko, we give you the Escala plan at <b class="pl-green">€49/month for life</b>.',
     pilot_form_title: 'Get one of the 5 spots',
