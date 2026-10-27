@@ -1,0 +1,155 @@
+/* ══════════════════════════════
+   CÓMO FUNCIONA — el portátil, como un MacBook de verdad (referencia: las fotos de producto del MacBook Air)
+   · la base tiene canto por los tres lados y una bisagra entre la base y la tapa;
+   · la tapa tiene su grosor de aluminio entre la pantalla y la parte de atrás (6 capas, ~7 px);
+   · teclado de proporciones reales: seis filas de teclas negras pequeñas y juntas que ocupan casi todo el ancho
+     (fila de funciones más baja y fila de abajo con la barra espaciadora), sin rejillas (en el Air suenan por la
+     bisagra) y trackpad de cristal de un 40 % del ancho;
+   · brillo pulido en los cantos y una sombra de contacto (oclusión) justo debajo.
+   Coordenadas del mundo: base en y = 392 (de z = 0, en la bisagra, a z = 270, delante), tapa de 620 × 400.
+══════════════════════════════ */
+
+/* ── Base ── */
+.cs-deck {
+  background:
+    /* brillo suave del aluminio, más claro hacia delante */
+    radial-gradient(120% 90% at 50% 85%, rgba(255, 255, 255, 0.28), transparent 60%),
+    /* junto a la bisagra, la sombra suave de la tapa */
+    linear-gradient(180deg, rgba(0, 0, 0, 0.1), transparent 9%),
+    linear-gradient(180deg, var(--alu-2), var(--alu-1) 22%, var(--alu-1) 82%, color-mix(in srgb, var(--alu-2) 70%, var(--alu-1)));
+  /* el chaflán pulido del borde de delante y un filo fino alrededor */
+  box-shadow: inset 0 -1.5px 0 rgba(255, 255, 255, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+/* Teclas: negras, con un brillo arriba; 14 por fila (paso de 40 px, hueco de aluminio de 4,5 px) */
+.cs-fkeys,
+.cs-keys,
+.cs-krow {
+  position: absolute; left: 44px; right: 44px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), transparent 45%), #15161a;
+  box-shadow: none;
+  border-radius: 3px;
+}
+/* Fila de funciones: más baja */
+.cs-fkeys {
+  top: 14px; height: 10px;
+  -webkit-mask: repeating-linear-gradient(90deg, #000 0 35.6px, transparent 35.6px 40.15px);
+  mask: repeating-linear-gradient(90deg, #000 0 35.6px, transparent 35.6px 40.15px);
+}
+/* Cuatro filas de letras */
+.cs-keys {
+  top: 28px; height: 84px; border-radius: 3px;
+  -webkit-mask: repeating-linear-gradient(90deg, #000 0 35.6px, transparent 35.6px 40.15px), repeating-linear-gradient(180deg, #000 0 18px, transparent 18px 22px);
+  -webkit-mask-composite: source-in;
+  mask: repeating-linear-gradient(90deg, #000 0 35.6px, transparent 35.6px 40.15px) intersect, repeating-linear-gradient(180deg, #000 0 18px, transparent 18px 22px);
+}
+/* Fila de abajo: fn · control · opción · comando · barra espaciadora · comando · opción · flechas */
+.cs-krow {
+  top: 116px; height: 18px;
+  -webkit-mask: linear-gradient(90deg,
+    #000 0 6.3%, transparent 6.3% 7.1%, #000 7.1% 13.4%, transparent 13.4% 14.2%, #000 14.2% 20.5%, transparent 20.5% 21.3%,
+    #000 21.3% 29.4%, transparent 29.4% 30.2%, #000 30.2% 63.4%, transparent 63.4% 64.2%, #000 64.2% 72.3%, transparent 72.3% 73.1%,
+    #000 73.1% 79.4%, transparent 79.4% 81.2%, #000 81.2% 87.4%, transparent 87.4% 88.2%, #000 88.2% 94.4%, transparent 94.4% 95.2%, #000 95.2% 100%);
+  mask: linear-gradient(90deg,
+    #000 0 6.3%, transparent 6.3% 7.1%, #000 7.1% 13.4%, transparent 13.4% 14.2%, #000 14.2% 20.5%, transparent 20.5% 21.3%,
+    #000 21.3% 29.4%, transparent 29.4% 30.2%, #000 30.2% 63.4%, transparent 63.4% 64.2%, #000 64.2% 72.3%, transparent 72.3% 73.1%,
+    #000 73.1% 79.4%, transparent 79.4% 81.2%, #000 81.2% 87.4%, transparent 87.4% 88.2%, #000 88.2% 94.4%, transparent 94.4% 95.2%, #000 95.2% 100%);
+}
+/* Trackpad: de cristal, un 40 % del ancho, con su filo y un reflejo */
+.cs-pad {
+  top: 150px; width: 264px; height: 106px; margin-left: -132px; border-radius: 8px;
+  background:
+    linear-gradient(170deg, rgba(255, 255, 255, 0.35), transparent 45%),
+    color-mix(in srgb, var(--alu-2) 40%, var(--alu-1));
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* Canto de delante: filo de luz arriba, aluminio que se oscurece hacia abajo y la muesca para abrir */
+.cs-lip {
+  height: 13px;
+  background: linear-gradient(180deg, color-mix(in srgb, #fff 55%, var(--alu-1)) 0, var(--alu-1) 14%, var(--alu-2) 60%, var(--alu-3) 100%);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
+}
+/* Cantos de los lados: del canto de delante (z = 270) a la bisagra (z = 0) */
+.cs-flank {
+  position: absolute; top: 392px; width: 270px; height: 13px;
+  transform-origin: 0 50%;
+  background: linear-gradient(180deg, color-mix(in srgb, #fff 45%, var(--alu-1)) 0, var(--alu-2) 50%, var(--alu-3) 100%);
+}
+.cs-flank--l { left: 125px; transform: translateZ(270px) rotateY(90deg); }
+.cs-flank--r { left: 775px; transform: translateZ(270px) rotateY(90deg); }
+/* Bisagra: la barra oscura entre la base y la tapa */
+.cs-hinge {
+  position: absolute; left: 180px; top: 381px; width: 540px; height: 15px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #3a3d45, #121317 45%, #050608 60%, #2a2c32);
+  transform: translateZ(-4px);
+}
+
+/* ── Tapa ── */
+/* El grosor del aluminio, entre la pantalla (z = 0) y la parte de atrás (z = −7,5) */
+.cs-lid-edge { position: absolute; inset: 0; border-radius: 22px 22px 6px 6px; transform-style: preserve-3d; pointer-events: none; }
+.cs-lid-edge i {
+  position: absolute; inset: 0; border-radius: inherit;
+  background: linear-gradient(160deg, color-mix(in srgb, #fff 35%, var(--alu-1)), var(--alu-2) 55%, var(--alu-3));
+  transform: translateZ(calc(var(--i) * -1.2px));
+}
+.cs-lid-back {
+  transform: translateZ(-7.5px) rotateY(180deg);
+  background:
+    radial-gradient(90% 70% at 30% 20%, rgba(255, 255, 255, 0.35), transparent 60%),
+    linear-gradient(160deg, var(--alu-1), var(--alu-2) 70%, var(--alu-3));
+}
+/* Pantalla: el marco negro brillante con un reflejo arriba, y el filo de aluminio alrededor */
+.cs-lid-front {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 18%),
+    var(--glass);
+}
+
+/* Sombra de contacto: oscura y pegada, justo debajo de la base (en el suelo, y = 404) */
+.cs-shadow--ao {
+  left: 560px; top: 690px; width: 680px; height: 300px;
+  background: radial-gradient(closest-side, rgba(8, 10, 30, 0.42), rgba(8, 10, 30, 0.18) 55%, transparent);
+}
+html[data-theme="dark"] .cs-shadow--ao { background: radial-gradient(closest-side, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.35) 55%, transparent); }
+
+/* Modo oscuro: gris espacial, con las teclas aún más negras */
+html[data-theme="dark"] .cs-fkeys,
+html[data-theme="dark"] .cs-keys,
+html[data-theme="dark"] .cs-krow { background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 45%), #08090b; }
+html[data-theme="dark"] .cs-deck { box-shadow: inset 0 -1.5px 0 rgba(255, 255, 255, 0.22), inset 0 0 0 1px rgba(255, 255, 255, 0.08); }
+html[data-theme="dark"] .cs-lip { background: linear-gradient(180deg, color-mix(in srgb, #fff 18%, var(--alu-1)) 0, var(--alu-1) 14%, var(--alu-2) 60%, var(--alu-3) 100%); }
+html[data-theme="dark"] .cs-flank { background: linear-gradient(180deg, color-mix(in srgb, #fff 15%, var(--alu-1)) 0, var(--alu-2) 50%, var(--alu-3) 100%); }
+html[data-theme="dark"] .cs-lid-edge i { background: linear-gradient(160deg, color-mix(in srgb, #fff 12%, var(--alu-1)), var(--alu-2) 55%, var(--alu-3)); }
+html[data-theme="dark"] .cs-lid-back { background: radial-gradient(90% 70% at 30% 20%, rgba(255, 255, 255, 0.1), transparent 60%), linear-gradient(160deg, var(--alu-1), var(--alu-2) 70%, var(--alu-3)); }
+
+/* ── Teclado de verdad ──
+   Una textura con la distribución real del MacBook (anchos de cada tecla, barra espaciadora, flechas en T invertida,
+   Touch ID, letras en gris y el bisel de cada tecla) pegada a la base: la perspectiva la inclina como al de verdad.
+   Sustituye a las tres franjas de antes. */
+.cs-keys,
+html[data-theme="dark"] .cs-keys {
+  top: 14px; height: 120px; left: 44px; right: 44px;
+  border-radius: 0;
+  background: url("/assets/images/macbook-teclado.svg") 0 0 / 100% 100% no-repeat;
+  -webkit-mask: none;
+  mask: none;
+}
+.cs-fkeys,
+.cs-krow { display: none; }
+
+/* ── El botón de Tuko en la demo, en el azul de la marca (como en los móviles) ──
+   En el asistente la tienda elige «Personalizado»: su muestra es el azul de Tuko y el botón de la vista previa y el de
+   la ficha de la tienda (en el portátil) salen en ese azul, con el mismo destello que en el Inicio */
+.cs-wiz .swatch.custom { background: linear-gradient(120deg, #3248ff 0%, #5468ff 48%, #7b4dff 100%); }
+html .cs-wiz .store-btn.cs-blue,
+html[data-theme="dark"] .cs-wiz .store-btn.cs-blue,
+.cs-tuko-btn {
+  border: 0;
+  color: #fff;
+  background:
+    linear-gradient(110deg, transparent 32%, rgba(255, 255, 255, 0.38) 46%, transparent 60%) 150% 0 / 260% 100% no-repeat,
+    linear-gradient(120deg, #3248ff 0%, #5468ff 48%, #7b4dff 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), 0 8px 18px -8px rgba(66, 87, 255, 0.85), 0 2px 4px -1px rgba(30, 40, 160, 0.3);
+  animation: hgShine 3.6s ease-in-out infinite;
+}

@@ -6,7 +6,7 @@
 .fz { padding: clamp(24px, 4vw, 48px) 20px clamp(36px, 4vw, 52px); }
 /* «Pronto» va justo después de la escena (bajo el escenario ya queda aire de la parte fija) */
 .fz .fx-soon { margin-top: 0; }
-.fz-track { position: relative; height: 340vh; margin-top: 8px; }
+.fz-track { position: relative; height: 560vh; margin-top: 8px; }
 /* El escenario arriba (justo bajo el nav), no centrado: así no queda hueco bajo el título al llegar */
 /* El bloque va centrado en vertical (debajo del menú): en pantallas altas no queda pegado arriba con media pantalla vacía */
 .fz-sticky { position: sticky; top: 0; height: 100svh; display: flex; align-items: center; padding-bottom: 20px; box-sizing: border-box; }
@@ -168,7 +168,7 @@ html[data-theme="dark"] .fz-stage { box-shadow: inset 0 0 0 1px rgba(143, 160, 2
 
 /* ── Móvil: arriba solo el paso activo; debajo, el escenario ── */
 @media (max-width: 900px) {
-  .fz-track { height: 360vh; }
+  .fz-track { height: 560vh; }
   /* La parte fija mide lo que su contenido: al soltarse no deja pantalla vacía antes de «Pronto» */
   .fz-sticky { height: auto; padding-bottom: 20px; }
   .fz-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; padding-top: calc(var(--nav-h, 64px) + 8px); }

@@ -40,7 +40,7 @@ html[data-theme="dark"] .cs {
   --alu-3: #1c1f27;
 }
 
-.cs-track { height: 520vh; }
+.cs-track { height: 660vh; }
 .cs-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
 
 /* ── Fondo: aurora lenta del color del paso, grano y viñeta (se funde con la página arriba y abajo) ── */
@@ -434,7 +434,8 @@ html[data-theme="dark"] .cs-tip { background: #eef0f6; color: #0f172a; }
 ══════════════════════════════ */
 .cm { display: none; }
 @media (max-width: 900px) {
-  .cs-track { height: 340vh; }
+  /* En móvil, bastante más larga: con el dedo avanzaba demasiado rápido */
+  .cs-track { height: 600vh; }
   .cs-stage { display: none; }
   .cs-aur { animation: none; filter: blur(60px); }
   .cs-grain { display: none; }

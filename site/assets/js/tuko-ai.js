@@ -576,7 +576,8 @@
   var loop = function () {
     raf = 0;
     if (cur < 0) cur = target;
-    cur += (target - cur) * 0.14;
+    /* Suavizado algo más lento: cada paso se lee con calma */
+    cur += (target - cur) * 0.1;
     if (Math.abs(target - cur) < 0.0005) cur = target;
     render(cur);
     if (cur !== target) raf = requestAnimationFrame(loop);

@@ -1,0 +1,97 @@
+/* ══════════════════════════════
+   CÓMO FUNCIONA en escritorio, como un plano de cine
+   · la escena ocupa todo el ancho y el Mac se ve grande (la interfaz real se lee);
+   · los cuatro pasos pasan a una barra fina arriba: cuatro tramos que se llenan con el scroll (--sp, el color de cada
+     paso) con su número y su título; se pueden pulsar para ir a ese paso;
+   · el texto de cada paso sale como un mensaje de cristal junto al aparato que lo protagoniza (home-how-scene.js lo
+     coloca cada fotograma) y crece desde la esquina que mira al aparato.
+   Las descripciones siguen en la lista (ocultas a la vista) para lectores de pantalla y buscadores. Móvil no cambia.
+══════════════════════════════ */
+.cs-msgs { display: none; }
+
+@media (min-width: 901px) {
+  .cs-grid { display: block; max-width: none; padding: 0; }
+
+  /* ── La barra de pasos ── */
+  .cs-side {
+    position: absolute; z-index: 3;
+    left: 50%; top: calc(var(--nav-h, 72px) + 36px);
+    width: min(980px, calc(100% - 48px));
+    transform: translateX(-50%);
+  }
+  .cs-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .cs .cs-step::before,
+  .cs .cs-step::after { content: ''; position: absolute; left: 0; right: 0; top: 0; bottom: auto; width: auto; height: 2px; border-radius: 2px; pointer-events: none; }
+  .cs .cs-step::before { background: color-mix(in srgb, var(--ink) 10%, transparent); }
+  .cs .cs-step::after { background: var(--a); transform-origin: 0 50%; transform: scaleX(var(--sp, 0)); }
+  html[data-theme="dark"] .cs .cs-step::before { background: rgba(255, 255, 255, 0.12); }
+  html[data-theme="dark"] .cs .cs-step::after { background: var(--ad); }
+  .cs-head { align-items: flex-start; gap: 9px; padding: 12px 2px 4px; border-radius: 0; }
+  .cs-head:hover { background: none; color: var(--ink-2); }
+  .cs-ring { width: auto; height: auto; }
+  .cs-ring::before, .cs-ring svg { display: none; }
+  .cs-ring b { font-size: 11px; line-height: 19px; }
+  .cs-t, .cs-step.is-on .cs-t { font-size: 13.5px; font-weight: 600; font-stretch: 100%; letter-spacing: -0.01em; line-height: 1.4; text-wrap: balance; }
+  .cs-step.is-on .cs-t { font-weight: 700; }
+  /* La descripción, fuera de la vista (la cuenta el mensaje) */
+  .cs-body { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+  /* ── El escenario: todo lo que queda debajo de la barra ── */
+  .cs-stage { position: absolute; left: 24px; right: 24px; top: calc(var(--nav-h, 72px) + 104px); bottom: 14px; height: auto; }
+  /* Más recorrido que en móvil: cada paso dura más scroll y no pasa tan deprisa */
+  .cs-track { height: 820vh; }
+
+  /* ── Los mensajes ── */
+  .cs-msgs { display: block; position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+  .cs-msg { position: absolute; left: 0; top: 0; width: clamp(250px, 21vw, 310px); will-change: transform; }
+  .cs-msg-in {
+    position: relative;
+    padding: 16px 18px 17px;
+    border-radius: 22px;
+    background: color-mix(in srgb, var(--hero-fade) 74%, transparent);
+    -webkit-backdrop-filter: blur(18px) saturate(1.6); backdrop-filter: blur(18px) saturate(1.6);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 8%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 24px 50px -22px rgba(20, 24, 60, 0.42);
+    opacity: 0; visibility: hidden;
+    transform: translateY(8px) scale(0.9);
+    transition: opacity 240ms ease, transform 300ms ease, visibility 0s linear 300ms;
+  }
+  /* La esquina que mira al aparato, casi recta (como un globo de chat), y desde ella crece */
+  .cs-msg--l .cs-msg-in { border-top-right-radius: 6px; transform-origin: 100% 0; }
+  .cs-msg--r .cs-msg-in { border-top-left-radius: 6px; transform-origin: 0 0; }
+  .cs-msg.is-on .cs-msg-in {
+    opacity: 1; visibility: visible; transform: none;
+    transition: opacity 360ms ease 80ms, transform 620ms cubic-bezier(0.34, 1.56, 0.64, 1) 80ms, visibility 0s linear 80ms;
+  }
+  .cs-msg-n { display: block; margin-bottom: 4px; font: italic 500 15px/1.2 'Roboto Serif', Georgia, serif; color: var(--a); }
+  .cs-msg-t { display: block; font-size: 17px; font-weight: 700; font-stretch: 104%; letter-spacing: -0.02em; line-height: 1.3; color: var(--ink); text-wrap: balance; }
+  .cs-msg-d { margin: 7px 0 0; font-size: 14.5px; line-height: 1.55; color: var(--ink-2); text-wrap: pretty; }
+
+  html[data-theme="dark"] .cs-msg-in { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 24px 50px -22px rgba(0, 0, 0, 0.75); }
+  html[data-theme="dark"] .cs-msg-n { color: var(--ad); }
+}
+
+/* Al acabar la sección, la escena se funde con la siguiente: sin el corte de luz entre las dos.
+   Va al final de la pista, así que solo se ve cuando la escena ya se está yendo (mientras está fija, queda abajo) */
+.cs-track { position: relative; }
+.cs-track::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 5;
+  height: 160px;
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--hero-fade) 70%, transparent) 55%, var(--hero-fade));
+  pointer-events: none;
+}
+/* Y al empezar, lo mismo: las luces de la escena se cortaban en el borde de arriba de la sección. Se funde con el
+   fondo de la de encima (en claro, la banda gris azulada; en oscuro, el fondo de la página) */
+.cs-track::before {
+  content: '';
+  position: absolute; left: 0; right: 0; top: 0; z-index: 5;
+  height: 160px;
+  background: linear-gradient(180deg, var(--hero-fade), color-mix(in srgb, var(--hero-fade) 70%, transparent) 45%, transparent);
+  pointer-events: none;
+}
+html:not([data-theme="dark"]) .cs-track::before { background: linear-gradient(180deg, var(--band, #f3f5fb), color-mix(in srgb, var(--band, #f3f5fb) 70%, transparent) 45%, transparent); }
+
+/* En oscuro, el fondo de la escena del mismo azul noche que el resto de la página: sin el grano (sobre negro se veía
+   como una neblina gris) y con menos luz verde (mezclada con el azul daba un tono grisáceo) */
+html[data-theme="dark"] .cs-grain { display: none; }
+html[data-theme="dark"] .cs-aur--b { opacity: 0.05; }

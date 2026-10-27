@@ -1,0 +1,10 @@
+/* ══════════════════════════════
+   ESQUINAS DE LAS PANTALLAS EN SAFARI (iPhone)
+   Safari no siempre recorta con overflow + border-radius lo que se mueve dentro con transform (popups, el asistente
+   reducido…): las esquinas salían cuadradas o con picos. Un clip-path redondeado recorta siempre, en claro y en oscuro.
+══════════════════════════════ */
+.hg-screen { clip-path: inset(0 round calc(var(--pw) * 0.137)); }
+.hg-wa-screen { clip-path: inset(0 round calc(var(--lw) * 0.137)); }
+.cs-screen { clip-path: inset(0 round 8px); }
+/* En la tarjeta del móvil se recorta solo el cuerpo (donde se mueve el asistente reducido): la tarjeta conserva su sombra */
+.cm-body--wiz { clip-path: inset(0 round 0 0 18px 18px); }

@@ -345,49 +345,16 @@
     }
   }
 
-  /* ── ¿Y si nadie más entra?: el reloj cuenta de 24:00:00 a 00:00:00 (el anillo se vacía) ──
-     Al llegar a cero, .is-zero dispara en CSS la luz por las líneas, la retícula y los resultados. */
+  /* ── ¿Y si nadie más entra?: en cada burbuja, una luz sigue al ratón (--mx/--my) ── */
   var re = document.querySelector('.re');
-  var reClock = re && re.querySelector('.re-clock');
-  if (reClock) {
-    var reTime = re.querySelector('.re-time');
-    var pad2 = function (n) { return (n < 10 ? '0' : '') + n; };
-    var reCount = function () {
-      var t0 = 0, DUR = 1000, TOTAL = 24 * 3600;
-      var step = function (now) {
-        if (!t0) t0 = now;
-        var k = Math.min(1, (now - t0) / DUR);
-        var left = Math.round(TOTAL * Math.pow(1 - k, 2.2));
-        if (reTime) reTime.textContent = pad2(Math.floor(left / 3600)) + ':' + pad2(Math.floor(left % 3600 / 60)) + ':' + pad2(left % 60);
-        reClock.style.setProperty('--re-left', (left / TOTAL).toFixed(4));
-        if (k < 1) requestAnimationFrame(step);
-        else re.classList.add('is-zero');
-      };
-      requestAnimationFrame(step);
-    };
-    /* En móvil la línea baja por las opciones y termina justo en la marca de la última (--re-end) */
-    var reCols = re.querySelector('.re-cols');
-    var reEnd = function () {
-      var last = reCols && reCols.lastElementChild;
-      if (!last) return;
-      var end = last.offsetTop + 31;
-      reCols.style.setProperty('--re-end', end + 'px');
-      /* Cada opción se enciende cuando la cabeza de la luz (lineal, 120 ms + 1900 ms) pasa por su marca */
-      Array.prototype.forEach.call(reCols.children, function (c) {
-        c.style.setProperty('--rd', Math.round(120 + 1900 * (c.offsetTop + 31) / end) + 'ms');
-      });
-    };
-    reEnd();
-    window.addEventListener('resize', reEnd);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(reEnd);
-    if ('IntersectionObserver' in window) {
-      var reIo = new IntersectionObserver(function (e) {
-        if (e[0].isIntersecting) { reIo.disconnect(); setTimeout(reCount, 200); }
-      }, { threshold: 0.35 });
-      reIo.observe(re.querySelector('.re-fork'));
-    } else {
-      re.classList.add('is-zero');
-    }
+  if (re && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    Array.prototype.forEach.call(re.querySelectorAll('.re-bubble'), function (b) {
+      b.addEventListener('pointermove', function (e) {
+        var r = b.getBoundingClientRect();
+        b.style.setProperty('--mx', (e.clientX - r.left).toFixed(0) + 'px');
+        b.style.setProperty('--my', (e.clientY - r.top).toFixed(0) + 'px');
+      }, { passive: true });
+    });
   }
 
   /* ── Luz ambiental: dos luces difusas fijas detrás de la lectura que acompañan el scroll ──
@@ -400,9 +367,7 @@
       ['#como-funciona', '#4257ff', '#8b5cf6'],
       ['.cs', '#4257ff', '#14c492'],
       ['#si-no-se-llena', '#14c492', '#38bdf8'],
-      ['#beneficios', '#14c492', '#4257ff'],
       ['#sin-requisitos', '#38bdf8', '#4257ff'],
-      ['#piloto', '#8b5cf6', '#4257ff'],
       ['#precios', '#4257ff', '#14c492'],
       ['#faq', '#38bdf8', '#8b5cf6'],
       ['#solicitud', '#4257ff', '#14c492']

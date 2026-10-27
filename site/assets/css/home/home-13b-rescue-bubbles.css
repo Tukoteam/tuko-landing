@@ -1,0 +1,129 @@
+/* ══════════════════════════════
+   ¿Y SI NADIE MÁS ENTRA? — tres burbujas, sin reloj ni títulos de opción
+   Cada burbuja enseña un trozo de la interfaz de lo que pasa (el pedido de 2 unidades, el grupo nuevo, el reembolso)
+   y la frase debajo. Entran escalonadas (.fade-up → .visible), cada trozo hace un gesto pequeño al aparecer y una luz
+   sigue al ratón (--mx/--my, home-sections.js). La nota de la comisión va debajo como una línea, sin marco.
+══════════════════════════════ */
+.re-bubbles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 1040px;
+  margin: clamp(36px, 4.5vw, 52px) auto 0;
+  padding: 0;
+  list-style: none;
+}
+/* Como un globo de chat: tres esquinas redondas y una casi recta */
+.re-bubble {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 16px 16px 20px;
+  border-radius: 24px 24px 24px 8px;
+  background: linear-gradient(180deg, #ffffff, #f6f7fb);
+  box-shadow: inset 0 0 0 1px rgba(20, 24, 38, 0.07), 0 26px 50px -36px rgba(20, 24, 60, 0.4);
+  text-align: left;
+  transition: translate 420ms var(--ease-out), box-shadow 420ms ease;
+}
+/* Luz que sigue al ratón por dentro */
+.re-bubble::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), rgba(66, 87, 255, 0.11), transparent 70%);
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .re-bubble:hover { translate: 0 -4px; box-shadow: inset 0 0 0 1px rgba(66, 87, 255, 0.28), 0 34px 60px -34px rgba(40, 55, 200, 0.45); }
+  .re-bubble:hover::before { opacity: 1; }
+}
+
+/* El trozo de interfaz */
+.re-ui {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 64px;
+  padding: 12px;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px rgba(20, 24, 38, 0.06), 0 1px 2px rgba(20, 24, 38, 0.05), 0 12px 24px -16px rgba(20, 24, 60, 0.4);
+  font-size: 13px;
+  line-height: 1.3;
+}
+.re-ui img { flex: none; width: 40px; height: 40px; border-radius: 10px; object-fit: cover; }
+.re-ui-txt { display: grid; gap: 2px; min-width: 0; }
+.re-ui-txt b { font-size: 13.5px; font-weight: 700; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.re-ui-txt i { font-style: normal; font-size: 12.5px; color: var(--ink-3); white-space: nowrap; }
+.re-tag { flex: none; margin-left: auto; padding: 4px 9px; border-radius: 999px; font-style: normal; font-size: 11.5px; font-weight: 700; }
+.re-tag--ok { color: #0a9a71; background: rgba(20, 196, 146, 0.14); }
+.re-tag--amount { color: var(--blue); background: rgba(66, 87, 255, 0.1); font-variant-numeric: tabular-nums; }
+/* Grupo nuevo: la primera persona ya dentro y la plaza libre, latiendo */
+.re-avs { flex: none; display: flex; }
+.re-av { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; font-size: 12px; font-weight: 700; color: #fff; }
+.re-av.is-in { background: linear-gradient(140deg, #3fe0b0, #14a37a); box-shadow: 0 0 0 2.5px #fff; }
+.re-av.is-wait { margin-left: -7px; border: 1.5px dashed color-mix(in srgb, var(--blue) 55%, transparent); background: color-mix(in srgb, var(--blue) 6%, #fff); }
+.re-24 { font-variant-numeric: tabular-nums; color: var(--blue); font-weight: 600; }
+/* Reembolso: la flecha de vuelta */
+.re-undo { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: rgba(66, 87, 255, 0.1); }
+.re-undo svg { width: 18px; height: 18px; fill: none; stroke: var(--blue); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* La frase */
+.re-say { display: flex; align-items: flex-start; gap: 12px; padding: 0 6px; }
+.re-say p { margin: 0; font-size: 16px; font-weight: 500; line-height: 1.45; color: var(--ink); text-wrap: pretty; }
+.re-ico { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: color-mix(in srgb, var(--blue) 12%, transparent); }
+.re-ico svg { width: 17px; height: 17px; fill: none; stroke: var(--blue); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Gestos al aparecer: «2 ×» rebota, la plaza libre late, la flecha da la vuelta y las etiquetas entran */
+.re-bubble.visible .re-x2 { display: inline-block; animation: reX2 700ms var(--ease-out) 650ms both; }
+@keyframes reX2 { 0% { scale: 1; } 40% { scale: 1.22; color: var(--ink); } 100% { scale: 1; } }
+.re-bubble.visible .re-av.is-wait { animation: reWait 1.8s ease-in-out 900ms infinite; }
+@keyframes reWait { 0%, 100% { box-shadow: 0 0 0 0 rgba(66, 87, 255, 0.35); } 50% { box-shadow: 0 0 0 6px rgba(66, 87, 255, 0); } }
+.re-bubble.visible .re-undo svg { animation: reUndo 900ms var(--ease-in-out) 750ms both; }
+@keyframes reUndo { from { rotate: 0deg; } to { rotate: -360deg; } }
+.re-tag { opacity: 0; translate: 6px 0; transition: opacity 400ms ease, translate 500ms var(--ease-out); transition-delay: 700ms; }
+.re-bubble.visible .re-tag { opacity: 1; translate: none; }
+
+/* Modo oscuro */
+html[data-theme="dark"] .re-bubble { background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.025)); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 26px 50px -36px rgba(0, 0, 0, 0.8); }
+html[data-theme="dark"] .re-bubble::before { background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), rgba(143, 160, 255, 0.12), transparent 70%); }
+html[data-theme="dark"] .re-ui { background: #151824; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07), 0 12px 24px -16px rgba(0, 0, 0, 0.8); }
+html[data-theme="dark"] .re-av.is-in { box-shadow: 0 0 0 2.5px #151824; }
+html[data-theme="dark"] .re-av.is-wait { background: rgba(143, 160, 255, 0.08); border-color: rgba(143, 160, 255, 0.55); }
+html[data-theme="dark"] .re-24,
+html[data-theme="dark"] .re-tag--amount { color: #8fa0ff; }
+html[data-theme="dark"] .re-tag--amount,
+html[data-theme="dark"] .re-undo,
+html[data-theme="dark"] .re-ico { background: rgba(143, 160, 255, 0.14); }
+html[data-theme="dark"] .re-undo svg,
+html[data-theme="dark"] .re-ico svg { stroke: #8fa0ff; }
+html[data-theme="dark"] .re-tag--ok { color: #3fe0b0; background: rgba(63, 224, 176, 0.14); }
+
+@media (max-width: 860px) {
+  .re-bubbles { grid-template-columns: minmax(0, 1fr); gap: 12px; max-width: 520px; }
+}
+
+/* La nota de la comisión, más ancha: la explicación en una línea y la frase en negrita debajo (dos líneas, no cuatro) */
+.re-foot { max-width: 780px; }
+/* Menos hueco hasta «Lo que no te pedimos»: las dos secciones van seguidas y el sello ya separa */
+#si-no-se-llena.re { padding-bottom: clamp(48px, 5vw, 72px); }
+#sin-requisitos.data.nk { padding-top: clamp(40px, 4.5vw, 64px); }
+
+/* Las dos plazas del grupo nuevo, como personas: la primera ya dentro (verde) y la segunda libre, esperando */
+.re-av svg { width: 17px; height: 17px; fill: none; stroke-width: 2; stroke-linecap: round; }
+.re-av.is-in svg { stroke: #fff; }
+.re-av.is-wait svg { stroke: color-mix(in srgb, var(--blue) 70%, transparent); }
+html[data-theme="dark"] .re-av.is-wait svg { stroke: #8fa0ff; }
+/* La explicación de la comisión, en negro (antes, gris claro); la frase de debajo se distingue por la negrita */
+.re-foot { color: var(--ink); }
+/* En oscuro, la plaza libre con fondo opaco (el de la tarjeta, con un toque de azul): si no, se transparentaba la
+   persona verde que tiene debajo */
+html[data-theme="dark"] .re-av.is-wait { background: color-mix(in srgb, #8fa0ff 12%, #151824); }
+/* Y menos hueco arriba: la pregunta llega justo después de que Tuko abra otro grupo (el degradado de la escena ya separa) */
+#si-no-se-llena.re { padding-top: clamp(28px, 3vw, 48px); }

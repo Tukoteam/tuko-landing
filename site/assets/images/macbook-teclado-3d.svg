@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 562 213.1" width="562" height="213" preserveAspectRatio="none">
+  <!-- Teclado de MacBook dibujado para la demo de Tuko: teclas negras con su bisel y las letras en gris -->
+  <defs>
+    <linearGradient id="cap" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#23252a"/>
+      <stop offset="0.22" stop-color="#16171b"/>
+      <stop offset="1" stop-color="#0b0c0e"/>
+    </linearGradient>
+  </defs>
+  <style>
+    .k { fill: url(#cap); stroke: #000; stroke-opacity: 0.55; stroke-width: 0.5; }
+    .id { fill: #0d0e10; }
+    .ring { fill: none; stroke: #2e3036; stroke-width: 1.1; }
+    .t { fill: #b9bdc6; fill-opacity: 0.82; font-family: Helvetica, Arial, sans-serif; font-size: 11.5px; text-anchor: middle; }
+    .f { font-size: 6.6px; fill-opacity: 0.7; }
+    .m { font-size: 6.6px; fill-opacity: 0.72; }
+  </style>
+  <rect x="0.00" y="0.00" width="33.92" height="17.60" rx="3.4" class="k"/>
+  <text x="16.96" y="12.67" class="t f">esc</text>
+  <rect x="37.72" y="0.00" width="33.92" height="17.60" rx="3.4" class="k"/>
+  <text x="54.68" y="12.67" class="t f">F1</text>
+  <rect x="75.44" y="0.00" width="33.92" height="17.60" rx="3.4" class="k"/>
+  <text x="92.40" y="12.67" class="t f">F2</text>
+  <rect x="113.16" y="0.00" width="33.92" height="17.60" rx="3.4" class="k"/>
+  <text x="130.12" y="12.67" class="t f">F3</text>
+  <rect x="150.88" y="0.00" width="33.92" height="17.60" rx="3.4" class="k"/>
+  <text x="167.84" y="12.67" class="t f">F4</text>
+  <rect x="188.60" y="0.00" width="33.92" height="17.60" rx="3.4" class="k"/>
+  <text x="205.56" y="12.67" class="t f">F5</text>
+  <rect x="226.32" y="0.00" width="33.92" height="17.60" rx="3.4" class="k"/>
+  <text x="243.28" y="12.67" class="t f">F6</text>
+  <rect x="264.04" y="0.00" width="33.92" height="17.60" rx="3.4" class="k"/>
+  <text x="281.00" y="12.67" class="t f">F7</text>
+  <rect x="301.76" y="0.00" width="33.92" height="17.60" rx="3.4" class="k"/>
+  <text x="318.72" y="12.67" class="t f">F8</text>
+  <rect x="339.48" y="0.00" width="33.92" height="17.60" rx="3.4" class="k"/>
+  <text x="356.44" y="12.67" class="t f">F9</text>
+  <rect x="377.20" y="0.00" width="33.92" height="17.60" rx="3.4" class="k"/>
+  <text x="394.16" y="12.67" class="t f">F10</text>
+  <rect x="414.92" y="0.00" width="33.92" height="17.60" rx="3.4" class="k"/>
+  <text x="431.88" y="12.67" class="t f">F11</text>
+  <rect x="452.64" y="0.00" width="33.92" height="17.60" rx="3.4" class="k"/>
+  <text x="469.60" y="12.67" class="t f">F12</text>
+  <rect x="490.36" y="0.00" width="33.92" height="17.60" rx="3.4" class="k id"/>
+  <circle cx="507.32" cy="8.80" r="5.6" class="ring"/>
+  <rect x="528.08" y="0.00" width="33.92" height="17.60" rx="3.4" class="k"/>
+  <rect x="0.00" y="21.40" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="16.96" y="44.70" class="t">`</text>
+  <rect x="37.72" y="21.40" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="54.68" y="44.70" class="t">1</text>
+  <rect x="75.44" y="21.40" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="92.40" y="44.70" class="t">2</text>
+  <rect x="113.16" y="21.40" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="130.12" y="44.70" class="t">3</text>
+  <rect x="150.88" y="21.40" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="167.84" y="44.70" class="t">4</text>
+  <rect x="188.60" y="21.40" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="205.56" y="44.70" class="t">5</text>
+  <rect x="226.32" y="21.40" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="243.28" y="44.70" class="t">6</text>
+  <rect x="264.04" y="21.40" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="281.00" y="44.70" class="t">7</text>
+  <rect x="301.76" y="21.40" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="318.72" y="44.70" class="t">8</text>
+  <rect x="339.48" y="21.40" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="356.44" y="44.70" class="t">9</text>
+  <rect x="377.20" y="21.40" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="394.16" y="44.70" class="t">0</text>
+  <rect x="414.92" y="21.40" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="431.88" y="44.70" class="t">-</text>
+  <rect x="452.64" y="21.40" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="469.60" y="44.70" class="t">=</text>
+  <rect x="490.36" y="21.40" width="71.64" height="35.30" rx="3.4" class="k"/>
+  <text x="557.40" y="51.20" class="t m" text-anchor="end">delete</text>
+  <rect x="0.00" y="60.50" width="52.78" height="35.30" rx="3.4" class="k"/>
+  <text x="4.60" y="90.30" class="t m" text-anchor="start">tab</text>
+  <rect x="56.58" y="60.50" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="73.54" y="83.80" class="t">Q</text>
+  <rect x="94.30" y="60.50" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="111.26" y="83.80" class="t">W</text>
+  <rect x="132.02" y="60.50" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="148.98" y="83.80" class="t">E</text>
+  <rect x="169.74" y="60.50" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="186.70" y="83.80" class="t">R</text>
+  <rect x="207.46" y="60.50" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="224.42" y="83.80" class="t">T</text>
+  <rect x="245.18" y="60.50" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="262.14" y="83.80" class="t">Y</text>
+  <rect x="282.90" y="60.50" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="299.86" y="83.80" class="t">U</text>
+  <rect x="320.62" y="60.50" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="337.58" y="83.80" class="t">I</text>
+  <rect x="358.34" y="60.50" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="375.30" y="83.80" class="t">O</text>
+  <rect x="396.06" y="60.50" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="413.02" y="83.80" class="t">P</text>
+  <rect x="433.78" y="60.50" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="450.74" y="83.80" class="t">[</text>
+  <rect x="471.50" y="60.50" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="488.46" y="83.80" class="t">]</text>
+  <rect x="509.22" y="60.50" width="52.78" height="35.30" rx="3.4" class="k"/>
+  <text x="535.61" y="83.80" class="t">\</text>
+  <rect x="0.00" y="99.60" width="62.21" height="35.30" rx="3.4" class="k"/>
+  <text x="4.60" y="129.40" class="t m" text-anchor="start">caps lock</text>
+  <rect x="66.01" y="99.60" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="82.97" y="122.90" class="t">A</text>
+  <rect x="103.73" y="99.60" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="120.69" y="122.90" class="t">S</text>
+  <rect x="141.45" y="99.60" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="158.41" y="122.90" class="t">D</text>
+  <rect x="179.17" y="99.60" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="196.13" y="122.90" class="t">F</text>
+  <rect x="216.89" y="99.60" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="233.85" y="122.90" class="t">G</text>
+  <rect x="254.61" y="99.60" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="271.57" y="122.90" class="t">H</text>
+  <rect x="292.33" y="99.60" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="309.29" y="122.90" class="t">J</text>
+  <rect x="330.05" y="99.60" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="347.01" y="122.90" class="t">K</text>
+  <rect x="367.77" y="99.60" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="384.73" y="122.90" class="t">L</text>
+  <rect x="405.49" y="99.60" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="422.45" y="122.90" class="t">;</text>
+  <rect x="443.21" y="99.60" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="460.17" y="122.90" class="t">&#39;</text>
+  <rect x="480.93" y="99.60" width="81.07" height="35.30" rx="3.4" class="k"/>
+  <text x="557.40" y="129.40" class="t m" text-anchor="end">return</text>
+  <rect x="0.00" y="138.70" width="81.07" height="35.30" rx="3.4" class="k"/>
+  <text x="4.60" y="168.50" class="t m" text-anchor="start">shift</text>
+  <rect x="84.87" y="138.70" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="101.83" y="162.00" class="t">Z</text>
+  <rect x="122.59" y="138.70" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="139.55" y="162.00" class="t">X</text>
+  <rect x="160.31" y="138.70" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="177.27" y="162.00" class="t">C</text>
+  <rect x="198.03" y="138.70" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="214.99" y="162.00" class="t">V</text>
+  <rect x="235.75" y="138.70" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="252.71" y="162.00" class="t">B</text>
+  <rect x="273.47" y="138.70" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="290.43" y="162.00" class="t">N</text>
+  <rect x="311.19" y="138.70" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="328.15" y="162.00" class="t">M</text>
+  <rect x="348.91" y="138.70" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="365.87" y="162.00" class="t">,</text>
+  <rect x="386.63" y="138.70" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="403.59" y="162.00" class="t">.</text>
+  <rect x="424.35" y="138.70" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="441.31" y="162.00" class="t">/</text>
+  <rect x="462.07" y="138.70" width="99.93" height="35.30" rx="3.4" class="k"/>
+  <text x="557.40" y="168.50" class="t m" text-anchor="end">shift</text>
+  <rect x="0.00" y="177.80" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="4.60" y="207.60" class="t m" text-anchor="start">fn</text>
+  <rect x="37.72" y="177.80" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="42.32" y="207.60" class="t m" text-anchor="start">control</text>
+  <rect x="75.44" y="177.80" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="80.04" y="207.60" class="t m" text-anchor="start">option</text>
+  <rect x="113.16" y="177.80" width="43.35" height="35.30" rx="3.4" class="k"/>
+  <text x="151.91" y="207.60" class="t m" text-anchor="end">command</text>
+  <rect x="160.31" y="177.80" width="203.66" height="35.30" rx="3.4" class="k"/>
+  <rect x="367.77" y="177.80" width="43.35" height="35.30" rx="3.4" class="k"/>
+  <text x="372.37" y="207.60" class="t m" text-anchor="start">command</text>
+  <rect x="414.92" y="177.80" width="33.92" height="35.30" rx="3.4" class="k"/>
+  <text x="419.52" y="207.60" class="t m" text-anchor="start">option</text>
+  <rect x="452.64" y="195.25" width="33.92" height="17.85" rx="3.4" class="k"/>
+  <rect x="490.36" y="177.80" width="33.92" height="16.95" rx="3.4" class="k"/>
+  <rect x="490.36" y="196.15" width="33.92" height="16.95" rx="3.4" class="k"/>
+  <rect x="528.08" y="195.25" width="33.92" height="17.85" rx="3.4" class="k"/>
+  <text x="469.60" y="208.16" class="t m">◀</text>
+  <text x="507.32" y="191.02" class="t m">▲</text>
+  <text x="507.32" y="209.37" class="t m">▼</text>
+  <text x="545.04" y="208.16" class="t m">▶</text>
+</svg>

@@ -44,25 +44,25 @@
     flex: 0 0 auto;
     width: auto;
     max-width: none;
-    height: 96px;
+    height: 116px;
     margin-right: clamp(60px, 7.5vw, 120px);
     opacity: 1;
   }
   .logos-section .logo-pill img {
     display: block;
     width: auto;
-    height: 62px;
-    max-width: 210px;
+    height: 75px;
+    max-width: 250px;
     object-fit: contain;
     filter: grayscale(1) contrast(1.15);
     opacity: 0.68;
     mix-blend-mode: multiply;
     transition: filter 200ms ease, opacity 200ms ease;
   }
-  .logos-section .logo-pill img[src*="upm"] { height: 69px; }
-  .logos-section .logo-pill img[src*="xiji"] { height: 78px; }
-  .logos-section .logo-pill img[src*="bio-vida"] { height: 74px; }
-  .logos-section .logo-pill img[src*="saper"] { height: 96px; }
+  .logos-section .logo-pill img[src*="upm"] { height: 83px; }
+  .logos-section .logo-pill img[src*="xiji"] { height: 94px; }
+  .logos-section .logo-pill img[src*="bio-vida"] { height: 89px; }
+  .logos-section .logo-pill img[src*="saper"] { height: 116px; }
   /* En oscuro los logos ya son blancos (versión de assets/logos-colaboradores/dark/): no hace falta filtro */
   html[data-theme="dark"] .logos-section .logo-pill img { filter: none; mix-blend-mode: normal; opacity: 0.62; }
   @media (hover: hover) and (pointer: fine) {
@@ -134,13 +134,15 @@
     background: none;
     box-shadow: none;
     font-size: 14.5px;
-    font-weight: 500;
+    font-weight: 600;
     font-stretch: 100%;
     line-height: 1.5;
     letter-spacing: -0.005em;
     text-transform: none;
-    color: var(--ink-2);
+    /* En azul, como el antetítulo de «Cómo funciona» */
+    color: var(--blue);
   }
+  html[data-theme="dark"] #problema .data-trigger { color: #8fa0ff; }
   #problema .data-trigger::before,
   #problema .data-trigger::after {
     content: '';
@@ -149,9 +151,9 @@
     height: 1px;
     margin: 0 14px;
     vertical-align: middle;
-    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--ink) 22%, transparent));
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, currentColor 45%, transparent));
   }
-  #problema .data-trigger::after { background: linear-gradient(90deg, color-mix(in srgb, var(--ink) 22%, transparent), transparent); }
+  #problema .data-trigger::after { background: linear-gradient(90deg, color-mix(in srgb, currentColor 45%, transparent), transparent); }
   /* Sin caja: el «-20 %» en rojo dentro de la frase, como una corrección a mano */
   #problema .data-tag {
     position: relative;
@@ -174,10 +176,12 @@
     transform-origin: left center;
     transition: transform 520ms var(--ease-in-out) 650ms;
   }
-  #problema .visible .data-tag::after { transform: scaleX(1); }
-  html[data-theme="dark"] #problema .data-tag { color: #ff8f8f; }
+  /* Sin tachar y del mismo azul que la frase: un solo color */
+  #problema .data-tag::after { display: none; }
+  #problema .data-tag,
+  html[data-theme="dark"] #problema .data-tag { color: inherit; }
 
-  /* Titular a dos tonos: el problema en gris, la salida en tinta */
+  /* Titular en un solo tono (negro en claro, blanco en oscuro); solo «clientes nuevos» en azul y en cursiva */
   #problema .data-headline {
     max-width: 21ch;
     margin: 22px auto 0;
@@ -186,7 +190,7 @@
     font-stretch: 108%;
     line-height: 1.04;
     letter-spacing: -0.035em;
-    color: var(--ink-3);
+    color: var(--ink);
     text-wrap: balance;
   }
   #problema .data-headline .title-accent-red { color: var(--ink); }
@@ -199,7 +203,7 @@
     color: var(--ink-2);
   }
 
-  /* Cierre a dos tonos, como el titular */
+  /* Cierre en un solo tono, como el titular; solo el final en azul y en cursiva */
   #problema .data-foot {
     max-width: 32ch;
     margin: clamp(44px, 6vw, 68px) auto 0;
@@ -208,7 +212,7 @@
     font-stretch: 105%;
     line-height: 1.22;
     letter-spacing: -0.025em;
-    color: var(--ink-3);
+    color: var(--ink);
     text-align: center;
     text-wrap: balance;
   }
@@ -221,27 +225,27 @@
     opacity: calc(0.14 + 0.86 * clamp(0, var(--p, 1) * (var(--n) + 3) - var(--i), 1));
     transition: opacity 140ms linear;
   }
-  /* «clientes nuevos»: el azul de Tuko pasa al verde del camino que se multiplica */
-  #problema .data-grow .w {
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-    background-image: linear-gradient(90deg, #3d50f2, #1d8ec6);
+  /* «clientes nuevos»: azul de Tuko en cursiva con serifa, como los acentos de los demás títulos */
+  #problema .data-grow {
+    font-family: 'Roboto Serif', Georgia, serif;
+    font-style: italic;
+    font-weight: 600;
+    font-stretch: normal;
+    letter-spacing: -0.03em;
+    color: var(--blue);
   }
-  #problema .data-grow .w:last-child { background-image: linear-gradient(90deg, #1d8ec6, #0fa87c); }
-  html[data-theme="dark"] #problema .data-grow .w { background-image: linear-gradient(90deg, #8fa0ff, #5cc6e0); }
-  html[data-theme="dark"] #problema .data-grow .w:last-child { background-image: linear-gradient(90deg, #5cc6e0, #3fe0b0); }
-  /* Cierre: solo «traiga otra» en el verde del camino que se multiplica */
-  #problema .data-foot .data-win { color: #0a9a71; }
-  html[data-theme="dark"] #problema .data-foot .data-win { color: #3fe0b0; }
+  html[data-theme="dark"] #problema .data-grow { color: #8fa0ff; }
+  /* Cierre: «traiga otra» como «clientes nuevos», en azul y en cursiva */
+  #problema .data-foot .data-win { font-family: 'Roboto Serif', Georgia, serif; font-style: italic; font-weight: 600; font-stretch: normal; color: var(--blue); }
+  html[data-theme="dark"] #problema .data-foot .data-win { color: #8fa0ff; }
 
   @media (max-width: 640px) {
     #problema.data { padding: 64px 16px 72px; }
     #problema .data-headline { font-size: clamp(30px, 8.6vw, 40px); font-stretch: 100%; }
-    .logos-section .logo-pill { height: 72px; margin-right: 52px; }
-    .logos-section .logo-pill img { height: 48px; max-width: 160px; }
-    .logos-section .logo-pill img[src*="upm"] { height: 53px; }
-    .logos-section .logo-pill img[src*="xiji"] { height: 60px; }
-    .logos-section .logo-pill img[src*="bio-vida"] { height: 57px; }
-    .logos-section .logo-pill img[src*="saper"] { height: 72px; }
+    .logos-section .logo-pill { height: 84px; margin-right: 52px; }
+    .logos-section .logo-pill img { height: 56px; max-width: 185px; }
+    .logos-section .logo-pill img[src*="upm"] { height: 62px; }
+    .logos-section .logo-pill img[src*="xiji"] { height: 70px; }
+    .logos-section .logo-pill img[src*="bio-vida"] { height: 66px; }
+    .logos-section .logo-pill img[src*="saper"] { height: 84px; }
   }

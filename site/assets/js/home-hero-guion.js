@@ -54,11 +54,13 @@
     [10950, function () { hero.classList.add('is-ss'); }],
     [11800, function () { touch('.hg-net--wa i'); }],
     [12300, function () { flash('is-app', 260); }],
-    /* WhatsApp: se envía el enlace, llega, ella escribe y contesta (y se marca como leído) */
-    [12550, function () { hero.classList.remove('is-ss'); hero.classList.add('is-chat', 'is-m1'); }],
-    [12950, function () { hero.classList.add('is-delivered'); }],
-    [13500, function () { hero.classList.add('is-typing'); }],
-    [14400, function () { hero.classList.remove('is-typing'); hero.classList.add('is-m2', 'is-read'); }],
+    /* WhatsApp en el móvil de Laura: entra el móvil, le llega el enlace de Lucía, escribe la respuesta y la envía
+       (se entrega y se lee) */
+    [12550, function () { hero.classList.remove('is-ss'); hero.classList.add('is-chat'); }],
+    [13000, function () { hero.classList.add('is-m1'); }],
+    [13550, function () { hero.classList.add('is-typing'); }],
+    [14400, function () { hero.classList.remove('is-typing'); hero.classList.add('is-m2'); }],
+    [14700, function () { hero.classList.add('is-delivered', 'is-read'); }],
     /* Grupo cerrado: 2 de 2 */
     [15000, function () {
       setStep(3);
@@ -180,6 +182,9 @@
     }
   }
 
+  /* Ritmo del guion: 1 = los tiempos de arriba; 1,2 = un 20 % más pausado (los toques siguen siendo rápidos).
+     Las barras 1·2·3 del CSS usan los mismos tiempos multiplicados por este ritmo */
+  var PACE = 1.2;
   function play(delay) {
     stop();
     playing = true;
@@ -187,7 +192,7 @@
       timers.push(setTimeout(function () {
         if (beat[1]) beat[1]();
         else play(0);
-      }, beat[0] + delay));
+      }, beat[0] * PACE + delay));
     });
   }
   function stop() {

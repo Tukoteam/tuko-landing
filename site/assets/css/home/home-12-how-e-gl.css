@@ -1,0 +1,20 @@
+/* ══════════════════════════════
+   CÓMO FUNCIONA — el Mac en WebGL (home-how-mac.js, solo escritorio)
+   Cuando el lienzo ya pinta, la sección lleva .is-gl: el cuerpo del portátil de CSS se esconde y queda su pantalla
+   (la interfaz real), que encaja con la tapa de WebGL. El suelo pasa a un mundo gemelo detrás del lienzo.
+   La bisagra de WebGL está 16 px por debajo de la de CSS (la barbilla de la pantalla, como en el MacBook), así que la
+   tapa de HTML gira desde ahí y el suelo baja a la base (y = 422).
+══════════════════════════════ */
+.cs-gl { position: absolute; pointer-events: none; }
+
+.cs.is-gl .cs-deck,
+.cs.is-gl .cs-lip,
+.cs.is-gl .cs-flank,
+.cs.is-gl .cs-hinge,
+.cs.is-gl .cs-lid-edge,
+.cs.is-gl .cs-lid-back,
+.cs.is-gl .cs-shadow--laptop,
+.cs.is-gl .cs-shadow--ao { display: none; }
+html .cs.is-gl .cs-lid-front { background: transparent; box-shadow: none; }
+.cs.is-gl .cs-lid { transform-origin: 50% calc(100% + 16px); }
+.cs.is-gl .cs-floor { top: -278px; }

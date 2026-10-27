@@ -299,7 +299,8 @@
     color: var(--ink);
     white-space: nowrap;
   }
-  .hero-meta .badge { border-left: 1px solid var(--hairline); }
+  /* Solo el respaldo de Xiji: sin el separador que tenía cuando había una nota delante */
+  .hero-meta .badge { border-left: 0; }
   .hero-meta .badge {
     display: inline-flex;
     align-items: center;
@@ -308,7 +309,11 @@
     font-weight: 500;
     color: var(--ink-2);
     white-space: nowrap;
+    text-decoration: none;
+    transition: color 200ms ease;
   }
+  /* Es un enlace a la web de Xiji: al pasar el ratón, el texto se enciende */
+  .hero-meta a.badge:hover { color: var(--ink); }
   .badge-xiji { display: flex; width: 16px; height: 16px; flex: 0 0 auto; }
   .badge-xiji img { display: block; width: 16px; height: 16px; object-fit: contain; }
   html[data-theme="dark"] .badge-xiji img { filter: invert(1) brightness(1.15); }
@@ -544,7 +549,7 @@
   @media (max-width: 640px) {
     .hero-sky { padding-left: 16px; padding-right: 16px; }
     .hero-meta { flex-direction: column; gap: 2px; border-radius: 20px; }
-    .hero-meta .badge { padding: 6px 10px 7px; border-left: 0; border-top: 1px solid var(--hairline); }
+    .hero-meta .badge { padding: 6px 10px 7px; border-left: 0; }
     .hero .hero-title {
       font-size: clamp(32px, 10.2vw, 52px);
       font-stretch: 100%;
@@ -557,3 +562,9 @@
     .hero .hero-actions .hero-cta,
     .hero .hero-actions .btn-ghost { justify-content: center; width: 100%; }
   }
+
+/* Modo claro: el brillo del cristal solo en el canto de arriba (como la luz real) y el contorno, una línea gris fina.
+   Antes era un filo blanco por todo el contorno, que sobre fondos con color se veía como un marco blanco */
+html:not([data-theme="dark"]) header > nav::before {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 0 0 1px rgba(20, 24, 38, 0.08), 0 1px 2px rgba(20, 24, 38, 0.04), 0 12px 32px -12px rgba(20, 24, 38, 0.18);
+}

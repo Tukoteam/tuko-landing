@@ -7,7 +7,7 @@ const translations = {
     nav_link_beneficios: 'Por qué funciona',
     nav_link_inicio: 'Inicio',
     nav_link_blog: 'Blog',
-    nav_cta: 'Acceder al piloto',
+    nav_cta: 'Instalar gratis',
     nav_cta_pilot: 'Quiero una de las 5 plazas',
     nav_lang_label: 'Idioma',
     /* TUKO AI */
@@ -435,7 +435,7 @@ const translations = {
     nav_link_beneficios: 'Why it works',
     nav_link_inicio: 'Home',
     nav_link_blog: 'Blog',
-    nav_cta: 'Access the pilot',
+    nav_cta: 'Install free',
     nav_cta_pilot: 'Get one of the 5 spots',
     nav_lang_label: 'Language',
     /* TUKO AI */

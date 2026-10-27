@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <!-- Fondo de chat al estilo de WhatsApp (dibujo propio): iconos de línea fina sobre el beige de siempre -->
+  <rect width="160" height="160" fill="#efeae2"/>
+  <g fill="none" stroke="#d8cfc2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <!-- corazón -->
+    <path d="M22 30c-4-5-12-2-11 4 1 5 11 11 11 11s10-6 11-11c1-6-7-9-11-4z"/>
+    <!-- bocadillo -->
+    <path d="M60 14h22a6 6 0 0 1 6 6v10a6 6 0 0 1-6 6H70l-7 6v-6h-3a6 6 0 0 1-6-6V20a6 6 0 0 1 6-6z"/>
+    <!-- estrella -->
+    <path d="M128 12l3.5 7.5 8 1-6 5.5 1.6 8-7.1-4-7.1 4 1.6-8-6-5.5 8-1z"/>
+    <!-- cámara -->
+    <rect x="14" y="70" width="30" height="21" rx="4"/><circle cx="29" cy="80.5" r="5.5"/><path d="M22 70l3-4h8l3 4"/>
+    <!-- nota musical -->
+    <path d="M70 92V68l16-4v22"/><circle cx="66" cy="92" r="4"/><circle cx="82" cy="86" r="4"/>
+    <!-- cara sonriente -->
+    <circle cx="128" cy="78" r="12"/><path d="M123 82c3 3 7 3 10 0"/><path d="M123.5 74.5h.01M132.5 74.5h.01"/>
+    <!-- hoja -->
+    <path d="M18 140c0-14 10-24 26-24 0 16-10 26-26 24z"/><path d="M18 140l14-14"/>
+    <!-- regalo -->
+    <rect x="62" y="122" width="26" height="20" rx="2"/><path d="M60 122h30v-6H60zM75 116v26"/><path d="M75 116c-4-6-10-6-10-2s6 2 10 2c4 0 10 2 10-2s-6-4-10 2z"/>
+    <!-- teléfono -->
+    <path d="M118 118c2-2 5-2 6 0l3 4c1 2 0 4-1 5l-2 2c2 4 5 7 9 9l2-2c1-1 3-2 5-1l4 3c2 1 2 4 0 6l-2 2c-3 3-12 0-19-7s-10-16-7-19z"/>
+    <!-- puntos sueltos -->
+    <path d="M100 44h.01M44 52h.01M108 104h.01M48 108h.01M142 50h.01"/>
+  </g>
+</svg>

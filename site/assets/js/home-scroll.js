@@ -7,7 +7,8 @@
   if (!window.Lenis || !gsap || !ST) return;
   gsap.registerPlugin(ST);
 
-  var lenis = new window.Lenis({ lerp: 0.09, wheelMultiplier: 0.95, anchors: true, allowNestedScroll: true });
+  /* Más pausado: cada vuelta de la rueda recorre menos y frena más suave */
+  var lenis = new window.Lenis({ lerp: 0.075, wheelMultiplier: 0.72, anchors: true, allowNestedScroll: true });
   lenis.on('scroll', ST.update);
   gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
   gsap.ticker.lagSmoothing(0);

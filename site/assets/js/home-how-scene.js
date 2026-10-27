@@ -49,7 +49,7 @@
     hint: function (d, price) { return 'With 2 people, the discount will be ' + d + '% · Final price ' + price; },
     next: 'Continue', publish: 'Publish now',
     btnLight: 'Group price €68.00', btnDark: 'Buy it for €68.00',
-    meta: function (light) { return '2 people · 24 h · ' + (light ? 'Light theme' : 'Dark theme'); },
+    meta: function (light) { return '2 people · 24 h · ' + (light ? 'Custom (blue)' : 'Dark theme'); },
     typing: 'typing…', online: 'online'
   } : {
     banner: [
@@ -60,7 +60,7 @@
     hint: function (d, price) { return 'Con 2 personas, el descuento será del ' + d + '% · Precio final ' + price; },
     next: 'Continuar', publish: 'Publicar ahora',
     btnLight: 'Precio grupal 68,00 €', btnDark: 'Cómpralo por 68,00€',
-    meta: function (light) { return '2 personas · 24 h · ' + (light ? 'Tema claro' : 'Tema oscuro'); },
+    meta: function (light) { return '2 personas · 24 h · ' + (light ? 'Personalizado (azul)' : 'Tema oscuro'); },
     typing: 'escribiendo…', online: 'en línea'
   };
   var BANNER = TX.banner;
@@ -80,6 +80,56 @@
   var touchA = $('.cs-touch', phA), touchB = $('.cs-touch', phB);
   var chat = $('.cs-pv--chat'), waSt = $('.cs-wa-st'), bubble = $('.cs-bubble'), preview = $('.cs-preview');
   var fly = $('.cs-fly'), trail = $$('.cs-trail i');
+
+  /* Escritorio: el texto de cada paso sale como un mensaje junto al aparato que lo protagoniza (el asistente en el Mac,
+     el móvil de Lucía, el de Marta y las estadísticas). Son copias en HTML plano de los textos de los pasos, fuera del 3D
+     para que siempre se lean; su sitio sale de proyectar cada fotograma un punto del mundo con la misma cámara.
+     side: a qué lado del punto va el mensaje; de from a to (p), se ve */
+  var MSG = [
+    { side: 'l', at: function (b) { return [151, 150, -90 * b]; }, from: 0, to: 0.235 },   /* borde izquierdo de la pantalla */
+    { side: 'r', at: function () { return [827, 150, 198]; }, from: 0.31, to: 0.49 },      /* canto derecho del móvil de Lucía */
+    { side: 'l', at: function () { return [73, 150, 198]; }, from: 0.53, to: 0.74 },       /* canto izquierdo del de Marta */
+    { side: 'r', at: function (b) { return [749, 150, -90 * b]; }, from: 0.815, to: 9 }     /* borde derecho de la pantalla */
+  ];
+  var msgBox = document.createElement('div');
+  msgBox.className = 'cs-msgs';
+  MSG.forEach(function (m, i) {
+    var st = steps[i];
+    var el = document.createElement('div');
+    el.className = 'cs-msg cs-msg--' + m.side;
+    el.setAttribute('style', st.getAttribute('style') || '');
+    el.innerHTML = '<div class="cs-msg-in"><span class="cs-msg-n">0' + (i + 1) + '</span></div>';
+    /* Los mismos nodos (con su data-i18n): el texto es el del paso, también en inglés */
+    var t = $('.cs-t', st).cloneNode(true), d = $('.cs-body > p', st).cloneNode(true);
+    t.className = 'cs-msg-t';
+    d.className = 'cs-msg-d';
+    el.lastChild.appendChild(t);
+    el.lastChild.appendChild(d);
+    msgBox.appendChild(el);
+    m.el = el; m.w = 0; m.h = 0;
+  });
+  stage.appendChild(msgBox);
+  var SW = 1, SH = 1, D2R = Math.PI / 180, GAP = 18;
+  var measureMsgs = function () { MSG.forEach(function (m) { m.w = m.el.offsetWidth; m.h = m.el.offsetHeight; }); };
+  /* Un punto del mundo (900 × 600, z hacia ti) en píxeles del escenario: lo mismo que hace el transform del mundo */
+  var project = function (q, cam) {
+    var x = q[0] - 450, y = q[1] - 300, z = q[2];
+    var ca = Math.cos(cam.ry * D2R), sa = Math.sin(cam.ry * D2R), cb = Math.cos(cam.rx * D2R), sb = Math.sin(cam.rx * D2R);
+    var x1 = x * ca + z * sa, z1 = -x * sa + z * ca;
+    var y2 = y * cb - z1 * sb, z2 = y * sb + z1 * cb;
+    var k = 1900 / (1900 - z2 * cam.s);
+    return { x: SW / 2 + (x1 * cam.s + cam.tx) * k, y: SH / 2 + (y2 * cam.s + cam.ty) * k };
+  };
+  var placeMsgs = function (p, cam) {
+    MSG.forEach(function (m) {
+      on(m.el, p >= m.from && p < m.to);
+      var a = project(m.at(cam.back), cam);
+      var x = m.side === 'l' ? a.x - GAP - m.w : a.x + GAP;
+      x = Math.max(14, Math.min(SW - m.w - 14, x));
+      var y = Math.max(10, Math.min(SH - m.h - 10, a.y - 30));
+      m.el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)';
+    });
+  };
 
   /* Móvil ligero: sus huecos y lo que se mueve a ellos (y de vuelta al pasar a escritorio) */
   var cm = $('.cm'), cmWin = $('.cm-win'), cmPa = $('.cm-pa'), cmPb = $('.cm-pb'), cmStat = $('.cm-stat');
@@ -155,14 +205,14 @@
   var CAM = [
     { p: -0.25, s: 0.8, tx: 0, ty: 20, rx: -26, ry: -12 },
     { p: -0.03, s: 0.98, tx: 0, ty: 40, rx: -11, ry: -5 },
-    { p: 0.05, s: 1.3, tx: 0, ty: 142, rx: -4, ry: -3 },   /* cerca de la pantalla */
-    { p: 0.23, s: 1.3, tx: 0, ty: 142, rx: -3, ry: 3 },
-    { p: 0.31, s: 0.98, tx: -20, ty: 34, rx: -9, ry: -10 }, /* se aleja y gira hacia Lucía */
-    { p: 0.47, s: 1.02, tx: -36, ty: 36, rx: -8, ry: -7 },
-    { p: 0.55, s: 0.92, tx: 0, ty: 26, rx: -10, ry: 3 },    /* plano abierto: las dos */
-    { p: 0.73, s: 0.94, tx: 0, ty: 26, rx: -9, ry: -2 },
-    { p: 0.81, s: 1.27, tx: 0, ty: 138, rx: -4, ry: 3 },    /* de vuelta a la pantalla */
-    { p: 1.0, s: 1.25, tx: 0, ty: 136, rx: -5, ry: -3 }
+    { p: 0.05, s: 1.12, tx: 70, ty: 118, rx: -5, ry: -3 },  /* cerca de la pantalla, un poco a la derecha: el mensaje va a la izquierda */
+    { p: 0.23, s: 1.12, tx: 70, ty: 118, rx: -4, ry: 3 },
+    { p: 0.31, s: 0.9, tx: -100, ty: 70, rx: -9, ry: -10 }, /* se aleja y gira hacia Lucía (a la derecha queda sitio para su mensaje) */
+    { p: 0.47, s: 0.92, tx: -110, ty: 70, rx: -8, ry: -7 },
+    { p: 0.55, s: 0.86, tx: 130, ty: 64, rx: -10, ry: 3 },  /* plano abierto: las dos; la cámara sigue al enlace hacia Marta */
+    { p: 0.73, s: 0.88, tx: 130, ty: 64, rx: -9, ry: -2 },
+    { p: 0.81, s: 0.98, tx: -70, ty: 78, rx: -6, ry: 3 },   /* de vuelta a la pantalla, a la izquierda (el mensaje va a la derecha) y entero: al acabar la sección se ve su borde de abajo */
+    { p: 1.0, s: 0.96, tx: -70, ty: 74, rx: -7, ry: -3 }
   ];
   var camAt = function (p) {
     if (p <= CAM[0].p) return CAM[0];
@@ -183,7 +233,7 @@
     { p: 0.062, el: disc },
     { p: 0.098, el: disc },
     { p: 0.106, el: btnNext, click: 0.113 },
-    { p: 0.132, el: themes[0], click: 0.138 },
+    { p: 0.132, el: themes[2], click: 0.138 },
     { p: 0.152, el: btnNext, click: 0.158 },
     { p: 0.18, el: btnNext, click: 0.192 },
     { p: 0.206, el: btnYes, click: 0.212 },
@@ -263,7 +313,11 @@
       var back = ease(seg(p, 0.25, 0.31)) * (1 - ease(seg(p, 0.75, 0.81)));
       laptop.style.transform = 'translate3d(0,0,' + (back * -90).toFixed(1) + 'px)';
       dim.style.opacity = (back * 0.28).toFixed(3);
-  
+      /* El Mac en WebGL (home-how-mac.js) y los mensajes, con la misma cámara */
+      var cam = { s: s, tx: c.tx * s, ty: c.ty * s, rx: rx, ry: ry, open: open, back: back };
+      if (sec.csGL) sec.csGL(cam);
+      placeMsgs(p, cam);
+
       /* Qué se ve en la pantalla: la app → la tienda → los grupos */
       var toStore = ease(seg(p, 0.25, 0.3)), toOrders = ease(seg(p, 0.76, 0.8));
       var vA = 1 - toStore, vS = toStore * (1 - toOrders), vO = toOrders;
@@ -290,10 +344,11 @@
     var d = Math.round(ease(seg(p, 0.066, 0.096)) * 15);
     setText(disc, String(d));
     setText(hint, TX.hint(d, euro(80 - 80 * d / 100)));
+    /* La tienda elige el estilo «Personalizado», en el azul de Tuko: el botón sale azul, como en los móviles */
     var light = p >= 0.138;
-    on(themes[0], light, 'selected');
+    on(themes[2], light, 'selected');
     on(themes[1], !light, 'selected');
-    on(storeBtn, light, 'cs-light');
+    on(storeBtn, light, 'cs-blue');
     setText(storeBtn, light ? TX.btnLight : TX.btnDark);
     setText(textIn, light ? TX.btnLight : TX.btnDark);
     setText(meta, TX.meta(light));
@@ -446,15 +501,32 @@
       statCard.style.transform = sh > cmH - 8 ? 'scale(' + ((cmH - 8) / sh).toFixed(4) + ')' : '';
     } else {
       wz.style.left = '';
-      K = Math.min(stage.clientWidth / 900, stage.clientHeight / 600);
+      stage.style.bottom = '';
+      stage.style.height = '';
+      stage.style.marginTop = '';
+      SW = stage.clientWidth;
+      SH = stage.clientHeight;
+      measureMsgs();
+      /* A lo ancho se reserva casi un mensaje (si no, en pantallas estrechas tapa los aparatos); con tope: en pantallas
+         enormes la interfaz de HTML, tan ampliada, dejaría de verse nítida */
+      K = Math.min((SW - 0.9 * (MSG[0].w || 280)) / 900, SH / 600, 1.6);
+      /* Si el Mac se ajusta por el ancho, el escenario mide solo lo que necesita (sin un hueco vacío junto a la barra) */
+      var need = Math.round(600 * K + 40);
+      /* El sitio que sobra, mitad arriba y mitad abajo: ni hueco grande bajo la barra ni al acabar la sección */
+      if (need < SH) { stage.style.bottom = 'auto'; stage.style.height = need + 'px'; stage.style.marginTop = Math.round((SH - need) / 2) + 'px'; SH = need; }
     }
   };
 
   /* Avance del scroll y ratón, suavizados (sin tirones) */
   var target = 0, cur = null, raf = 0;
+  /* El paso 1 (el asistente entero) se lleva más recorrido que los demás: el 36 % del scroll en vez del 25 %.
+     raw es el avance real del scroll (0…1); la escena trabaja con p, donde cada paso mide 0,25 */
+  var STEP1 = 0.36;
+  var toP = function (raw) { return raw <= 0 ? raw : raw < STEP1 ? raw / STEP1 * 0.25 : 0.25 + (raw - STEP1) / (1 - STEP1) * 0.75; };
+  var toRaw = function (p) { return p < 0.25 ? p / 0.25 * STEP1 : STEP1 + (p - 0.25) / 0.75 * (1 - STEP1); };
   var read = function () {
     var r = track.getBoundingClientRect();
-    target = Math.max(-0.25, Math.min(1, -r.top / Math.max(1, r.height - window.innerHeight)));
+    target = toP(Math.max(-0.25, Math.min(1, -r.top / Math.max(1, r.height - window.innerHeight))));
   };
   var loop = function () {
     raf = 0;
@@ -475,7 +547,7 @@
     st.querySelector('.cs-head').addEventListener('click', function () {
       var r = track.getBoundingClientRect();
       var range = r.height - window.innerHeight;
-      window.scrollTo({ top: window.scrollY + r.top + range * (i / 4 + 0.2), behavior: 'smooth' });
+      window.scrollTo({ top: window.scrollY + r.top + range * toRaw(i / 4 + 0.2), behavior: 'smooth' });
     });
   });
 
@@ -490,8 +562,10 @@
 
   window.addEventListener('scroll', kick, { passive: true });
   window.addEventListener('resize', function () { fit(); kick(); });
+  /* El Mac en WebGL ya está listo: pinta el fotograma de ahora */
+  sec.addEventListener('cs-gl', kick);
   /* Las medidas dependen de las fuentes: se vuelven a tomar cuando han cargado */
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { spots.clear(); kick(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { spots.clear(); if (!MOBILE) measureMsgs(); kick(); });
   fit();
   kick();
 })();

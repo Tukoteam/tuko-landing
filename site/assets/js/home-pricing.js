@@ -1,8 +1,8 @@
-/* «Precios»: cuatro tarjetas unidas con lo que añade cada plan.
-   Lee las cuatro tarjetas de siempre (ocultas; las traducciones las rellenan) y monta la pieza: cada plan con su
-   precio y solo lo que añade al anterior. La comisión no se repite: el subtítulo ya dice que ningún plan tiene.
-   Escala va como el pase fundador, con la nota del piloto en una matriz de ticket y el botón del piloto.
-   Los precios cuentan al aparecer y la luz sigue al cursor en cada tarjeta. Siempre animado. */
+/* «Precios»: se paga por uso. Nadie elige plan: según los grupos que cierras al mes, se te cobra uno u otro.
+   Lee las cuatro tarjetas de siempre (ocultas; las traducciones las rellenan) y monta la pieza: los cuatro planes
+   iguales, en el mismo azul y sin destacar ninguno, cada uno con su precio y su número de grupos; debajo, lo que
+   incluyen todos (es lo mismo en los cuatro) y un solo botón, a la Shopify App Store.
+   Los precios cuentan al aparecer y la luz sigue al cursor en cada plan. Siempre animado. */
 (function () {
   'use strict';
 
@@ -13,64 +13,56 @@
   var ctaSrc = section.querySelector('.pr-cta-src');
   if (!table || !src) return;
 
-  var YES = /^(sí|si|yes)$/i, NO = /^no$/i;
+  var YES = /^(sí|si|yes)$/i;
   var esc = function (t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; };
+  var CK = '<span class="pr-yes" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 8.4l2.6 2.6L12 5.6"/></svg></span>';
+  var GROUPS = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.7-3.2 2.9-5 5.5-5s4.8 1.8 5.5 5"/><circle cx="17" cy="9" r="2.6"/><path d="M16.2 14.2c2.2.2 3.8 1.8 4.4 4.8"/></svg>';
 
   var build = function () {
     var cards = Array.prototype.slice.call(src.querySelectorAll('.pricing-card'));
     if (!cards.length) return;
-    /* Cada fila «Etiqueta: valor»; el orden de las filas, el del plan más completo */
+    /* Cada fila «Etiqueta: valor»; la primera es la de los grupos al mes, la única que cambia entre planes */
     var plans = cards.map(function (c) {
-      var rows = {}, order = [];
+      var rows = [];
       Array.prototype.forEach.call(c.querySelectorAll('.pricing-features li'), function (li) {
         var t = li.textContent.trim(), i = t.lastIndexOf(':');
-        if (i < 0) return;
-        var k = t.slice(0, i).trim();
-        rows[k] = t.slice(i + 1).trim();
-        order.push(k);
+        if (i > 0) rows.push({ k: t.slice(0, i).trim(), v: t.slice(i + 1).trim() });
       });
-      var rib = c.querySelector('.pricing-ribbon');
       return {
         name: (c.querySelector('.pricing-name') || {}).textContent || '',
         price: (c.querySelector('.pricing-amount') || {}).textContent || '',
         per: (c.querySelector('.pricing-period') || {}).textContent || '',
-        gift: c.classList.contains('is-gift'),
-        /* La nota lleva «45 días» en negrita: solo se conservan las <b> */
-        ribbon: rib ? rib.innerHTML.replace(/<(?!\/?b>)[^>]*>/g, '').trim() : '',
-        rows: rows,
-        order: order
+        rows: rows
       };
     });
-    var labels = plans[plans.length - 1].order.filter(function (k, i) { return i > 0; }); // sin «Comisión»
-    /* Lo que tiene cada plan: los números siempre; el resto, solo si es «Sí» */
-    var has = function (p, k) { var v = p.rows[k] || ''; return !!v && !NO.test(v); };
-    var CK = '<span class="pr-yes" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 8.4l2.6 2.6L12 5.6"/></svg></span>';
-    var item = function (p, k) {
-      var v = p.rows[k];
-      return '<li>' + CK + '<span>' + esc(k) + (YES.test(v) ? '' : ': <b>' + esc(v) + '</b>') + '</span></li>';
-    };
     var en = (document.documentElement.lang || 'es').slice(0, 2) === 'en';
-    var plus = function (name) { return en ? 'Everything in ' + name + ', plus:' : 'Todo lo de ' + name + ', más:'; };
+    var groups = function (v) {
+      var n = parseInt(v, 10);
+      if (isNaN(n)) return en ? 'Unlimited closed groups' : 'Grupos cerrados ilimitados';
+      return en ? 'Up to <b>' + n + '</b> closed groups a month' : 'Hasta <b>' + n + '</b> grupos cerrados al mes';
+    };
 
-    /* Cuatro tarjetas unidas; cada una enseña solo lo que añade al plan anterior */
-    var html = '<div class="pr-grid">';
+    var html = '<div class="pr-grid is-usage">';
     plans.forEach(function (p, i) {
-      var prev = plans[i - 1];
-      var list = labels.filter(function (k) { return has(p, k) && (!prev || p.rows[k] !== prev.rows[k]); });
-      html += '<div class="pr-col' + (p.gift ? ' is-gift' : '') + '" style="--i:' + i + '">';
-      /* La nota del piloto va en una pestaña encima de la tarjeta */
-      if (p.gift && p.ribbon) html += '<span class="pr-stub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5l1.6 4.2 4.4.3-3.4 2.8 1.1 4.3L8 10.7 4.3 13.1l1.1-4.3L2 6l4.4-.3z"/></svg><span>' + p.ribbon + '</span></span>';
-      if (p.gift) html += '<span class="pr-holo" aria-hidden="true"></span>';
-      html += '<div class="pr-head">' +
-        '<span class="pr-name">' + esc(p.name) + '</span>' +
-        '<span class="pr-price"><b data-pr-price="' + esc(p.price) + '">' + esc(p.price) + '</b><i>' + esc(p.per) + '</i></span>' +
-        '</div>';
-      html += '<div class="pr-body">' + (prev ? '<p class="pr-plus">' + esc(plus(prev.name)) + '</p>' : '') +
-        '<ul class="pr-list">' + list.map(function (k) { return item(p, k); }).join('') + '</ul></div>';
-      html += '<div class="pr-foot">' + (p.gift && ctaSrc ? '<a href="#solicitud" class="pr-cta">' + esc(ctaSrc.textContent.trim()) + '<span aria-hidden="true">→</span></a>' : '') + '</div>';
-      html += '</div>';
+      html += '<div class="pr-col" style="--i:' + i + '">' +
+        '<div class="pr-head">' +
+          '<span class="pr-name">' + esc(p.name) + '</span>' +
+          '<span class="pr-price"><b data-pr-price="' + esc(p.price) + '">' + esc(p.price) + '</b><i>' + esc(p.per) + '</i></span>' +
+        '</div>' +
+        '<p class="pr-groups">' + GROUPS + '<span>' + groups(p.rows[0] ? p.rows[0].v : '') + '</span></p>' +
+      '</div>';
     });
     html += '</div>';
+
+    /* Lo que incluyen todos: las filas del primer plan menos la de los grupos */
+    var all = plans[0].rows.slice(1).map(function (r) {
+      return '<li>' + CK + '<span>' + esc(r.k) + (YES.test(r.v) ? '' : ': <b>' + esc(r.v) + '</b>') + '</span></li>';
+    }).join('');
+    html += '<div class="pr-all"><p class="pr-all-t">' + (en ? 'Every plan includes' : 'Todos los planes incluyen') + '</p><ul class="pr-chips">' + all + '</ul></div>';
+    if (ctaSrc) {
+      html += '<div class="pr-ctas"><a href="' + esc(ctaSrc.getAttribute('href')) + '" class="pr-cta" target="_blank" rel="noopener">' +
+        esc(ctaSrc.textContent.trim()) + '<span aria-hidden="true">→</span></a></div>';
+    }
     table.innerHTML = html;
     counted = false;
     if (seen) countUp();
@@ -100,7 +92,7 @@
     }, { threshold: 0.08 }).observe(table);
   } else { seen = true; section.classList.add('is-in'); }
 
-  /* ── Luz que sigue al cursor: el brillo del pase en Escala y el foco de luz en los demás planes ── */
+  /* ── Luz que sigue al cursor en cada plan ── */
   table.addEventListener('pointermove', function (e) {
     var g = e.target.closest && e.target.closest('.pr-col');
     if (!g) return;

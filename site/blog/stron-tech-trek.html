@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/main.css?v=b47155cd">
+<link rel="stylesheet" href="../assets/css/main.css?v=bd4eb7a3">
 <link rel="stylesheet" href="../assets/css/tuko-theme.css?v=cf1fd4c8">
 
 <style>
@@ -111,45 +111,8 @@
 </head>
 <body>
 
-<header role="banner">
-<nav aria-label="Navegación principal">
-  <a href="/" class="nav-logo">
-    <img src="/assets/images/tuko-logo-nav.webp" width="840" height="321" alt="Tuko" decoding="async">
-  </a>
-  <ul class="nav-links">
-    <li><a href="/#como-funciona" data-i18n="nav_link_como_funciona">Cómo funciona</a></li>
-    <li><a href="/#beneficios" data-i18n="nav_link_beneficios">Por qué funciona</a></li>
-    <li><a href="/#precios" data-i18n="nav_link_precios">Precios</a></li>
-    <li><a href="/blog/" data-i18n="nav_link_blog">Blog</a></li>
-    <li><a href="/tuko-ai" data-i18n="nav_link_ia">tuko AI</a></li>
-    <li><a href="/#solicitud" class="nav-cta" data-i18n="nav_cta">Acceder al piloto</a></li>
-  </ul>
-  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Activar modo oscuro" aria-pressed="false">
-    <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-  </button>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-  <div class="lang-switcher" role="group" aria-label="Selector de idioma" data-active="es">
-    <span class="lang-thumb" aria-hidden="true"></span>
-    <button type="button" class="lang-opt active" data-lang="es" aria-label="Cambiar idioma a Español">
-      <span class="lang-opt-flag" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" width="22" height="15"><rect width="3" height="2" fill="#c60b1e"/><rect width="3" height="1" y="0.5" fill="#ffc400"/></svg>
-      </span>
-      <span class="lang-opt-label">ES</span>
-    </button>
-    <button type="button" class="lang-opt" data-lang="en" aria-label="Switch language to English">
-      <span class="lang-opt-flag" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="22" height="15"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg>
-      </span>
-      <span class="lang-opt-label">EN</span>
-    </button>
-  </div>
-</nav>
-</header>
-
-<!-- MOBILE MENU -->
+<!-- tuko:partial:nav-es -->
+<!-- NAV -->
 <header role="banner">
 <nav aria-label="Navegación principal">
   <a href="/" class="nav-logo">
@@ -157,11 +120,10 @@
   </a>
   <ul class="nav-links">
     <li><a href="/#como-funciona" data-i18n="nav_link_como_funciona">Cómo funciona</a></li>
-    <li><a href="/#beneficios" data-i18n="nav_link_beneficios">Por qué funciona</a></li>
     <li><a href="/#precios" data-i18n="nav_link_precios">Precios</a></li>
     <li><a href="/blog/" data-i18n="nav_link_blog">Blog</a></li>
     <li><a href="/tuko-ai" data-i18n="nav_link_ia">tuko AI</a></li>
-    <li><a href="/#solicitud" class="nav-cta" data-i18n="nav_cta">Acceder al piloto</a></li>
+    <li><a href="https://apps.shopify.com/tuko?locale=es" class="nav-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Instalar gratis</a></li>
   </ul>
   <button type="button" class="theme-toggle" id="themeToggle" aria-label="Activar modo oscuro" aria-pressed="false">
     <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -191,7 +153,6 @@
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Menú de navegación" aria-hidden="true">
   <a href="/#como-funciona" data-i18n="nav_link_como_funciona">Cómo funciona</a>
-  <a href="/#beneficios" data-i18n="nav_link_beneficios">Por qué funciona</a>
   <a href="/#precios" data-i18n="nav_link_precios">Precios</a>
   <a href="/blog/" data-i18n="nav_link_blog">Blog</a>
   <a href="/tuko-ai" data-i18n="nav_link_ia">tuko AI</a>
@@ -213,7 +174,7 @@
       </button>
     </div>
   </div>
-  <a href="/#solicitud" class="mobile-cta" data-i18n="nav_cta">Acceder al piloto</a>
+  <a href="https://apps.shopify.com/tuko?locale=es" class="mobile-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Instalar gratis</a>
 </div>
 <!-- /tuko:partial:nav-es -->
 
@@ -312,7 +273,7 @@
 </footer>
 
 <script src="/assets/js/main.js?v=27ca6f87" defer></script>
-<script src="/assets/js/i18n.js?v=a86e2a28" defer></script>
+<script src="/assets/js/i18n.js?v=cfaffb85" defer></script>
 <script src="/assets/js/tuko-theme.js?v=b2ef7977" defer></script>
 </body>
 </html>

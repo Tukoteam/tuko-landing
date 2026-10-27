@@ -1,0 +1,26 @@
+/* ══════════════════════════════
+   TIPOGRAFÍA DE LOS TÍTULOS — la misma que la página de tuko AI
+   Mona Sans en 700 y al 105 % de ancho, interletraje −0,035 em; los acentos en cursiva, en Roboto Serif 500
+   (antes Inicio no cargaba Roboto Serif y la cursiva salía en Georgia, que es otra letra).
+══════════════════════════════ */
+:root {
+  --section-title-size: clamp(34px, 4.6vw, 56px);
+  --title-weight: 700;
+  --title-lh: 1.04;
+  --title-spacing: -0.035em;
+}
+@media (max-width: 960px) {
+  :root { --section-title-size: clamp(30px, 7.6vw, 40px); }
+}
+.s-title,
+#solicitud h2,
+#problema .data-headline { font-stretch: 105%; }
+.hero--guion .hero-title { font-stretch: 105%; letter-spacing: -0.04em; }
+.s-title .title-accent-em,
+#solicitud h2 .title-accent-em,
+#problema .data-grow,
+#problema .data-foot .data-win {
+  font-family: 'Roboto Serif', Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
