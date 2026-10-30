@@ -249,3 +249,7 @@
     .logos-section .logo-pill img[src*="bio-vida"] { height: 66px; }
     .logos-section .logo-pill img[src*="saper"] { height: 84px; }
   }
+
+  /* Natrue: un sello redondo, como el de Bio Vida Sana */
+  .logos-section .logo-pill img[src*="natrue"] { height: 81px; }
+  @media (max-width: 640px) { .logos-section .logo-pill img[src*="natrue"] { height: 60px; } }

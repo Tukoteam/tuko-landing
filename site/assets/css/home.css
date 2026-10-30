@@ -4807,6 +4807,10 @@ html:not([data-theme="dark"]) header > nav::before {
     .logos-section .logo-pill img[src*="saper"] { height: 84px; }
   }
 
+  /* Natrue: un sello redondo, como el de Bio Vida Sana */
+  .logos-section .logo-pill img[src*="natrue"] { height: 81px; }
+  @media (max-width: 640px) { .logos-section .logo-pill img[src*="natrue"] { height: 60px; } }
+
   /* ══════════════════════════════
      PROBLEMA — «el mismo descuento, dos resultados»: un solo escenario con un interruptor.
      En el camino caro, 100 puntos y 68 se tiñen de rojo (ya te compraban); al pasar al camino que se multiplica,
