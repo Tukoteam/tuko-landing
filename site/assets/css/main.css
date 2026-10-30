@@ -5,7 +5,7 @@
    el mismo footer y la misma base. Debajo van solo los estilos propios de estas páginas.
    El build pone la versión de caché al import (?v=), igual que en los <link>.
 ══════════════════════════════ */
-@import url("home.css?v=2fb53f62");
+@import url("home.css?v=e271ccd4");
 
 /* ── Páginas legales (privacidad, términos): sin cambios de diseño, solo el nav y el footer de Inicio ── */
   .legal-page {

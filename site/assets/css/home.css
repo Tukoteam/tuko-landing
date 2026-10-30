@@ -5701,7 +5701,9 @@ html[data-theme="dark"] .hero--guion[data-line="3"] .hero-accent {
 .hero--guion[data-step="3"] .hg-how,
 .hero--guion[data-step="3"] .hg-foot { display: none; }
 /* Grupo cerrado: el contenido, centrado en vertical dentro de la tarjeta */
-.hero--guion[data-step="3"] .hg-fsp-scroll { display: flex; flex-direction: column; justify-content: center; padding-bottom: calc(20 * var(--u)); }
+/* flex: none: la tarjeta mide lo que su contenido (height: fit-content); con flex: 1 (base 0) Safari lo contaba como 0
+   y la tarjeta se quedaba en una franja con «Cerrado» y los puntos */
+.hero--guion[data-step="3"] .hg-fsp-scroll { flex: none; display: flex; flex-direction: column; justify-content: center; padding-bottom: calc(20 * var(--u)); }
 .hero--guion[data-step="3"] .hg-done { display: block; animation: hgUp 420ms cubic-bezier(0.25, 0.8, 0.25, 1) 200ms both; }
 
 .hg-how { padding-top: calc(26 * var(--u)); }
