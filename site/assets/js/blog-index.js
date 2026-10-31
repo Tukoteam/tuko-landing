@@ -1,5 +1,5 @@
 /* Blog (índice): cabecera «galería flotante» y lista con algo más de vida.
-   La cabecera muestra solo los N artículos más recientes (N = huecos del layout: 9 desktop / 5 móvil).
+   La cabecera muestra solo los N artículos más recientes (N = huecos del layout: 8 desktop / 5 móvil).
    Si hay más posts en la rejilla, no se añaden más tarjetas al hero: entra el nuevo y sale el más viejo. */
 
 /* Cabecera: las portadas flotantes */
@@ -26,8 +26,7 @@
     { x: 30, y: 18, w: 118, d: 3, r: 5 },
     { x: 70, y: 16, w: 112, d: 3, r: -6 },
     { x: 5, y: 82, w: 120, d: 3, r: -3 },
-    { x: 77, y: 88, w: 130, d: 3, r: -2 },
-    { x: 50, y: 94, w: 110, d: 3, r: 2 }
+    { x: 77, y: 88, w: 130, d: 3, r: -2 }
   ];
 
   var cards = Array.prototype.slice.call(grid.querySelectorAll('.bp-card')).sort(function (a, b) {
