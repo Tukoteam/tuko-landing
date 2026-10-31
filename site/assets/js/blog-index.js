@@ -1,6 +1,6 @@
 /* Blog (índice): cabecera «galería flotante» y lista con algo más de vida.
-   La cabecera muestra solo los N artículos más recientes (N = huecos del layout: 8 desktop / 5 móvil).
-   Si hay más posts en la rejilla, no se añaden más tarjetas al hero: entra el nuevo y sale el más viejo. */
+   Hero: 8 portadas en desktop / 5 en móvil (tope fijo; si hay más posts, no crece).
+   Orden: 1.ª más reciente → grande izq; 2.ª → grande der; el resto de huecos al azar. */
 
 /* Cabecera: las portadas flotantes */
 (function () {
@@ -12,12 +12,13 @@
   var mobile = window.matchMedia('(max-width: 760px)').matches;
   var fitW = mobile ? 1 : Math.max(0.62, Math.min(1, window.innerWidth / 1280));
 
+  /* Huecos 0 y 1 = protagonistas (cerca). El resto = profundidad 2–3. */
   var SLOTS = mobile ? [
     { x: 17, y: 19, w: 118, d: 1, r: -7 },
-    { x: 85, y: 22, w: 106, d: 2, r: 6 },
+    { x: 85, y: 22, w: 106, d: 1, r: 6 },
     { x: 52, y: 12, w: 78, d: 3, r: -3 },
     { x: 16, y: 91, w: 104, d: 2, r: 5 },
-    { x: 84, y: 90, w: 118, d: 1, r: -5 }
+    { x: 84, y: 90, w: 118, d: 2, r: -5 }
   ] : [
     { x: 12, y: 32, w: 230, d: 1, r: -6 },
     { x: 86, y: 30, w: 220, d: 1, r: 5 },
@@ -29,11 +30,26 @@
     { x: 77, y: 88, w: 130, d: 3, r: -2 }
   ];
 
-  var cards = Array.prototype.slice.call(grid.querySelectorAll('.bp-card')).sort(function (a, b) {
-    return (b.dataset.date || '').localeCompare(a.dataset.date || '');
-  }).slice(0, SLOTS.length);
+  function shuffle(arr) {
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = arr[i];
+      arr[i] = arr[j];
+      arr[j] = t;
+    }
+    return arr;
+  }
 
-  cards.forEach(function (c, i) {
+  var byDate = Array.prototype.slice.call(grid.querySelectorAll('.bp-card')).sort(function (a, b) {
+    return (b.dataset.date || '').localeCompare(a.dataset.date || '');
+  });
+  /* Cupo del hero (top N por fecha); 2 fijos + el resto de ese cupo barajado */
+  var pool = byDate.slice(0, SLOTS.length);
+  var featured = pool.slice(0, 2);
+  var rest = shuffle(pool.slice(2));
+  var picked = featured.concat(rest);
+
+  picked.forEach(function (c, i) {
     var sl = SLOTS[i];
     if (!c || !sl) return;
     var img = c.querySelector('.bp-media img');
