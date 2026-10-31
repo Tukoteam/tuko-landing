@@ -1,6 +1,6 @@
 /* Blog (índice): cabecera «galería flotante» y lista con algo más de vida.
-   La cabecera coge las portadas de los artículos más recientes de la rejilla (así se actualiza sola cuando se
-   publica uno nuevo), las reparte a tres profundidades alrededor del título y las mueve con el cursor. */
+   La cabecera muestra solo los N artículos más recientes (N = huecos del layout: 9 desktop / 5 móvil).
+   Si hay más posts en la rejilla, no se añaden más tarjetas al hero: entra el nuevo y sale el más viejo. */
 
 /* Cabecera: las portadas flotantes */
 (function () {
@@ -10,11 +10,8 @@
   var grid = document.getElementById('bp-grid');
   if (!box || !grid) return;
   var mobile = window.matchMedia('(max-width: 760px)').matches;
-  /* En pantallas medianas las portadas se encogen con el ancho, para no tapar el título */
   var fitW = mobile ? 1 : Math.max(0.62, Math.min(1, window.innerWidth / 1280));
 
-  /* Sitio de cada portada (centro, en % del escenario), ancho, profundidad (1 cerca … 3 lejos) y giro.
-     Dejan libre el centro, donde va el título. */
   var SLOTS = mobile ? [
     { x: 17, y: 19, w: 118, d: 1, r: -7 },
     { x: 85, y: 22, w: 106, d: 2, r: 6 },
@@ -29,17 +26,17 @@
     { x: 30, y: 18, w: 118, d: 3, r: 5 },
     { x: 70, y: 16, w: 112, d: 3, r: -6 },
     { x: 5, y: 82, w: 120, d: 3, r: -3 },
-    { x: 77, y: 88, w: 130, d: 3, r: -2 }
+    { x: 77, y: 88, w: 130, d: 3, r: -2 },
+    { x: 50, y: 94, w: 110, d: 3, r: 2 }
   ];
 
-  /* Los artículos más recientes primero */
   var cards = Array.prototype.slice.call(grid.querySelectorAll('.bp-card')).sort(function (a, b) {
     return (b.dataset.date || '').localeCompare(a.dataset.date || '');
-  });
-  /* Una portada por artículo (si hay menos artículos que huecos, sobran huecos, no se repiten) */
-  SLOTS.slice(0, cards.length).forEach(function (sl, i) {
-    var c = cards[i];
-    if (!c) return;
+  }).slice(0, SLOTS.length);
+
+  cards.forEach(function (c, i) {
+    var sl = SLOTS[i];
+    if (!c || !sl) return;
     var img = c.querySelector('.bp-media img');
     var link = c.querySelector('.bp-title a');
     if (!img || !link) return;
@@ -49,7 +46,6 @@
     a.tabIndex = -1;
     a.setAttribute('aria-hidden', 'true');
     a.dataset.d = sl.d;
-    /* El título sale encima en las portadas de abajo y alineado hacia dentro en las de los lados (que no se corte) */
     if (sl.y > 55) a.dataset.tip = 'up';
     if (sl.x < 22) a.dataset.align = 'start';
     else if (sl.x > 78) a.dataset.align = 'end';
@@ -62,7 +58,6 @@
     box.appendChild(a);
   });
 
-  /* Cursor: las cercanas se mueven más que las lejanas (con inercia) */
   if (mobile || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   var tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
   var loop = function () {
