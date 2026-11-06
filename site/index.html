@@ -750,256 +750,506 @@
                       </aside>
                       <div class="cs-main cs-main--app">
                         <div class="cs-wiz">
-                                <div class="wizard">                          
-                                  <div class="w-header">                          
-                                    <div>                          
-                                      <div class="w-title" data-t="wTitle">Publicar grupo</div>                          
-                                      <div class="w-sub" data-t="wSub">Completa los pasos y publica en tu tienda</div>                          
-                                    </div>                          
-                                    <div class="w-close" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div>                          
-                                  </div>                          
-                                                    
-                                  <div class="stepper">                          
-                                    <div class="step-item active">                          
-                                      <div class="step-circle">                          
-                                        <span class="step-num">1</span>                          
-                                        <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>                          
-                                      </div>                          
-                                      <div class="step-label" data-t="step1">GRUPO</div>                          
-                                    </div>                          
-                                    <div class="step-bar"></div>                          
-                                    <div class="step-item">                          
-                                      <div class="step-circle">                          
-                                        <span class="step-num">2</span>                          
-                                        <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>                          
-                                      </div>                          
-                                      <div class="step-label" data-t="step2">APARIENCIA</div>                          
-                                    </div>                          
-                                    <div class="step-bar"></div>                          
-                                    <div class="step-item">                          
-                                      <div class="step-circle">                          
-                                        <span class="step-num">3</span>                          
-                                        <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>                          
-                                      </div>                          
-                                      <div class="step-label" data-t="step3">PUBLICAR</div>                          
-                                    </div>                          
-                                  </div>                          
-                                                    
-                                  <div class="info-banner">                          
-                                    <div class="info-ic" data-ic="1" aria-hidden="true">                          
-                                      <svg class="ic-1" viewBox="0 0 24 24">                          
-                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>                          
-                                        <circle cx="9" cy="7" r="4"/>                          
-                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>                          
-                                      </svg>                          
-                                      <svg class="ic-2" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.83 2.83 0 0 0-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg>                          
-                                      <svg class="ic-3" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.2l2.4 2.4 4.6-4.8"/></svg>                          
-                                    </div>                          
-                                    <div class="info-txt">                          
-                                      <div class="info-title">Configura tu grupo de compra</div>                          
-                                      <div class="info-sub">Elige el producto, las personas, el descuento y el tiempo.</div>                          
-                                    </div>                          
-                                  </div>                          
-                                                    
-                                  <div class="panels">                          
-                                    <!-- PASO 1 · GRUPO -->                          
-                                    <div class="panel active">                          
-                                      <div>                          
-                                        <div class="field-label" data-t="productLabel">Producto</div>                          
-                                        <div class="product-card">                          
-                                          <div class="product-thumb"><img src="/assets/images/serum-vitamina-c.svg" alt="" width="40" height="40"></div>                          
-                                          <div>                          
-                                            <div class="product-name" data-t="productName">Sérum Vitamina C</div>                          
-                                            <div class="product-price" data-t="price">80,00 €</div>                          
-                                          </div>                          
-                                        </div>                          
-                                        <div class="add-products" style="margin-top:10px"><span>+</span><span data-t="addProducts">Añadir productos</span></div>                          
-                                      </div>                          
-                                                    
-                                      <div class="row-2">                          
-                                        <div class="field">                          
-                                          <div class="field-label" data-t="sizeLabel">Tamaño del grupo</div>                          
-                                          <div class="input"><span>2</span><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>                          
-                                        </div>                          
-                                        <div class="field">                          
-                                          <div class="field-label" data-t="discLabel">Porcentaje de descuento</div>                          
-                                          <div class="input strong"><span>15</span></div>                          
-                                        </div>                          
-                                      </div>                          
-                                                    
-                                      <div class="hint" data-t="hint">Con 2 personas, el descuento será del 15% · Precio final 68,00 €</div>                          
-                                                    
-                                      <div>                          
-                                        <div class="field-label" data-t="timeLabel">Tiempo límite</div>                          
-                                        <div class="field-help" data-t="timeHelp">El reloj arranca cuando entra el primer comprador.</div>                          
-                                        <div class="input"><span>24 h</span><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>                          
-                                      </div>                          
-                                    </div>                          
-                                                    
-                                    <!-- PASO 2 · APARIENCIA -->                          
-                                    <div class="panel">                          
-                                      <div class="preview-card">                          
-                                        <div class="preview-title" data-t="previewTitle">Vista previa del botón</div>                          
-                                        <div class="preview-sub" data-t="previewSub">Así se verá en tu tienda</div>                          
-                                        <div class="store-btn" data-t="storeBtn">Cómpralo por 68,00€</div>                          
-                                      </div>                          
-                                      <div>                          
-                                        <div class="field-label" data-t="styleLabel">Estilo del botón</div>                          
-                                        <div class="theme-picker">                          
-                                          <div class="theme-card">                          
-                                            <div class="swatch light"></div>                          
-                                            <div class="theme-name" data-t="themeLight">Tema claro</div>                          
-                                          </div>                          
-                                          <div class="theme-card selected">                          
-                                            <div class="swatch dark"></div>                          
-                                            <div class="theme-name" data-t="themeDark">Tema oscuro</div>                          
-                                          </div>                          
-                                          <div class="theme-card">                          
-                                            <div class="swatch custom"></div>                          
-                                            <div class="theme-name" data-t="themeCustom">Personalizado</div>                          
-                                          </div>                          
-                                        </div>                          
-                                      </div>                          
-                                      <div>                          
-                                        <div class="field-label" data-t="textLabel">Texto del botón</div>                          
-                                        <div class="input placeholder"><span data-t="storeBtn">Cómpralo por 68,00€</span></div>                          
-                                      </div>                          
-                                    </div>                          
-                                                    
-                                    <!-- PASO 3 · PUBLICAR -->                          
-                                    <div class="panel">                          
-                                      <div class="when-card">                          
-                                        <div class="when-title" data-t="when">¿Cuándo quieres activarlo?</div>                          
-                                        <div class="publish-picker">                          
-                                          <div class="pub-card selected">                          
-                                            <div class="pub-ic">                          
-                                              <svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>                          
-                                            </div>                          
-                                            <div>                          
-                                              <div class="pub-title" data-t="pubNow">Publicar ahora</div>                          
-                                              <div class="pub-sub" data-t="pubNowSub">Visible en tu tienda al instante</div>                          
-                                            </div>                          
-                                          </div>                          
-                                          <div class="pub-card">                          
-                                            <div class="pub-ic">                          
-                                              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>                          
-                                            </div>                          
-                                            <div>                          
-                                              <div class="pub-title" data-t="schedule">Programar</div>                          
-                                              <div class="pub-sub" data-t="scheduleSub">Elige fecha y hora de inicio</div>                          
-                                            </div>                          
-                                          </div>                          
-                                        </div>                          
-                                      </div>                          
-                                                    
-                                      <div class="summary">                          
-                                        <div class="summary-head">                          
-                                          <div class="product-thumb framed"><img src="/assets/images/serum-vitamina-c.svg" alt="" width="34" height="34"></div>                          
-                                          <div>                          
-                                            <div class="product-name" data-t="productName">Sérum Vitamina C</div>                          
-                                            <div class="product-price" data-t="price">80,00 €</div>                          
-                                          </div>                          
-                                        </div>                          
-                                        <div class="summary-meta" data-t="summaryMeta">2 personas · 24 h · Tema oscuro</div>                          
-                                        <div class="summary-goal-lbl" data-t="goalLbl">Objetivo</div>                          
-                                        <div class="goal-row">                          
-                                          <div class="goal-tgt">                          
-                                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>                          
-                                          </div>                          
-                                          <div class="goal-txt">                          
-                                            <div class="goal-main"><span data-t="goalMain">2 personas</span> <span class="badge-disc">−15%</span></div>                          
-                                            <div class="goal-hint" data-t="goalHint">Si se llena</div>                          
-                                          </div>                          
-                                          <div class="goal-price-box">                          
-                                            <span class="goal-price" data-t="finalPrice">68,00 €</span>                          
-                                            <span class="goal-save" data-t="save">−12,00 €</span>                          
-                                          </div>                          
-                                        </div>                          
-                                      </div>                          
-                                    </div>                          
-                                  </div>                          
-                                                    
-                                  <div class="w-footer">                          
-                                    <span class="btn-back hidden"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg><span data-t="back">Atrás</span></span>                          
-                                    <span class="btn-primary">                          
-                                      <span>Continuar</span>                          
-                                      <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>                          
-                                    </span>                          
-                                  </div>                          
-                                                    
-                                  <!-- Intro -->                          
-                                  <div class="intro">                          
-                                    <svg class="intro-art" viewBox="0 0 210 150" aria-hidden="true">                          
-                                      <circle class="intro-dot" cx="22" cy="28" r="3.2" fill="#c9cff6"/>                          
-                                      <circle class="intro-dot" cx="186" cy="42" r="3.2" fill="#c9cff6"/>                          
-                                      <ellipse class="intro-base" cx="105" cy="138" rx="86" ry="9" fill="#e4e6f6"/>                          
-                                      <path class="intro-dash" d="M40 76 Q48 54 70 48" fill="none" stroke="#b8bff0" stroke-width="1.6" stroke-dasharray="4 4"/>                          
-                                      <rect class="intro-frame" x="70" y="38" width="70" height="74" rx="11" fill="#fff" stroke="#dde1fb" stroke-width="2"/>                          
-                                      <rect class="intro-photo" x="78" y="46" width="54" height="42" rx="7" fill="#eef0fd" stroke="#c6ccf4" stroke-width="1.5"/>                          
-                                      <circle class="intro-plus-bg" cx="105" cy="67" r="9" fill="#dde1f6"/>                          
-                                      <path class="intro-plus" d="M105 62v10M100 67h10" stroke="#8a91b4" stroke-width="1.6" stroke-linecap="round"/>                          
-                                      <rect class="intro-bar" x="89" y="96" width="32" height="5" rx="2.5" fill="#dde1f6"/>                          
-                                      <g class="intro-avatar">                          
-                                        <circle cx="105" cy="14" r="12" fill="#f6f7fc" stroke="#d6daf1" stroke-width="1.4"/>                          
-                                        <circle cx="105" cy="11" r="4" fill="#d2d6e2"/>                          
-                                        <path d="M97 22c1.4-3.6 4.2-5 8-5s6.6 1.4 8 5" fill="none" stroke="#d2d6e2" stroke-width="2"/>                          
-                                      </g>                          
-                                      <g class="intro-avatar">                          
-                                        <circle cx="34" cy="90" r="14" fill="#f6f7fc" stroke="#d6daf1" stroke-width="1.4"/>                          
-                                        <circle cx="34" cy="86.5" r="4.6" fill="#d2d6e2"/>                          
-                                        <path d="M24.5 100c1.6-4 4.8-5.8 9.5-5.8s7.9 1.8 9.5 5.8" fill="none" stroke="#d2d6e2" stroke-width="2.2"/>                          
-                                      </g>                          
-                                      <g class="intro-avatar">                          
-                                        <circle cx="176" cy="90" r="14" fill="#f6f7fc" stroke="#d6daf1" stroke-width="1.4"/>                          
-                                        <circle cx="176" cy="86.5" r="4.6" fill="#d2d6e2"/>                          
-                                        <path d="M166.5 100c1.6-4 4.8-5.8 9.5-5.8s7.9 1.8 9.5 5.8" fill="none" stroke="#d2d6e2" stroke-width="2.2"/>                          
-                                      </g>                          
-                                    </svg>                          
-                                    <div class="intro-title" data-t="wTitle">Publicar grupo</div>                          
-                                    <div class="intro-sub" data-t="introSub">Configura y publica una compra colectiva en pocos pasos. Simple, guiado y listo para tu tienda.</div>                          
-                                    <span class="btn-start">                          
-                                      <span data-t="start">Empezar</span>                          
-                                      <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>                          
-                                    </span>                          
-                                  </div>                          
-                                                    
-                                  <!-- Confirmación -->                          
-                                  <div class="confirm-overlay">                          
-                                    <div class="confirm-box">                          
-                                      <div class="confirm-x" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div>                          
-                                      <svg class="confirm-art" viewBox="0 0 70 50" aria-hidden="true">                          
-                                        <defs>                          
-                                          <linearGradient id="csRkGrad" x1="0" y1="1" x2="1" y2="0">                          
-                                            <stop offset="0" stop-color="#6366f1"/>                          
-                                            <stop offset="1" stop-color="#a855f7"/>                          
-                                          </linearGradient>                          
-                                        </defs>                          
-                                        <circle cx="10" cy="14" r="2" fill="#c4b5fd"/>                          
-                                        <circle cx="60" cy="26" r="2" fill="#c4b5fd"/>                          
-                                        <circle cx="16" cy="44" r="1.4" fill="#ddd6fe"/>                          
-                                        <g transform="translate(21 4) scale(1.75)" fill="none" stroke="url(#csRkGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">                          
-                                          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>                          
-                                          <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>                          
-                                          <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>                          
-                                          <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>                          
-                                        </g>                          
-                                      </svg>                          
-                                      <div class="confirm-stack">                          
-                                        <div class="confirm-ask">                          
-                                          <div class="confirm-title" data-t="confirmTitle">¿Estás seguro de que quieres activar el grupo?</div>                          
-                                          <div class="confirm-sub" data-t="confirmSub">Los clientes podrán unirse desde tu tienda.</div>                          
-                                          <div class="confirm-actions">                          
-                                            <div class="btn-cancel" data-t="cancel">Cancelar</div>                          
-                                            <div class="btn-yes" data-t="yes">Sí, activar grupo</div>                          
-                                          </div>                          
-                                        </div>                          
-                                        <div class="confirm-success">                          
-                                          <div class="confirm-title" data-t="successTitle">Se ha activado el grupo exitosamente</div>                          
-                                          <div class="confirm-sub" data-t="successSub">Míralo en tu tienda.</div>                          
-                                        </div>                          
-                                      </div>                          
-                                    </div>                          
-                                  </div>                          
+                                <div class="wizard">
+                          
+                                  <div class="w-header">
+                          
+                                    <div>
+                          
+                                      <div class="w-title" data-t="wTitle">Publicar grupo</div>
+                          
+                                      <div class="w-sub" data-t="wSub">Completa los pasos y publica en tu tienda</div>
+                          
+                                    </div>
+                          
+                                    <div class="w-close" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
+                          
+                                  </div>
+                          
+                          
+                          
+                                  <div class="stepper">
+                          
+                                    <div class="step-item active">
+                          
+                                      <div class="step-circle">
+                          
+                                        <span class="step-num">1</span>
+                          
+                                        <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+                          
+                                      </div>
+                          
+                                      <div class="step-label" data-t="step1">GRUPO</div>
+                          
+                                    </div>
+                          
+                                    <div class="step-bar"></div>
+                          
+                                    <div class="step-item">
+                          
+                                      <div class="step-circle">
+                          
+                                        <span class="step-num">2</span>
+                          
+                                        <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+                          
+                                      </div>
+                          
+                                      <div class="step-label" data-t="step2">APARIENCIA</div>
+                          
+                                    </div>
+                          
+                                    <div class="step-bar"></div>
+                          
+                                    <div class="step-item">
+                          
+                                      <div class="step-circle">
+                          
+                                        <span class="step-num">3</span>
+                          
+                                        <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+                          
+                                      </div>
+                          
+                                      <div class="step-label" data-t="step3">PUBLICAR</div>
+                          
+                                    </div>
+                          
+                                  </div>
+                          
+                          
+                          
+                                  <div class="info-banner">
+                          
+                                    <div class="info-ic" data-ic="1" aria-hidden="true">
+                          
+                                      <svg class="ic-1" viewBox="0 0 24 24">
+                          
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                          
+                                        <circle cx="9" cy="7" r="4"/>
+                          
+                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                          
+                                      </svg>
+                          
+                                      <svg class="ic-2" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.83 2.83 0 0 0-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg>
+                          
+                                      <svg class="ic-3" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.2l2.4 2.4 4.6-4.8"/></svg>
+                          
+                                    </div>
+                          
+                                    <div class="info-txt">
+                          
+                                      <div class="info-title">Configura tu grupo de compra</div>
+                          
+                                      <div class="info-sub">Elige el producto, las personas, el descuento y el tiempo.</div>
+                          
+                                    </div>
+                          
+                                  </div>
+                          
+                          
+                          
+                                  <div class="panels">
+                          
+                                    <!-- PASO 1 · GRUPO -->
+                          
+                                    <div class="panel active">
+                          
+                                      <div>
+                          
+                                        <div class="field-label" data-t="productLabel">Producto</div>
+                          
+                                        <div class="product-card">
+                          
+                                          <div class="product-thumb"><img src="/assets/images/serum-vitamina-c.svg" alt="" width="40" height="40"></div>
+                          
+                                          <div>
+                          
+                                            <div class="product-name" data-t="productName">Sérum Vitamina C</div>
+                          
+                                            <div class="product-price" data-t="price">80,00 €</div>
+                          
+                                          </div>
+                          
+                                        </div>
+                          
+                                        <div class="add-products" style="margin-top:10px"><span>+</span><span data-t="addProducts">Añadir productos</span></div>
+                          
+                                      </div>
+                          
+                          
+                          
+                                      <div class="row-2">
+                          
+                                        <div class="field">
+                          
+                                          <div class="field-label" data-t="sizeLabel">Tamaño del grupo</div>
+                          
+                                          <div class="input"><span>2</span><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+                          
+                                        </div>
+                          
+                                        <div class="field">
+                          
+                                          <div class="field-label" data-t="discLabel">Porcentaje de descuento</div>
+                          
+                                          <div class="input strong"><span>15</span></div>
+                          
+                                        </div>
+                          
+                                      </div>
+                          
+                          
+                          
+                                      <div class="hint" data-t="hint">Con 2 personas, el descuento será del 15% · Precio final 68,00 €</div>
+                          
+                          
+                          
+                                      <div>
+                          
+                                        <div class="field-label" data-t="timeLabel">Tiempo límite</div>
+                          
+                                        <div class="field-help" data-t="timeHelp">El reloj arranca cuando entra el primer comprador.</div>
+                          
+                                        <div class="input"><span>24 h</span><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+                          
+                                      </div>
+                          
+                                    </div>
+                          
+                          
+                          
+                                    <!-- PASO 2 · APARIENCIA -->
+                          
+                                    <div class="panel">
+                          
+                                      <div class="preview-card">
+                          
+                                        <div class="preview-title" data-t="previewTitle">Vista previa del botón</div>
+                          
+                                        <div class="preview-sub" data-t="previewSub">Así se verá en tu tienda</div>
+                          
+                                        <div class="store-btn" data-t="storeBtn">Cómpralo por 68,00€</div>
+                          
+                                      </div>
+                          
+                                      <div>
+                          
+                                        <div class="field-label" data-t="styleLabel">Estilo del botón</div>
+                          
+                                        <div class="theme-picker">
+                          
+                                          <div class="theme-card">
+                          
+                                            <div class="swatch light"></div>
+                          
+                                            <div class="theme-name" data-t="themeLight">Tema claro</div>
+                          
+                                          </div>
+                          
+                                          <div class="theme-card selected">
+                          
+                                            <div class="swatch dark"></div>
+                          
+                                            <div class="theme-name" data-t="themeDark">Tema oscuro</div>
+                          
+                                          </div>
+                          
+                                          <div class="theme-card">
+                          
+                                            <div class="swatch custom"></div>
+                          
+                                            <div class="theme-name" data-t="themeCustom">Personalizado</div>
+                          
+                                          </div>
+                          
+                                        </div>
+                          
+                                      </div>
+                          
+                                      <div>
+                          
+                                        <div class="field-label" data-t="textLabel">Texto del botón</div>
+                          
+                                        <div class="input placeholder"><span data-t="storeBtn">Cómpralo por 68,00€</span></div>
+                          
+                                      </div>
+                          
+                                    </div>
+                          
+                          
+                          
+                                    <!-- PASO 3 · PUBLICAR -->
+                          
+                                    <div class="panel">
+                          
+                                      <div class="when-card">
+                          
+                                        <div class="when-title" data-t="when">¿Cuándo quieres activarlo?</div>
+                          
+                                        <div class="publish-picker">
+                          
+                                          <div class="pub-card selected">
+                          
+                                            <div class="pub-ic">
+                          
+                                              <svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+                          
+                                            </div>
+                          
+                                            <div>
+                          
+                                              <div class="pub-title" data-t="pubNow">Publicar ahora</div>
+                          
+                                              <div class="pub-sub" data-t="pubNowSub">Visible en tu tienda al instante</div>
+                          
+                                            </div>
+                          
+                                          </div>
+                          
+                                          <div class="pub-card">
+                          
+                                            <div class="pub-ic">
+                          
+                                              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                          
+                                            </div>
+                          
+                                            <div>
+                          
+                                              <div class="pub-title" data-t="schedule">Programar</div>
+                          
+                                              <div class="pub-sub" data-t="scheduleSub">Elige fecha y hora de inicio</div>
+                          
+                                            </div>
+                          
+                                          </div>
+                          
+                                        </div>
+                          
+                                      </div>
+                          
+                          
+                          
+                                      <div class="summary">
+                          
+                                        <div class="summary-head">
+                          
+                                          <div class="product-thumb framed"><img src="/assets/images/serum-vitamina-c.svg" alt="" width="34" height="34"></div>
+                          
+                                          <div>
+                          
+                                            <div class="product-name" data-t="productName">Sérum Vitamina C</div>
+                          
+                                            <div class="product-price" data-t="price">80,00 €</div>
+                          
+                                          </div>
+                          
+                                        </div>
+                          
+                                        <div class="summary-meta" data-t="summaryMeta">2 personas · 24 h · Tema oscuro</div>
+                          
+                                        <div class="summary-goal-lbl" data-t="goalLbl">Objetivo</div>
+                          
+                                        <div class="goal-row">
+                          
+                                          <div class="goal-tgt">
+                          
+                                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>
+                          
+                                          </div>
+                          
+                                          <div class="goal-txt">
+                          
+                                            <div class="goal-main"><span data-t="goalMain">2 personas</span> <span class="badge-disc">−15%</span></div>
+                          
+                                            <div class="goal-hint" data-t="goalHint">Si se llena</div>
+                          
+                                          </div>
+                          
+                                          <div class="goal-price-box">
+                          
+                                            <span class="goal-price" data-t="finalPrice">68,00 €</span>
+                          
+                                            <span class="goal-save" data-t="save">−12,00 €</span>
+                          
+                                          </div>
+                          
+                                        </div>
+                          
+                                      </div>
+                          
+                                    </div>
+                          
+                                  </div>
+                          
+                          
+                          
+                                  <div class="w-footer">
+                          
+                                    <span class="btn-back hidden"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg><span data-t="back">Atrás</span></span>
+                          
+                                    <span class="btn-primary">
+                          
+                                      <span>Continuar</span>
+                          
+                                      <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                          
+                                    </span>
+                          
+                                  </div>
+                          
+                          
+                          
+                                  <!-- Intro -->
+                          
+                                  <div class="intro">
+                          
+                                    <svg class="intro-art" viewBox="0 0 210 150" aria-hidden="true">
+                          
+                                      <circle class="intro-dot" cx="22" cy="28" r="3.2" fill="#c9cff6"/>
+                          
+                                      <circle class="intro-dot" cx="186" cy="42" r="3.2" fill="#c9cff6"/>
+                          
+                                      <ellipse class="intro-base" cx="105" cy="138" rx="86" ry="9" fill="#e4e6f6"/>
+                          
+                                      <path class="intro-dash" d="M40 76 Q48 54 70 48" fill="none" stroke="#b8bff0" stroke-width="1.6" stroke-dasharray="4 4"/>
+                          
+                                      <rect class="intro-frame" x="70" y="38" width="70" height="74" rx="11" fill="#fff" stroke="#dde1fb" stroke-width="2"/>
+                          
+                                      <rect class="intro-photo" x="78" y="46" width="54" height="42" rx="7" fill="#eef0fd" stroke="#c6ccf4" stroke-width="1.5"/>
+                          
+                                      <circle class="intro-plus-bg" cx="105" cy="67" r="9" fill="#dde1f6"/>
+                          
+                                      <path class="intro-plus" d="M105 62v10M100 67h10" stroke="#8a91b4" stroke-width="1.6" stroke-linecap="round"/>
+                          
+                                      <rect class="intro-bar" x="89" y="96" width="32" height="5" rx="2.5" fill="#dde1f6"/>
+                          
+                                      <g class="intro-avatar">
+                          
+                                        <circle cx="105" cy="14" r="12" fill="#f6f7fc" stroke="#d6daf1" stroke-width="1.4"/>
+                          
+                                        <circle cx="105" cy="11" r="4" fill="#d2d6e2"/>
+                          
+                                        <path d="M97 22c1.4-3.6 4.2-5 8-5s6.6 1.4 8 5" fill="none" stroke="#d2d6e2" stroke-width="2"/>
+                          
+                                      </g>
+                          
+                                      <g class="intro-avatar">
+                          
+                                        <circle cx="34" cy="90" r="14" fill="#f6f7fc" stroke="#d6daf1" stroke-width="1.4"/>
+                          
+                                        <circle cx="34" cy="86.5" r="4.6" fill="#d2d6e2"/>
+                          
+                                        <path d="M24.5 100c1.6-4 4.8-5.8 9.5-5.8s7.9 1.8 9.5 5.8" fill="none" stroke="#d2d6e2" stroke-width="2.2"/>
+                          
+                                      </g>
+                          
+                                      <g class="intro-avatar">
+                          
+                                        <circle cx="176" cy="90" r="14" fill="#f6f7fc" stroke="#d6daf1" stroke-width="1.4"/>
+                          
+                                        <circle cx="176" cy="86.5" r="4.6" fill="#d2d6e2"/>
+                          
+                                        <path d="M166.5 100c1.6-4 4.8-5.8 9.5-5.8s7.9 1.8 9.5 5.8" fill="none" stroke="#d2d6e2" stroke-width="2.2"/>
+                          
+                                      </g>
+                          
+                                    </svg>
+                          
+                                    <div class="intro-title" data-t="wTitle">Publicar grupo</div>
+                          
+                                    <div class="intro-sub" data-t="introSub">Configura y publica una compra colectiva en pocos pasos. Simple, guiado y listo para tu tienda.</div>
+                          
+                                    <span class="btn-start">
+                          
+                                      <span data-t="start">Empezar</span>
+                          
+                                      <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                          
+                                    </span>
+                          
+                                  </div>
+                          
+                          
+                          
+                                  <!-- Confirmación -->
+                          
+                                  <div class="confirm-overlay">
+                          
+                                    <div class="confirm-box">
+                          
+                                      <div class="confirm-x" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
+                          
+                                      <svg class="confirm-art" viewBox="0 0 70 50" aria-hidden="true">
+                          
+                                        <defs>
+                          
+                                          <linearGradient id="csRkGrad" x1="0" y1="1" x2="1" y2="0">
+                          
+                                            <stop offset="0" stop-color="#6366f1"/>
+                          
+                                            <stop offset="1" stop-color="#a855f7"/>
+                          
+                                          </linearGradient>
+                          
+                                        </defs>
+                          
+                                        <circle cx="10" cy="14" r="2" fill="#c4b5fd"/>
+                          
+                                        <circle cx="60" cy="26" r="2" fill="#c4b5fd"/>
+                          
+                                        <circle cx="16" cy="44" r="1.4" fill="#ddd6fe"/>
+                          
+                                        <g transform="translate(21 4) scale(1.75)" fill="none" stroke="url(#csRkGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                          
+                                          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+                          
+                                          <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+                          
+                                          <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+                          
+                                          <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+                          
+                                        </g>
+                          
+                                      </svg>
+                          
+                                      <div class="confirm-stack">
+                          
+                                        <div class="confirm-ask">
+                          
+                                          <div class="confirm-title" data-t="confirmTitle">¿Estás seguro de que quieres activar el grupo?</div>
+                          
+                                          <div class="confirm-sub" data-t="confirmSub">Los clientes podrán unirse desde tu tienda.</div>
+                          
+                                          <div class="confirm-actions">
+                          
+                                            <div class="btn-cancel" data-t="cancel">Cancelar</div>
+                          
+                                            <div class="btn-yes" data-t="yes">Sí, activar grupo</div>
+                          
+                                          </div>
+                          
+                                        </div>
+                          
+                                        <div class="confirm-success">
+                          
+                                          <div class="confirm-title" data-t="successTitle">Se ha activado el grupo exitosamente</div>
+                          
+                                          <div class="confirm-sub" data-t="successSub">Míralo en tu tienda.</div>
+                          
+                                        </div>
+                          
+                                      </div>
+                          
+                                    </div>
+                          
+                                  </div>
+                          
                                 </div>
                         </div>
                       </div>
