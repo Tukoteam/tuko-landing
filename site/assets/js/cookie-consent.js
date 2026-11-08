@@ -85,8 +85,27 @@
     if (typeof window.TukoLoadGA4 === 'function') window.TukoLoadGA4();
   }
 
+  /** Rechazar borra las cookies que Google Analytics ya hubiera puesto antes. */
+  function clearAnalyticsCookies() {
+    try {
+      window['ga-disable-' + (window.TUKO_GA4_ID || 'G-W751M44D2X')] = true;
+    } catch (e) { /* noop */ }
+    var host = location.hostname;
+    var parts = host.split('.');
+    var domains = ['', host, '.' + host];
+    if (parts.length > 2) domains.push('.' + parts.slice(-2).join('.'));
+    document.cookie.split(';').forEach(function (raw) {
+      var name = raw.split('=')[0].trim();
+      if (!/^(_ga|_gid|_gat)/.test(name)) return;
+      domains.forEach(function (d) {
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + (d ? '; domain=' + d : '');
+      });
+    });
+  }
+
   function onReject() {
     setChoice('rejected');
+    clearAnalyticsCookies();
     hideBanner();
   }
 
@@ -160,7 +179,10 @@
       if (typeof window.TukoLoadGA4 === 'function') window.TukoLoadGA4();
       return;
     }
-    if (choice === 'rejected') return;
+    if (choice === 'rejected') {
+      clearAnalyticsCookies();
+      return;
+    }
     showBanner();
   }
 
