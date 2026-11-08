@@ -24,14 +24,17 @@ html:not([data-theme="dark"]) .logos-section {
 }
 /* El escenario baja por detrás de la tira de logos (un fondo de la cabecera, debajo de todo lo suyo): la tira queda
    transparente y el brillo del móvil se difumina sobre ese fondo, sin cortarse. Cierra con las esquinas redondeadas */
+/* Contexto propio: la capa de detrás (z-index -1) se pinta dentro de #inicio y no detrás de otros fondos de la página */
+html:not([data-theme="dark"]) #inicio { isolation: isolate; }
 html:not([data-theme="dark"]) #inicio::after {
   content: '';
   position: absolute;
   z-index: -1;
   left: 0;
   right: 0;
-  top: 100%;
-  height: var(--logos-h, 220px);
+  /* 2 px por encima del final de #inicio: sin solape, el redondeo dejaba una rendija y se veía una línea clara */
+  top: calc(100% - 2px);
+  height: calc(var(--logos-h, 220px) + 2px);
   background: #0b0d14;
   border-radius: 0 0 clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px);
   box-shadow: 0 44px 90px -54px rgba(20, 30, 120, 0.55);
