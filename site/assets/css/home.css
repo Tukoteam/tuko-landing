@@ -9760,6 +9760,12 @@ html:not([data-theme="dark"]) #inicio::after {
   pointer-events: none;
 }
 html:not([data-theme="dark"]) .logos-section { position: relative; z-index: 2; }
+/* La tira de logos lleva su propio fondo oscuro: algunos Safari de iPhone no dibujan #inicio::after (z-index -1)
+   y los logos blancos quedaban sobre blanco, con solo la pista oscura detrás. Mismo color y esquinas que esa capa. */
+html:not([data-theme="dark"]) .logos-section {
+  background: #0b0d14;
+  border-radius: 0 0 clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px);
+}
 
 /* Lo que en oscuro tiene regla propia, igual en el escenario */
 html:not([data-theme="dark"]) .hero .hero-accent { color: #8fa0ff; }
