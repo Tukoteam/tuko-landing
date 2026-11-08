@@ -4810,6 +4810,18 @@ html:not([data-theme="dark"]) header > nav::before {
   /* Natrue: un sello redondo, como el de Bio Vida Sana */
   .logos-section .logo-pill img[src*="natrue"] { height: 81px; }
   @media (max-width: 640px) { .logos-section .logo-pill img[src*="natrue"] { height: 60px; } }
+  /* Margen vacío dentro de cada imagen (Sáper ocupa 28 px de 200; NATRUE, todo el lienzo): se compensa para que
+     la separación que se ve entre logos sea la misma. Valores = relleno de la imagen × altura con la que se pinta. */
+  .logos-section .logo-pill img[src*="xiji"] { margin-left: -38px; margin-right: -37px; }
+  .logos-section .logo-pill img[src*="ocea"] { margin-left: -20px; margin-right: -13px; }
+  .logos-section .logo-pill img[src*="bio-vida"] { margin-left: -11px; margin-right: -14px; }
+  .logos-section .logo-pill img[src*="saper"] { margin-left: -97px; margin-right: -102px; }
+  @media (max-width: 640px) {
+    .logos-section .logo-pill img[src*="xiji"] { margin-left: -28px; margin-right: -27px; }
+    .logos-section .logo-pill img[src*="ocea"] { margin-left: -15px; margin-right: -10px; }
+    .logos-section .logo-pill img[src*="bio-vida"] { margin-left: -8px; margin-right: -10px; }
+    .logos-section .logo-pill img[src*="saper"] { margin-left: -71px; margin-right: -74px; }
+  }
 
   /* ══════════════════════════════
      PROBLEMA — «el mismo descuento, dos resultados»: un solo escenario con un interruptor.
