@@ -9,7 +9,7 @@
   "category": "guias",
   "mins": 11,
   "tags": [],
-  "coverImage": "https://tukoteam.com/assets/images/banners-blog/como-calcular-roas-de-equilibrio-mw75slob.webp",
+  "coverImage": "https://tukoteam.com/assets/images/banners-blog/portada-es-mw7p9euv.webp",
   "canonical": "https://tukoteam.com/blog/como-calcular-roas-de-equilibrio",
   "locale": "es",
   "translationOf": null,
@@ -22,6 +22,6 @@
   "seo": {
     "noFakeHreflang": true,
     "canonicalClean": true,
-    "hreflangWhenPaired": false
+    "hreflangWhenPaired": true
   }
 }
