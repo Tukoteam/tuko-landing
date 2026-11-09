@@ -78,7 +78,19 @@
   if (!hero) return;
 
   /* ── AURORA ── */
-  initAurora(hero, document.getElementById('heroAurora'));
+  /* La luz arranca cuando la página ya se ve: compilar el sombreador al cargar bloqueaba el móvil casi un segundo.
+     Aparece con su fundido de siempre (.is-ready), solo un instante después. */
+  (function () {
+    var canvas = document.getElementById('heroAurora');
+    if (!canvas) return;
+    var go = function () { initAurora(hero, canvas); };
+    var idle = function () {
+      if ('requestIdleCallback' in window) window.requestIdleCallback(go, { timeout: 900 });
+      else window.setTimeout(go, 200);
+    };
+    if (document.readyState === 'complete') idle();
+    else window.addEventListener('load', idle, { once: true });
+  })();
 
   function initAurora(hero, canvas) {
     if (!canvas) return null;

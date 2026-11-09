@@ -467,7 +467,8 @@
     });
     setText(countN, '0' + (active + 1));
     mprog.forEach(function (g, i) { g.style.setProperty('--sp', seg(p, i / 4, (i + 1) / 4).toFixed(3)); });
-    sec.style.setProperty('--cc', COLORS[active]);
+    /* Solo al cambiar de paso: --cc la heredan todos los hijos de la sección y reescribirla en cada fotograma recalculaba toda la escena */
+    if (sec.__cc !== active) { sec.__cc = active; sec.style.setProperty('--cc', COLORS[active]); }
     if (MOBILE) layoutMobile(p);
     lastP = p;
   };
