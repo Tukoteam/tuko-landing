@@ -9,7 +9,7 @@
   "category": "guias",
   "mins": 5,
   "tags": [],
-  "coverImage": "https://tukoteam.com/assets/images/banners-blog/natural-organic-certified-cosmetics-mw9eyzx8.webp",
+  "coverImage": "https://tukoteam.com/assets/images/banners-blog/natural-organic-certified-cosmetics-serie-mw9fcf5i.webp",
   "canonical": "https://tukoteam.com/blog/natural-organic-certified-cosmetics",
   "locale": "es",
   "translationOf": null,
@@ -22,6 +22,6 @@
   "seo": {
     "noFakeHreflang": true,
     "canonicalClean": true,
-    "hreflangWhenPaired": false
+    "hreflangWhenPaired": true
   }
 }
