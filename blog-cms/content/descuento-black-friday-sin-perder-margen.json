@@ -9,7 +9,7 @@
   "category": "guias",
   "mins": 11,
   "tags": [],
-  "coverImage": "https://tukoteam.com/assets/images/banners-blog/descuento-black-friday-sin-perder-margen-mw961xos.webp",
+  "coverImage": "https://tukoteam.com/assets/images/banners-blog/descuento-black-friday-sin-perder-margen-claro-mw97ecqy.webp",
   "canonical": "https://tukoteam.com/blog/descuento-black-friday-sin-perder-margen",
   "locale": "es",
   "translationOf": null,
@@ -22,6 +22,6 @@
   "seo": {
     "noFakeHreflang": true,
     "canonicalClean": true,
-    "hreflangWhenPaired": false
+    "hreflangWhenPaired": true
   }
 }
