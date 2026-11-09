@@ -157,7 +157,8 @@ header[role="banner"] ~ header[role="banner"] { display: none !important; }
 html[data-theme="dark"] body:has(.article-main, .article-wrap, .legal-page) header > nav { background: transparent; border-bottom: 0; }
 
 /* ── Contenido del artículo (como estaba) ── */
-  .article-page {
+  /* Solo para un contenedor: los artículos antiguos llevan la clase en <body> y el relleno movía el footer y abría hueco arriba */
+  .article-page:not(body) {
     padding: 120px 48px 96px;
     background: var(--white);
   }
@@ -318,7 +319,7 @@ html[data-theme="dark"] body:has(.article-main, .article-wrap, .legal-page) head
     .blog-list-section { padding: 48px 20px 72px; }
     .blog-post { flex-direction: column; gap: 20px; }
     .blog-post-image { width: 100%; }
-    .article-page { padding: 96px 20px 72px; }
+    .article-page:not(body) { padding: 96px 20px 72px; }
     .article-main { padding: 96px 20px 72px; }
     .article-wrap { padding-left: 20px; padding-right: 20px; }
     .article-related-grid { grid-template-columns: 1fr; gap: 20px; }
@@ -330,7 +331,7 @@ html[data-theme="dark"] body:has(.article-main, .article-wrap, .legal-page) head
   }
 
   @media (max-width: 480px) {
-    .article-page,
+    .article-page:not(body),
     .article-main { padding: 88px 16px 64px; }
     .article-wrap { padding-left: 16px; padding-right: 16px; }
     main[style*="80px"] {
