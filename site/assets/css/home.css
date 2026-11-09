@@ -4073,6 +4073,17 @@
     opacity: 1;
     transform: none;
   }
+  /* La cápsula (::before, z-index -1) necesita que el nav sea su propio contexto: así nunca queda detrás de la página */
+  header > nav { isolation: isolate; }
+  /* iPhone (Safari y todos los navegadores de iOS): el desenfoque en este pseudo-elemento, que además se anima, a veces
+     no se pinta y el menú quedaba encima del texto sin fondo. Ahí la cápsula va casi opaca y sin desenfoque. */
+  @supports (-webkit-touch-callout: none) {
+    header > nav::before {
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      background: var(--glass-strong, var(--glass));
+    }
+  }
 
   .nav-logo { display: flex; align-items: center; text-decoration: none; flex: 0 0 auto; min-width: max-content; }
   header .nav-logo img { display: block; width: auto; max-width: none; height: 34px; object-fit: contain; }
