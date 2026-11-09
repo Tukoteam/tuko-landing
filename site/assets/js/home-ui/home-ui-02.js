@@ -748,6 +748,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function initCarousel() {
     const track = document.querySelector('.logos-track');
     if (!track) return;
+    /* La tira ya la mueve home-sections.js (clase is-js): dos bucles a la vez se pisaban y gastaban el doble */
+    if (track.classList.contains('is-js')) return;
 
     stopCarousel();
 
@@ -770,10 +772,30 @@ document.addEventListener('DOMContentLoaded', () => {
       if (document.hidden) lastTs = null;
     }, { signal: visAbort.signal });
 
-    function halfWidth() {
+    /* El ancho se mide al empezar y al cambiar de tamaño, nunca dentro del bucle */
+    let half = 1;
+    function measureHalf() {
       const w = track.scrollWidth / 2;
-      return w > 0 ? w : 1;
+      half = w > 0 ? w : 1;
     }
+    measureHalf();
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(measureHalf);
+      ro.observe(track);
+      visAbort.signal.addEventListener('abort', function() { ro.disconnect(); });
+    }
+
+    /* Fuera de pantalla no se mueve */
+    let onScreen = true;
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(function(entries) {
+        onScreen = entries[0].isIntersecting;
+        if (onScreen && rafId === null && started) { lastTs = null; rafId = requestAnimationFrame(tick); }
+      }, { rootMargin: '100px 0px' });
+      io.observe(track);
+      visAbort.signal.addEventListener('abort', function() { io.disconnect(); });
+    }
+    let started = false;
 
     function tick(ts) {
       if (!isMobile()) {
@@ -787,13 +809,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const dt = Math.min(ts - lastTs, 50);
       lastTs = ts;
       pos += SPEED * dt / 1000;
-      const half = halfWidth();
       if (pos >= half) pos -= half;
       track.style.transform = 'translate3d(-' + pos + 'px, 0, 0)';
-      rafId = requestAnimationFrame(tick);
+      rafId = onScreen ? requestAnimationFrame(tick) : null;
     }
 
     function start() {
+      started = true;
+      measureHalf();
       rafId = requestAnimationFrame(tick);
     }
 

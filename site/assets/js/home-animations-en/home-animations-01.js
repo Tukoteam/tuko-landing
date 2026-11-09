@@ -1,7 +1,9 @@
 /* ── ANIMATED PERSPECTIVE GRID ── */
 function initGrid(canvas, opts) {
   const ctx = canvas.getContext('2d');
-  let W, H, raf;
+  let W, H, raf = 0;
+  /* Solo se dibuja cuando se ve: fuera de pantalla o con la pestaña oculta no gasta nada */
+  let inView = true;
   let offset = 0, sideOff = 0;
 
   function resize() {
@@ -76,15 +78,30 @@ function initGrid(canvas, opts) {
       ctx.stroke();
     }
 
-    raf = requestAnimationFrame(draw);
+    raf = inView && !document.hidden ? requestAnimationFrame(draw) : 0;
+  }
+
+  function play() {
+    if (!raf && inView && !document.hidden) raf = requestAnimationFrame(draw);
   }
 
   window.addEventListener('resize', () => { resize(); });
   resize();
   draw();
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      inView = entries[0].isIntersecting;
+      if (inView) play();
+      else if (raf) { cancelAnimationFrame(raf); raf = 0; }
+    }, { rootMargin: '200px 0px' }).observe(canvas);
+  }
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { if (raf) cancelAnimationFrame(raf); raf = 0; }
+    else play();
+  });
 
   return {
-    stop: () => cancelAnimationFrame(raf),
+    stop: () => { cancelAnimationFrame(raf); raf = 0; inView = false; },
     setOpts: (patch) => { Object.assign(opts, patch || {}); }
   };
 }

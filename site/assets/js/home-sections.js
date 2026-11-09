@@ -51,7 +51,14 @@
     var half = 0, last = 0, raf = 0, visible = false, lastY = window.scrollY;
     var focus = pills.map(function () { return -1; });
 
-    function measure() { half = track.scrollWidth / 2; }
+    /* Medidas guardadas: el bucle no lee el tamaño de nada (leerlo justo después de mover la tira obligaba al
+       navegador a recalcular la página en cada fotograma) */
+    var boxW = 0, centers = [];
+    function measure() {
+      half = track.scrollWidth / 2;
+      boxW = box.clientWidth;
+      centers = pills.map(function (p) { return p.offsetLeft + p.offsetWidth / 2; });
+    }
     function frame(now) {
       var dt = Math.min(0.05, last ? (now - last) / 1000 : 0.016);
       last = now;
@@ -63,12 +70,10 @@
       track.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
 
       /* Foco en el centro: 1 justo en medio, 0 a partir de un 22 % del ancho */
-      var b = box.getBoundingClientRect();
-      var mid = b.left + b.width / 2;
-      var reach = b.width * 0.22;
+      var mid = boxW / 2;
+      var reach = boxW * 0.22;
       for (var i = 0; i < pills.length; i++) {
-        var r = pills[i].getBoundingClientRect();
-        var d = Math.abs(r.left + r.width / 2 - mid);
+        var d = Math.abs(centers[i] + x - mid);
         var f = d >= reach ? 0 : Math.round((1 - d / reach) * 20) / 20;
         if (f !== focus[i]) { focus[i] = f; pills[i].style.setProperty('--f', f); }
       }
