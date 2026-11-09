@@ -21,9 +21,9 @@
     # Desactiva APIs del navegador que la web no usa
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), accelerometer=()"
     Cross-Origin-Opener-Policy = "same-origin"
-    # CSP: permite lo que la web realmente necesita (Google Fonts, YouTube, formulario de Netlify)
+    # CSP: permite lo que la web realmente necesita (YouTube, formulario de Netlify; las fuentes se sirven desde /assets/fonts/)
     # img-src https: — permite imágenes del blog (propias y URLs pegadas en el CMS)
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://www.googletagmanager.com; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://www.googletagmanager.com; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
 
 # ── El HTML se revalida siempre: los cambios se ven al instante ──
 [[headers]]
@@ -44,6 +44,12 @@
 
 [[headers]]
   for = "/assets/logos-colaboradores/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# ── Fuentes propias: la versión va en el nombre del archivo (p. ej. mona-sans-v4-…) ──
+[[headers]]
+  for = "/assets/fonts/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
