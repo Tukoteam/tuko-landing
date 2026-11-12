@@ -208,6 +208,13 @@
     <priority>0.6</priority>
   </url>
 
+    <url>
+    <loc>https://tukoteam.com/blog/cuanto-gastar-captar-cliente</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <!-- Producto -->
   <url>
     <loc>https://tukoteam.com/tuko-ai</loc>
