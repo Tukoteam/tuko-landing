@@ -222,6 +222,13 @@
     <priority>0.6</priority>
   </url>
 
+    <url>
+    <loc>https://tukoteam.com/blog/grow-beauty-brand-without-giving-away-margin</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <!-- Producto -->
   <url>
     <loc>https://tukoteam.com/tuko-ai</loc>
