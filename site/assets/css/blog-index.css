@@ -194,7 +194,7 @@ html[data-theme="dark"] .blog-list-section { background: transparent; }
 /* ── Móvil ── */
 @media (max-width: 760px) {
   /* El título algo más arriba y la cabecera más baja: la lista asoma antes */
-  .bx-stage { min-height: 530px; padding: calc(var(--nav-h, 64px) + 6px) 18px 156px; border-radius: 0 0 28px 28px; }
+  .bx-stage { min-height: 440px; padding: calc(var(--nav-h, 64px) + 6px) 18px 112px; border-radius: 0 0 28px 28px; }
   .bx-copy h1 { font-size: clamp(76px, 24vw, 110px); }
   .bx-copy p { font-size: 15.5px; }
   .bx-tip { display: none; }
