@@ -249,6 +249,7 @@
     font-size: 13.5px; font-weight: 500; color: var(--black); text-decoration: none; line-height: 1.35;
     transition: border-color 0.18s, color 0.18s;
   }
+  .bp-tool + .bp-tool { margin-top: 8px; }
   .bp-tool:hover, .bp-tool:focus-visible { border-color: var(--blue); color: var(--blue); outline: none; }
   .bp-tool svg { flex: 0 0 auto; width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; }
 

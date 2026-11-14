@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en" data-url-es="https://tukoteam.com/herramientas/calculadora-precio-margen" data-url-en="https://tukoteam.com/en/tools/price-margin-calculator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- tuko:partial:theme-head -->
+<script>(function(){try{var t=localStorage.getItem("tuko_theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<!-- /tuko:partial:theme-head -->
+<title>Selling price and margin calculator — Tuko</title>
+<meta name="theme-color" content="#3D50F2">
+<link rel="icon" href="/assets/favicon.png?v=5" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/favicon.svg?v=5" type="image/svg+xml">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://tukoteam.com/en/tools/price-margin-calculator#webpage",
+      "url": "https://tukoteam.com/en/tools/price-margin-calculator",
+      "name": "Selling price and margin calculator",
+      "description": "Free calculator for the selling price you need for the margin you want, or the margin and markup your current price leaves you, with or without sales tax.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://tukoteam.com/#website"
+      },
+      "mainEntity": {
+        "@id": "https://tukoteam.com/en/tools/price-margin-calculator#app"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://tukoteam.com/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Calculators",
+          "item": "https://tukoteam.com/en/tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Selling price and margin calculator",
+          "item": "https://tukoteam.com/en/tools/price-margin-calculator"
+        }
+      ]
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://tukoteam.com/en/tools/price-margin-calculator#app",
+      "name": "Selling price and margin calculator",
+      "url": "https://tukoteam.com/en/tools/price-margin-calculator",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "publisher": {
+        "@id": "https://tukoteam.com/#organization"
+      }
+    }
+  ]
+}
+</script>
+<meta name="description" content="Free calculator for the selling price you need for the margin you want, or the margin and markup your current price leaves you, with or without sales tax.">
+<link rel="canonical" href="https://tukoteam.com/en/tools/price-margin-calculator">
+<link rel="alternate" hreflang="es" href="https://tukoteam.com/herramientas/calculadora-precio-margen">
+<link rel="alternate" hreflang="en" href="https://tukoteam.com/en/tools/price-margin-calculator">
+<link rel="alternate" hreflang="x-default" href="https://tukoteam.com/herramientas/calculadora-precio-margen">
+
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tukoteam.com/en/tools/price-margin-calculator">
+<meta property="og:title" content="Selling price and margin calculator — Tuko">
+<meta property="og:description" content="Work out the selling price for the margin you want, or the margin your price leaves you.">
+<meta property="og:image" content="https://tukoteam.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Tuko">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Selling price and margin calculator — Tuko">
+<meta name="twitter:description" content="Work out the selling price for the margin you want, or the margin your price leaves you.">
+<meta name="twitter:image" content="https://tukoteam.com/assets/og-image.png">
+
+<link rel="preload" href="/assets/fonts/mona-sans-v4-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css?v=70ba8d47">
+<link rel="stylesheet" href="/assets/css/main.css?v=fd7297f3">
+<link rel="stylesheet" href="/assets/css/tuko-theme.css?v=73191e12">
+<style>.skip-link{position:absolute;left:-9999px;top:0;z-index:999;background:#3D50F2;color:#fff;padding:10px 18px;border-radius:0 0 8px 0;font-size:14px;text-decoration:none}.skip-link:focus{left:0}</style>
+<style>
+/* Calculadora de precio de venta y margen (solo esta página y su versión ES; mismos estilos que la de ROAS) */
+.calc-page{--c-accent:#3D50F2;--c-accent-ink:#3D50F2;--c-surface:#F7F8FB;--c-field:#FFFFFF;--c-line:rgba(20,24,38,.09);--c-line-strong:rgba(20,24,38,.16);--c-text:#1a1a1a;--c-body:#2A2A2A;--c-muted:#5b6070;--c-pos:#0E8A5A;--c-neg:#C33232}
+html[data-theme="dark"] .calc-page{--c-accent-ink:#8fa0ff;--c-surface:#12151e;--c-field:#0b0d14;--c-line:rgba(255,255,255,.08);--c-line-strong:rgba(255,255,255,.16);--c-text:#f2f3f7;--c-body:#d0d5e0;--c-muted:#a9b0c2;--c-pos:#3fd59a;--c-neg:#ff8a8a}
+.calc-wrap{max-width:1040px;margin:0 auto}
+.calc-head{max-width:680px;margin-bottom:40px}
+.calc-eyebrow{font-size:13px;font-weight:600;font-stretch:semi-expanded;color:var(--c-accent-ink);margin:0 0 14px;letter-spacing:.01em}
+.calc-page .calc-title{margin-bottom:16px}
+.calc-lead{font-size:17px;font-weight:300;line-height:1.65;color:var(--c-body);margin:0}
+.calc-tool{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:20px;align-items:start}
+.calc-card{background:var(--c-surface);border:1px solid var(--c-line);border-radius:20px;padding:32px;min-width:0}
+.calc-results{position:sticky;top:96px}
+.calc-inputs fieldset{border:0;margin:0;padding:0;min-width:0}
+.calc-inputs fieldset+fieldset{margin-top:28px;padding-top:24px;border-top:1px solid var(--c-line)}
+.calc-legend{float:left;width:100%;padding:0;margin:0 0 16px;font-size:13px;font-weight:600;font-stretch:semi-expanded;color:var(--c-muted);letter-spacing:.01em}
+.calc-legend+*{clear:both}
+.calc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px}
+.calc-field{min-width:0}
+.calc-field label{display:block;font-size:14px;font-weight:500;color:var(--c-text);margin-bottom:8px}
+.calc-input{position:relative}
+.calc-input input{display:block;width:100%;box-sizing:border-box;height:48px;margin:0;padding:0 42px 0 14px;font:inherit;font-size:16px;color:var(--c-text);background:var(--c-field);border:1px solid var(--c-line-strong);border-radius:12px;-webkit-appearance:none;appearance:none;transition:border-color .15s ease,box-shadow .15s ease}
+.calc-input input::placeholder{color:var(--c-muted);opacity:.7}
+.calc-input input:focus{outline:none;border-color:var(--c-accent);box-shadow:0 0 0 3px rgba(61,80,242,.18)}
+.calc-input input[aria-invalid="true"]{border-color:var(--c-neg)}
+.calc-unit{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:15px;color:var(--c-muted);pointer-events:none}
+.calc-input.is-prefix input{padding:0 14px 0 34px}
+.calc-input.is-prefix .calc-unit{right:auto;left:14px}
+.calc-hint,.calc-err{font-size:12.5px;line-height:1.45;margin:6px 0 0}
+.calc-hint{color:var(--c-muted)}
+.calc-err{color:var(--c-neg)}
+.calc-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:24px}
+.calc-reset{background:none;border:0;padding:8px 0;font:inherit;font-size:14px;font-weight:500;color:var(--c-accent-ink);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.calc-reset:focus-visible{outline:2px solid var(--c-accent);outline-offset:2px;border-radius:4px}
+.calc-privacy{font-size:12.5px;color:var(--c-muted);margin:0}
+.calc-cur{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:var(--c-text)}
+.calc-select{height:40px;padding:0 12px;font:inherit;font-size:15px;color:var(--c-text);background:var(--c-field);border:1px solid var(--c-line-strong);border-radius:10px}
+.calc-res-label{font-size:14px;font-weight:500;color:var(--c-muted);margin:0}
+.calc-res-big{font-size:clamp(52px,6vw,72px);font-weight:800;font-stretch:semi-expanded;letter-spacing:-.03em;line-height:1;color:var(--c-accent-ink);margin:12px 0 10px}
+.calc-res-big.is-none{font-size:clamp(36px,4vw,44px);color:var(--c-neg)}
+.calc-res-sub{font-size:14px;line-height:1.5;color:var(--c-muted);margin:0}
+.calc-stats{margin:24px 0 0;padding:0;border-top:1px solid var(--c-line)}
+.calc-stats>div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:12px 0;border-bottom:1px solid var(--c-line);font-size:14px;line-height:1.4}
+.calc-stats dt{color:var(--c-muted)}
+.calc-stats dd{margin:0;font-weight:600;color:var(--c-text);text-align:right;white-space:nowrap}
+.calc-verdict{margin:20px 0 0;padding:14px 16px;border-radius:12px;font-size:14.5px;line-height:1.5;color:var(--c-text);background:rgba(61,80,242,.06)}
+.calc-verdict strong{font-weight:700}
+.calc-verdict.is-pos{background:rgba(14,138,90,.09)}
+.calc-verdict.is-pos strong{color:var(--c-pos)}
+.calc-verdict.is-neg{background:rgba(195,50,50,.08)}
+.calc-verdict.is-neg strong{color:var(--c-neg)}
+.calc-verdict.is-hint{background:none;padding:0;color:var(--c-muted);font-size:13.5px}
+html[data-theme="dark"] .calc-verdict.is-pos{background:rgba(63,213,154,.10)}
+html[data-theme="dark"] .calc-verdict.is-neg{background:rgba(255,138,138,.10)}
+.calc-table{width:100%;border-collapse:collapse;margin-top:28px;font-size:13.5px}
+.calc-table caption{text-align:left;font-size:13px;font-weight:600;font-stretch:semi-expanded;color:var(--c-muted);padding-bottom:6px}
+.calc-table th,.calc-table td{padding:8px 0;border-bottom:1px solid var(--c-line);text-align:left;font-weight:400;color:var(--c-body)}
+.calc-table th{color:var(--c-muted);font-weight:500}
+.calc-table th:last-child,.calc-table td:last-child{text-align:right}
+.calc-table tr.is-current td{color:var(--c-accent-ink);font-weight:600}
+.calc-explain{max-width:680px;margin-top:80px}
+.calc-explain h2{font-size:22px;font-weight:700;font-stretch:semi-expanded;letter-spacing:-.02em;line-height:1.25;color:var(--c-text);margin:44px 0 12px}
+.calc-explain h2:first-child{margin-top:0}
+.calc-explain p{font-size:16px;font-weight:300;line-height:1.7;color:var(--c-body);margin:0 0 12px}
+.calc-explain a{color:var(--c-accent-ink);text-decoration:underline;text-underline-offset:3px}
+.calc-formula{margin:16px 0;padding:16px 18px;border:1px solid var(--c-line);border-radius:12px;background:var(--c-surface);font-size:15px;line-height:1.9;color:var(--c-text)}
+.calc-formula p{margin:0;color:var(--c-text);font-weight:400}
+.calc-label-note{font-weight:400;color:var(--c-muted)}
+.calc-dock{display:none}
+@media (max-width:860px){
+  .calc-dock{position:fixed;left:16px;right:16px;bottom:16px;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border:0;border-radius:14px;background:#141826;color:#fff;font:inherit;font-size:14px;box-shadow:0 10px 30px rgba(20,24,38,.22);transform:translateY(calc(100% + 24px));transition:transform .25s ease;cursor:pointer;text-align:left}
+  .calc-dock.is-on{transform:none}
+  .calc-dock b{font-size:22px;font-weight:800;font-stretch:semi-expanded;letter-spacing:-.02em;color:#a9b5ff}
+  .calc-dock.is-bad b{color:#ff9d9d;font-size:15px}
+  html[data-theme="dark"] .calc-dock{background:#232838;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+}
+@media (prefers-reduced-motion:reduce){.calc-dock{transition:none}}
+@media (max-width:640px){.calc-inputs .calc-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 12px}.calc-field label{font-size:13.5px}}
+@media (max-width:340px){.calc-inputs .calc-grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:860px){.calc-tool{grid-template-columns:minmax(0,1fr)}.calc-results{position:static}}
+@media (max-width:640px){
+  .calc-page.legal-page{padding:96px 16px 72px}
+  .calc-card{padding:22px 18px;border-radius:16px}
+  .calc-grid{grid-template-columns:minmax(0,1fr);gap:18px}
+  .calc-explain{margin-top:56px}
+  .calc-explain h2{font-size:20px}
+}
+.calc-more{margin-top:72px;padding-top:32px;border-top:1px solid var(--c-line)}
+.calc-more-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:16px}
+.calc-more-title{font-size:13px;font-weight:600;font-stretch:semi-expanded;color:var(--c-muted);letter-spacing:.01em;margin:0}
+.calc-more-all{font-size:14px;font-weight:500;color:var(--c-accent-ink);text-decoration:underline;text-underline-offset:3px}
+.calc-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;list-style:none;margin:0;padding:0}
+.calc-links.is-index{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.calc-links li{display:flex;min-width:0}
+.calc-link{display:flex;flex-direction:column;width:100%;box-sizing:border-box;padding:22px 24px;border:1px solid var(--c-line);border-radius:16px;background:var(--c-surface);color:var(--c-text);text-decoration:none;transition:border-color .15s ease}
+.calc-link:hover{border-color:var(--c-accent)}
+.calc-link:focus-visible{outline:2px solid var(--c-accent);outline-offset:2px}
+.calc-link-title{font-size:16px;font-weight:600;line-height:1.35;color:var(--c-text);margin:0 0 6px}
+.calc-link-desc{font-size:14px;line-height:1.55;color:var(--c-muted);margin:0 0 18px}
+.calc-link-cta{display:inline-flex;align-items:center;gap:6px;margin-top:auto;font-size:14px;font-weight:500;color:var(--c-accent-ink)}
+.calc-link-cta svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .15s ease}
+.calc-link:hover .calc-link-cta svg{transform:translateX(2px)}
+.calc-links.is-index .calc-link{padding:28px}
+.calc-links.is-index .calc-link-title{font-size:18px;margin-bottom:8px}
+@media (max-width:860px){.calc-links,.calc-links.is-index{grid-template-columns:minmax(0,1fr);gap:16px}}
+@media (max-width:640px){.calc-links{grid-template-columns:minmax(0,1fr)}.calc-more{margin-top:56px}.calc-link,.calc-links.is-index .calc-link{padding:20px 18px}}
+.calc-seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;margin:0 0 28px;border:1px solid var(--c-line-strong);border-radius:12px;background:var(--c-field)}
+.calc-seg input{position:absolute;opacity:0;pointer-events:none}
+.calc-seg label{display:flex;align-items:center;justify-content:center;min-height:40px;padding:0 12px;border-radius:9px;font-size:14px;font-weight:500;color:var(--c-muted);cursor:pointer;text-align:center;line-height:1.25;transition:background-color .15s ease,color .15s ease}
+.calc-seg input:checked+label{background:var(--c-accent);color:#fff}
+.calc-seg input:focus-visible+label{outline:2px solid var(--c-accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<!-- tuko:partial:nav-en -->
+<!-- NAV -->
+<header role="banner">
+<nav aria-label="Main navigation">
+  <a href="/en/" class="nav-logo">
+    <img src="/assets/images/tuko-logo-nav.webp" width="840" height="321" alt="Tuko" decoding="async" fetchpriority="high">
+  </a>
+  <ul class="nav-links">
+    <li><a href="/en/#como-funciona" data-i18n="nav_link_como_funciona">How it works</a></li>
+    <li><a href="/en/#precios" data-i18n="nav_link_precios">Pricing</a></li>
+    <li><a href="/en/blog/" data-i18n="nav_link_blog">Blog</a></li>
+    <li><a href="/en/tuko-ai" data-i18n="nav_link_ia">tuko AI</a></li>
+    <li><a href="https://apps.shopify.com/tuko" class="nav-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Install free</a></li>
+  </ul>
+  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" aria-pressed="false">
+    <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+  </button>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="lang-switcher" role="group" aria-label="Language selector" data-active="en">
+    <span class="lang-thumb" aria-hidden="true"></span>
+    <button type="button" class="lang-opt" data-lang="es" aria-label="Cambiar idioma a Español">
+      <span class="lang-opt-flag" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" width="22" height="15"><rect width="3" height="2" fill="#c60b1e"/><rect width="3" height="1" y="0.5" fill="#ffc400"/></svg>
+      </span>
+      <span class="lang-opt-label">ES</span>
+    </button>
+    <button type="button" class="lang-opt active" data-lang="en" aria-label="Switch language to English">
+      <span class="lang-opt-flag" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="22" height="15"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg>
+      </span>
+      <span class="lang-opt-label">EN</span>
+    </button>
+  </div>
+</nav>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu" aria-hidden="true">
+  <a href="/en/#como-funciona" data-i18n="nav_link_como_funciona">How it works</a>
+  <a href="/en/#precios" data-i18n="nav_link_precios">Pricing</a>
+  <a href="/en/blog/" data-i18n="nav_link_blog">Blog</a>
+  <a href="/en/tuko-ai" data-i18n="nav_link_ia">tuko AI</a>
+  <div class="mobile-lang">
+    <p class="mobile-lang-label" data-i18n="nav_lang_label">Language</p>
+    <div class="lang-switcher mobile-lang-switcher" role="group" aria-label="Language selector" data-active="en">
+      <span class="lang-thumb" aria-hidden="true"></span>
+      <button type="button" class="lang-opt" data-lang="es" aria-label="Cambiar idioma a Español">
+        <span class="lang-opt-flag" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" width="22" height="15"><rect width="3" height="2" fill="#c60b1e"/><rect width="3" height="1" y="0.5" fill="#ffc400"/></svg>
+        </span>
+        <span class="lang-opt-label">ES</span>
+      </button>
+      <button type="button" class="lang-opt active" data-lang="en" aria-label="Switch language to English">
+        <span class="lang-opt-flag" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="22" height="15"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg>
+        </span>
+        <span class="lang-opt-label">EN</span>
+      </button>
+    </div>
+  </div>
+  <a href="https://apps.shopify.com/tuko" class="mobile-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Install free</a>
+</div>
+<!-- /tuko:partial:nav-en -->
+
+<main id="main-content" class="legal-page calc-page">
+  <div class="calc-wrap">
+    <header class="calc-head">
+      <h1 class="legal-title calc-title">Selling price and margin calculator</h1>
+      <p class="calc-lead">Work out the selling price you need for the margin you want, or the margin your current price leaves you. Margin is measured on the price excluding sales tax/VAT.</p>
+    </header>
+
+    <div class="calc-tool">
+      <form class="calc-card calc-inputs" id="calcForm" novalidate>
+        <div class="calc-seg" role="radiogroup" aria-label="What do you want to calculate">
+          <input type="radio" name="mode" id="m-margin" value="margin" checked><label for="m-margin">I want a margin</label>
+          <input type="radio" name="mode" id="m-price" value="price"><label for="m-price">I have a price</label>
+        </div>
+        <fieldset>
+          <legend class="calc-legend">Costs per unit, excluding sales tax/VAT</legend>
+          <div class="calc-grid">
+            <div class="calc-field">
+              <label for="f-product">Product cost</label>
+              <div class="calc-input is-prefix" data-money><input id="f-product" name="product" type="text" inputmode="decimal" autocomplete="off" value="20" aria-describedby="e-product"><span class="calc-unit" aria-hidden="true">$</span></div>
+              <p class="calc-err" id="e-product" hidden></p>
+            </div>
+            <div class="calc-field">
+              <label for="f-shipping">Shipping you pay</label>
+              <div class="calc-input is-prefix" data-money><input id="f-shipping" name="shipping" type="text" inputmode="decimal" autocomplete="off" value="5" aria-describedby="e-shipping"><span class="calc-unit" aria-hidden="true">$</span></div>
+              <p class="calc-err" id="e-shipping" hidden></p>
+            </div>
+            <div class="calc-field">
+              <label for="f-fee">Payment fee</label>
+              <div class="calc-input is-prefix" data-money><input id="f-fee" name="fee" type="text" inputmode="decimal" autocomplete="off" value="1.5" aria-describedby="e-fee"><span class="calc-unit" aria-hidden="true">$</span></div>
+              <p class="calc-err" id="e-fee" hidden></p>
+            </div>
+            <div class="calc-field">
+              <label for="f-packaging">Packaging</label>
+              <div class="calc-input is-prefix" data-money><input id="f-packaging" name="packaging" type="text" inputmode="decimal" autocomplete="off" value="1" aria-describedby="e-packaging"><span class="calc-unit" aria-hidden="true">$</span></div>
+              <p class="calc-err" id="e-packaging" hidden></p>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend class="calc-legend">Price</legend>
+          <div class="calc-grid">
+            <div class="calc-field" id="w-margin">
+              <label for="f-margin">Margin you want</label>
+              <div class="calc-input"><input id="f-margin" name="margin" type="text" inputmode="decimal" autocomplete="off" value="40" aria-describedby="e-margin"><span class="calc-unit" aria-hidden="true">%</span></div>
+              <p class="calc-err" id="e-margin" hidden></p>
+            </div>
+            <div class="calc-field" id="w-gross" hidden>
+              <label for="f-gross">Selling price incl. tax</label>
+              <div class="calc-input is-prefix" data-money><input id="f-gross" name="gross" type="text" inputmode="decimal" autocomplete="off" value="45.83" aria-describedby="e-gross"><span class="calc-unit" aria-hidden="true">$</span></div>
+              <p class="calc-err" id="e-gross" hidden></p>
+            </div>
+            <div class="calc-field">
+              <label for="f-vat">Sales tax / VAT</label>
+              <div class="calc-input"><input id="f-vat" name="vat" type="text" inputmode="decimal" autocomplete="off" value="0" aria-describedby="e-vat"><span class="calc-unit" aria-hidden="true">%</span></div>
+              <p class="calc-err" id="e-vat" hidden></p>
+            </div>
+          </div>
+        </fieldset>
+        <div class="calc-actions">
+          <button type="button" class="calc-reset" id="calcReset">Back to the example</button>
+          <div class="calc-cur"><label for="f-cur">Currency</label><select class="calc-select" id="f-cur"><option value="USD" selected>$ USD</option><option value="EUR">€ EUR</option><option value="GBP">£ GBP</option></select></div>
+        </div>
+        <p class="calc-privacy" style="margin-top:12px">Indicative estimate based on your inputs; not financial advice. What you type never leaves your browser.</p>
+      </form>
+
+      <section class="calc-card calc-results" aria-labelledby="resLabel">
+        <div id="calcOut" aria-live="polite">
+          <p class="calc-res-label" id="resLabel">Selling price excl. tax</p>
+          <p class="calc-res-big" id="resBig">$45.83</p>
+          <p class="calc-res-sub" id="resSub">With 0% tax: $45.83</p>
+          <p class="calc-verdict is-hint" id="resVerdict" hidden></p>
+        </div>
+        <dl class="calc-stats" id="resStats"></dl>
+        <table class="calc-table" id="resTable">
+          <caption>Equivalent margin and markup</caption>
+          <thead><tr><th scope="col">Margin</th><th scope="col">Markup</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </div>
+
+    <button type="button" class="calc-dock" id="calcDock" aria-hidden="true" tabindex="-1"><span>Selling price excl. tax</span><b>$45.83</b></button>
+
+    <article class="calc-explain">
+      <h2>How do you work out the price for a given margin?</h2>
+      <p>Divide your total cost per unit by 1 minus the margin you want. Margin is measured on the price excluding tax, so adding that percentage to your cost isn’t enough.</p>
+      <div class="calc-formula">
+      <p>Total cost = product + shipping + payment fee + packaging</p>
+      <p>Price excl. tax = total cost ÷ (1 − margin)</p>
+      <p>Price incl. tax = price excl. tax × (1 + tax rate)</p>
+      <p>Margin = (price excl. tax − total cost) ÷ price excl. tax</p>
+      <p>Markup = (price excl. tax − total cost) ÷ total cost</p>
+      </div>
+      <p>With the calculator’s example, 20 + 5 + 1.50 + 1 = 27.50, and 27.50 ÷ (1 − 0.40) = 45.83 before tax. Each unit leaves 18.33: 40% of the price and 66.7% on cost.</p>
+      <h2>What’s the difference between margin and markup?</h2>
+      <p>Margin is profit divided by price; markup is profit divided by cost. For the same product, markup always comes out higher, and mixing them up leads to prices lower than you think: adding 40% to your cost gives a 28.6% margin, not 40%.</p>
+      <table class="calc-table">
+      <thead><tr><th scope="col">Markup</th><th scope="col">Margin</th></tr></thead>
+      <tbody><tr><td>25%</td><td>20%</td></tr><tr><td>50%</td><td>33.3%</td></tr><tr><td>66.7%</td><td>40%</td></tr><tr><td>100%</td><td>50%</td></tr></tbody>
+      </table>
+      <h2>Why calculate without sales tax or VAT?</h2>
+      <p>Because the tax you collect isn’t yours: you pass it on to the tax authority. Measure margin on the price including tax and it looks higher than it is. With 21% VAT, for example, the 55.46 price seems to leave over 50% on 27.50 of cost, but the real margin is 40%. If you’re unsure how tax applies to your products, check with your accountant.</p>
+      <h2>Which costs should I include?</h2>
+      <p>The ones that come with each unit sold: product, shipping you don’t charge the customer, payment fee and packaging. If you have returns, add their average per unit to packaging or product cost. Fixed costs such as salaries or rent stay out; your margin pays for them.</p>
+      <h2>What do I do with the margin?</h2>
+      <p>Use it to see how much your ads can carry with the <a href="/en/tools/break-even-roas-calculator">break-even ROAS calculator</a> and how far you can discount with the <a href="/en/tools/discount-margin-calculator">discount margin calculator</a>. How margin and ad spend connect is explained in “<a href="/en/blog/como-calcular-roas-de-equilibrio">Break-even ROAS formula, with and without discounts</a>”.</p>
+    </article>
+
+    <section class="calc-more" aria-labelledby="moreTitle">
+      <div class="calc-more-head"><h2 class="calc-more-title" id="moreTitle">Other calculators</h2><a class="calc-more-all" href="/en/tools/">See all</a></div>
+      <ul class="calc-links">
+        <li><a class="calc-link" href="/en/tools/break-even-roas-calculator"><span class="calc-link-title">Break-even ROAS calculator</span><span class="calc-link-desc">The minimum ROAS your ads need to break even, with and without a discount.</span><span class="calc-link-cta">Open the calculator <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+        <li><a class="calc-link" href="/en/tools/max-cac-calculator"><span class="calc-link-title">Maximum CAC calculator</span><span class="calc-link-desc">The most you can pay to acquire a customer, based on your margin and how often they come back.</span><span class="calc-link-cta">Open the calculator <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+        <li><a class="calc-link" href="/en/tools/discount-margin-calculator"><span class="calc-link-title">Discount margin calculator</span><span class="calc-link-desc">How many more orders a discount needs to earn the same, and how far you can discount.</span><span class="calc-link-cta">Open the calculator <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<!-- tuko:partial:footer-en -->
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bg"><svg class="footer-svg-logo" viewBox="0 0 840 321" fill="none" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="125.26" cy="160.499" rx="29.0064" ry="108.774" fill="#FFFFFF"/>
+<path d="M154.267 160.499C154.267 220.574 154.267 269.273 154.267 269.273C182.301 269.273 205.028 220.574 205.028 160.499C205.028 100.425 182.301 51.7255 154.267 51.7255C154.267 51.7255 154.267 100.425 154.267 160.499Z" fill="#FFFFFF"/>
+<path d="M205.021 160.497C205.021 200.546 205.021 233.013 205.021 233.013C221.04 233.013 234.027 200.546 234.027 160.497C234.027 120.447 221.04 87.9808 205.021 87.9808C205.021 87.9808 205.021 120.447 205.021 160.497Z" fill="#FFFFFF"/>
+<ellipse cx="78.1274" cy="160.497" rx="18.129" ry="72.516" fill="#FFFFFF"/>
+<path d="M330.167 194.064V148.47H313.07V119.316H330.167V90.3818H366.555V119.316H404.038V148.47H366.555V192.31C366.555 196.11 367.066 199.252 368.089 201.736C369.112 204.074 370.5 205.974 372.254 207.435C374.008 208.896 376.2 209.919 378.83 210.504C381.46 211.088 384.383 211.381 387.598 211.381C390.082 211.381 392.713 211.235 395.489 210.942C398.266 210.65 401.115 210.212 404.038 209.627V239C398.631 239.877 393.59 240.607 388.913 241.192C384.383 241.777 379.926 242.069 375.542 242.069C368.089 242.069 361.513 241.119 355.814 239.219C350.115 237.319 345.365 234.47 341.566 230.67C337.766 226.725 334.917 221.756 333.017 215.765C331.117 209.773 330.167 202.54 330.167 194.064ZM410.224 196.475V119.316H446.83V185.077C446.83 189.607 447.123 193.552 447.707 196.913C448.438 200.275 449.534 203.051 450.995 205.243C452.603 207.435 454.575 209.043 456.914 210.065C459.252 211.088 462.101 211.6 465.462 211.6C468.677 211.6 471.6 211.015 474.23 209.846C477.007 208.677 479.345 206.997 481.245 204.805C483.145 202.613 484.606 199.909 485.629 196.694C486.652 193.333 487.163 189.461 487.163 185.077V119.316H523.551V239H489.794L488.917 217.518C487.456 221.756 485.483 225.41 482.998 228.478C480.66 231.547 477.884 234.105 474.669 236.15C471.454 238.196 467.947 239.658 464.147 240.534C460.348 241.557 456.256 242.069 451.872 242.069C445.588 242.069 439.889 241.046 434.774 239C429.66 236.954 425.276 234.031 421.622 230.232C417.969 226.286 415.119 221.464 413.073 215.765C411.174 210.065 410.224 203.636 410.224 196.475ZM534.079 239V77.8874H570.466V159.868L613.43 119.316H658.804L608.607 166.664L660.339 239H617.814L582.961 188.145L570.466 199.982V239H534.079ZM645.875 178.939C645.875 169.733 647.409 161.257 650.478 153.512C653.547 145.767 657.858 139.191 663.411 133.784C668.964 128.23 675.686 123.92 683.577 120.851C691.469 117.782 700.31 116.248 710.101 116.248C719.746 116.248 728.514 117.782 736.405 120.851C744.296 123.92 751.018 128.23 756.571 133.784C762.271 139.191 766.655 145.767 769.723 153.512C772.792 161.257 774.327 169.806 774.327 179.158C774.327 188.511 772.792 197.06 769.723 204.805C766.655 212.55 762.271 219.199 756.571 224.752C751.018 230.159 744.296 234.397 736.405 237.466C728.514 240.534 719.746 242.069 710.101 242.069C700.31 242.069 691.469 240.534 683.577 237.466C675.686 234.397 668.964 230.159 663.411 224.752C657.858 219.199 653.547 212.55 650.478 204.805C647.409 197.06 645.875 188.438 645.875 178.939ZM682.701 178.939C682.701 184.2 683.285 188.949 684.454 193.187C685.769 197.279 687.523 200.786 689.715 203.709C692.053 206.631 694.903 208.896 698.264 210.504C701.771 212.111 705.717 212.915 710.101 212.915C714.485 212.915 718.357 212.111 721.718 210.504C725.08 208.896 727.929 206.631 730.267 203.709C732.605 200.786 734.359 197.279 735.528 193.187C736.697 188.949 737.282 184.2 737.282 178.939C737.282 173.97 736.697 169.44 735.528 165.349C734.359 161.111 732.605 157.53 730.267 154.608C727.929 151.539 725.08 149.274 721.718 147.812C718.357 146.205 714.485 145.401 710.101 145.401C705.717 145.401 701.771 146.205 698.264 147.812C694.903 149.274 692.053 151.539 689.715 154.608C687.523 157.53 685.769 161.111 684.454 165.349C683.285 169.44 682.701 173.97 682.701 178.939Z" fill="#FFFFFF"/>
+</svg></div>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/en/" class="footer-brand-mark">tuko</a>
+        <p class="footer-brand-text" data-i18n="footer_tagline">Goal-based discounts for Shopify stores. Sell more units without giving away margin.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title" data-i18n="footer_col1_title">Contact</p>
+        <a href="mailto:joan@tukoteam.com" data-i18n="footer_email">joan@tukoteam.com</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title" data-i18n="footer_col_product">Product</p>
+        <a href="/en/#precios" data-i18n="footer_pricing">Pricing</a>
+        <a href="/en/tools/">Calculators</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title" data-i18n="footer_col2_title">Legal</p>
+        <a href="/en/privacidad">Privacy policy</a>
+        <a href="/en/terminos">Terms and conditions</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom-inner" data-i18n="footer_copy">© 2026 Tuko. All rights reserved.</div>
+</footer>
+<!-- /tuko:partial:footer-en -->
+
+<script>
+/*calc-core*/
+function tukoPriceCalc(i) {
+  var cost = i.product + i.shipping + i.fee + i.packaging;
+  var vat = (i.vat || 0) / 100;
+  var price = i.mode === 'price' ? i.gross / (1 + vat) : cost / (1 - i.margin / 100);
+  var r = { mode: i.mode, cost: cost, vat: vat, price: price, gross: price * (1 + vat) };
+  r.profit = price - cost;
+  r.margin = price > 0 ? r.profit / price : null;
+  r.markup = cost > 0 ? r.profit / cost : null;
+  r.table = [20, 100 / 3, 40, 50].map(function (m) { return { margin: m / 100, markup: m / (100 - m) }; });
+  return r;
+}
+/*end-calc-core*/
+(function () {
+  var LOC = 'en-US', CUR = 'USD';
+  var T = {
+    labelPrice: 'Selling price excl. tax',
+    labelMargin: 'Margin on price',
+    subGross: function (p, g) { return 'With ' + p + ' tax: ' + g; },
+    subNet: function (n) { return 'Price excluding tax: ' + n; },
+    invalid: 'Check the highlighted fields.',
+    cost: 'Total cost per unit',
+    net: 'Price excluding tax',
+    gross: function (p) { return 'Price including ' + p + ' tax'; },
+    profit: 'Profit per unit',
+    margin: 'Margin on price',
+    markup: 'Markup on cost',
+    loss: function (a) { return 'At this price you <strong>lose ' + a + '</strong> on every unit: your costs are higher than the price excluding tax.'; },
+    errMarginEmpty: 'Enter the margin you want.',
+    errMargin: 'Must be below 100%.',
+    errPrice: 'Enter a price above 0.',
+    errVat: 'Must be between 0 and 50.',
+    errCost: 'Add at least one cost.',
+    errNum: 'Enter a number only.',
+    errNeg: 'This can’t be negative.',
+    dash: '—'
+  };
+  var DEF = {'product': '20', 'shipping': '5', 'fee': '1.5', 'packaging': '1', 'margin': '40', 'gross': '45.83', 'vat': '0'};
+  /* calc-ui (igual en ES y EN) */
+  var FIELDS = ['product', 'shipping', 'fee', 'packaging', 'margin', 'gross', 'vat'];
+  var $ = function (id) { return document.getElementById(id); };
+  var nf = function (o) { return new Intl.NumberFormat(LOC, o); };
+  var fPct = function (v) { return nf({ style: 'percent', maximumFractionDigits: 1 }).format(v); };
+  var fMoney = function (v, dec) { return nf({ style: 'currency', currency: CUR, minimumFractionDigits: dec, maximumFractionDigits: dec }).format(v); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var mode = 'margin', grossTouched = false, last = null;
+
+  function parseNum(s) {
+    s = String(s).replace(/[\s  €$£%]/g, '');
+    if (s === '') return null;
+    var c = s.lastIndexOf(','), p = s.lastIndexOf('.');
+    if (c > -1 && p > -1) s = c > p ? s.replace(/\./g, '').replace(',', '.') : s.replace(/,/g, '');
+    else if (c > -1) s = s.replace(',', '.');
+    if (!/^-?(\d+\.?\d*|\.\d+)$/.test(s)) return NaN;
+    var n = parseFloat(s);
+    return isFinite(n) ? n : NaN;
+  }
+
+  function setErr(k, msg) {
+    var el = $('f-' + k), e = $('e-' + k);
+    if (msg) { el.setAttribute('aria-invalid', 'true'); e.textContent = msg; e.hidden = false; }
+    else { el.removeAttribute('aria-invalid'); e.textContent = ''; e.hidden = true; }
+  }
+
+  function read() {
+    var vals = { mode: mode }, bad = false;
+    FIELDS.forEach(function (k) {
+      if ((k === 'margin' && mode !== 'margin') || (k === 'gross' && mode !== 'price')) { setErr(k, null); return; }
+      var v = parseNum($('f-' + k).value), err = null;
+      if (k === 'margin') {
+        if (v === null) err = T.errMarginEmpty; else if (isNaN(v)) err = T.errNum; else if (v < 0) err = T.errNeg; else if (v >= 100) err = T.errMargin;
+      } else if (k === 'gross') {
+        if (v === null || (!isNaN(v) && v <= 0)) err = T.errPrice; else if (isNaN(v)) err = T.errNum;
+      } else if (k === 'vat') {
+        if (v === null) v = 0; else if (isNaN(v)) err = T.errNum; else if (v < 0 || v > 50) err = T.errVat;
+      } else {
+        if (v === null) v = 0; else if (isNaN(v)) err = T.errNum; else if (v < 0) err = T.errNeg;
+      }
+      setErr(k, err);
+      if (err) bad = true;
+      vals[k] = v;
+    });
+    if (!bad && mode === 'margin' && vals.product + vals.shipping + vals.fee + vals.packaging <= 0) { setErr('product', T.errCost); bad = true; }
+    return bad ? null : vals;
+  }
+
+  function row(label, value) {
+    return '<div><dt>' + esc(label) + '</dt><dd>' + esc(value) + '</dd></div>';
+  }
+
+  function render() {
+    var big = $('resBig'), sub = $('resSub'), ver = $('resVerdict'), stats = $('resStats'), tbody = $('resTable').tBodies[0];
+    var v = read();
+    big.classList.remove('is-none');
+    $('resLabel').textContent = mode === 'margin' ? T.labelPrice : T.labelMargin;
+    if (!v) {
+      last = null;
+      big.textContent = T.dash;
+      sub.textContent = T.invalid;
+      ver.hidden = true;
+      stats.innerHTML = row(T.cost, T.dash) + row(T.profit, T.dash) + row(T.markup, T.dash);
+      tbody.innerHTML = '';
+      return;
+    }
+    var r = tukoPriceCalc(v), vatPct = fPct(r.vat);
+    last = r;
+    if (mode === 'margin') {
+      big.textContent = fMoney(r.price, 2);
+      sub.textContent = T.subGross(vatPct, fMoney(r.gross, 2));
+    } else {
+      big.textContent = fPct(r.margin);
+      if (r.profit < 0) big.classList.add('is-none');
+      sub.textContent = T.subNet(fMoney(r.price, 2));
+    }
+    var h = row(T.cost, fMoney(r.cost, 2));
+    if (mode === 'price') h += row(T.net, fMoney(r.price, 2));
+    else h += row(T.gross(vatPct), fMoney(r.gross, 2));
+    h += row(T.profit, fMoney(r.profit, 2));
+    if (mode === 'margin') h += row(T.margin, fPct(r.margin));
+    h += row(T.markup, r.markup == null ? T.dash : fPct(r.markup));
+    stats.innerHTML = h;
+
+    ver.className = 'calc-verdict';
+    if (r.profit < 0) { ver.hidden = false; ver.classList.add('is-neg'); ver.innerHTML = T.loss(esc(fMoney(-r.profit, 2))); }
+    else ver.hidden = true;
+
+    var cur = Math.round(r.margin * 1000);
+    tbody.innerHTML = r.table.map(function (t) {
+      return '<tr' + (Math.round(t.margin * 1000) === cur ? ' class="is-current"' : '') + '><td>' + esc(fPct(t.margin)) + '</td><td>' + esc(fPct(t.markup)) + '</td></tr>';
+    }).join('');
+  }
+
+  function setMode(m) {
+    if (m === mode) return;
+    // Al pasar a «Tengo un precio», parte del precio con IVA que acaba de salir
+    if (m === 'price' && !grossTouched && last && mode === 'margin') $('f-gross').value = nf({ maximumFractionDigits: 2, useGrouping: false }).format(Math.round(last.gross * 100) / 100);
+    mode = m;
+    $('w-margin').hidden = m !== 'margin';
+    $('w-gross').hidden = m !== 'price';
+    render();
+  }
+
+  var form = $('calcForm');
+  form.addEventListener('input', function (e) {
+    if (e.target.name === 'mode') return;
+    if (e.target.id === 'f-gross') grossTouched = true;
+    render();
+  });
+  form.addEventListener('change', function (e) { if (e.target.name === 'mode') setMode(e.target.value); });
+  form.addEventListener('submit', function (e) { e.preventDefault(); });
+  $('calcReset').addEventListener('click', function () {
+    FIELDS.forEach(function (k) { $('f-' + k).value = DEF[k]; });
+    grossTouched = false;
+    $('m-margin').checked = true;
+    mode = 'price';
+    setMode('margin');
+  });
+  var UNITS = { USD: '$', EUR: '€', GBP: '£' };
+  function applyCurrency() {
+    CUR = $('f-cur').value in UNITS ? $('f-cur').value : 'USD';
+    document.querySelectorAll('.calc-input[data-money]').forEach(function (w) {
+      w.querySelector('.calc-unit').textContent = UNITS[CUR];
+      w.classList.toggle('is-prefix', CUR !== 'EUR');
+    });
+  }
+  $('f-cur').addEventListener('change', function () { applyCurrency(); render(); });
+  applyCurrency();
+  render();
+})();
+</script>
+<script>
+(function () {
+  // Móvil: mientras rellenas los datos, el resultado se ve abajo; al tocarlo, baja a la tarjeta de resultados.
+  var dock = document.getElementById('calcDock'), big = document.getElementById('resBig');
+  var form = document.getElementById('calcForm'), res = document.querySelector('.calc-results');
+  if (!dock || !big || !form || !res) return;
+  var val = dock.querySelector('b'), lab = dock.querySelector('span'), resLabel = document.getElementById('resLabel');
+  function sync() { val.textContent = big.textContent; if (resLabel) lab.textContent = resLabel.textContent; dock.classList.toggle('is-bad', big.classList.contains('is-none')); }
+  new MutationObserver(sync).observe(big, { childList: true, characterData: true, subtree: true, attributes: true });
+  sync();
+  dock.addEventListener('click', function () { res.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+  if (!('IntersectionObserver' in window)) return;
+  var seeForm = false, seeRes = false;
+  function toggle() { dock.classList.toggle('is-on', seeForm && !seeRes); }
+  new IntersectionObserver(function (e) { seeForm = e[0].isIntersecting; toggle(); }).observe(form);
+  new IntersectionObserver(function (e) { seeRes = e[0].isIntersecting; toggle(); }, { threshold: 0.25 }).observe(res);
+})();
+</script>
+<script src="/assets/js/main.js?v=27ca6f87" defer></script>
+<script src="/assets/js/i18n.js?v=d78d4006" defer></script>
+
+<script src="/assets/js/ga4-loader.js?v=7593ef4a" defer></script>
+<link rel="stylesheet" href="/assets/css/cookie-consent.css?v=165383de">
+<script src="/assets/js/cookie-consent.js?v=eaaa9fce" defer></script>
+<script src="/assets/js/tuko-theme.js?v=b2ef7977" defer></script>
+</body>
+</html>
