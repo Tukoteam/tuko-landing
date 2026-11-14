@@ -226,6 +226,20 @@ html[data-theme="dark"] .calc-verdict.is-neg{background:rgba(255,138,138,.10)}
 .tool-card:hover .tool-arrow,.tool-card:focus-visible .tool-arrow{background:var(--c-accent);border-color:var(--c-accent);color:#fff}
 @media (max-width:720px){.tool-grid{grid-template-columns:minmax(0,1fr)}.tool-card{padding:24px 22px 22px}.tool-arrow{top:20px;right:20px}}
 @media (prefers-reduced-motion:reduce){.tool-card{transition:none}.tool-card:hover{transform:none}}
+
+/* Un tono por categoría */
+.tool-card{--tone:var(--c-accent-ink)}
+.tool-grid li:nth-child(2) .tool-card{--tone:#0A86A3}
+.tool-grid li:nth-child(3) .tool-card{--tone:#6A43E0}
+.tool-grid li:nth-child(4) .tool-card{--tone:#C2410C}
+html[data-theme="dark"] .tool-grid li:nth-child(2) .tool-card{--tone:#5CCCE6}
+html[data-theme="dark"] .tool-grid li:nth-child(3) .tool-card{--tone:#A88CFF}
+html[data-theme="dark"] .tool-grid li:nth-child(4) .tool-card{--tone:#FF9B66}
+.tool-figure{color:var(--tone)}
+.tool-kicker{display:inline-flex;align-items:center;gap:8px}
+.tool-kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--tone)}
+.tool-card:hover,.tool-card:focus-visible{border-color:var(--tone)}
+.tool-card:hover .tool-arrow,.tool-card:focus-visible .tool-arrow{background:var(--tone);border-color:var(--tone)}
 </style>
 </head>
 <body>
