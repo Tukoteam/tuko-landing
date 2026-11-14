@@ -65,7 +65,7 @@
     pricing_p2_rows: '<li>Closed groups per month: 20</li><li>Commission: 0%</li><li>Products at once: Unlimited</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Tuko status emails: Yes</li><li>Priority support: Yes</li><li>Tuko Marketplace: Yes</li><li>Tuko AI: Yes</li>',
     pricing_p3_rows: '<li>Closed groups per month: 50</li><li>Commission: 0%</li><li>Products at once: Unlimited</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Tuko status emails: Yes</li><li>Priority support: Yes</li><li>Tuko Marketplace: Yes</li><li>Tuko AI: Yes</li>',
     pricing_p4_rows: '<li>Closed groups per month: Unlimited</li><li>Commission: 0%</li><li>Products at once: Unlimited</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Tuko status emails: Yes</li><li>Priority support: Yes</li><li>Tuko Marketplace: Yes</li><li>Tuko AI: Yes</li>',
-    pricing_note_groups: 'Only groups that close count. If a group doesn\'t close, it uses up nothing.',
+    pricing_note_groups: 'Prices exclude VAT. Only groups that close count. If a group doesn\'t close, it uses up nothing.',
     pricing_p1_name: 'Free',
     pricing_p1_price: '€0',
     pricing_p1_comm: 'Commission on Tuko group sales. Maximum €500/mo',
@@ -142,6 +142,8 @@
     faq_a7: 'Because we want to look after them properly and because the pilot is for learning, not for billing. Once we fill the five, we close.',
     faq_q8: 'Won\'t this take away sales I was going to make anyway?',
     faq_a8: 'Quite the opposite of a normal discount. When you put twenty percent off in your store, everyone who was going to buy anyway takes it. With Tuko, the discount only applies if one more person joins. Nobody gets the low price without bringing you a customer.',
+    faq_q9: 'What do I need to keep in mind about consumer law?',
+    faq_a9: 'If you advertise the group price as a reduction, the struck-through price must be the lowest you applied in the previous 30 days. The 14-day right of withdrawal still applies to group orders, and what happens if the group doesn\'t fill must be shown before payment. Your store is the seller and is responsible for complying with consumer law.',
 
     /* MOCKUP */
     mockup_product_name: 'Cream set',
