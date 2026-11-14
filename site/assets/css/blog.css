@@ -243,15 +243,18 @@
   }
 
   .bp-side-title--tools { margin-top: 34px; }
+  .bp-tools { list-style: none; display: flex; flex-direction: column; gap: 4px; }
   .bp-tool {
     display: flex; align-items: center; justify-content: space-between; gap: 10px;
-    padding: 12px 14px; border: 1px solid var(--gray-2); border-radius: 10px;
-    font-size: 13.5px; font-weight: 500; color: var(--black); text-decoration: none; line-height: 1.35;
-    transition: border-color 0.18s, color 0.18s;
+    padding: 10px 12px; border-radius: 10px;
+    font-size: 14px; font-weight: 400; color: #1A1A1A; text-decoration: none; line-height: 1.35;
+    transition: background 0.18s, color 0.18s;
   }
-  .bp-tool + .bp-tool { margin-top: 8px; }
-  .bp-tool:hover, .bp-tool:focus-visible { border-color: var(--blue); color: var(--blue); outline: none; }
-  .bp-tool svg { flex: 0 0 auto; width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; }
+  .bp-tool:hover, .bp-tool:focus-visible { background: var(--gray-1); color: var(--black); outline: none; }
+  .bp-tool svg { flex: 0 0 auto; width: 14px; height: 14px; fill: none; stroke: #9AA0AE; stroke-width: 2; transition: stroke 0.18s, transform 0.18s; }
+  .bp-tool:hover svg, .bp-tool:focus-visible svg { stroke: var(--blue); transform: translateX(2px); }
+  .bp-tools-all { display: inline-block; margin: 10px 0 0 12px; font-size: 13px; font-weight: 500; color: var(--blue); text-decoration: none; }
+  .bp-tools-all:hover { text-decoration: underline; text-underline-offset: 3px; }
 
   /* ── Rejilla ── */
   .bp-count {

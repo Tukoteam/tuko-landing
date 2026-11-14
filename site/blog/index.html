@@ -170,7 +170,7 @@
 <link rel="preload" href="../assets/fonts/mona-sans-v4-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/css/fonts.css?v=70ba8d47">
 <link rel="stylesheet" href="../assets/css/home.css?v=3a345828">
-<link rel="stylesheet" href="../assets/css/tuko-theme.css?v=73191e12">
+<link rel="stylesheet" href="../assets/css/tuko-theme.css?v=782f89f6">
 <link rel="stylesheet" href="../assets/css/blog-index.css?v=0be60567">
 
 
@@ -356,15 +356,18 @@
   }
 
   .bp-side-title--tools { margin-top: 34px; }
+  .bp-tools { list-style: none; display: flex; flex-direction: column; gap: 4px; }
   .bp-tool {
     display: flex; align-items: center; justify-content: space-between; gap: 10px;
-    padding: 12px 14px; border: 1px solid var(--gray-2); border-radius: 10px;
-    font-size: 13.5px; font-weight: 500; color: var(--black); text-decoration: none; line-height: 1.35;
-    transition: border-color 0.18s, color 0.18s;
+    padding: 10px 12px; border-radius: 10px;
+    font-size: 14px; font-weight: 400; color: #1A1A1A; text-decoration: none; line-height: 1.35;
+    transition: background 0.18s, color 0.18s;
   }
-  .bp-tool + .bp-tool { margin-top: 8px; }
-  .bp-tool:hover, .bp-tool:focus-visible { border-color: var(--blue); color: var(--blue); outline: none; }
-  .bp-tool svg { flex: 0 0 auto; width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; }
+  .bp-tool:hover, .bp-tool:focus-visible { background: var(--gray-1); color: var(--black); outline: none; }
+  .bp-tool svg { flex: 0 0 auto; width: 14px; height: 14px; fill: none; stroke: #9AA0AE; stroke-width: 2; transition: stroke 0.18s, transform 0.18s; }
+  .bp-tool:hover svg, .bp-tool:focus-visible svg { stroke: var(--blue); transform: translateX(2px); }
+  .bp-tools-all { display: inline-block; margin: 10px 0 0 12px; font-size: 13px; font-weight: 500; color: var(--blue); text-decoration: none; }
+  .bp-tools-all:hover { text-decoration: underline; text-underline-offset: 3px; }
 
   /* ── Rejilla ── */
   .bp-count {
@@ -627,10 +630,13 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h2 class="bp-side-title bp-side-title--tools">Herramientas</h2>
-        <a class="bp-tool" href="/herramientas/calculadora-precio-margen">Calculadora de precio de venta y margen <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a class="bp-tool" href="/herramientas/calculadora-roas-equilibrio">Calculadora de ROAS de equilibrio <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a class="bp-tool" href="/herramientas/calculadora-cac-maximo">Calculadora de CAC máximo <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a class="bp-tool" href="/herramientas/calculadora-descuento-sin-perder-margen">Calculadora de descuento sin perder margen <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <ul class="bp-tools">
+          <li><a class="bp-tool" href="/herramientas/calculadora-precio-margen">Precio y margen <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+          <li><a class="bp-tool" href="/herramientas/calculadora-roas-equilibrio">ROAS de equilibrio <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+          <li><a class="bp-tool" href="/herramientas/calculadora-cac-maximo">CAC máximo <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+          <li><a class="bp-tool" href="/herramientas/calculadora-descuento-sin-perder-margen">Descuento sin perder margen <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        </ul>
+        <a class="bp-tools-all" href="/herramientas/">Ver todas →</a>
       </div>
     </aside>
 
@@ -640,7 +646,7 @@
       <div class="bp-grid" id="bp-grid">
 <article class="bp-card" data-cat="guias" data-date="2026-11-14" data-mins="14" data-cms-slug="estrategia-marketing-boca-a-boca" data-locale="es">
         <a class="bp-media" href="estrategia-marketing-boca-a-boca" tabindex="-1" aria-hidden="true">
-          <img src="https://tukoteam.com/assets/images/banners-blog/estrategia-marketing-boca-a-boca-mwgcbs1o.webp" alt="Estrategia de marketing boca a boca para tu tienda online y cuánto te cuesta cada cliente nuevo" width="1600" height="1067" loading="lazy" decoding="async">
+          <img src="https://tukoteam.com/assets/images/banners-blog/estrategia-marketing-boca-a-boca-recibo.webp" alt="Estrategia de marketing boca a boca para tu tienda online y cuánto te cuesta cada cliente nuevo" width="1600" height="1067" loading="lazy" decoding="async">
         </a>
         <div class="bp-body">
           <p class="bp-meta">

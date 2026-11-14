@@ -103,7 +103,7 @@
 <link rel="preload" href="/assets/fonts/mona-sans-v4-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/fonts.css?v=70ba8d47">
 <link rel="stylesheet" href="/assets/css/main.css?v=fd7297f3">
-<link rel="stylesheet" href="/assets/css/tuko-theme.css?v=73191e12">
+<link rel="stylesheet" href="/assets/css/tuko-theme.css?v=782f89f6">
 <style>.skip-link{position:absolute;left:-9999px;top:0;z-index:999;background:#3D50F2;color:#fff;padding:10px 18px;border-radius:0 0 8px 0;font-size:14px;text-decoration:none}.skip-link:focus{left:0}</style>
 <style>
 /* Índice de calculadoras (mismos estilos que las calculadoras) */
@@ -211,6 +211,21 @@ html[data-theme="dark"] .calc-verdict.is-neg{background:rgba(255,138,138,.10)}
 @media (max-width:860px){.calc-links,.calc-links.is-index{grid-template-columns:minmax(0,1fr);gap:16px}}
 @media (max-width:640px){.calc-links{grid-template-columns:minmax(0,1fr)}.calc-more{margin-top:56px}.calc-link,.calc-links.is-index .calc-link{padding:20px 18px}}
 .calc-index .calc-head{margin-bottom:36px}
+
+/* Tarjetas del índice: la cifra de ejemplo manda */
+.tool-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.tool-card{position:relative;display:flex;flex-direction:column;height:100%;box-sizing:border-box;padding:28px 28px 26px;border:1px solid var(--c-line);border-radius:20px;background:var(--c-surface);color:var(--c-text);text-decoration:none;transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+.tool-card:hover,.tool-card:focus-visible{border-color:rgba(61,80,242,.45);transform:translateY(-2px);box-shadow:0 14px 34px rgba(20,24,38,.08);outline:none}
+.tool-kicker{font-size:12px;font-weight:600;font-stretch:semi-expanded;letter-spacing:.08em;text-transform:uppercase;color:var(--c-muted)}
+.tool-figure{margin:22px 0 4px;font-size:clamp(40px,4.4vw,52px);font-weight:800;font-stretch:semi-expanded;letter-spacing:-.03em;line-height:1;color:var(--c-accent-ink)}
+.tool-figure-cap{font-size:13px;color:var(--c-muted)}
+.tool-name{margin-top:26px;padding-top:18px;border-top:1px solid var(--c-line);font-size:18px;font-weight:700;font-stretch:semi-expanded;letter-spacing:-.01em}
+.tool-desc{margin-top:6px;font-size:14.5px;line-height:1.55;color:var(--c-body)}
+.tool-arrow{position:absolute;top:24px;right:24px;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--c-line-strong);color:var(--c-muted);transition:background .2s ease,color .2s ease,border-color .2s ease}
+.tool-arrow svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+.tool-card:hover .tool-arrow,.tool-card:focus-visible .tool-arrow{background:var(--c-accent);border-color:var(--c-accent);color:#fff}
+@media (max-width:720px){.tool-grid{grid-template-columns:minmax(0,1fr)}.tool-card{padding:24px 22px 22px}.tool-arrow{top:20px;right:20px}}
+@media (prefers-reduced-motion:reduce){.tool-card{transition:none}.tool-card:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -290,11 +305,11 @@ html[data-theme="dark"] .calc-verdict.is-neg{background:rgba(255,138,138,.10)}
       <p class="calc-lead">Cuatro cálculos para fijar precios y decidir cuánto gastar en anuncios, en captar clientes y en descuentos, con los números de tu tienda. Son gratis, no piden registro y lo que escribes no sale de tu navegador.</p>
     </header>
 
-    <ul class="calc-links is-index">
-      <li><a class="calc-link" href="/herramientas/calculadora-precio-margen"><span class="calc-link-title">Calculadora de precio de venta y margen</span><span class="calc-link-desc">El precio que necesitas para el margen que quieres, o el margen que te deja tu precio.</span><span class="calc-link-cta">Abrir la calculadora <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-      <li><a class="calc-link" href="/herramientas/calculadora-roas-equilibrio"><span class="calc-link-title">Calculadora de ROAS de equilibrio</span><span class="calc-link-desc">El ROAS mínimo para que tus anuncios no pierdan dinero, con y sin descuento.</span><span class="calc-link-cta">Abrir la calculadora <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-      <li><a class="calc-link" href="/herramientas/calculadora-cac-maximo"><span class="calc-link-title">Calculadora de CAC máximo</span><span class="calc-link-desc">Lo máximo que puedes pagar por captar un cliente, según tu margen y las veces que repite.</span><span class="calc-link-cta">Abrir la calculadora <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-      <li><a class="calc-link" href="/herramientas/calculadora-descuento-sin-perder-margen"><span class="calc-link-title">Calculadora de descuento sin perder margen</span><span class="calc-link-desc">Cuántos pedidos más necesitas para ganar lo mismo con un descuento, y hasta dónde rebajar.</span><span class="calc-link-cta">Abrir la calculadora <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+    <ul class="tool-grid">
+      <li><a class="tool-card" href="/herramientas/calculadora-precio-margen"><span class="tool-kicker">Precios</span><span class="tool-figure">45,83 €</span><span class="tool-figure-cap">precio para un 40 % de margen</span><span class="tool-name">Precio y margen</span><span class="tool-desc">El precio que necesitas para el margen que quieres, o el margen que te deja el precio que ya tienes.</span><span class="tool-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+      <li><a class="tool-card" href="/herramientas/calculadora-roas-equilibrio"><span class="tool-kicker">Anuncios</span><span class="tool-figure">2,5</span><span class="tool-figure-cap">ROAS mínimo con un 40 % de margen</span><span class="tool-name">ROAS de equilibrio</span><span class="tool-desc">El ROAS por debajo del cual tus anuncios pierden dinero, con y sin descuento.</span><span class="tool-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+      <li><a class="tool-card" href="/herramientas/calculadora-cac-maximo"><span class="tool-kicker">Captación</span><span class="tool-figure">31,50 €</span><span class="tool-figure-cap">por cliente que repite 1,5 veces</span><span class="tool-name">CAC máximo</span><span class="tool-desc">Lo máximo que puedes pagar por captar un cliente según tu margen y cuántas veces vuelve.</span><span class="tool-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+      <li><a class="tool-card" href="/herramientas/calculadora-descuento-sin-perder-margen"><span class="tool-kicker">Descuentos</span><span class="tool-figure">×2,08</span><span class="tool-figure-cap">pedidos con un 20 % de descuento</span><span class="tool-name">Descuento sin perder margen</span><span class="tool-desc">Cuántos pedidos más necesitas para ganar lo mismo con una rebaja, y hasta dónde bajar.</span><span class="tool-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
     </ul>
   </div>
 </main>

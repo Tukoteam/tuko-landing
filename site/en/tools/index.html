@@ -103,7 +103,7 @@
 <link rel="preload" href="/assets/fonts/mona-sans-v4-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/fonts.css?v=70ba8d47">
 <link rel="stylesheet" href="/assets/css/main.css?v=fd7297f3">
-<link rel="stylesheet" href="/assets/css/tuko-theme.css?v=73191e12">
+<link rel="stylesheet" href="/assets/css/tuko-theme.css?v=782f89f6">
 <style>.skip-link{position:absolute;left:-9999px;top:0;z-index:999;background:#3D50F2;color:#fff;padding:10px 18px;border-radius:0 0 8px 0;font-size:14px;text-decoration:none}.skip-link:focus{left:0}</style>
 <style>
 /* Calculators index (same styles as the calculators) */
@@ -211,6 +211,21 @@ html[data-theme="dark"] .calc-verdict.is-neg{background:rgba(255,138,138,.10)}
 @media (max-width:860px){.calc-links,.calc-links.is-index{grid-template-columns:minmax(0,1fr);gap:16px}}
 @media (max-width:640px){.calc-links{grid-template-columns:minmax(0,1fr)}.calc-more{margin-top:56px}.calc-link,.calc-links.is-index .calc-link{padding:20px 18px}}
 .calc-index .calc-head{margin-bottom:36px}
+
+/* Tarjetas del índice: la cifra de ejemplo manda */
+.tool-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.tool-card{position:relative;display:flex;flex-direction:column;height:100%;box-sizing:border-box;padding:28px 28px 26px;border:1px solid var(--c-line);border-radius:20px;background:var(--c-surface);color:var(--c-text);text-decoration:none;transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+.tool-card:hover,.tool-card:focus-visible{border-color:rgba(61,80,242,.45);transform:translateY(-2px);box-shadow:0 14px 34px rgba(20,24,38,.08);outline:none}
+.tool-kicker{font-size:12px;font-weight:600;font-stretch:semi-expanded;letter-spacing:.08em;text-transform:uppercase;color:var(--c-muted)}
+.tool-figure{margin:22px 0 4px;font-size:clamp(40px,4.4vw,52px);font-weight:800;font-stretch:semi-expanded;letter-spacing:-.03em;line-height:1;color:var(--c-accent-ink)}
+.tool-figure-cap{font-size:13px;color:var(--c-muted)}
+.tool-name{margin-top:26px;padding-top:18px;border-top:1px solid var(--c-line);font-size:18px;font-weight:700;font-stretch:semi-expanded;letter-spacing:-.01em}
+.tool-desc{margin-top:6px;font-size:14.5px;line-height:1.55;color:var(--c-body)}
+.tool-arrow{position:absolute;top:24px;right:24px;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--c-line-strong);color:var(--c-muted);transition:background .2s ease,color .2s ease,border-color .2s ease}
+.tool-arrow svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+.tool-card:hover .tool-arrow,.tool-card:focus-visible .tool-arrow{background:var(--c-accent);border-color:var(--c-accent);color:#fff}
+@media (max-width:720px){.tool-grid{grid-template-columns:minmax(0,1fr)}.tool-card{padding:24px 22px 22px}.tool-arrow{top:20px;right:20px}}
+@media (prefers-reduced-motion:reduce){.tool-card{transition:none}.tool-card:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -290,11 +305,11 @@ html[data-theme="dark"] .calc-verdict.is-neg{background:rgba(255,138,138,.10)}
       <p class="calc-lead">Four calculations for setting prices and deciding how much to spend on ads, on acquiring customers and on discounts, using your own store’s numbers. They’re free, need no sign-up, and what you type never leaves your browser.</p>
     </header>
 
-    <ul class="calc-links is-index">
-      <li><a class="calc-link" href="/en/tools/price-margin-calculator"><span class="calc-link-title">Selling price and margin calculator</span><span class="calc-link-desc">The price you need for the margin you want, or the margin your price leaves you.</span><span class="calc-link-cta">Open the calculator <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-      <li><a class="calc-link" href="/en/tools/break-even-roas-calculator"><span class="calc-link-title">Break-even ROAS calculator</span><span class="calc-link-desc">The minimum ROAS your ads need to break even, with and without a discount.</span><span class="calc-link-cta">Open the calculator <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-      <li><a class="calc-link" href="/en/tools/max-cac-calculator"><span class="calc-link-title">Maximum CAC calculator</span><span class="calc-link-desc">The most you can pay to acquire a customer, based on your margin and how often they come back.</span><span class="calc-link-cta">Open the calculator <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-      <li><a class="calc-link" href="/en/tools/discount-margin-calculator"><span class="calc-link-title">Discount margin calculator</span><span class="calc-link-desc">How many more orders a discount needs to earn the same, and how far you can discount.</span><span class="calc-link-cta">Open the calculator <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+    <ul class="tool-grid">
+      <li><a class="tool-card" href="/en/tools/price-margin-calculator"><span class="tool-kicker">Pricing</span><span class="tool-figure">$45.83</span><span class="tool-figure-cap">price for a 40% margin</span><span class="tool-name">Price and margin</span><span class="tool-desc">The price you need for the margin you want, or the margin your current price leaves you.</span><span class="tool-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+      <li><a class="tool-card" href="/en/tools/break-even-roas-calculator"><span class="tool-kicker">Ads</span><span class="tool-figure">2.5</span><span class="tool-figure-cap">minimum ROAS at a 40% margin</span><span class="tool-name">Break-even ROAS</span><span class="tool-desc">The ROAS below which your ads lose money, with and without a discount.</span><span class="tool-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+      <li><a class="tool-card" href="/en/tools/max-cac-calculator"><span class="tool-kicker">Acquisition</span><span class="tool-figure">$31.50</span><span class="tool-figure-cap">per customer who buys 1.5 times</span><span class="tool-name">Maximum CAC</span><span class="tool-desc">The most you can pay to acquire a customer, based on your margin and how often they come back.</span><span class="tool-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+      <li><a class="tool-card" href="/en/tools/discount-margin-calculator"><span class="tool-kicker">Discounts</span><span class="tool-figure">×2.08</span><span class="tool-figure-cap">orders with a 20% discount</span><span class="tool-name">Discount without losing margin</span><span class="tool-desc">How many more orders you need to earn the same with a discount, and how far you can go.</span><span class="tool-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
     </ul>
   </div>
 </main>
