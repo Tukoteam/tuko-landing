@@ -1,0 +1,27 @@
+# Tuko
+
+> Tuko es una app para tiendas Shopify que añade un botón de compra en grupo en la ficha de producto. Un cliente entra con descuento, trae a otra persona y los dos compran: el precio bajo solo se aplica si llega un cliente más. Se instala desde la Shopify App Store en unos dos minutos, sin tocar el theme, sin cambiar los pagos de Shopify y sin necesidad de Shopify Plus.
+
+Cómo funciona: la tienda elige los productos y el descuento. El primer cliente paga con el descuento en el checkout normal de la tienda y tiene 24 horas (o 48, si la tienda lo elige) para que entre otra persona con su enlace. Cuando entra, el grupo se completa y los dos pedidos siguen su curso; cada pedido es individual y va a la dirección de cada cliente. Si el grupo no se completa, el cliente elige entre quedarse las unidades que faltan al precio de grupo, pasarse a otro grupo abierto o recuperar su dinero (si no responde en 12 horas, se le devuelve automáticamente).
+
+En qué se diferencia: no es un descuento para toda la tienda (solo baja el precio si llega otro cliente), ni un portal de cupones externo (vive dentro de la tienda), ni una app de descuentos por volumen (un pack hace que un cliente compre más; Tuko hace que lleguen más clientes, y ambas cosas son compatibles).
+
+## Producto
+
+- [Tuko en la Shopify App Store](https://apps.shopify.com/tuko): instalación y condiciones actuales
+- [Página principal](https://tukoteam.com/): qué es Tuko y cómo funciona la compra en grupo
+- [Home in English](https://tukoteam.com/en/): the same page in English
+- [Tuko AI](https://tukoteam.com/tuko-ai)
+
+## Blog
+
+Guías para tiendas online sobre captación de clientes, descuentos, referidos, conversión, SEO y ROAS, con cálculos propios y fuentes enlazadas. Se publica en español y en inglés.
+
+- [Blog en español](https://tukoteam.com/blog/): todos los artículos
+- [Blog in English](https://tukoteam.com/en/blog/): all articles
+- [Mapa del sitio](https://tukoteam.com/sitemap.xml): lista completa y actualizada de páginas y artículos
+
+## Optional
+
+- [Privacidad](https://tukoteam.com/privacidad)
+- [Términos](https://tukoteam.com/terminos)
