@@ -800,8 +800,9 @@ html[data-theme="dark"] .bp-cat.is-active {
 }
 html[data-theme="dark"] .bp-cat-n { color: #b8bfce; }
 html[data-theme="dark"] .bp-cat.is-active .bp-cat-n { color: #8fa0ff; }
-html[data-theme="dark"] .bp-tool { color: #e6e9f2; border-color: rgba(255,255,255,.14); }
-html[data-theme="dark"] .bp-tool:hover, html[data-theme="dark"] .bp-tool:focus-visible { color: #8fa0ff; border-color: #8fa0ff; }
+html[data-theme="dark"] .bp-tool { color: #c5cad6; }
+html[data-theme="dark"] .bp-tool:hover, html[data-theme="dark"] .bp-tool:focus-visible { background: rgba(255,255,255,.06); color: #fff; }
+html[data-theme="dark"] .bp-tools-all { color: #8fa0ff; }
 html[data-theme="dark"] .bp-select {
   background: #161922;
   border-color: rgba(255, 255, 255, 0.1);
