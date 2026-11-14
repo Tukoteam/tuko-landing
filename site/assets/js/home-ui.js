@@ -317,7 +317,7 @@ const translations = {
     pricing_p2_rows: '<li>Grupos cerrados al mes: 20</li><li>Comisión: 0 %</li><li>Productos a la vez: Ilimitados</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li>Soporte prioritario: Sí</li><li>Tuko Marketplace: Sí</li><li>Tuko AI: Sí</li>',
     pricing_p3_rows: '<li>Grupos cerrados al mes: 50</li><li>Comisión: 0 %</li><li>Productos a la vez: Ilimitados</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li>Soporte prioritario: Sí</li><li>Tuko Marketplace: Sí</li><li>Tuko AI: Sí</li>',
     pricing_p4_rows: '<li>Grupos cerrados al mes: Ilimitados</li><li>Comisión: 0 %</li><li>Productos a la vez: Ilimitados</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li>Soporte prioritario: Sí</li><li>Tuko Marketplace: Sí</li><li>Tuko AI: Sí</li>',
-    pricing_note_groups: 'Solo cuentan los grupos que se cierran. Si un grupo no sale, no te consume nada.',
+    pricing_note_groups: 'Precios sin IVA. Solo cuentan los grupos que se cierran. Si un grupo no sale, no te consume nada.',
     pricing_p1_name: 'Free',
     pricing_p1_price: '0 €',
     pricing_p1_comm: 'Comisión sobre ventas de grupos Tuko. Máximo 500 €/mes',
@@ -394,6 +394,8 @@ const translations = {
     faq_a7: 'Porque queremos atenderlas bien y porque el piloto es para aprender, no para facturar. Cuando cerremos las cinco, cerramos.',
     faq_q8: '¿Esto no me quita ventas que ya iba a hacer?',
     faq_a8: 'Al revés que un descuento normal. Cuando pones un menos veinte por ciento en tu tienda, se lo lleva todo el que iba a comprar igualmente. Con Tuko, el descuento solo se aplica si entra una persona más. Nadie se lleva el precio bajo sin traerte un cliente.',
+    faq_q9: '¿Qué tengo que tener en cuenta con la ley de consumo?',
+    faq_a9: 'Si anuncias el precio de grupo como una rebaja, el precio tachado tiene que ser el más bajo que aplicaste en los 30 días anteriores. El derecho de desistimiento de 14 días sigue valiendo en los pedidos de grupo, y lo que pasa si el grupo no se completa tiene que verse antes de pagar. Tu tienda es la que vende y la responsable de cumplir la normativa de consumo.',
 
     /* MOCKUP */
     mockup_product_name: 'Set de cremas',
@@ -917,7 +919,7 @@ const translations = {
     pricing_p2_rows: '<li>Closed groups per month: 20</li><li>Commission: 0%</li><li>Products at once: Unlimited</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Tuko status emails: Yes</li><li>Priority support: Yes</li><li>Tuko Marketplace: Yes</li><li>Tuko AI: Yes</li>',
     pricing_p3_rows: '<li>Closed groups per month: 50</li><li>Commission: 0%</li><li>Products at once: Unlimited</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Tuko status emails: Yes</li><li>Priority support: Yes</li><li>Tuko Marketplace: Yes</li><li>Tuko AI: Yes</li>',
     pricing_p4_rows: '<li>Closed groups per month: Unlimited</li><li>Commission: 0%</li><li>Products at once: Unlimited</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Tuko status emails: Yes</li><li>Priority support: Yes</li><li>Tuko Marketplace: Yes</li><li>Tuko AI: Yes</li>',
-    pricing_note_groups: 'Only groups that close count. If a group doesn\'t close, it uses up nothing.',
+    pricing_note_groups: 'Prices exclude VAT. Only groups that close count. If a group doesn\'t close, it uses up nothing.',
     pricing_p1_name: 'Free',
     pricing_p1_price: '€0',
     pricing_p1_comm: 'Commission on Tuko group sales. Maximum €500/mo',
@@ -994,6 +996,8 @@ const translations = {
     faq_a7: 'Because we want to look after them properly and because the pilot is for learning, not for billing. Once we fill the five, we close.',
     faq_q8: 'Won\'t this take away sales I was going to make anyway?',
     faq_a8: 'Quite the opposite of a normal discount. When you put twenty percent off in your store, everyone who was going to buy anyway takes it. With Tuko, the discount only applies if one more person joins. Nobody gets the low price without bringing you a customer.',
+    faq_q9: 'What do I need to keep in mind about consumer law?',
+    faq_a9: 'If you advertise the group price as a reduction, the struck-through price must be the lowest you applied in the previous 30 days. The 14-day right of withdrawal still applies to group orders, and what happens if the group doesn\'t fill must be shown before payment. Your store is the seller and is responsible for complying with consumer law.',
 
     /* MOCKUP */
     mockup_product_name: 'Cream set',

@@ -316,7 +316,7 @@ const translations = {
     pricing_p2_rows: '<li>Grupos cerrados al mes: 20</li><li>Comisión: 0 %</li><li>Productos a la vez: Ilimitados</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li>Soporte prioritario: Sí</li><li>Tuko Marketplace: Sí</li><li>Tuko AI: Sí</li>',
     pricing_p3_rows: '<li>Grupos cerrados al mes: 50</li><li>Comisión: 0 %</li><li>Productos a la vez: Ilimitados</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li>Soporte prioritario: Sí</li><li>Tuko Marketplace: Sí</li><li>Tuko AI: Sí</li>',
     pricing_p4_rows: '<li>Grupos cerrados al mes: Ilimitados</li><li>Comisión: 0 %</li><li>Productos a la vez: Ilimitados</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li>Soporte prioritario: Sí</li><li>Tuko Marketplace: Sí</li><li>Tuko AI: Sí</li>',
-    pricing_note_groups: 'Solo cuentan los grupos que se cierran. Si un grupo no sale, no te consume nada.',
+    pricing_note_groups: 'Precios sin IVA. Solo cuentan los grupos que se cierran. Si un grupo no sale, no te consume nada.',
     pricing_p1_name: 'Free',
     pricing_p1_price: '0 €',
     pricing_p1_comm: 'Comisión sobre ventas de grupos Tuko. Máximo 500 €/mes',
@@ -393,6 +393,8 @@ const translations = {
     faq_a7: 'Porque queremos atenderlas bien y porque el piloto es para aprender, no para facturar. Cuando cerremos las cinco, cerramos.',
     faq_q8: '¿Esto no me quita ventas que ya iba a hacer?',
     faq_a8: 'Al revés que un descuento normal. Cuando pones un menos veinte por ciento en tu tienda, se lo lleva todo el que iba a comprar igualmente. Con Tuko, el descuento solo se aplica si entra una persona más. Nadie se lleva el precio bajo sin traerte un cliente.',
+    faq_q9: '¿Qué tengo que tener en cuenta con la ley de consumo?',
+    faq_a9: 'Si anuncias el precio de grupo como una rebaja, el precio tachado tiene que ser el más bajo que aplicaste en los 30 días anteriores. El derecho de desistimiento de 14 días sigue valiendo en los pedidos de grupo, y lo que pasa si el grupo no se completa tiene que verse antes de pagar. Tu tienda es la que vende y la responsable de cumplir la normativa de consumo.',
 
     /* MOCKUP */
     mockup_product_name: 'Set de cremas',

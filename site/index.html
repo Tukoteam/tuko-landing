@@ -81,10 +81,10 @@
 <meta name="target" content="Tiendas online Shopify, Ecommerce España">
 
 <!-- ═══ SEO: Dublin Core ═══ -->
-<meta name="DC.title" content="Tuko — Plugin de Compras Colectivas para Shopify">
+<meta name="DC.title" content="Tuko — App de compra en grupo para Shopify">
 <meta name="DC.creator" content="Tuko">
 <meta name="DC.subject" content="descuentos por objetivo, campañas shopify, group buying, shopify españa">
-<meta name="DC.description" content="Plugin B2B de compras colectivas para tiendas Shopify en España. Descuentos escalonados que se desbloquean por grupo y generan viralidad orgánica.">
+<meta name="DC.description" content="App de compra en grupo para tiendas Shopify: un cliente paga con descuento y tiene 24 horas para que entre otra persona; si entra, los dos compran.">
 <meta name="DC.publisher" content="Tuko">
 <meta name="DC.language" content="es">
 <meta name="DC.coverage" content="España">
@@ -148,7 +148,7 @@
       "@type": "SoftwareApplication",
       "@id": "https://tukoteam.com/#app",
       "name": "Tuko — Un cliente entra. Trae a otro. Los dos compran.",
-      "alternateName": ["Tuko Campaigns", "Tuko Plugin Shopify"],
+      "alternateName": ["Tuko Campaigns", "Tuko para Shopify"],
       "applicationCategory": "BusinessApplication",
       "applicationSubCategory": "E-commerce Plugin",
       "operatingSystem": "Shopify",
@@ -167,10 +167,10 @@
       },
       "offers": {
         "@type": "Offer",
-        "url": "https://tukoteam.com/tuko-ai#cta",
+        "url": "https://apps.shopify.com/tuko",
         "priceCurrency": "EUR",
         "description": "Tuko pone un botón en tus productos. Quien lo pulsa paga con descuento y tiene 24 horas para atraer a un comprador más.",
-        "availability": "https://schema.org/PreOrder"
+        "availability": "https://schema.org/InStock"
       },
       "publisher": { "@id": "https://tukoteam.com/#organization" },
       "inLanguage": "es-ES"
@@ -178,9 +178,9 @@
     {
       "@type": "Service",
       "@id": "https://tukoteam.com/#service",
-      "name": "Tuko — Plugin de Compras Colectivas",
+      "name": "Tuko — App de compra en grupo para Shopify",
       "alternateName": ["Group Buying Shopify", "Compra Colectiva Shopify"],
-      "serviceType": "Plugin de Ecommerce / Group Buying",
+      "serviceType": "App de Shopify / Compra en grupo",
       "description": "Tuko pone un botón en tus productos. Quien lo pulsa paga con descuento y tiene 24 horas para atraer a un comprador más.",
       "url": "https://tukoteam.com/",
       "provider": { "@id": "https://tukoteam.com/#organization" },
@@ -203,10 +203,10 @@
         "itemListElement": [
           {
             "@type": "Offer",
-            "name": "Acceso Anticipado Tuko",
+            "name": "Tuko para Shopify",
             "description": "Tuko pone un botón en tus productos. Quien lo pulsa paga con descuento y tiene 24 horas para atraer a un comprador más.",
-            "url": "https://tukoteam.com/tuko-ai#cta",
-            "availability": "https://schema.org/PreOrder",
+            "url": "https://apps.shopify.com/tuko",
+            "availability": "https://schema.org/InStock",
             "priceCurrency": "EUR"
           }
         ]
@@ -248,7 +248,7 @@
 </script>
 <link rel="preload" as="style" href="/assets/css/home.css?v=3a345828">
 <link rel="stylesheet" href="/assets/css/home.css?v=3a345828">
-<link rel="stylesheet" href="/assets/css/tuko-theme.css?v=cf1fd4c8">
+<link rel="stylesheet" href="/assets/css/tuko-theme.css?v=73191e12">
 <link rel="prefetch" href="blog/" as="document">
 <link rel="prefetch" href="tuko-ai.html" as="document">
 </head>
@@ -1661,7 +1661,7 @@
     </div>
     </div>
 
-    <p class="pricing-legal fade-up" data-i18n="pricing_note_groups">Solo cuentan los grupos que se cierran. Si un grupo no sale, no te consume nada.</p>
+    <p class="pricing-legal fade-up" data-i18n="pricing_note_groups">Precios sin IVA. Solo cuentan los grupos que se cierran. Si un grupo no sale, no te consume nada.</p>
     <div class="pricing-links fade-up d1">
       <a href="#faq" data-i18n="pricing_link_faq">¿Te quedan dudas? Mira las preguntas frecuentes</a>
     </div>
@@ -1744,6 +1744,20 @@
         <div class="faq-panel" id="faq-panel-8" role="region" aria-labelledby="faq-btn-8" hidden>
           <div class="faq-panel-inner">
             <p class="faq-a" data-i18n="faq_a8">Al revés que un descuento normal. Cuando pones un menos veinte por ciento en tu tienda, se lo lleva todo el que iba a comprar igualmente. Con Tuko, el descuento solo se aplica si entra una persona más. Nadie se lleva el precio bajo sin traerte un cliente.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item fade-up d2">
+        <h3 class="faq-h">
+          <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-9" id="faq-btn-9">
+            <span class="faq-num" aria-hidden="true">06</span>
+            <span class="faq-q" data-i18n="faq_q9">¿Qué tengo que tener en cuenta con la ley de consumo?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-panel" id="faq-panel-9" role="region" aria-labelledby="faq-btn-9" hidden>
+          <div class="faq-panel-inner">
+            <p class="faq-a" data-i18n="faq_a9">Si anuncias el precio de grupo como una rebaja, el precio tachado tiene que ser el más bajo que aplicaste en los 30 días anteriores. El derecho de desistimiento de 14 días sigue valiendo en los pedidos de grupo, y lo que pasa si el grupo no se completa tiene que verse antes de pagar. Tu tienda es la que vende y la responsable de cumplir la normativa de consumo.</p>
           </div>
         </div>
       </div>
@@ -1845,12 +1859,12 @@
 </div>
 
 <script src="/assets/js/home-animations.js?v=2a1f5080"></script>
-<script src="/assets/js/home-ui.js?v=5d8f00b1"></script>
+<script src="/assets/js/home-ui.js?v=9c36e7ff"></script>
 <script src="/assets/js/tuko-theme.js?v=b2ef7977" defer></script>
 <script src="/assets/js/tuko-form.js?v=ebdb6073" defer></script>
-<script src="/assets/js/ga4-loader.js?v=57d4501d" defer></script>
+<script src="/assets/js/ga4-loader.js?v=7593ef4a" defer></script>
 <link rel="stylesheet" href="/assets/css/cookie-consent.css?v=165383de" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/assets/css/cookie-consent.css?v=165383de"></noscript>
-<script src="/assets/js/cookie-consent.js?v=167bc795" defer></script>
+<script src="/assets/js/cookie-consent.js?v=eaaa9fce" defer></script>
 <script src="/assets/js/local-landing-label.js?v=545496da"></script>
 
 <script>

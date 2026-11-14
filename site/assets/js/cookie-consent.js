@@ -4,16 +4,20 @@
  */
 (function () {
   var STORAGE_KEY = 'tuko_cookie_consent';
+
+  // El consentimiento se vuelve a pedir pasados 13 meses (guía de cookies de la AEPD).
+  var AT_KEY = 'tuko_cookie_consent_at';
+  var MAX_AGE_MS = 395 * 24 * 60 * 60 * 1000;
   var COPY = {
     es: {
-      text: 'Usamos cookies de análisis (Google Analytics) para entender el uso del sitio. Puedes aceptar o rechazar.',
+      text: 'Tuko usa cookies de análisis de Google Analytics (un servicio de terceros) para medir el uso de la web. Solo se activan si aceptas.',
       accept: 'Aceptar',
       reject: 'Rechazar',
       privacy: 'Política de privacidad',
       manage: 'Cookies'
     },
     en: {
-      text: 'We use analytics cookies (Google Analytics) to understand how the site is used. You can accept or reject.',
+      text: 'Tuko uses Google Analytics analytics cookies (a third-party service) to measure how the site is used. They are only set if you accept.',
       accept: 'Accept',
       reject: 'Reject',
       privacy: 'Privacy policy',
@@ -34,7 +38,20 @@
 
   function getChoice() {
     try {
-      return localStorage.getItem(STORAGE_KEY);
+      var value = localStorage.getItem(STORAGE_KEY);
+      if (!value) return null;
+      var at = Number(localStorage.getItem(AT_KEY));
+      if (!at) {
+        // Elecciones guardadas antes de que existiera la fecha: cuentan desde hoy.
+        localStorage.setItem(AT_KEY, String(Date.now()));
+        return value;
+      }
+      if (Date.now() - at > MAX_AGE_MS) {
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(AT_KEY);
+        return null;
+      }
+      return value;
     } catch (e) {
       return null;
     }
@@ -43,6 +60,7 @@
   function setChoice(value) {
     try {
       localStorage.setItem(STORAGE_KEY, value);
+      localStorage.setItem(AT_KEY, String(Date.now()));
     } catch (e) { /* noop */ }
   }
 

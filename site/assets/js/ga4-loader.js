@@ -10,7 +10,10 @@
 
   function hasAcceptedConsent() {
     try {
-      return localStorage.getItem(STORAGE_KEY) === 'accepted';
+      if (localStorage.getItem(STORAGE_KEY) !== 'accepted') return false;
+      // Pasados 13 meses el consentimiento caduca y el aviso lo vuelve a pedir.
+      var at = Number(localStorage.getItem('tuko_cookie_consent_at'));
+      return !at || Date.now() - at <= 395 * 24 * 60 * 60 * 1000;
     } catch (e) {
       return false;
     }
