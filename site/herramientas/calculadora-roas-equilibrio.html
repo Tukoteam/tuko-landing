@@ -40,6 +40,12 @@
         {
           "@type": "ListItem",
           "position": 2,
+          "name": "Calculadoras",
+          "item": "https://tukoteam.com/herramientas/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
           "name": "Calculadora de ROAS de equilibrio",
           "item": "https://tukoteam.com/herramientas/calculadora-roas-equilibrio"
         }
@@ -173,6 +179,25 @@ html[data-theme="dark"] .calc-verdict.is-neg{background:rgba(255,138,138,.10)}
 @media (max-width:640px){.calc-inputs .calc-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 12px}.calc-field label{font-size:13.5px}}
 @media (max-width:340px){.calc-inputs .calc-grid{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:860px){.calc-tool{grid-template-columns:minmax(0,1fr)}.calc-results{position:static}}
+.calc-more{margin-top:72px;padding-top:32px;border-top:1px solid var(--c-line)}
+.calc-more-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:16px}
+.calc-more-title{font-size:13px;font-weight:600;font-stretch:semi-expanded;color:var(--c-muted);letter-spacing:.01em;margin:0}
+.calc-more-all{font-size:14px;font-weight:500;color:var(--c-accent-ink);text-decoration:underline;text-underline-offset:3px}
+.calc-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;list-style:none;margin:0;padding:0}
+.calc-links.is-index{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.calc-links li{display:flex;min-width:0}
+.calc-link{display:flex;flex-direction:column;width:100%;box-sizing:border-box;padding:22px 24px;border:1px solid var(--c-line);border-radius:16px;background:var(--c-surface);color:var(--c-text);text-decoration:none;transition:border-color .15s ease}
+.calc-link:hover{border-color:var(--c-accent)}
+.calc-link:focus-visible{outline:2px solid var(--c-accent);outline-offset:2px}
+.calc-link-title{font-size:16px;font-weight:600;line-height:1.35;color:var(--c-text);margin:0 0 6px}
+.calc-link-desc{font-size:14px;line-height:1.55;color:var(--c-muted);margin:0 0 18px}
+.calc-link-cta{display:inline-flex;align-items:center;gap:6px;margin-top:auto;font-size:14px;font-weight:500;color:var(--c-accent-ink)}
+.calc-link-cta svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .15s ease}
+.calc-link:hover .calc-link-cta svg{transform:translateX(2px)}
+.calc-links.is-index .calc-link{padding:28px}
+.calc-links.is-index .calc-link-title{font-size:18px;margin-bottom:8px}
+@media (max-width:860px){.calc-links,.calc-links.is-index{grid-template-columns:minmax(0,1fr);gap:16px}}
+@media (max-width:640px){.calc-links{grid-template-columns:minmax(0,1fr)}.calc-more{margin-top:56px}.calc-link,.calc-links.is-index .calc-link{padding:20px 18px}}
 @media (max-width:640px){
   .calc-page.legal-page{padding:96px 16px 72px}
   .calc-card{padding:22px 18px;border-radius:16px}
@@ -357,6 +382,15 @@ html[data-theme="dark"] .calc-verdict.is-neg{background:rgba(255,138,138,.10)}
       <p>Tienes tres salidas: rebajar menos, limitar el descuento a menos productos o hacer que solo lo consiga quien trae a otro cliente. La tercera es la que usa Tuko, nuestra app de compra en grupo para Shopify: el precio bajo solo se aplica si entra otro cliente, así que el descuento no sale de cada venta. Está en la <a href="https://apps.shopify.com/tuko?locale=es" target="_blank" rel="noopener">Shopify App Store</a>.</p>
       <p>La explicación completa, con tablas por margen y por descuento, está en «<a href="/blog/como-calcular-roas-de-equilibrio">Cómo calcular el ROAS de equilibrio y cuánto sube con cada descuento</a>».</p>
     </article>
+
+    <section class="calc-more" aria-labelledby="moreTitle">
+      <div class="calc-more-head"><h2 class="calc-more-title" id="moreTitle">Otras calculadoras</h2><a class="calc-more-all" href="/herramientas/">Ver todas</a></div>
+      <ul class="calc-links">
+        <li><a class="calc-link" href="/herramientas/calculadora-precio-margen"><span class="calc-link-title">Calculadora de precio de venta y margen</span><span class="calc-link-desc">El precio que necesitas para el margen que quieres, o el margen que te deja tu precio.</span><span class="calc-link-cta">Abrir la calculadora <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+        <li><a class="calc-link" href="/herramientas/calculadora-cac-maximo"><span class="calc-link-title">Calculadora de CAC máximo</span><span class="calc-link-desc">Lo máximo que puedes pagar por captar un cliente, según tu margen y las veces que repite.</span><span class="calc-link-cta">Abrir la calculadora <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+        <li><a class="calc-link" href="/herramientas/calculadora-descuento-sin-perder-margen"><span class="calc-link-title">Calculadora de descuento sin perder margen</span><span class="calc-link-desc">Cuántos pedidos más necesitas para ganar lo mismo con un descuento, y hasta dónde rebajar.</span><span class="calc-link-cta">Abrir la calculadora <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+      </ul>
+    </section>
   </div>
 </main>
 
@@ -383,7 +417,7 @@ html[data-theme="dark"] .calc-verdict.is-neg{background:rgba(255,138,138,.10)}
       <div class="footer-col">
         <p class="footer-col-title" data-i18n="footer_col_product">Producto</p>
         <a href="/#precios" data-i18n="footer_pricing">Precios</a>
-        <a href="/herramientas/calculadora-roas-equilibrio">Calculadora de ROAS</a>
+        <a href="/herramientas/">Calculadoras</a>
       </div>
       <div class="footer-col">
         <p class="footer-col-title" data-i18n="footer_col2_title">Legales</p>
@@ -571,7 +605,7 @@ function tukoRoasCalc(i) {
 })();
 </script>
 <script src="/assets/js/main.js?v=27ca6f87" defer></script>
-<script src="/assets/js/i18n.js?v=c021fef8" defer></script>
+<script src="/assets/js/i18n.js?v=d78d4006" defer></script>
 
 <script src="/assets/js/ga4-loader.js?v=7593ef4a" defer></script>
 <link rel="stylesheet" href="/assets/css/cookie-consent.css?v=165383de">

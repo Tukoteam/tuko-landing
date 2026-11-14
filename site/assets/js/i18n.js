@@ -912,7 +912,8 @@ function setLanguage(lang) {
     var destPath = dest.pathname.replace(/\/$/, '') || '/';
     var onLocaleTree =
       herePath.indexOf('/blog') !== -1 || herePath.indexOf('/en/blog') !== -1 ||
-      herePath.indexOf('/herramientas/') === 0 || herePath.indexOf('/en/tools/') === 0;
+      herePath === '/herramientas' || herePath.indexOf('/herramientas/') === 0 ||
+      herePath === '/en/tools' || herePath.indexOf('/en/tools/') === 0;
     if (onLocaleTree && destPath !== herePath) {
       localStorage.setItem('tuko_lang', lang);
       location.href = dest.href;
