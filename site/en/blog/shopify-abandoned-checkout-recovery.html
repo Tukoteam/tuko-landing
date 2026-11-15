@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" data-url-es="https://tukoteam.com/blog/carrito-abandonado-shopify" data-url-en="https://tukoteam.com/en/blog/shopify-abandoned-checkout-recovery">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){try{var t=localStorage.getItem("tuko_theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<title>Shopify abandoned checkout recovery without losing margin — Blog Tuko</title>
+<link rel="preload" href="/assets/fonts/mona-sans-v4-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css?v=70ba8d47">
+<link rel="stylesheet" href="/assets/css/main.css?v=fd7297f3">
+<link rel="stylesheet" href="/assets/css/tuko-theme.css?v=31135431">
+<link rel="stylesheet" href="/assets/css/blog.css?v=aa97d802">
+<!-- TUKO_SEO_START -->
+<meta name="description" content="How to turn on Shopify's free abandoned checkout emails and why they may not send. Plus the math to check whether the email discount pays for itself.">
+<link rel="canonical" href="https://tukoteam.com/en/blog/shopify-abandoned-checkout-recovery">
+<link rel="alternate" hreflang="es" href="https://tukoteam.com/blog/carrito-abandonado-shopify">
+<link rel="alternate" hreflang="en" href="https://tukoteam.com/en/blog/shopify-abandoned-checkout-recovery">
+<link rel="alternate" hreflang="x-default" href="https://tukoteam.com/blog/carrito-abandonado-shopify">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://tukoteam.com/en/blog/shopify-abandoned-checkout-recovery">
+<meta property="og:title" content="Shopify abandoned checkout recovery without losing margin — Blog Tuko">
+<meta property="og:description" content="How to turn on Shopify's free abandoned checkout emails and why they may not send. Plus the math to check whether the email discount pays for itself.">
+<meta property="og:image" content="https://tukoteam.com/assets/images/banners-blog/carrito-abandonado-shopify-en-mwhqz0li.webp">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Tuko">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Shopify abandoned checkout recovery without losing margin — Blog Tuko">
+<meta name="twitter:description" content="How to turn on Shopify's free abandoned checkout emails and why they may not send. Plus the math to check whether the email discount pays for itself.">
+<meta name="twitter:image" content="https://tukoteam.com/assets/images/banners-blog/carrito-abandonado-shopify-en-mwhqz0li.webp">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Shopify abandoned checkout recovery without losing margin",
+  "description": "How to turn on Shopify's free abandoned checkout emails and why they may not send. Plus the math to check whether the email discount pays for itself.",
+  "datePublished": "2026-11-15",
+  "dateModified": "2026-11-15",
+  "author": { "@type": "Organization", "name": "Tuko", "url": "https://tukoteam.com/" },
+  "publisher": { "@type": "Organization", "name": "Tuko", "url": "https://tukoteam.com/" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://tukoteam.com/en/blog/shopify-abandoned-checkout-recovery" },
+  "image": "https://tukoteam.com/assets/images/banners-blog/carrito-abandonado-shopify-en-mwhqz0li.webp",
+  "inLanguage": "en"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://tukoteam.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://tukoteam.com/en/blog/" },
+    { "@type": "ListItem", "position": 3, "name": "How to recover abandoned checkouts on Shopify, and when the email discount costs you margin", "item": "https://tukoteam.com/en/blog/shopify-abandoned-checkout-recovery" }
+  ]
+}
+</script>
+<!-- TUKO_SEO_END -->
+<script src="/assets/js/ga4-loader.js?v=7593ef4a" defer></script>
+<link rel="stylesheet" href="/assets/css/cookie-consent.css?v=165383de">
+<script src="/assets/js/cookie-consent.js?v=d97e4d34" defer></script>
+<script src="/assets/js/blog-analytics.js?v=679d1600" defer></script>
+</head>
+<body>
+
+<header role="banner">
+<nav aria-label="Main navigation">
+  <a href="/en/" class="nav-logo">
+    <img src="https://tukoteam.com/assets/images/tuko-logo-nav.webp" width="840" height="321" alt="Tuko" decoding="async" fetchpriority="high">
+  </a>
+  <ul class="nav-links">
+    <li><a href="/en/#como-funciona" data-i18n="nav_link_como_funciona">How it works</a></li>
+    <li><a href="/en/#precios" data-i18n="nav_link_precios">Pricing</a></li>
+    <li><a href="/en/blog/" class="nav-link-active" data-i18n="nav_link_blog">Blog</a></li>
+    <li><a href="/en/tuko-ai" data-i18n="nav_link_ia">tuko AI</a></li>
+    <li><a href="https://apps.shopify.com/tuko?locale=en" class="nav-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Install free</a></li>
+  </ul>
+  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" aria-pressed="false">
+    <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+  </button>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="lang-switcher" role="group" aria-label="Language selector" data-active="en">
+    <span class="lang-thumb" aria-hidden="true"></span>
+    <button type="button" class="lang-opt" data-lang="es" aria-label="Cambiar idioma a Español">
+      <span class="lang-opt-flag" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" width="22" height="15"><rect width="3" height="2" fill="#c60b1e"/><rect width="3" height="1" y="0.5" fill="#ffc400"/></svg>
+      </span>
+      <span class="lang-opt-label">ES</span>
+    </button>
+    <button type="button" class="lang-opt active" data-lang="en" aria-label="Switch language to English">
+      <span class="lang-opt-flag" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="22" height="15"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg>
+      </span>
+      <span class="lang-opt-label">EN</span>
+    </button>
+  </div>
+</nav>
+</header>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu" aria-hidden="true">
+  <a href="/en/#como-funciona" data-i18n="nav_link_como_funciona">How it works</a>
+  <a href="/en/#precios" data-i18n="nav_link_precios">Pricing</a>
+  <a href="/en/blog/" class="nav-link-active" data-i18n="nav_link_blog">Blog</a>
+  <a href="/en/tuko-ai" data-i18n="nav_link_ia">tuko AI</a>
+  <div class="mobile-lang">
+    <p class="mobile-lang-label" data-i18n="nav_lang_label">Language</p>
+    <div class="lang-switcher mobile-lang-switcher" role="group" aria-label="Language selector" data-active="en">
+      <span class="lang-thumb" aria-hidden="true"></span>
+      <button type="button" class="lang-opt" data-lang="es" aria-label="Cambiar idioma a Español">
+        <span class="lang-opt-flag" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" width="22" height="15"><rect width="3" height="2" fill="#c60b1e"/><rect width="3" height="1" y="0.5" fill="#ffc400"/></svg>
+        </span>
+        <span class="lang-opt-label">ES</span>
+      </button>
+      <button type="button" class="lang-opt active" data-lang="en" aria-label="Switch language to English">
+        <span class="lang-opt-flag" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="22" height="15"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg>
+        </span>
+        <span class="lang-opt-label">EN</span>
+      </button>
+    </div>
+  </div>
+  <a href="https://apps.shopify.com/tuko?locale=en" class="mobile-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Install free</a>
+</div>
+
+<main class="article-main">
+  <a href="index" class="article-back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg><span data-i18n="article_back">Back to blog</span></a>
+  <p class="article-meta">15 Nov 2026 · Written with AI · Tuko</p>
+  <p class="article-ai-note">Written with artificial intelligence by Tuko's editorial system, from the sources linked below. If you spot a mistake, write to joan@tukoteam.com.</p>
+  <h1 style="font-size:clamp(32px,4vw,52px);font-weight:800;font-stretch:semi-expanded;line-height:1.08;letter-spacing:-0.03em;color:#1a1a1a;margin-bottom:24px;">How to recover abandoned checkouts on Shopify, and when the email discount costs you margin</h1>
+  <img src="https://tukoteam.com/assets/images/banners-blog/carrito-abandonado-shopify-en-mwhqz0li.webp" alt="How to recover abandoned checkouts on Shopify, and when the email discount costs you margin" width="1600" height="1066" fetchpriority="high" decoding="async" style="width:100%;height:auto;max-width:100%;border-radius:16px;margin-bottom:48px;display:block;">
+  <div style="font-size:17px;font-weight:400;font-stretch:normal;color:#3A3A3A;line-height:1.75;max-width:720px;" class="blog-cms-body">
+<style>.blog-cms-body>p,.blog-cms-body>div{margin:0 0 1em} .blog-cms-body>p:last-child,.blog-cms-body>div:last-child{margin-bottom:0} .blog-cms-body>div>br:only-child{display:none} .blog-cms-body img{max-width:100%;height:auto;border-radius:16px;display:block;margin:1em 0} .blog-cms-body [style*="text-align:center"] img,.blog-cms-body [style*="text-align: center"] img{margin-left:auto;margin-right:auto} .blog-cms-body [style*="text-align:right"] img,.blog-cms-body [style*="text-align: right"] img{margin-left:auto;margin-right:0}</style>
+<p>For Shopify abandoned checkout recovery, the platform's built-in tool is an automatic email to anyone who started checkout and didn't finish the order. According to <a href="https://help.shopify.com/en/manual/promoting-marketing/create-marketing/shopify-messaging/email/pricing" target="_blank" rel="noopener noreferrer">Shopify Messaging's email pricing page</a>, abandoned checkout emails are always free and don't count towards the monthly limit. In the legacy experience, a checkout counts as abandoned if it stays incomplete for more than ten minutes after the customer gave their email, as defined in <a href="https://help.shopify.com/en/manual/promoting-marketing/create-marketing/abandoned-checkouts" target="_blank" rel="noopener noreferrer">Shopify's help page on recovering abandoned checkouts</a>. What usually goes wrong is the default setup, which only writes to subscribers, and the email discount, which many stores add without doing the math.</p><p>To work out whether that discount pays off, you need your margin per order. If you don't have it handy, start with <a href="/en/blog/how-much-to-spend-to-acquire-a-customer">how much you can spend to acquire a customer without losing money, worked out from your margin</a>, then come back with the number.</p><h2>What is the difference between an abandoned cart and an abandoned checkout on Shopify?</h2><p>An abandoned cart belongs to someone who added products and never started checkout. An abandoned checkout belongs to someone who started paying and didn't complete the order. Shopify handles them with separate templates in <a href="https://help.shopify.com/en/manual/promoting-marketing/create-marketing/shopify-messaging/marketing-automations/create" target="_blank" rel="noopener noreferrer">its Shopify Messaging marketing automations</a>, which also include a third one for abandoned browsing.</p><table><thead><tr><th>Template</th><th>Who it targets, according to Shopify</th><th>What to keep in mind</th></tr></thead><tbody><tr><td>Abandoned cart</td><td>Customers who add products to their cart but don't start the checkout process</td><td>Logically, it can only reach people the store can already identify</td></tr><tr><td>Abandoned checkout</td><td>Customers who start the checkout process but don't complete an order</td><td>Its emails are free and use none of your quota</td></tr><tr><td>Abandoned browse</td><td>By its name, people who look at products without reaching the cart</td><td>The furthest from a purchase</td></tr></tbody></table><p>The practical difference is the email address. Checkout is the step where the customer types their email, and the legacy definition counts abandonment from that moment. Someone who leaves a cart without giving an email is an anonymous visitor. It's reasonable to assume no template can write to them unless the store already knows them from a past purchase or signup.</p><p>If you only turn on one, make it the abandoned checkout automation. Those people got furthest, and the emails cost you nothing.</p><h2>How do you turn on abandoned checkout recovery in Shopify?</h2><p>Shopify has two versions running side by side. The legacy experience is the one described on <a href="https://help.shopify.com/en/manual/promoting-marketing/create-marketing/abandoned-checkouts" target="_blank" rel="noopener noreferrer">its page on recovering abandoned checkouts</a>, which says at the top that it applies to the legacy experience only. The other is a newer automation inside Shopify Messaging. Before you touch anything, note that <a href="https://help.shopify.com/en/manual/promoting-marketing/create-marketing/migrate-abandoned-checkout" target="_blank" rel="noopener noreferrer">Shopify's guide to moving to the new automation</a> says activating it is a permanent change, so you can't go back to the legacy emails.</p><p>The steps, using the names from Shopify's own guide:</p><ol><li><strong>Save what you have.</strong> If you customized the legacy template with copy or a discount, copy the text and note the settings first, because the switch can't be undone.</li><li><strong>Turn on the new automation.</strong> Follow the guide “Opt in to the new abandoned checkout automation”. Menu paths change between versions of the admin, so following the guide there is more reliable than memorizing clicks.</li><li><strong>Check the “To” field.</strong> By default the automation is only sent to customers subscribed to email marketing. You can change it to “All customers”, but read the next section before you do.</li><li><strong>Check the wait time.</strong> According to the same guide, the new automation defaults to a 10 hour wait before the email goes out, and you edit that wait with Shopify Flow.</li><li><strong>Decide the content and the discount.</strong> Leave the discount until you've done the math in the discount section below.</li><li><strong>Run a test.</strong> Start a checkout with an email of yours that is subscribed, don't finish it, and confirm the email arrives once the wait has passed.</li></ol><p>The wait time is a judgment call. A long wait gives room to people who just went to find their card, and avoids writing to someone who was coming back anyway. A short one lands while the product is still fresh in their mind. There's no official data on which works better in your store, so the sensible move is to keep what you have for a month, measure, and then test another.</p><h2>Why aren't Shopify abandoned checkout emails being sent?</h2><p>The first place to look is the default recipient setting. According to <a href="https://help.shopify.com/en/manual/promoting-marketing/create-marketing/migrate-abandoned-checkout" target="_blank" rel="noopener noreferrer">the guide to the new automation</a>, the abandoned checkout email is only sent to customers subscribed to email marketing. If few people tick the subscription box at your checkout, most abandoned checkouts will get nothing.</p><p>The same guide lists cases where the email isn't sent. The first is a customer who hasn't previously completed a purchase and hasn't subscribed to marketing. In practice, a new visitor who leaves their email without ticking the subscription box falls outside the default setup, and a new customer is exactly the one you most want back. Check the full list in the guide, because Shopify can extend it.</p><h3>Should you switch to “All customers”?</h3><p>The “All customers” option in the “To” field widens sending to every customer, subscribed or not, and it adds more recipients than any other change. The catch is that Shopify describes these automations as marketing messages, and sending commercial messages to people who haven't consented can conflict with the rules in your country, which differ from one place to another. Check with a professional before changing it.</p><h2>Is it worth putting a discount in the abandoned checkout email?</h2><p>It's worth it only if the extra orders the discount recovers pay for the discount you hand to people who would have come back anyway. An email with no discount already recovers some customers, and as soon as you add a price cut, all of them get it too.</p><p>The condition looks like this:</p><p><strong>extra orders × (margin − discount) ≥ orders you already recovered × discount</strong></p><p>Margin and discount use the same unit: dollars per order, or percentage of the price. The left side is what you earn from customers who return because of the discount. The right side is what you lose on those who would have bought without it. Solved for the unknown, the extra orders you need equal the orders you already recovered times discount / (margin − discount). The closer the discount gets to your margin, the faster that number climbs, and if it equals your margin, no volume can make up for it.</p><p>If you're still on the legacy template, one Shopify detail makes the math harder. In the method explained on <a href="https://help.shopify.com/en/manual/discounts/discounts-for-abandoned-checkout-recovery-emails" target="_blank" rel="noopener noreferrer">Shopify's help page on automatically applying discounts to recovery emails</a>, the code goes in the template's URL, so every recovery email ends up with the same code. The same page says that if the customer had entered another code when starting checkout, the original is replaced by the recovery code.</p><p>Any open discount carries this background cost, because the people who were going to buy anyway get it too. Tuko starts from that idea. It's an app that adds a group-buying button to the product page, and the lower price only applies if one more person joins, so nobody gets it without bringing in another customer. Tuko doesn't recover abandoned checkouts, which is a different problem. It fits if you want the discount to be earned by whoever brings someone along. The mechanism is explained in <a href="/en/blog/what-is-group-buying">what group buying is and how it differs from Groupon</a>.</p><h2>Example: how many extra orders a discount needs to pay for itself</h2><p>All figures in this section are invented, and kept round so you can redo the math with yours. A store has an average order of $100 before tax and a 40% margin, which is $40 per order before any discount. With no discount in the email it recovers 30 orders a month, which leave 30 × $40 = $1,200 of margin.</p><p>With a 10% discount, each recovered order leaves 40 − 10 = $30. To match the $1,200 it needs 1,200 / 30 = 40 orders, which is 10 more than without the discount. Those 10 are a third (1/3) of the 30 it already recovered, and the formula agrees: 30 × 10 / (40 − 10) = 10. If the discounted email doesn't bring in at least a third more recovered orders, the store earns less than before, even if the report shows more recovered sales.</p><table><thead><tr><th>Discount in the email</th><th>Margin per order</th><th>Orders needed to match $1,200</th><th>Extra orders</th><th>Extra over the base of 30</th></tr></thead><tbody><tr><td>No discount</td><td>$40</td><td>30</td><td>0</td><td>0%</td></tr><tr><td>10%</td><td>$30</td><td>40</td><td>10</td><td>33%</td></tr><tr><td>15%</td><td>$25</td><td>48</td><td>18</td><td>60%</td></tr><tr><td>20%</td><td>$20</td><td>60</td><td>30</td><td>100%</td></tr><tr><td>25%</td><td>$15</td><td>80</td><td>50</td><td>167%</td></tr></tbody></table><p>With a 20% discount and that margin, the email has to double recoveries just to break even. The table leaves out shipping, payment fees and returns, which come out of the same margin. If your real margin after those costs is lower, redo the table, because every point of margin you lose raises the extra orders you need. The same reasoning applied to advertising is in <a href="/en/blog/break-even-roas-formula">how to calculate break-even ROAS and how much each discount raises it</a>.</p><h2>What should you try before adding a discount to the email?</h2><p>Before cutting the price, use up everything that doesn't cost margin. In this order:</p><ol><li><strong>One month of email with no discount.</strong> This is your baseline. Without it you can't tell whether the discount brings extra orders or just marks down the ones you already had.</li><li><strong>More subscribers.</strong> If few people subscribe, review how you present the signup in your store and at checkout. Every extra subscriber is one more possible recovery email without touching the price.</li><li><strong>A different wait time.</strong> Use Flow to try a wait different from the current one, and compare similar months.</li><li><strong>A test purchase.</strong> Place one order from your phone and one from a computer with each payment method you offer. If a method fails, or shipping costs show up late and surprise people, the email discount covers the symptom and leaves the fault where it is.</li><li><strong>A small discount, measured.</strong> If you test one afterwards, start with the lowest that feels credible, run it for a comparable period, and compare the result with the table in the example.</li></ol><p>What I wouldn't do is start with a big discount because everyone does. With the table in front of you, you can see how expensive it gets. If it also lands during a campaign like Black Friday, do the full math, which is in <a href="/en/blog/black-friday-discount-without-losing-margin">how much discount to offer on Black Friday without losing margin</a>.</p><h2>What should you measure, and what are the limits of the data?</h2><p>Measure recovered margin per month alongside recovered sales, because margin is what tells you whether the discount pays off. A simple spreadsheet is enough: abandoned checkouts, recovered orders, discount applied, and the margin each order leaves.</p><p>Write the numbers down every month. According to <a href="https://help.shopify.com/en/manual/promoting-marketing/create-marketing/abandoned-checkouts" target="_blank" rel="noopener noreferrer">Shopify's help page on abandoned checkouts</a>, abandoned checkouts older than three months are automatically deleted from the admin, so to compare one quarter with another you need to keep the figures somewhere else.</p><p>Be wary of small differences. With few recovered orders a month, a gap of a couple of orders between two months can be chance. Don't compare a sale month with a quiet one either. And remember that someone who returns after the email might have returned without it, which is exactly why the month without a discount is the reference for everything else.</p><h2>Frequently asked questions</h2><h3>How much do Shopify abandoned checkout emails cost?</h3><p>Abandoned checkout emails in Shopify Messaging are always free and don't count towards the monthly limit, according to <a href="https://help.shopify.com/en/manual/promoting-marketing/create-marketing/shopify-messaging/email/pricing" target="_blank" rel="noopener noreferrer">Shopify Messaging's email pricing page</a>. For other sends, check that same page, because the terms can change.</p><h3>Do I need an app to recover abandoned checkouts?</h3><p>To start, no. The native automation covers abandoned checkouts at no cost. An app makes sense when you need something the native one doesn't do, and after you've checked which permissions it asks for, as explained in <a href="/en/blog/best-shopify-apps">how to choose Shopify apps without overpaying or over-sharing data</a>.</p><h3>How long does Shopify keep abandoned checkouts?</h3><p>Three months. After that they're automatically deleted from the admin, according to Shopify's help, so export or write down your figures beforehand if you want to compare periods.</p><h2>Next steps</h2><p>Turn on the abandoned checkout automation today with no discount, check who it's being sent to, and let it run for a month to get your baseline. With that number and your margin, the table in the example tells you how many extra orders each discount would need to bring before you test it. If you'd rather the lower price go only to customers who bring in someone else, you can <a href="https://apps.shopify.com/tuko" target="_blank" rel="noopener noreferrer">install Tuko from the Shopify App Store</a>. It takes about two minutes and there's no need to touch your theme.</p>
+  </div>
+
+  <section class="article-related" aria-labelledby="article-related-heading">
+    <h2 class="article-related-title" id="article-related-heading" data-i18n="article_related">More articles</h2>
+    <div class="article-related-grid">
+    <a class="article-related-card" href="best-shopify-apps">
+      <span class="article-related-media">
+        <img src="https://tukoteam.com/assets/images/banners-blog/mejores-apps-shopify-en-versus.webp" alt="How to choose the best Shopify apps without overpaying or over-sharing data" width="800" height="500" loading="lazy" decoding="async">
+      </span>
+      <span class="article-related-card-meta">
+        <span>15 Nov 2026 · Written with AI · Tuko</span>
+        <span aria-hidden="true"> · </span>
+        <span>12 min</span>
+      </span>
+      <span class="article-related-card-name">How to choose the best Shopify apps without overpaying or over-sharing data</span>
+    </a>
+    <a class="article-related-card" href="increase-average-order-value-ecommerce">
+      <span class="article-related-media">
+        <img src="https://tukoteam.com/assets/images/banners-blog/como-aumentar-ticket-medio-en-mwhjdgr1.webp" alt="How to increase average order value in ecommerce with bundles, free shipping and cross-sell, without losing margin" width="800" height="500" loading="lazy" decoding="async">
+      </span>
+      <span class="article-related-card-meta">
+        <span>15 Nov 2026 · Written with AI · Tuko</span>
+        <span aria-hidden="true"> · </span>
+        <span>14 min</span>
+      </span>
+      <span class="article-related-card-name">How to increase average order value in ecommerce with bundles, free shipping and cross-sell, without losing margin</span>
+    </a>
+    <a class="article-related-card" href="word-of-mouth-marketing-strategy-ecommerce">
+      <span class="article-related-media">
+        <img src="https://tukoteam.com/assets/images/banners-blog/estrategia-marketing-boca-a-boca-en-recibo.webp" alt="Word of mouth marketing strategy for ecommerce, with the cost of each new customer worked out" width="800" height="500" loading="lazy" decoding="async">
+      </span>
+      <span class="article-related-card-meta">
+        <span>14 Nov 2026 · Written with AI · Tuko</span>
+        <span aria-hidden="true"> · </span>
+        <span>13 min</span>
+      </span>
+      <span class="article-related-card-name">Word of mouth marketing strategy for ecommerce, with the cost of each new customer worked out</span>
+    </a>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bg"><svg class="footer-svg-logo" viewBox="0 0 840 321" fill="none" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="125.26" cy="160.499" rx="29.0064" ry="108.774" fill="#FFFFFF"/>
+<path d="M154.267 160.499C154.267 220.574 154.267 269.273 154.267 269.273C182.301 269.273 205.028 220.574 205.028 160.499C205.028 100.425 182.301 51.7255 154.267 51.7255C154.267 51.7255 154.267 100.425 154.267 160.499Z" fill="#FFFFFF"/>
+<path d="M205.021 160.497C205.021 200.546 205.021 233.013 205.021 233.013C221.04 233.013 234.027 200.546 234.027 160.497C234.027 120.447 221.04 87.9808 205.021 87.9808C205.021 87.9808 205.021 120.447 205.021 160.497Z" fill="#FFFFFF"/>
+<ellipse cx="78.1274" cy="160.497" rx="18.129" ry="72.516" fill="#FFFFFF"/>
+<path d="M330.167 194.064V148.47H313.07V119.316H330.167V90.3818H366.555V119.316H404.038V148.47H366.555V192.31C366.555 196.11 367.066 199.252 368.089 201.736C369.112 204.074 370.5 205.974 372.254 207.435C374.008 208.896 376.2 209.919 378.83 210.504C381.46 211.088 384.383 211.381 387.598 211.381C390.082 211.381 392.713 211.235 395.489 210.942C398.266 210.65 401.115 210.212 404.038 209.627V239C398.631 239.877 393.59 240.607 388.913 241.192C384.383 241.777 379.926 242.069 375.542 242.069C368.089 242.069 361.513 241.119 355.814 239.219C350.115 237.319 345.365 234.47 341.566 230.67C337.766 226.725 334.917 221.756 333.017 215.765C331.117 209.773 330.167 202.54 330.167 194.064ZM410.224 196.475V119.316H446.83V185.077C446.83 189.607 447.123 193.552 447.707 196.913C448.438 200.275 449.534 203.051 450.995 205.243C452.603 207.435 454.575 209.043 456.914 210.065C459.252 211.088 462.101 211.6 465.462 211.6C468.677 211.6 471.6 211.015 474.23 209.846C477.007 208.677 479.345 206.997 481.245 204.805C483.145 202.613 484.606 199.909 485.629 196.694C486.652 193.333 487.163 189.461 487.163 185.077V119.316H523.551V239H489.794L488.917 217.518C487.456 221.756 485.483 225.41 482.998 228.478C480.66 231.547 477.884 234.105 474.669 236.15C471.454 238.196 467.947 239.658 464.147 240.534C460.348 241.557 456.256 242.069 451.872 242.069C445.588 242.069 439.889 241.046 434.774 239C429.66 236.954 425.276 234.031 421.622 230.232C417.969 226.286 415.119 221.464 413.073 215.765C411.174 210.065 410.224 203.636 410.224 196.475ZM534.079 239V77.8874H570.466V159.868L613.43 119.316H658.804L608.607 166.664L660.339 239H617.814L582.961 188.145L570.466 199.982V239H534.079ZM645.875 178.939C645.875 169.733 647.409 161.257 650.478 153.512C653.547 145.767 657.858 139.191 663.411 133.784C668.964 128.23 675.686 123.92 683.577 120.851C691.469 117.782 700.31 116.248 710.101 116.248C719.746 116.248 728.514 117.782 736.405 120.851C744.296 123.92 751.018 128.23 756.571 133.784C762.271 139.191 766.655 145.767 769.723 153.512C772.792 161.257 774.327 169.806 774.327 179.158C774.327 188.511 772.792 197.06 769.723 204.805C766.655 212.55 762.271 219.199 756.571 224.752C751.018 230.159 744.296 234.397 736.405 237.466C728.514 240.534 719.746 242.069 710.101 242.069C700.31 242.069 691.469 240.534 683.577 237.466C675.686 234.397 668.964 230.159 663.411 224.752C657.858 219.199 653.547 212.55 650.478 204.805C647.409 197.06 645.875 188.438 645.875 178.939ZM682.701 178.939C682.701 184.2 683.285 188.949 684.454 193.187C685.769 197.279 687.523 200.786 689.715 203.709C692.053 206.631 694.903 208.896 698.264 210.504C701.771 212.111 705.717 212.915 710.101 212.915C714.485 212.915 718.357 212.111 721.718 210.504C725.08 208.896 727.929 206.631 730.267 203.709C732.605 200.786 734.359 197.279 735.528 193.187C736.697 188.949 737.282 184.2 737.282 178.939C737.282 173.97 736.697 169.44 735.528 165.349C734.359 161.111 732.605 157.53 730.267 154.608C727.929 151.539 725.08 149.274 721.718 147.812C718.357 146.205 714.485 145.401 710.101 145.401C705.717 145.401 701.771 146.205 698.264 147.812C694.903 149.274 692.053 151.539 689.715 154.608C687.523 157.53 685.769 161.111 684.454 165.349C683.285 169.44 682.701 173.97 682.701 178.939Z" fill="#FFFFFF"/>
+</svg></div>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/en/" class="footer-brand-mark">tuko</a>
+        <p class="footer-brand-text" data-i18n="footer_tagline">Group buying for Shopify stores. More sales. Less ad dependency.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title" data-i18n="footer_col1_title">Contact</p>
+        <a href="mailto:joan@tukoteam.com" data-i18n="footer_email">joan@tukoteam.com</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title" data-i18n="footer_col_product">Product</p>
+        <a href="/en/#precios" data-i18n="footer_pricing">Pricing</a>
+        <a href="/en/tools/">Calculators</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title" data-i18n="footer_col2_title">Legal</p>
+        <a href="/en/privacy" data-i18n="footer_privacy">Privacy policy</a>
+        <a href="/en/terms" data-i18n="footer_terms">Terms and conditions</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom-inner" data-i18n="footer_copy">© 2026 Tuko. All rights reserved.</div>
+</footer>
+
+<script src="/assets/js/main.js?v=27ca6f87" defer></script>
+<script src="/assets/js/tuko-theme.js?v=b2ef7977" defer></script>
+<script src="/assets/js/i18n.js?v=d78d4006" defer></script>
+</body>
+</html>
