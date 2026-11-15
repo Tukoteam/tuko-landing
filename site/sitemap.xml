@@ -125,12 +125,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://tukoteam.com/blog/how-people-choose-a-face-cream</loc>
-    <lastmod>2026-10-31</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://tukoteam.com/blog/como-calcular-roas-de-equilibrio</loc>
     <lastmod>2026-11-08</lastmod>
     <changefreq>yearly</changefreq>
@@ -278,6 +272,13 @@
 
     <url>
     <loc>https://tukoteam.com/blog/cosmetica-natural-ecologica-certificada</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+    <url>
+    <loc>https://tukoteam.com/blog/como-elegir-crema-facial</loc>
     <lastmod>2026-11-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
