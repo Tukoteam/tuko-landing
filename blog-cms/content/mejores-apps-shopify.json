@@ -22,6 +22,6 @@
   "seo": {
     "noFakeHreflang": true,
     "canonicalClean": true,
-    "hreflangWhenPaired": false
+    "hreflangWhenPaired": true
   }
 }
