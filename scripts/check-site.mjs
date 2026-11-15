@@ -47,6 +47,14 @@ function readRedirectAwayFroms() {
     const status = Number(block.match(/status\s*=\s*(\d+)/)?.[1] || "0");
     if (from && (status === 301 || status === 302)) froms.add(from);
   }
+  // El CMS del blog añade aquí las redirecciones de las páginas que cambian de dirección.
+  const extra = path.join(siteDir, "_redirects");
+  if (fs.existsSync(extra)) {
+    for (const line of fs.readFileSync(extra, "utf8").split(/\r?\n/)) {
+      const [from, , status = ""] = line.trim().split(/\s+/);
+      if (from && !from.startsWith("#") && /^30[12]/.test(status)) froms.add(from);
+    }
+  }
   return froms;
 }
 
@@ -153,6 +161,9 @@ for (const file of htmlFiles) {
 
     if (!resolveExists(internal)) {
       errors.push(`broken link in ${rel}: ${raw} → ${internal}`);
+    } else if (!/\/assets\//.test(internal) && (redirectFroms.has(internal) || redirectFroms.has(internal.replace(/\.html$/, "")))) {
+      // Funciona, pero pasa por una redirección: mejor enlazar directo a la dirección nueva.
+      warnings.push(`link through redirect in ${rel}: ${raw} → ${internal}`);
     }
   }
 }
