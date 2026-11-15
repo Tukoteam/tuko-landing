@@ -188,13 +188,6 @@
   </url>
 
     <url>
-    <loc>https://tukoteam.com/en/blog/descuentos-black-friday-tienda-online</loc>
-    <lastmod>2026-11-10</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-    <url>
     <loc>https://tukoteam.com/blog/como-funciona-marketing-referidos</loc>
     <lastmod>2026-11-11</lastmod>
     <changefreq>yearly</changefreq>
@@ -273,6 +266,13 @@
 
     <url>
     <loc>https://tukoteam.com/en/blog/how-referral-marketing-works-ecommerce</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+    <url>
+    <loc>https://tukoteam.com/en/blog/black-friday-discount-strategy</loc>
     <lastmod>2026-11-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
