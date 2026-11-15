@@ -258,13 +258,6 @@
   </url>
 
     <url>
-    <loc>https://tukoteam.com/en/blog/mejores-apps-shopify</loc>
-    <lastmod>2026-11-15</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-    <url>
     <loc>https://tukoteam.com/blog/como-aumentar-ticket-medio</loc>
     <lastmod>2026-11-15</lastmod>
     <changefreq>yearly</changefreq>
@@ -273,6 +266,13 @@
 
     <url>
     <loc>https://tukoteam.com/en/blog/increase-average-order-value-ecommerce</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+    <url>
+    <loc>https://tukoteam.com/en/blog/best-shopify-apps</loc>
     <lastmod>2026-11-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
