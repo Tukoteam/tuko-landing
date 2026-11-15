@@ -77,12 +77,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://tukoteam.com/en/blog/gran-paso-tuko</loc>
-    <lastmod>2026-10-31</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://tukoteam.com/en/blog/new-formulas-shanghai</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>yearly</changefreq>
@@ -276,6 +270,13 @@
 
     <url>
     <loc>https://tukoteam.com/en/blog/what-is-group-buying</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+    <url>
+    <loc>https://tukoteam.com/en/blog/a-big-step-for-tuko</loc>
     <lastmod>2026-11-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
