@@ -10,11 +10,11 @@
   "mins": 4,
   "tags": [],
   "coverImage": "https://tukoteam.com/assets/images/banners-blog/grow-beauty-brand-without-giving-away-margin-ser-mw9fheqp.webp",
-  "canonical": "https://tukoteam.com/blog/grow-beauty-brand-without-giving-away-margin",
+  "canonical": "https://tukoteam.com/blog/crecer-marca-cosmetica-sin-regalar-margen",
   "locale": "es",
   "translationOf": null,
   "datePublished": "2026-11-13",
-  "dateModified": "2026-11-13",
+  "dateModified": "2026-11-15",
   "author": {
     "name": "Equipo Tuko",
     "type": "Organization"
@@ -22,6 +22,6 @@
   "seo": {
     "noFakeHreflang": true,
     "canonicalClean": true,
-    "hreflangWhenPaired": false
+    "hreflangWhenPaired": true
   }
 }

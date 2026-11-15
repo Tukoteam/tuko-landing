@@ -178,13 +178,6 @@
   </url>
 
     <url>
-    <loc>https://tukoteam.com/blog/grow-beauty-brand-without-giving-away-margin</loc>
-    <lastmod>2026-11-13</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-    <url>
     <loc>https://tukoteam.com/en/blog/grow-beauty-brand-without-giving-away-margin</loc>
     <lastmod>2026-11-13</lastmod>
     <changefreq>yearly</changefreq>
@@ -277,6 +270,13 @@
 
     <url>
     <loc>https://tukoteam.com/en/blog/a-big-step-for-tuko</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+    <url>
+    <loc>https://tukoteam.com/blog/crecer-marca-cosmetica-sin-regalar-margen</loc>
     <lastmod>2026-11-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
