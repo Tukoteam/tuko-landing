@@ -257,7 +257,10 @@ if (fs.existsSync(esBlog)) {
     if (!name.endsWith(".html") || name === "index.html") continue;
     const slug = name.replace(/\.html$/, "");
     if (esOnly.has(slug)) continue;
-    const enPath = path.join(enBlog, name);
+    // La versión inglesa puede tener su propia dirección: se busca por el hreflang de la página española.
+    const esHtml = fs.readFileSync(path.join(esBlog, name), "utf8");
+    const alt = esHtml.match(/hreflang="en" href="https:\/\/tukoteam\.com\/en\/blog\/([^"#?]+)"/);
+    const enPath = path.join(enBlog, alt ? `${alt[1]}.html` : name);
     if (!fs.existsSync(enPath)) {
       errors.push(`ES blog post without EN pair: blog/${name}`);
     }

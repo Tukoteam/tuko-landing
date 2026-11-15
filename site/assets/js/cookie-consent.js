@@ -65,7 +65,7 @@
   }
 
   function privacyHref() {
-    return getLang() === 'en' ? '/en/privacidad' : '/privacidad';
+    return getLang() === 'en' ? '/en/privacy' : '/privacidad';
   }
 
   function applyI18n(root) {

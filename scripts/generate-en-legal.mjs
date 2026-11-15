@@ -1,5 +1,5 @@
 /**
- * Genera /en/privacidad y /en/terminos (legales EN reales) + cablea hreflang ES.
+ * Genera /en/privacy y /en/terms (legales EN reales) + cablea hreflang ES.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -13,21 +13,21 @@ const i18nPath = path.join(landing, 'assets', 'js', 'i18n.js');
 const PAGES = [
   {
     src: 'privacidad.html',
-    out: 'en/privacidad.html',
+    out: 'en/privacy.html',
     slug: 'privacidad',
     enTitle: 'Privacy Policy — Tuko',
     enDesc: 'How Tuko collects and processes personal data through its website and Shopify group-buying plugin.',
     esCanon: 'https://tukoteam.com/privacidad',
-    enCanon: 'https://tukoteam.com/en/privacidad',
+    enCanon: 'https://tukoteam.com/en/privacy',
   },
   {
     src: 'terminos.html',
-    out: 'en/terminos.html',
+    out: 'en/terms.html',
     slug: 'terminos',
     enTitle: 'Terms of Use — Tuko',
     enDesc: 'Terms governing access to and use of the Tuko website.',
     esCanon: 'https://tukoteam.com/terminos',
-    enCanon: 'https://tukoteam.com/en/terminos',
+    enCanon: 'https://tukoteam.com/en/terms',
   },
 ];
 
@@ -87,10 +87,10 @@ function buildEnPage(srcHtml, cfg, dict) {
   h = h.replace(/"name": "Términos de uso"/g, '"name": "Terms of use"');
 
   // Schema/page URLs → EN (before setting hreflang/data-url)
-  h = h.replace(/https:\/\/tukoteam\.com\/pages\/privacidad\.html/g, 'https://tukoteam.com/en/privacidad');
-  h = h.replace(/https:\/\/tukoteam\.com\/pages\/terminos\.html/g, 'https://tukoteam.com/en/terminos');
-  h = h.replace(/https:\/\/tukoteam\.com\/privacidad(?![\w/-])/g, 'https://tukoteam.com/en/privacidad');
-  h = h.replace(/https:\/\/tukoteam\.com\/terminos(?![\w/-])/g, 'https://tukoteam.com/en/terminos');
+  h = h.replace(/https:\/\/tukoteam\.com\/pages\/privacidad\.html/g, 'https://tukoteam.com/en/privacy');
+  h = h.replace(/https:\/\/tukoteam\.com\/pages\/terminos\.html/g, 'https://tukoteam.com/en/terms');
+  h = h.replace(/https:\/\/tukoteam\.com\/privacidad(?![\w/-])/g, 'https://tukoteam.com/en/privacy');
+  h = h.replace(/https:\/\/tukoteam\.com\/terminos(?![\w/-])/g, 'https://tukoteam.com/en/terms');
   h = h.replace(/\/en\/en\//g, '/en/');
 
   // Nav y footer compartidos en inglés (los rellena el build desde src/partials)
