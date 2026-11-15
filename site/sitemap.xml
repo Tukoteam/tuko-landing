@@ -149,12 +149,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://tukoteam.com/en/blog/como-calcular-roas-de-equilibrio</loc>
-    <lastmod>2026-11-08</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://tukoteam.com/blog/descuento-black-friday-sin-perder-margen</loc>
     <lastmod>2026-11-09</lastmod>
     <changefreq>yearly</changefreq>
@@ -274,6 +268,13 @@
 
     <url>
     <loc>https://tukoteam.com/en/blog/black-friday-discount-without-losing-margin</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+    <url>
+    <loc>https://tukoteam.com/en/blog/break-even-roas-formula</loc>
     <lastmod>2026-11-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
