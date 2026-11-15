@@ -142,12 +142,6 @@
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://tukoteam.com/blog/natural-organic-certified-cosmetics</loc>
-    <lastmod>2026-11-09</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
 
     <url>
     <loc>https://tukoteam.com/en/blog/natural-organic-certified-cosmetics</loc>
@@ -277,6 +271,13 @@
 
     <url>
     <loc>https://tukoteam.com/blog/crecer-marca-cosmetica-sin-regalar-margen</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+    <url>
+    <loc>https://tukoteam.com/blog/cosmetica-natural-ecologica-certificada</loc>
     <lastmod>2026-11-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
