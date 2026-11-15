@@ -115,8 +115,8 @@ const localize = (() => {
     .replace(/href="\.\.\/index\.html"/g, 'href="/en/"')
     .replace(/href="\.\.\/"/g, 'href="/en/"')
     .replace(/href="\.\.\/tuko-ai"/g, 'href="/en/tuko-ai"')
-    .replace(/href="\.\.\/privacidad"/g, 'href="/en/privacidad"')
-    .replace(/href="\.\.\/terminos"/g, 'href="/en/terminos"')
+    .replace(/href="\.\.\/privacidad"/g, 'href="/en/privacy"')
+    .replace(/href="\.\.\/terminos"/g, 'href="/en/terms"')
     .replace(/href="index"/g, 'href="/en/blog/"')
     .replace(/apps\.shopify\.com\/tuko\?locale=es/g, 'apps.shopify.com/tuko?locale=en')
     .replace(/aria-label="Navegación principal"/g, 'aria-label="Main navigation"')
@@ -153,10 +153,10 @@ let footer = String(ARTICLE_FOOTER || '');
 footer = footer
   .replace(/href="\.\.\/index\.html"/g, 'href="/en/"')
   .replace(/href="\.\.\/"/g, 'href="/en/"')
-  .replace(/href="\.\.\/pages\/privacidad\.html"/g, 'href="/en/privacidad"')
-  .replace(/href="\.\.\/privacidad"/g, 'href="/en/privacidad"')
-  .replace(/href="\.\.\/pages\/terminos\.html"/g, 'href="/en/terminos"')
-  .replace(/href="\.\.\/terminos"/g, 'href="/en/terminos"')
+  .replace(/href="\.\.\/pages\/privacidad\.html"/g, 'href="/en/privacy"')
+  .replace(/href="\.\.\/privacidad"/g, 'href="/en/privacy"')
+  .replace(/href="\.\.\/pages\/terminos\.html"/g, 'href="/en/terms"')
+  .replace(/href="\.\.\/terminos"/g, 'href="/en/terms"')
   .replace(
     />Compras colectivas para tiendas Shopify\. Más ventas, menos dependencia de anuncios\.</g,
     '>Group buying for Shopify stores. More sales. Less ad dependency.<'

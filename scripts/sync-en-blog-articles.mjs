@@ -38,11 +38,11 @@ for (const f of fs.readdirSync(blogDir)) {
   // Legal PDFs → HTML EN
   html = html.replace(
     /href="[^"]*politica-de-privacidad\.pdf"[^>]*>/gi,
-    'href="/en/privacidad">'
+    'href="/en/privacy">'
   );
   html = html.replace(
     /href="[^"]*terminos-y-condiciones\.pdf"[^>]*>/gi,
-    'href="/en/terminos">'
+    'href="/en/terms">'
   );
   fs.writeFileSync(p, html);
   ok += 1;

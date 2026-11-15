@@ -270,13 +270,13 @@
 
 [[redirects]]
   from = "/en/pages/privacidad.html"
-  to = "/en/privacidad"
+  to = "/en/privacy"
   status = 301
   force = true
 
 [[redirects]]
   from = "/en/pages/terminos.html"
-  to = "/en/terminos"
+  to = "/en/terms"
   status = 301
   force = true
 
@@ -347,26 +347,51 @@
   status = 301
   force = true
 
+# Legales en inglés con nombre en inglés (15-nov-2026): las direcciones antiguas redirigen.
+[[redirects]]
+  from = "/en/privacidad"
+  to = "/en/privacy"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/en/privacidad.html"
-  to = "/en/privacidad"
+  to = "/en/privacy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/terminos"
+  to = "/en/terms"
   status = 301
   force = true
 
 [[redirects]]
   from = "/en/terminos.html"
-  to = "/en/terminos"
+  to = "/en/terms"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/privacy.html"
+  to = "/en/privacy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/terms.html"
+  to = "/en/terms"
   status = 301
   force = true
 [[redirects]]
-  from = "/en/privacidad"
-  to = "/en/privacidad.html"
+  from = "/en/privacy"
+  to = "/en/privacy.html"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/en/terminos"
-  to = "/en/terminos.html"
+  from = "/en/terms"
+  to = "/en/terms.html"
   status = 200
   force = true
 
