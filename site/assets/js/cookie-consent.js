@@ -25,14 +25,15 @@
     }
   };
 
+  /* Manda el idioma de la página: las de /en/ siempre en inglés, aunque se guardara otro idioma en una visita anterior */
   function getLang() {
+    if (location.pathname.indexOf('/en/') === 0 || location.pathname === '/en') return 'en';
+    var htmlLang = (document.documentElement.lang || '').toLowerCase();
+    if (htmlLang.indexOf('en') === 0) return 'en';
     try {
       var stored = localStorage.getItem('tuko_lang');
       if (stored === 'en' || stored === 'es') return stored;
     } catch (e) { /* noop */ }
-    var htmlLang = (document.documentElement.lang || 'es').toLowerCase();
-    if (htmlLang.indexOf('en') === 0) return 'en';
-    if (location.pathname.indexOf('/en/') === 0 || location.pathname === '/en') return 'en';
     return 'es';
   }
 

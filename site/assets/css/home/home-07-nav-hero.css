@@ -533,8 +533,10 @@
     from { opacity: 0.2; filter: blur(12px); transform: translateY(0.1em); }
     to { opacity: 1; filter: blur(0); transform: none; }
   }
+  /* 0.01 y no 0: a la vista es igual, pero el navegador cuenta el texto como pintado desde el principio
+     y no como contenido que aparece tarde (LCP de la home) */
   @keyframes heroRise {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0.01; transform: translateY(10px); }
     to { opacity: 1; transform: none; }
   }
   @keyframes heroStage {
