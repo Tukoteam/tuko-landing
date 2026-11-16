@@ -95,7 +95,8 @@ html[data-theme="dark"] .bx-stage::after { content: ''; position: absolute; z-in
 @keyframes bxFocus { from { opacity: 0.1; filter: blur(14px); transform: translateY(0.06em); } to { opacity: 1; filter: blur(0); transform: none; } }
 
 /* ── Las portadas que flotan ── */
-.bx-floats { position: absolute; inset: 0; z-index: 2; }
+/* container-type: la entrada de las portadas se mide en cqw/cqh de esta caja */
+.bx-floats { position: absolute; inset: 0; z-index: 2; container-type: size; }
 .bx-card {
   --k: 20px;
   position: absolute;
@@ -107,8 +108,9 @@ html[data-theme="dark"] .bx-stage::after { content: ''; position: absolute; z-in
   rotate: var(--r);
   border-radius: 14px;
   outline: none;
-  /* Entrada: salen del centro y se abren hasta su sitio */
-  animation: bxIn 1100ms var(--ease-out) calc(250ms + var(--i) * 90ms) both;
+  /* Entrada: salen del centro y se abren hasta su sitio. Se mueven con translate y no con left/top
+     para que el navegador no lo cuente como contenido que salta (CLS); se ve igual. */
+  animation: bxIn 1100ms var(--ease-out) calc(250ms + var(--i) * 90ms) backwards;
 }
 .bx-card-in {
   position: absolute;
@@ -126,7 +128,7 @@ html[data-theme="dark"] .bx-stage::after { content: ''; position: absolute; z-in
 .bx-card[data-d="2"] .bx-card-in { filter: blur(1px) saturate(0.9); opacity: 0.78; }
 .bx-card[data-d="3"] { --k: 5px; }
 .bx-card[data-d="3"] .bx-card-in { filter: blur(3px) saturate(0.8); opacity: 0.5; }
-@keyframes bxIn { from { opacity: 0; left: 50%; top: 50%; scale: 0.5; } }
+@keyframes bxIn { from { opacity: 0; translate: calc(-50% + (50 - var(--xn, 50)) * 1cqw) calc(-50% + (50 - var(--yn, 50)) * 1cqh); scale: 0.5; } }
 @keyframes bxFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -12px; } }
 /* Al pasar el ratón: se acerca, se enfoca y enseña su título */
 .bx-tip {
