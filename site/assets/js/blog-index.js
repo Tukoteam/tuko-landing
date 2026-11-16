@@ -64,7 +64,7 @@
     if (sl.y > 55) a.dataset.tip = 'up';
     if (sl.x < 22) a.dataset.align = 'start';
     else if (sl.x > 78) a.dataset.align = 'end';
-    a.style.cssText = '--x:' + sl.x + '%;--y:' + sl.y + '%;--w:' + Math.round(sl.w * fitW) + 'px;--r:' + sl.r + 'deg;--i:' + i +
+    a.style.cssText = '--x:' + sl.x + '%;--y:' + sl.y + '%;--xn:' + sl.x + ';--yn:' + sl.y + ';--w:' + Math.round(sl.w * fitW) + 'px;--r:' + sl.r + 'deg;--i:' + i +
       ';--f:' + (8 + (i % 4) * 1.3).toFixed(1) + 's;--fd:' + (-i * 1.1).toFixed(1) + 's';
     var src = img.currentSrc || img.getAttribute('src');
     a.innerHTML = '<span class="bx-card-in"><img alt="" decoding="async"></span><span class="bx-tip"></span>';

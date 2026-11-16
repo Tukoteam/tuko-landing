@@ -927,12 +927,16 @@ function setLanguage(lang) {
   document.documentElement.lang = lang;
   localStorage.setItem('tuko_lang', lang);
 
+  /* Si el HTML ya trae el texto en este idioma no se reescribe (evita que el navegador lo cuente como pintado tarde) */
+  const tpl = document.createElement('template');
+  const sameHtml = (el, html) => { tpl.innerHTML = html; return tpl.innerHTML === el.innerHTML; };
+
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (!t[key]) return;
     if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-      el.placeholder = t[key];
-    } else {
+      if (el.placeholder !== t[key]) el.placeholder = t[key];
+    } else if (!sameHtml(el, t[key])) {
       el.innerHTML = t[key];
     }
   });

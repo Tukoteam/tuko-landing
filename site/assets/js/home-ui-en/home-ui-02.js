@@ -630,13 +630,17 @@ function setLanguage(lang, opts) {
 
   const apply = () => {
     const t = translations[lang];
+    /* Si el HTML ya trae el texto en este idioma no se reescribe: reescribirlo igual hace que el navegador
+       lo cuente como pintado tarde (LCP de la home en inglés) sin cambiar nada en pantalla */
+    const tpl = document.createElement('template');
+    const sameHtml = (el, html) => { tpl.innerHTML = html; return tpl.innerHTML === el.innerHTML; };
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (!t[key]) return;
       if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-        el.placeholder = t[key];
-      } else {
+        if (el.placeholder !== t[key]) el.placeholder = t[key];
+      } else if (!sameHtml(el, t[key])) {
         el.innerHTML = t[key];
       }
     });
