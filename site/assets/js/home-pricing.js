@@ -36,11 +36,9 @@
       };
     });
     var en = (document.documentElement.lang || 'es').slice(0, 2) === 'en';
-    var groups = function (v) {
-      var n = parseInt(v, 10);
-      if (isNaN(n)) return en ? 'Unlimited closed groups' : 'Grupos cerrados ilimitados';
-      return en ? 'Up to <b>' + n + '</b> closed groups a month' : 'Hasta <b>' + n + '</b> grupos cerrados al mes';
-    };
+    /* Primera fila de cada tarjeta: qué se cobra en esa columna */
+    var groups = function (v) { return esc(v); };
+    var allTitle = (src.querySelector('[data-i18n="pricing_all_title"]') || {}).textContent || (en ? 'Always included' : 'Siempre incluido');
 
     var html = '<div class="pr-grid is-usage">';
     plans.forEach(function (p, i) {
@@ -58,7 +56,7 @@
     var all = plans[0].rows.slice(1).map(function (r) {
       return '<li>' + CK + '<span>' + esc(r.k) + (YES.test(r.v) ? '' : ': <b>' + esc(r.v) + '</b>') + '</span></li>';
     }).join('');
-    html += '<div class="pr-all"><p class="pr-all-t">' + (en ? 'Every plan includes' : 'Todos los planes incluyen') + '</p><ul class="pr-chips">' + all + '</ul></div>';
+    html += '<div class="pr-all"><p class="pr-all-t">' + esc(allTitle) + '</p><ul class="pr-chips">' + all + '</ul></div>';
     if (ctaSrc) {
       html += '<div class="pr-ctas"><a href="' + esc(ctaSrc.getAttribute('href')) + '" class="pr-cta" target="_blank" rel="noopener">' +
         esc(ctaSrc.textContent.trim()) + '<span aria-hidden="true">→</span></a></div>';

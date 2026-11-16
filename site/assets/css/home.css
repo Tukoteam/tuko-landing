@@ -9632,6 +9632,12 @@ html[data-theme="dark"] .final-cta.fc .btn-submit,
 html[data-theme="dark"] .final-cta.fc .btn-submit:hover { background: #fff; color: #2b3bd0; }
 html[data-theme="dark"] .final-cta.fc .cta-form label { color: rgba(255, 255, 255, 0.65); }
 
+/* Información básica de privacidad bajo los formularios (RGPD art. 13) */
+.cta-legal { max-width: 520px; margin: 12px auto 0; font-size: 12px; line-height: 1.5; opacity: 0.7; }
+.cta-legal a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.wx .cta-legal { margin-left: 0; }
+@media (max-width: 760px) { .wx .cta-legal { margin-left: auto; } }
+
 /* ══════════════════════════════
    FOOTER DE LA HOME — tranquilo: cierra la página sin robarle protagonismo al CTA
    Un «tuko» gigante estático y muy sutil (como un grabado) cortado por el borde de abajo, una línea de luz arriba,

@@ -25,6 +25,12 @@
     # img-src https: — permite imágenes del blog (propias y URLs pegadas en el CMS)
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://www.googletagmanager.com; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
 
+# ── Demo de la home (se carga en iframes): no indexar como página suelta ──
+[[headers]]
+  for = "/landing-demo/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
 # ── El HTML se revalida siempre: los cambios se ven al instante ──
 [[headers]]
   for = "/*.html"
