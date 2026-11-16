@@ -246,8 +246,8 @@
   ]
 }
 </script>
-<link rel="preload" as="style" href="/assets/css/home.css?v=3a345828">
-<link rel="stylesheet" href="/assets/css/home.css?v=3a345828">
+<link rel="preload" as="style" href="/assets/css/home.css?v=b3ce0d1d">
+<link rel="stylesheet" href="/assets/css/home.css?v=b3ce0d1d">
 <link rel="stylesheet" href="../assets/css/tuko-theme.css?v=31135431">
 <link rel="prefetch" href="blog/" as="document">
 <link rel="prefetch" href="tuko-ai" as="document">
@@ -1563,7 +1563,7 @@
       </li>
     </ul>
 
-    <p class="re-foot" data-i18n="rescue_body">If they choose a refund, Shopify doesn't return the payment gateway fee. We cover it. <b>A group that doesn't close doesn't cost you <span class="re-euro">a single euro.</span></b></p>
+    <p class="re-foot" data-i18n="rescue_body">If they choose a refund, Shopify doesn't return the payment gateway fee. We cover it, up to €100 a month. <b>A group that doesn't close doesn't cost you <span class="re-euro">a single euro.</span></b></p>
   </div>
 </section>
 
@@ -1609,63 +1609,64 @@
 <section class="pricing pr" id="precios">
   <div class="pricing-inner">
     <div class="fade-up"><span class="s-badge" data-i18n="pricing_badge">Pricing</span></div>
-    <h2 class="s-title fade-up d1" data-i18n="pricing_title">You pay for the groups you close</h2>
-    <p class="s-sub fade-up d2" data-i18n="pricing_sub">Install Tuko and use it. Depending on how many groups you close each month, you're billed one plan or another. Nothing to choose and no commission.</p>
+    <h2 class="s-title fade-up d1" data-i18n="pricing_title">You only pay for groups that complete</h2>
+    <p class="s-sub fade-up d2" data-i18n="pricing_sub">No fixed fee and no commission on your sales. You pay €1 per completed group and, in launches, €1 per buyer. The first 5 in every 30-day cycle are free, and you never pay more than €129 per cycle.</p>
 
     <!-- La tabla la construye home-pricing.js con las tarjetas de abajo (ocultas; las traducciones las rellenan) -->
     <div class="pr-table fade-up d3" data-pr-table></div>
     <a href="https://apps.shopify.com/tuko" class="pr-cta-src" hidden data-i18n="pilot_cta">Install free on Shopify</a>
     <div class="pr-src" hidden>
+      <p data-i18n="pricing_all_title">Always included</p>
     <div class="pricing-grid">
       <article class="pricing-card is-soon fade-up d1">
-        <h3 class="pricing-name" data-i18n="pricing_p1_name">Free</h3>
+        <h3 class="pricing-name" data-i18n="pricing_p1_name">To start</h3>
         <div class="pricing-price-row">
           <span class="pricing-amount" data-i18n="pricing_p1_price">€0</span>
-          <span class="pricing-period" data-i18n="pricing_per_month">/ mo</span>
+          <span class="pricing-period" data-i18n="pricing_p1_per">/ group</span>
         </div>
-        <ul class="pricing-features" data-i18n="pricing_p1_rows"><li>Closed groups per month: 5</li><li>Commission: 0%</li><li>Products at once: Unlimited</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Tuko status emails: Yes</li><li>Priority support: Yes</li><li>Tuko Marketplace: Yes</li><li>Tuko AI: Yes</li></ul>
+        <ul class="pricing-features" data-i18n="pricing_p1_rows"><li>Usage: The first 5 groups or buyers in every cycle</li><li>Commission on your sales: 0%</li><li>Fixed fee: €0</li><li>Products at once: Unlimited</li><li>Groups and launches: Yes</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Tuko status emails: Yes</li><li>Support: Yes</li><li>Lock-in: None</li></ul>
         <a class="pricing-cta is-secondary" aria-disabled="true" data-i18n="pricing_p1_cta">Start free</a>
       </article>
 
       <article class="pricing-card is-soon fade-up d2">
-        <h3 class="pricing-name" data-i18n="pricing_p2_name">Basic</h3>
+        <h3 class="pricing-name" data-i18n="pricing_p2_name">Groups</h3>
         <div class="pricing-price-row">
-          <span class="pricing-amount" data-i18n="pricing_p2_price">€19</span>
-          <span class="pricing-period" data-i18n="pricing_per_month">/ mo</span>
+          <span class="pricing-amount" data-i18n="pricing_p2_price">€1</span>
+          <span class="pricing-period" data-i18n="pricing_p2_per">/ group</span>
         </div>
-        <ul class="pricing-features" data-i18n="pricing_p2_rows"><li>Closed groups per month: 20</li><li>Commission: 0%</li><li>Products at once: Unlimited</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Tuko status emails: Yes</li><li>Priority support: Yes</li><li>Tuko Marketplace: Yes</li><li>Tuko AI: Yes</li></ul>
+        <ul class="pricing-features" data-i18n="pricing_p2_rows"><li>Usage: Only when the group completes</li><li>Commission on your sales: 0%</li><li>Fixed fee: €0</li><li>Products at once: Unlimited</li><li>Groups and launches: Yes</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Tuko status emails: Yes</li><li>Support: Yes</li><li>Lock-in: None</li></ul>
         <a class="pricing-cta is-secondary" aria-disabled="true" data-i18n="pricing_p2_cta">Choose plan</a>
       </article>
 
       <article class="pricing-card is-soon fade-up d3">
-        <h3 class="pricing-name" data-i18n="pricing_p3_name">Pro</h3>
+        <h3 class="pricing-name" data-i18n="pricing_p3_name">Launches</h3>
         <div class="pricing-price-row">
-          <span class="pricing-amount" data-i18n="pricing_p3_price">€49</span>
-          <span class="pricing-period" data-i18n="pricing_per_month">/ mo</span>
+          <span class="pricing-amount" data-i18n="pricing_p3_price">€1</span>
+          <span class="pricing-period" data-i18n="pricing_p3_per">/ buyer</span>
         </div>
-        <ul class="pricing-features" data-i18n="pricing_p3_rows"><li>Closed groups per month: 50</li><li>Commission: 0%</li><li>Products at once: Unlimited</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Tuko status emails: Yes</li><li>Priority support: Yes</li><li>Tuko Marketplace: Yes</li><li>Tuko AI: Yes</li></ul>
+        <ul class="pricing-features" data-i18n="pricing_p3_rows"><li>Usage: Only if the launch reaches its minimum</li><li>Commission on your sales: 0%</li><li>Fixed fee: €0</li><li>Products at once: Unlimited</li><li>Groups and launches: Yes</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Tuko status emails: Yes</li><li>Support: Yes</li><li>Lock-in: None</li></ul>
         <a class="pricing-cta is-secondary" aria-disabled="true" data-i18n="pricing_p3_cta">Choose plan</a>
       </article>
 
       <article class="pricing-card fade-up d4">
-        <h3 class="pricing-name" data-i18n="pricing_p4_name">Scale</h3>
+        <h3 class="pricing-name" data-i18n="pricing_p4_name">Maximum</h3>
         <div class="pricing-price-row">
           <span class="pricing-amount" data-i18n="pricing_p4_price">€129</span>
-          <span class="pricing-period" data-i18n="pricing_per_month">/ mo</span>
+          <span class="pricing-period" data-i18n="pricing_p4_per">/ cycle</span>
         </div>
-        <ul class="pricing-features" data-i18n="pricing_p4_rows"><li>Closed groups per month: Unlimited</li><li>Commission: 0%</li><li>Products at once: Unlimited</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Tuko status emails: Yes</li><li>Priority support: Yes</li><li>Tuko Marketplace: Yes</li><li>Tuko AI: Yes</li></ul>
+        <ul class="pricing-features" data-i18n="pricing_p4_rows"><li>Usage: Never more in 30 days, however much you sell</li><li>Commission on your sales: 0%</li><li>Fixed fee: €0</li><li>Products at once: Unlimited</li><li>Groups and launches: Yes</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Tuko status emails: Yes</li><li>Support: Yes</li><li>Lock-in: None</li></ul>
         <a href="#solicitud" class="pricing-cta is-secondary" data-i18n="pricing_p4_cta">Choose plan</a>
       </article>
     </div>
     </div>
 
-    <p class="pricing-legal fade-up" data-i18n="pricing_note_groups">Prices exclude VAT. Only groups that close count. If a group doesn't close, it uses up nothing.</p>
+    <p class="pricing-legal fade-up" data-i18n="pricing_note_groups">Prices exclude VAT. If a group or a launch doesn't complete, you're not charged. No lock-in.</p>
     <div class="pricing-links fade-up d1">
       <a href="#faq" data-i18n="pricing_link_faq">Still have questions? See the FAQ</a>
     </div>
   </div>
 </section>
-<script src="/assets/js/home-pricing.js?v=d50cf21f" defer></script>
+<script src="/assets/js/home-pricing.js?v=273b183f" defer></script>
 
 <!-- FAQ -->
 <!-- tuko:partial:home-faq-en -->
@@ -1775,8 +1776,8 @@
       <p class="fade-up d2" data-i18n="fcta_sub">Leave your website and we'll help you launch your first group with Tuko.</p>
       <form class="cta-form fade-up d3" id="pilotForm" name="piloto" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate data-tuko-form>
         <input type="hidden" name="form-name" value="piloto">
-        <input type="hidden" name="subject" data-remove-prefix value="Solicitud plan piloto Tuko">
-        <input type="hidden" name="Formulario" value="Piloto">
+        <input type="hidden" name="subject" data-remove-prefix value="Tuko installation request">
+        <input type="hidden" name="Formulario" value="Installation">
         <input type="hidden" name="Pagina" value="">
         <input type="hidden" name="Idioma" value="English">
         <p class="cta-hp" hidden style="display:none"><label>No rellenar / Leave empty: <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label></p>
@@ -1795,6 +1796,7 @@
         <button type="submit" class="btn-submit" data-i18n="pilot_form_submit">Send</button>
         <p class="cta-status" id="pilotFormStatus" role="status" aria-live="polite" data-form-status hidden></p>
       </form>
+      <p class="cta-legal" data-i18n="form_legal">When you submit, Joan de Zavala Prats (Tuko) will use your details only to reply to you. You can access, correct or delete them at any time. More in our <a href="/en/privacy">Privacy Policy</a>.</p>
       <div class="final-cta-trust fade-up d4">
         <span data-i18n="fcta_trust2">Set up in 2 minutes</span>
         <span data-i18n="fcta_trust3">No theme changes</span>
@@ -1839,6 +1841,10 @@
         <p class="footer-col-title" data-i18n="footer_col2_title">Legal</p>
         <a href="/en/privacy">Privacy policy</a>
         <a href="/en/terms">Terms and conditions</a>
+        <a href="https://api.tukoteam.com/legal/terminos-servicio-en.html">App terms of service</a>
+        <a href="https://api.tukoteam.com/legal/condiciones-compra-colectiva-en.html">Buyer terms</a>
+        <a href="https://api.tukoteam.com/legal/privacidad-usuarios-en.html">App privacy policy</a>
+        <a href="https://api.tukoteam.com/legal/dpa-en.html">Data processing agreement (DPA)</a>
       </div>
     </div>
   </div>
@@ -1857,7 +1863,7 @@
 </div>
 
 <script src="/assets/js/home-animations-en.js?v=84f9fb14"></script>
-<script src="/assets/js/home-ui-en.js?v=23de0d15"></script>
+<script src="/assets/js/home-ui-en.js?v=2c060fdc"></script>
 <script src="../assets/js/tuko-theme.js?v=b2ef7977" defer></script>
 <script src="../assets/js/tuko-form.js?v=ebdb6073" defer></script>
 <script src="../assets/js/ga4-loader.js?v=7593ef4a" defer></script>

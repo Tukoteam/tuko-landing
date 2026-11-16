@@ -36,8 +36,5 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-# Sin valor de rastreo
-Disallow: /_versiones/
-Disallow: /_originales-png/
 
 Sitemap: https://tukoteam.com/sitemap.xml

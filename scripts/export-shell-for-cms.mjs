@@ -37,7 +37,8 @@ function fragments(file) {
 }
 
 const es = fragments(path.join(site, 'blog', SAMPLE));
-const en = fragments(path.join(site, 'en', 'blog', SAMPLE));
+// La versión inglesa tiene su propia dirección (compra-colectiva-ecommerce → what-is-group-buying)
+const en = fragments(path.join(site, 'en', 'blog', 'what-is-group-buying.html'));
 
 const body = `/**
  * Shell compartido con los artículos de la web: nav, footer, estilos y modo noche.

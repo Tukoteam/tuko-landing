@@ -24,3 +24,49 @@
 /blog/natural-organic-certified-cosmetics.html /blog/cosmetica-natural-ecologica-certificada 301!
 /blog/how-people-choose-a-face-cream /blog/como-elegir-crema-facial 301!
 /blog/how-people-choose-a-face-cream.html /blog/como-elegir-crema-facial 301!
+
+# URLs con .html -> URL limpia (una sola dirección por página; Netlify no admite :slug.html)
+/blog/carrito-abandonado-shopify.html /blog/carrito-abandonado-shopify 301!
+/blog/como-aumentar-ticket-medio.html /blog/como-aumentar-ticket-medio 301!
+/blog/como-calcular-roas-de-equilibrio.html /blog/como-calcular-roas-de-equilibrio 301!
+/blog/como-elegir-crema-facial.html /blog/como-elegir-crema-facial 301!
+/blog/como-funciona-marketing-referidos.html /blog/como-funciona-marketing-referidos 301!
+/blog/compra-colectiva-ecommerce.html /blog/compra-colectiva-ecommerce 301!
+/blog/cosmetica-natural-ecologica-certificada.html /blog/cosmetica-natural-ecologica-certificada 301!
+/blog/crecer-marca-cosmetica-sin-regalar-margen.html /blog/crecer-marca-cosmetica-sin-regalar-margen 301!
+/blog/cuanto-gastar-captar-cliente.html /blog/cuanto-gastar-captar-cliente 301!
+/blog/descuento-black-friday-sin-perder-margen.html /blog/descuento-black-friday-sin-perder-margen 301!
+/blog/descuentos-black-friday-tienda-online.html /blog/descuentos-black-friday-tienda-online 301!
+/blog/estrategia-marketing-boca-a-boca.html /blog/estrategia-marketing-boca-a-boca 301!
+/blog/mejores-apps-shopify.html /blog/mejores-apps-shopify 301!
+/en/blog/a-big-step-for-tuko.html /en/blog/a-big-step-for-tuko 301!
+/en/blog/best-shopify-apps.html /en/blog/best-shopify-apps 301!
+/en/blog/black-friday-discount-strategy.html /en/blog/black-friday-discount-strategy 301!
+/en/blog/black-friday-discount-without-losing-margin.html /en/blog/black-friday-discount-without-losing-margin 301!
+/en/blog/break-even-roas-formula.html /en/blog/break-even-roas-formula 301!
+/en/blog/grow-beauty-brand-without-giving-away-margin.html /en/blog/grow-beauty-brand-without-giving-away-margin 301!
+/en/blog/how-much-to-spend-to-acquire-a-customer.html /en/blog/how-much-to-spend-to-acquire-a-customer 301!
+/en/blog/how-people-choose-a-face-cream.html /en/blog/how-people-choose-a-face-cream 301!
+/en/blog/how-referral-marketing-works-ecommerce.html /en/blog/how-referral-marketing-works-ecommerce 301!
+/en/blog/increase-average-order-value-ecommerce.html /en/blog/increase-average-order-value-ecommerce 301!
+/en/blog/natural-organic-certified-cosmetics.html /en/blog/natural-organic-certified-cosmetics 301!
+/en/blog/shopify-abandoned-checkout-recovery.html /en/blog/shopify-abandoned-checkout-recovery 301!
+/en/blog/what-is-group-buying.html /en/blog/what-is-group-buying 301!
+/en/blog/word-of-mouth-marketing-strategy-ecommerce.html /en/blog/word-of-mouth-marketing-strategy-ecommerce 301!
+/herramientas/calculadora-cac-maximo.html /herramientas/calculadora-cac-maximo 301!
+/herramientas/calculadora-descuento-sin-perder-margen.html /herramientas/calculadora-descuento-sin-perder-margen 301!
+/herramientas/calculadora-precio-margen.html /herramientas/calculadora-precio-margen 301!
+/herramientas/calculadora-roas-equilibrio.html /herramientas/calculadora-roas-equilibrio 301!
+/herramientas/index.html /herramientas/ 301!
+/en/tools/break-even-roas-calculator.html /en/tools/break-even-roas-calculator 301!
+/en/tools/discount-margin-calculator.html /en/tools/discount-margin-calculator 301!
+/en/tools/index.html /en/tools/ 301!
+/en/tools/max-cac-calculator.html /en/tools/max-cac-calculator 301!
+/en/tools/price-margin-calculator.html /en/tools/price-margin-calculator 301!
+
+# Documentos legales antiguos en PDF -> páginas actuales
+/assets/legal/politica-de-privacidad.pdf /privacidad 301!
+/assets/legal/terminos-y-condiciones.pdf /terminos 301!
+
+# Navegadores que piden /favicon.ico
+/favicon.ico /assets/favicon.png 200
