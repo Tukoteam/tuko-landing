@@ -9915,5 +9915,16 @@ html:not([data-theme="dark"]) .cs-shadow--ao { background: radial-gradient(close
    se adelanta un poco (≈1 % del ancho, 3-4 px): siempre queda claramente delante y a simple vista no cambia nada. */
 .hg-screen { transform: translateZ(calc(var(--pw) * 0.012)); }
 .hg-wa-screen { transform: translateZ(calc(var(--lw) * 0.02)); }
+
+/* PARPADEO NEGRO CUANDO SALE EL MÓVIL DE WHATSAPP (móviles, también Android)
+   Con el de Lucía solo no pasa: es la suma de los dos móviles en 3D (cada uno con su grosor en 12 capas, uno dentro de la
+   escena del otro). En pantallas pequeñas el de Laura se queda plano: una sola capa que se mueve y gira igual, sin las
+   capas del canto (a ese tamaño apenas se veían). Su sombra pasa al propio móvil. En escritorio, todo igual. */
+@media (max-width: 900px) {
+  .hg-wa { transform-style: flat; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), inset 0 0 0 2px rgba(0, 0, 0, 0.7), 0 30px 60px -20px rgba(10, 14, 40, 0.6), 0 60px 110px -40px rgba(66, 87, 255, 0.45); }
+  html[data-theme="dark"] .hg-wa { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), inset 0 0 0 2px rgba(0, 0, 0, 0.7), 0 30px 60px -20px rgba(0, 0, 0, 0.8), 0 60px 110px -40px rgba(66, 87, 255, 0.5); }
+  .hg-wa-edge { display: none; }
+  .hg-wa-screen { transform: none; }
+}
 /* En la tarjeta del móvil se recorta solo el cuerpo (donde se mueve el asistente reducido): la tarjeta conserva su sombra */
 .cm-body--wiz { clip-path: inset(0 round 0 0 18px 18px); }
