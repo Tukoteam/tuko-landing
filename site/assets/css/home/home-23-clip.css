@@ -6,5 +6,12 @@
 .hg-screen { clip-path: inset(0 round calc(var(--pw) * 0.137)); }
 .hg-wa-screen { clip-path: inset(0 round calc(var(--lw) * 0.137)); }
 .cs-screen { clip-path: inset(0 round 8px); }
+
+/* PARPADEO NEGRO DE LOS MÓVILES DEL HERO EN SAFARI (iPhone)
+   Detrás de cada pantalla hay 12 capas oscuras para el grosor del canto, la primera a ~2 px. Con el balanceo continuo,
+   Safari a veces ordena mal capas tan juntas y pinta una oscura delante de la pantalla: parpadeo en negro. La pantalla
+   se adelanta un poco (≈1 % del ancho, 3-4 px): siempre queda claramente delante y a simple vista no cambia nada. */
+.hg-screen { transform: translateZ(calc(var(--pw) * 0.012)); }
+.hg-wa-screen { transform: translateZ(calc(var(--lw) * 0.02)); }
 /* En la tarjeta del móvil se recorta solo el cuerpo (donde se mueve el asistente reducido): la tarjeta conserva su sombra */
 .cm-body--wiz { clip-path: inset(0 round 0 0 18px 18px); }

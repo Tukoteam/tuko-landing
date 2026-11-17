@@ -92,12 +92,26 @@
     hero.classList.add(cls);
     timers.push(setTimeout(function () { hero.classList.remove(cls); }, ms));
   }
+  /* «-50%» o «12px» → píxeles (el % de translate es del propio elemento) */
+  function toPx(v, size) {
+    if (!v) return 0;
+    return /%$/.test(v) ? (parseFloat(v) / 100) * size : parseFloat(v) || 0;
+  }
   /* El dedo se coloca encima de lo que va a pulsar (coordenadas dentro de la pantalla) */
   function touch(sel) {
     var el = hero.querySelector(sel);
     if (!el || !finger || !screen) return;
     var x = el.offsetWidth / 2, y = el.offsetHeight / 2;
-    for (var n = el; n && n !== screen; n = n.offsetParent) { x += n.offsetLeft; y += n.offsetTop; }
+    for (var n = el; n && n !== screen; n = n.offsetParent) {
+      x += n.offsetLeft;
+      y += n.offsetTop;
+      // offsetTop no cuenta la propiedad translate (las tarjetas centradas con translate: 0 -50%): se suma aparte
+      var t = (getComputedStyle(n).translate || '').split(' ');
+      if (t[0] && t[0] !== 'none') {
+        x += toPx(t[0], n.offsetWidth);
+        y += toPx(t[1], n.offsetHeight);
+      }
+    }
     finger.style.left = x + 'px';
     finger.style.top = y + 'px';
     flash('is-touch', 950);
