@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" data-url-es="https://tukoteam.com/blog/como-calcular-coste-adquisicion-clientes" data-url-en="https://tukoteam.com/en/blog/how-to-calculate-customer-acquisition-cost">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){try{var t=localStorage.getItem("tuko_theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<title>How to calculate customer acquisition cost (CAC) on Shopify</title>
+<link rel="preload" href="/assets/fonts/mona-sans-v4-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css?v=70ba8d47">
+<link rel="stylesheet" href="/assets/css/main.css?v=bf57d09d">
+<link rel="stylesheet" href="/assets/css/tuko-theme.css?v=31135431">
+<link rel="stylesheet" href="/assets/css/blog.css?v=aa97d802">
+<!-- TUKO_SEO_START -->
+<meta name="description" content="The real CAC formula for a Shopify store, the costs people forget and a worked example. Plus why it never matches the CPA you see in Meta.">
+<link rel="canonical" href="https://tukoteam.com/en/blog/how-to-calculate-customer-acquisition-cost">
+<link rel="alternate" hreflang="es" href="https://tukoteam.com/blog/como-calcular-coste-adquisicion-clientes">
+<link rel="alternate" hreflang="en" href="https://tukoteam.com/en/blog/how-to-calculate-customer-acquisition-cost">
+<link rel="alternate" hreflang="x-default" href="https://tukoteam.com/blog/como-calcular-coste-adquisicion-clientes">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://tukoteam.com/en/blog/how-to-calculate-customer-acquisition-cost">
+<meta property="og:title" content="How to calculate customer acquisition cost (CAC) on Shopify">
+<meta property="og:description" content="The real CAC formula for a Shopify store, the costs people forget and a worked example. Plus why it never matches the CPA you see in Meta.">
+<meta property="og:image" content="https://tukoteam.com/assets/images/banners-blog/como-calcular-coste-adquisicion-clientes-en-mwkk5xdh.webp">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Tuko">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to calculate customer acquisition cost (CAC) on Shopify">
+<meta name="twitter:description" content="The real CAC formula for a Shopify store, the costs people forget and a worked example. Plus why it never matches the CPA you see in Meta.">
+<meta name="twitter:image" content="https://tukoteam.com/assets/images/banners-blog/como-calcular-coste-adquisicion-clientes-en-mwkk5xdh.webp">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to calculate customer acquisition cost (CAC) on Shopify",
+  "description": "The real CAC formula for a Shopify store, the costs people forget and a worked example. Plus why it never matches the CPA you see in Meta.",
+  "datePublished": "2026-11-17",
+  "dateModified": "2026-11-17",
+  "author": { "@type": "Organization", "name": "Tuko", "url": "https://tukoteam.com/" },
+  "publisher": { "@type": "Organization", "name": "Tuko", "url": "https://tukoteam.com/" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://tukoteam.com/en/blog/how-to-calculate-customer-acquisition-cost" },
+  "image": "https://tukoteam.com/assets/images/banners-blog/como-calcular-coste-adquisicion-clientes-en-mwkk5xdh.webp",
+  "inLanguage": "en"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://tukoteam.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://tukoteam.com/en/blog/" },
+    { "@type": "ListItem", "position": 3, "name": "How to calculate customer acquisition cost for your Shopify store, first-order discount included", "item": "https://tukoteam.com/en/blog/how-to-calculate-customer-acquisition-cost" }
+  ]
+}
+</script>
+<!-- TUKO_SEO_END -->
+<script src="/assets/js/ga4-loader.js?v=7593ef4a" defer></script>
+<link rel="stylesheet" href="/assets/css/cookie-consent.css?v=165383de">
+<script src="/assets/js/cookie-consent.js?v=9c3b264b" defer></script>
+<script src="/assets/js/blog-analytics.js?v=679d1600" defer></script>
+</head>
+<body>
+
+<header role="banner">
+<nav aria-label="Main navigation">
+  <a href="/en/" class="nav-logo">
+    <img src="https://tukoteam.com/assets/images/tuko-logo-nav.webp" width="840" height="321" alt="Tuko" decoding="async" fetchpriority="high">
+  </a>
+  <ul class="nav-links">
+    <li><a href="/en/#como-funciona" data-i18n="nav_link_como_funciona">How it works</a></li>
+    <li><a href="/en/#precios" data-i18n="nav_link_precios">Pricing</a></li>
+    <li><a href="/en/blog/" class="nav-link-active" data-i18n="nav_link_blog">Blog</a></li>
+    <li><a href="/en/tuko-ai" data-i18n="nav_link_ia">tuko AI</a></li>
+    <li><a href="https://apps.shopify.com/tuko?locale=en" class="nav-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Install free</a></li>
+  </ul>
+  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" aria-pressed="false">
+    <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+  </button>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="lang-switcher" role="group" aria-label="Language selector" data-active="en">
+    <span class="lang-thumb" aria-hidden="true"></span>
+    <button type="button" class="lang-opt" data-lang="es" aria-label="Cambiar idioma a Español">
+      <span class="lang-opt-flag" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" width="22" height="15"><rect width="3" height="2" fill="#c60b1e"/><rect width="3" height="1" y="0.5" fill="#ffc400"/></svg>
+      </span>
+      <span class="lang-opt-label">ES</span>
+    </button>
+    <button type="button" class="lang-opt active" data-lang="en" aria-label="Switch language to English">
+      <span class="lang-opt-flag" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="22" height="15"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg>
+      </span>
+      <span class="lang-opt-label">EN</span>
+    </button>
+  </div>
+</nav>
+</header>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu" aria-hidden="true">
+  <a href="/en/#como-funciona" data-i18n="nav_link_como_funciona">How it works</a>
+  <a href="/en/#precios" data-i18n="nav_link_precios">Pricing</a>
+  <a href="/en/blog/" class="nav-link-active" data-i18n="nav_link_blog">Blog</a>
+  <a href="/en/tuko-ai" data-i18n="nav_link_ia">tuko AI</a>
+  <div class="mobile-lang">
+    <p class="mobile-lang-label" data-i18n="nav_lang_label">Language</p>
+    <div class="lang-switcher mobile-lang-switcher" role="group" aria-label="Language selector" data-active="en">
+      <span class="lang-thumb" aria-hidden="true"></span>
+      <button type="button" class="lang-opt" data-lang="es" aria-label="Cambiar idioma a Español">
+        <span class="lang-opt-flag" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" width="22" height="15"><rect width="3" height="2" fill="#c60b1e"/><rect width="3" height="1" y="0.5" fill="#ffc400"/></svg>
+        </span>
+        <span class="lang-opt-label">ES</span>
+      </button>
+      <button type="button" class="lang-opt active" data-lang="en" aria-label="Switch language to English">
+        <span class="lang-opt-flag" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="22" height="15"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg>
+        </span>
+        <span class="lang-opt-label">EN</span>
+      </button>
+    </div>
+  </div>
+  <a href="https://apps.shopify.com/tuko?locale=en" class="mobile-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Install free</a>
+</div>
+
+<main class="article-main">
+  <a href="index" class="article-back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg><span data-i18n="article_back">Back to blog</span></a>
+  <p class="article-meta">17 Nov 2026 · Written with AI · Tuko</p>
+  <p class="article-ai-note">Written with artificial intelligence by Tuko's editorial system, from the sources linked below. If you spot a mistake, write to joan@tukoteam.com.</p>
+  <h1 style="font-size:clamp(32px,4vw,52px);font-weight:800;font-stretch:semi-expanded;line-height:1.08;letter-spacing:-0.03em;color:#1a1a1a;margin-bottom:24px;">How to calculate customer acquisition cost for your Shopify store, first-order discount included</h1>
+  <img src="https://tukoteam.com/assets/images/banners-blog/como-calcular-coste-adquisicion-clientes-en-mwkk5xdh.webp" alt="How to calculate customer acquisition cost for your Shopify store, first-order discount included" width="1600" height="1066" fetchpriority="high" decoding="async" style="width:100%;height:auto;max-width:100%;border-radius:16px;margin-bottom:48px;display:block;">
+  <div style="font-size:17px;font-weight:400;font-stretch:normal;color:#3A3A3A;line-height:1.75;max-width:720px;" class="blog-cms-body">
+<style>.blog-cms-body>p,.blog-cms-body>div{margin:0 0 1em} .blog-cms-body>p:last-child,.blog-cms-body>div:last-child{margin-bottom:0} .blog-cms-body>div>br:only-child{display:none} .blog-cms-body img{max-width:100%;height:auto;border-radius:16px;display:block;margin:1em 0} .blog-cms-body [style*="text-align:center"] img,.blog-cms-body [style*="text-align: center"] img{margin-left:auto;margin-right:auto} .blog-cms-body [style*="text-align:right"] img,.blog-cms-body [style*="text-align: right"] img{margin-left:auto;margin-right:0}</style>
+<p>To calculate customer acquisition cost (CAC), add up everything you spent to win customers in a period and divide it by the new customers you got in that same period. CAC is what it costs you, on average, to get someone who has never bought from you to place a first order. Two details separate a useful CAC from a misleading one: which costs go on top, and who you count underneath.</p><p>This article is about how much you really spend. If you want to know the most you could spend, that is in <a href="/en/blog/how-much-to-spend-to-acquire-a-customer">how much you can spend to acquire a customer without losing money</a>. The two numbers work together.</p><h2>What is the customer acquisition cost formula?</h2><p>The CAC formula is: <strong>total acquisition spend in the period ÷ new customers in the period</strong>. It is the standard definition, as in <a href="https://en.wikipedia.org/wiki/Customer_acquisition_cost" target="_blank" rel="noopener noreferrer">Wikipedia's entry on customer acquisition cost</a>. Both parts have to cover the same dates.</p><p>A new customer is someone who places their first order in your store within that period. If someone first bought last year and comes back this month, that counts as an order, not as a new customer.</p><p>For a store with steady sales, the calendar month works well: it lines up with the invoices from your agency, your tools and your ads. With few sales, a single month swings a lot on a couple of orders; quarters or a 90-day rolling average work better there.</p><h2>Which costs should you include in CAC?</h2><p>CAC includes every cost whose purpose is to win someone who is not a customer yet. Ads are the visible part; what usually gets forgotten is everything around the ads and the discount you give to close the first purchase.</p><table><thead><tr><th>Cost</th><th>Part of CAC?</th><th>Why it gets missed or mixed up</th></tr></thead><tbody><tr><td>Meta Ads, Google Ads, TikTok and other ads</td><td>Yes</td><td>It is the only thing many people count</td></tr><tr><td>Creative: photos, videos, creator content</td><td>Yes</td><td>It is paid separately and filed as "design"</td></tr><tr><td>Acquisition agency or freelancer</td><td>Yes, the share spent on acquisition</td><td>If they also email existing customers, that share is not</td></tr><tr><td>Acquisition tools (pop-ups, landing pages, ad analytics)</td><td>Yes, the proportional share</td><td>They sit on the card as "software"</td></tr><tr><td>Influencers: fee, product and shipping</td><td>Yes</td><td>Gifted product is forgotten because there is no invoice</td></tr><tr><td>First-order discount</td><td>Yes, or in the margin, never in both</td><td>It never leaves the bank: it is money you do not collect</td></tr><tr><td>Your own time, or the salary of whoever runs marketing</td><td>Optional, but worth knowing</td><td>If you do it yourself, your CAC looks lower than it is</td></tr><tr><td>Shopify plan, order shipping, product cost</td><td>No</td><td>They are costs of selling and belong in the per-order margin</td></tr></tbody></table><p>Salary is the most debatable line. If you run the ads yourself, putting your time into CAC tells you what acquisition would cost if you handed it over tomorrow. Work it out with and without that line and keep both numbers.</p><h2>Does the first-order discount count as an acquisition cost?</h2><p>Yes. The welcome discount, the pop-up code or the abandoned-cart email discount given to a new customer is money you hand over so that someone buys for the first time. If you leave it out, a store that acquires with aggressive discounts looks cheaper than it is.</p><p>The only rule is not to count it twice. You can put it in CAC and work out first-order margin at full price, or leave it out of CAC and subtract it from margin. The end result is the same, as the example below shows. What breaks the numbers is putting it in both places, or in neither.</p><p>Recovery emails work the same way: part of that discount goes to people who were going to buy anyway. We go through the numbers in <a href="/en/blog/shopify-abandoned-checkout-recovery">how to recover abandoned checkouts on Shopify and when the email discount costs you margin</a>.</p><h2>Why divide only by new customers?</h2><p>You divide only by new customers because acquisition spend exists to bring them in. If you divide by every order in the month, returning customers, who would have come back without that spend, push CAC down artificially.</p><p>The effect grows with loyalty. The more repeat orders you have, the further "spend divided by orders" drifts from the real cost of winning someone new. A consumables store with lots of repeat orders can believe it acquires cheaply just when its acquisition is getting more expensive.</p><p>To separate new from returning customers, the most reliable starting point is each customer's first order date. Shopify's analytics include customer reports (see <a href="https://help.shopify.com/en/manual/reports-and-analytics/shopify-reports/report-types/default-reports/customers-reports" target="_blank" rel="noopener noreferrer">Shopify's help page on customer reports</a>); if yours splits first-time from returning customers, use it and check that it filters on the same dates as your spend. Otherwise, export your orders, group them by customer email and mark as new anyone whose first order falls inside the period. Guest checkouts with different emails can inflate new customers slightly; at normal volumes the error is small.</p><h2>Example: a Shopify store's real CAC in one month</h2><p>Every figure in this section is made up. A Shopify store closes the month with 500 orders. Of those, 200 come from new customers and 300 from customers who had bought before. The average order is $50 before discounts.</p><p>The month's acquisition spend looks like this:</p><ul><li>Meta Ads: $3,000</li><li>Google Ads: $1,500</li><li>Creative: $600</li><li>Ads agency: $800</li><li>Acquisition tools, proportional share: $100</li><li>Influencers, product and shipping: $300</li><li>10% welcome discount: used by 160 of the 200 new customers, at $5 each, $800</li></ul><p>The total is $7,100. Spread over 200 new customers, the real CAC is $35.50.</p><p>Now the usual shortcuts, with the same store:</p><ol><li>Ads only, divided by all orders: $4,500 ÷ 500 = $9.</li><li>Ads only, divided by new customers: $4,500 ÷ 200 = $22.50.</li><li>The CPA Meta shows: it credits itself with 150 purchases for its $3,000, so $20.</li><li>The CPA Google Ads shows: it credits itself with 90 conversions for its $1,500, about $16.67.</li></ol><p>The two platforms add up to 240 attributed purchases when there were only 200 new customers. Together they give a CPA of $4,500 ÷ 240 = $18.75, about half the real CAC.</p><table><thead><tr><th>Calculation</th><th>Numerator</th><th>Denominator</th><th>Result</th></tr></thead><tbody><tr><td>Ads ÷ all orders</td><td>$4,500</td><td>500 orders</td><td>$9.00</td></tr><tr><td>Combined platform CPA</td><td>$4,500</td><td>240 attributed conversions</td><td>$18.75</td></tr><tr><td>Ads ÷ new customers</td><td>$4,500</td><td>200 new customers</td><td>$22.50</td></tr><tr><td>Without the discount ÷ new customers</td><td>$6,300</td><td>200 new customers</td><td>$31.50</td></tr><tr><td><strong>Real CAC</strong></td><td><strong>$7,100</strong></td><td><strong>200 new customers</strong></td><td><strong>$35.50</strong></td></tr></tbody></table><p>The next question is whether that CAC holds up. Say that after product, shipping, payment fees and returns, each $50 order at full price leaves $20 of contribution margin. Since the discount is already inside CAC, the first order is compared at full price: $20 − $35.50 = −$15.50 per new customer. The store loses money on the first purchase and gets it back from the second order onwards: with two orders, $40 − $35.50 = $4.50.</p><p>If you would rather leave the discount out of CAC, the calculation changes shape but not result. CAC drops to $31.50. The average discount per new customer is $800 ÷ 200 = $4, so the first order leaves $16 of margin. And $16 − $31.50 = −$15.50, the same. If you put it in both places, you would get $16 − $35.50 = −$19.50, a $4 error per customer.</p><h2>Why doesn't my CAC match the CPA in Meta or Google Ads?</h2><p>Your CAC and each platform's CPA don't match because they measure different things. CPA divides that platform's ad spend by the conversions it credits itself with; CAC divides all your acquisition spend by the new customers who actually came in.</p><p>Three reasons almost always explain the gap:</p><ul><li><strong>Each platform counts purchases, not new customers.</strong> Unless you set it up otherwise, a returning customer who buys after a remarketing ad also counts as a conversion.</li><li><strong>Attribution overlaps.</strong> Each platform applies its own model and attribution window, so someone who saw an ad on Instagram and then searched for your brand on Google can end up counted by both. Check which window each account is set to before comparing.</li><li><strong>The numerator is smaller.</strong> CPA only includes what you pay the platform, without creative, agency or discounts.</li></ul><p>CPA is still useful for deciding where to move budget inside a platform: which campaign or ad performs better than another. To know whether acquisition is profitable, the number that matters is blended CAC.</p><h2>How do you know if your CAC is too high?</h2><p>Your CAC is too high when it exceeds the margin a new customer leaves you within the time you can afford to wait. If you sell something people buy once, the first order has to cover CAC. If you sell consumables that get reordered, you can lose money on the first order as long as you know, from your own data, how many orders an average customer places and over how many months.</p><p>With tight cash flow, waiting until the third purchase to earn back what you spent is a risk even if the numbers work over a year. The prudent move is to set a payback period your cash can handle and compare CAC with the margin accumulated within it.</p><p>The limit itself is worked out in <a href="/en/blog/how-much-to-spend-to-acquire-a-customer">how much you can spend to acquire a customer, calculated from your margin</a>. If you work with ROAS in your ads manager, <a href="/en/blog/break-even-roas-formula">how to calculate break-even ROAS and how much each discount raises it</a> turns that same limit into the number you see in Meta.</p><h2>How do you lower CAC without relying only on ads?</h2><p>To lower CAC without relying only on ads, you need channels where the cost only appears when a new customer arrives. With ads you pay for impressions or clicks whether anyone buys or not; with a referral programme you pay the reward when the referred person buys. That turns a fixed, uncertain cost into a variable one.</p><p>Word of mouth and referrals fit there. <a href="/en/blog/word-of-mouth-marketing-strategy-ecommerce">The word-of-mouth marketing strategy</a> and <a href="/en/blog/how-referral-marketing-works-ecommerce">how referral marketing works</a> calculate how much you can pay for each customer brought in without losing margin, using the same logic as this article.</p><p>Group buying is another way to tie the discount to a customer who actually arrives. With the <a href="/en/blog/what-is-group-buying">group buying</a> that Tuko adds to the Shopify product page, the lower price only applies if one more person joins: the first buyer shares their link, for example on WhatsApp, and both get the discount when the group is complete. Nobody gets that price without bringing another customer, unlike a welcome code that anyone who finds it can use.</p><p>It has a limit worth measuring: whoever completes the group may already be one of your customers. That is why the group-buying discount goes into the calculation like any other, and you only divide by the buyers who were genuinely placing their first order.</p><h2>Frequently asked questions about customer acquisition cost</h2><h3>Can you calculate CAC by channel?</h3><p>You can, but carefully. CAC by channel depends on how you attribute each new customer to a channel, and that is where the platforms' overlaps come back. Use it to compare channels with each other, and always keep the store-wide blended CAC next to it.</p><h3>What is the difference between CAC and CPA?</h3><p>CPA is the cost per acquisition or conversion that each ad platform calculates from its spend and the conversions it credits itself with. CAC is your own calculation: all acquisition spend divided by real new customers. CPA is for optimising campaigns; CAC is for knowing whether acquisition pays.</p><h3>How often should you recalculate CAC?</h3><p>Once a month is enough for most stores, once all the invoices for the period are in. If you change the budget a lot or launch a new discount, recalculate when that push ends to see its effect on its own.</p><h2>What to do with your CAC now</h2><p>Open a spreadsheet with your last closed month. Write down every cost from the table above, including the first-order discount, count only customers whose first order falls in those dates, and divide. Put the result next to the CPA in Meta and Google Ads and next to the contribution margin of your average order. If your real CAC is higher than that margin and your customers are slow to reorder, look for channels where the discount is only paid when someone new arrives; one of them is to <a href="https://apps.shopify.com/tuko" target="_blank" rel="noopener noreferrer">install Tuko on your Shopify store</a> and try group buying on a couple of products.</p>
+  </div>
+
+  <section class="article-related" aria-labelledby="article-related-heading">
+    <h2 class="article-related-title" id="article-related-heading" data-i18n="article_related">More articles</h2>
+    <div class="article-related-grid">
+    <a class="article-related-card" href="roas-and-customer-acquisition-cost">
+      <span class="article-related-media">
+        <img src="https://tukoteam.com/assets/images/banners-blog/roas-coste-adquisicion-en-mwki0mph.webp" alt="ROAS vs customer acquisition cost: which one to check to know if your ads make money" width="800" height="500" loading="lazy" decoding="async">
+      </span>
+      <span class="article-related-card-meta">
+        <span>17 Nov 2026 · Written with AI · Tuko</span>
+        <span aria-hidden="true"> · </span>
+        <span>10 min</span>
+      </span>
+      <span class="article-related-card-name">ROAS vs customer acquisition cost: which one to check to know if your ads make money</span>
+    </a>
+    <a class="article-related-card" href="word-of-mouth-marketing-strategy-ecommerce">
+      <span class="article-related-media">
+        <img src="https://tukoteam.com/assets/images/banners-blog/estrategia-marketing-boca-a-boca-en-recibo.webp" alt="Word of mouth marketing strategy for ecommerce, with the cost of each new customer worked out" width="800" height="500" loading="lazy" decoding="async">
+      </span>
+      <span class="article-related-card-meta">
+        <span>14 Nov 2026 · Written with AI · Tuko</span>
+        <span aria-hidden="true"> · </span>
+        <span>13 min</span>
+      </span>
+      <span class="article-related-card-name">Word of mouth marketing strategy for ecommerce, with the cost of each new customer worked out</span>
+    </a>
+    <a class="article-related-card" href="black-friday-discount-without-losing-margin">
+      <span class="article-related-media">
+        <img src="https://tukoteam.com/assets/images/banners-blog/descuento-black-friday-sin-perder-margen-en-clar-mw97f7vq.webp" alt="How much discount to offer on Black Friday without losing margin, with ad costs and cannibalization counted" width="800" height="500" loading="lazy" decoding="async">
+      </span>
+      <span class="article-related-card-meta">
+        <span>9 Nov 2026 · Written with AI · Tuko</span>
+        <span aria-hidden="true"> · </span>
+        <span>10 min</span>
+      </span>
+      <span class="article-related-card-name">How much discount to offer on Black Friday without losing margin, with ad costs and cannibalization counted</span>
+    </a>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bg"><svg class="footer-svg-logo" viewBox="0 0 840 321" fill="none" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="125.26" cy="160.499" rx="29.0064" ry="108.774" fill="#FFFFFF"/>
+<path d="M154.267 160.499C154.267 220.574 154.267 269.273 154.267 269.273C182.301 269.273 205.028 220.574 205.028 160.499C205.028 100.425 182.301 51.7255 154.267 51.7255C154.267 51.7255 154.267 100.425 154.267 160.499Z" fill="#FFFFFF"/>
+<path d="M205.021 160.497C205.021 200.546 205.021 233.013 205.021 233.013C221.04 233.013 234.027 200.546 234.027 160.497C234.027 120.447 221.04 87.9808 205.021 87.9808C205.021 87.9808 205.021 120.447 205.021 160.497Z" fill="#FFFFFF"/>
+<ellipse cx="78.1274" cy="160.497" rx="18.129" ry="72.516" fill="#FFFFFF"/>
+<path d="M330.167 194.064V148.47H313.07V119.316H330.167V90.3818H366.555V119.316H404.038V148.47H366.555V192.31C366.555 196.11 367.066 199.252 368.089 201.736C369.112 204.074 370.5 205.974 372.254 207.435C374.008 208.896 376.2 209.919 378.83 210.504C381.46 211.088 384.383 211.381 387.598 211.381C390.082 211.381 392.713 211.235 395.489 210.942C398.266 210.65 401.115 210.212 404.038 209.627V239C398.631 239.877 393.59 240.607 388.913 241.192C384.383 241.777 379.926 242.069 375.542 242.069C368.089 242.069 361.513 241.119 355.814 239.219C350.115 237.319 345.365 234.47 341.566 230.67C337.766 226.725 334.917 221.756 333.017 215.765C331.117 209.773 330.167 202.54 330.167 194.064ZM410.224 196.475V119.316H446.83V185.077C446.83 189.607 447.123 193.552 447.707 196.913C448.438 200.275 449.534 203.051 450.995 205.243C452.603 207.435 454.575 209.043 456.914 210.065C459.252 211.088 462.101 211.6 465.462 211.6C468.677 211.6 471.6 211.015 474.23 209.846C477.007 208.677 479.345 206.997 481.245 204.805C483.145 202.613 484.606 199.909 485.629 196.694C486.652 193.333 487.163 189.461 487.163 185.077V119.316H523.551V239H489.794L488.917 217.518C487.456 221.756 485.483 225.41 482.998 228.478C480.66 231.547 477.884 234.105 474.669 236.15C471.454 238.196 467.947 239.658 464.147 240.534C460.348 241.557 456.256 242.069 451.872 242.069C445.588 242.069 439.889 241.046 434.774 239C429.66 236.954 425.276 234.031 421.622 230.232C417.969 226.286 415.119 221.464 413.073 215.765C411.174 210.065 410.224 203.636 410.224 196.475ZM534.079 239V77.8874H570.466V159.868L613.43 119.316H658.804L608.607 166.664L660.339 239H617.814L582.961 188.145L570.466 199.982V239H534.079ZM645.875 178.939C645.875 169.733 647.409 161.257 650.478 153.512C653.547 145.767 657.858 139.191 663.411 133.784C668.964 128.23 675.686 123.92 683.577 120.851C691.469 117.782 700.31 116.248 710.101 116.248C719.746 116.248 728.514 117.782 736.405 120.851C744.296 123.92 751.018 128.23 756.571 133.784C762.271 139.191 766.655 145.767 769.723 153.512C772.792 161.257 774.327 169.806 774.327 179.158C774.327 188.511 772.792 197.06 769.723 204.805C766.655 212.55 762.271 219.199 756.571 224.752C751.018 230.159 744.296 234.397 736.405 237.466C728.514 240.534 719.746 242.069 710.101 242.069C700.31 242.069 691.469 240.534 683.577 237.466C675.686 234.397 668.964 230.159 663.411 224.752C657.858 219.199 653.547 212.55 650.478 204.805C647.409 197.06 645.875 188.438 645.875 178.939ZM682.701 178.939C682.701 184.2 683.285 188.949 684.454 193.187C685.769 197.279 687.523 200.786 689.715 203.709C692.053 206.631 694.903 208.896 698.264 210.504C701.771 212.111 705.717 212.915 710.101 212.915C714.485 212.915 718.357 212.111 721.718 210.504C725.08 208.896 727.929 206.631 730.267 203.709C732.605 200.786 734.359 197.279 735.528 193.187C736.697 188.949 737.282 184.2 737.282 178.939C737.282 173.97 736.697 169.44 735.528 165.349C734.359 161.111 732.605 157.53 730.267 154.608C727.929 151.539 725.08 149.274 721.718 147.812C718.357 146.205 714.485 145.401 710.101 145.401C705.717 145.401 701.771 146.205 698.264 147.812C694.903 149.274 692.053 151.539 689.715 154.608C687.523 157.53 685.769 161.111 684.454 165.349C683.285 169.44 682.701 173.97 682.701 178.939Z" fill="#FFFFFF"/>
+</svg></div>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/en/" class="footer-brand-mark">tuko</a>
+        <p class="footer-brand-text" data-i18n="footer_tagline">Group buying for Shopify stores. More sales. Less ad dependency.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title" data-i18n="footer_col1_title">Contact</p>
+        <a href="mailto:joan@tukoteam.com" data-i18n="footer_email">joan@tukoteam.com</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title" data-i18n="footer_col_product">Product</p>
+        <a href="/en/#precios" data-i18n="footer_pricing">Pricing</a>
+        <a href="/en/tools/">Calculators</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title" data-i18n="footer_col2_title">Legal</p>
+        <a href="/en/privacy" data-i18n="footer_privacy">Privacy policy</a>
+        <a href="/en/terms" data-i18n="footer_terms">Terms and conditions</a>
+        <a href="https://api.tukoteam.com/legal/terminos-servicio-en.html">App terms of service</a>
+        <a href="https://api.tukoteam.com/legal/condiciones-compra-colectiva-en.html">Buyer terms</a>
+        <a href="https://api.tukoteam.com/legal/privacidad-usuarios-en.html">App privacy policy</a>
+        <a href="https://api.tukoteam.com/legal/dpa-en.html">Data processing agreement (DPA)</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom-inner" data-i18n="footer_copy">© 2026 Tuko. All rights reserved.</div>
+</footer>
+
+<script src="/assets/js/main.js?v=27ca6f87" defer></script>
+<script src="/assets/js/tuko-theme.js?v=b2ef7977" defer></script>
+<script src="/assets/js/i18n.js?v=a939461f" defer></script>
+</body>
+</html>
