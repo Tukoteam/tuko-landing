@@ -5785,10 +5785,9 @@ html[data-theme="dark"] .hero--guion[data-line="3"] .hero-accent {
 .hg-ok {
   position: absolute;
   z-index: 6;
-  top: 0;
-  bottom: 0;
-  height: fit-content;
-  margin: auto 0;
+  /* Centrada con translate (no con top/bottom + height: fit-content: Safari en iPhone la estiraba a toda la pantalla) */
+  top: 50%;
+  translate: 0 -50%;
   left: calc(16 * var(--u));
   right: calc(16 * var(--u));
   padding: calc(24 * var(--u)) calc(18 * var(--u)) calc(18 * var(--u));
@@ -5859,12 +5858,10 @@ html[data-theme="dark"] .hero--guion[data-line="3"] .hero-accent {
 .hg-redirect {
   position: absolute;
   z-index: 6;
-  top: 0;
-  bottom: 0;
+  /* Centrada con translate (no con top/bottom + height: fit-content: Safari en iPhone la estiraba a toda la pantalla) */
+  top: 50%;
+  translate: 0 -50%;
   left: 50%;
-  height: fit-content;
-  margin-top: auto;
-  margin-bottom: auto;
   display: grid;
   justify-items: center;
   gap: calc(4 * var(--u));
@@ -6035,7 +6032,9 @@ html[data-theme="dark"] .hg-floor { background: radial-gradient(ellipse at cente
   letter-spacing: -0.005em;
   text-align: left;
   opacity: 0;
-  transform: translate3d(-40%, 8%, 40px) rotateY(34deg) scale(0.92);
+  /* Entra desde bien por delante (z 130 px): con 40 px, al girar, su borde derecho quedaba a la altura de la pantalla del
+     de Lucía y Safari en iPhone dibujaba esa parte por detrás (se veía «mordido») */
+  transform: translate3d(-40%, 8%, 130px) rotateY(34deg) scale(0.92);
   transition: opacity 360ms ease, transform 900ms var(--ease-out);
 }
 .hero--guion.is-chat .hg-wa { opacity: 1; transform: translate3d(0, 0, 90px) rotateY(16deg); }
@@ -6374,7 +6373,13 @@ html[data-theme="dark"] .hg-wa-edge i:last-child { box-shadow: 0 30px 60px -20px
   .amb {
     --amb-k: 10%;
     position: fixed;
-    inset: 0;
+    /* Alto de la pantalla con la barra de Safari escondida (lvh), no inset: 0: en iPhone, al esconderse o volver la
+       barra mientras se baja, la capa tardaba en estirarse y dejaba una franja blanca sin teñir abajo */
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    height: 100lvh;
     z-index: 150;
     overflow: hidden;
     opacity: 0;

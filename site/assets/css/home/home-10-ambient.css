@@ -8,7 +8,13 @@
   .amb {
     --amb-k: 10%;
     position: fixed;
-    inset: 0;
+    /* Alto de la pantalla con la barra de Safari escondida (lvh), no inset: 0: en iPhone, al esconderse o volver la
+       barra mientras se baja, la capa tardaba en estirarse y dejaba una franja blanca sin teñir abajo */
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    height: 100lvh;
     z-index: 150;
     overflow: hidden;
     opacity: 0;
