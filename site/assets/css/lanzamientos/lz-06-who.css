@@ -165,7 +165,8 @@
 /* ══ «Te sirve si…» sin papel ══
    Hay papel de sobra alrededor (tickets de los finales y fotos de las filas): este bloque es un consejo,
 no un
-   resultado { display: none; }
+   resultado, así que va con el estilo de la web. Tres líneas entre filetes finos y una marca de acento que se
+   dibuja una a una al verse. */
 .lz-who .lz-fit-wrap { rotate: none; width: min(100%, 400px); align-self: end; margin: 0; }
 .lz-fit {
   padding: 0;
