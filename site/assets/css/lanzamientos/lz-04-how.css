@@ -1,0 +1,434 @@
+/* ══════════════════════════════
+   LANZAMIENTOS · CUERPO (común) y CÓMO FUNCIONA
+   Fondo de página (claro u oscuro según el tema). Cabeceras como el resto de la web: rótulo fino, titular
+   Mona con una sola parte en serif cursiva.
+   «Cómo funciona» es un instrumento: un panel oscuro del mismo material que la impresora, con una regla de
+   precisión de 12 días (marcas por día y por cuarto de día) y una aguja que avanza (--p de 0 a 1, desde
+   lanzamientos-body.js). Debajo, los tres momentos como columnas del mismo panel: se encienden al pasar la
+   aguja. El lanzamiento se completa el día 9 y los 3 días que sobran quedan rayados.
+══════════════════════════════ */
+.lz-sec {
+  --lz-acc: var(--blue, #3d50f2);
+  --lz-ok: #0f9d74;
+  --lz-card: rgba(255, 255, 255, 0.72);
+  --lz-edge: rgba(20, 24, 38, 0.08);
+  padding: clamp(80px, 11vw, 150px) 20px 0;
+  color: var(--ink);
+}
+html[data-theme="dark"] .lz-sec {
+  --lz-acc: #8fa0ff;
+  --lz-ok: #3fe0b0;
+  --lz-card: rgba(255, 255, 255, 0.035);
+  --lz-edge: rgba(255, 255, 255, 0.08);
+}
+.lz-sec:last-of-type { padding-bottom: clamp(80px, 11vw, 150px); }
+.lz-wrap { max-width: 1180px; margin: 0 auto; }
+
+.lz-head { max-width: 760px; margin: 0 auto; text-align: center; }
+.lz-head-left { margin: 0; text-align: left; }
+.lz-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 700;
+  font-stretch: 112%;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lz-acc);
+}
+.lz-eyebrow::before { content: ''; width: 20px; height: 1px; background: currentColor; opacity: 0.55; }
+.lz-h2 {
+  margin: 18px 0 0;
+  font-size: clamp(34px, 4.4vw, 58px);
+  font-weight: 700;
+  font-stretch: 106%;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.lz-h2 em { font-family: 'Roboto Serif', Georgia, serif; font-style: italic; font-weight: 500; font-stretch: 100%; letter-spacing: -0.025em; color: var(--lz-acc); }
+.lz-sub { max-width: 36em; margin: 20px auto 0; font-size: clamp(16.5px, 1.35vw, 18.5px); line-height: 1.6; color: var(--ink-2); text-wrap: pretty; }
+
+/* ══ El panel ══ */
+.lz-run {
+  --i1: #f3f5ff;
+  --i2: rgba(222, 228, 255, 0.7);
+  --i3: rgba(196, 205, 245, 0.5);
+  --hl: rgba(143, 160, 255, 0.14);
+  --b: #8fa0ff;
+  --g: #3fe0b0;
+  --bg: #070919;
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  margin-top: clamp(48px, 6vw, 72px);
+  border-radius: clamp(24px, 3vw, 34px);
+  background:
+    radial-gradient(60% 90% at 50% -10%, #131a4a 0%, transparent 70%),
+    linear-gradient(180deg, #0a0c22 0%, var(--bg) 100%);
+  color: var(--i1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 0 0 1px var(--hl),
+    0 40px 80px -40px rgba(30, 40, 140, 0.55),
+    0 90px 140px -90px rgba(66, 87, 255, 0.5);
+}
+html[data-theme="dark"] .lz-run { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), inset 0 0 0 1px var(--hl), 0 50px 90px -50px rgba(0, 0, 0, 0.9); }
+/* Grano fino encima de todo, como en el hero */
+.lz-run::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* Luz azul que sigue a la aguja y una verde que sube al completarse */
+.lz-run-aurora { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.lz-run-aurora i { position: absolute; border-radius: 50%; filter: blur(90px); transition: opacity 1400ms ease; }
+.lz-run-aurora i:nth-child(1) { width: 520px; height: 300px; left: calc(var(--p) * 100% - 260px); top: -160px; background: #3445e6; opacity: 0.45; }
+.lz-run-aurora i:nth-child(2) { width: 460px; height: 260px; right: -60px; bottom: -180px; background: #14c492; opacity: 0; }
+.lz-run.is-done .lz-run-aurora i:nth-child(2) { opacity: 0.22; }
+
+/* Barra superior del panel */
+.lz-run-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 58px; padding: 0 clamp(20px, 3vw, 34px); border-bottom: 1px solid var(--hl); }
+.lz-run-id { display: inline-flex; align-items: center; gap: 10px; min-width: 0; font-size: 11.5px; font-weight: 700; font-stretch: 110%; letter-spacing: 0.16em; text-transform: uppercase; color: var(--i2); white-space: nowrap; }
+.lz-run-id > span { color: var(--i3); }
+.lz-run-id i { flex: 0 0 auto; width: 7px; height: 7px; border-radius: 50%; background: var(--b); box-shadow: 0 0 8px #4257ff; animation: lzLive 1.6s ease-in-out infinite; }
+.lz-run.is-done .lz-run-id i { background: var(--g); box-shadow: 0 0 8px #14c492; animation: none; }
+@keyframes lzLive { 50% { opacity: 0.35; } }
+
+.lz-replay {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 32px;
+  padding: 0 14px 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--i1);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px var(--hl);
+  transition: background-color 200ms ease, transform 160ms var(--ease-out), opacity 300ms ease;
+}
+.lz-replay[hidden] { display: inline-flex; visibility: hidden; opacity: 0; }
+.lz-replay svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.lz-replay:active { transform: scale(0.96); }
+.lz-replay:focus-visible { outline: 2px solid var(--b); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) { .lz-replay:hover { background: rgba(255, 255, 255, 0.11); } }
+
+/* ══ La regla de precisión ══
+   --rx es el margen lateral de la regla; todo lo que se coloca por día usa el ancho útil (100% - 2·rx). */
+.lz-ruler { --rx: clamp(20px, 3vw, 34px); position: relative; height: 112px; }
+.lz-ruler-ticks { position: absolute; left: var(--rx); right: var(--rx); top: 58px; height: 12px; }
+/* Marcas (las crea el JS): largas por día, cortas por cuarto de día */
+.lz-ruler-ticks i { position: absolute; bottom: 0; width: 1px; height: 5px; margin-left: -0.5px; background: rgba(196, 205, 245, 0.22); }
+.lz-ruler-ticks i.is-day { height: 12px; background: rgba(196, 205, 245, 0.45); }
+.lz-run.is-done .lz-ruler-ticks i.is-spare { background: rgba(63, 224, 176, 0.5); }
+.lz-ruler-track { position: absolute; left: var(--rx); right: var(--rx); top: 74px; height: 2px; border-radius: 2px; background: rgba(143, 160, 255, 0.14); }
+.lz-ruler-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgba(143, 160, 255, 0.25), var(--b) 70%, #fff);
+  box-shadow: 0 0 12px rgba(120, 140, 255, 0.7);
+  transform-origin: left;
+  transform: scaleX(var(--p));
+}
+.lz-run.is-done .lz-ruler-fill { background: linear-gradient(90deg, rgba(63, 224, 176, 0.25), var(--g) 80%, #dffaf0); box-shadow: 0 0 12px rgba(63, 224, 176, 0.6); }
+/* Los días que sobran: una banda rayada sobre las marcas */
+.lz-ruler-spare {
+  position: absolute;
+  left: calc(9.2 / 12 * 100%);
+  right: 0;
+  top: -16px;
+  height: 18px;
+  border-radius: 3px;
+  background: repeating-linear-gradient(-45deg, rgba(63, 224, 176, 0.32) 0 1.5px, transparent 1.5px 6px);
+  opacity: 0;
+  transition: opacity 700ms ease 400ms;
+}
+.lz-run.is-done .lz-ruler-spare { opacity: 1; }
+.lz-ruler-lbl,
+.lz-spare-lbl {
+  position: absolute;
+  top: 88px;
+  left: calc(var(--rx) + var(--d) / 12 * (100% - 2 * var(--rx)));
+  translate: -50% 0;
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+  color: var(--i3);
+  white-space: nowrap;
+  transition: opacity 400ms ease;
+}
+.lz-ruler-lbl[style*="--d: 0"] { translate: 0 0; }
+.lz-ruler-lbl[style*="--d: 12"] { translate: -100% 0; }
+.lz-run.is-done .lz-ruler-lbl[style*="--d: 12"] { opacity: 0; }
+.lz-spare-lbl { --d: 10.6; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--g); opacity: 0; transition: opacity 700ms ease 700ms; }
+.lz-run.is-done .lz-spare-lbl { opacity: 1; }
+
+/* Aguja: línea fina con cabeza luminosa sobre la pista y su lectura encima */
+.lz-needle {
+  position: absolute;
+  top: 44px;
+  left: calc(var(--rx) + var(--p) * (100% - 2 * var(--rx)));
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(180deg, transparent, var(--i1) 40%, var(--i1));
+}
+.lz-needle::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 26px;
+  width: 9px;
+  height: 9px;
+  margin-left: -4.5px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(143, 160, 255, 0.35), 0 0 14px 2px rgba(143, 160, 255, 0.8);
+  transition: box-shadow 400ms ease;
+}
+.lz-run.is-done .lz-needle::after { box-shadow: 0 0 0 3px rgba(63, 224, 176, 0.35), 0 0 14px 2px rgba(63, 224, 176, 0.8); }
+.lz-needle-tag {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 0;
+  /* Al principio queda a la derecha de la aguja y al final a la izquierda: nunca se sale */
+  translate: calc(var(--p) * -100%) 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: var(--i1);
+  font-size: 11.5px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: background 400ms ease, color 400ms ease, box-shadow 400ms ease;
+}
+.lz-needle-sep { width: 1px; height: 10px; background: currentColor; opacity: 0.3; }
+.lz-run.is-done .lz-needle-tag { background: rgba(63, 224, 176, 0.16); box-shadow: inset 0 0 0 1px rgba(63, 224, 176, 0.4); color: #dffaf0; }
+
+/* ══ Los tres momentos: columnas del panel ══ */
+.lz-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--hl); }
+.lz-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(24px, 2.6vw, 34px) clamp(20px, 2.6vw, 34px) clamp(26px, 2.8vw, 36px);
+  transition: background-color 600ms ease;
+}
+.lz-step + .lz-step { border-left: 1px solid var(--hl); }
+/* Filo de luz arriba de la columna activa */
+.lz-step::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--b), transparent);
+  box-shadow: 0 0 14px 1px rgba(120, 140, 255, 0.7);
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+.lz-step.is-on { background: linear-gradient(180deg, rgba(143, 160, 255, 0.07), transparent 60%); }
+.lz-step.is-on::before { opacity: 1; }
+.lz-run.is-done .lz-step.is-on { background: linear-gradient(180deg, rgba(63, 224, 176, 0.07), transparent 60%); }
+.lz-run.is-done .lz-step.is-on::before { background: linear-gradient(90deg, transparent, var(--g), transparent); box-shadow: 0 0 14px 1px rgba(63, 224, 176, 0.6); }
+
+.lz-step-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.lz-step-n { font-family: 'Roboto Serif', Georgia, serif; font-size: 34px; font-style: italic; font-weight: 300; line-height: 1; color: var(--i3); transition: color 500ms ease; }
+.lz-step.is-on .lz-step-n, .lz-step.is-past .lz-step-n { color: var(--b); }
+.lz-run.is-done .lz-step[data-step="3"] .lz-step-n { color: var(--g); }
+.lz-step-d { padding: 4px 9px; border-radius: 6px; box-shadow: inset 0 0 0 1px var(--hl); font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--i3); white-space: nowrap; }
+.lz-step h3 { margin: 18px 0 0; font-size: clamp(22px, 2vw, 26px); font-weight: 700; font-stretch: 106%; letter-spacing: -0.03em; color: var(--i1); }
+.lz-step > p { margin: 10px 0 24px; font-size: 15px; line-height: 1.6; color: var(--i2); text-wrap: pretty; }
+
+/* Lectura de cada momento: pantallita hundida, como la LCD de la impresora */
+.lz-mini {
+  margin-top: auto;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(3, 4, 14, 0.7), rgba(8, 10, 30, 0.5));
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.6), inset 0 0 0 1px var(--hl), 0 1px 0 rgba(255, 255, 255, 0.05);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 01 · Ficha: los valores se encienden uno a uno */
+.lz-cfg { display: grid; gap: 9px; }
+.lz-cfg span { display: flex; justify-content: space-between; gap: 12px; }
+.lz-cfg em { font-style: normal; color: var(--i3); }
+.lz-cfg b { font-weight: 650; color: var(--i1); opacity: 0.12; transition: opacity 300ms ease, text-shadow 600ms ease; }
+.lz-cfg s { font-weight: 500; color: var(--i3); }
+.lz-cfg span.is-set b { opacity: 1; text-shadow: 0 0 10px rgba(143, 160, 255, 0.45); }
+
+/* 02 · Contador */
+.lz-join { display: grid; gap: 11px; }
+.lz-join-n { display: flex; align-items: baseline; gap: 8px; }
+.lz-join-c { min-width: 1.3em; font-size: 32px; font-weight: 700; font-stretch: 112%; letter-spacing: -0.03em; line-height: 1; color: #eef1ff; text-shadow: 0 0 14px rgba(120, 140, 255, 0.55); transition: color 500ms ease, text-shadow 500ms ease; }
+.lz-run.is-done .lz-join-c { color: #dffaf0; text-shadow: 0 0 14px rgba(63, 224, 176, 0.55); }
+.lz-join-n small { font-size: 12.5px; color: var(--i3); }
+.lz-join-bar { position: relative; height: 3px; border-radius: 2px; background: rgba(143, 160, 255, 0.14); }
+.lz-join-bar i { position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(90deg, #4257ff, var(--b)); box-shadow: 0 0 8px rgba(120, 140, 255, 0.6); transform-origin: left; transform: scaleX(var(--j, 0)); }
+.lz-run.is-done .lz-join-bar i { background: linear-gradient(90deg, #4257ff, var(--g) 70%); box-shadow: 0 0 10px rgba(63, 224, 176, 0.6); }
+.lz-join-last { display: flex; align-items: center; gap: 8px; min-width: 0; font-size: 12px; color: var(--i3); }
+.lz-join-av { display: grid; place-items: center; flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%; background: rgba(143, 160, 255, 0.18); color: var(--b); font-size: 10px; font-style: normal; font-weight: 700; }
+.lz-join-who { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lz-join-last.is-new .lz-join-av { animation: lzPop 380ms var(--ease-out); }
+@keyframes lzPop { 0% { transform: scale(0.4); } 70% { transform: scale(1.15); } }
+
+/* 03 · Estado: de «Abierto» a «Completado» */
+.lz-close { display: grid; gap: 6px; }
+.lz-close-st { position: relative; display: flex; align-items: center; gap: 10px; height: 32px; font-size: 20px; font-weight: 700; font-stretch: 108%; letter-spacing: -0.02em; color: var(--i2); }
+.lz-close-st i { width: 9px; height: 9px; border-radius: 50%; background: rgba(196, 205, 245, 0.3); transition: background 400ms ease, box-shadow 400ms ease; }
+.lz-close-a, .lz-close-b { transition: opacity 400ms ease, transform 500ms var(--ease-out); }
+.lz-close-b { position: absolute; left: 19px; opacity: 0; transform: translateY(8px); color: #dffaf0; text-shadow: 0 0 14px rgba(63, 224, 176, 0.5); }
+.lz-close-sub { font-size: 12px; color: var(--i3); opacity: 0.35; transition: opacity 500ms ease 250ms, color 500ms ease; }
+.lz-run.is-done .lz-close-st i { background: var(--g); box-shadow: 0 0 0 4px rgba(63, 224, 176, 0.18), 0 0 10px #14c492; }
+.lz-run.is-done .lz-close-a { opacity: 0; transform: translateY(-8px); }
+.lz-run.is-done .lz-close-b { opacity: 1; transform: none; }
+.lz-run.is-done .lz-close-sub { opacity: 1; color: var(--i2); }
+
+@media (max-width: 900px) {
+  .lz-steps { grid-template-columns: minmax(0, 1fr); }
+  .lz-step + .lz-step { border-left: 0; border-top: 1px solid var(--hl); }
+  /* La regla se queda fija bajo el menú mientras se leen los tres momentos */
+  .lz-ruler { position: sticky; z-index: 5; top: calc(var(--nav-h, 72px) + 4px); --rx: 22px; background: linear-gradient(180deg, #0a0c22 0%, #090b20 86%, rgba(9, 11, 32, 0)); }
+  .lz-run-aurora i:nth-child(1) { left: -120px; }
+}
+@media (max-width: 520px) {
+  .lz-run-id > span { display: none; }
+  .lz-ruler-lbl:not([style*="--d: 0"]):not([style*="--d: 12"]) { display: none; }
+  .lz-spare-lbl { display: none; }
+  .lz-run.is-done .lz-ruler-lbl[style*="--d: 12"] { opacity: 1; }
+}
+
+/* ══ Conectores de esquema (regla → columnas) ══
+   Una línea fina apagada y, encima, la misma línea que se «traza» (pathLength 1) cuando su momento se enciende */
+.lz-links { position: relative; height: 64px; margin-top: -8px; }
+.lz-links svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.lz-ln, .lz-ln-on { fill: none; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.lz-ln { stroke: rgba(143, 160, 255, 0.16); stroke-dasharray: 2 4; }
+.lz-ln-on { stroke: var(--b); stroke-dasharray: 1; stroke-dashoffset: 1; filter: drop-shadow(0 0 4px rgba(120, 140, 255, 0.9)); transition: stroke-dashoffset 900ms var(--ease-out), stroke 500ms ease; }
+.lz-ln-on.is-on, .lz-ln-on.is-past { stroke-dashoffset: 0; }
+.lz-ln-on.is-past { stroke: rgba(143, 160, 255, 0.45); filter: none; }
+.lz-ln-dot { fill: #0a0c22; stroke: rgba(143, 160, 255, 0.35); stroke-width: 1; transition: fill 400ms ease, stroke 400ms ease; }
+.lz-ln-dot.is-on, .lz-ln-dot.is-past { fill: var(--b); stroke: var(--b); }
+.lz-run.is-done .lz-ln-on.is-on { stroke: var(--g); filter: drop-shadow(0 0 4px rgba(63, 224, 176, 0.9)); }
+.lz-run.is-done .lz-ln-dot.is-on { fill: var(--g); stroke: var(--g); }
+/* Con la regla, las columnas ya no llevan línea arriba: el conector llega a su número */
+.lz-steps { border-top: 0; }
+.lz-step + .lz-step { border-left: 1px solid var(--hl); }
+.lz-step { padding-top: 8px; }
+.lz-step::before { display: none; }
+.lz-step-n { margin-left: 4px; }
+
+/* Lecturas de la misma altura, alineadas en una línea limpia; el contador sin hueco tras el número */
+.lz-mini { box-sizing: border-box; min-height: 132px; align-content: center; }
+.lz-join-c { min-width: 0; }
+
+@media (max-width: 900px) {
+  .lz-links { display: none; }
+  .lz-steps { border-top: 1px solid var(--hl); }
+  .lz-step { padding-top: 26px; }
+  .lz-step + .lz-step { border-left: 0; }
+  .lz-mini { min-height: 0; }
+}
+
+/* ══ Acabado sobrio ══
+   Menos efecto y más precisión, como un panel de instrumentos de verdad: sin halos ni textos que brillan, sin
+   aurora, una sola luz de acento, líneas de 1 px, cifras tabulares y texto en tipo de frase (no todo en
+   mayúsculas espaciadas). Las lecturas dejan de ser cajas hundidas y pasan a ser una tabla bajo una línea. */
+.lz-run {
+  background: linear-gradient(180deg, #0d0f21 0%, #090a17 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 30px 60px -34px rgba(12, 16, 60, 0.5);
+}
+html[data-theme="dark"] .lz-run { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.07); }
+.lz-run { --hl: rgba(255, 255, 255, 0.08); --i2: rgba(232, 236, 255, 0.66); --i3: rgba(214, 220, 245, 0.44); }
+.lz-run::after { opacity: 0.035; }
+.lz-run-aurora { display: none; }
+
+.lz-run-id { gap: 8px; font-size: 13px; font-weight: 600; font-stretch: 100%; letter-spacing: 0; text-transform: none; color: var(--i1); }
+.lz-run-id i { width: 6px; height: 6px; box-shadow: none; animation: none; }
+.lz-run.is-done .lz-run-id i { box-shadow: none; }
+.lz-replay { height: 30px; background: transparent; font-size: 12.5px; font-weight: 500; color: var(--i2); }
+
+/* Regla */
+.lz-ruler-fill, .lz-run.is-done .lz-ruler-fill { box-shadow: none; }
+.lz-ruler-fill { background: var(--b); }
+.lz-run.is-done .lz-ruler-fill { background: var(--g); }
+.lz-ruler-ticks i { background: rgba(255, 255, 255, 0.16); }
+.lz-ruler-ticks i.is-day { background: rgba(255, 255, 255, 0.34); }
+.lz-run.is-done .lz-ruler-ticks i.is-spare { background: rgba(63, 224, 176, 0.45); }
+.lz-ruler-spare { background: repeating-linear-gradient(-45deg, rgba(63, 224, 176, 0.2) 0 1px, transparent 1px 5px); }
+.lz-ruler-lbl { letter-spacing: 0; font-weight: 500; }
+.lz-spare-lbl { font-size: 11px; font-weight: 600; letter-spacing: 0; text-transform: none; }
+.lz-needle { background: rgba(255, 255, 255, 0.5); }
+.lz-needle::after { width: 7px; height: 7px; margin-left: -3.5px; top: 27px; box-shadow: 0 0 0 3px #0c0e1f; }
+.lz-run.is-done .lz-needle::after { background: var(--g); box-shadow: 0 0 0 3px #0c0e1f; }
+.lz-needle-tag { gap: 7px; padding: 4px 8px; border-radius: 6px; background: #f3f5ff; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; color: #0b0d1c; font-weight: 600; letter-spacing: 0; }
+.lz-run.is-done .lz-needle-tag { background: var(--g); box-shadow: none; color: #03140e; }
+
+/* Conectores: líneas ortogonales de 1 px, sin puntos ni brillo */
+.lz-ln { stroke: rgba(255, 255, 255, 0.1); stroke-dasharray: none; }
+.lz-ln-on { stroke: rgba(255, 255, 255, 0.6); filter: none; }
+.lz-ln-on.is-past { stroke: rgba(255, 255, 255, 0.26); }
+.lz-run.is-done .lz-ln-on.is-on { stroke: var(--g); filter: none; }
+.lz-ln-dot { display: none; }
+
+/* Columnas */
+.lz-step.is-on, .lz-run.is-done .lz-step.is-on { background: rgba(255, 255, 255, 0.022); }
+.lz-step-top { align-items: baseline; }
+.lz-step-n { margin-left: 0; font-family: inherit; font-size: 12.5px; font-style: normal; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: 0.02em; line-height: 1.2; color: var(--i3); }
+.lz-step.is-on .lz-step-n, .lz-step.is-past .lz-step-n { color: var(--i1); }
+.lz-run.is-done .lz-step[data-step="3"] .lz-step-n { color: var(--g); }
+.lz-step-d { padding: 0; box-shadow: none; font-size: 12.5px; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--i3); }
+.lz-step h3 { margin-top: 12px; font-size: clamp(21px, 1.9vw, 24px); font-weight: 650; letter-spacing: -0.025em; }
+.lz-step > p { margin-bottom: 28px; font-size: 15px; }
+
+/* Lecturas: tabla bajo una línea fina */
+.lz-mini { min-height: 122px; padding: 16px 0 0; border-radius: 0; background: none; box-shadow: none; border-top: 1px solid var(--hl); align-content: start; }
+.lz-cfg { gap: 8px; }
+.lz-cfg span.is-set b { text-shadow: none; }
+.lz-cfg b { font-weight: 600; }
+.lz-join-c, .lz-run.is-done .lz-join-c { font-size: 30px; font-weight: 650; font-stretch: 100%; text-shadow: none; color: var(--i1); }
+.lz-join-bar { height: 2px; background: rgba(255, 255, 255, 0.1); }
+.lz-join-bar i, .lz-run.is-done .lz-join-bar i { box-shadow: none; background: var(--b); }
+.lz-run.is-done .lz-join-bar i { background: var(--g); }
+.lz-join-av { background: rgba(255, 255, 255, 0.08); color: var(--i1); }
+.lz-close-st { height: 30px; font-size: 18px; font-weight: 650; font-stretch: 100%; }
+.lz-close-st i { width: 8px; height: 8px; }
+.lz-close-b { text-shadow: none; color: var(--g); }
+.lz-run.is-done .lz-close-st i { box-shadow: none; }
+.lz-close-sub { font-size: 12.5px; }
+
+@media (max-width: 900px) {
+  .lz-ruler { background: #0c0e1f; box-shadow: 0 -34px 0 #0c0e1f, 0 10px 12px -6px #0c0e1f; }
+  .lz-mini { min-height: 0; }
+}
+/* Grises con más contraste: las etiquetas secundarias (Producto, Precio…, «30 personas · 12 días») se leían
+   demasiado apagadas sobre el grafito. Siguen por debajo del blanco, pero ya pasan holgadas de AA. */
+.lz-run { --i2: rgba(232, 236, 255, 0.76); --i3: rgba(214, 220, 245, 0.62); }
+/* En móvil y tablet, el fondo que la regla fija extiende hacia arriba (para tapar el texto que pasa por detrás
+   al quedarse pegada) tapaba la barra del panel cuando aún no estaba pegada. La barra va por encima. */
+.lz-run-bar { position: relative; z-index: 6; background: #0d0f21; }

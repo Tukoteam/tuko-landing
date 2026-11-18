@@ -310,6 +310,8 @@ for (const file of htmlFiles) {
       pathOnly.startsWith("/blog/") ||
       pathOnly === "/tuko-ai" ||
       pathOnly === "/tuko-ai.html" ||
+      pathOnly === "/lanzamientos" ||
+      pathOnly === "/lanzamientos.html" ||
       pathOnly === "/privacidad" ||
       pathOnly === "/privacidad.html" ||
       pathOnly === "/terminos" ||
@@ -319,6 +321,7 @@ for (const file of htmlFiles) {
         !raw.startsWith(`${host}/en`) &&
         (/\/blog(\/|$)/.test(raw) ||
           /\/tuko-ai(\.html)?(\/|$|\?|#)/.test(raw) ||
+          /\/lanzamientos(\.html)?(\/|$|\?|#)/.test(raw) ||
           /\/privacidad(\.html)?(\/|$|\?|#)/.test(raw) ||
           /\/terminos(\.html)?(\/|$|\?|#)/.test(raw)));
 

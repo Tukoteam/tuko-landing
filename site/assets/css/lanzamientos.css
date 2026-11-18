@@ -1,0 +1,2920 @@
+/* Built from ./lanzamientos/ — edit parts, not this file */
+/* ══════════════════════════════
+   LANZAMIENTOS · ESCENARIO DEL HERO
+   Como Inicio y tuko AI: un escenario oscuro a pantalla completa (también en modo claro), con aurora y grano.
+   En claro termina como una lámina con las esquinas de abajo redondeadas; en oscuro se funde con la página.
+   Mientras el nav está encima (sin scroll), su logo y sus textos pasan a blanco.
+══════════════════════════════ */
+body { background: var(--hero-ground); }
+.skip-link { position: absolute; z-index: 9999; left: -9999px; top: 8px; padding: 8px 16px; border-radius: 8px; background: var(--blue); color: #fff; font-weight: 600; text-decoration: none; }
+.skip-link:focus { left: 8px; }
+
+.lz-hero { padding: 0; }
+.lz-stage {
+  --lz-ink: #f3f5ff;
+  --lz-ink-2: rgba(225, 230, 255, 0.74);
+  --lz-ink-3: rgba(200, 208, 245, 0.52);
+  --lz-line: rgba(143, 160, 255, 0.16);
+  --lz-blue: #8fa0ff;
+  --lz-green: #3fe0b0;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: max(720px, 100svh);
+  background:
+    radial-gradient(70% 60% at 76% 46%, #111845 0%, transparent 72%),
+    linear-gradient(180deg, #080a1d 0%, #05060f 100%);
+  color: var(--lz-ink);
+}
+html:not([data-theme="dark"]) .lz-stage {
+  border-radius: 0 0 clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px);
+  box-shadow: 0 40px 80px -50px rgba(20, 30, 120, 0.5);
+}
+html[data-theme="dark"] .lz-stage {
+  background:
+    radial-gradient(70% 60% at 76% 46%, #111845 0%, transparent 72%),
+    linear-gradient(180deg, #080a1d 0%, var(--hero-ground) 100%);
+}
+html[data-theme="dark"] .lz-stage::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 280px;
+  background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--hero-ground) 80%, transparent) 70%, var(--hero-ground) 100%);
+  pointer-events: none;
+}
+
+/* Aurora: dos luces de la marca detrás de la ficha y un verde que solo sube cuando el lanzamiento llega al mínimo */
+.lz-aurora { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.lz-aurora i { position: absolute; border-radius: 50%; filter: blur(90px); }
+.lz-aurora i:nth-child(1) { width: 560px; height: 560px; right: 6%; top: -14%; background: #3445e6; opacity: 0.5; animation: lzDriftA 19s ease-in-out infinite; }
+.lz-aurora i:nth-child(2) { width: 420px; height: 420px; right: 32%; bottom: -30%; background: #6d4dff; opacity: 0.28; animation: lzDriftB 23s ease-in-out infinite; }
+.lz-aurora i:nth-child(3) {
+  width: 380px;
+  height: 380px;
+  right: 2%;
+  bottom: 4%;
+  background: #14c492;
+  opacity: 0.08;
+  transition: opacity 1600ms ease;
+  animation: lzDriftC 21s ease-in-out infinite;
+}
+.lz-stage.is-made .lz-aurora i:nth-child(3) { opacity: 0.26; }
+@keyframes lzDriftA { 50% { transform: translate3d(-70px, 50px, 0) scale(1.08); } }
+@keyframes lzDriftB { 50% { transform: translate3d(90px, -40px, 0) scale(0.92); } }
+@keyframes lzDriftC { 50% { transform: translate3d(-40px, -60px, 0) scale(1.12); } }
+
+.lz-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+html[data-theme="dark"] .lz-grain { -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent); mask-image: linear-gradient(180deg, #000 55%, transparent); }
+
+/* Nav sobre el escenario: blanco hasta que se baja (entonces vuelve a su cápsula de siempre) */
+header > nav:not(.is-scrolled) { --ink: #f3f5ff; --hover-fill: rgba(255, 255, 255, 0.08); }
+header > nav:not(.is-scrolled) .nav-logo img { filter: brightness(0) invert(1); }
+header > nav:not(.is-scrolled) .lang-opt { color: rgba(243, 245, 255, 0.75); }
+html:not([data-theme="dark"]) header > nav:not(.is-scrolled) .lang-opt.active { color: #10142e; }
+
+/* ── Composición: texto a la izquierda, la ficha del lanzamiento a la derecha ── */
+.lz-grid {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  align-items: center;
+  gap: clamp(40px, 5vw, 88px);
+  max-width: 1240px;
+  min-height: inherit;
+  margin: 0 auto;
+  padding: calc(var(--nav-h, 72px) + clamp(28px, 3vw, 48px)) clamp(24px, 4.5vw, 64px) clamp(56px, 6vw, 88px);
+}
+
+@keyframes lzRise { from { opacity: 0.01; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes lzFocus { from { opacity: 0.01; filter: blur(12px); transform: translateY(0.06em); } to { opacity: 1; filter: blur(0); transform: none; } }
+
+@media (max-width: 960px) {
+  .lz-grid { grid-template-columns: minmax(0, 1fr); gap: 44px; padding: calc(var(--nav-h, 64px) + 32px) 20px 48px; text-align: center; }
+}
+@media (max-width: 520px) {
+  .lz-grid { padding-left: 16px; padding-right: 16px; }
+}
+
+/* Provisional (bloque 1): hueco claro bajo el hero hasta montar «Cómo funciona» */
+
+/* ══════════════════════════════
+   LANZAMIENTOS · TEXTO DEL HERO
+   Misma familia que Inicio: Mona ancha y apretada, una sola palabra en serif cursiva por titular.
+══════════════════════════════ */
+/* Cabecera impresa (en lugar de la típica pastilla con punto): una línea fina y mayúsculas espaciadas,
+   como el encabezado de un ticket. La línea se «traza» al entrar. */
+.lz-kicker {
+  display: inline-flex;
+  margin: 0;
+  align-items: center;
+  gap: 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  font-stretch: 112%;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lz-ink-2);
+  animation: lzRise 700ms var(--ease-out) 80ms both;
+}
+.lz-kicker::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
+  transform-origin: left;
+  animation: lzRule 900ms var(--ease-out) 200ms both;
+}
+.lz-kicker i { margin: 0 -0.35em 0 -0.15em; font-style: normal; opacity: 0.6; }
+.lz-kicker b { font-weight: inherit; color: var(--lz-blue); transition: color 1200ms ease; }
+.lz-stage.is-made .lz-kicker b { color: var(--lz-green); }
+@keyframes lzRule { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+.lz-title {
+  margin: 24px 0 0;
+  font-size: clamp(40px, 4.1vw, 68px);
+  font-weight: 700;
+  font-stretch: 106%;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  color: var(--lz-ink);
+  text-wrap: balance;
+}
+.lz-title > span { display: block; white-space: nowrap; animation: lzFocus 1000ms var(--ease-out) both; }
+.lz-title > span:nth-child(1) { animation-delay: 140ms; }
+.lz-title > span:nth-child(2) { animation-delay: 260ms; }
+.lz-title em {
+  font-family: 'Roboto Serif', Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-stretch: 100%;
+  letter-spacing: -0.03em;
+  color: var(--lz-blue);
+  transition: color 1200ms ease;
+}
+/* Cuando la ficha llega al mínimo, «ya está vendido» pasa a verde: el titular se cumple */
+.lz-stage.is-made .lz-title em { color: var(--lz-green); }
+
+.lz-lead {
+  max-width: 31em;
+  margin: 26px 0 0;
+  font-size: clamp(17.5px, 1.45vw, 20px);
+  line-height: 1.55;
+  color: var(--lz-ink-2);
+  text-wrap: pretty;
+  animation: lzRise 800ms var(--ease-out) 380ms both;
+}
+.lz-lead b { font-weight: 600; color: var(--lz-ink); }
+
+.lz-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; animation: lzRise 800ms var(--ease-out) 480ms both; }
+.lz-cta,
+.lz-ghost {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 56px;
+  padding: 0 24px 0 28px;
+  overflow: hidden;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  font-stretch: 105%;
+  letter-spacing: -0.015em;
+  text-decoration: none;
+  transition: transform 160ms var(--ease-out), box-shadow 250ms ease, background-color 250ms ease;
+}
+.lz-cta {
+  background: #fff;
+  color: #10142e;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4), 0 14px 40px -12px rgba(120, 140, 255, 0.7);
+}
+.lz-cta svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 200ms var(--ease-out); }
+.lz-cta::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(66, 87, 255, 0.18) 50%, transparent 65%) -100% 0 / 200% 100% no-repeat;
+  animation: lzCtaShine 5s ease-in-out 2.4s infinite;
+}
+@keyframes lzCtaShine { 0%, 70% { background-position: 150% 0; } 100% { background-position: -50% 0; } }
+.lz-ghost {
+  padding: 0 26px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--lz-ink);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+.lz-cta:active, .lz-ghost:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .lz-cta:hover { box-shadow: 0 0 0 1px #fff, 0 18px 48px -12px rgba(120, 140, 255, 0.95); }
+  .lz-cta:hover svg { transform: translateX(3px); }
+  .lz-ghost:hover { background: rgba(255, 255, 255, 0.1); }
+}
+.lz-cta:focus-visible, .lz-ghost:focus-visible { outline: 2px solid var(--lz-blue); outline-offset: 3px; }
+
+.lz-note { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 20px 0 0; font-size: 14px; color: var(--lz-ink-3); animation: lzRise 800ms var(--ease-out) 560ms both; }
+.lz-note i { width: 4px; height: 4px; border-radius: 50%; background: currentColor; opacity: 0.6; }
+
+@media (max-width: 960px) {
+  .lz-copy { display: grid; justify-items: center; }
+  .lz-lead { margin-left: auto; margin-right: auto; }
+  .lz-actions, .lz-note { justify-content: center; }
+  .lz-title { font-size: clamp(38px, 9.6vw, 64px); font-stretch: 102%; letter-spacing: -0.04em; line-height: 1.02; }
+  .lz-title > span { white-space: normal; }
+}
+@media (max-width: 520px) {
+  .lz-actions { width: 100%; }
+  .lz-cta, .lz-ghost { flex: 1 1 100%; justify-content: center; }
+}
+
+/* ══════════════════════════════
+   LANZAMIENTOS · LA IMPRESORA DE PEDIDOS
+   Cada compra del lanzamiento imprime una línea en un ticket térmico que sale de la impresora hacia arriba.
+   Al llegar al mínimo, la impresora saca el bloque «Mínimo alcanzado» y cae un sello de tinta «Se fabrica».
+   Debajo, el recuento por tallas (lo que la tienda necesita para fabricar). Lo mueve lanzamientos.js.
+══════════════════════════════ */
+.lz-visual {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 560px;
+  animation: lzRise 1000ms var(--ease-out) 240ms both;
+}
+
+/* ── El papel: crece hacia arriba desde la ranura; arriba se pierde en la oscuridad ── */
+.lz-paper-win {
+  position: relative;
+  z-index: 3;
+  width: min(330px, 86%);
+  height: clamp(380px, 52vh, 480px);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 34%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 34%);
+  perspective: 900px;
+  perspective-origin: 50% 100%;
+}
+.lz-paper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 26px 22px 14px;
+  background:
+    linear-gradient(90deg, rgba(40, 36, 30, 0.10) 0%, rgba(40, 36, 30, 0.02) 6%, transparent 14%, transparent 86%, rgba(40, 36, 30, 0.02) 94%, rgba(40, 36, 30, 0.12) 100%),
+    radial-gradient(90% 50% at 22% 30%, rgba(255, 255, 255, 0.55), transparent 70%),
+    linear-gradient(180deg, #ecE9e1 0%, #f8f6f0 55%, #f3f1ea 100%);
+  color: #2a2c35;
+  text-shadow: 0 0 0.4px rgba(42, 44, 53, 0.55);
+  transform: rotateX(14deg);
+  transform-origin: 50% 100%;
+  font-stretch: 82%;
+  font-variant-numeric: tabular-nums;
+  text-align: left;
+  /* Borde de arriba arrancado en zigzag */
+  -webkit-mask-image: linear-gradient(#000, #000), conic-gradient(from -45deg at 50% 0, #000 90deg, transparent 0);
+  -webkit-mask-size: 100% calc(100% - 7px), 14px 7px;
+  -webkit-mask-position: 0 100%, 0 0;
+  -webkit-mask-repeat: no-repeat, repeat-x;
+  mask-image: linear-gradient(#000, #000), conic-gradient(from -45deg at 50% 0, #000 90deg, transparent 0);
+  mask-size: 100% calc(100% - 7px), 14px 7px;
+  mask-position: 0 100%, 0 0;
+  mask-repeat: no-repeat, repeat-x;
+}
+/* Textura de papel térmico */
+.lz-paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.42;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.25 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.02 0.9' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.43 0 0 0 0 0.4 0 0 0 -0.32 0.17'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.52 0 0 0 0 0.47 0 0 0 0.22 -0.06'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23b)'/%3E%3C/svg%3E");
+  background-size: 120px 120px, 260px 260px, 400px 400px;
+}
+/* Tinta térmica: el punteado del cabezal deja micro-huecos en el negro */
+.lz-p-head > span, .lz-lines {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='i'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.9' numOctaves='1' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3.2 2.75'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23i)'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='i'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.9' numOctaves='1' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3.2 2.75'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23i)'/%3E%3C/svg%3E");
+  -webkit-mask-size: 90px 90px;
+  mask-size: 90px 90px;
+}
+
+/* Cabecera del ticket */
+.lz-p-head { display: grid; justify-items: center; gap: 4px; padding-bottom: 4px; text-align: center; }
+.lz-p-logo { width: 42px; height: auto; fill: #23252e; }
+/* Foto del producto tramada (blanco y negro, punto a punto), como la imprime una térmica */
+.lz-p-photo { display: block; width: 192px; height: 144px; margin: 6px auto 0; image-rendering: pixelated; image-rendering: crisp-edges; }
+.lz-p-title { margin-top: 6px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+.lz-p-sub { font-size: 12px; font-weight: 500; letter-spacing: 0.04em; color: #5c5f6b; }
+.lz-p-note { margin-top: 2px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #6a6d78; }
+.lz-p-price { margin-top: 4px; padding: 3px 10px; border-radius: 999px; background: rgba(35, 37, 46, 0.07); font-size: 12px; font-weight: 600; color: #3a3d48; }
+.lz-p-price b { font-weight: 800; color: #23252e; }
+.lz-p-price s { margin-left: 4px; color: #8a8d98; }
+.lz-p-rule { height: 0; margin: 8px 0; border-top: 1.5px dashed rgba(35, 37, 46, 0.35); }
+
+/* Líneas de pedido */
+.lz-lines { display: grid; margin: 0; padding: 0; list-style: none; }
+/* Cada pedido, en dos líneas: nº · comprador · importe; debajo, variante · ciudad · hora */
+.lz-line {
+  display: grid;
+  grid-template-columns: 3.1em minmax(0, 1fr) auto;
+  grid-template-areas: 'num name price' '. meta .';
+  align-items: baseline;
+  column-gap: 8px;
+  row-gap: 1px;
+  padding: 6px 0 5px;
+  border-bottom: 1px dotted rgba(42, 44, 53, 0.18);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.lz-line .num { grid-area: num; font-weight: 800; }
+.lz-line .nm { grid-area: name; overflow: hidden; text-overflow: ellipsis; font-weight: 700; }
+.lz-line .pr { grid-area: price; font-weight: 700; }
+.lz-line .mt { grid-area: meta; display: flex; align-items: center; gap: 6px; overflow: hidden; font-size: 11px; font-weight: 500; color: #6a6d78; }
+.lz-line .mt i { width: 3px; height: 3px; border-radius: 50%; background: currentColor; opacity: 0.6; }
+.lz-line .sz { padding: 0 4px; border: 1.1px solid #2a2c35; border-radius: 3px; font-size: 10px; font-weight: 700; line-height: 1.45; color: #2a2c35; }
+.lz-line .ok { margin-left: auto; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 9.5px; }
+/* La línea recién impresa sale de la ranura revelándose de abajo arriba, a saltos, como un cabezal térmico */
+.lz-line.is-new { animation: lzInkUp 700ms ease-out both; }
+@keyframes lzInkUp { from { opacity: 0.25; filter: blur(0.6px); } to { opacity: var(--ink, 1); filter: none; } }
+.lz-line { opacity: var(--ink, 1); }
+
+/* Bloque «Mínimo alcanzado» */
+.lz-p-made { position: relative; display: grid; justify-items: center; gap: 2px; padding: 10px 0 6px; text-align: center; }
+.lz-p-made strong { font-size: 19px; font-weight: 900; font-stretch: 100%; letter-spacing: 0.02em; text-transform: uppercase; }
+.lz-p-made > span:not(.lz-ink) { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5c5f6b; }
+/* Sin clip-path: el sello sobresale del bloque y no debe recortarse */
+.lz-p-made.is-new { animation: lzMade 520ms steps(8, end) both; }
+@keyframes lzMade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* El sello de tinta: cae sobre los totales al completarse el lanzamiento */
+.lz-ink {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 70px;
+  translate: -50% 0;
+  display: grid;
+  justify-items: center;
+  padding: 8px 14px 6px;
+  border: 3.5px solid #0f9a73;
+  border-radius: 10px;
+  color: #0f9a73;
+  font-size: 25px;
+  font-weight: 900;
+  font-stretch: 112%;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+  mix-blend-mode: multiply;
+  rotate: -9deg;
+  opacity: 0;
+  pointer-events: none;
+  /* Tinta irregular: el sello no carga igual en todo el borde */
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='120'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.6 1.75'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='120'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.6 1.75'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  -webkit-mask-size: cover;
+  mask-size: cover;
+}
+.lz-ink small { margin-top: 3px; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; }
+.lz-ink.is-on { animation: lzInk 460ms cubic-bezier(0.2, 1.5, 0.4, 1) 420ms both; }
+@keyframes lzInk {
+  0% { opacity: 0; scale: 1.9; }
+  55% { opacity: 0.95; scale: 0.94; }
+  100% { opacity: 0.95; scale: 1; }
+}
+
+/* ── La impresora de tickets ──
+   Un bloque compacto como una térmica de verdad: cara superior con la ranura y la barra de corte, la tapa del rollo
+   (curva por delante y con la línea de la bisagra), y un frontal con una tira LCD, el botón de avance de papel,
+   dos luces y la fila de variantes grabada. Aluminio anodizado oscuro con volumen y sombra en el «suelo». */
+.lz-printer {
+  position: relative;
+  z-index: 2;
+  width: min(408px, 100%);
+  margin-top: -10px;
+  border-radius: 22px 22px 28px 28px;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 0%, transparent 16%, transparent 76%, rgba(0, 0, 0, 0.32) 100%),
+    linear-gradient(180deg, #1c2048 0%, #141739 45%, #0b0d26 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 1px 0 0 rgba(255, 255, 255, 0.05),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.55),
+    0 1px 0 rgba(143, 160, 255, 0.12),
+    0 34px 60px -26px rgba(0, 0, 0, 0.9),
+    0 12px 24px -16px rgba(0, 0, 0, 0.8);
+}
+/* Grano fino de metal anodizado */
+.lz-printer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Cara superior con la ranura (el papel entra en ella) */
+.lz-pr-top {
+  position: relative;
+  height: 28px;
+  border-radius: 22px 22px 0 0;
+  background: linear-gradient(180deg, #262c62 0%, #222859 30%, #2c3370 52%, #1e2352 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+}
+.lz-pr-top::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  width: calc(min(330px, 86%) + 14px);
+  height: 8px;
+  translate: -50% 0;
+  border-radius: 3px 3px 5px 5px;
+  background: linear-gradient(180deg, #000 0%, #04050f 70%, #0b0e28 100%);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 1), 0 -1px 0 rgba(0, 0, 0, 0.6), 0 1.5px 0 rgba(170, 185, 255, 0.38);
+}
+/* Sombra que el papel proyecta sobre el labio de atrás */
+.lz-pr-top::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: min(330px, 86%);
+  height: 8px;
+  translate: -50% 0;
+  background: radial-gradient(60% 100% at 50% 100%, rgba(0, 0, 0, 0.45), transparent 75%);
+  pointer-events: none;
+}
+/* Donde el papel se mete en la ranura: oscuridad y algo de sombra del labio */
+.lz-paper-win::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 18px;
+  background: linear-gradient(0deg, rgba(3, 4, 12, 0.85) 0%, rgba(3, 4, 12, 0.35) 4px, rgba(3, 4, 12, 0.08) 10px, transparent 100%);
+  pointer-events: none;
+}
+
+/* Tapa del rollo: bombeada, con la línea de la bisagra delante */
+.lz-pr-lid {
+  position: relative;
+  height: 34px;
+  background:
+    radial-gradient(120% 140% at 50% -40%, rgba(255, 255, 255, 0.1), transparent 60%),
+    linear-gradient(180deg, #232963 0%, #1a1f4c 100%);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.7), 0 1px 0 rgba(143, 160, 255, 0.14);
+}
+.lz-pr-lid::before {
+  /* Hendidura para abrir la tapa */
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 9px;
+  width: 64px;
+  height: 5px;
+  translate: -50% 0;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #0a0c22, #161a40);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.9), 0 1px 0 rgba(143, 160, 255, 0.16);
+}
+
+.lz-pr-face { position: relative; z-index: 1; padding: 14px 16px 12px; }
+.lz-pr-row { display: flex; align-items: center; gap: 12px; }
+
+/* Tira LCD de una línea, con el progreso debajo */
+.lz-lcd {
+  position: relative;
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  row-gap: 7px;
+  padding: 9px 12px 9px;
+  overflow: hidden;
+  border-radius: 10px;
+  background:
+    radial-gradient(120% 90% at 20% 0%, rgba(90, 108, 255, 0.16), transparent 60%),
+    linear-gradient(180deg, #05071a 0%, #080b22 100%);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.85), inset 0 0 0 1px rgba(143, 160, 255, 0.12), 0 1px 0 rgba(255, 255, 255, 0.07);
+  font-variant-numeric: tabular-nums;
+}
+.lz-lcd::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0) 38%),
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0 1px, transparent 1px 3px);
+  pointer-events: none;
+}
+.lz-lcd-a { display: inline-flex; align-items: baseline; gap: 7px; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lz-ink-3); white-space: nowrap; }
+.lz-lcd-a b { font-size: 22px; font-weight: 700; font-stretch: 112%; letter-spacing: -0.02em; line-height: 1; color: #eef1ff; text-shadow: 0 0 14px rgba(120, 140, 255, 0.5); transition: color 600ms ease, text-shadow 600ms ease; }
+.lz-lcd-a small { margin-left: -4px; font-size: 13px; font-weight: 600; letter-spacing: 0; color: var(--lz-ink-3); }
+.lz-visual.is-made .lz-lcd-a b { color: #dffaf0; text-shadow: 0 0 14px rgba(63, 224, 176, 0.5); }
+.lz-led { align-self: baseline; translate: 0 -0.5px; width: 7px; height: 7px; border-radius: 50%; background: var(--lz-blue); box-shadow: 0 0 8px #4257ff, 0 0 2px #fff inset; }
+/* El punto destella una vez con cada pedido que entra */
+.lz-led.is-ping { animation: lzPing 520ms ease-out; }
+@keyframes lzPing { 0% { background: #fff; box-shadow: 0 0 14px 3px rgba(160, 175, 255, 0.95), 0 0 2px #fff inset; } 100% { } }
+@keyframes lzBlink { 50% { opacity: 0.25; } }
+.lz-visual.is-made .lz-led { background: var(--lz-green); box-shadow: 0 0 10px #14c492, 0 0 2px #fff inset; }
+
+.lz-pr-state { position: relative; display: grid; font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lz-blue); }
+.lz-pr-state > span { grid-area: 1 / 1; justify-self: end; white-space: nowrap; transition: opacity 350ms ease, translate 450ms var(--ease-out); }
+.lz-pr-state .is-b { opacity: 0; translate: 0 5px; color: var(--lz-green); }
+.lz-visual.is-made .lz-pr-state .is-a { opacity: 0; translate: 0 -5px; }
+.lz-visual.is-made .lz-pr-state .is-b { opacity: 1; translate: none; }
+
+.lz-lcd-bar { grid-column: 1 / -1; position: relative; height: 3px; border-radius: 2px; background: rgba(143, 160, 255, 0.14); }
+.lz-lcd-bar i {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #4257ff, #8fa0ff);
+  transform-origin: left;
+  transform: scaleX(calc(var(--n, 0) / var(--goal, 30)));
+  transition: transform 260ms var(--ease-out);
+  box-shadow: 0 0 8px rgba(120, 140, 255, 0.6);
+}
+.lz-visual.is-made .lz-lcd-bar i { background: linear-gradient(90deg, #4257ff 0%, #3fe0b0 70%); box-shadow: 0 0 10px rgba(63, 224, 176, 0.6); }
+
+/* Botón de avance de papel (de goma) y luces de encendido / papel */
+.lz-ctrl { display: grid; justify-items: center; gap: 8px; flex: 0 0 auto; }
+.lz-feedbtn {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 30%, #2d3470 0%, #171b44 70%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 -2px 3px rgba(0, 0, 0, 0.6), 0 0 0 3px #0c0e28, 0 0 0 4px rgba(143, 160, 255, 0.12), 0 4px 8px rgba(0, 0, 0, 0.5);
+  color: rgba(200, 208, 245, 0.55);
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+.lz-feedbtn svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+/* Al arrancar cada lanzamiento, el botón se «pulsa» (avance de la cabecera) */
+.lz-visual.is-swap .lz-feedbtn { transform: translateY(1px) scale(0.96); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 2px rgba(0, 0, 0, 0.6), 0 0 0 3px #0c0e28, 0 0 0 4px rgba(143, 160, 255, 0.12), 0 2px 4px rgba(0, 0, 0, 0.5); }
+.lz-leds { display: flex; gap: 6px; }
+.lz-leds i { width: 5px; height: 5px; border-radius: 50%; background: #20254f; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.6); }
+.lz-leds i.is-on { background: var(--lz-green); box-shadow: 0 0 6px #14c492; }
+.lz-visual.is-printing .lz-leds i.is-paper { background: #f5b84a; box-shadow: 0 0 6px #f0a23a; }
+
+/* Variantes: chips grabados en el frontal */
+.lz-sizes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-top: 12px; }
+.lz-sizes span {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  min-width: 0;
+  padding: 7px 9px;
+  border-radius: 8px;
+  background: rgba(5, 7, 22, 0.45);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.7), 0 1px 0 rgba(143, 160, 255, 0.08);
+  transition: background-color 300ms ease;
+}
+.lz-sizes em { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-style: normal; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lz-ink-3); }
+.lz-sizes b { font-size: 15px; font-weight: 700; font-stretch: 108%; letter-spacing: -0.02em; color: var(--lz-ink); font-variant-numeric: tabular-nums; transition: color 300ms ease; }
+.lz-sizes span.is-bump { background: rgba(66, 87, 255, 0.18); }
+.lz-sizes span.is-bump b { color: #fff; }
+
+/* Sombra de contacto en el «suelo» */
+.lz-floor { width: min(440px, 110%); height: 30px; margin-top: -14px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0, 0, 0, 0.7), transparent); filter: blur(6px); pointer-events: none; }
+
+@media (max-width: 960px) {
+  .lz-visual { min-height: 0; }
+  .lz-paper-win { height: 340px; }
+}
+@media (max-width: 520px) {
+  .lz-paper-win { width: 90%; height: 300px; }
+  .lz-paper { padding: 22px 14px 12px; }
+  .lz-line { font-size: 12px; gap: 6px; }
+  .lz-pr-face { padding: 12px 12px 10px; }
+  .lz-sizes span { padding: 6px 7px; }
+  .lz-lcd { padding: 8px 10px; column-gap: 8px; }
+  .lz-lcd-a { gap: 5px; letter-spacing: 0.08em; }
+  .lz-lcd-a b { font-size: 19px; }
+  .lz-pr-state { letter-spacing: 0.08em; }
+  .lz-q { display: none; }
+  .lz-ink { font-size: 21px; top: 66px; }
+}
+
+/* Bucle: al terminar un lanzamiento, el ticket se arranca (corte en zigzag abajo) y se va hacia arriba */
+.lz-paper.is-torn {
+  -webkit-mask-image: linear-gradient(#000, #000), conic-gradient(from -45deg at 50% 0, #000 90deg, transparent 0), conic-gradient(from 135deg at 50% 100%, #000 90deg, transparent 0);
+  -webkit-mask-size: 100% calc(100% - 14px), 14px 7px, 14px 7px;
+  -webkit-mask-position: 0 7px, 0 0, 0 100%;
+  -webkit-mask-repeat: no-repeat, repeat-x, repeat-x;
+  mask-image: linear-gradient(#000, #000), conic-gradient(from -45deg at 50% 0, #000 90deg, transparent 0), conic-gradient(from 135deg at 50% 100%, #000 90deg, transparent 0);
+  mask-size: 100% calc(100% - 14px), 14px 7px, 14px 7px;
+  mask-position: 0 7px, 0 0, 0 100%;
+  mask-repeat: no-repeat, repeat-x, repeat-x;
+}
+/* Mientras cambia de lanzamiento, la pantalla parpadea un instante */
+.lz-visual.is-swap .lz-lcd { animation: lzScreenSwap 700ms ease both; }
+@keyframes lzScreenSwap { 35% { filter: brightness(0.35); } }
+
+/* Bandas del cabezal: líneas horizontales muy tenues, como deja una térmica al imprimir */
+.lz-paper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(104deg, transparent 28%, rgba(255, 255, 255, 0.28) 44%, rgba(255, 255, 255, 0.08) 52%, transparent 64%),
+    repeating-linear-gradient(180deg, rgba(30, 28, 24, 0.022) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, transparent 0 38%, rgba(30, 28, 24, 0.025) 38% 39%, transparent 39% 71%, rgba(30, 28, 24, 0.02) 71% 72%, transparent 72%);
+}
+
+/* Totales y código de barras al final del lanzamiento */
+.lz-p-tot { display: flex; justify-content: space-between; align-items: baseline; width: 100%; margin-top: 2px; font-size: 12.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+.lz-p-tot b { font-size: 14px; font-weight: 900; }
+.lz-bc { display: flex; justify-content: center; align-items: stretch; gap: 1px; height: 34px; margin-top: 10px; }
+.lz-bc i { display: block; background: #1d1e24; }
+.lz-bc i.g { background: transparent; }
+.lz-bc-n { margin-top: 3px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.32em; color: #3a3d48; }
+
+/* Mientras imprime, la máquina vibra un poco */
+.lz-visual.is-printing .lz-printer { animation: lzBuzz 90ms linear infinite; }
+@keyframes lzBuzz {
+  0% { translate: 0 0; }
+  25% { translate: 0.35px 0; }
+  50% { translate: -0.3px 0; }
+  75% { translate: 0.2px 0; }
+}
+
+/* ══════════════════════════════
+   ACABADOS PREMIUM
+   Dos materiales (tapa de grafito satinado y cuerpo azul anodizado), panel frontal biselado, aro metálico en el
+   botón, serigrafías pequeñas, bandeja de variantes hundida y un zócalo oscuro como pie del aparato.
+══════════════════════════════ */
+.lz-printer { border-radius: 22px 22px 18px 18px; }
+
+/* Cara superior y tapa: grafito satinado con brillo especular en la curva */
+.lz-pr-top {
+  background:
+    radial-gradient(70% 160% at 28% -30%, rgba(255, 255, 255, 0.2), transparent 55%),
+    linear-gradient(180deg, #3b4062 0%, #30354f 45%, #2a2e48 100%);
+}
+.lz-pr-lid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+  padding: 0 18px;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0%, transparent 20%, transparent 78%, rgba(0, 0, 0, 0.28) 100%),
+    radial-gradient(90% 120% at 30% -10%, rgba(255, 255, 255, 0.14), transparent 55%),
+    linear-gradient(180deg, #2c3049 0%, #23273e 60%, #1c1f33 100%);
+  box-shadow: none;
+}
+/* Junta de la bisagra: ranura oscura con el canto de abajo iluminado */
+.lz-pr-lid::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: #05060f;
+  box-shadow: 0 1px 0 rgba(160, 175, 255, 0.22);
+}
+.lz-pr-lid::before { content: none; }
+
+/* Serigrafías: texto pequeño impreso en la carcasa */
+.lz-silk { font-size: 8.5px; font-weight: 700; font-stretch: 110%; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(205, 212, 245, 0.38); }
+.lz-model { letter-spacing: 0.24em; }
+.lz-pr-lid .lz-leds { display: flex; gap: 12px; }
+.lz-pr-lid .lz-leds > span { display: inline-flex; align-items: center; gap: 5px; font-size: 8.5px; font-weight: 700; font-stretch: 110%; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(205, 212, 245, 0.38); }
+.lz-pr-lid .lz-leds i { width: 5px; height: 5px; border-radius: 50%; background: #2a2e4a; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.6); }
+.lz-pr-lid .lz-leds i.is-on { background: var(--lz-green); box-shadow: 0 0 6px #14c492; }
+.lz-visual.is-printing .lz-pr-lid .lz-leds i.is-paper { background: #f5b84a; box-shadow: 0 0 6px #f0a23a; }
+
+/* Panel frontal hundido con canto biselado (como una pieza fresada) */
+.lz-pr-face { padding: 12px 14px 14px; }
+.lz-pr-panel {
+  padding: 8px 10px 8px 8px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.12));
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.65),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.lz-lcd { box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.85), inset 0 0 0 1px rgba(143, 160, 255, 0.14), 0 0 0 2px #06071a; }
+
+/* Botón de avance: goma oscura dentro de un aro metálico pulido */
+.lz-ctrl { gap: 5px; }
+.lz-feedring {
+  display: grid;
+  place-items: center;
+  padding: 3px;
+  border-radius: 50%;
+  background: conic-gradient(from 210deg, #8f97be, #eef0fb, #6a7196, #c7cce6, #7c84ab, #e3e6f7, #8f97be);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+.lz-feedbtn {
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(circle at 40% 30%, #2b315f 0%, #141838 75%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 -2px 3px rgba(0, 0, 0, 0.65);
+}
+.lz-visual.is-swap .lz-feedbtn { transform: scale(0.94); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -1px 2px rgba(0, 0, 0, 0.7); }
+
+/* Variantes: una bandeja hundida con separadores finos (no cuatro cajas) */
+.lz-sizes {
+  gap: 0;
+  padding: 3px;
+  border-radius: 11px;
+  background: linear-gradient(180deg, rgba(3, 4, 14, 0.62), rgba(5, 7, 22, 0.42));
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.75), 0 1px 0 rgba(143, 160, 255, 0.08);
+}
+.lz-sizes span { position: relative; background: transparent; box-shadow: none; border-radius: 8px; padding: 7px 10px; }
+.lz-sizes span + span::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 22%;
+  bottom: 22%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(143, 160, 255, 0.2), transparent);
+}
+.lz-sizes span.is-bump { background: rgba(66, 87, 255, 0.2); }
+
+/* Zócalo: el pie del aparato, más oscuro y algo más estrecho */
+.lz-pr-base {
+  width: min(372px, 91%);
+  height: 9px;
+  margin-top: -1px;
+  border-radius: 0 0 12px 12px;
+  background: linear-gradient(180deg, #06071a 0%, #020309 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 6px 12px rgba(0, 0, 0, 0.6);
+}
+.lz-floor { margin-top: -12px; }
+
+@media (max-width: 520px) {
+  .lz-pr-lid { padding: 0 14px; }
+  .lz-pr-lid .lz-leds { gap: 9px; }
+  .lz-pr-face { padding: 10px 10px 12px; }
+  .lz-pr-panel { padding: 7px 8px 7px 7px; }
+  .lz-sizes span { padding: 6px 7px; }
+}
+
+/* Serigrafía de la carcasa: pintura gris clara con algo de cuerpo (una sombra mínima de grosor) y un leve
+   desgaste; el logotipo de Tuko impreso igual que el texto */
+.lz-silk {
+  color: rgba(214, 220, 248, 0.62);
+  text-shadow: 0 0.6px 0 rgba(0, 0, 0, 0.55), 0 -0.4px 0 rgba(255, 255, 255, 0.06);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.4' numOctaves='1' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.6 2.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.4' numOctaves='1' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.6 2.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");
+  -webkit-mask-size: 60px 60px;
+  mask-size: 60px 60px;
+}
+.lz-model { display: inline-flex; align-items: center; gap: 6px; font-size: 9px; letter-spacing: 0.18em; }
+.lz-model svg { width: 9px; height: auto; fill: currentColor; filter: drop-shadow(0 0.6px 0 rgba(0, 0, 0, 0.55)); }
+.lz-model b { font-size: 11px; font-weight: 800; font-stretch: 100%; letter-spacing: -0.01em; text-transform: none; }
+.lz-model i { width: 1px; height: 9px; background: currentColor; opacity: 0.5; }
+.lz-ctrl .lz-silk { font-size: 8px; letter-spacing: 0.24em; }
+.lz-pr-lid .lz-leds > span { color: rgba(214, 220, 248, 0.62); text-shadow: 0 0.6px 0 rgba(0, 0, 0, 0.55); }
+
+/* Entrada: apagada (pantalla y luces sin encender) → se enciende con la prueba de pantalla → sale el papel */
+.lz-lcd > *, .lz-led, .lz-pr-lid .lz-leds i { transition: opacity 500ms ease, background-color 300ms ease, box-shadow 300ms ease; }
+.lz-visual.is-off .lz-lcd > * { opacity: 0.06; }
+.lz-visual.is-off .lz-led,
+.lz-visual.is-off .lz-pr-lid .lz-leds i.is-on { background: #2a2e4a; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.6); }
+.lz-visual.is-boot .lz-lcd > * { opacity: 1; filter: brightness(1.35); }
+.lz-visual.is-boot .lz-lcd-bar i { transform: scaleX(1); }
+
+/* ══════════════════════════════
+   LANZAMIENTOS · CUERPO (común) y CÓMO FUNCIONA
+   Fondo de página (claro u oscuro según el tema). Cabeceras como el resto de la web: rótulo fino, titular
+   Mona con una sola parte en serif cursiva.
+   «Cómo funciona» es un instrumento: un panel oscuro del mismo material que la impresora, con una regla de
+   precisión de 12 días (marcas por día y por cuarto de día) y una aguja que avanza (--p de 0 a 1, desde
+   lanzamientos-body.js). Debajo, los tres momentos como columnas del mismo panel: se encienden al pasar la
+   aguja. El lanzamiento se completa el día 9 y los 3 días que sobran quedan rayados.
+══════════════════════════════ */
+.lz-sec {
+  --lz-acc: var(--blue, #3d50f2);
+  --lz-ok: #0f9d74;
+  --lz-card: rgba(255, 255, 255, 0.72);
+  --lz-edge: rgba(20, 24, 38, 0.08);
+  padding: clamp(80px, 11vw, 150px) 20px 0;
+  color: var(--ink);
+}
+html[data-theme="dark"] .lz-sec {
+  --lz-acc: #8fa0ff;
+  --lz-ok: #3fe0b0;
+  --lz-card: rgba(255, 255, 255, 0.035);
+  --lz-edge: rgba(255, 255, 255, 0.08);
+}
+.lz-sec:last-of-type { padding-bottom: clamp(80px, 11vw, 150px); }
+.lz-wrap { max-width: 1180px; margin: 0 auto; }
+
+.lz-head { max-width: 760px; margin: 0 auto; text-align: center; }
+.lz-head-left { margin: 0; text-align: left; }
+.lz-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 700;
+  font-stretch: 112%;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lz-acc);
+}
+.lz-eyebrow::before { content: ''; width: 20px; height: 1px; background: currentColor; opacity: 0.55; }
+.lz-h2 {
+  margin: 18px 0 0;
+  font-size: clamp(34px, 4.4vw, 58px);
+  font-weight: 700;
+  font-stretch: 106%;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.lz-h2 em { font-family: 'Roboto Serif', Georgia, serif; font-style: italic; font-weight: 500; font-stretch: 100%; letter-spacing: -0.025em; color: var(--lz-acc); }
+.lz-sub { max-width: 36em; margin: 20px auto 0; font-size: clamp(16.5px, 1.35vw, 18.5px); line-height: 1.6; color: var(--ink-2); text-wrap: pretty; }
+
+/* ══ El panel ══ */
+.lz-run {
+  --i1: #f3f5ff;
+  --i2: rgba(222, 228, 255, 0.7);
+  --i3: rgba(196, 205, 245, 0.5);
+  --hl: rgba(143, 160, 255, 0.14);
+  --b: #8fa0ff;
+  --g: #3fe0b0;
+  --bg: #070919;
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  margin-top: clamp(48px, 6vw, 72px);
+  border-radius: clamp(24px, 3vw, 34px);
+  background:
+    radial-gradient(60% 90% at 50% -10%, #131a4a 0%, transparent 70%),
+    linear-gradient(180deg, #0a0c22 0%, var(--bg) 100%);
+  color: var(--i1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 0 0 1px var(--hl),
+    0 40px 80px -40px rgba(30, 40, 140, 0.55),
+    0 90px 140px -90px rgba(66, 87, 255, 0.5);
+}
+html[data-theme="dark"] .lz-run { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), inset 0 0 0 1px var(--hl), 0 50px 90px -50px rgba(0, 0, 0, 0.9); }
+/* Grano fino encima de todo, como en el hero */
+.lz-run::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* Luz azul que sigue a la aguja y una verde que sube al completarse */
+.lz-run-aurora { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.lz-run-aurora i { position: absolute; border-radius: 50%; filter: blur(90px); transition: opacity 1400ms ease; }
+.lz-run-aurora i:nth-child(1) { width: 520px; height: 300px; left: calc(var(--p) * 100% - 260px); top: -160px; background: #3445e6; opacity: 0.45; }
+.lz-run-aurora i:nth-child(2) { width: 460px; height: 260px; right: -60px; bottom: -180px; background: #14c492; opacity: 0; }
+.lz-run.is-done .lz-run-aurora i:nth-child(2) { opacity: 0.22; }
+
+/* Barra superior del panel */
+.lz-run-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 58px; padding: 0 clamp(20px, 3vw, 34px); border-bottom: 1px solid var(--hl); }
+.lz-run-id { display: inline-flex; align-items: center; gap: 10px; min-width: 0; font-size: 11.5px; font-weight: 700; font-stretch: 110%; letter-spacing: 0.16em; text-transform: uppercase; color: var(--i2); white-space: nowrap; }
+.lz-run-id > span { color: var(--i3); }
+.lz-run-id i { flex: 0 0 auto; width: 7px; height: 7px; border-radius: 50%; background: var(--b); box-shadow: 0 0 8px #4257ff; animation: lzLive 1.6s ease-in-out infinite; }
+.lz-run.is-done .lz-run-id i { background: var(--g); box-shadow: 0 0 8px #14c492; animation: none; }
+@keyframes lzLive { 50% { opacity: 0.35; } }
+
+.lz-replay {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 32px;
+  padding: 0 14px 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--i1);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px var(--hl);
+  transition: background-color 200ms ease, transform 160ms var(--ease-out), opacity 300ms ease;
+}
+.lz-replay[hidden] { display: inline-flex; visibility: hidden; opacity: 0; }
+.lz-replay svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.lz-replay:active { transform: scale(0.96); }
+.lz-replay:focus-visible { outline: 2px solid var(--b); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) { .lz-replay:hover { background: rgba(255, 255, 255, 0.11); } }
+
+/* ══ La regla de precisión ══
+   --rx es el margen lateral de la regla; todo lo que se coloca por día usa el ancho útil (100% - 2·rx). */
+.lz-ruler { --rx: clamp(20px, 3vw, 34px); position: relative; height: 112px; }
+.lz-ruler-ticks { position: absolute; left: var(--rx); right: var(--rx); top: 58px; height: 12px; }
+/* Marcas (las crea el JS): largas por día, cortas por cuarto de día */
+.lz-ruler-ticks i { position: absolute; bottom: 0; width: 1px; height: 5px; margin-left: -0.5px; background: rgba(196, 205, 245, 0.22); }
+.lz-ruler-ticks i.is-day { height: 12px; background: rgba(196, 205, 245, 0.45); }
+.lz-run.is-done .lz-ruler-ticks i.is-spare { background: rgba(63, 224, 176, 0.5); }
+.lz-ruler-track { position: absolute; left: var(--rx); right: var(--rx); top: 74px; height: 2px; border-radius: 2px; background: rgba(143, 160, 255, 0.14); }
+.lz-ruler-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgba(143, 160, 255, 0.25), var(--b) 70%, #fff);
+  box-shadow: 0 0 12px rgba(120, 140, 255, 0.7);
+  transform-origin: left;
+  transform: scaleX(var(--p));
+}
+.lz-run.is-done .lz-ruler-fill { background: linear-gradient(90deg, rgba(63, 224, 176, 0.25), var(--g) 80%, #dffaf0); box-shadow: 0 0 12px rgba(63, 224, 176, 0.6); }
+/* Los días que sobran: una banda rayada sobre las marcas */
+.lz-ruler-spare {
+  position: absolute;
+  left: calc(9.2 / 12 * 100%);
+  right: 0;
+  top: -16px;
+  height: 18px;
+  border-radius: 3px;
+  background: repeating-linear-gradient(-45deg, rgba(63, 224, 176, 0.32) 0 1.5px, transparent 1.5px 6px);
+  opacity: 0;
+  transition: opacity 700ms ease 400ms;
+}
+.lz-run.is-done .lz-ruler-spare { opacity: 1; }
+.lz-ruler-lbl,
+.lz-spare-lbl {
+  position: absolute;
+  top: 88px;
+  left: calc(var(--rx) + var(--d) / 12 * (100% - 2 * var(--rx)));
+  translate: -50% 0;
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+  color: var(--i3);
+  white-space: nowrap;
+  transition: opacity 400ms ease;
+}
+.lz-ruler-lbl[style*="--d: 0"] { translate: 0 0; }
+.lz-ruler-lbl[style*="--d: 12"] { translate: -100% 0; }
+.lz-run.is-done .lz-ruler-lbl[style*="--d: 12"] { opacity: 0; }
+.lz-spare-lbl { --d: 10.6; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--g); opacity: 0; transition: opacity 700ms ease 700ms; }
+.lz-run.is-done .lz-spare-lbl { opacity: 1; }
+
+/* Aguja: línea fina con cabeza luminosa sobre la pista y su lectura encima */
+.lz-needle {
+  position: absolute;
+  top: 44px;
+  left: calc(var(--rx) + var(--p) * (100% - 2 * var(--rx)));
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(180deg, transparent, var(--i1) 40%, var(--i1));
+}
+.lz-needle::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 26px;
+  width: 9px;
+  height: 9px;
+  margin-left: -4.5px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(143, 160, 255, 0.35), 0 0 14px 2px rgba(143, 160, 255, 0.8);
+  transition: box-shadow 400ms ease;
+}
+.lz-run.is-done .lz-needle::after { box-shadow: 0 0 0 3px rgba(63, 224, 176, 0.35), 0 0 14px 2px rgba(63, 224, 176, 0.8); }
+.lz-needle-tag {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 0;
+  /* Al principio queda a la derecha de la aguja y al final a la izquierda: nunca se sale */
+  translate: calc(var(--p) * -100%) 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: var(--i1);
+  font-size: 11.5px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: background 400ms ease, color 400ms ease, box-shadow 400ms ease;
+}
+.lz-needle-sep { width: 1px; height: 10px; background: currentColor; opacity: 0.3; }
+.lz-run.is-done .lz-needle-tag { background: rgba(63, 224, 176, 0.16); box-shadow: inset 0 0 0 1px rgba(63, 224, 176, 0.4); color: #dffaf0; }
+
+/* ══ Los tres momentos: columnas del panel ══ */
+.lz-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--hl); }
+.lz-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(24px, 2.6vw, 34px) clamp(20px, 2.6vw, 34px) clamp(26px, 2.8vw, 36px);
+  transition: background-color 600ms ease;
+}
+.lz-step + .lz-step { border-left: 1px solid var(--hl); }
+/* Filo de luz arriba de la columna activa */
+.lz-step::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--b), transparent);
+  box-shadow: 0 0 14px 1px rgba(120, 140, 255, 0.7);
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+.lz-step.is-on { background: linear-gradient(180deg, rgba(143, 160, 255, 0.07), transparent 60%); }
+.lz-step.is-on::before { opacity: 1; }
+.lz-run.is-done .lz-step.is-on { background: linear-gradient(180deg, rgba(63, 224, 176, 0.07), transparent 60%); }
+.lz-run.is-done .lz-step.is-on::before { background: linear-gradient(90deg, transparent, var(--g), transparent); box-shadow: 0 0 14px 1px rgba(63, 224, 176, 0.6); }
+
+.lz-step-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.lz-step-n { font-family: 'Roboto Serif', Georgia, serif; font-size: 34px; font-style: italic; font-weight: 300; line-height: 1; color: var(--i3); transition: color 500ms ease; }
+.lz-step.is-on .lz-step-n, .lz-step.is-past .lz-step-n { color: var(--b); }
+.lz-run.is-done .lz-step[data-step="3"] .lz-step-n { color: var(--g); }
+.lz-step-d { padding: 4px 9px; border-radius: 6px; box-shadow: inset 0 0 0 1px var(--hl); font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--i3); white-space: nowrap; }
+.lz-step h3 { margin: 18px 0 0; font-size: clamp(22px, 2vw, 26px); font-weight: 700; font-stretch: 106%; letter-spacing: -0.03em; color: var(--i1); }
+.lz-step > p { margin: 10px 0 24px; font-size: 15px; line-height: 1.6; color: var(--i2); text-wrap: pretty; }
+
+/* Lectura de cada momento: pantallita hundida, como la LCD de la impresora */
+.lz-mini {
+  margin-top: auto;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(3, 4, 14, 0.7), rgba(8, 10, 30, 0.5));
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.6), inset 0 0 0 1px var(--hl), 0 1px 0 rgba(255, 255, 255, 0.05);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 01 · Ficha: los valores se encienden uno a uno */
+.lz-cfg { display: grid; gap: 9px; }
+.lz-cfg span { display: flex; justify-content: space-between; gap: 12px; }
+.lz-cfg em { font-style: normal; color: var(--i3); }
+.lz-cfg b { font-weight: 650; color: var(--i1); opacity: 0.12; transition: opacity 300ms ease, text-shadow 600ms ease; }
+.lz-cfg s { font-weight: 500; color: var(--i3); }
+.lz-cfg span.is-set b { opacity: 1; text-shadow: 0 0 10px rgba(143, 160, 255, 0.45); }
+
+/* 02 · Contador */
+.lz-join { display: grid; gap: 11px; }
+.lz-join-n { display: flex; align-items: baseline; gap: 8px; }
+.lz-join-c { min-width: 1.3em; font-size: 32px; font-weight: 700; font-stretch: 112%; letter-spacing: -0.03em; line-height: 1; color: #eef1ff; text-shadow: 0 0 14px rgba(120, 140, 255, 0.55); transition: color 500ms ease, text-shadow 500ms ease; }
+.lz-run.is-done .lz-join-c { color: #dffaf0; text-shadow: 0 0 14px rgba(63, 224, 176, 0.55); }
+.lz-join-n small { font-size: 12.5px; color: var(--i3); }
+.lz-join-bar { position: relative; height: 3px; border-radius: 2px; background: rgba(143, 160, 255, 0.14); }
+.lz-join-bar i { position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(90deg, #4257ff, var(--b)); box-shadow: 0 0 8px rgba(120, 140, 255, 0.6); transform-origin: left; transform: scaleX(var(--j, 0)); }
+.lz-run.is-done .lz-join-bar i { background: linear-gradient(90deg, #4257ff, var(--g) 70%); box-shadow: 0 0 10px rgba(63, 224, 176, 0.6); }
+.lz-join-last { display: flex; align-items: center; gap: 8px; min-width: 0; font-size: 12px; color: var(--i3); }
+.lz-join-av { display: grid; place-items: center; flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%; background: rgba(143, 160, 255, 0.18); color: var(--b); font-size: 10px; font-style: normal; font-weight: 700; }
+.lz-join-who { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lz-join-last.is-new .lz-join-av { animation: lzPop 380ms var(--ease-out); }
+@keyframes lzPop { 0% { transform: scale(0.4); } 70% { transform: scale(1.15); } }
+
+/* 03 · Estado: de «Abierto» a «Completado» */
+.lz-close { display: grid; gap: 6px; }
+.lz-close-st { position: relative; display: flex; align-items: center; gap: 10px; height: 32px; font-size: 20px; font-weight: 700; font-stretch: 108%; letter-spacing: -0.02em; color: var(--i2); }
+.lz-close-st i { width: 9px; height: 9px; border-radius: 50%; background: rgba(196, 205, 245, 0.3); transition: background 400ms ease, box-shadow 400ms ease; }
+.lz-close-a, .lz-close-b { transition: opacity 400ms ease, transform 500ms var(--ease-out); }
+.lz-close-b { position: absolute; left: 19px; opacity: 0; transform: translateY(8px); color: #dffaf0; text-shadow: 0 0 14px rgba(63, 224, 176, 0.5); }
+.lz-close-sub { font-size: 12px; color: var(--i3); opacity: 0.35; transition: opacity 500ms ease 250ms, color 500ms ease; }
+.lz-run.is-done .lz-close-st i { background: var(--g); box-shadow: 0 0 0 4px rgba(63, 224, 176, 0.18), 0 0 10px #14c492; }
+.lz-run.is-done .lz-close-a { opacity: 0; transform: translateY(-8px); }
+.lz-run.is-done .lz-close-b { opacity: 1; transform: none; }
+.lz-run.is-done .lz-close-sub { opacity: 1; color: var(--i2); }
+
+@media (max-width: 900px) {
+  .lz-steps { grid-template-columns: minmax(0, 1fr); }
+  .lz-step + .lz-step { border-left: 0; border-top: 1px solid var(--hl); }
+  /* La regla se queda fija bajo el menú mientras se leen los tres momentos */
+  .lz-ruler { position: sticky; z-index: 5; top: calc(var(--nav-h, 72px) + 4px); --rx: 22px; background: linear-gradient(180deg, #0a0c22 0%, #090b20 86%, rgba(9, 11, 32, 0)); }
+  .lz-run-aurora i:nth-child(1) { left: -120px; }
+}
+@media (max-width: 520px) {
+  .lz-run-id > span { display: none; }
+  .lz-ruler-lbl:not([style*="--d: 0"]):not([style*="--d: 12"]) { display: none; }
+  .lz-spare-lbl { display: none; }
+  .lz-run.is-done .lz-ruler-lbl[style*="--d: 12"] { opacity: 1; }
+}
+
+/* ══ Conectores de esquema (regla → columnas) ══
+   Una línea fina apagada y, encima, la misma línea que se «traza» (pathLength 1) cuando su momento se enciende */
+.lz-links { position: relative; height: 64px; margin-top: -8px; }
+.lz-links svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.lz-ln, .lz-ln-on { fill: none; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.lz-ln { stroke: rgba(143, 160, 255, 0.16); stroke-dasharray: 2 4; }
+.lz-ln-on { stroke: var(--b); stroke-dasharray: 1; stroke-dashoffset: 1; filter: drop-shadow(0 0 4px rgba(120, 140, 255, 0.9)); transition: stroke-dashoffset 900ms var(--ease-out), stroke 500ms ease; }
+.lz-ln-on.is-on, .lz-ln-on.is-past { stroke-dashoffset: 0; }
+.lz-ln-on.is-past { stroke: rgba(143, 160, 255, 0.45); filter: none; }
+.lz-ln-dot { fill: #0a0c22; stroke: rgba(143, 160, 255, 0.35); stroke-width: 1; transition: fill 400ms ease, stroke 400ms ease; }
+.lz-ln-dot.is-on, .lz-ln-dot.is-past { fill: var(--b); stroke: var(--b); }
+.lz-run.is-done .lz-ln-on.is-on { stroke: var(--g); filter: drop-shadow(0 0 4px rgba(63, 224, 176, 0.9)); }
+.lz-run.is-done .lz-ln-dot.is-on { fill: var(--g); stroke: var(--g); }
+/* Con la regla, las columnas ya no llevan línea arriba: el conector llega a su número */
+.lz-steps { border-top: 0; }
+.lz-step + .lz-step { border-left: 1px solid var(--hl); }
+.lz-step { padding-top: 8px; }
+.lz-step::before { display: none; }
+.lz-step-n { margin-left: 4px; }
+
+/* Lecturas de la misma altura, alineadas en una línea limpia; el contador sin hueco tras el número */
+.lz-mini { box-sizing: border-box; min-height: 132px; align-content: center; }
+.lz-join-c { min-width: 0; }
+
+@media (max-width: 900px) {
+  .lz-links { display: none; }
+  .lz-steps { border-top: 1px solid var(--hl); }
+  .lz-step { padding-top: 26px; }
+  .lz-step + .lz-step { border-left: 0; }
+  .lz-mini { min-height: 0; }
+}
+
+/* ══ Acabado sobrio ══
+   Menos efecto y más precisión, como un panel de instrumentos de verdad: sin halos ni textos que brillan, sin
+   aurora, una sola luz de acento, líneas de 1 px, cifras tabulares y texto en tipo de frase (no todo en
+   mayúsculas espaciadas). Las lecturas dejan de ser cajas hundidas y pasan a ser una tabla bajo una línea. */
+.lz-run {
+  background: linear-gradient(180deg, #0d0f21 0%, #090a17 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 30px 60px -34px rgba(12, 16, 60, 0.5);
+}
+html[data-theme="dark"] .lz-run { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.07); }
+.lz-run { --hl: rgba(255, 255, 255, 0.08); --i2: rgba(232, 236, 255, 0.66); --i3: rgba(214, 220, 245, 0.44); }
+.lz-run::after { opacity: 0.035; }
+.lz-run-aurora { display: none; }
+
+.lz-run-id { gap: 8px; font-size: 13px; font-weight: 600; font-stretch: 100%; letter-spacing: 0; text-transform: none; color: var(--i1); }
+.lz-run-id i { width: 6px; height: 6px; box-shadow: none; animation: none; }
+.lz-run.is-done .lz-run-id i { box-shadow: none; }
+.lz-replay { height: 30px; background: transparent; font-size: 12.5px; font-weight: 500; color: var(--i2); }
+
+/* Regla */
+.lz-ruler-fill, .lz-run.is-done .lz-ruler-fill { box-shadow: none; }
+.lz-ruler-fill { background: var(--b); }
+.lz-run.is-done .lz-ruler-fill { background: var(--g); }
+.lz-ruler-ticks i { background: rgba(255, 255, 255, 0.16); }
+.lz-ruler-ticks i.is-day { background: rgba(255, 255, 255, 0.34); }
+.lz-run.is-done .lz-ruler-ticks i.is-spare { background: rgba(63, 224, 176, 0.45); }
+.lz-ruler-spare { background: repeating-linear-gradient(-45deg, rgba(63, 224, 176, 0.2) 0 1px, transparent 1px 5px); }
+.lz-ruler-lbl { letter-spacing: 0; font-weight: 500; }
+.lz-spare-lbl { font-size: 11px; font-weight: 600; letter-spacing: 0; text-transform: none; }
+.lz-needle { background: rgba(255, 255, 255, 0.5); }
+.lz-needle::after { width: 7px; height: 7px; margin-left: -3.5px; top: 27px; box-shadow: 0 0 0 3px #0c0e1f; }
+.lz-run.is-done .lz-needle::after { background: var(--g); box-shadow: 0 0 0 3px #0c0e1f; }
+.lz-needle-tag { gap: 7px; padding: 4px 8px; border-radius: 6px; background: #f3f5ff; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; color: #0b0d1c; font-weight: 600; letter-spacing: 0; }
+.lz-run.is-done .lz-needle-tag { background: var(--g); box-shadow: none; color: #03140e; }
+
+/* Conectores: líneas ortogonales de 1 px, sin puntos ni brillo */
+.lz-ln { stroke: rgba(255, 255, 255, 0.1); stroke-dasharray: none; }
+.lz-ln-on { stroke: rgba(255, 255, 255, 0.6); filter: none; }
+.lz-ln-on.is-past { stroke: rgba(255, 255, 255, 0.26); }
+.lz-run.is-done .lz-ln-on.is-on { stroke: var(--g); filter: none; }
+.lz-ln-dot { display: none; }
+
+/* Columnas */
+.lz-step.is-on, .lz-run.is-done .lz-step.is-on { background: rgba(255, 255, 255, 0.022); }
+.lz-step-top { align-items: baseline; }
+.lz-step-n { margin-left: 0; font-family: inherit; font-size: 12.5px; font-style: normal; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: 0.02em; line-height: 1.2; color: var(--i3); }
+.lz-step.is-on .lz-step-n, .lz-step.is-past .lz-step-n { color: var(--i1); }
+.lz-run.is-done .lz-step[data-step="3"] .lz-step-n { color: var(--g); }
+.lz-step-d { padding: 0; box-shadow: none; font-size: 12.5px; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--i3); }
+.lz-step h3 { margin-top: 12px; font-size: clamp(21px, 1.9vw, 24px); font-weight: 650; letter-spacing: -0.025em; }
+.lz-step > p { margin-bottom: 28px; font-size: 15px; }
+
+/* Lecturas: tabla bajo una línea fina */
+.lz-mini { min-height: 122px; padding: 16px 0 0; border-radius: 0; background: none; box-shadow: none; border-top: 1px solid var(--hl); align-content: start; }
+.lz-cfg { gap: 8px; }
+.lz-cfg span.is-set b { text-shadow: none; }
+.lz-cfg b { font-weight: 600; }
+.lz-join-c, .lz-run.is-done .lz-join-c { font-size: 30px; font-weight: 650; font-stretch: 100%; text-shadow: none; color: var(--i1); }
+.lz-join-bar { height: 2px; background: rgba(255, 255, 255, 0.1); }
+.lz-join-bar i, .lz-run.is-done .lz-join-bar i { box-shadow: none; background: var(--b); }
+.lz-run.is-done .lz-join-bar i { background: var(--g); }
+.lz-join-av { background: rgba(255, 255, 255, 0.08); color: var(--i1); }
+.lz-close-st { height: 30px; font-size: 18px; font-weight: 650; font-stretch: 100%; }
+.lz-close-st i { width: 8px; height: 8px; }
+.lz-close-b { text-shadow: none; color: var(--g); }
+.lz-run.is-done .lz-close-st i { box-shadow: none; }
+.lz-close-sub { font-size: 12.5px; }
+
+@media (max-width: 900px) {
+  .lz-ruler { background: #0c0e1f; box-shadow: 0 -34px 0 #0c0e1f, 0 10px 12px -6px #0c0e1f; }
+  .lz-mini { min-height: 0; }
+}
+/* Grises con más contraste: las etiquetas secundarias (Producto, Precio…, «30 personas · 12 días») se leían
+   demasiado apagadas sobre el grafito. Siguen por debajo del blanco, pero ya pasan holgadas de AA. */
+.lz-run { --i2: rgba(232, 236, 255, 0.76); --i3: rgba(214, 220, 245, 0.62); }
+/* En móvil y tablet, el fondo que la regla fija extiende hacia arriba (para tapar el texto que pasa por detrás
+   al quedarse pegada) tapaba la barra del panel cuando aún no estaba pegada. La barra va por encima. */
+.lz-run-bar { position: relative; z-index: 6; background: #0d0f21; }
+
+/* ══════════════════════════════
+   LANZAMIENTOS · DOS FINALES
+   Dos tickets del mismo papel térmico que el hero. Al verse (.is-in) salen de una ranura oscura, el texto se
+   «imprime» y cae el sello: verde «Completado» y granate «Devuelto». Ligeramente torcidos, como dejados en
+   una mesa; al pasar el ratón se enderezan.
+══════════════════════════════ */
+.lz-ends-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(28px, 5vw, 72px);
+  max-width: 900px;
+  margin: clamp(48px, 6vw, 72px) auto 0;
+}
+.lz-end { display: grid; justify-items: center; margin: 0; }
+
+/* Ranura de la que sale el ticket */
+.lz-tk-slot {
+  position: relative;
+  z-index: 2;
+  width: min(360px, 100%);
+  height: 12px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #05060f, #1a1d33);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.9), 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+html[data-theme="dark"] .lz-tk-slot { box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.9), 0 1px 0 rgba(143, 160, 255, 0.14); }
+.lz-tk-clip { width: min(330px, 92%); margin-top: -6px; padding: 0 14px 30px; overflow: hidden; }
+
+.lz-tk {
+  position: relative;
+  display: grid;
+  gap: 9px;
+  padding: 30px 22px 22px;
+  background:
+    linear-gradient(90deg, rgba(40, 36, 30, 0.08) 0%, transparent 10%, transparent 90%, rgba(40, 36, 30, 0.1) 100%),
+    linear-gradient(180deg, #ebe8df 0%, #f8f6f0 40%, #f3f1ea 100%);
+  color: #2a2c35;
+  font-stretch: 82%;
+  text-shadow: 0 0 0.4px rgba(42, 44, 53, 0.55);
+  /* Borde de arriba arrancado (el corte anterior): irregular y fino, no dientes de sierra */
+  -webkit-mask: linear-gradient(#000, #000) bottom / 100% calc(100% - 6px) no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 6' preserveAspectRatio='none'%3E%3Cpath transform='matrix(1 0 0 -1 0 6)' d='M0 0H300V1.1L296.9 1.8L294.7 1.3L289.1 1.3L285.7 2.1L281.1 4.0L275.4 2.4L270.5 2.9L265.4 1.0L261.8 3.0L259.3 2.7L257.0 3.6L255.0 1.7L252.4 4.3L249.3 2.0L245.8 1.3L241.9 2.2L239.7 3.1L237.1 4.5L231.8 3.3L229.7 1.3L227.5 1.7L222.2 2.0L216.7 3.8L211.9 4.0L209.3 1.1L206.3 4.8L201.1 1.5L197.2 3.5L191.7 2.9L185.8 1.4L182.0 3.5L178.6 1.0L172.7 2.1L167.8 3.9L164.2 1.9L160.8 2.4L158.7 3.3L154.1 4.1L148.7 4.9L142.8 4.6L137.7 2.1L135.2 4.1L132.3 2.1L128.5 2.9L123.2 2.8L119.2 2.8L115.9 5.0L111.3 3.9L107.6 1.2L105.3 2.9L102.4 1.6L97.8 4.2L94.2 3.5L91.2 3.0L85.7 2.0L80.0 1.3L76.6 2.5L71.5 1.6L68.2 3.3L65.2 2.9L59.3 1.7L56.2 3.8L52.0 2.8L49.2 5.0L45.4 1.5L39.6 4.9L37.4 1.7L33.4 3.4L30.8 3.8L27.8 3.1L25.5 3.8L20.4 2.2L16.8 3.5L11.2 1.3L7.2 2.9L4.2 1.5L0.0 3.1Z'/%3E%3C/svg%3E") top / 100% 6px no-repeat;
+  mask: linear-gradient(#000, #000) bottom / 100% calc(100% - 6px) no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 6' preserveAspectRatio='none'%3E%3Cpath transform='matrix(1 0 0 -1 0 6)' d='M0 0H300V1.1L296.9 1.8L294.7 1.3L289.1 1.3L285.7 2.1L281.1 4.0L275.4 2.4L270.5 2.9L265.4 1.0L261.8 3.0L259.3 2.7L257.0 3.6L255.0 1.7L252.4 4.3L249.3 2.0L245.8 1.3L241.9 2.2L239.7 3.1L237.1 4.5L231.8 3.3L229.7 1.3L227.5 1.7L222.2 2.0L216.7 3.8L211.9 4.0L209.3 1.1L206.3 4.8L201.1 1.5L197.2 3.5L191.7 2.9L185.8 1.4L182.0 3.5L178.6 1.0L172.7 2.1L167.8 3.9L164.2 1.9L160.8 2.4L158.7 3.3L154.1 4.1L148.7 4.9L142.8 4.6L137.7 2.1L135.2 4.1L132.3 2.1L128.5 2.9L123.2 2.8L119.2 2.8L115.9 5.0L111.3 3.9L107.6 1.2L105.3 2.9L102.4 1.6L97.8 4.2L94.2 3.5L91.2 3.0L85.7 2.0L80.0 1.3L76.6 2.5L71.5 1.6L68.2 3.3L65.2 2.9L59.3 1.7L56.2 3.8L52.0 2.8L49.2 5.0L45.4 1.5L39.6 4.9L37.4 1.7L33.4 3.4L30.8 3.8L27.8 3.1L25.5 3.8L20.4 2.2L16.8 3.5L11.2 1.3L7.2 2.9L4.2 1.5L0.0 3.1Z'/%3E%3C/svg%3E") top / 100% 6px no-repeat;
+  filter: drop-shadow(0 18px 22px rgba(20, 24, 38, 0.22));
+  transform: translateY(-104%);
+  transition: transform 1600ms cubic-bezier(0.45, 0.05, 0.25, 1);
+}
+.lz-end-ok .lz-tk { rotate: -1.2deg; }
+.lz-end-no .lz-tk { rotate: 1.4deg; transition-delay: 350ms; }
+.lz-ends.is-in .lz-tk { transform: none; }
+@media (hover: hover) and (pointer: fine) {
+  .lz-tk { transition: transform 1600ms cubic-bezier(0.45, 0.05, 0.25, 1), rotate 400ms var(--ease-out); }
+  .lz-end:hover .lz-tk { rotate: 0deg; }
+}
+
+.lz-tk > span { display: block; }
+.lz-tk-k { font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #55586a; }
+.lz-tk-big { padding: 4px 0 8px; border-bottom: 1px dashed rgba(42, 44, 53, 0.35); font-size: 15px; font-weight: 600; }
+.lz-tk-big b { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; margin-right: 4px; }
+.lz-tk-row { display: flex !important; justify-content: space-between; gap: 12px; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+.lz-tk-row em { font-style: normal; color: #55586a; }
+.lz-tk-row b { font-weight: 700; }
+.lz-tk-fee { padding-top: 9px; border-top: 1px dashed rgba(42, 44, 53, 0.35); }
+.lz-tk-bars {
+  height: 34px;
+  margin-top: 6px;
+  background: repeating-linear-gradient(90deg, #2a2c35 0 2px, transparent 2px 4px, #2a2c35 4px 5px, transparent 5px 8px, #2a2c35 8px 11px, transparent 11px 12px, #2a2c35 12px 13px, transparent 13px 17px);
+  opacity: 0.85;
+}
+
+/* Sello de tinta: cae y se queda algo transparente, con la tinta irregular */
+.lz-tk-stamp {
+  position: absolute;
+  left: 50%;
+  top: 83%;
+  padding: 6px 14px;
+  border: 3px solid currentColor;
+  border-radius: 8px;
+  font-size: 24px;
+  font-weight: 800;
+  font-stretch: 112%;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-shadow: none;
+  white-space: nowrap;
+  opacity: 0;
+  translate: -50% -50%;
+  rotate: -10deg;
+  scale: 1.6;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 2.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 2.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  transition: opacity 120ms ease, scale 260ms cubic-bezier(0.5, 0, 0.75, 0);
+}
+.lz-end-ok .lz-tk-stamp { color: #0b8a63; }
+.lz-end-no .lz-tk-stamp { color: #a3263b; rotate: 8deg; }
+.lz-ends.is-in .lz-tk-stamp { opacity: 0.86; scale: 1; }
+.lz-ends.is-in .lz-end-ok .lz-tk-stamp { transition-delay: 1700ms; }
+.lz-ends.is-in .lz-end-no .lz-tk-stamp { transition-delay: 2050ms; }
+
+.lz-end figcaption { max-width: 22em; margin-top: 4px; font-size: 16px; line-height: 1.55; color: var(--ink-2); text-align: center; text-wrap: pretty; }
+.lz-end figcaption b { font-weight: 700; color: var(--ink); }
+.lz-end-ok figcaption b { color: var(--lz-ok); }
+.lz-end-no figcaption b { color: #c0394f; }
+html[data-theme="dark"] .lz-end-no figcaption b { color: #ff8a9b; }
+
+@media (max-width: 760px) {
+  .lz-tk-stamp { font-size: 20px; }
+  .lz-ends-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+}
+
+/* Boca de la impresora: un labio de grafito (el mismo material que la tapa del hero) con la rendija oscura;
+   el papel sale por debajo y el labio le deja una sombra en la parte de arriba */
+.lz-tk-slot {
+  width: min(352px, 100%);
+  height: 22px;
+  border-radius: 11px 11px 7px 7px;
+  background:
+    radial-gradient(70% 140% at 30% -40%, rgba(255, 255, 255, 0.2), transparent 60%),
+    linear-gradient(180deg, #3a3f60 0%, #2a2e48 45%, #1b1e33 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+    0 1px 0 rgba(0, 0, 0, 0.25),
+    0 10px 18px -10px rgba(10, 12, 40, 0.55);
+}
+html[data-theme="dark"] .lz-tk-slot { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 -1px 0 rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(143, 160, 255, 0.1), 0 10px 18px -10px rgba(0, 0, 0, 0.8); }
+.lz-tk-slot::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: 9px;
+  height: 4px;
+  border-radius: 2px;
+  background: #02030a;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 1), 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+.lz-tk-clip { position: relative; margin-top: -4px; }
+.lz-tk-clip::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  left: 14px;
+  right: 14px;
+  top: 0;
+  height: 18px;
+  background: linear-gradient(180deg, rgba(10, 12, 30, 0.3), rgba(10, 12, 30, 0.08) 50%, transparent);
+  pointer-events: none;
+}
+
+/* La boca: un labio de grafito cuyo canto de abajo ES la rendija; el papel sale justo de ella, algo más
+   estrecho que la rendija, y la rendija se dibuja por encima del papel */
+.lz-tk-slot { height: 16px; border-radius: 10px 10px 4px 4px; }
+.lz-tk-slot::before { top: auto; bottom: -2px; left: 20px; right: 20px; height: 5px; border-radius: 3px; box-shadow: inset 0 1px 2px #000, 0 1px 0 rgba(255, 255, 255, 0.1); }
+.lz-tk-clip { z-index: 1; margin-top: 0; }
+.lz-tk-slot { z-index: 3; }
+.lz-tk-clip::before { left: 14px; right: 14px; height: 22px; background: linear-gradient(180deg, rgba(10, 12, 30, 0.42), rgba(10, 12, 30, 0.1) 45%, transparent); }
+
+/* El sello tiene su propio hueco al pie del ticket, bajo el código de barras: se lee entero y no tapa cifras */
+.lz-tk { padding-bottom: 92px; }
+.lz-tk-stamp { top: auto; bottom: 26px; translate: -50% 0; font-size: 22px; }
+@media (max-width: 760px) { .lz-tk-stamp { font-size: 20px; } }
+/* El papel cuelga recto de la rendija: torcido, sus esquinas asomaban por los lados de la boca y los bordes
+   (máscara + sombra) salían dentados. La gracia la ponen los sellos, que sí van torcidos. */
+.lz-end-ok .lz-tk,
+.lz-end-no .lz-tk,
+.lz-end:hover .lz-tk { rotate: none; }
+/* Las dos figuras miden lo mismo (la fila de la rejilla se estira a la más alta): sin esto, el hueco que le
+   sobra al ticket corto se repartía entre la boca y el papel y quedaba una separación */
+.lz-end { align-content: start; }
+
+/* ══ Más papel térmico ══
+   Cabecera con el logotipo y la hora de cierre, número bajo el código de barras, fibras del papel, tinta
+   térmica algo irregular y el pie del ticket que se curva un poco hacia delante. */
+.lz-tk-head { display: flex !important; align-items: center; gap: 6px; padding-bottom: 10px; margin-bottom: 2px; border-bottom: 1px solid rgba(42, 44, 53, 0.55); }
+.lz-tk-head svg { width: 9px; height: auto; fill: #2a2c35; }
+.lz-tk-head b { font-size: 13px; font-weight: 800; font-stretch: 100%; letter-spacing: -0.01em; }
+.lz-tk-head em { margin-left: auto; font-size: 10.5px; font-style: normal; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: 0.04em; color: #55586a; }
+.lz-tk-bn { margin-top: -3px; font-size: 10px; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: 0.34em; text-align: center; color: #3a3d48; }
+.lz-tk-head, .lz-tk-k, .lz-tk-big, .lz-tk-row, .lz-tk-bars, .lz-tk-bn {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='1' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.7 1.95'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='1' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.7 1.95'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  -webkit-mask-size: 90px 90px;
+  mask-size: 90px 90px;
+}
+.lz-tk::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9 .06' numOctaves='2' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .42 0 0 0 0 .36 0 0 0 -.28 .16'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+}
+.lz-tk::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 26px; pointer-events: none; background: linear-gradient(0deg, rgba(60, 54, 40, 0.1), transparent); }
+.lz-tk > * { position: relative; }
+.lz-tk > .lz-tk-stamp { position: absolute; }
+
+/* ══ Impresión de verdad (la mueve lanzamientos-body.js) ══
+   El papel avanza a saltos de motor paso a paso, la cuchilla lo corta (un tirón), se balancea colgando y,
+   un momento después, cae el sello con un golpe que hunde el papel. */
+.lz-end { grid-template-rows: auto 1fr auto; }
+.lz-tk { transition: none; transform: translateY(-101%); transform-origin: 50% 0; }
+.lz-end.is-printed .lz-tk { transform: none; }
+.lz-ends.is-in .lz-tk-stamp,
+.lz-ends.is-in .lz-end-ok .lz-tk-stamp,
+.lz-ends.is-in .lz-end-no .lz-tk-stamp { opacity: 0; scale: 1.6; transition: none; }
+.lz-end.is-stamped .lz-tk-stamp { animation: lzThump 460ms cubic-bezier(0.3, 0, 0.2, 1) forwards; }
+@keyframes lzThump {
+  0% { opacity: 0; scale: 1.7; filter: blur(2px); }
+  55% { opacity: 0.95; scale: 0.96; filter: blur(0); }
+  100% { opacity: 0.86; scale: 1; filter: blur(0); }
+}
+/* La boca vibra mientras imprime */
+.lz-end.is-feeding .lz-tk-slot { animation: lzBuzz 90ms linear infinite; }
+.lz-tk { transform: none; clip-path: inset(0 0 100% 0); }
+.lz-end.is-printed .lz-tk { clip-path: none; }
+
+/* ══ El papel sale de la ranura ══
+   La boca está debajo: el ticket nace dentro de ella (translateY de su propio alto) y sube a saltos, con la
+   cabecera por delante. Arriba queda el borde del corte anterior (recto) y abajo, el corte de ahora (arrancado).
+   El tramo que aún está dentro lo tapa el recorte, justo en la rendija. */
+.lz-end { grid-template-rows: 1fr auto auto; }
+.lz-tk-clip { align-self: end; margin: 0; padding: 34px 14px 0; }
+.lz-tk { clip-path: none; transform: translateY(102%); transform-origin: 50% 100%; }
+.lz-end.is-printed .lz-tk { clip-path: none; transform: none; }
+.lz-tk-clip::before { top: auto; bottom: 0; height: 20px; background: linear-gradient(0deg, rgba(10, 12, 30, 0.4), rgba(10, 12, 30, 0.1) 45%, transparent); }
+/* La boca, vista desde delante: la rendija está en su canto de arriba */
+.lz-tk-slot { margin-top: -2px; border-radius: 4px 4px 12px 12px; }
+.lz-tk-slot::before { top: -2px; bottom: auto; }
+.lz-end figcaption { margin-top: 24px; }
+/* Fallo corregido: una regla antigua (.lz-ends.is-in .lz-tk { transform: none }) sacaba los tickets nada más cargar;
+   al empezar la impresión desaparecían y volvían a salir. El papel se queda dentro hasta que se imprime. */
+.lz-ends.is-in .lz-tk { transform: translateY(102%); }
+.lz-ends.is-in .lz-end.is-printed .lz-tk { transform: none; }
+/* Sello más suave: cae desde menos altura y se asienta más despacio */
+.lz-end.is-stamped .lz-tk-stamp { animation: lzThumpSoft 620ms cubic-bezier(0.25, 0.6, 0.3, 1) forwards; }
+@keyframes lzThumpSoft {
+  0% { opacity: 0; scale: 1.3; filter: blur(1.5px); }
+  60% { opacity: 0.9; scale: 0.985; filter: blur(0); }
+  100% { opacity: 0.86; scale: 1; filter: blur(0); }
+}
+
+/* ══════════════════════════════
+   LANZAMIENTOS · PARA QUIÉN
+   Lista editorial con filas separadas por una línea fina: número en serif cursiva, sector y uso, el porqué y,
+   a la derecha, la foto tramada del producto en un recorte de papel térmico (la misma impresora del hero).
+   Al pasar por una fila, el recorte se endereza y se acerca.
+══════════════════════════════ */
+.lz-who .lz-head-left { max-width: 820px; }
+.lz-uses { margin: clamp(40px, 5vw, 64px) 0 0; padding: 0; list-style: none; border-top: 1px solid var(--lz-edge); }
+.lz-use {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1.05fr) minmax(0, 1.2fr) 132px;
+  align-items: center;
+  gap: clamp(16px, 3vw, 40px);
+  padding: 26px 8px;
+  border-bottom: 1px solid var(--lz-edge);
+  transition: background-color 300ms ease;
+}
+.lz-use-n { font-family: 'Roboto Serif', Georgia, serif; font-size: clamp(30px, 3vw, 42px); font-style: italic; font-weight: 400; line-height: 1; color: color-mix(in srgb, var(--ink) 30%, transparent); transition: color 300ms ease; }
+.lz-use-t h3 { margin: 0; font-size: clamp(21px, 2vw, 27px); font-weight: 700; font-stretch: 106%; letter-spacing: -0.03em; line-height: 1.1; color: var(--ink); }
+.lz-use-t span { display: inline-block; margin-top: 8px; font-size: 11.5px; font-weight: 700; font-stretch: 112%; letter-spacing: 0.18em; text-transform: uppercase; color: var(--lz-acc); }
+.lz-use p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--ink-2); text-wrap: pretty; }
+
+/* Recorte de ticket con la foto tramada */
+.lz-use-art {
+  justify-self: end;
+  display: block;
+  width: 120px;
+  height: 90px;
+  padding: 8px 6px;
+  box-sizing: content-box;
+  background: linear-gradient(180deg, #ebe8df, #f6f4ee);
+  box-shadow: 0 10px 22px -12px rgba(20, 24, 38, 0.45);
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  rotate: 3deg;
+  transition: rotate 400ms var(--ease-out), scale 400ms var(--ease-out);
+}
+.lz-use:nth-child(even) .lz-use-art { rotate: -2.5deg; }
+@media (hover: hover) and (pointer: fine) {
+  .lz-use:hover { background: color-mix(in srgb, var(--ink) 2.5%, transparent); }
+  .lz-use:hover .lz-use-n { color: var(--lz-acc); }
+  .lz-use:hover .lz-use-art { rotate: 0deg; scale: 1.08; }
+}
+
+@media (max-width: 900px) {
+  .lz-use { grid-template-columns: 48px minmax(0, 1fr) 104px; grid-template-areas: 'n t a' 'n p a'; row-gap: 8px; align-items: start; }
+  .lz-use-n { grid-area: n; }
+  .lz-use-t { grid-area: t; }
+  .lz-use p { grid-area: p; font-size: 15px; }
+  .lz-use-art { grid-area: a; align-self: center; width: 96px; height: 72px; }
+}
+@media (max-width: 520px) {
+  .lz-use { grid-template-columns: 36px minmax(0, 1fr) 76px; column-gap: 12px; padding: 22px 0; }
+  .lz-use-art { width: 72px; height: 54px; padding: 5px 4px; }
+}
+
+/* Cabecera partida: titular a la izquierda (alineado con la lista) y la entrada a la derecha, abajo */
+.lz-who .lz-head-left { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); grid-template-areas: 'e e' 't s'; align-items: end; column-gap: clamp(32px, 6vw, 96px); max-width: none; }
+.lz-who .lz-eyebrow { grid-area: e; justify-self: start; }
+.lz-who .lz-h2 { grid-area: t; }
+.lz-who .lz-sub { grid-area: s; max-width: 26em; margin: 0 0 6px; }
+@media (max-width: 900px) {
+  .lz-who .lz-head-left { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'e' 't' 's'; }
+  .lz-who .lz-sub { margin-top: 18px; }
+}
+
+/* ══ «Te sirve si…» ══
+   Un recorte del mismo papel térmico que los tickets, sujeto con un trozo de cinta translúcida. Tres casillas
+   de tinta que se marcan una a una al verse (.is-in) y, al pie, la salida honesta. */
+.lz-who .lz-fit-wrap { position: relative; grid-area: s; justify-self: end; align-self: end; width: min(100%, 380px); }
+.lz-fit {
+  position: relative;
+  width: 100%;
+  margin: 0 0 4px;
+  padding: 26px 26px 22px;
+  background:
+    linear-gradient(90deg, rgba(40, 36, 30, 0.07) 0%, transparent 8%, transparent 92%, rgba(40, 36, 30, 0.08) 100%),
+    linear-gradient(180deg, #efece4 0%, #f8f6f0 45%, #f3f1ea 100%);
+  color: #2a2c35;
+  font-stretch: 86%;
+  text-shadow: 0 0 0.4px rgba(42, 44, 53, 0.5);
+  -webkit-mask: linear-gradient(#000, #000) bottom / 100% calc(100% - 6px) no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 6' preserveAspectRatio='none'%3E%3Cpath d='M0 6V3L7 1.5L12 4L19 2L26 3.8L33 1L41 3.2L48 2.1L55 4.4L63 1.6L70 3.1L78 1.2L86 4L93 2.3L101 3.6L108 1.4L116 3.9L124 2L131 4.2L139 1.8L147 3.3L154 1.1L162 3.7L170 2.4L177 4.1L185 1.5L193 3L200 2.2L208 4.3L215 1.7L223 3.4L231 1.3L238 3.9L246 2.1L254 4L261 1.6L269 3.5L277 2L284 4.2L292 1.9L300 3.2V6Z'/%3E%3C/svg%3E") top / 100% 6px no-repeat;
+  mask: linear-gradient(#000, #000) bottom / 100% calc(100% - 6px) no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 6' preserveAspectRatio='none'%3E%3Cpath d='M0 6V3L7 1.5L12 4L19 2L26 3.8L33 1L41 3.2L48 2.1L55 4.4L63 1.6L70 3.1L78 1.2L86 4L93 2.3L101 3.6L108 1.4L116 3.9L124 2L131 4.2L139 1.8L147 3.3L154 1.1L162 3.7L170 2.4L177 4.1L185 1.5L193 3L200 2.2L208 4.3L215 1.7L223 3.4L231 1.3L238 3.9L246 2.1L254 4L261 1.6L269 3.5L277 2L284 4.2L292 1.9L300 3.2V6Z'/%3E%3C/svg%3E") top / 100% 6px no-repeat;
+  filter: drop-shadow(0 1px 1px rgba(20, 24, 38, 0.08)) drop-shadow(0 16px 24px rgba(20, 24, 38, 0.14));
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 600ms ease, transform 800ms var(--ease-out);
+}
+.lz-fit.is-in { opacity: 1; transform: none; }
+/* Fibras del papel */
+.lz-fit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9 .06' numOctaves='2' seed='8'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .42 0 0 0 0 .36 0 0 0 -.28 .16'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+}
+
+.lz-fit > * { position: relative; }
+.lz-fit-k {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(42, 44, 53, 0.6);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.lz-fit-k span + span { color: #6a6d78; letter-spacing: 0.08em; }
+.lz-fit ul { display: grid; gap: 13px; margin: 16px 0 0; padding: 0; list-style: none; }
+.lz-fit li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 12px; align-items: start; font-size: 15px; font-weight: 500; line-height: 1.4; }
+.lz-fit-k, .lz-fit li, .lz-fit-no {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='1' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.7 1.95'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='1' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.7 1.95'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  -webkit-mask-size: 90px 90px;
+  mask-size: 90px 90px;
+}
+/* Casilla impresa y la marca, que se «imprime» con un pequeño trazo */
+.lz-fit li i { position: relative; width: 16px; height: 16px; margin-top: 2px; border: 1.5px solid #2a2c35; border-radius: 3px; }
+.lz-fit li i::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 0;
+  width: 5px;
+  height: 9px;
+  border: solid #2a2c35;
+  border-width: 0 2.2px 2.2px 0;
+  transform: rotate(42deg) scale(0);
+  transform-origin: 60% 80%;
+  transition: transform 260ms cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.lz-fit.is-in li i::after { transform: rotate(42deg) scale(1); }
+.lz-fit.is-in li:nth-child(1) i::after { transition-delay: 500ms; }
+.lz-fit.is-in li:nth-child(2) i::after { transition-delay: 850ms; }
+.lz-fit.is-in li:nth-child(3) i::after { transition-delay: 1200ms; }
+.lz-fit-no { margin: 18px 0 0; padding-top: 12px; border-top: 1px dashed rgba(42, 44, 53, 0.4); font-size: 13px; font-style: italic; color: #55586a; }
+
+@media (max-width: 900px) {
+  .lz-who .lz-fit-wrap { justify-self: start; margin-top: 32px; }
+}
+/* El recorte ocupa la altura del rótulo y del titular (no empuja el titular hacia abajo) */
+.lz-who .lz-head-left { grid-template-areas: 'e s' 't s'; }
+.lz-fit::before { opacity: 0.22; }
+@media (max-width: 900px) {
+  .lz-who .lz-head-left { grid-template-areas: 'e' 't' 's'; }
+}
+/* Más compacto y algo torcido, como un recorte pegado a mano */
+.lz-fit { padding: 18px 22px 15px; }
+.lz-fit-k { padding-bottom: 9px; font-size: 11px; }
+.lz-fit ul { gap: 7px; margin-top: 11px; }
+.lz-fit li { grid-template-columns: 16px minmax(0, 1fr); gap: 10px; font-size: 14px; line-height: 1.35; }
+.lz-fit li i { width: 14px; height: 14px; margin-top: 2px; }
+.lz-fit li i::after { left: 3.5px; top: -0.5px; width: 4.5px; height: 8px; border-width: 0 2px 2px 0; }
+.lz-fit-no { margin-top: 11px; padding-top: 8px; font-size: 12.5px; }
+.lz-who .lz-fit-wrap { width: min(100%, 360px); align-self: center; rotate: 2deg; }
+@media (max-width: 900px) {
+  .lz-who .lz-fit-wrap { rotate: -1.5deg; margin-left: 6px; }
+}
+
+/* ══ «Te sirve si…» sin papel ══
+   Hay papel de sobra alrededor (tickets de los finales y fotos de las filas): este bloque es un consejo,
+no un
+   resultado { display: none; }
+.lz-who .lz-fit-wrap { rotate: none; width: min(100%, 400px); align-self: end; margin: 0; }
+.lz-fit {
+  padding: 0;
+  background: none;
+  color: var(--ink);
+  font-stretch: 100%;
+  text-shadow: none;
+  -webkit-mask: none;
+  mask: none;
+  filter: none;
+}
+.lz-fit::before { display: none; }
+.lz-fit-k, .lz-fit li, .lz-fit-no { -webkit-mask-image: none; mask-image: none; }
+.lz-fit-k { display: block; padding: 0 0 12px; border: 0; font-size: 14px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--ink); }
+.lz-fit ul { gap: 0; margin: 0; border-top: 1px solid var(--lz-edge); }
+.lz-fit li { grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--lz-edge); font-size: 15px; font-weight: 500; line-height: 1.4; color: var(--ink); }
+.lz-fit li i { width: 22px; height: 22px; margin: 0; border: 0; border-radius: 50%; background: color-mix(in srgb, var(--lz-acc) 12%, transparent); }
+.lz-fit li i::after { left: 8px; top: 5px; width: 5px; height: 9px; border-color: var(--lz-acc); border-width: 0 2px 2px 0; }
+.lz-fit-no { margin: 12px 0 0; padding: 0; border: 0; font-size: 13.5px; font-style: normal; color: var(--ink-3); }
+@media (max-width: 900px) {
+  .lz-who .lz-fit-wrap { rotate: none; margin: 28px 0 0; width: 100%; }
+}
+
+/* ══════════════════════════════
+   LANZAMIENTOS · FRENTE A UNA PREVENTA, LO QUE VE TU CLIENTE, PRECIO, PREGUNTAS Y CIERRE
+   Mismo criterio que el panel de «Cómo funciona»: líneas de 1 px, cifras tabulares, un acento y nada de brillos.
+══════════════════════════════ */
+
+/* ══ Frente a una preventa ══
+   Tabla de tres columnas; la del lanzamiento es una franja oscura continua (del material del panel) */
+.lz-vs-table { max-width: 1040px; margin: clamp(44px, 5vw, 64px) auto 0; }
+.lz-vs-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr) minmax(0, 1.1fr);
+  align-items: stretch;
+}
+.lz-vs-row > span { padding: 22px 24px; font-size: 15.5px; line-height: 1.5; border-top: 1px solid var(--lz-edge); }
+.lz-vs-row > span[role="rowheader"] { padding-left: 0; font-weight: 650; color: var(--ink); }
+.lz-vs-row > span[role="cell"] { color: var(--ink-3); }
+.lz-vs-row > .is-us {
+  background: #0d0f21;
+  color: rgba(232, 236, 255, 0.86) !important;
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+.lz-vs-hrow > span { padding-top: 0; padding-bottom: 16px; border-top: 0; font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--ink-3); }
+.lz-vs-hrow > .is-us { display: flex; align-items: center; gap: 9px; padding-top: 22px; border-radius: 18px 18px 0 0; color: #f3f5ff !important; }
+.lz-vs-hrow > .is-us i { width: 7px; height: 7px; border-radius: 50%; background: #3fe0b0; }
+.lz-vs-row:last-child > .is-us { border-radius: 0 0 18px 18px; padding-bottom: 26px; }
+.lz-vs-row:last-child > span:not(.is-us) { border-bottom: 1px solid var(--lz-edge); }
+.lz-vs-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+html[data-theme="dark"] .lz-vs-row > .is-us { background: rgba(255, 255, 255, 0.05); }
+
+@media (max-width: 760px) {
+  .lz-vs-hrow { display: none; }
+  .lz-vs-row { grid-template-columns: minmax(0, 1fr); margin-bottom: 14px; }
+  .lz-vs-row > span { padding: 12px 18px; border-top: 0; }
+  .lz-vs-row > span[role="rowheader"] { padding: 0 0 8px; }
+  .lz-vs-row > span[role="cell"]:not(.is-us) { padding-left: 18px; border-left: 2px solid var(--lz-edge); }
+  .lz-vs-row > span[role="cell"]:not(.is-us)::before { content: 'Preventa normal · '; font-weight: 600; }
+  .lz-vs-row > .is-us { margin-top: 8px; border-radius: 14px; }
+  .lz-vs-row > .is-us::before { content: 'Con Tuko · '; font-weight: 700; color: #3fe0b0; }
+  .lz-vs-row:last-child > .is-us { border-radius: 14px; padding-bottom: 12px; }
+  .lz-vs-row:last-child > span:not(.is-us) { border-bottom: 0; }
+}
+
+/* ══ Lo que ve tu cliente ══ */
+.lz-buyer-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); align-items: center; gap: clamp(32px, 6vw, 96px); }
+.lz-buyer-copy .lz-sub { margin-left: 0; }
+.lz-mails { display: grid; margin: 32px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--lz-edge); }
+.lz-mails li {
+  position: relative;
+  display: grid;
+  gap: 3px;
+  padding: 14px 0 14px 22px;
+  border-bottom: 1px solid var(--lz-edge);
+  transition: opacity 400ms ease;
+  opacity: 0.45;
+}
+.lz-mails li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ink) 18%, transparent);
+  transition: background 300ms ease;
+}
+.lz-mails li.is-on, .lz-mails li.is-past { opacity: 1; }
+.lz-mails li.is-on::before { background: var(--lz-acc); }
+.lz-mails li.is-past::before { background: color-mix(in srgb, var(--lz-acc) 45%, transparent); }
+.lz-mails li.is-on.is-ok::before { background: var(--lz-ok); }
+.lz-mails span { font-size: 12.5px; font-weight: 600; color: var(--ink-3); }
+.lz-mails b { font-size: 15.5px; font-weight: 600; color: var(--ink); }
+.lz-mails em { font-size: 13px; font-style: normal; color: var(--ink-3); }
+
+/* ══ Precio ══ */
+.lz-price-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  max-width: 1040px;
+  margin: clamp(44px, 5vw, 64px) auto 0;
+  border-radius: 28px;
+  background: var(--lz-card);
+  box-shadow: inset 0 0 0 1px var(--lz-edge), 0 30px 60px -40px rgba(20, 24, 38, 0.3);
+  overflow: hidden;
+}
+.lz-price-main, .lz-calc { padding: clamp(28px, 4vw, 48px); }
+.lz-calc { border-left: 1px solid var(--lz-edge); background: color-mix(in srgb, var(--ink) 2.5%, transparent); }
+.lz-price-big { display: flex; align-items: baseline; gap: 14px; margin: 0; }
+.lz-price-big b { font-size: clamp(64px, 8vw, 104px); font-weight: 700; font-stretch: 106%; line-height: 0.9; letter-spacing: -0.05em; color: var(--ink); }
+.lz-price-big span { font-family: 'Roboto Serif', Georgia, serif; font-size: clamp(20px, 2vw, 26px); font-style: italic; color: var(--lz-acc); }
+.lz-price-lead { margin: 18px 0 0; font-size: 17px; line-height: 1.5; color: var(--ink-2); }
+.lz-price-lead b { color: var(--ink); font-weight: 650; }
+.lz-price-list { display: grid; margin: 24px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--lz-edge); }
+.lz-price-list li { padding: 12px 0; border-bottom: 1px solid var(--lz-edge); font-size: 15px; color: var(--ink); }
+
+.lz-calc-k { margin: 0 0 18px; font-size: 14px; font-weight: 650; color: var(--ink); }
+.lz-calc-row { display: grid; gap: 10px; margin-bottom: 20px; cursor: pointer; }
+.lz-calc-row > span { display: flex; justify-content: space-between; font-size: 14px; }
+.lz-calc-row em { font-style: normal; color: var(--ink-3); }
+.lz-calc-row b { font-weight: 650; font-variant-numeric: tabular-nums; color: var(--ink); }
+.lz-calc-in { width: 100%; height: 22px; margin: 0; background: transparent; cursor: pointer; -webkit-appearance: none; appearance: none; }
+.lz-calc-in::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--lz-acc) var(--v, 30%), color-mix(in srgb, var(--ink) 12%, transparent) var(--v, 30%)); }
+.lz-calc-in::-moz-range-track { height: 4px; border-radius: 2px; background: color-mix(in srgb, var(--ink) 12%, transparent); }
+.lz-calc-in::-moz-range-progress { height: 4px; border-radius: 2px; background: var(--lz-acc); }
+.lz-calc-in::-webkit-slider-thumb { width: 20px; height: 20px; margin-top: -8px; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1px rgba(20, 24, 38, 0.14), 0 2px 6px rgba(20, 24, 38, 0.25); -webkit-appearance: none; appearance: none; }
+.lz-calc-in::-moz-range-thumb { width: 20px; height: 20px; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1px rgba(20, 24, 38, 0.14), 0 2px 6px rgba(20, 24, 38, 0.25); }
+.lz-calc-in:focus-visible { outline: 2px solid var(--lz-acc); outline-offset: 4px; border-radius: 4px; }
+.lz-calc-out { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 6px; border-top: 1px solid var(--lz-edge); }
+.lz-calc-out span { display: grid; gap: 4px; padding-top: 16px; }
+.lz-calc-out span + span { padding-left: 16px; border-left: 1px solid var(--lz-edge); }
+.lz-calc-out em { font-size: 12.5px; font-style: normal; color: var(--ink-3); }
+.lz-calc-out b { font-size: clamp(22px, 2.2vw, 28px); font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -0.03em; color: var(--ink); }
+.lz-calc-out .lz-calc-fee { color: var(--lz-acc); }
+.lz-calc-note { margin: 18px 0 0; font-size: 12.5px; line-height: 1.5; color: var(--ink-3); }
+
+@media (max-width: 860px) {
+  .lz-price-card { grid-template-columns: minmax(0, 1fr); }
+  .lz-calc { border-left: 0; border-top: 1px solid var(--lz-edge); }
+}
+
+/* ══ Cierre ══ El escenario del hero en pequeño, con la pantalla de la impresora esperando */
+.lz-final { padding-bottom: clamp(80px, 11vw, 150px); }
+.lz-final-stage {
+  --lz-ink: #f3f5ff;
+  --lz-ink-2: rgba(225, 230, 255, 0.74);
+  --lz-ink-3: rgba(200, 208, 245, 0.52);
+  --lz-blue: #8fa0ff;
+  --lz-green: #3fe0b0;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(64px, 9vw, 120px) 24px;
+  border-radius: clamp(28px, 4vw, 44px);
+  background:
+    radial-gradient(70% 80% at 50% 0%, #131a4a 0%, transparent 70%),
+    linear-gradient(180deg, #080a1d 0%, #05060f 100%);
+  color: var(--lz-ink);
+  text-align: center;
+}
+.lz-final-stage .lz-aurora i:nth-child(1) { right: auto; left: 10%; top: -40%; opacity: 0.4; }
+.lz-final-stage .lz-aurora i:nth-child(2) { right: 8%; bottom: -50%; }
+.lz-final-in { position: relative; z-index: 3; display: grid; justify-items: center; }
+@keyframes lzCaret { 50% { opacity: 0.15; } }
+.lz-final-h { margin: 28px 0 0; font-size: clamp(42px, 6vw, 84px); font-weight: 700; font-stretch: 106%; line-height: 0.98; letter-spacing: -0.045em; text-wrap: balance; }
+.lz-final-h em { font-family: 'Roboto Serif', Georgia, serif; font-style: italic; font-weight: 500; font-stretch: 100%; letter-spacing: -0.03em; color: var(--lz-blue); }
+.lz-final-p { max-width: 30em; margin: 22px 0 0; font-size: clamp(16.5px, 1.4vw, 19px); line-height: 1.55; color: var(--lz-ink-2); }
+.lz-final .lz-actions { justify-content: center; animation: none; }
+/* El desenfoque de la aurora se salía por la esquina redondeada en Chrome: recorte explícito */
+.lz-final-stage { clip-path: inset(0 round clamp(28px, 4vw, 44px)); }
+/* Etiquetas de la tabla en móvil, en inglés */
+@media (max-width: 760px) {
+  :root:lang(en) .lz-vs-row > span[role="cell"]:not(.is-us)::before { content: 'Regular pre-order · '; }
+  :root:lang(en) .lz-vs-row > .is-us::before { content: 'With Tuko · '; }
+}
+
+/* ══ Calculadora: barra de reparto, «Te quedas» e interruptor «¿Y si no se completa?» ══ */
+.lz-calc-out .lz-calc-keep { color: var(--ink); }
+.lz-split {
+  --t: 2%;
+  position: relative;
+  display: flex;
+  height: 30px;
+  margin-top: 18px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+}
+.lz-split > span { position: relative; display: flex; align-items: center; transition: flex-basis 450ms var(--ease-out), background 400ms ease, opacity 400ms ease; }
+.lz-split-you { flex: 0 0 calc(100% - var(--t)); padding-left: 12px; background: linear-gradient(90deg, color-mix(in srgb, var(--lz-acc) 55%, #fff), var(--lz-acc)); }
+.lz-split-tuko { flex: 0 0 var(--t); background: var(--ink); box-shadow: -2px 0 0 var(--lz-card); }
+.lz-split em { font-size: 11.5px; font-style: normal; font-weight: 700; color: #fff; white-space: nowrap; }
+/* La etiqueta de Tuko, fuera de su astilla (no cabe dentro) */
+.lz-split-tuko em { position: absolute; right: 0; bottom: calc(100% + 6px); color: var(--ink-3); }
+.lz-split { overflow: visible; }
+.lz-split-you { border-radius: 10px 0 0 10px; }
+.lz-split-tuko { border-radius: 0 10px 10px 0; }
+.lz-calc-per { position: relative; margin: 12px 0 0; font-size: 15px; line-height: 1.4; color: var(--ink-2); }
+.lz-calc-per b { color: var(--ink); font-weight: 700; }
+.lz-per-a, .lz-per-b { transition: opacity 300ms ease; }
+.lz-per-b { position: absolute; left: 0; top: 0; opacity: 0; }
+
+/* Interruptor */
+.lz-calc-sw { display: inline-flex; align-items: center; gap: 10px; margin-top: 16px; font-size: 14px; font-weight: 600; color: var(--ink); cursor: pointer; user-select: none; }
+.lz-calc-sw input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.lz-sw { position: relative; width: 38px; height: 22px; border-radius: 999px; background: color-mix(in srgb, var(--ink) 16%, transparent); transition: background 250ms ease; }
+.lz-sw i { position: absolute; left: 2px; top: 2px; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(20, 24, 38, 0.3); transition: transform 250ms var(--ease-out); }
+.lz-calc-sw input:checked + .lz-sw { background: #c0394f; }
+.lz-calc-sw input:checked + .lz-sw i { transform: translateX(16px); }
+.lz-calc-sw input:focus-visible + .lz-sw { outline: 2px solid var(--lz-acc); outline-offset: 3px; }
+
+/* No se completa: la barra pasa a «devuelto» rayado, sin astilla, y todo a 0 € */
+.lz-calc.is-fail .lz-split-you { flex-basis: 100%; border-radius: 10px; background: repeating-linear-gradient(-45deg, color-mix(in srgb, #c0394f 18%, transparent) 0 6px, color-mix(in srgb, #c0394f 8%, transparent) 6px 12px); }
+.lz-calc.is-fail .lz-split-you em { color: #c0394f; }
+.lz-calc.is-fail .lz-split-tuko { flex-basis: 0; opacity: 0; }
+.lz-calc.is-fail .lz-per-a { opacity: 0; }
+.lz-calc.is-fail .lz-per-b { opacity: 1; }
+.lz-calc.is-fail .lz-calc-out b { color: var(--ink-3); }
+.lz-calc.is-fail .lz-calc-out .lz-calc-fee { color: #c0394f; }
+html[data-theme="dark"] .lz-calc.is-fail .lz-calc-out .lz-calc-fee,
+html[data-theme="dark"] .lz-calc.is-fail .lz-split-you em { color: #ff8a9b; }
+.lz-calc.is-fail .lz-split-you em { display: none; }
+.lz-calc.is-fail .lz-split-you::after { content: 'Devuelto el 100 %'; font-size: 11.5px; font-weight: 700; color: #c0394f; }
+:root:lang(en) .lz-calc.is-fail .lz-split-you::after { content: '100% refunded'; }
+html[data-theme="dark"] .lz-calc.is-fail .lz-split-you::after { color: #ff8a9b; }
+.lz-calc-out span { align-content: space-between; }
+/* Barra de reparto en oscuro: azules profundos en vez de un degradado que arranca casi en blanco, y la astilla de
+   Tuko en lavanda claro para que se distinga */
+html[data-theme="dark"] .lz-split { background: rgba(255, 255, 255, 0.06); }
+html[data-theme="dark"] .lz-split-you { background: linear-gradient(90deg, #26319a 0%, #3d50f2 60%, #6676ff 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12); }
+html[data-theme="dark"] .lz-split-tuko { background: #c9d1ff; box-shadow: -2px 0 0 #161925; }
+html[data-theme="dark"] .lz-split-you em { color: #eef1ff; }
+.lz-calc-hint { margin-top: -4px; font-size: 12px; line-height: 1.4; color: var(--ink-3); }
+/* Barra de reparto en claro: azul de la marca liso para «Tú» y lavanda para Tuko (sin degradado ni bloque negro) */
+html:not([data-theme="dark"]) .lz-split-you { background: #3d50f2; }
+html:not([data-theme="dark"]) .lz-split-tuko { background: #c9d1ff; box-shadow: -2px 0 0 var(--lz-card, #fff); }
+.lz-split-tuko em { color: #6b74b8; }
+html[data-theme="dark"] .lz-split-tuko em { color: #c9d1ff; }
+
+/* ══════════════════════════════
+   LANZAMIENTOS · FRENTE A UNA PREVENTA (versión con mini-diagramas)
+   Cada fila se ve antes de leerse: a la izquierda un dibujo gris y quieto (la preventa normal), a la derecha el
+   mismo concepto vivo dentro de la franja oscura (stock que sobra → 100 % devuelto; hoja de cálculo → tallas en
+   directo; «en unas semanas» → contador; tú solo → tú y tus compradores). Se animan al verse (.is-in).
+══════════════════════════════ */
+.lz-vs-row > span { display: flex; flex-direction: column; gap: 14px; padding: 26px 26px 24px; }
+.lz-vs-row > span[role="rowheader"] { gap: 6px; padding-left: 0; font-size: 16.5px; letter-spacing: -0.01em; }
+.lz-vs-row > span[role="rowheader"] em { font-size: 12px; font-style: normal; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: 0.04em; color: var(--ink-3); }
+.lz-vs-txt { font-size: 15px; line-height: 1.5; }
+.lz-vs-hrow > span { padding-top: 0; padding-bottom: 16px; }
+.lz-vs-hrow > .is-us { padding-top: 24px; }
+.lz-vs-row { transition: background-color 300ms ease; }
+@media (hover: hover) and (pointer: fine) {
+  .lz-vs-row:not(.lz-vs-hrow):hover > span:not(.is-us) { background: color-mix(in srgb, var(--ink) 2.5%, transparent); }
+  .lz-vs-row:not(.lz-vs-hrow):hover > .is-us { background: #11132a; }
+}
+
+/* ── Mini-diagramas: una tira de 40 px de alto ── */
+.mv { position: relative; display: flex; align-items: center; gap: 10px; height: 40px; font-variant-numeric: tabular-nums; }
+.mv small { font-size: 12px; font-weight: 600; color: var(--ink-3); }
+.is-us .mv small { color: rgba(214, 220, 245, 0.62); }
+
+/* 01 · Cajas que sobran / 100 % devuelto */
+.mv-boxes { display: grid; grid-template-columns: repeat(8, 14px); gap: 4px; }
+.mv-boxes i { height: 14px; border-radius: 3px; background: color-mix(in srgb, var(--ink) 22%, transparent); }
+.mv-boxes i.is-left { background: none; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, #c0394f 70%, transparent); }
+.mv-stock small { color: #c0394f; }
+html[data-theme="dark"] .mv-stock small { color: #ff8a9b; }
+.mv-refund svg { width: 26px; height: 26px; fill: none; stroke: #3fe0b0; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transform: rotate(-90deg); transition: transform 900ms var(--ease-out); }
+.lz-vs.is-in .mv-refund svg { transform: none; }
+.mv-refund b { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: #f3f5ff; }
+
+/* 02 · Hoja de cálculo con «?» / tallas en directo */
+.mv-grid { display: grid; grid-template-columns: repeat(3, 22px); grid-auto-rows: 10px; gap: 2px; padding: 2px; border-radius: 4px; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 16%, transparent); }
+.mv-grid i { background: color-mix(in srgb, var(--ink) 10%, transparent); border-radius: 1px; }
+.mv-sheet b { font-size: 22px; font-weight: 700; color: var(--ink-3); }
+.mv-sizes { align-items: flex-end; gap: 7px; }
+.mv-sizes > span { display: grid; justify-items: center; gap: 3px; width: 20px; }
+.mv-sizes > span i { width: 100%; height: 26px; border-radius: 3px; background: linear-gradient(180deg, #8fa0ff, #4257ff); transform-origin: bottom; transform: scaleY(0.08); transition: transform 900ms var(--ease-out); }
+.mv-sizes > span:nth-child(2) i { transition-delay: 120ms; }
+.mv-sizes > span:nth-child(3) i { transition-delay: 240ms; }
+.mv-sizes > span:nth-child(4) i { transition-delay: 360ms; }
+.lz-vs.is-in .mv-sizes > span i { transform: scaleY(var(--h)); }
+.mv-sizes em { font-size: 9.5px; font-style: normal; font-weight: 700; color: rgba(214, 220, 245, 0.62); line-height: 1; }
+.mv-sizes small { align-self: center; margin-left: 4px; display: inline-flex; align-items: center; gap: 6px; }
+.mv-sizes small::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #3fe0b0; animation: lzLive 1.6s ease-in-out infinite; }
+
+/* 03 · «En unas semanas» / contador con cuenta atrás */
+.mv-wait svg { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: var(--ink-3); stroke-width: 1.8; stroke-linecap: round; }
+.mv-wait span { padding: 5px 10px; border-radius: 7px; background: color-mix(in srgb, var(--ink) 6%, transparent); font-size: 12.5px; font-weight: 600; color: var(--ink-3); }
+.mv-count { gap: 8px; }
+.mv-count b { min-width: 1.2em; font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: #f3f5ff; }
+.mv-of { font-size: 12.5px; color: rgba(214, 220, 245, 0.62); }
+.mv-bar { position: relative; flex: 0 1 90px; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, 0.1); overflow: hidden; }
+.mv-bar i { position: absolute; inset: 0; background: #8fa0ff; transform-origin: left; transform: scaleX(var(--f, 0.4)); transition: transform 300ms var(--ease-out); }
+.mv-t { padding: 3px 7px; border-radius: 6px; background: rgba(255, 255, 255, 0.07); font-size: 11.5px; font-weight: 600; color: rgba(232, 236, 255, 0.8); }
+
+/* 04 · Tú solo / tú y tus compradores (la red se dibuja y aparecen las personas) */
+.mv-people { position: relative; width: 150px; }
+.mv-people i {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ink) 12%, transparent);
+  font-size: 9.5px;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--ink-2);
+}
+.mv-people i.is-you { width: 28px; height: 28px; font-size: 10.5px; background: var(--ink); color: var(--hero-ground, #fff); }
+.mv-net i { position: absolute; left: var(--x); top: var(--y); translate: -50% -50%; background: rgba(143, 160, 255, 0.22); color: #dfe4ff; scale: 0; transition: scale 360ms cubic-bezier(0.3, 1.6, 0.5, 1); transition-delay: calc(var(--d, 0) * 110ms + 300ms); }
+.mv-net i.is-you { background: #f3f5ff; color: #0b0d1c; scale: 1; }
+.lz-vs.is-in .mv-net i { scale: 1; }
+.mv-lines { position: absolute; inset: 0; width: 150px; height: 40px; overflow: visible; }
+.mv-lines path { fill: none; stroke: rgba(143, 160, 255, 0.45); stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1200ms var(--ease-out) 200ms; }
+.lz-vs.is-in .mv-lines path { stroke-dashoffset: 0; }
+
+@media (max-width: 760px) {
+  .lz-vs-row > span { padding: 14px 18px; gap: 10px; }
+  .lz-vs-row > span[role="rowheader"] { padding: 0 0 8px; flex-direction: row; align-items: baseline; gap: 10px; }
+  .lz-vs-row > span[role="cell"]:not(.is-us)::before,
+  .lz-vs-row > .is-us::before { display: block; font-size: 12px; }
+  .mv-boxes { grid-template-columns: repeat(8, 12px); }
+  .mv-boxes i { height: 12px; }
+}
+.lz-vs-hrow > span { flex-direction: row; align-items: flex-end; }
+.lz-vs-hrow > .is-us { align-items: center; gap: 9px; }
+/* Red más abierta: las personas no se pisan */
+.mv-net { width: 165px; height: 44px; }
+.mv-net i { width: 20px; height: 20px; }
+.mv-net i.is-you { width: 26px; height: 26px; }
+.mv-lines { width: 165px; height: 44px; }
+/* En móvil la etiqueta va en su propia línea: sin el punto separador */
+@media (max-width: 760px) {
+  .lz-vs-row > span[role="cell"]:not(.is-us)::before { content: 'Preventa normal'; }
+  .lz-vs-row > .is-us::before { content: 'Con Tuko'; }
+  :root:lang(en) .lz-vs-row > span[role="cell"]:not(.is-us)::before { content: 'Regular pre-order'; }
+  :root:lang(en) .lz-vs-row > .is-us::before { content: 'With Tuko'; }
+}
+
+/* ══ Entrada al llegar con el scroll ══
+   Las filas suben una tras otra; la franja oscura de Tuko «cae» de arriba abajo (cada celda se descubre con un
+   recorte desde arriba, en cascada), y el texto de la columna gris llega un instante antes que el de Tuko. */
+.lz-vs.is-ready .lz-vs-row > span { opacity: 0; transform: translateY(14px); transition: opacity 600ms ease, transform 800ms var(--ease-out); }
+.lz-vs.is-ready .lz-vs-row > .is-us { clip-path: inset(0 0 100% 0); transform: none; transition: opacity 300ms ease, clip-path 700ms cubic-bezier(0.65, 0, 0.35, 1); }
+.lz-vs.is-in .lz-vs-row > span { opacity: 1; transform: none; }
+.lz-vs.is-in .lz-vs-row > .is-us { clip-path: inset(0 0 -2px 0); }
+.lz-vs.is-in .lz-vs-row:nth-child(1) > * { transition-delay: 0ms; }
+.lz-vs.is-in .lz-vs-row:nth-child(2) > * { transition-delay: 120ms; }
+.lz-vs.is-in .lz-vs-row:nth-child(3) > * { transition-delay: 240ms; }
+.lz-vs.is-in .lz-vs-row:nth-child(4) > * { transition-delay: 360ms; }
+.lz-vs.is-in .lz-vs-row:nth-child(5) > * { transition-delay: 480ms; }
+.lz-vs.is-in .lz-vs-row > .is-us { transition-delay: calc(var(--row, 0) * 1ms); }
+.lz-vs.is-in .lz-vs-row:nth-child(1) > .is-us { transition-delay: 150ms; }
+.lz-vs.is-in .lz-vs-row:nth-child(2) > .is-us { transition-delay: 330ms; }
+.lz-vs.is-in .lz-vs-row:nth-child(3) > .is-us { transition-delay: 510ms; }
+.lz-vs.is-in .lz-vs-row:nth-child(4) > .is-us { transition-delay: 690ms; }
+.lz-vs.is-in .lz-vs-row:nth-child(5) > .is-us { transition-delay: 870ms; }
+/* Los dibujos de Tuko empiezan cuando su celda ya ha caído */
+.lz-vs.is-ready .mv-refund svg { transition-delay: 500ms; }
+.lz-vs.is-ready .mv-sizes > span i { transition-delay: 700ms; }
+.lz-vs.is-ready .mv-lines path { transition-delay: 1100ms; }
+.lz-vs.is-ready .mv-net i { transition-delay: calc(var(--d, 0) * 110ms + 1200ms); }
+
+/* ══ Latido en directo ══ La talla que se compra crece y se ilumina un instante; al llegar a 30, todo en verde */
+.mv-sizes > span i { transition: transform 600ms var(--ease-out), filter 400ms ease; }
+.mv-sizes > span.is-bump i { animation: lzSizeBump 700ms ease-out; }
+@keyframes lzSizeBump { 0% { filter: brightness(1.7) drop-shadow(0 0 6px rgba(143, 160, 255, 0.9)); } 100% { filter: none; } }
+.mv-sizes > span.is-bump em { color: #f3f5ff; }
+.mv-count b { transition: color 300ms ease; }
+.lz-vs.is-full .mv-bar i { background: #3fe0b0; }
+.lz-vs.is-full .mv-t { background: rgba(63, 224, 176, 0.16); color: #3fe0b0; }
+.lz-vs.is-full .mv-count b { color: #dffaf0; }
+/* Tras la entrada, los cambios del latido van sin retraso */
+.lz-vs.is-live .mv-sizes > span i { transition-delay: 0ms; }
+.mv-wait { min-width: 0; }
+.mv-wait span { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+/* La primera columna con aire a la izquierda: al pasar el ratón, el fondo gris ya no queda pegado al texto */
+@media (min-width: 761px) {
+  .lz-vs-row > span[role="rowheader"],
+  .lz-vs-hrow > span:first-child { padding-left: 22px; }
+}
+
+/* ══════════════════════════════
+   LANZAMIENTOS · LO QUE VE TU CLIENTE · el móvil
+   El mismo móvil que la home pero en versión ligera (sin canto 3D, sin parte de atrás, sin giro): marco de
+   aluminio oscuro, isla, reflejo y una ficha de producto de una tienda Shopify de verdad (marca inventada).
+   El bloque y la hoja del lanzamiento usan los textos reales del widget de Tuko. La historia la mueve
+   lanzamientos-more.js: toque → hoja → pago → avisos → completado.
+══════════════════════════════ */
+.lz-phone-wrap { position: relative; display: grid; justify-items: center; perspective: 1600px; }
+.lzp {
+  --pw: 304px;
+  position: relative;
+  width: var(--pw);
+  aspect-ratio: 9 / 19.3;
+  padding: 9px;
+  border-radius: 50px;
+  background: linear-gradient(155deg, #4a4e5a 0%, #23262e 22%, #121419 55%, #0a0b0f 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 0 0 0 2.5px rgba(0, 0, 0, 0.7),
+    inset 0 1px 1px 2px rgba(255, 255, 255, 0.06),
+    0 50px 80px -40px rgba(20, 24, 70, 0.55),
+    0 18px 30px -18px rgba(20, 24, 38, 0.45);
+  transform: rotateY(-9deg) rotateX(3deg);
+  transition: transform 900ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) { .lz-phone-wrap:hover .lzp { transform: rotateY(-3deg) rotateX(1deg); } }
+/* Botones laterales */
+.lzp::before, .lzp::after { content: ''; position: absolute; width: 3px; border-radius: 2px; background: linear-gradient(90deg, #2b2e36, #4a4e5a); }
+.lzp::before { left: -2px; top: 110px; height: 34px; box-shadow: 0 50px 0 #33363f, 0 96px 0 #33363f; }
+.lzp::after { right: -2px; top: 150px; height: 64px; }
+.lzp-floor { width: 70%; height: 24px; margin-top: 18px; border-radius: 50%; background: radial-gradient(closest-side, rgba(20, 24, 50, 0.32), transparent); filter: blur(4px); }
+
+.lzp-screen {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 42px;
+  background: #fff;
+  color: #121317;
+  font-variant-numeric: tabular-nums;
+  isolation: isolate;
+}
+.lzp-island { position: absolute; z-index: 9; top: 9px; left: 50%; width: 92px; height: 27px; margin-left: -46px; border-radius: 999px; background: #000; }
+.lzp-glare { position: absolute; z-index: 8; inset: 0; pointer-events: none; background: linear-gradient(115deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 32%); mix-blend-mode: soft-light; }
+
+/* Barra de estado */
+.lzp-status { display: flex; justify-content: space-between; align-items: center; height: 46px; padding: 6px 26px 0 30px; font-size: 13px; }
+.lzp-status b { font-weight: 650; letter-spacing: -0.01em; }
+.lzp-sys { display: inline-flex; align-items: center; gap: 5px; }
+.lzp-sys svg { height: 10px; width: auto; fill: #121317; }
+.lzp-bat { position: relative; width: 22px; height: 11px; border-radius: 3px; box-shadow: inset 0 0 0 1px rgba(18, 19, 23, 0.4); }
+.lzp-bat i { position: absolute; left: 2px; top: 2px; bottom: 2px; width: 14px; border-radius: 1.5px; background: #121317; }
+.lzp-bat::after { content: ''; position: absolute; right: -3px; top: 3.5px; width: 2px; height: 4px; border-radius: 0 1px 1px 0; background: rgba(18, 19, 23, 0.4); }
+
+/* Cabecera de la tienda */
+.lzp-head { display: flex; align-items: center; justify-content: space-between; height: 40px; padding: 0 16px; border-bottom: 1px solid #eeeef1; }
+.lzp-ico { width: 18px; height: 18px; fill: none; stroke: #121317; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.lzp-icons { display: inline-flex; gap: 12px; }
+.lzp-brand { display: inline-flex; align-items: baseline; gap: 3px; font-size: 14px; font-weight: 800; letter-spacing: 0.18em; }
+.lzp-brand small { font-family: 'Roboto Serif', Georgia, serif; font-size: 11px; font-style: italic; font-weight: 500; letter-spacing: 0; color: #6b6e7a; }
+
+/* Ficha del producto (como un tema Dawn) */
+.lzp-page { padding: 0 16px; }
+.lzp-gal { position: relative; margin: 0 -16px; height: 196px; background: #ebe8e1; overflow: hidden; }
+.lzp-gal img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.lzp-dots { position: absolute; left: 50%; bottom: 9px; display: flex; gap: 5px; translate: -50% 0; }
+.lzp-dots i { width: 5px; height: 5px; border-radius: 50%; background: rgba(18, 19, 23, 0.25); }
+.lzp-dots i.is-on { background: #121317; }
+.lzp-vendor { margin: 12px 0 0; font-size: 9.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #6b6e7a; }
+.lzp-name { margin: 3px 0 0; font-size: 18px; font-weight: 650; letter-spacing: -0.02em; }
+.lzp-price { display: flex; align-items: baseline; gap: 8px; margin: 5px 0 0; font-size: 13px; }
+.lzp-price b { font-size: 15px; font-weight: 650; }
+.lzp-price s { color: #8a8d99; }
+.lzp-price span { padding: 2px 8px; border-radius: 999px; background: #121317; color: #fff; font-size: 9.5px; font-weight: 700; letter-spacing: 0.04em; }
+.lzp-tax { margin: 2px 0 0; font-size: 10px; color: #8a8d99; }
+.lzp-opt { margin: 10px 0 0; font-size: 11px; color: #4b4e5c; }
+.lzp-opt b { color: #121317; }
+.lzp-sizes { display: flex; gap: 6px; margin-top: 6px; }
+.lzp-sizes span { flex: 1; padding: 7px 0; border-radius: 999px; box-shadow: inset 0 0 0 1px #dcdde3; font-size: 11.5px; font-weight: 600; text-align: center; color: #4b4e5c; }
+.lzp-sizes .is-on { background: #121317; box-shadow: none; color: #fff; }
+
+/* Bloque del lanzamiento en la ficha */
+.lzp-launch { margin-top: 12px; padding: 10px 12px 11px; border-radius: 12px; background: #f4f5f8; box-shadow: inset 0 0 0 1px #ebecf1; }
+.lzp-l-top { display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 650; }
+.lzp-l-state { position: relative; display: inline-flex; align-items: center; gap: 6px; }
+.lzp-l-state i { width: 7px; height: 7px; border-radius: 50%; background: #3d50f2; transition: background 300ms ease; }
+.lzp-l-b { position: absolute; left: 13px; white-space: nowrap; opacity: 0; color: #0b8a63; transition: opacity 300ms ease; }
+.lzp-l-a { transition: opacity 300ms ease; }
+.lzp-time { font-weight: 600; color: #6b6e7a; }
+.lzp-l-bar { position: relative; height: 4px; margin-top: 8px; border-radius: 2px; background: #e1e3ea; overflow: hidden; }
+.lzp-l-bar i { position: absolute; inset: 0; border-radius: inherit; background: #3d50f2; transform-origin: left; transform: scaleX(var(--f, 0.567)); transition: transform 300ms var(--ease-out), background 300ms ease; }
+.lzp-l-count { margin: 6px 0 0; font-size: 11px; color: #4b4e5c; }
+.lzp-l-count b { font-size: 13px; color: #121317; }
+.lzp-btn { position: relative; display: grid; place-items: center; height: 42px; margin-top: 10px; border-radius: 999px; background: #121317; color: #fff; font-size: 13px; font-weight: 650; transition: background 300ms ease, transform 150ms ease; }
+.lzp-btn > span { grid-area: 1 / 1; transition: opacity 250ms ease; }
+.lzp-btn-b { opacity: 0; }
+.lzp-note { margin: 6px 0 0; font-size: 10px; color: #6b6e7a; text-align: center; }
+.lzp-acc { display: grid; margin-top: 10px; border-top: 1px solid #eeeef1; }
+.lzp-acc span { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eeeef1; font-size: 11.5px; font-weight: 600; }
+.lzp-acc span::after { content: '+'; font-weight: 500; color: #8a8d99; }
+
+/* Estados de la ficha */
+.lzp.is-joined .lzp-btn { background: #eef0ff; color: #3d50f2; }
+.lzp.is-joined .lzp-btn-a { opacity: 0; }
+.lzp.is-joined .lzp-btn-b { opacity: 1; }
+.lzp.is-done .lzp-l-state i { background: #14c492; }
+.lzp.is-done .lzp-l-a { opacity: 0; }
+.lzp.is-done .lzp-l-b { opacity: 1; }
+.lzp.is-done .lzp-l-bar i { background: #14c492; }
+.lzp.is-done .lzp-btn { background: #e7f8f1; color: #0b8a63; }
+.lzp.is-tap-btn .lzp-btn { transform: scale(0.97); }
+
+/* Toque del dedo */
+.lzp-touch { position: absolute; z-index: 7; left: var(--tx, 50%); top: var(--ty, 70%); width: 38px; height: 38px; margin: -19px 0 0 -19px; border-radius: 50%; background: rgba(18, 19, 23, 0.22); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5); opacity: 0; scale: 1.4; pointer-events: none; }
+.lzp-touch.is-on { animation: lzpTouch 520ms ease-out; }
+@keyframes lzpTouch { 0% { opacity: 0; scale: 1.4; } 30% { opacity: 1; scale: 0.85; } 100% { opacity: 0; scale: 1.2; } }
+
+/* Hoja del lanzamiento (como el popup del widget) */
+.lzp-dim { position: absolute; z-index: 4; inset: 0; background: rgba(10, 11, 18, 0.45); opacity: 0; transition: opacity 400ms ease; pointer-events: none; }
+.lzp.is-sheet .lzp-dim { opacity: 1; }
+.lzp-sheet {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 18px 22px;
+  border-radius: 24px 24px 0 0;
+  background: #fff;
+  box-shadow: 0 -10px 30px rgba(10, 11, 18, 0.18);
+  transform: translateY(102%);
+  transition: transform 520ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.lzp.is-sheet .lzp-sheet { transform: none; }
+.lzp-grab { display: block; width: 38px; height: 4px; margin: 0 auto 12px; border-radius: 2px; background: #dcdde3; }
+.lzp-s-k { display: inline-flex; align-items: center; gap: 6px; margin: 0; padding: 3px 9px; border-radius: 999px; background: #eef0ff; color: #3d50f2; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; }
+.lzp-s-k i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.lzp-s-h { margin: 8px 0 0; font-size: 16px; font-weight: 700; line-height: 1.25; letter-spacing: -0.02em; }
+.lzp-s-h s { font-size: 12px; font-weight: 500; color: #8a8d99; }
+.lzp-timer { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 12px; }
+.lzp-timer span { display: grid; justify-items: center; padding: 6px 0 5px; border-radius: 10px; background: #f4f5f8; }
+.lzp-timer b { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
+.lzp-timer em { font-size: 8.5px; font-style: normal; font-weight: 600; color: #8a8d99; }
+.lzp-s-prog { margin-top: 12px; }
+.lzp-s-prog p { margin: 0; font-size: 11.5px; color: #4b4e5c; }
+.lzp-s-prog p b { font-size: 14px; color: #121317; }
+.lzp-s-prog > span { display: block; position: relative; height: 4px; margin-top: 6px; border-radius: 2px; background: #e1e3ea; overflow: hidden; }
+.lzp-s-prog > span i { position: absolute; inset: 0; background: #3d50f2; transform-origin: left; transform: scaleX(var(--f, 0.567)); transition: transform 300ms var(--ease-out); }
+.lzp-steps { display: grid; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; counter-reset: s; }
+.lzp-steps li { position: relative; display: grid; padding-left: 26px; counter-increment: s; }
+.lzp-steps li::before { content: counter(s); position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: #121317; color: #fff; font-size: 9.5px; font-weight: 700; }
+.lzp-steps b { font-size: 11.5px; font-weight: 650; }
+.lzp-steps span { font-size: 10px; line-height: 1.35; color: #6b6e7a; }
+.lzp-s-btn { display: grid; place-items: center; height: 42px; margin-top: 14px; border-radius: 999px; background: #3d50f2; color: #fff; font-size: 13px; font-weight: 650; transition: transform 150ms ease; }
+.lzp.is-tap-pay .lzp-s-btn { transform: scale(0.97); }
+.lzp-s-join, .lzp-s-done { transition: opacity 300ms ease; }
+.lzp-s-done { position: absolute; inset: 40px 18px 22px; display: grid; align-content: center; justify-items: center; gap: 8px; text-align: center; opacity: 0; pointer-events: none; }
+.lzp-check { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: #e7f8f1; }
+.lzp-check svg { width: 26px; height: 26px; fill: none; stroke: #0b8a63; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 24; stroke-dashoffset: 24; transition: stroke-dashoffset 500ms var(--ease-out) 150ms; }
+.lzp-s-done p { margin: 4px 0 0; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
+.lzp-s-done > span:last-child { max-width: 22em; font-size: 11px; line-height: 1.4; color: #6b6e7a; }
+.lzp.is-paid .lzp-s-join { opacity: 0; }
+.lzp.is-paid .lzp-s-done { opacity: 1; }
+.lzp.is-paid .lzp-check svg { stroke-dashoffset: 0; }
+
+/* Aviso que cae (asunto real del email) */
+.lzp-notif {
+  position: absolute;
+  z-index: 10;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 20px;
+  background: rgba(246, 246, 249, 0.86);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  backdrop-filter: blur(18px) saturate(1.5);
+  box-shadow: 0 12px 30px -10px rgba(20, 24, 38, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+  transform: translateY(-140%);
+  transition: transform 520ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.lzp-notif.is-in { transform: none; }
+.lzp-app { flex: 0 0 auto; width: 30px; height: 30px; border-radius: 8px; background: #121317 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='m3 7 9 6 9-6'/%3E%3C/svg%3E") center / 16px no-repeat; }
+.lzp-txt { display: grid; min-width: 0; font-size: 11.5px; line-height: 1.3; }
+.lzp-msg { color: #2a2c35; }
+.lzp-now { align-self: start; margin-left: auto; font-size: 10.5px; color: #8a8d99; }
+
+@media (max-width: 900px) {
+  .lz-buyer-grid { grid-template-columns: minmax(0, 1fr); }
+  .lz-phone-wrap { margin-top: 12px; }
+  .lzp { transform: none; }
+}
+@media (max-width: 420px) {
+  .lzp { --pw: 286px; }
+  .lzp-gal { height: 176px; }
+}
+.lzp-gal { background: #e9e6df; }
+.lzp-gal img { object-fit: contain; }
+.lzp-s-h s { display: block; margin-top: 2px; }
+
+/* ══ Grosor y levitación ══
+   Grosor: el canto de aluminio se construye con sombras escalonadas hacia el lado que queda a la vista con el
+   giro (izquierda), del metal claro al oscuro, sin capas 3D. Levitación: sube y baja despacio con un leve
+   balanceo; la sombra del suelo se encoge y aclara cuando el móvil está arriba. */
+.lzp {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 0 0 0 2.5px rgba(0, 0, 0, 0.7),
+    inset 0 1px 1px 2px rgba(255, 255, 255, 0.06),
+    -1px 0 0 #5a5e6a,
+    -2px 1px 0 #454955,
+    -3px 1px 0 #383b45,
+    -4px 1px 0 #2f323b,
+    -5px 2px 0 #292c34,
+    -6px 2px 0 #24262d,
+    -7px 2px 0 #1e2026,
+    -8px 3px 0 #18191e,
+    -14px 40px 60px -30px rgba(20, 24, 70, 0.5),
+    0 18px 30px -18px rgba(20, 24, 38, 0.45);
+  animation: lzpFloat 6.5s ease-in-out infinite;
+}
+@keyframes lzpFloat {
+  0%, 100% { translate: 0 0; rotate: 0deg; }
+  50% { translate: 0 -12px; rotate: 0.6deg; }
+}
+.lzp-floor { animation: lzpFloor 6.5s ease-in-out infinite; }
+@keyframes lzpFloor {
+  0%, 100% { scale: 1; opacity: 1; }
+  50% { scale: 0.86; opacity: 0.6; }
+}
+/* Los botones laterales asoman por el canto */
+.lzp::before { left: -10px; width: 4px; background: linear-gradient(90deg, #1e2026, #3a3e48); }
+.lzp::after { right: -1px; }
+/* El giro tiene que coincidir con el canto que se dibuja: el lado izquierdo viene hacia nosotros (el móvil mira
+   al texto), así que se ve su canto izquierdo con los botones de volumen */
+.lzp { transform: rotateY(10deg) rotateX(3deg); }
+@media (hover: hover) and (pointer: fine) { .lz-phone-wrap:hover .lzp { transform: rotateY(4deg) rotateX(1deg); } }
+@media (max-width: 900px) { .lzp { transform: rotateY(6deg); } }
+
+/* ══ Sigue al cursor (lanzamientos-more.js pone --ry, --rx y el lado del canto --s, de −1 a 1) ══
+   --s > 0: el lado izquierdo viene hacia nosotros y se ve el canto izquierdo (botones de volumen);
+   --s < 0: se ve el derecho (botón de encendido). Sin ratón, mira un poco hacia el texto. */
+.lzp {
+  --ry: -8deg;
+  --rx: 3deg;
+  --s: -0.67;
+  --sl: 0;
+  --sr: 0.67;
+  transform: rotateY(var(--ry)) rotateX(var(--rx));
+  transition: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 0 0 0 2.5px rgba(0, 0, 0, 0.7),
+    inset 0 1px 1px 2px rgba(255, 255, 255, 0.06),
+    calc(var(--s) * -1px) 0 0 #5a5e6a,
+    calc(var(--s) * -2px) 1px 0 #454955,
+    calc(var(--s) * -3px) 1px 0 #383b45,
+    calc(var(--s) * -4px) 1px 0 #2f323b,
+    calc(var(--s) * -5px) 2px 0 #292c34,
+    calc(var(--s) * -6px) 2px 0 #24262d,
+    calc(var(--s) * -7px) 2px 0 #1e2026,
+    calc(var(--s) * -8px) 3px 0 #18191e,
+    calc(var(--s) * -14px) 40px 60px -30px rgba(20, 24, 70, 0.5),
+    0 18px 30px -18px rgba(20, 24, 38, 0.45);
+}
+@media (hover: hover) and (pointer: fine) { .lz-phone-wrap:hover .lzp { transform: rotateY(var(--ry)) rotateX(var(--rx)); } }
+.lzp::before { left: calc(-2px - var(--sl) * 8px); opacity: calc(var(--sl) * 2); }
+.lzp::after { right: calc(-2px - var(--sr) * 8px); width: 4px; opacity: calc(var(--sr) * 2); background: linear-gradient(270deg, #1e2026, #3a3e48); }
+@media (max-width: 900px) { .lzp { --ry: -5deg; --rx: 0deg; --s: -0.42; --sr: 0.42; } }
+
+/* ══ Gente uniéndose ══ Círculos superpuestos (el más reciente delante), «Tú» con aro azul al pagar y el «+N» */
+.lzp-l-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; min-height: 24px; }
+.lzp-l-row .lzp-l-count { margin: 0; }
+.lzp-faces { display: inline-flex; align-items: center; padding-left: 6px; }
+.lzp-av {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  margin-left: -6px;
+  border-radius: 50%;
+  background: var(--c, #dfe2ea);
+  box-shadow: 0 0 0 2px #f4f5f8;
+  color: rgba(18, 19, 23, 0.72);
+  font-size: 7.5px;
+  font-style: normal;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+}
+.lzp-av.is-you { position: relative; z-index: 2; background: #121317; color: #fff; box-shadow: 0 0 0 2px #f4f5f8, 0 0 0 3.5px #3d50f2; font-size: 7px; }
+.lzp-av.is-new { animation: lzpJoin 560ms cubic-bezier(0.3, 1.5, 0.5, 1); }
+@keyframes lzpJoin {
+  0% { width: 0; margin-left: 0; opacity: 0; transform: scale(0.2) translateY(6px); }
+  60% { opacity: 1; }
+  100% { width: 22px; margin-left: -6px; transform: none; }
+}
+.lzp-av.is-you.is-new { animation-duration: 700ms; }
+.lzp-more { margin-left: 5px; padding: 2px 6px; border-radius: 999px; background: #e6e8ef; color: #4b4e5c; font-size: 9.5px; font-weight: 700; }
+.lzp-more.is-bump { animation: lzpMore 380ms ease-out; }
+@keyframes lzpMore { 40% { transform: scale(1.18); background: #dfe3ff; color: #3d50f2; } }
+.lzp.is-done .lzp-av.is-you { box-shadow: 0 0 0 2px #f4f5f8, 0 0 0 3.5px #14c492; }
+.lzp.is-done .lzp-time { color: #0b8a63; }
+
+/* ══════════════════════════════
+   LANZAMIENTOS · PREGUNTAS (por momento del lanzamiento)
+   A la izquierda, fijo: el titular y una regla vertical con tres paradas (Antes de abrir · Mientras está abierto ·
+   Al cerrar). La aguja baja con la lectura y la parada activa se enciende; al pulsar una, salta a su grupo.
+   A la derecha, las preguntas agrupadas. Cada respuesta se despliega con suavidad y trae su «dato clave».
+══════════════════════════════ */
+.lz-faq-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+.lz-faq-head { position: sticky; top: calc(var(--nav-h, 72px) + 32px); }
+
+/* ── La regla vertical ── */
+.lz-rail { --g: 0; position: relative; display: grid; gap: 22px; margin-top: 40px; padding-left: 30px; }
+.lz-rail-line { position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; border-radius: 2px; background: color-mix(in srgb, var(--ink) 10%, transparent); }
+.lz-rail-fill { position: absolute; left: 0; right: 0; top: 0; height: calc(var(--g) * 50%); border-radius: inherit; background: var(--lz-acc); transition: height 600ms var(--ease-out); }
+.lz-rail-needle {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--g) * 50%);
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: var(--lz-acc);
+  box-shadow: 0 0 0 4px var(--hero-ground, #f5f6fa), 0 0 0 5px color-mix(in srgb, var(--lz-acc) 35%, transparent);
+  transition: top 600ms var(--ease-out);
+}
+.lz-rail a {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 15.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color 300ms ease;
+}
+.lz-rail a::before {
+  content: '';
+  position: absolute;
+  left: -27px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--hero-ground, #f5f6fa);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--ink) 22%, transparent);
+}
+.lz-rail a em { font-size: 12px; font-style: normal; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink-3); }
+.lz-rail a.is-on { color: var(--ink); }
+.lz-rail a.is-on em { color: var(--lz-acc); }
+.lz-rail a:focus-visible { outline: 2px solid var(--lz-acc); outline-offset: 4px; border-radius: 6px; }
+@media (hover: hover) and (pointer: fine) { .lz-rail a:hover { color: var(--ink); } }
+
+/* ── Grupos y preguntas ── */
+.lz-faq-list { display: grid; gap: 40px; }
+.lz-faq-group { scroll-margin-top: calc(var(--nav-h, 72px) + 24px); }
+.lz-faq-gk { display: flex; align-items: baseline; gap: 10px; margin: 0 0 6px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lz-acc); }
+.lz-faq-gk em { font-style: normal; font-variant-numeric: tabular-nums; letter-spacing: 0.04em; opacity: 0.7; }
+.lz-faq-group details { border-bottom: 1px solid var(--lz-edge); }
+.lz-faq-group details:first-of-type { border-top: 1px solid var(--lz-edge); }
+.lz-faq-group summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 0;
+  font-size: clamp(17px, 1.5vw, 19px);
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  list-style: none;
+  cursor: pointer;
+}
+.lz-faq-group summary::-webkit-details-marker { display: none; }
+.lz-faq-group summary:focus-visible { outline: 2px solid var(--lz-acc); outline-offset: 4px; border-radius: 6px; }
+/* «+» que gira a «×» */
+.lz-faq-group summary i { position: relative; flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--lz-edge); transition: background-color 250ms ease, transform 400ms var(--ease-out); }
+.lz-faq-group summary i::before,
+.lz-faq-group summary i::after { content: ''; position: absolute; left: 50%; top: 50%; width: 11px; height: 1.5px; margin: -0.75px 0 0 -5.5px; border-radius: 1px; background: var(--ink); transition: background 250ms ease; }
+.lz-faq-group summary i::after { transform: rotate(90deg); }
+.lz-faq-group details[open] summary i { background: var(--ink); transform: rotate(45deg); }
+.lz-faq-group details[open] summary i::before,
+.lz-faq-group details[open] summary i::after { background: var(--hero-ground, #fff); }
+@media (hover: hover) and (pointer: fine) { .lz-faq-group summary:hover i { background: color-mix(in srgb, var(--ink) 6%, transparent); } }
+
+/* Respuesta con su dato clave a la derecha */
+.lz-faq-a { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 28px; overflow: hidden; }
+.lz-faq-a p { max-width: 36em; margin: -6px 0 24px; font-size: 16px; line-height: 1.6; color: var(--ink-2); text-wrap: pretty; }
+.lz-fact {
+  display: grid;
+  justify-items: end;
+  gap: 2px;
+  min-width: 96px;
+  margin: -10px 0 24px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--lz-acc) 7%, transparent);
+  text-align: right;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 400ms ease 120ms, transform 500ms var(--ease-out) 120ms;
+}
+.lz-fact b { font-size: 24px; font-weight: 700; font-stretch: 106%; letter-spacing: -0.03em; line-height: 1.05; color: var(--lz-acc); white-space: nowrap; }
+.lz-fact em { max-width: 9em; font-size: 11.5px; font-style: normal; font-weight: 600; line-height: 1.3; color: var(--ink-3); }
+.lz-faq-group details[open] .lz-fact { opacity: 1; transform: none; }
+
+@media (max-width: 860px) {
+  .lz-faq-grid { grid-template-columns: minmax(0, 1fr); }
+  .lz-faq-head { position: static; }
+  .lz-rail { display: none; }
+}
+@media (max-width: 560px) {
+  .lz-faq-a { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .lz-fact { justify-items: start; text-align: left; margin: -10px 0 22px; width: max-content; }
+  .lz-faq-a p { margin-bottom: 14px; }
+}
+/* Al cerrar, el dato clave se va a la vez que el texto */
+.lz-faq-group details.is-closing .lz-fact { opacity: 0; transition-delay: 0ms; }
+
+/* ══ Dato clave, más limpio ══
+   Antes era un recuadro lila alineado a la derecha y con margen negativo: al animar la altura se le cortaban las
+   esquinas de arriba. Ahora es una columna separada del texto por un filete, sin fondo, alineada arriba con él. */
+.lz-faq-a { gap: 32px; padding-top: 2px; }
+.lz-faq-a p { margin: 0 0 26px; }
+.lz-fact {
+  justify-items: start;
+  align-self: start;
+  min-width: 0;
+  width: 132px;
+  margin: 0 0 26px;
+  padding: 2px 0 2px 20px;
+  border-radius: 0;
+  background: none;
+  border-left: 1px solid var(--lz-edge);
+  text-align: left;
+}
+.lz-fact b { font-size: 26px; }
+.lz-fact em { max-width: none; margin-top: 2px; }
+@media (max-width: 560px) {
+  .lz-fact { width: auto; margin: 0 0 22px; padding: 0 0 0 14px; }
+  .lz-faq-a p { margin-bottom: 12px; }
+}
+
+/* ══ Regla: paradas iguales y centradas en la línea ══
+   Sin bola aparte: cada parada es un punto de 10 px sobre la línea (vacío si falta, relleno si ya se ha leído) y la
+   activa lleva un halo suave. La línea se rellena hasta la parada activa. */
+.lz-rail { padding-left: 32px; gap: 24px; }
+.lz-rail-needle { display: none; }
+.lz-rail a { line-height: 22px; }
+.lz-rail-line { left: 11px; width: 2px; top: 11px; bottom: 11px; }
+.lz-rail a::before {
+  left: -26px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  background: var(--hero-ground, #f5f6fa);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--ink) 25%, transparent);
+  transition: background-color 300ms ease, box-shadow 300ms ease, transform 300ms var(--ease-out);
+}
+.lz-rail a.is-past::before { background: var(--lz-acc); box-shadow: none; }
+.lz-rail a.is-on::before { background: var(--lz-acc); box-shadow: 0 0 0 4px color-mix(in srgb, var(--lz-acc) 18%, transparent); transform: scale(1.15); }
+.lz-rail a.is-past { color: var(--ink-2); }
+
+/* ══ Dato clave y botón de cerrar, más finos ══ */
+.lz-fact { width: 150px; border-left-color: color-mix(in srgb, var(--lz-acc) 30%, transparent); }
+.lz-fact b { font-size: 24px; }
+.lz-fact em { font-size: 12px; font-weight: 500; line-height: 1.35; }
+.lz-faq-group details[open] summary i { background: color-mix(in srgb, var(--ink) 7%, transparent); box-shadow: none; }
+.lz-faq-group details[open] summary i::before,
+.lz-faq-group details[open] summary i::after { background: var(--ink); }
+
+/* ══════════════════════════════
+   LANZAMIENTOS · CIERRE «el siguiente es el tuyo»
+   El escenario del hero con el texto a la izquierda y, a la derecha, tu propia impresora (el mismo grafito que la
+   del hero, en pequeño): un ticket en blanco asoma de la ranura y con − / + eliges el objetivo.
+══════════════════════════════ */
+.lz-final-stage { padding: clamp(56px, 7vw, 96px) clamp(24px, 5vw, 72px); text-align: left; }
+.lz-final-in { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); align-items: center; justify-items: stretch; gap: clamp(32px, 5vw, 72px); }
+.lz-final-copy { display: grid; justify-items: start; }
+.lz-final-k { display: inline-flex; align-items: center; gap: 12px; margin: 0; font-size: 12.5px; font-weight: 700; font-stretch: 112%; letter-spacing: 0.2em; text-transform: uppercase; color: var(--lz-ink-2); }
+.lz-final-k::before { content: ''; width: 20px; height: 1px; background: currentColor; opacity: 0.55; }
+.lz-final-h { margin-top: 20px; font-size: clamp(40px, 5vw, 72px); }
+.lz-final-p { margin-top: 20px; }
+.lz-final .lz-actions { justify-content: flex-start; margin-top: 32px; }
+
+/* ── La mini impresora ── */
+.lzf { position: relative; display: grid; justify-items: center; width: min(100%, 330px); justify-self: center; }
+.lzf-clip { position: relative; z-index: 1; width: 82%; height: 214px; overflow: hidden; margin-bottom: -14px; padding: 0 6px; }
+.lzf-paper {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: 0;
+  display: grid;
+  gap: 9px;
+  padding: 18px 18px 26px;
+  background:
+    linear-gradient(90deg, rgba(40, 36, 30, 0.08) 0%, transparent 10%, transparent 90%, rgba(40, 36, 30, 0.1) 100%),
+    linear-gradient(180deg, #ebe8df 0%, #f8f6f0 45%, #f3f1ea 100%);
+  color: #2a2c35;
+  font-stretch: 86%;
+  text-shadow: 0 0 0.4px rgba(42, 44, 53, 0.5);
+  -webkit-mask: linear-gradient(#000, #000) bottom / 100% calc(100% - 6px) no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 6' preserveAspectRatio='none'%3E%3Cpath d='M0 6V3L7 1.5L12 4L19 2L26 3.8L33 1L41 3.2L48 2.1L55 4.4L63 1.6L70 3.1L78 1.2L86 4L93 2.3L101 3.6L108 1.4L116 3.9L124 2L131 4.2L139 1.8L147 3.3L154 1.1L162 3.7L170 2.4L177 4.1L185 1.5L193 3L200 2.2L208 4.3L215 1.7L223 3.4L231 1.3L238 3.9L246 2.1L254 4L261 1.6L269 3.5L277 2L284 4.2L292 1.9L300 3.2V6Z'/%3E%3C/svg%3E") top / 100% 6px no-repeat;
+  mask: linear-gradient(#000, #000) bottom / 100% calc(100% - 6px) no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 6' preserveAspectRatio='none'%3E%3Cpath d='M0 6V3L7 1.5L12 4L19 2L26 3.8L33 1L41 3.2L48 2.1L55 4.4L63 1.6L70 3.1L78 1.2L86 4L93 2.3L101 3.6L108 1.4L116 3.9L124 2L131 4.2L139 1.8L147 3.3L154 1.1L162 3.7L170 2.4L177 4.1L185 1.5L193 3L200 2.2L208 4.3L215 1.7L223 3.4L231 1.3L238 3.9L246 2.1L254 4L261 1.6L269 3.5L277 2L284 4.2L292 1.9L300 3.2V6Z'/%3E%3C/svg%3E") top / 100% 6px no-repeat;
+  transform: translateY(100%);
+  transition: transform 2200ms steps(22, end);
+}
+.lzf.is-in .lzf-paper { transform: none; }
+.lzf-k { display: flex; align-items: center; gap: 6px; padding-bottom: 9px; border-bottom: 1px solid rgba(42, 44, 53, 0.55); font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+.lzf-k svg { width: 8px; height: auto; fill: #2a2c35; }
+.lzf-name { display: flex; align-items: center; font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: #8a8d99; }
+.lzf-caret { width: 2px; height: 20px; margin-left: 3px; background: #3d50f2; animation: lzCaret 1.05s steps(2, jump-none) infinite; }
+.lzf-row { display: flex; justify-content: space-between; gap: 12px; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.lzf-row em { font-style: normal; color: #55586a; }
+.lzf-row b { font-weight: 700; }
+.lzf-row:last-child { padding-top: 8px; border-top: 1px dashed rgba(42, 44, 53, 0.35); }
+.lzf-goal { display: inline-block; }
+.lzf.is-bump .lzf-paper .lzf-goal { animation: lzfReprint 420ms steps(3, end); }
+@keyframes lzfReprint { 0% { opacity: 0.1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
+
+/* Cuerpo: tapa de grafito con la ranura, frontal con la pantalla y los botones */
+.lzf-body {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 22px 16px 16px;
+  border-radius: 22px 22px 18px 18px;
+  background:
+    radial-gradient(80% 120% at 30% -20%, rgba(255, 255, 255, 0.16), transparent 55%),
+    linear-gradient(180deg, #3b4062 0%, #2a2e48 30%, #1d2036 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.45),
+    0 30px 50px -24px rgba(0, 0, 0, 0.8);
+}
+.lzf-slot { position: absolute; left: 10%; right: 10%; top: 8px; height: 6px; border-radius: 3px; background: #02030a; box-shadow: inset 0 1px 2px #000, 0 1px 0 rgba(255, 255, 255, 0.1); }
+.lzf-face { display: flex; align-items: center; gap: 12px; padding: 8px; border-radius: 14px; background: linear-gradient(180deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.12)); box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.65), 0 1px 0 rgba(255, 255, 255, 0.07); }
+.lzf-lcd {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #0a0c22, #10143a);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.85), inset 0 0 0 1px rgba(143, 160, 255, 0.14);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(200, 208, 245, 0.55);
+  font-variant-numeric: tabular-nums;
+}
+.lzf-lcd i { align-self: center; width: 7px; height: 7px; border-radius: 50%; background: #8fa0ff; box-shadow: 0 0 8px #4257ff; animation: lzLive 1.6s ease-in-out infinite; }
+.lzf-lcd b { margin-left: 2px; font-size: 22px; letter-spacing: -0.02em; color: #eef1ff; text-shadow: 0 0 12px rgba(120, 140, 255, 0.5); }
+.lzf-lcd small { font-size: 13px; letter-spacing: 0; color: rgba(200, 208, 245, 0.7); }
+.lzf.is-bump .lzf-lcd small { animation: lzfLcd 360ms ease-out; }
+@keyframes lzfLcd { 0% { color: #fff; text-shadow: 0 0 10px #8fa0ff; } }
+.lzf-step { display: grid; justify-items: center; gap: 4px; }
+.lzf-step > span { order: 3; font-size: 8.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(205, 212, 245, 0.55); }
+.lzf-step { grid-template-columns: auto auto; column-gap: 6px; }
+.lzf-step > span { grid-column: 1 / -1; }
+.lzf-btn {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 30%, #2b315f 0%, #141838 75%);
+  box-shadow: 0 0 0 2px #8f97be, 0 0 0 3px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 3px 6px rgba(0, 0, 0, 0.5);
+  color: #dfe4ff;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+.lzf-btn:active { transform: translateY(1px) scale(0.95); box-shadow: 0 0 0 2px #8f97be, 0 0 0 3px rgba(0, 0, 0, 0.5), inset 0 2px 3px rgba(0, 0, 0, 0.6); }
+.lzf-btn:focus-visible { outline: 2px solid #8fa0ff; outline-offset: 4px; }
+.lzf-btn:disabled { opacity: 0.4; cursor: default; }
+@media (hover: hover) and (pointer: fine) { .lzf-btn:hover { color: #fff; } }
+.lzf-floor { width: 86%; height: 18px; margin-top: 10px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0, 0, 0, 0.55), transparent); filter: blur(4px); }
+
+@media (max-width: 860px) {
+  .lz-final-stage { text-align: center; }
+  .lz-final-in { grid-template-columns: minmax(0, 1fr); }
+  .lz-final-copy { justify-items: center; }
+  .lz-final .lz-actions { justify-content: center; }
+}
+
+/* ══ El papel sale de la rendija, se mece y la impresora levita ══
+   La rendija está en el canto de arriba del cuerpo y se dibuja por delante del papel (un poco más ancha que él),
+   con sombra en la salida. Cuando el ticket ha salido, se mece despacio colgando de la rendija (3D, eje abajo) y
+   toda la impresora sube y baja con su sombra en el suelo. */
+.lzf { animation: lzfFloat 6.5s ease-in-out infinite; }
+@keyframes lzfFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+.lzf-floor { animation: lzfFloor 6.5s ease-in-out infinite; }
+@keyframes lzfFloor { 0%, 100% { scale: 1; opacity: 1; } 50% { scale: 0.86; opacity: 0.55; } }
+
+.lzf-clip { width: 80%; height: 226px; margin-bottom: 0; padding: 0; overflow: visible; perspective: 700px; clip-path: inset(-40px -30px 0 -30px); }
+.lzf-paper {
+  left: 0;
+  right: 0;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.35));
+}
+/* Fibras y una curva suave (más claro arriba, sombra al salir de la rendija) */
+.lzf-paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9 .06' numOctaves='2' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .42 0 0 0 0 .36 0 0 0 -.28 .16'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+}
+.lzf-paper::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 26px;
+  pointer-events: none;
+  background: linear-gradient(0deg, rgba(10, 12, 30, 0.38), rgba(10, 12, 30, 0.08) 55%, transparent);
+}
+.lzf-paper > * { position: relative; z-index: 1; }
+.lzf.is-in .lzf-paper { animation: lzfSway 5.5s ease-in-out 2.4s infinite; }
+@keyframes lzfSway {
+  0%, 100% { transform: rotateX(0deg); }
+  30% { transform: rotateX(7deg); }
+  65% { transform: rotateX(-3deg); }
+}
+
+/* Rendija en el canto, por delante del papel */
+.lzf-body { padding-top: 26px; }
+.lzf-slot {
+  z-index: 3;
+  top: -4px;
+  left: 7%;
+  right: 7%;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #000 0%, #05060f 60%, #1b1e33 100%);
+  box-shadow: inset 0 2px 3px #000, 0 1px 0 rgba(255, 255, 255, 0.14), 0 -1px 0 rgba(255, 255, 255, 0.06);
+}
+/* El labio de la tapa, con brillo, para que el cuerpo tenga canto */
+.lzf-body::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 14px;
+  border-radius: 22px 22px 0 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent);
+  pointer-events: none;
+}
+/* La sombra del papel va aparte (la máscara del borde arrancado se comería un drop-shadow): crece con el papel */
+.lzf-paper { filter: none; }
+.lzf-clip::before {
+  content: '';
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: 18px;
+  bottom: 0;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  filter: blur(16px);
+  transform-origin: 50% 100%;
+  transform: scaleY(0);
+  transition: transform 2200ms steps(22, end);
+}
+.lzf.is-in .lzf-clip::before { transform: scaleY(1); }
+.lzf { width: min(100%, 370px); }
+.lzf-clip { height: 240px; }
+.lzf-name { font-size: 22px; }
+
+/* ══ Parte de abajo, como la impresora del hero ══
+   Franja de tapa con la serigrafía (tuko | TP-01) y las luces Power / Paper (ámbar mientras sale el papel), la
+   pantalla, y un balancín − / + de una pieza con aro metálico y «OBJETIVO» serigrafiado. */
+.lzf-body { padding: 24px 14px 14px; }
+.lzf-lid { display: flex; align-items: center; justify-content: space-between; margin: 0 4px 10px; }
+.lzf-silk {
+  font-size: 8px;
+  font-weight: 700;
+  font-stretch: 110%;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(214, 220, 248, 0.6);
+  text-shadow: 0 0.6px 0 rgba(0, 0, 0, 0.55);
+}
+.lzf-model { display: inline-flex; align-items: center; gap: 5px; letter-spacing: 0.16em; }
+.lzf-model svg { width: 8px; height: auto; fill: currentColor; }
+.lzf-model b { font-size: 10px; font-weight: 800; font-stretch: 100%; letter-spacing: -0.01em; text-transform: none; }
+.lzf-model i { width: 1px; height: 8px; background: currentColor; opacity: 0.5; }
+.lzf-leds { display: inline-flex; gap: 10px; }
+.lzf-leds > span { display: inline-flex; align-items: center; gap: 4px; font-size: 7.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(214, 220, 248, 0.6); }
+.lzf-leds i { width: 5px; height: 5px; border-radius: 50%; background: #2a2e4a; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.6); }
+.lzf-leds i.is-on { background: #3fe0b0; box-shadow: 0 0 6px #14c492; }
+.lzf.is-in .lzf-leds i.is-paper { animation: lzfPaperLed 2200ms steps(1, end) forwards; }
+@keyframes lzfPaperLed { 0% { background: #f5b84a; box-shadow: 0 0 6px #f0a23a; } 100% { background: #2a2e4a; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.6); } }
+.lzf.is-bump .lzf-leds i.is-paper { animation: lzfPaperBlink 420ms steps(2, jump-none); }
+@keyframes lzfPaperBlink { 0%, 100% { background: #f5b84a; box-shadow: 0 0 6px #f0a23a; } }
+
+/* Balancín */
+.lzf-step { display: grid; grid-template-columns: auto; justify-items: center; gap: 6px; }
+.lzf-step > .lzf-silk { grid-column: auto; order: 0; }
+.lzf-rocker {
+  display: flex;
+  padding: 3px;
+  border-radius: 999px;
+  background: conic-gradient(from 210deg, #8f97be, #eef0fb, #6a7196, #c7cce6, #7c84ab, #e3e6f7, #8f97be);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+.lzf-rocker .lzf-btn {
+  width: 38px;
+  height: 32px;
+  border-radius: 0;
+  background: linear-gradient(180deg, #2b315f 0%, #171b3d 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 -2px 3px rgba(0, 0, 0, 0.55);
+  font-size: 17px;
+}
+.lzf-rocker .lzf-btn:first-child { border-radius: 999px 0 0 999px; border-right: 1px solid #05060f; }
+.lzf-rocker .lzf-btn:last-child { border-radius: 0 999px 999px 0; border-left: 1px solid rgba(255, 255, 255, 0.08); }
+.lzf-rocker .lzf-btn:active { transform: none; background: linear-gradient(180deg, #141838 0%, #1d2250 100%); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.7); }
+.lzf-rocker .lzf-btn:disabled { opacity: 1; color: rgba(223, 228, 255, 0.3); cursor: default; }
+/* Cursor de «Tu producto» en tinta (no azul) y el punto de la pantalla a la altura de «PEDIDOS» */
+.lzf-caret { background: #2a2c35; }
+.lzf-lcd i { align-self: baseline; width: 6px; height: 6px; translate: 0 -1px; }
+
+/* ══════════════════════════════
+   LANZAMIENTOS · RITMO DE FONDO (como Inicio)
+   Fondo blanco y bandas de un gris azulado muy suave que entran y salen difuminadas (sin líneas entre secciones),
+   con luces azules difusas en Precio y Preguntas. En oscuro, lo mismo en su tono: bandas apenas más claras que el
+   fondo y luces muy tenues.
+══════════════════════════════ */
+html:not([data-theme="dark"]) body:has(.lz-stage) { --band: #f2f4fb; background: #fff; }
+html[data-theme="dark"] body:has(.lz-stage) { --band: #10131d; }
+
+/* Cómo funciona → Dos finales: una sola banda que entra en Cómo funciona y sale al final de los tickets */
+.lz-how { background: linear-gradient(180deg, transparent 0, var(--band) 220px); }
+.lz-ends { background: linear-gradient(180deg, var(--band) 0, var(--band) calc(100% - 220px), transparent 100%); }
+/* Frente a una preventa: banda con los dos bordes difuminados */
+.lz-vs { background: linear-gradient(180deg, transparent 0, var(--band) 200px, var(--band) calc(100% - 200px), transparent 100%); }
+/* Lo que ve tu cliente: un halo azul detrás del móvil */
+.lz-buyer { background: radial-gradient(40% 50% at 78% 55%, rgba(66, 87, 255, 0.09), transparent 70%); }
+/* Precio: banda y su luz azul arriba, más adentro, como en Inicio */
+.lz-price {
+  background:
+    radial-gradient(ellipse 60% 18% at 50% 22%, rgba(66, 87, 255, 0.09), transparent 100%),
+    radial-gradient(ellipse 40% 14% at 8% 80%, rgba(66, 87, 255, 0.05), transparent 100%),
+    linear-gradient(180deg, transparent 0, var(--band) 200px, var(--band) calc(100% - 200px), transparent 100%);
+}
+/* Preguntas: blanco con una luz suave detrás del titular */
+.lz-faq { background: radial-gradient(ellipse 40% 30% at 18% 30%, rgba(66, 87, 255, 0.07), transparent 100%); }
+/* El cierre se apoya en una banda que entra desde arriba */
+.lz-final { background: linear-gradient(180deg, transparent 0, var(--band) 260px); }
+
+html[data-theme="dark"] .lz-buyer { background: radial-gradient(40% 50% at 78% 55%, rgba(66, 87, 255, 0.12), transparent 70%); }
+html[data-theme="dark"] .lz-price {
+  background:
+    radial-gradient(ellipse 60% 18% at 50% 22%, rgba(66, 87, 255, 0.12), transparent 100%),
+    linear-gradient(180deg, transparent 0, var(--band) 200px, var(--band) calc(100% - 200px), transparent 100%);
+}
+html[data-theme="dark"] .lz-faq { background: radial-gradient(ellipse 40% 30% at 18% 30%, rgba(66, 87, 255, 0.1), transparent 100%); }
+
+/* Piezas que usaban el color del fondo para «recortarse» (puntos huecos de la regla, aro de la aguja) */
+html:not([data-theme="dark"]) .lz-faq { --hero-ground: #fff; }
+html:not([data-theme="dark"]) .lz-how,
+html:not([data-theme="dark"]) .lz-final { --hero-ground: var(--band); }
+
+@media (max-width: 900px) {
+  .lz-buyer { background: radial-gradient(70% 30% at 50% 70%, rgba(66, 87, 255, 0.09), transparent 70%); }
+}
+
+/* ══════════════════════════════
+   LANZAMIENTOS · IMPRESORA DEL HERO, ÚLTIMO PULIDO
+   1 · El papel sale de dentro: la impresora va por delante del papel y la rendija está en el canto de arriba, un
+       poco más ancha que el ticket; la sombra del final del papel queda justo en la salida.
+   2 · Reacciona a la luz: mientras imprime, la pantalla ilumina un poco el panel; al completarse, un filo verde
+       recorre el canto de arriba y la pantalla da un destello.
+   3 · Levita muy despacio (papel, impresora y zócalo juntos) y la sombra del suelo respira.
+══════════════════════════════ */
+
+/* 1 · Salida del papel */
+.lz-printer { z-index: 4; }
+.lz-pr-top::before {
+  z-index: 2;
+  top: -4px;
+  height: 9px;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #000 0%, #03040c 55%, #141833 100%);
+  box-shadow:
+    inset 0 2px 3px rgba(0, 0, 0, 1),
+    0 1px 0 rgba(170, 185, 255, 0.32),
+    0 -1px 0 rgba(255, 255, 255, 0.06);
+}
+.lz-pr-top::after { display: none; }
+
+/* 2 · Luz */
+.lz-pr-top { transition: box-shadow 900ms ease; }
+.lz-lcd { transition: box-shadow 600ms ease; }
+.lz-visual.is-printing .lz-lcd {
+  box-shadow:
+    inset 0 2px 5px rgba(0, 0, 0, 0.85),
+    inset 0 0 0 1px rgba(143, 160, 255, 0.2),
+    0 0 0 2px #06071a,
+    0 0 26px -2px rgba(110, 130, 255, 0.35);
+}
+.lz-visual.is-made .lz-pr-top {
+  box-shadow:
+    inset 0 1px 0 rgba(120, 255, 210, 0.55),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+    0 -3px 22px -8px rgba(63, 224, 176, 0.65);
+}
+.lz-visual.is-made .lz-lcd { animation: lzLcdFlash 900ms ease-out; }
+@keyframes lzLcdFlash {
+  0% { box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.85), inset 0 0 0 1px rgba(63, 224, 176, 0.6), 0 0 0 2px #06071a, 0 0 30px 2px rgba(63, 224, 176, 0.55); }
+  100% { box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.85), inset 0 0 0 1px rgba(143, 160, 255, 0.14), 0 0 0 2px #06071a; }
+}
+
+/* 3 · Levitación (transform; el temblor de impresión usa translate y no choca) */
+.lz-paper-win,
+.lz-printer,
+.lz-pr-base { animation: lzHover 7s ease-in-out infinite; }
+.lz-visual.is-printing .lz-printer { animation: lzBuzz 90ms linear infinite, lzHover 7s ease-in-out infinite; }
+@keyframes lzHover {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+.lz-floor { animation: lzHoverFloor 7s ease-in-out infinite; }
+@keyframes lzHoverFloor {
+  0%, 100% { scale: 1; opacity: 1; }
+  50% { scale: 0.9; opacity: 0.7; }
+}
+
+/* Pantalla que se adapta a su propio ancho (no al de la ventana): en pantallas medianas la impresora se estrecha y
+   «QUEDAN 12 D 00 H» no cabía junto al contador. Primero se quita «Quedan»; si aún falta sitio, todo un punto más
+   pequeño. Nunca se sale del cristal. */
+.lz-lcd { container-type: inline-size; overflow: hidden; }
+.lz-pr-state { min-width: 0; white-space: nowrap; }
+@container (max-width: 300px) {
+  .lz-q { display: none; }
+}
+@container (max-width: 250px) {
+  .lz-lcd-a { gap: 5px; letter-spacing: 0.08em; }
+  .lz-lcd-a b { font-size: 19px; }
+  .lz-pr-state { font-size: 10px; letter-spacing: 0.06em; }
+}
+.lz-lcd { column-gap: 12px; }
+@container (max-width: 270px) {
+  .lz-lcd-a { gap: 5px; letter-spacing: 0.08em; }
+  .lz-lcd-a b { font-size: 19px; }
+  .lz-pr-state { font-size: 10px; letter-spacing: 0.06em; }
+}
+/* Barra de la pantalla en un solo color: azul mientras se llena, verde al completarse */
+.lz-lcd-bar i { background: #7084ff; }
+.lz-visual.is-made .lz-lcd-bar i { background: #3fe0b0; }
+
+/* Secciones fuera de pantalla: sus animaciones en bucle (aurora, levitación, puntos que laten…) se pausan.
+   La clase la pone lanzamientos-more.js con un margen generoso, así que al llegar ya están en marcha. */
+.is-away, .is-away *, .is-away *::before, .is-away *::after { animation-play-state: paused !important; }

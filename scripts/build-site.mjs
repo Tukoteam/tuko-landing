@@ -111,6 +111,7 @@ function concatCssBundles() {
     { entry: 'tuko-theme.css', folder: 'theme' },
     { entry: 'main.css', folder: 'main' },
     { entry: 'tuko-ai.css', folder: 'tuko-ai' },
+    { entry: 'lanzamientos.css', folder: 'lanzamientos' },
   ];
   let n = 0;
   for (const { entry, folder } of bundles) {

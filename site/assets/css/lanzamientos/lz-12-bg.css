@@ -1,0 +1,44 @@
+/* ══════════════════════════════
+   LANZAMIENTOS · RITMO DE FONDO (como Inicio)
+   Fondo blanco y bandas de un gris azulado muy suave que entran y salen difuminadas (sin líneas entre secciones),
+   con luces azules difusas en Precio y Preguntas. En oscuro, lo mismo en su tono: bandas apenas más claras que el
+   fondo y luces muy tenues.
+══════════════════════════════ */
+html:not([data-theme="dark"]) body:has(.lz-stage) { --band: #f2f4fb; background: #fff; }
+html[data-theme="dark"] body:has(.lz-stage) { --band: #10131d; }
+
+/* Cómo funciona → Dos finales: una sola banda que entra en Cómo funciona y sale al final de los tickets */
+.lz-how { background: linear-gradient(180deg, transparent 0, var(--band) 220px); }
+.lz-ends { background: linear-gradient(180deg, var(--band) 0, var(--band) calc(100% - 220px), transparent 100%); }
+/* Frente a una preventa: banda con los dos bordes difuminados */
+.lz-vs { background: linear-gradient(180deg, transparent 0, var(--band) 200px, var(--band) calc(100% - 200px), transparent 100%); }
+/* Lo que ve tu cliente: un halo azul detrás del móvil */
+.lz-buyer { background: radial-gradient(40% 50% at 78% 55%, rgba(66, 87, 255, 0.09), transparent 70%); }
+/* Precio: banda y su luz azul arriba, más adentro, como en Inicio */
+.lz-price {
+  background:
+    radial-gradient(ellipse 60% 18% at 50% 22%, rgba(66, 87, 255, 0.09), transparent 100%),
+    radial-gradient(ellipse 40% 14% at 8% 80%, rgba(66, 87, 255, 0.05), transparent 100%),
+    linear-gradient(180deg, transparent 0, var(--band) 200px, var(--band) calc(100% - 200px), transparent 100%);
+}
+/* Preguntas: blanco con una luz suave detrás del titular */
+.lz-faq { background: radial-gradient(ellipse 40% 30% at 18% 30%, rgba(66, 87, 255, 0.07), transparent 100%); }
+/* El cierre se apoya en una banda que entra desde arriba */
+.lz-final { background: linear-gradient(180deg, transparent 0, var(--band) 260px); }
+
+html[data-theme="dark"] .lz-buyer { background: radial-gradient(40% 50% at 78% 55%, rgba(66, 87, 255, 0.12), transparent 70%); }
+html[data-theme="dark"] .lz-price {
+  background:
+    radial-gradient(ellipse 60% 18% at 50% 22%, rgba(66, 87, 255, 0.12), transparent 100%),
+    linear-gradient(180deg, transparent 0, var(--band) 200px, var(--band) calc(100% - 200px), transparent 100%);
+}
+html[data-theme="dark"] .lz-faq { background: radial-gradient(ellipse 40% 30% at 18% 30%, rgba(66, 87, 255, 0.1), transparent 100%); }
+
+/* Piezas que usaban el color del fondo para «recortarse» (puntos huecos de la regla, aro de la aguja) */
+html:not([data-theme="dark"]) .lz-faq { --hero-ground: #fff; }
+html:not([data-theme="dark"]) .lz-how,
+html:not([data-theme="dark"]) .lz-final { --hero-ground: var(--band); }
+
+@media (max-width: 900px) {
+  .lz-buyer { background: radial-gradient(70% 30% at 50% 70%, rgba(66, 87, 255, 0.09), transparent 70%); }
+}

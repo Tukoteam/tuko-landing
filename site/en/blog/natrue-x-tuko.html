@@ -65,18 +65,18 @@
 <header role="banner">
 <nav aria-label="Main navigation">
   <a href="/en/" class="nav-logo">
-    <img src="https://tukoteam.com/assets/images/tuko-logo-nav.webp" width="840" height="321" alt="Tuko" decoding="async" fetchpriority="high">
+    <img src="/assets/images/tuko-logo-nav.webp" width="840" height="321" alt="Tuko" decoding="async" fetchpriority="high">
   </a>
   <ul class="nav-links">
     <li><a href="/en/#como-funciona" data-i18n="nav_link_como_funciona">How it works</a></li>
     <li><a href="/en/#precios" data-i18n="nav_link_precios">Pricing</a></li>
-    <li><a href="/en/blog/" class="nav-link-active" data-i18n="nav_link_blog">Blog</a></li>
+    <li><a href="/en/blog/" data-i18n="nav_link_blog">Blog</a></li>
     <li><a href="/en/tuko-ai" data-i18n="nav_link_ia">tuko AI</a></li>
-    <li><a href="https://apps.shopify.com/tuko?locale=en" class="nav-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Install free</a></li>
+    <li><a href="https://apps.shopify.com/tuko" class="nav-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Install free</a></li>
   </ul>
   <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" aria-pressed="false">
     <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
   </button>
   <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
     <span></span><span></span><span></span>
@@ -99,10 +99,11 @@
 </nav>
 </header>
 
+<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu" aria-hidden="true">
   <a href="/en/#como-funciona" data-i18n="nav_link_como_funciona">How it works</a>
   <a href="/en/#precios" data-i18n="nav_link_precios">Pricing</a>
-  <a href="/en/blog/" class="nav-link-active" data-i18n="nav_link_blog">Blog</a>
+  <a href="/en/blog/" data-i18n="nav_link_blog">Blog</a>
   <a href="/en/tuko-ai" data-i18n="nav_link_ia">tuko AI</a>
   <div class="mobile-lang">
     <p class="mobile-lang-label" data-i18n="nav_lang_label">Language</p>
@@ -122,8 +123,9 @@
       </button>
     </div>
   </div>
-  <a href="https://apps.shopify.com/tuko?locale=en" class="mobile-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Install free</a>
+  <a href="https://apps.shopify.com/tuko" class="mobile-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Install free</a>
 </div>
+<!-- /tuko:partial:nav-en -->
 
 <main class="article-main">
   <a href="index" class="article-back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg><span data-i18n="article_back">Back to blog</span></a>
@@ -224,7 +226,7 @@
     <div class="footer-top">
       <div class="footer-brand">
         <a href="/en/" class="footer-brand-mark">tuko</a>
-        <p class="footer-brand-text" data-i18n="footer_tagline">Group buying for Shopify stores. More sales. Less ad dependency.</p>
+        <p class="footer-brand-text" data-i18n="footer_tagline">Goal-based discounts for Shopify stores. Sell more units without giving away margin.</p>
       </div>
       <div class="footer-col">
         <p class="footer-col-title" data-i18n="footer_col1_title">Contact</p>
@@ -237,8 +239,8 @@
       </div>
       <div class="footer-col">
         <p class="footer-col-title" data-i18n="footer_col2_title">Legal</p>
-        <a href="/en/privacy" data-i18n="footer_privacy">Privacy policy</a>
-        <a href="/en/terms" data-i18n="footer_terms">Terms and conditions</a>
+        <a href="/en/privacy">Privacy policy</a>
+        <a href="/en/terms">Terms and conditions</a>
         <a href="https://api.tukoteam.com/legal/terminos-servicio-en.html">App terms of service</a>
         <a href="https://api.tukoteam.com/legal/condiciones-compra-colectiva-en.html">Buyer terms</a>
         <a href="https://api.tukoteam.com/legal/privacidad-usuarios-en.html">App privacy policy</a>
@@ -251,6 +253,6 @@
 
 <script src="/assets/js/main.js?v=27ca6f87" defer></script>
 <script src="/assets/js/tuko-theme.js?v=b2ef7977" defer></script>
-<script src="/assets/js/i18n.js?v=a939461f" defer></script>
+<script src="/assets/js/i18n.js?v=df816a99" defer></script>
 </body>
 </html>
