@@ -63,6 +63,12 @@ function bustVersion(urlPath) {
    así que les llega la marca de cierre del nav pero no la de inicio, y el nav nunca se actualizaba.
    Si falta la de inicio, se pone justo antes del header. */
 function repairNavMarkers(html) {
+  // Artículos que publica el Blog CMS de la app con su copia del nav y sin ninguna marca: se envuelve todo el
+  // bloque (header + menú móvil, hasta <main>) con las marcas del idioma de la página.
+  if (!/<!--\s*\/?tuko:partial:nav-[a-z]+\s*-->/.test(html) && /class="mobile-menu"/.test(html)) {
+    const lang = /<html[^>]*\blang=["']en/i.test(html) ? 'en' : 'es';
+    return html.replace(/(?:<!-- NAV -->\s*)?<header role="banner">[\s\S]*?(?=\s*<main\b)/, (m) => `<!-- tuko:partial:nav-${lang} -->\n${m.replace(/^<!-- NAV -->\s*/, '')}\n<!-- /tuko:partial:nav-${lang} -->`);
+  }
   const m = html.match(/<!--\s*\/tuko:partial:(nav-[a-z]+)\s*-->/);
   if (!m || new RegExp(`<!--\\s*tuko:partial:${m[1]}\\s*-->`).test(html)) return html;
   return html.replace(/(<!-- NAV -->\s*)?<header role="banner">/, `<!-- tuko:partial:${m[1]} -->\n<header role="banner">`);
