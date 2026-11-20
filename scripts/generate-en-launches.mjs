@@ -61,7 +61,7 @@ const T = [
   ['>Repetir<', '>Replay<'],
   ['de 30 personas', 'of 30 people'],
   ['de 40 personas', 'of 40 people'],
-  ['Quedan <b class="lz-flow-d">12</b> días', '<b class="lz-flow-d">12</b> days left'],
+  ['Día <b class="lz-flow-d">1</b> de 12', 'Day <b class="lz-flow-d">1</b> of 12'],
   ['<b>Completado</b><small>3 días antes</small>', '<b>Completed</b><small>3 days early</small>'],
   ['Lo abres', 'You open it'],
   ['Eliges el producto, cuántas personas hacen falta, el precio y hasta cuándo.',

@@ -55,6 +55,40 @@
     fSlotBox.innerHTML = sh;
     var fSlots = fSlotBox.children;
 
+    var DONE_D = Math.floor(DONE_DAY);
+    var setDay = function (d) { fDays.textContent = d; };
+
+    // Contador de rodillo: dos cifras; la de las decenas aparece al llegar a 10. Del 9 al 0 sube hasta el
+    // «0» de abajo de la tira y luego salta sin transición al de arriba, para que siempre ruede hacia delante.
+    var strip = '';
+    for (var q = 0; q <= 10; q++) strip += '<i>' + (q % 10) + '</i>';
+    fCount.innerHTML = '<span class="lz-od"><span>' + strip + '</span></span><span class="lz-od"><span>' + strip + '</span></span>';
+    var fOd = fCount.children;
+    var odW = 0;
+    var setCount = function (n, snap) {
+      if (!odW) odW = fOd[1].getBoundingClientRect().width;
+      var digs = [Math.floor(n / 10) % 10, n % 10];
+      Array.prototype.forEach.call(fOd, function (o, i) {
+        var cur = +(o.getAttribute('data-d') || 0);
+        var d = digs[i];
+        if (odW) o.style.width = odW + 'px';
+        o.classList.toggle('is-snap', !!snap);
+        if (!snap && d === 0 && cur === 9) {
+          o.style.setProperty('--d', 10);
+          setTimeout(function () {
+            o.classList.add('is-snap');
+            o.style.setProperty('--d', 0);
+            void o.offsetWidth;
+            o.classList.remove('is-snap');
+          }, 440);
+        } else {
+          o.style.setProperty('--d', d);
+        }
+        o.setAttribute('data-d', d);
+      });
+      fOd[0].classList.toggle('is-off', n < 10);
+    };
+
     // Personas apuntadas según el avance (0…1): buen arranque, algo más de calma en medio y empujón final, sin
     // ráfagas (si entran demasiadas a la vez, las caras se amontonan en el aire). De ahí sale cuándo entra cada una.
     var joined = function (t) { return Math.round(GOAL * (0.3 * (1 - Math.pow(1 - t, 2)) + 0.7 * Math.pow(t, 1.45))); };
@@ -91,7 +125,7 @@
       var sl = fSlots[n - 1];
       sl.className = 't' + (n % TONES) + ' is-in';
       fLanded = Math.max(fLanded, n);
-      fCount.textContent = fLanded;
+      setCount(fLanded);
       flow.style.setProperty('--j', (fLanded / GOAL).toFixed(3));
       rail();
       if (fLanded === GOAL) finish();
@@ -139,7 +173,7 @@
     // Los 30: un instante para ver el último hueco con su color, ola verde hasta la meta (✓) y cae el sello
     var finish = function () {
       cancelAnimationFrame(fRaf);
-      fDays.textContent = DAYS - Math.floor(DONE_DAY);
+      setDay(DONE_D);
       later(function () { flow.classList.add('is-wave'); }, 420);
       later(function () {
         setStep(2);
@@ -161,8 +195,8 @@
       flow.classList.remove('is-wave', 'is-done');
       if (fStage) fStage.classList.remove('is-printed');
       fToast.classList.remove('is-in');
-      fCount.textContent = 0;
-      fDays.textContent = DAYS;
+      setCount(0, true);
+      setDay(1);
       flow.style.setProperty('--j', 0);
       setStep(-1);
       fReplay.hidden = true;
@@ -178,7 +212,7 @@
         var frame = function (now) {
           var t = Math.min(1, (now - t0) / RUN);
           while (next < GOAL && at[next] <= t) { next++; drop(next); }
-          if (fLanded < GOAL) fDays.textContent = Math.max(0, DAYS - Math.floor(DONE_DAY * t));
+          if (fLanded < GOAL) setDay(Math.max(1, Math.ceil(DONE_D * t)));
           if (next < GOAL) fRaf = requestAnimationFrame(frame);
         };
         fRaf = requestAnimationFrame(frame);
