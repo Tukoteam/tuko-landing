@@ -1,5 +1,5 @@
 /**
- * Genera en/launches.html (página EN real) desde lanzamientos.html.
+ * Genera en/drops.html (página EN real) desde drops.html.
  * La página no usa claves de i18n: se traduce con una tabla ES → EN (se aplica de la frase más larga a la más
  * corta, para que una palabra suelta no pise una frase que la contiene). Los textos que pinta el JavaScript
  * (tickets, regla, móvil, calculadora) cambian solos con <html lang="en">.
@@ -13,16 +13,16 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
 const site = path.join(repoRoot, 'site');
-const srcPath = path.join(site, 'lanzamientos.html');
-const outPath = path.join(site, 'en', 'launches.html');
-const ES_URL = 'https://tukoteam.com/lanzamientos';
-const EN_URL = 'https://tukoteam.com/en/launches';
+const srcPath = path.join(site, 'drops.html');
+const outPath = path.join(site, 'en', 'drops.html');
+const ES_URL = 'https://tukoteam.com/drops';
+const EN_URL = 'https://tukoteam.com/en/drops';
 
 const SEO = {
-  title: 'Launches: drops and pre-orders on Shopify · Tuko',
+  title: 'Drops and pre-orders on Shopify · Tuko',
   desc: 'Open a launch with a buyer goal and a launch price. Hit it and it completes; miss it and everyone is refunded. €1 per buyer.',
   keywords: 'shopify pre-order, launch a drop, clothing drop, pre-order with goal, shopify crowdfunding, shopify limited edition, sell before you make, shopify product launch, group buying',
-  ogTitle: 'Tuko Launches: launch only what already has buyers',
+  ogTitle: 'Tuko Drops: launch only what already has buyers',
   ogDesc: 'Drops and pre-orders with a buyer goal for your Shopify store. Hit it and it completes. Miss it and everyone is refunded.',
   twDesc: 'Drops and pre-orders with a buyer goal for your Shopify store. Miss it and everyone is refunded.',
 };
@@ -30,7 +30,7 @@ const SEO = {
 /* ── Tabla de traducción ── */
 const T = [
   // Hero
-  ['<b>Lanzamientos</b>', '<b>Launches</b>'],
+  ['<b>Drops</b>', '<b>Drops</b>'],
   ['Lanza solo lo que', 'Launch only what'],
   ['ya tiene compradores.', 'already has buyers.'],
   ['Drops, preventas y ediciones limitadas con un objetivo de compradores.', 'Drops, pre-orders and limited editions with a buyer goal.'],
@@ -50,35 +50,26 @@ const T = [
   ['>Cómo funciona<', '>How it works<'],
   ['Pones las reglas una vez.', 'You set the rules once.'],
   ['El resto va solo.', 'The rest runs itself.'],
-  ['Un lanzamiento tiene tres datos: cuántas personas hacen falta, a qué precio y hasta cuándo. Con eso, cada compra suma y el lanzamiento se cierra solo.',
-    'A launch has three numbers: how many people it needs, at what price and until when. From there, every purchase counts and the launch closes on its own.'],
+  ['Eliges cuántas personas hacen falta, a qué precio y hasta cuándo. Tuko se encarga del resto.',
+    'You choose how many people it needs, at what price and until when. Tuko takes care of the rest.'],
   ['Sudadera Ed. 01', 'Hoodie Ed. 01'],
-  ['· 30 personas · 12 días', '· 30 people · 12 days'],
+  ['<em>Objetivo</em>30 personas', '<em>Goal</em>30 people'],
+  ['<em>Precio</em>39 €', '<em>Price</em>€39'],
+  ['<em>Plazo</em>12 días', '<em>Deadline</em>12 days'],
+  ['<em>30 pedidos × 39 €</em><b>1.170 €</b>', '<em>30 orders × €39</em><b>€1,170</b>'],
+  ['Completado · día 9', 'Complete · day 9'],
   ['>Repetir<', '>Replay<'],
-  ['Día 0', 'Day 0'],
-  ['Día 12', 'Day 12'],
-  ['Día 9', 'Day 9'],
-  ['3 días de margen', '3 days to spare'],
-  ['Lo abres', 'You open it'],
-  ['Eliges el producto, las personas que hacen falta (de 5 a 100), el descuento sobre tu precio (de 0 a 90 %) y cuántos días dura (de 3 a 30).',
-    'Pick the product, how many people it needs (5 to 100), the discount on your price (0 to 90%) and how long it runs (3 to 30 days).'],
-  ['<em>Producto</em>', '<em>Product</em>'],
-  ['<em>Personas</em>', '<em>People</em>'],
-  ['<em>Duración</em>', '<em>Duration</em>'],
-  ['12 días', '12 days'],
-  ['<em>Descuento</em><b>−20 % · 39 € <s>49 €</s></b>', '<em>Discount</em><b>−20% · €39 <s>€49</s></b>'],
-  ['Del día 1 al 9', 'Days 1 to 9'],
-  ['Se apuntan', 'People join'],
-  ['Cada persona paga al unirse y suma una más al contador. Tú solo tienes que compartir el enlace.',
-    'Each person pays when they join and adds one to the counter. All you do is share the link.'],
   ['de 30 personas', 'of 30 people'],
   ['de 40 personas', 'of 40 people'],
-  ['Esperando a la primera persona', 'Waiting for the first person'],
-  ['Se cierra', 'It closes'],
-  ['Al llegar a 30 se completa, aunque queden días, y los pedidos siguen adelante al precio de lanzamiento. Si se acaba el plazo sin llegar, se devuelve el dinero a todos.',
-    'At 30 it completes, even with days to go, and the orders go ahead at the launch price. If time runs out first, everyone is refunded.'],
-  ['>Abierto<', '>Open<'],
-  ['30 pedidos · todos con −20 %', '30 orders · all at −20%'],
+  ['Quedan <b class="lz-flow-d">12</b> días', '<b class="lz-flow-d">12</b> days left'],
+  ['<b>Completado</b><small>3 días antes</small>', '<b>Completed</b><small>3 days early</small>'],
+  ['Lo abres', 'You open it'],
+  ['Eliges el producto, cuántas personas hacen falta, el precio y hasta cuándo.',
+    'Pick the product, how many people it needs, the price and the deadline.'],
+  ['Se apuntan', 'People join'],
+  ['Cada persona paga al unirse. Tú solo compartes el enlace.', 'Each person pays when they join. All you do is share the link.'],
+  ['<h3>Se completa</h3>', '<h3>It completes</h3>'],
+  ['Al llegar al objetivo se cierra y preparas los pedidos.', 'Once it hits the goal it closes and you prepare the orders.'],
 
   // Dos finales
   ['Al cerrar', 'At the close'],
@@ -160,39 +151,46 @@ const T = [
   ['Lo que ve tu cliente', 'What your customer sees'],
   ['Tus clientes saben en todo momento', 'Your customers always know'],
   ['cuánto falta.', 'how close it is.'],
-  ['En la ficha del producto, el botón de compra se cambia por el del lanzamiento: precio, personas que faltan y cuenta atrás. Y Tuko les escribe en cada momento clave, sin que tú hagas nada.',
-    'On the product page, the buy button becomes the launch button: price, people still needed and a countdown. And Tuko emails them at every key moment, without you doing a thing.'],
+  ['En la ficha del producto, el botón de compra se cambia por el del drop: precio, personas que faltan y cuenta atrás. Y Tuko les escribe en cada momento clave, sin que tú hagas nada.',
+    'On the product page, the buy button becomes the drop button: price, people still needed and a countdown. And Tuko emails them at every key moment, without you doing a thing.'],
   ['<span>Al pagar</span>', '<span>When they pay</span>'],
   ['Compra confirmada. Faltan 12 personas', 'Purchase confirmed. 12 more people needed'],
   ['Cuando quedan 12 horas', 'With 12 hours to go'],
-  ['Quedan 12 horas para completar el lanzamiento', '12 hours left to complete the launch'],
+  ['Quedan 12 horas para completar el drop', '12 hours left to complete the drop'],
   ['Cuando falta una persona', 'When one person is left'],
-  ['Falta 1 persona para completar el lanzamiento', '1 more person to fill the launch'],
-  ['o «El lanzamiento no se completó. Te devolvemos 39 €»', 'or “The launch didn’t fill up. You get €39 back”'],
-  ['Lanzamiento completado', 'Launch complete'],
+  ['Falta 1 persona para completar el drop', '1 more person to fill the drop'],
+  ['o «El drop no se completó. Te devolvemos 39 €»', 'or “The drop didn’t fill up. You get €39 back”'],
+  ['Drop completado', 'Drop complete'],
   ['>ahora<', '>now<'],
   ['Si no se completa, te devolvemos el 100 %.', 'If it doesn’t fill up, you get 100% back.'],
-  ['Únete al lanzamiento por 39 €', 'Join the launch for €39'],
 
-  // Móvil: la tienda y la hoja del lanzamiento
-  ['<b>39,00 €</b><s>49,00 €</s><span>Lanzamiento</span>', '<b>€39.00</b><s>€49.00</s><span>Launch</span>'],
-  ['Impuestos incluidos.', 'Taxes included.'],
-  ['Talla: <b>M</b>', 'Size: <b>M</b>'],
-  ['Lanzamiento · faltan <b class="lzp-left">13</b>', 'Launch · <b class="lzp-left">13</b> to go'],
-  ['Ya estás dentro', 'You’re in'],
-  ['<span>Descripción</span><span>Envío y devoluciones</span>', '<span>Description</span><span>Shipping &amp; returns</span>'],
-  ['<i></i>Lanzamiento</p>', '<i></i>Launch</p>'],
-  ['Únete al lanzamiento por <b>39 €</b> <s>49 €</s>', 'Join the launch for <b>€39</b> <s>€49</s>'],
+  // Móvil: Tuko Store, el widget del drop y su popup
+  ['<b>39,00 €</b><s>49,00 €</s>', '<b>€39.00</b><s>€49.00</s>'],
+  ['Precio especial de drop', 'Special drop price'],
+  ['Este drop se completó', 'This drop filled up'],
+  ['Se vendió a <b>39,00 €</b>', 'Sold at <b>€39.00</b>'],
+  ['>Completo<', '>Complete<'],
+  ['Cierra en', 'Closes in'],
+  ['<em>días</em>', '<em>days</em>'],
+  ['<em>horas</em>', '<em>hours</em>'],
+  ['Faltan <b class="lzp-left">13</b> compradores', '<b class="lzp-left">13</b> more buyers needed'],
+  ['Se llegó a 30 compradores', '30 buyers reached'],
+  ['Reservar mi plaza por 39,00 €', 'Reserve my spot for €39.00'],
+  ['Reservar mi plaza', 'Reserve my spot'],
+  ['Ya tienes tu plaza', 'Your spot is saved'],
+  ['Ver detalles', 'See details'],
+  ['Si no se llega a 30 compradores, te devolvemos el dinero.', 'If it doesn’t reach 30 buyers, you get your money back.'],
+  ['Precio especial si se llega a 30 compradores', 'Special price if it reaches 30 buyers'],
+  ['<span>−20 %</span>', '<span>−20%</span>'],
+  ['¿Cómo funciona?', 'How does it work?'],
   ['<em>Días</em>', '<em>Days</em>'],
   ['<em>Horas</em>', '<em>Hours</em>'],
   ['<em>Minutos</em>', '<em>Minutes</em>'],
-  ['<em>Segundos</em>', '<em>Seconds</em>'],
-  ['<b>Entras y pagas 39 €</b><span>Ahora, en el checkout de la tienda.</span>', '<b>You join and pay €39</b><span>Now, at the store checkout.</span>'],
-  ['<b>Se apuntan 30 personas</b><span>Antes de que se acabe el tiempo.</span>', '<b>30 people join</b><span>Before the time runs out.</span>'],
-  ['<b>Se completa</b><span>Todos os lleváis el descuento. Si no se completa, devolución del 100 %.</span>', '<b>It fills up</b><span>Everyone gets the discount. If it doesn’t fill, 100% refund.</span>'],
-  ['Ir al pago · 39 €', 'Go to checkout · €39'],
-  ['Ya has pagado el precio de lanzamiento', 'You’ve paid the launch price'],
-  ['Puedes cancelar mientras siga abierto. Te devolvemos el 100 %.', 'You can cancel while it’s open. 100% refund.'],
+  ['Reservado y pagado', 'Reserved and paid'],
+  ['Tu plaza está guardada. Te enviamos la confirmación por email y, si no se completa, te devolvemos el 100 %.', 'Your spot is saved. We’ll email you the confirmation and, if it doesn’t fill up, you get 100% back.'],
+  ['<span class="lzp-s-tag">Completado</span>', '<span class="lzp-s-tag">Complete</span>'],
+  ['¡Ya tienes el tuyo! La tienda lo prepara y te lo envía.', 'Yours is secured! The store will prepare it and ship it to you.'],
+  ['<s>49,00 €</s> 39,00 €', '<s>€49.00</s> €39.00'],
 
   // Precio
   ['<p class="lz-eyebrow">Precio</p>', '<p class="lz-eyebrow">Pricing</p>'],
@@ -201,7 +199,7 @@ const T = [
   ['<b>1 €</b><span>por comprador</span>', '<b>€1</b><span>per buyer</span>'],
   ['Solo si el lanzamiento se completa. Si no se llega, <b>no le pagas nada a Tuko</b>.', 'Only if the launch completes. If it falls short, <b>you pay Tuko nothing</b>.'],
   ['Los 5 primeros compradores de cada ciclo de 30 días, gratis', 'The first 5 buyers in every 30-day cycle are free'],
-  ['Nunca más de 129 € por ciclo, vendas lo que vendas', 'Never more than €129 per cycle, however much you sell'],
+  ['Nunca más de 200 € por ciclo, vendas lo que vendas', 'Never more than €200 per cycle, however much you sell'],
   ['Sin cuota fija y sin comisión sobre tus ventas', 'No fixed fee and no commission on your sales'],
   ['Haz la cuenta', 'Run the numbers'],
   ['Personas del lanzamiento', 'People in the launch'],
@@ -216,7 +214,7 @@ const T = [
   ['De cada 100 € que vendes, Tuko se lleva <b class="lz-calc-pct">2,1 €</b>', 'Out of every €100 you sell, Tuko takes <b class="lz-calc-pct">€2.1</b>'],
   ['Se devuelve el dinero a todos. Tuko: <b>0 €</b>', 'Everyone is refunded. Tuko: <b>€0</b>'],
   ['¿Y si no se completa?', 'What if it doesn’t complete?'],
-  ['Si es lo único que usas en el ciclo. Precios sin IVA.', 'If it’s the only thing you use in the cycle. Prices exclude VAT.'],
+  ['Con un solo lanzamiento en el ciclo: los 5 gratis se comparten con tus grupos y otros lanzamientos. Sin IVA ni la comisión de tu pasarela de pago.', 'With a single launch in the cycle: the 5 free are shared with your groups and other launches. Excludes VAT and your payment provider’s fee.'],
   ['Precio de lanzamiento', 'Launch price'],
 
   // Preguntas
@@ -311,7 +309,7 @@ function jsonLd(html) {
         '@type': 'WebPage',
         '@id': `${EN_URL}#webpage`,
         url: EN_URL,
-        name: 'Launches: drops and pre-orders with a buyer goal on Shopify',
+        name: 'Drops and pre-orders with a buyer goal on Shopify',
         description: SEO.desc,
         inLanguage: 'en',
         isPartOf: { '@id': 'https://tukoteam.com/#website' },
@@ -321,7 +319,7 @@ function jsonLd(html) {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://tukoteam.com/en/' },
-          { '@type': 'ListItem', position: 2, name: 'Launches', item: EN_URL },
+          { '@type': 'ListItem', position: 2, name: 'Drops', item: EN_URL },
         ],
       },
       { '@type': 'FAQPage', '@id': `${EN_URL}#faq`, mainEntity: qa },
@@ -378,17 +376,17 @@ function ensureSitemap() {
   let sm = fs.readFileSync(p, 'utf8');
   if (sm.includes(`<loc>${EN_URL}</loc>`)) return;
   const entry = `  <url>\n    <loc>${EN_URL}</loc>\n    <lastmod>${new Date().toISOString().slice(0, 10)}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.85</priority>\n  </url>\n`;
-  sm = sm.replace(/(<url>\s*<loc>https:\/\/tukoteam\.com\/lanzamientos<\/loc>[\s\S]*?<\/url>\r?\n)/, `$1${entry}`);
+  sm = sm.replace(/(<url>\s*<loc>https:\/\/tukoteam\.com\/drops<\/loc>[\s\S]*?<\/url>\r?\n)/, `$1${entry}`);
   fs.writeFileSync(p, sm);
 }
 
 function ensureRedirects() {
   const p = path.join(repoRoot, 'netlify.toml');
   let n = fs.readFileSync(p, 'utf8');
-  if (n.includes('from = "/en/launches"')) return;
+  if (n.includes('from = "/en/drops"')) return;
   n = n.replace(
     /(\[\[redirects\]\]\r?\n  from = "\/en\/tuko-ai"\r?\n)/,
-    `# Launches (EN): URL limpia\n[[redirects]]\n  from = "/en/launches.html"\n  to = "/en/launches"\n  status = 301\n  force = true\n\n[[redirects]]\n  from = "/en/launches"\n  to = "/en/launches.html"\n  status = 200\n  force = true\n\n$1`
+    `# Drops (EN): URL limpia\n[[redirects]]\n  from = "/en/drops.html"\n  to = "/en/drops"\n  status = 301\n  force = true\n\n[[redirects]]\n  from = "/en/drops"\n  to = "/en/drops.html"\n  status = 200\n  force = true\n\n$1`
   );
   fs.writeFileSync(p, n);
 }
@@ -406,7 +404,7 @@ console.log('wrote', path.relative(repoRoot, outPath));
 let esOut = es.replace(/<html lang="es"[^>]*>/, `<html lang="es" data-url-es="${ES_URL}" data-url-en="${EN_URL}">`);
 esOut = hreflang(esOut);
 fs.writeFileSync(srcPath, esOut);
-console.log('patched lanzamientos.html (hreflang + data-url-en)');
+console.log('patched drops.html (hreflang + data-url-en)');
 
 ensureSitemap();
 ensureRedirects();

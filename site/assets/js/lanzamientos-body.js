@@ -1,8 +1,8 @@
 /**
  * Página Lanzamientos · cuerpo.
- * - Cómo funciona: la aguja recorre la regla de 12 días. Primero se rellena la ficha (01), luego se apuntan
- *   personas (02; al principio rápido, en medio más lento y al final otro empujón) y al llegar a 30, el día 9,
- *   se completa (03) aunque sobren días. Se reproduce al verse por primera vez; «Verlo otra vez» lo repite.
+ * - Cómo funciona: los tres pasos se encienden por turno; el contador y la barra suben con las caras de quien se
+ *   apunta (rápido al principio, más lento en medio y un empujón al final) y al llegar a 30 todo se pone verde.
+ *   Se reproduce al verse por primera vez; «Repetir» lo repite.
  * - Dos finales: los tickets salen al verse (.is-in).
  * - Para quién: dibuja las fotos tramadas.
  * Todos los datos son de ejemplo.
@@ -28,161 +28,167 @@
   }
 
   /* ── Cómo funciona ── */
-  var run = document.querySelector('.lz-run');
-  if (run) {
-    var steps = run.querySelectorAll('.lz-step');
-    var cfgRows = run.querySelectorAll('.lz-cfg span');
-    var dayEl = run.querySelector('.lz-needle-day');
-    var nEl = run.querySelector('.lz-needle-n');
-    var joinC = run.querySelector('.lz-join-c');
-    var joinBar = run.querySelector('.lz-join-bar');
-    var last = run.querySelector('.lz-join-last');
-    var av = run.querySelector('.lz-join-av');
-    var who = run.querySelector('.lz-join-who');
-    var replay = run.querySelector('.lz-replay');
-    var raf = 0;
-    var current = -1;
-    var ruler = run.querySelector('.lz-ruler');
-    var linksSvg = run.querySelector('.lz-links svg');
-    var timers = [];
+  var flow = document.querySelector('.lz-flow');
+  if (flow) {
+    var fSteps = flow.querySelectorAll('.lz-flow-step');
+    var fCount = flow.querySelector('.lz-flow-c');
+    var fDays = flow.querySelector('.lz-flow-d');
+    var fRun = flow.querySelector('.lz-flow-run');
+    var fSlotBox = flow.querySelector('.lz-flow-slots');
+    var fToast = flow.querySelector('.lz-flow-toast');
+    var fReplay = flow.querySelector('.lz-replay');
+    var fStepsBox = flow.querySelector('.lz-flow-steps');
+    var fStage = flow.parentNode.classList.contains('lz-flow-stage') ? flow.parentNode : null;
+    var fCur = -1;
+    var TONES = 5;
+    var RUN = 7600;   // lo que tardan en apuntarse los 30
+    var FALL = 720;   // lo que tarda cada cara en caer a su hueco
+    var WAVE = 24;    // retraso de la ola verde entre hueco y hueco (igual que en el CSS)
+    var fRaf = 0;
+    var fTimers = [];
+    var fFlying = [];
+    var fLanded = 0;
 
-    // Personas apuntadas según el avance (0…1): arranque fuerte, valle en medio y empujón final
-    var joined = function (t) { return Math.round(GOAL * (0.55 * (1 - Math.pow(1 - t, 2.2)) + 0.45 * t * t * t)); };
+    // Los 30 huecos
+    var sh = '';
+    for (var s = 0; s < GOAL; s++) sh += '<i style="--i:' + s + '"></i>';
+    fSlotBox.innerHTML = sh;
+    var fSlots = fSlotBox.children;
 
-    var setStep = function (k) {
-      current = k;
-      Array.prototype.forEach.call(steps, function (s, i) {
-        s.classList.toggle('is-on', i === k);
-        s.classList.toggle('is-past', i < k);
-      });
-      if (linksSvg) Array.prototype.forEach.call(linksSvg.querySelectorAll('[data-k]'), function (el) {
-        var i = +el.getAttribute('data-k');
-        el.classList.toggle('is-on', i === k);
-        el.classList.toggle('is-past', i < k);
-      });
+    // Personas apuntadas según el avance (0…1): buen arranque, algo más de calma en medio y empujón final, sin
+    // ráfagas (si entran demasiadas a la vez, las caras se amontonan en el aire). De ahí sale cuándo entra cada una.
+    var joined = function (t) { return Math.round(GOAL * (0.3 * (1 - Math.pow(1 - t, 2)) + 0.7 * Math.pow(t, 1.45))); };
+    var at = [];
+    for (var k = 1; k <= GOAL; k++) { var tt = 0; while (joined(tt) < k && tt < 1) tt += 0.002; at.push(tt); }
+
+    var later = function (fn, ms) { fTimers.push(setTimeout(fn, ms)); };
+    var who = function (n) { return NAMES[(n * 7) % NAMES.length]; };
+    var tr = function (x, y, sc) { return 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) translate(-50%,-50%) scale(' + sc + ')'; };
+
+    // Línea de tiempo de los pasos: va del icono 1 al 3; llega al 2 al abrirse y de ahí al 3 según se apuntan
+    var rail = function () {
+      if (fSteps.length < 3) return;
+      var c = function (i) { return fSteps[i].offsetLeft + 19; };
+      var a = c(0), b = c(1), e = c(2);
+      var p = a;
+      if (fCur >= 1) p = b + (e - b) * (fLanded / GOAL);
+      if (fCur >= 2) p = e;
+      fStepsBox.style.setProperty('--r0', a + 'px');
+      fStepsBox.style.setProperty('--rw', (e - a) + 'px');
+      fStepsBox.style.setProperty('--rf', Math.max(0, p - a).toFixed(1) + 'px');
     };
-    var setP = function (day, n) {
-      run.style.setProperty('--p', (day / DAYS).toFixed(4));
-      dayEl.textContent = (EN ? 'Day ' : 'Día ') + Math.floor(day);
-      nEl.textContent = n;
-      joinC.textContent = n;
-      joinBar.style.setProperty('--j', (n / GOAL).toFixed(3));
+    var setStep = function (i0) {
+      fCur = i0;
+      Array.prototype.forEach.call(fSteps, function (st, i) {
+        st.classList.toggle('is-on', i === i0);
+        st.classList.toggle('is-past', i < i0);
+      });
+      rail();
     };
-    var later = function (fn, ms) { timers.push(setTimeout(fn, ms)); };
+
+    // Llega al hueco: se enciende con su color, sube el contador y crece el brillo
+    var land = function (n) {
+      var sl = fSlots[n - 1];
+      sl.className = 't' + (n % TONES) + ' is-in';
+      fLanded = Math.max(fLanded, n);
+      fCount.textContent = fLanded;
+      flow.style.setProperty('--j', (fLanded / GOAL).toFixed(3));
+      rail();
+      if (fLanded === GOAL) finish();
+    };
+
+    // Cae: aparece encima, un poco a la izquierda, y cae con gravedad hasta su hueco, donde se encoge
+    var drop = function (n) {
+      var rr = fRun.getBoundingClientRect();
+      var sr = fSlots[n - 1].getBoundingClientRect();
+      var x = sr.left - rr.left + sr.width / 2;
+      var y = sr.top - rr.top + sr.height / 2;
+      var y0 = y - 40;
+      var f = document.createElement('i');
+      f.className = 'lz-flow-drop t' + (n % TONES);
+      f.textContent = who(n).charAt(0);
+      fRun.appendChild(f);
+      fFlying.push(f);
+
+      // Globito al lado de la cara (a la derecha; si no cabe, a la izquierda)
+      fToast.textContent = who(n) + (EN ? ' joined' : ' se ha unido');
+      var tw = fToast.offsetWidth;
+      var lx = x + 22;
+      if (lx + tw > fRun.clientWidth) lx = x - 22 - tw;
+      fToast.style.left = Math.max(0, lx).toFixed(1) + 'px';
+      fToast.style.top = (y0 - 13).toFixed(1) + 'px';
+      fToast.classList.remove('is-in');
+      void fToast.offsetWidth;
+      fToast.classList.add('is-in');
+
+      if (!f.animate) { f.remove(); land(n); return; }
+      var a = f.animate([
+        { transform: tr(x - 14, y0 + 6, 0.5), opacity: 0, easing: 'cubic-bezier(0.2, 0.8, 0.3, 1)' },
+        { transform: tr(x - 8, y0, 1), opacity: 1, offset: 0.26, easing: 'cubic-bezier(0.55, 0, 0.9, 0.5)' },
+        { transform: tr(x, y, 0.36), opacity: 1, offset: 0.88 },
+        { transform: tr(x, y, 0.2), opacity: 0 }
+      ], { duration: FALL, fill: 'forwards' });
+      a.onfinish = function () {
+        f.remove();
+        var i = fFlying.indexOf(f);
+        if (i > -1) fFlying.splice(i, 1);
+        land(n);
+      };
+    };
+
+    // Los 30: un instante para ver el último hueco con su color, ola verde hasta la meta (✓) y cae el sello
+    var finish = function () {
+      cancelAnimationFrame(fRaf);
+      fDays.textContent = DAYS - Math.floor(DONE_DAY);
+      later(function () { flow.classList.add('is-wave'); }, 420);
+      later(function () {
+        setStep(2);
+        flow.classList.add('is-done');
+      }, 420 + GOAL * WAVE + 250);
+      // Tras el sello, la tarjeta imprime el ticket por debajo
+      later(function () { if (fStage) fStage.classList.add('is-printed'); }, 420 + GOAL * WAVE + 1050);
+      later(function () { fReplay.hidden = false; }, 420 + GOAL * WAVE + 2400);
+    };
 
     var reset = function () {
-      cancelAnimationFrame(raf);
-      timers.forEach(clearTimeout);
-      timers = [];
-      run.classList.remove('is-done');
-      Array.prototype.forEach.call(cfgRows, function (r) { r.classList.remove('is-set'); });
-      av.textContent = '·';
-      who.textContent = EN ? 'Waiting for the first person' : 'Esperando a la primera persona';
-      setP(0, 0);
+      cancelAnimationFrame(fRaf);
+      fTimers.forEach(clearTimeout);
+      fTimers = [];
+      fFlying.forEach(function (f) { f.getAnimations && f.getAnimations().forEach(function (an) { an.cancel(); }); f.remove(); });
+      fFlying = [];
+      fLanded = 0;
+      Array.prototype.forEach.call(fSlots, function (sl) { sl.className = ''; });
+      flow.classList.remove('is-wave', 'is-done');
+      if (fStage) fStage.classList.remove('is-printed');
+      fToast.classList.remove('is-in');
+      fCount.textContent = 0;
+      fDays.textContent = DAYS;
+      flow.style.setProperty('--j', 0);
       setStep(-1);
-      replay.hidden = true;
+      fReplay.hidden = true;
     };
 
     var play = function () {
       reset();
-      // 01 · se rellena la ficha
       setStep(0);
-      Array.prototype.forEach.call(cfgRows, function (r, i) { later(function () { r.classList.add('is-set'); }, 300 + i * 380); });
-      // 02 · avanza la aguja y se apuntan
       later(function () {
         setStep(1);
         var t0 = performance.now();
-        var dur = 7000;
-        var shown = 0;
-        var seed = 0;
+        var next = 0;
         var frame = function (now) {
-          var t = Math.min(1, (now - t0) / dur);
-          var n = joined(t);
-          setP(DONE_DAY * t, n);
-          if (n > shown) {
-            shown = n;
-            seed = (seed * 7 + n * 13) % 997;
-            var name = NAMES[seed % NAMES.length];
-            av.textContent = name.charAt(0);
-            who.textContent = name + ' · ' + CITIES[seed % CITIES.length] + (EN ? ' · size ' : ' · talla ') + SIZES[seed % SIZES.length];
-            last.classList.remove('is-new');
-            void last.offsetWidth;
-            last.classList.add('is-new');
-          }
-          if (t < 1) { raf = requestAnimationFrame(frame); return; }
-          // 03 · se completa el día 9
-          setP(DONE_DAY, GOAL);
-          dayEl.textContent = EN ? 'Complete · day 9' : 'Completado · día 9';
-          setStep(2);
-          run.classList.add('is-done');
-          later(function () { replay.hidden = false; }, 1200);
+          var t = Math.min(1, (now - t0) / RUN);
+          while (next < GOAL && at[next] <= t) { next++; drop(next); }
+          if (fLanded < GOAL) fDays.textContent = Math.max(0, DAYS - Math.floor(DONE_DAY * t));
+          if (next < GOAL) fRaf = requestAnimationFrame(frame);
         };
-        raf = requestAnimationFrame(frame);
-      }, 300 + cfgRows.length * 380 + 500);
+        fRaf = requestAnimationFrame(frame);
+      }, 1300);
     };
 
-    // Marcas de la regla: una por cuarto de día (las de día entero, más largas)
-    var ticks = run.querySelector('.lz-ruler-ticks');
-    if (ticks) {
-      var html = '';
-      for (var q = 0; q <= DAYS * 4; q++) {
-        var cls = (q % 4 === 0 ? 'is-day' : '') + (q / 4 > DONE_DAY ? ' is-spare' : '');
-        html += '<i class="' + cls + '" style="left:' + (q / (DAYS * 4) * 100).toFixed(4) + '%"></i>';
-      }
-      ticks.innerHTML = html;
-    }
-
-    /* Conectores: del Día 0 a «Lo abres», un corchete del día 1 al 9 a «Se apuntan» y del día 9 a «Se cierra».
-       Se dibujan con las medidas reales (la regla tiene márgenes y las columnas, relleno) y se rehacen al cambiar el ancho. */
-    function drawLinks() {
-      if (!linksSvg) return;
-      var W = run.clientWidth;
-      var H = linksSvg.parentNode.clientHeight;
-      if (!W || !H) return;
-      // Posición real de las marcas (el margen de la regla es un clamp() y no se puede leer como número)
-      var tk = ruler.querySelector('.lz-ruler-ticks');
-      var r0 = run.getBoundingClientRect().left;
-      var tr = tk.getBoundingClientRect();
-      var pad = parseFloat(getComputedStyle(steps[0]).paddingLeft) || 0;
-      var x = function (d) { return tr.left - r0 + d / DAYS * tr.width; };
-      // Cada línea llega al centro del número de su columna (medido, no supuesto)
-      var col = function (i) {
-        var nr = steps[i].querySelector('.lz-step-n').getBoundingClientRect();
-        return Math.round(nr.left - r0 + nr.width / 2) + 0.5;
-      };
-      var y0 = 4;
-      var yb = 14;
-      // Codos en ángulo recto (como en un plano), no curvas
-      var curve = function (xa, ya, xb) {
-        var m = Math.round(ya + (H - ya) * 0.55) + 0.5;
-        if (Math.abs(xa - xb) < 14) return 'M' + xb + ' ' + ya + ' V' + H; // casi alineados: recta, sin escalón
-        return 'M' + xa + ' ' + ya + ' V' + m + ' H' + xb + ' V' + H;
-      };
-      var paths = [
-        curve(x(0), y0, col(0)),
-        'M' + x(1) + ' ' + y0 + ' V' + yb + ' H' + x(DONE_DAY - 0.2) + ' V' + y0 + ' M' + col(1) + ' ' + yb + ' V' + H,
-        curve(x(DONE_DAY), y0, col(2)),
-      ];
-      var dots = [[x(0), y0], [col(0), H], [col(1), yb], [col(1), H], [x(DONE_DAY), y0], [col(2), H]];
-      var dk = [0, 0, 1, 1, 2, 2];
-      var html = '';
-      paths.forEach(function (d, i) {
-        html += '<path class="lz-ln" d="' + d + '"/>';
-        html += '<path class="lz-ln-on" data-k="' + i + '" pathLength="1" d="' + d + '"/>';
-      });
-      dots.forEach(function (p, i) {
-        html += '<circle class="lz-ln-dot" data-k="' + dk[i] + '" cx="' + p[0].toFixed(1) + '" cy="' + p[1] + '" r="2.5"/>';
-      });
-      linksSvg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-      linksSvg.innerHTML = html;
-      setStep(current);
-    }
-    if ('ResizeObserver' in window) new ResizeObserver(drawLinks).observe(run); else window.addEventListener('resize', drawLinks);
-    drawLinks();
-
-    replay.addEventListener('click', play);
+    fReplay.addEventListener('click', play);
+    if ('ResizeObserver' in window) new ResizeObserver(rail).observe(fStepsBox); else window.addEventListener('resize', rail);
     reset();
-    onSeen(run.querySelector('.lz-ruler'), play, 0.9);
+    onSeen(flow.querySelector('.lz-flow-meter'), play, 0.6);
   }
 
   /* ── Dos finales ── */

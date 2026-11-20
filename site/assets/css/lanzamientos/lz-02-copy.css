@@ -129,3 +129,17 @@
   .lz-actions { width: 100%; }
   .lz-cta, .lz-ghost { flex: 1 1 100%; justify-content: center; }
 }
+
+/* Cuando el hero va centrado (tablet y móvil), el antetítulo lleva raya a los dos lados, como los de la home:
+   con una sola raya a la izquierda parecía descentrado. En escritorio el texto va a la izquierda y basta una. */
+@media (max-width: 960px) {
+  .lz-kicker::after {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.55;
+    transform-origin: right;
+    animation: lzRule 900ms var(--ease-out) 200ms both;
+  }
+}

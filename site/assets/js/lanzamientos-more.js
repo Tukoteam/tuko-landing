@@ -2,7 +2,7 @@
  * Página Lanzamientos · «Lo que ve tu cliente» y el cálculo del precio.
  * - El móvil: el contador sube de 17 a 30 y van cayendo los avisos (asuntos reales de los emails de Tuko);
  *   la lista de la izquierda marca el aviso de cada momento. En bucle mientras se ve; se pausa fuera de pantalla.
- * - La calculadora: 1 € por comprador si se completa, los 5 primeros del ciclo gratis y como mucho 129 €.
+ * - La calculadora: 1 € por comprador si se completa, los 5 primeros del ciclo gratis y como mucho 200 €.
  * Datos de ejemplo.
  */
 (function () {
@@ -12,7 +12,7 @@
   var EN = document.documentElement.lang === 'en';
 
   /* ── El móvil: una tienda de verdad ──
-     Historia en bucle: el dedo toca «Únete al lanzamiento», sube la hoja (cuenta atrás, personas, 3 pasos), se paga,
+     Historia en bucle: el dedo toca «Reservar mi plaza», sale el popup del widget (precio, faltan, cuenta atrás), se paga,
      la ficha queda «Ya estás dentro» y caen los avisos (asuntos reales de los emails de Tuko) mientras el contador
      sube hasta 30 y el lanzamiento se completa. La lista de la izquierda marca el aviso de cada momento. */
   var phone = document.querySelector('.lzp');
@@ -22,10 +22,12 @@
     var notif = phone.querySelector('.lzp-notif');
     var msg = phone.querySelector('.lzp-msg');
     var nEls = phone.querySelectorAll('.lzp-n, .lzp-n2');
-    var leftEl = phone.querySelector('.lzp-left');
+    var leftEls = phone.querySelectorAll('.lzp-left');
     var bars = phone.querySelectorAll('.lzp-l-bar, .lzp-s-prog > span');
-    var timeEl = phone.querySelector('.lzp-time');
-    var secEl = phone.querySelector('.lzp-sec');
+    var dEls = phone.querySelectorAll('.lzw-d');
+    var hEls = phone.querySelectorAll('.lzw-hh');
+    var mEls = phone.querySelectorAll('.lzw-mm');
+    var secEl = null;
     var touch = phone.querySelector('.lzp-touch');
     var btn = phone.querySelector('.lzp-btn');
     var payBtn = phone.querySelector('.lzp-s-btn');
@@ -33,14 +35,14 @@
     // Asuntos reales de los emails de Tuko (launchI18n en tuko-platform)
     var MSGS = EN ? [
       'Purchase confirmed. 12 more people needed',
-      '12 hours left to complete the launch',
-      '1 more person to fill the launch',
-      'Launch complete',
+      '12 hours left to complete the drop',
+      '1 more person to fill the drop',
+      'Drop complete',
     ] : [
       'Compra confirmada. Faltan 12 personas',
-      'Quedan 12 horas para completar el lanzamiento',
-      'Falta 1 persona para completar el lanzamiento',
-      'Lanzamiento completado',
+      'Quedan 12 horas para completar el drop',
+      'Falta 1 persona para completar el drop',
+      'Drop completado',
     ];
     var timers = [];
     var running = false;
@@ -57,26 +59,21 @@
     var avatar = function (i, cls) {
       return '<i class="lzp-av' + (cls ? ' ' + cls : '') + '" style="--c:' + TONES[i % TONES.length] + '">' + INITIALS[i % INITIALS.length] + '</i>';
     };
+    // Como en el widget: personas en círculos de color (hasta 4) y un quinto con «+N»; la que entra, con un rebote
     var renderFaces = function (n) {
       if (!facesEl) return;
       var html = '';
-      var shown = 0;
-      var youNew = joined && n === 18 && lastN < 18;
-      if (joined) { html += '<i class="lzp-av is-you' + (youNew ? ' is-new' : '') + '">' + (EN ? 'You' : 'Tú') + '</i>'; shown++; }
-      var others = joined ? n - 1 : n;
-      for (var k = 0; shown < 5 && k < others; k++) {
-        var idx = others - k; // la más reciente primero
-        html += avatar(idx, k === 0 && n > lastN && !(joined && n === 18 && lastN < 18) ? 'is-new' : '');
-        shown++;
+      for (var k = Math.min(4, n) - 1; k >= 0; k--) {
+        var idx = n - k;
+        html += '<i class="t' + (idx % 4) + (k === 0 && n > lastN ? ' is-new' : '') + '"></i>';
       }
-      var more = n - shown;
-      if (more > 0) html += '<span class="lzp-more' + (n > lastN ? ' is-bump' : '') + '">+' + more + '</span>';
+      if (n > 4) html += '<i class="lzw-more">+' + (n - 4) + '</i>';
       facesEl.innerHTML = html;
       lastN = n;
     };
     var setN = function (n) {
       Array.prototype.forEach.call(nEls, function (el) { el.textContent = n; });
-      if (leftEl) leftEl.textContent = Math.max(0, GOAL - n);
+      Array.prototype.forEach.call(leftEls, function (el) { el.textContent = Math.max(0, GOAL - n); });
       Array.prototype.forEach.call(bars, function (b) { b.style.setProperty('--f', (n / GOAL).toFixed(3)); });
       renderFaces(n);
       // El reloj corre a la vez que sube la gente: de 3 d 14 h (17 personas) a 12 h (26) y a 9 h al completarse
@@ -97,7 +94,11 @@
       timeShown += (timeTarget - timeShown) * 0.12;
       timeShown -= 0.6; // y nunca se para del todo, como un reloj
       if (timeShown < timeTarget - 30) timeShown = timeTarget - 30;
-      timeEl.textContent = fmtLeft(timeShown);
+      var m = Math.max(0, Math.round(timeShown));
+      var put = function (els, v) { Array.prototype.forEach.call(els, function (el) { el.textContent = v; }); };
+      put(dEls, Math.floor(m / 1440));
+      put(hEls, Math.floor((m % 1440) / 60));
+      put(mEls, m % 60);
     };
     var mark = function (k) {
       Array.prototype.forEach.call(mails, function (li, i) {
@@ -138,7 +139,7 @@
     var cycle = function () {
       timers.forEach(clearTimeout);
       timers = [];
-      phone.classList.remove('is-done', 'is-joined', 'is-sheet', 'is-paid', 'is-tap-btn', 'is-tap-pay');
+      phone.classList.remove('is-done', 'is-joined', 'is-sheet', 'is-paid', 'is-final', 'is-tap-btn', 'is-tap-pay');
       joined = false;
       lastN = 0;
       setN(17);
@@ -167,7 +168,12 @@
         phone.classList.add('is-done');
         notify(3);
       }, t + 3800);
-      later(function () { if (running) cycle(); }, t + 9500);
+      // 4 · toca «Ver detalles» y sale el popup «Drop completado»
+      later(function () { tap(btn, 'is-tap-btn'); }, t + 6600);
+      later(function () { phone.classList.add('is-final'); }, t + 6850);
+      later(function () { phone.classList.add('is-sheet'); }, t + 6950);
+      later(function () { phone.classList.remove('is-sheet'); }, t + 10600);
+      later(function () { if (running) cycle(); }, t + 11600);
     };
     var tickSec = function () {
       sec = sec <= 0 ? 59 : sec - 1;
@@ -430,7 +436,7 @@
   }
 
   /* ── Calculadora del precio ──
-     1 € por comprador si se completa, los 5 primeros del ciclo gratis y como mucho 129 €. Las cifras ruedan hasta
+     1 € por comprador si se completa, los 5 primeros del ciclo gratis y como mucho 200 €. Las cifras ruedan hasta
      su valor, la barra muestra lo que es tuyo y la astilla de Tuko, y el interruptor «¿Y si no se completa?» lo
      pone todo a 0 € (se devuelve el dinero a todos). */
   var calc = document.querySelector('.lz-calc');
@@ -470,7 +476,7 @@
       var p = +inP.value;
       var off = fail && fail.checked;
       var sales = n * p;
-      var fee = off ? 0 : Math.min(129, Math.max(0, n - 5));
+      var fee = off ? 0 : Math.min(200, Math.max(0, n - 5));
       var keep = off ? 0 : sales - fee;
       calc.querySelector('.lz-calc-n').textContent = n;
       calc.querySelector('.lz-calc-p').textContent = eur(p);

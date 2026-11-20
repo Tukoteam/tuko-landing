@@ -59,8 +59,26 @@ function bustVersion(urlPath) {
   return hashCache.get(abs);
 }
 
+/* Los artículos del blog copian el header desde «<header role="banner">» (sync-blog-article-shell y el CMS),
+   así que les llega la marca de cierre del nav pero no la de inicio, y el nav nunca se actualizaba.
+   Si falta la de inicio, se pone justo antes del header. */
+function repairNavMarkers(html) {
+  const m = html.match(/<!--\s*\/tuko:partial:(nav-[a-z]+)\s*-->/);
+  if (!m || new RegExp(`<!--\\s*tuko:partial:${m[1]}\\s*-->`).test(html)) return html;
+  return html.replace(/(<!-- NAV -->\s*)?<header role="banner">/, `<!-- tuko:partial:${m[1]} -->\n<header role="banner">`);
+}
+
+/* Lo mismo con el footer: los artículos del blog lo llevan sin marcas, así que nunca se actualizaba. Si la página
+   tiene el footer de la web («<!-- FOOTER -->» + <footer>) y no tiene marcas, se envuelve en las del idioma de la
+   página; el reemplazo de abajo lo deja igual que la plantilla. */
+function repairFooterMarkers(html) {
+  if (/<!--\s*tuko:partial:footer-[a-z]+\s*-->/.test(html)) return html;
+  const lang = /<html[^>]*\blang=["']en/i.test(html) ? 'en' : 'es';
+  return html.replace(/<!-- FOOTER -->\s*<footer>[\s\S]*?<\/footer>/, (m) => `<!-- tuko:partial:footer-${lang} -->\n${m}\n<!-- /tuko:partial:footer-${lang} -->`);
+}
+
 function injectPartials(html, partials) {
-  let out = html;
+  let out = repairFooterMarkers(repairNavMarkers(html));
   out = out.replace(
     /<!--\s*tuko:include:([a-z0-9_-]+)\s*-->/gi,
     (_, name) => {

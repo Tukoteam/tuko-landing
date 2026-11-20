@@ -85,7 +85,7 @@ const translations = {
   es: {
     /* NAV */
     nav_link_problema: 'El problema',
-    nav_link_como_funciona: 'Cómo funciona',
+    nav_link_como_funciona: 'Compra en grupo',
     nav_link_precios: 'Precios',
     nav_link_faq: 'Preguntas',
     nav_link_beneficios: 'Por qué funciona',
@@ -95,7 +95,7 @@ const translations = {
     /* TUKO AI */
     nav_link_ia: 'tuko AI',
 
-    nav_link_lanzamientos: 'Lanzamientos',
+    nav_link_lanzamientos: 'Drops',
     ia_status: 'En desarrollo',
     ia_lead: '<span class="ia-lead-brand">tuko AI</span> monta tus <span class="ia-lead-key">campañas</span> <em>por ti</em>: analiza tu tienda y tu mercado, y decide qué vender, a <span class="ia-lead-key">qué precio</span> y <span class="ia-lead-key">cuándo</span>.',
     ia_note: 'En desarrollo. Llegará dentro de Tuko.',
@@ -301,7 +301,7 @@ const translations = {
     /* PRECIOS */
     pricing_badge: 'Precios',
     pricing_title: 'Pagas solo por los grupos que se completan',
-    pricing_sub: 'Sin cuota fija y sin comisión sobre tus ventas. Pagas 1 € por grupo completado y, en los lanzamientos, 1 € por comprador. Los 5 primeros de cada ciclo de 30 días son gratis y nunca pagas más de 129 € por ciclo.',
+    pricing_sub: 'Sin cuota fija y sin comisión sobre tus ventas. Pagas 1 € por grupo completado y, en los lanzamientos, 1 € por comprador. Los 5 primeros de cada ciclo de 30 días son gratis y nunca pagas más de 200 € por ciclo.',
     pricing_p1_rows: '<li>Uso: Los 5 primeros grupos o compradores de cada ciclo</li><li>Comisión sobre tus ventas: 0 %</li><li>Cuota fija: 0 €</li><li>Productos a la vez: Ilimitados</li><li>Grupos y lanzamientos: Sí</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li>Soporte: Sí</li><li>Permanencia: Ninguna</li>',
     pricing_p2_rows: '<li>Uso: Solo cuando el grupo se completa</li><li>Comisión sobre tus ventas: 0 %</li><li>Cuota fija: 0 €</li><li>Productos a la vez: Ilimitados</li><li>Grupos y lanzamientos: Sí</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li>Soporte: Sí</li><li>Permanencia: Ninguna</li>',
     pricing_p3_rows: '<li>Uso: Solo si el lanzamiento se completa</li><li>Comisión sobre tus ventas: 0 %</li><li>Cuota fija: 0 €</li><li>Productos a la vez: Ilimitados</li><li>Grupos y lanzamientos: Sí</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li>Soporte: Sí</li><li>Permanencia: Ninguna</li>',
@@ -317,7 +317,7 @@ const translations = {
     pricing_p3_price: '1 €',
     pricing_p3_cta: 'Elegir plan',
     pricing_p4_name: 'Máximo',
-    pricing_p4_price: '129 €',
+    pricing_p4_price: '200 €',
     pricing_p4_cta: 'Elegir plan',
     pricing_p1_per: '/ grupo',
     pricing_p2_per: '/ grupo',
@@ -646,7 +646,7 @@ const translations = {
   en: {
     /* NAV */
     nav_link_problema: 'The problem',
-    nav_link_como_funciona: 'How it works',
+    nav_link_como_funciona: 'Group buying',
     nav_link_precios: 'Pricing',
     nav_link_faq: 'FAQ',
     nav_link_beneficios: 'Why it works',
@@ -656,7 +656,7 @@ const translations = {
     /* TUKO AI */
     nav_link_ia: 'tuko AI',
 
-    nav_link_lanzamientos: 'Launches',
+    nav_link_lanzamientos: 'Drops',
     ia_status: 'In development',
     ia_lead: '<span class="ia-lead-brand">tuko AI</span> builds your <span class="ia-lead-key">campaigns</span> <em>for you</em>: it reads your store and your market, and decides what to sell, at <span class="ia-lead-key">what price</span> and <span class="ia-lead-key">when</span>.',
     ia_note: 'In development. Coming inside Tuko.',

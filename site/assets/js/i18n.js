@@ -2,7 +2,7 @@ const translations = {
   es: {
     /* NAV */
     nav_link_problema: 'El problema',
-    nav_link_como_funciona: 'Cómo funciona',
+    nav_link_como_funciona: 'Compra en grupo',
     nav_link_precios: 'Precios',
     nav_link_beneficios: 'Por qué funciona',
     nav_link_inicio: 'Inicio',
@@ -12,7 +12,7 @@ const translations = {
     /* TUKO AI */
     nav_link_ia: 'tuko AI',
 
-    nav_link_lanzamientos: 'Lanzamientos',
+    nav_link_lanzamientos: 'Drops',
     ia_status: 'En desarrollo',
     ia_lead: '<span class="ia-lead-brand">tuko AI</span> monta tus <span class="ia-lead-key">campañas</span> <em>por ti</em>: analiza tu tienda y tu mercado, y decide qué vender, a <span class="ia-lead-key">qué precio</span> y <span class="ia-lead-key">cuándo</span>.',
     ia_note: 'En desarrollo<span class="ia-note-sep" aria-hidden="true"></span>Llegará dentro de Tuko',
@@ -433,7 +433,7 @@ const translations = {
   en: {
     /* NAV */
     nav_link_problema: 'The problem',
-    nav_link_como_funciona: 'How it works',
+    nav_link_como_funciona: 'Group buying',
     nav_link_precios: 'Pricing',
     nav_link_beneficios: 'Why it works',
     nav_link_inicio: 'Home',
@@ -443,7 +443,7 @@ const translations = {
     /* TUKO AI */
     nav_link_ia: 'tuko AI',
 
-    nav_link_lanzamientos: 'Launches',
+    nav_link_lanzamientos: 'Drops',
     ia_status: 'In development',
     ia_lead: '<span class="ia-lead-brand">tuko AI</span> builds your <span class="ia-lead-key">campaigns</span> <em>for you</em>: it reads your store and your market, and decides what to sell, at <span class="ia-lead-key">what price</span> and <span class="ia-lead-key">when</span>.',
     ia_note: 'In development<span class="ia-note-sep" aria-hidden="true"></span>Coming inside Tuko',

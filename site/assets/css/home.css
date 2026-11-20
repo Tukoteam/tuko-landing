@@ -3214,7 +3214,8 @@
   }
   .footer-top {
     display: grid;
-    grid-template-columns: minmax(200px, 1.35fr) repeat(3, minmax(120px, 0.55fr));
+    /* «Legales» lleva los enlaces más largos: más ancho para que cada uno quepa en una línea */
+    grid-template-columns: minmax(200px, 1.1fr) minmax(150px, 0.6fr) minmax(110px, 0.45fr) minmax(230px, 0.95fr);
     gap: clamp(36px, 5vw, 64px);
     align-items: start;
     padding-bottom: 48px;
@@ -8776,6 +8777,8 @@ html[data-theme="dark"] .pr .s-badge { color: #8fa0ff; }
   background: linear-gradient(90deg, transparent, color-mix(in srgb, currentColor 45%, transparent));
 }
 .pr .s-badge::after { background: linear-gradient(90deg, color-mix(in srgb, currentColor 45%, transparent), transparent); }
+/* Antetítulo centrado sobre el título en todos los anchos (antes solo en móvil: en escritorio quedaba a la izquierda) */
+.pr :has(> .s-badge) { text-align: center; }
 
 .pr-src,
 .pr-cta-src { display: none !important; }
@@ -9016,7 +9019,7 @@ html[data-theme="dark"] .pr-yes svg { stroke: #3fe0b0; }
 }
 /* ── Móvil: una debajo de otra, Escala primero ── */
 @media (max-width: 700px) {
-  .pr :has(> .s-badge) { text-align: center; }
+  /* (el antetítulo ya va centrado en todos los anchos, arriba) */
   /* También en oscuro: sin el fondo del bloque de escritorio (aquí dejaba un rectángulo de bordes duros) */
   .pr-grid,
   html[data-theme="dark"] .pr-grid {

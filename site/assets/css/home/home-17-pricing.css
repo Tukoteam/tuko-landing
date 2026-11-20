@@ -35,6 +35,8 @@ html[data-theme="dark"] .pr .s-badge { color: #8fa0ff; }
   background: linear-gradient(90deg, transparent, color-mix(in srgb, currentColor 45%, transparent));
 }
 .pr .s-badge::after { background: linear-gradient(90deg, color-mix(in srgb, currentColor 45%, transparent), transparent); }
+/* Antetítulo centrado sobre el título en todos los anchos (antes solo en móvil: en escritorio quedaba a la izquierda) */
+.pr :has(> .s-badge) { text-align: center; }
 
 .pr-src,
 .pr-cta-src { display: none !important; }
@@ -275,7 +277,7 @@ html[data-theme="dark"] .pr-yes svg { stroke: #3fe0b0; }
 }
 /* ── Móvil: una debajo de otra, Escala primero ── */
 @media (max-width: 700px) {
-  .pr :has(> .s-badge) { text-align: center; }
+  /* (el antetítulo ya va centrado en todos los anchos, arriba) */
   /* También en oscuro: sin el fondo del bloque de escritorio (aquí dejaba un rectángulo de bordes duros) */
   .pr-grid,
   html[data-theme="dark"] .pr-grid {
