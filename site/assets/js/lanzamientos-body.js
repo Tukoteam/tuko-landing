@@ -64,14 +64,11 @@
     for (var q = 0; q <= 10; q++) strip += '<i>' + (q % 10) + '</i>';
     fCount.innerHTML = '<span class="lz-od"><span>' + strip + '</span></span><span class="lz-od"><span>' + strip + '</span></span>';
     var fOd = fCount.children;
-    var odW = 0;
     var setCount = function (n, snap) {
-      if (!odW) odW = fOd[1].getBoundingClientRect().width;
       var digs = [Math.floor(n / 10) % 10, n % 10];
       Array.prototype.forEach.call(fOd, function (o, i) {
         var cur = +(o.getAttribute('data-d') || 0);
         var d = digs[i];
-        if (odW) o.style.width = odW + 'px';
         o.classList.toggle('is-snap', !!snap);
         if (!snap && d === 0 && cur === 9) {
           o.style.setProperty('--d', 10);
