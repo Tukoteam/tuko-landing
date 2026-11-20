@@ -85,3 +85,19 @@
 /* Secciones fuera de pantalla: sus animaciones en bucle (aurora, levitación, puntos que laten…) se pausan.
    La clase la pone lanzamientos-more.js con un margen generoso, así que al llegar ya están en marcha. */
 .is-away, .is-away *, .is-away *::before, .is-away *::after { animation-play-state: paused !important; }
+
+/* En una sola columna (tablet y móvil), los títulos de Para quién, Lo que ve tu cliente y Preguntas van centrados
+   como los del resto de la página. En escritorio siguen a la izquierda, junto a lo que explican. Las listas
+   (Te sirve si…, los avisos, las preguntas) se quedan alineadas a la izquierda para leerse bien. */
+@media (max-width: 900px) {
+  .lz-who .lz-head-left,
+  .lz-buyer-copy { text-align: center; }
+  .lz-who .lz-eyebrow { justify-self: center; }
+  .lz-buyer-copy .lz-sub { margin-left: auto; margin-right: auto; }
+  .lz-who .lz-fit-wrap,
+  .lz-buyer-copy .lz-mails { text-align: left; }
+}
+@media (max-width: 860px) {
+  .lz-faq-head { text-align: center; }
+  .lz-faq-head .lz-rail { text-align: left; }
+}
