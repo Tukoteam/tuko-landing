@@ -1,0 +1,110 @@
+/* ══════════════════════════════
+   LANZAMIENTOS · ESCENARIO DEL HERO
+   Como Inicio y tuko AI: un escenario oscuro a pantalla completa (también en modo claro), con aurora y grano.
+   En claro termina como una lámina con las esquinas de abajo redondeadas; en oscuro se funde con la página.
+   Mientras el nav está encima (sin scroll), su logo y sus textos pasan a blanco.
+══════════════════════════════ */
+body { background: var(--hero-ground); }
+.skip-link { position: absolute; z-index: 9999; left: -9999px; top: 8px; padding: 8px 16px; border-radius: 8px; background: var(--blue); color: #fff; font-weight: 600; text-decoration: none; }
+.skip-link:focus { left: 8px; }
+
+.lz-hero { padding: 0; }
+.lz-stage {
+  --lz-ink: #f3f5ff;
+  --lz-ink-2: rgba(225, 230, 255, 0.74);
+  --lz-ink-3: rgba(200, 208, 245, 0.52);
+  --lz-line: rgba(143, 160, 255, 0.16);
+  --lz-blue: #8fa0ff;
+  --lz-green: #3fe0b0;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: max(720px, 100svh);
+  background:
+    radial-gradient(70% 60% at 76% 46%, #111845 0%, transparent 72%),
+    linear-gradient(180deg, #080a1d 0%, #05060f 100%);
+  color: var(--lz-ink);
+}
+html:not([data-theme="dark"]) .lz-stage {
+  border-radius: 0 0 clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px);
+  box-shadow: 0 40px 80px -50px rgba(20, 30, 120, 0.5);
+}
+html[data-theme="dark"] .lz-stage {
+  background:
+    radial-gradient(70% 60% at 76% 46%, #111845 0%, transparent 72%),
+    linear-gradient(180deg, #080a1d 0%, var(--hero-ground) 100%);
+}
+html[data-theme="dark"] .lz-stage::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 280px;
+  background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--hero-ground) 80%, transparent) 70%, var(--hero-ground) 100%);
+  pointer-events: none;
+}
+
+/* Aurora: dos luces de la marca detrás de la ficha y un verde que solo sube cuando el lanzamiento llega al mínimo */
+.lz-aurora { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.lz-aurora i { position: absolute; border-radius: 50%; filter: blur(90px); }
+.lz-aurora i:nth-child(1) { width: 560px; height: 560px; right: 6%; top: -14%; background: #3445e6; opacity: 0.5; animation: lzDriftA 19s ease-in-out infinite; }
+.lz-aurora i:nth-child(2) { width: 420px; height: 420px; right: 32%; bottom: -30%; background: #6d4dff; opacity: 0.28; animation: lzDriftB 23s ease-in-out infinite; }
+.lz-aurora i:nth-child(3) {
+  width: 380px;
+  height: 380px;
+  right: 2%;
+  bottom: 4%;
+  background: #14c492;
+  opacity: 0.08;
+  transition: opacity 1600ms ease;
+  animation: lzDriftC 21s ease-in-out infinite;
+}
+.lz-stage.is-made .lz-aurora i:nth-child(3) { opacity: 0.26; }
+@keyframes lzDriftA { 50% { transform: translate3d(-70px, 50px, 0) scale(1.08); } }
+@keyframes lzDriftB { 50% { transform: translate3d(90px, -40px, 0) scale(0.92); } }
+@keyframes lzDriftC { 50% { transform: translate3d(-40px, -60px, 0) scale(1.12); } }
+
+.lz-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+html[data-theme="dark"] .lz-grain { -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent); mask-image: linear-gradient(180deg, #000 55%, transparent); }
+
+/* Nav sobre el escenario: blanco hasta que se baja (entonces vuelve a su cápsula de siempre) */
+header > nav:not(.is-scrolled) { --ink: #f3f5ff; --hover-fill: rgba(255, 255, 255, 0.08); }
+header > nav:not(.is-scrolled) .nav-logo img { filter: brightness(0) invert(1); }
+header > nav:not(.is-scrolled) .lang-opt { color: rgba(243, 245, 255, 0.75); }
+html:not([data-theme="dark"]) header > nav:not(.is-scrolled) .lang-opt.active { color: #10142e; }
+
+/* ── Composición: texto a la izquierda, la ficha del lanzamiento a la derecha ── */
+.lz-grid {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  align-items: center;
+  gap: clamp(40px, 5vw, 88px);
+  max-width: 1240px;
+  min-height: inherit;
+  margin: 0 auto;
+  padding: calc(var(--nav-h, 72px) + clamp(28px, 3vw, 48px)) clamp(24px, 4.5vw, 64px) clamp(56px, 6vw, 88px);
+}
+
+@keyframes lzRise { from { opacity: 0.01; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes lzFocus { from { opacity: 0.01; filter: blur(12px); transform: translateY(0.06em); } to { opacity: 1; filter: blur(0); transform: none; } }
+
+@media (max-width: 960px) {
+  .lz-grid { grid-template-columns: minmax(0, 1fr); gap: 44px; padding: calc(var(--nav-h, 64px) + 32px) 20px 48px; text-align: center; }
+}
+@media (max-width: 520px) {
+  .lz-grid { padding-left: 16px; padding-right: 16px; }
+}
+
+/* Provisional (bloque 1): hueco claro bajo el hero hasta montar «Cómo funciona» */

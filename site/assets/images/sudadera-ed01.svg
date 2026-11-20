@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <!-- Producto de ejemplo para la página de Lanzamientos: sudadera verde salvia sobre fondo de estudio -->
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="70%">
+      <stop offset="0" stop-color="#f4f2ed"/>
+      <stop offset="1" stop-color="#e4e0d7"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" x2="1">
+      <stop offset="0" stop-color="#5f7a66"/>
+      <stop offset="0.35" stop-color="#7f9a86"/>
+      <stop offset="0.6" stop-color="#7a957f"/>
+      <stop offset="1" stop-color="#55705c"/>
+    </linearGradient>
+    <linearGradient id="sleeveL" x1="0" x2="1">
+      <stop offset="0" stop-color="#4f6955"/>
+      <stop offset="1" stop-color="#6f8a76"/>
+    </linearGradient>
+    <linearGradient id="sleeveR" x1="1" x2="0">
+      <stop offset="0" stop-color="#4b6551"/>
+      <stop offset="1" stop-color="#6c8773"/>
+    </linearGradient>
+    <linearGradient id="hood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#86a08c"/>
+      <stop offset="1" stop-color="#6a8571"/>
+    </linearGradient>
+    <linearGradient id="fold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.16"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="10"/></filter>
+  </defs>
+  <rect width="500" height="500" fill="url(#bg)"/>
+  <ellipse cx="250" cy="440" rx="170" ry="16" fill="#000" opacity="0.14" filter="url(#soft)"/>
+
+  <!-- Mangas -->
+  <path d="M150 128 C112 140 96 170 88 220 L70 360 C69 372 76 380 88 381 L120 383 C130 383 136 377 138 368 L160 236 Z" fill="url(#sleeveL)"/>
+  <path d="M350 128 C388 140 404 170 412 220 L430 360 C431 372 424 380 412 381 L380 383 C370 383 364 377 362 368 L340 236 Z" fill="url(#sleeveR)"/>
+  <!-- Puños -->
+  <path d="M70 352 L138 360 L135 384 C134 392 128 397 119 397 L85 395 C75 394 68 387 69 378 Z" fill="#4c6552"/>
+  <path d="M430 352 L362 360 L365 384 C366 392 372 397 381 397 L415 395 C425 394 432 387 431 378 Z" fill="#4a6350"/>
+  <g stroke="#3f5745" stroke-width="1.4" opacity="0.6">
+    <path d="M80 360 L78 390 M92 361 L91 393 M104 362 L104 394 M116 363 L117 395 M128 364 L129 394"/>
+    <path d="M420 360 L422 390 M408 361 L409 393 M396 362 L396 394 M384 363 L383 395 M372 364 L371 394"/>
+  </g>
+
+  <!-- Cuerpo -->
+  <path d="M150 128 C180 116 214 110 250 110 C286 110 320 116 350 128 C362 160 366 200 364 240 L362 392 L138 392 L136 240 C134 200 138 160 150 128 Z" fill="url(#body)"/>
+  <!-- Bajo elástico -->
+  <path d="M138 384 L362 384 L362 420 C362 426 357 430 351 430 L149 430 C143 430 138 426 138 420 Z" fill="#4f6955"/>
+  <g stroke="#41594a" stroke-width="1.4" opacity="0.55">
+    <path d="M152 388 V428 M168 388 V428 M184 388 V428 M200 388 V428 M216 388 V428 M232 388 V428 M248 388 V428 M264 388 V428 M280 388 V428 M296 388 V428 M312 388 V428 M328 388 V428 M344 388 V428"/>
+  </g>
+  <!-- Bolsillo canguro -->
+  <path d="M180 300 L320 300 L340 372 L160 372 Z" fill="#000" opacity="0.07"/>
+  <path d="M182 296 L318 296 L336 368 L164 368 Z" fill="#7a957f" stroke="#5f7a66" stroke-width="2"/>
+  <path d="M182 296 L164 368 M318 296 L336 368" stroke="#4f6955" stroke-width="3" opacity="0.55"/>
+  <!-- Pliegues -->
+  <path d="M138 250 C170 262 196 262 214 252 C200 274 170 282 140 276 Z" fill="url(#fold)" opacity="0.6"/>
+  <path d="M362 250 C330 262 304 262 286 252 C300 274 330 282 360 276 Z" fill="url(#fold)" opacity="0.6"/>
+
+  <!-- Capucha -->
+  <path d="M182 120 C176 74 210 46 250 46 C290 46 324 74 318 120 C300 150 276 160 250 160 C224 160 200 150 182 120 Z" fill="url(#hood)"/>
+  <path d="M204 118 C204 86 226 70 250 70 C274 70 296 86 296 118 C284 136 268 142 250 142 C232 142 216 136 204 118 Z" fill="#2f3f34"/>
+  <path d="M214 120 C226 132 238 136 250 136 C262 136 274 132 286 120 C276 146 264 156 250 156 C236 156 224 146 214 120 Z" fill="#6d8874"/>
+  <!-- Cordones -->
+  <path d="M236 150 C234 180 236 206 232 232" stroke="#ece8de" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M264 150 C266 180 264 206 268 232" stroke="#ece8de" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <rect x="227" y="230" width="9" height="14" rx="3" fill="#d9d4c7"/>
+  <rect x="264" y="230" width="9" height="14" rx="3" fill="#d9d4c7"/>
+  <!-- Etiqueta bordada -->
+  <rect x="236" y="196" width="28" height="9" rx="2" fill="#ece8de" opacity="0.85"/>
+  <!-- Brillo suave -->
+  <path d="M168 150 C176 210 176 300 170 370" stroke="#fff" stroke-width="16" opacity="0.06" fill="none" stroke-linecap="round"/>
+</svg>

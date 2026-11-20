@@ -1,0 +1,171 @@
+/* ══════════════════════════════
+   LANZAMIENTOS · PREGUNTAS (por momento del lanzamiento)
+   A la izquierda, fijo: el titular y una regla vertical con tres paradas (Antes de abrir · Mientras está abierto ·
+   Al cerrar). La aguja baja con la lectura y la parada activa se enciende; al pulsar una, salta a su grupo.
+   A la derecha, las preguntas agrupadas. Cada respuesta se despliega con suavidad y trae su «dato clave».
+══════════════════════════════ */
+.lz-faq-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+.lz-faq-head { position: sticky; top: calc(var(--nav-h, 72px) + 32px); }
+
+/* ── La regla vertical ── */
+.lz-rail { --g: 0; position: relative; display: grid; gap: 22px; margin-top: 40px; padding-left: 30px; }
+.lz-rail-line { position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; border-radius: 2px; background: color-mix(in srgb, var(--ink) 10%, transparent); }
+.lz-rail-fill { position: absolute; left: 0; right: 0; top: 0; height: calc(var(--g) * 50%); border-radius: inherit; background: var(--lz-acc); transition: height 600ms var(--ease-out); }
+.lz-rail-needle {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--g) * 50%);
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: var(--lz-acc);
+  box-shadow: 0 0 0 4px var(--hero-ground, #f5f6fa), 0 0 0 5px color-mix(in srgb, var(--lz-acc) 35%, transparent);
+  transition: top 600ms var(--ease-out);
+}
+.lz-rail a {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 15.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color 300ms ease;
+}
+.lz-rail a::before {
+  content: '';
+  position: absolute;
+  left: -27px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--hero-ground, #f5f6fa);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--ink) 22%, transparent);
+}
+.lz-rail a em { font-size: 12px; font-style: normal; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink-3); }
+.lz-rail a.is-on { color: var(--ink); }
+.lz-rail a.is-on em { color: var(--lz-acc); }
+.lz-rail a:focus-visible { outline: 2px solid var(--lz-acc); outline-offset: 4px; border-radius: 6px; }
+@media (hover: hover) and (pointer: fine) { .lz-rail a:hover { color: var(--ink); } }
+
+/* ── Grupos y preguntas ── */
+.lz-faq-list { display: grid; gap: 40px; }
+.lz-faq-group { scroll-margin-top: calc(var(--nav-h, 72px) + 24px); }
+.lz-faq-gk { display: flex; align-items: baseline; gap: 10px; margin: 0 0 6px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lz-acc); }
+.lz-faq-gk em { font-style: normal; font-variant-numeric: tabular-nums; letter-spacing: 0.04em; opacity: 0.7; }
+.lz-faq-group details { border-bottom: 1px solid var(--lz-edge); }
+.lz-faq-group details:first-of-type { border-top: 1px solid var(--lz-edge); }
+.lz-faq-group summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 0;
+  font-size: clamp(17px, 1.5vw, 19px);
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  list-style: none;
+  cursor: pointer;
+}
+.lz-faq-group summary::-webkit-details-marker { display: none; }
+.lz-faq-group summary:focus-visible { outline: 2px solid var(--lz-acc); outline-offset: 4px; border-radius: 6px; }
+/* «+» que gira a «×» */
+.lz-faq-group summary i { position: relative; flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--lz-edge); transition: background-color 250ms ease, transform 400ms var(--ease-out); }
+.lz-faq-group summary i::before,
+.lz-faq-group summary i::after { content: ''; position: absolute; left: 50%; top: 50%; width: 11px; height: 1.5px; margin: -0.75px 0 0 -5.5px; border-radius: 1px; background: var(--ink); transition: background 250ms ease; }
+.lz-faq-group summary i::after { transform: rotate(90deg); }
+.lz-faq-group details[open] summary i { background: var(--ink); transform: rotate(45deg); }
+.lz-faq-group details[open] summary i::before,
+.lz-faq-group details[open] summary i::after { background: var(--hero-ground, #fff); }
+@media (hover: hover) and (pointer: fine) { .lz-faq-group summary:hover i { background: color-mix(in srgb, var(--ink) 6%, transparent); } }
+
+/* Respuesta con su dato clave a la derecha */
+.lz-faq-a { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 28px; overflow: hidden; }
+.lz-faq-a p { max-width: 36em; margin: -6px 0 24px; font-size: 16px; line-height: 1.6; color: var(--ink-2); text-wrap: pretty; }
+.lz-fact {
+  display: grid;
+  justify-items: end;
+  gap: 2px;
+  min-width: 96px;
+  margin: -10px 0 24px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--lz-acc) 7%, transparent);
+  text-align: right;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 400ms ease 120ms, transform 500ms var(--ease-out) 120ms;
+}
+.lz-fact b { font-size: 24px; font-weight: 700; font-stretch: 106%; letter-spacing: -0.03em; line-height: 1.05; color: var(--lz-acc); white-space: nowrap; }
+.lz-fact em { max-width: 9em; font-size: 11.5px; font-style: normal; font-weight: 600; line-height: 1.3; color: var(--ink-3); }
+.lz-faq-group details[open] .lz-fact { opacity: 1; transform: none; }
+
+@media (max-width: 860px) {
+  .lz-faq-grid { grid-template-columns: minmax(0, 1fr); }
+  .lz-faq-head { position: static; }
+  .lz-rail { display: none; }
+}
+@media (max-width: 560px) {
+  .lz-faq-a { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .lz-fact { justify-items: start; text-align: left; margin: -10px 0 22px; width: max-content; }
+  .lz-faq-a p { margin-bottom: 14px; }
+}
+/* Al cerrar, el dato clave se va a la vez que el texto */
+.lz-faq-group details.is-closing .lz-fact { opacity: 0; transition-delay: 0ms; }
+
+/* ══ Dato clave, más limpio ══
+   Antes era un recuadro lila alineado a la derecha y con margen negativo: al animar la altura se le cortaban las
+   esquinas de arriba. Ahora es una columna separada del texto por un filete, sin fondo, alineada arriba con él. */
+.lz-faq-a { gap: 32px; padding-top: 2px; }
+.lz-faq-a p { margin: 0 0 26px; }
+.lz-fact {
+  justify-items: start;
+  align-self: start;
+  min-width: 0;
+  width: 132px;
+  margin: 0 0 26px;
+  padding: 2px 0 2px 20px;
+  border-radius: 0;
+  background: none;
+  border-left: 1px solid var(--lz-edge);
+  text-align: left;
+}
+.lz-fact b { font-size: 26px; }
+.lz-fact em { max-width: none; margin-top: 2px; }
+@media (max-width: 560px) {
+  .lz-fact { width: auto; margin: 0 0 22px; padding: 0 0 0 14px; }
+  .lz-faq-a p { margin-bottom: 12px; }
+}
+
+/* ══ Regla: paradas iguales y centradas en la línea ══
+   Sin bola aparte: cada parada es un punto de 10 px sobre la línea (vacío si falta, relleno si ya se ha leído) y la
+   activa lleva un halo suave. La línea se rellena hasta la parada activa. */
+.lz-rail { padding-left: 32px; gap: 24px; }
+.lz-rail-needle { display: none; }
+.lz-rail a { line-height: 22px; }
+.lz-rail-line { left: 11px; width: 2px; top: 11px; bottom: 11px; }
+.lz-rail a::before {
+  left: -26px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  background: var(--hero-ground, #f5f6fa);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--ink) 25%, transparent);
+  transition: background-color 300ms ease, box-shadow 300ms ease, transform 300ms var(--ease-out);
+}
+.lz-rail a.is-past::before { background: var(--lz-acc); box-shadow: none; }
+.lz-rail a.is-on::before { background: var(--lz-acc); box-shadow: 0 0 0 4px color-mix(in srgb, var(--lz-acc) 18%, transparent); transform: scale(1.15); }
+.lz-rail a.is-past { color: var(--ink-2); }
+
+/* ══ Dato clave y botón de cerrar, más finos ══ */
+.lz-fact { width: 150px; border-left-color: color-mix(in srgb, var(--lz-acc) 30%, transparent); }
+.lz-fact b { font-size: 24px; }
+.lz-fact em { font-size: 12px; font-weight: 500; line-height: 1.35; }
+.lz-faq-group details[open] summary i { background: color-mix(in srgb, var(--ink) 7%, transparent); box-shadow: none; }
+.lz-faq-group details[open] summary i::before,
+.lz-faq-group details[open] summary i::after { background: var(--ink); }

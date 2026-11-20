@@ -1,0 +1,217 @@
+/* ══════════════════════════════
+   LANZAMIENTOS · FRENTE A UNA PREVENTA, LO QUE VE TU CLIENTE, PRECIO, PREGUNTAS Y CIERRE
+   Mismo criterio que el panel de «Cómo funciona»: líneas de 1 px, cifras tabulares, un acento y nada de brillos.
+══════════════════════════════ */
+
+/* ══ Frente a una preventa ══
+   Tabla de tres columnas; la del lanzamiento es una franja oscura continua (del material del panel) */
+.lz-vs-table { max-width: 1040px; margin: clamp(44px, 5vw, 64px) auto 0; }
+.lz-vs-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr) minmax(0, 1.1fr);
+  align-items: stretch;
+}
+.lz-vs-row > span { padding: 22px 24px; font-size: 15.5px; line-height: 1.5; border-top: 1px solid var(--lz-edge); }
+.lz-vs-row > span[role="rowheader"] { padding-left: 0; font-weight: 650; color: var(--ink); }
+.lz-vs-row > span[role="cell"] { color: var(--ink-3); }
+.lz-vs-row > .is-us {
+  background: #0d0f21;
+  color: rgba(232, 236, 255, 0.86) !important;
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+.lz-vs-hrow > span { padding-top: 0; padding-bottom: 16px; border-top: 0; font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--ink-3); }
+.lz-vs-hrow > .is-us { display: flex; align-items: center; gap: 9px; padding-top: 22px; border-radius: 18px 18px 0 0; color: #f3f5ff !important; }
+.lz-vs-hrow > .is-us i { width: 7px; height: 7px; border-radius: 50%; background: #3fe0b0; }
+.lz-vs-row:last-child > .is-us { border-radius: 0 0 18px 18px; padding-bottom: 26px; }
+.lz-vs-row:last-child > span:not(.is-us) { border-bottom: 1px solid var(--lz-edge); }
+.lz-vs-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+html[data-theme="dark"] .lz-vs-row > .is-us { background: rgba(255, 255, 255, 0.05); }
+
+@media (max-width: 760px) {
+  .lz-vs-hrow { display: none; }
+  .lz-vs-row { grid-template-columns: minmax(0, 1fr); margin-bottom: 14px; }
+  .lz-vs-row > span { padding: 12px 18px; border-top: 0; }
+  .lz-vs-row > span[role="rowheader"] { padding: 0 0 8px; }
+  .lz-vs-row > span[role="cell"]:not(.is-us) { padding-left: 18px; border-left: 2px solid var(--lz-edge); }
+  .lz-vs-row > span[role="cell"]:not(.is-us)::before { content: 'Preventa normal · '; font-weight: 600; }
+  .lz-vs-row > .is-us { margin-top: 8px; border-radius: 14px; }
+  .lz-vs-row > .is-us::before { content: 'Con Tuko · '; font-weight: 700; color: #3fe0b0; }
+  .lz-vs-row:last-child > .is-us { border-radius: 14px; padding-bottom: 12px; }
+  .lz-vs-row:last-child > span:not(.is-us) { border-bottom: 0; }
+}
+
+/* ══ Lo que ve tu cliente ══ */
+.lz-buyer-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); align-items: center; gap: clamp(32px, 6vw, 96px); }
+.lz-buyer-copy .lz-sub { margin-left: 0; }
+.lz-mails { display: grid; margin: 32px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--lz-edge); }
+.lz-mails li {
+  position: relative;
+  display: grid;
+  gap: 3px;
+  padding: 14px 0 14px 22px;
+  border-bottom: 1px solid var(--lz-edge);
+  transition: opacity 400ms ease;
+  opacity: 0.45;
+}
+.lz-mails li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ink) 18%, transparent);
+  transition: background 300ms ease;
+}
+.lz-mails li.is-on, .lz-mails li.is-past { opacity: 1; }
+.lz-mails li.is-on::before { background: var(--lz-acc); }
+.lz-mails li.is-past::before { background: color-mix(in srgb, var(--lz-acc) 45%, transparent); }
+.lz-mails li.is-on.is-ok::before { background: var(--lz-ok); }
+.lz-mails span { font-size: 12.5px; font-weight: 600; color: var(--ink-3); }
+.lz-mails b { font-size: 15.5px; font-weight: 600; color: var(--ink); }
+.lz-mails em { font-size: 13px; font-style: normal; color: var(--ink-3); }
+
+/* ══ Precio ══ */
+.lz-price-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  max-width: 1040px;
+  margin: clamp(44px, 5vw, 64px) auto 0;
+  border-radius: 28px;
+  background: var(--lz-card);
+  box-shadow: inset 0 0 0 1px var(--lz-edge), 0 30px 60px -40px rgba(20, 24, 38, 0.3);
+  overflow: hidden;
+}
+.lz-price-main, .lz-calc { padding: clamp(28px, 4vw, 48px); }
+.lz-calc { border-left: 1px solid var(--lz-edge); background: color-mix(in srgb, var(--ink) 2.5%, transparent); }
+.lz-price-big { display: flex; align-items: baseline; gap: 14px; margin: 0; }
+.lz-price-big b { font-size: clamp(64px, 8vw, 104px); font-weight: 700; font-stretch: 106%; line-height: 0.9; letter-spacing: -0.05em; color: var(--ink); }
+.lz-price-big span { font-family: 'Roboto Serif', Georgia, serif; font-size: clamp(20px, 2vw, 26px); font-style: italic; color: var(--lz-acc); }
+.lz-price-lead { margin: 18px 0 0; font-size: 17px; line-height: 1.5; color: var(--ink-2); }
+.lz-price-lead b { color: var(--ink); font-weight: 650; }
+.lz-price-list { display: grid; margin: 24px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--lz-edge); }
+.lz-price-list li { padding: 12px 0; border-bottom: 1px solid var(--lz-edge); font-size: 15px; color: var(--ink); }
+
+.lz-calc-k { margin: 0 0 18px; font-size: 14px; font-weight: 650; color: var(--ink); }
+.lz-calc-row { display: grid; gap: 10px; margin-bottom: 20px; cursor: pointer; }
+.lz-calc-row > span { display: flex; justify-content: space-between; font-size: 14px; }
+.lz-calc-row em { font-style: normal; color: var(--ink-3); }
+.lz-calc-row b { font-weight: 650; font-variant-numeric: tabular-nums; color: var(--ink); }
+.lz-calc-in { width: 100%; height: 22px; margin: 0; background: transparent; cursor: pointer; -webkit-appearance: none; appearance: none; }
+.lz-calc-in::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--lz-acc) var(--v, 30%), color-mix(in srgb, var(--ink) 12%, transparent) var(--v, 30%)); }
+.lz-calc-in::-moz-range-track { height: 4px; border-radius: 2px; background: color-mix(in srgb, var(--ink) 12%, transparent); }
+.lz-calc-in::-moz-range-progress { height: 4px; border-radius: 2px; background: var(--lz-acc); }
+.lz-calc-in::-webkit-slider-thumb { width: 20px; height: 20px; margin-top: -8px; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1px rgba(20, 24, 38, 0.14), 0 2px 6px rgba(20, 24, 38, 0.25); -webkit-appearance: none; appearance: none; }
+.lz-calc-in::-moz-range-thumb { width: 20px; height: 20px; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1px rgba(20, 24, 38, 0.14), 0 2px 6px rgba(20, 24, 38, 0.25); }
+.lz-calc-in:focus-visible { outline: 2px solid var(--lz-acc); outline-offset: 4px; border-radius: 4px; }
+.lz-calc-out { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 6px; border-top: 1px solid var(--lz-edge); }
+.lz-calc-out span { display: grid; gap: 4px; padding-top: 16px; }
+.lz-calc-out span + span { padding-left: 16px; border-left: 1px solid var(--lz-edge); }
+.lz-calc-out em { font-size: 12.5px; font-style: normal; color: var(--ink-3); }
+.lz-calc-out b { font-size: clamp(22px, 2.2vw, 28px); font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -0.03em; color: var(--ink); }
+.lz-calc-out .lz-calc-fee { color: var(--lz-acc); }
+.lz-calc-note { margin: 18px 0 0; font-size: 12.5px; line-height: 1.5; color: var(--ink-3); }
+
+@media (max-width: 860px) {
+  .lz-price-card { grid-template-columns: minmax(0, 1fr); }
+  .lz-calc { border-left: 0; border-top: 1px solid var(--lz-edge); }
+}
+
+/* ══ Cierre ══ El escenario del hero en pequeño, con la pantalla de la impresora esperando */
+.lz-final { padding-bottom: clamp(80px, 11vw, 150px); }
+.lz-final-stage {
+  --lz-ink: #f3f5ff;
+  --lz-ink-2: rgba(225, 230, 255, 0.74);
+  --lz-ink-3: rgba(200, 208, 245, 0.52);
+  --lz-blue: #8fa0ff;
+  --lz-green: #3fe0b0;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(64px, 9vw, 120px) 24px;
+  border-radius: clamp(28px, 4vw, 44px);
+  background:
+    radial-gradient(70% 80% at 50% 0%, #131a4a 0%, transparent 70%),
+    linear-gradient(180deg, #080a1d 0%, #05060f 100%);
+  color: var(--lz-ink);
+  text-align: center;
+}
+.lz-final-stage .lz-aurora i:nth-child(1) { right: auto; left: 10%; top: -40%; opacity: 0.4; }
+.lz-final-stage .lz-aurora i:nth-child(2) { right: 8%; bottom: -50%; }
+.lz-final-in { position: relative; z-index: 3; display: grid; justify-items: center; }
+@keyframes lzCaret { 50% { opacity: 0.15; } }
+.lz-final-h { margin: 28px 0 0; font-size: clamp(42px, 6vw, 84px); font-weight: 700; font-stretch: 106%; line-height: 0.98; letter-spacing: -0.045em; text-wrap: balance; }
+.lz-final-h em { font-family: 'Roboto Serif', Georgia, serif; font-style: italic; font-weight: 500; font-stretch: 100%; letter-spacing: -0.03em; color: var(--lz-blue); }
+.lz-final-p { max-width: 30em; margin: 22px 0 0; font-size: clamp(16.5px, 1.4vw, 19px); line-height: 1.55; color: var(--lz-ink-2); }
+.lz-final .lz-actions { justify-content: center; animation: none; }
+/* El desenfoque de la aurora se salía por la esquina redondeada en Chrome: recorte explícito */
+.lz-final-stage { clip-path: inset(0 round clamp(28px, 4vw, 44px)); }
+/* Etiquetas de la tabla en móvil, en inglés */
+@media (max-width: 760px) {
+  :root:lang(en) .lz-vs-row > span[role="cell"]:not(.is-us)::before { content: 'Regular pre-order · '; }
+  :root:lang(en) .lz-vs-row > .is-us::before { content: 'With Tuko · '; }
+}
+
+/* ══ Calculadora: barra de reparto, «Te quedas» e interruptor «¿Y si no se completa?» ══ */
+.lz-calc-out .lz-calc-keep { color: var(--ink); }
+.lz-split {
+  --t: 2%;
+  position: relative;
+  display: flex;
+  height: 30px;
+  margin-top: 18px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+}
+.lz-split > span { position: relative; display: flex; align-items: center; transition: flex-basis 450ms var(--ease-out), background 400ms ease, opacity 400ms ease; }
+.lz-split-you { flex: 0 0 calc(100% - var(--t)); padding-left: 12px; background: linear-gradient(90deg, color-mix(in srgb, var(--lz-acc) 55%, #fff), var(--lz-acc)); }
+.lz-split-tuko { flex: 0 0 var(--t); background: var(--ink); box-shadow: -2px 0 0 var(--lz-card); }
+.lz-split em { font-size: 11.5px; font-style: normal; font-weight: 700; color: #fff; white-space: nowrap; }
+/* La etiqueta de Tuko, fuera de su astilla (no cabe dentro) */
+.lz-split-tuko em { position: absolute; right: 0; bottom: calc(100% + 6px); color: var(--ink-3); }
+.lz-split { overflow: visible; }
+.lz-split-you { border-radius: 10px 0 0 10px; }
+.lz-split-tuko { border-radius: 0 10px 10px 0; }
+.lz-calc-per { position: relative; margin: 12px 0 0; font-size: 15px; line-height: 1.4; color: var(--ink-2); }
+.lz-calc-per b { color: var(--ink); font-weight: 700; }
+.lz-per-a, .lz-per-b { transition: opacity 300ms ease; }
+.lz-per-b { position: absolute; left: 0; top: 0; opacity: 0; }
+
+/* Interruptor */
+.lz-calc-sw { display: inline-flex; align-items: center; gap: 10px; margin-top: 16px; font-size: 14px; font-weight: 600; color: var(--ink); cursor: pointer; user-select: none; }
+.lz-calc-sw input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.lz-sw { position: relative; width: 38px; height: 22px; border-radius: 999px; background: color-mix(in srgb, var(--ink) 16%, transparent); transition: background 250ms ease; }
+.lz-sw i { position: absolute; left: 2px; top: 2px; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(20, 24, 38, 0.3); transition: transform 250ms var(--ease-out); }
+.lz-calc-sw input:checked + .lz-sw { background: #c0394f; }
+.lz-calc-sw input:checked + .lz-sw i { transform: translateX(16px); }
+.lz-calc-sw input:focus-visible + .lz-sw { outline: 2px solid var(--lz-acc); outline-offset: 3px; }
+
+/* No se completa: la barra pasa a «devuelto» rayado, sin astilla, y todo a 0 € */
+.lz-calc.is-fail .lz-split-you { flex-basis: 100%; border-radius: 10px; background: repeating-linear-gradient(-45deg, color-mix(in srgb, #c0394f 18%, transparent) 0 6px, color-mix(in srgb, #c0394f 8%, transparent) 6px 12px); }
+.lz-calc.is-fail .lz-split-you em { color: #c0394f; }
+.lz-calc.is-fail .lz-split-tuko { flex-basis: 0; opacity: 0; }
+.lz-calc.is-fail .lz-per-a { opacity: 0; }
+.lz-calc.is-fail .lz-per-b { opacity: 1; }
+.lz-calc.is-fail .lz-calc-out b { color: var(--ink-3); }
+.lz-calc.is-fail .lz-calc-out .lz-calc-fee { color: #c0394f; }
+html[data-theme="dark"] .lz-calc.is-fail .lz-calc-out .lz-calc-fee,
+html[data-theme="dark"] .lz-calc.is-fail .lz-split-you em { color: #ff8a9b; }
+.lz-calc.is-fail .lz-split-you em { display: none; }
+.lz-calc.is-fail .lz-split-you::after { content: 'Devuelto el 100 %'; font-size: 11.5px; font-weight: 700; color: #c0394f; }
+:root:lang(en) .lz-calc.is-fail .lz-split-you::after { content: '100% refunded'; }
+html[data-theme="dark"] .lz-calc.is-fail .lz-split-you::after { color: #ff8a9b; }
+.lz-calc-out span { align-content: space-between; }
+/* Barra de reparto en oscuro: azules profundos en vez de un degradado que arranca casi en blanco, y la astilla de
+   Tuko en lavanda claro para que se distinga */
+html[data-theme="dark"] .lz-split { background: rgba(255, 255, 255, 0.06); }
+html[data-theme="dark"] .lz-split-you { background: linear-gradient(90deg, #26319a 0%, #3d50f2 60%, #6676ff 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12); }
+html[data-theme="dark"] .lz-split-tuko { background: #c9d1ff; box-shadow: -2px 0 0 #161925; }
+html[data-theme="dark"] .lz-split-you em { color: #eef1ff; }
+.lz-calc-hint { margin-top: -4px; font-size: 12px; line-height: 1.4; color: var(--ink-3); }
+/* Barra de reparto en claro: azul de la marca liso para «Tú» y lavanda para Tuko (sin degradado ni bloque negro) */
+html:not([data-theme="dark"]) .lz-split-you { background: #3d50f2; }
+html:not([data-theme="dark"]) .lz-split-tuko { background: #c9d1ff; box-shadow: -2px 0 0 var(--lz-card, #fff); }
+.lz-split-tuko em { color: #6b74b8; }
+html[data-theme="dark"] .lz-split-tuko em { color: #c9d1ff; }

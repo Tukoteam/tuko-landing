@@ -256,6 +256,32 @@
   status = 200
   force = true
 
+# Lanzamientos (preventa con mínimo): URL limpia
+[[redirects]]
+  from = "/lanzamientos.html"
+  to = "/lanzamientos"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/lanzamientos"
+  to = "/lanzamientos.html"
+  status = 200
+  force = true
+
+# Launches (EN): URL limpia
+[[redirects]]
+  from = "/en/launches.html"
+  to = "/en/launches"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/launches"
+  to = "/en/launches.html"
+  status = 200
+  force = true
+
 [[redirects]]
   from = "/en/tuko-ai"
   to = "/en/tuko-ai.html"

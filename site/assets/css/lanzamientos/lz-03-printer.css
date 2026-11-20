@@ -1,0 +1,567 @@
+/* ══════════════════════════════
+   LANZAMIENTOS · LA IMPRESORA DE PEDIDOS
+   Cada compra del lanzamiento imprime una línea en un ticket térmico que sale de la impresora hacia arriba.
+   Al llegar al mínimo, la impresora saca el bloque «Mínimo alcanzado» y cae un sello de tinta «Se fabrica».
+   Debajo, el recuento por tallas (lo que la tienda necesita para fabricar). Lo mueve lanzamientos.js.
+══════════════════════════════ */
+.lz-visual {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 560px;
+  animation: lzRise 1000ms var(--ease-out) 240ms both;
+}
+
+/* ── El papel: crece hacia arriba desde la ranura; arriba se pierde en la oscuridad ── */
+.lz-paper-win {
+  position: relative;
+  z-index: 3;
+  width: min(330px, 86%);
+  height: clamp(380px, 52vh, 480px);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 34%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 34%);
+  perspective: 900px;
+  perspective-origin: 50% 100%;
+}
+.lz-paper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 26px 22px 14px;
+  background:
+    linear-gradient(90deg, rgba(40, 36, 30, 0.10) 0%, rgba(40, 36, 30, 0.02) 6%, transparent 14%, transparent 86%, rgba(40, 36, 30, 0.02) 94%, rgba(40, 36, 30, 0.12) 100%),
+    radial-gradient(90% 50% at 22% 30%, rgba(255, 255, 255, 0.55), transparent 70%),
+    linear-gradient(180deg, #ecE9e1 0%, #f8f6f0 55%, #f3f1ea 100%);
+  color: #2a2c35;
+  text-shadow: 0 0 0.4px rgba(42, 44, 53, 0.55);
+  transform: rotateX(14deg);
+  transform-origin: 50% 100%;
+  font-stretch: 82%;
+  font-variant-numeric: tabular-nums;
+  text-align: left;
+  /* Borde de arriba arrancado en zigzag */
+  -webkit-mask-image: linear-gradient(#000, #000), conic-gradient(from -45deg at 50% 0, #000 90deg, transparent 0);
+  -webkit-mask-size: 100% calc(100% - 7px), 14px 7px;
+  -webkit-mask-position: 0 100%, 0 0;
+  -webkit-mask-repeat: no-repeat, repeat-x;
+  mask-image: linear-gradient(#000, #000), conic-gradient(from -45deg at 50% 0, #000 90deg, transparent 0);
+  mask-size: 100% calc(100% - 7px), 14px 7px;
+  mask-position: 0 100%, 0 0;
+  mask-repeat: no-repeat, repeat-x;
+}
+/* Textura de papel térmico */
+.lz-paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.42;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.25 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.02 0.9' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.43 0 0 0 0 0.4 0 0 0 -0.32 0.17'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.52 0 0 0 0 0.47 0 0 0 0.22 -0.06'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23b)'/%3E%3C/svg%3E");
+  background-size: 120px 120px, 260px 260px, 400px 400px;
+}
+/* Tinta térmica: el punteado del cabezal deja micro-huecos en el negro */
+.lz-p-head > span, .lz-lines {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='i'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.9' numOctaves='1' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3.2 2.75'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23i)'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='i'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.9' numOctaves='1' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3.2 2.75'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23i)'/%3E%3C/svg%3E");
+  -webkit-mask-size: 90px 90px;
+  mask-size: 90px 90px;
+}
+
+/* Cabecera del ticket */
+.lz-p-head { display: grid; justify-items: center; gap: 4px; padding-bottom: 4px; text-align: center; }
+.lz-p-logo { width: 42px; height: auto; fill: #23252e; }
+/* Foto del producto tramada (blanco y negro, punto a punto), como la imprime una térmica */
+.lz-p-photo { display: block; width: 192px; height: 144px; margin: 6px auto 0; image-rendering: pixelated; image-rendering: crisp-edges; }
+.lz-p-title { margin-top: 6px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+.lz-p-sub { font-size: 12px; font-weight: 500; letter-spacing: 0.04em; color: #5c5f6b; }
+.lz-p-note { margin-top: 2px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #6a6d78; }
+.lz-p-price { margin-top: 4px; padding: 3px 10px; border-radius: 999px; background: rgba(35, 37, 46, 0.07); font-size: 12px; font-weight: 600; color: #3a3d48; }
+.lz-p-price b { font-weight: 800; color: #23252e; }
+.lz-p-price s { margin-left: 4px; color: #8a8d98; }
+.lz-p-rule { height: 0; margin: 8px 0; border-top: 1.5px dashed rgba(35, 37, 46, 0.35); }
+
+/* Líneas de pedido */
+.lz-lines { display: grid; margin: 0; padding: 0; list-style: none; }
+/* Cada pedido, en dos líneas: nº · comprador · importe; debajo, variante · ciudad · hora */
+.lz-line {
+  display: grid;
+  grid-template-columns: 3.1em minmax(0, 1fr) auto;
+  grid-template-areas: 'num name price' '. meta .';
+  align-items: baseline;
+  column-gap: 8px;
+  row-gap: 1px;
+  padding: 6px 0 5px;
+  border-bottom: 1px dotted rgba(42, 44, 53, 0.18);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.lz-line .num { grid-area: num; font-weight: 800; }
+.lz-line .nm { grid-area: name; overflow: hidden; text-overflow: ellipsis; font-weight: 700; }
+.lz-line .pr { grid-area: price; font-weight: 700; }
+.lz-line .mt { grid-area: meta; display: flex; align-items: center; gap: 6px; overflow: hidden; font-size: 11px; font-weight: 500; color: #6a6d78; }
+.lz-line .mt i { width: 3px; height: 3px; border-radius: 50%; background: currentColor; opacity: 0.6; }
+.lz-line .sz { padding: 0 4px; border: 1.1px solid #2a2c35; border-radius: 3px; font-size: 10px; font-weight: 700; line-height: 1.45; color: #2a2c35; }
+.lz-line .ok { margin-left: auto; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 9.5px; }
+/* La línea recién impresa sale de la ranura revelándose de abajo arriba, a saltos, como un cabezal térmico */
+.lz-line.is-new { animation: lzInkUp 700ms ease-out both; }
+@keyframes lzInkUp { from { opacity: 0.25; filter: blur(0.6px); } to { opacity: var(--ink, 1); filter: none; } }
+.lz-line { opacity: var(--ink, 1); }
+
+/* Bloque «Mínimo alcanzado» */
+.lz-p-made { position: relative; display: grid; justify-items: center; gap: 2px; padding: 10px 0 6px; text-align: center; }
+.lz-p-made strong { font-size: 19px; font-weight: 900; font-stretch: 100%; letter-spacing: 0.02em; text-transform: uppercase; }
+.lz-p-made > span:not(.lz-ink) { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5c5f6b; }
+/* Sin clip-path: el sello sobresale del bloque y no debe recortarse */
+.lz-p-made.is-new { animation: lzMade 520ms steps(8, end) both; }
+@keyframes lzMade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* El sello de tinta: cae sobre los totales al completarse el lanzamiento */
+.lz-ink {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 70px;
+  translate: -50% 0;
+  display: grid;
+  justify-items: center;
+  padding: 8px 14px 6px;
+  border: 3.5px solid #0f9a73;
+  border-radius: 10px;
+  color: #0f9a73;
+  font-size: 25px;
+  font-weight: 900;
+  font-stretch: 112%;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+  mix-blend-mode: multiply;
+  rotate: -9deg;
+  opacity: 0;
+  pointer-events: none;
+  /* Tinta irregular: el sello no carga igual en todo el borde */
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='120'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.6 1.75'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='120'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.6 1.75'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  -webkit-mask-size: cover;
+  mask-size: cover;
+}
+.lz-ink small { margin-top: 3px; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; }
+.lz-ink.is-on { animation: lzInk 460ms cubic-bezier(0.2, 1.5, 0.4, 1) 420ms both; }
+@keyframes lzInk {
+  0% { opacity: 0; scale: 1.9; }
+  55% { opacity: 0.95; scale: 0.94; }
+  100% { opacity: 0.95; scale: 1; }
+}
+
+/* ── La impresora de tickets ──
+   Un bloque compacto como una térmica de verdad: cara superior con la ranura y la barra de corte, la tapa del rollo
+   (curva por delante y con la línea de la bisagra), y un frontal con una tira LCD, el botón de avance de papel,
+   dos luces y la fila de variantes grabada. Aluminio anodizado oscuro con volumen y sombra en el «suelo». */
+.lz-printer {
+  position: relative;
+  z-index: 2;
+  width: min(408px, 100%);
+  margin-top: -10px;
+  border-radius: 22px 22px 28px 28px;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 0%, transparent 16%, transparent 76%, rgba(0, 0, 0, 0.32) 100%),
+    linear-gradient(180deg, #1c2048 0%, #141739 45%, #0b0d26 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 1px 0 0 rgba(255, 255, 255, 0.05),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.55),
+    0 1px 0 rgba(143, 160, 255, 0.12),
+    0 34px 60px -26px rgba(0, 0, 0, 0.9),
+    0 12px 24px -16px rgba(0, 0, 0, 0.8);
+}
+/* Grano fino de metal anodizado */
+.lz-printer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Cara superior con la ranura (el papel entra en ella) */
+.lz-pr-top {
+  position: relative;
+  height: 28px;
+  border-radius: 22px 22px 0 0;
+  background: linear-gradient(180deg, #262c62 0%, #222859 30%, #2c3370 52%, #1e2352 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+}
+.lz-pr-top::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  width: calc(min(330px, 86%) + 14px);
+  height: 8px;
+  translate: -50% 0;
+  border-radius: 3px 3px 5px 5px;
+  background: linear-gradient(180deg, #000 0%, #04050f 70%, #0b0e28 100%);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 1), 0 -1px 0 rgba(0, 0, 0, 0.6), 0 1.5px 0 rgba(170, 185, 255, 0.38);
+}
+/* Sombra que el papel proyecta sobre el labio de atrás */
+.lz-pr-top::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: min(330px, 86%);
+  height: 8px;
+  translate: -50% 0;
+  background: radial-gradient(60% 100% at 50% 100%, rgba(0, 0, 0, 0.45), transparent 75%);
+  pointer-events: none;
+}
+/* Donde el papel se mete en la ranura: oscuridad y algo de sombra del labio */
+.lz-paper-win::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 18px;
+  background: linear-gradient(0deg, rgba(3, 4, 12, 0.85) 0%, rgba(3, 4, 12, 0.35) 4px, rgba(3, 4, 12, 0.08) 10px, transparent 100%);
+  pointer-events: none;
+}
+
+/* Tapa del rollo: bombeada, con la línea de la bisagra delante */
+.lz-pr-lid {
+  position: relative;
+  height: 34px;
+  background:
+    radial-gradient(120% 140% at 50% -40%, rgba(255, 255, 255, 0.1), transparent 60%),
+    linear-gradient(180deg, #232963 0%, #1a1f4c 100%);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.7), 0 1px 0 rgba(143, 160, 255, 0.14);
+}
+.lz-pr-lid::before {
+  /* Hendidura para abrir la tapa */
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 9px;
+  width: 64px;
+  height: 5px;
+  translate: -50% 0;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #0a0c22, #161a40);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.9), 0 1px 0 rgba(143, 160, 255, 0.16);
+}
+
+.lz-pr-face { position: relative; z-index: 1; padding: 14px 16px 12px; }
+.lz-pr-row { display: flex; align-items: center; gap: 12px; }
+
+/* Tira LCD de una línea, con el progreso debajo */
+.lz-lcd {
+  position: relative;
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  row-gap: 7px;
+  padding: 9px 12px 9px;
+  overflow: hidden;
+  border-radius: 10px;
+  background:
+    radial-gradient(120% 90% at 20% 0%, rgba(90, 108, 255, 0.16), transparent 60%),
+    linear-gradient(180deg, #05071a 0%, #080b22 100%);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.85), inset 0 0 0 1px rgba(143, 160, 255, 0.12), 0 1px 0 rgba(255, 255, 255, 0.07);
+  font-variant-numeric: tabular-nums;
+}
+.lz-lcd::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0) 38%),
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0 1px, transparent 1px 3px);
+  pointer-events: none;
+}
+.lz-lcd-a { display: inline-flex; align-items: baseline; gap: 7px; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lz-ink-3); white-space: nowrap; }
+.lz-lcd-a b { font-size: 22px; font-weight: 700; font-stretch: 112%; letter-spacing: -0.02em; line-height: 1; color: #eef1ff; text-shadow: 0 0 14px rgba(120, 140, 255, 0.5); transition: color 600ms ease, text-shadow 600ms ease; }
+.lz-lcd-a small { margin-left: -4px; font-size: 13px; font-weight: 600; letter-spacing: 0; color: var(--lz-ink-3); }
+.lz-visual.is-made .lz-lcd-a b { color: #dffaf0; text-shadow: 0 0 14px rgba(63, 224, 176, 0.5); }
+.lz-led { align-self: baseline; translate: 0 -0.5px; width: 7px; height: 7px; border-radius: 50%; background: var(--lz-blue); box-shadow: 0 0 8px #4257ff, 0 0 2px #fff inset; }
+/* El punto destella una vez con cada pedido que entra */
+.lz-led.is-ping { animation: lzPing 520ms ease-out; }
+@keyframes lzPing { 0% { background: #fff; box-shadow: 0 0 14px 3px rgba(160, 175, 255, 0.95), 0 0 2px #fff inset; } 100% { } }
+@keyframes lzBlink { 50% { opacity: 0.25; } }
+.lz-visual.is-made .lz-led { background: var(--lz-green); box-shadow: 0 0 10px #14c492, 0 0 2px #fff inset; }
+
+.lz-pr-state { position: relative; display: grid; font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lz-blue); }
+.lz-pr-state > span { grid-area: 1 / 1; justify-self: end; white-space: nowrap; transition: opacity 350ms ease, translate 450ms var(--ease-out); }
+.lz-pr-state .is-b { opacity: 0; translate: 0 5px; color: var(--lz-green); }
+.lz-visual.is-made .lz-pr-state .is-a { opacity: 0; translate: 0 -5px; }
+.lz-visual.is-made .lz-pr-state .is-b { opacity: 1; translate: none; }
+
+.lz-lcd-bar { grid-column: 1 / -1; position: relative; height: 3px; border-radius: 2px; background: rgba(143, 160, 255, 0.14); }
+.lz-lcd-bar i {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #4257ff, #8fa0ff);
+  transform-origin: left;
+  transform: scaleX(calc(var(--n, 0) / var(--goal, 30)));
+  transition: transform 260ms var(--ease-out);
+  box-shadow: 0 0 8px rgba(120, 140, 255, 0.6);
+}
+.lz-visual.is-made .lz-lcd-bar i { background: linear-gradient(90deg, #4257ff 0%, #3fe0b0 70%); box-shadow: 0 0 10px rgba(63, 224, 176, 0.6); }
+
+/* Botón de avance de papel (de goma) y luces de encendido / papel */
+.lz-ctrl { display: grid; justify-items: center; gap: 8px; flex: 0 0 auto; }
+.lz-feedbtn {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 30%, #2d3470 0%, #171b44 70%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 -2px 3px rgba(0, 0, 0, 0.6), 0 0 0 3px #0c0e28, 0 0 0 4px rgba(143, 160, 255, 0.12), 0 4px 8px rgba(0, 0, 0, 0.5);
+  color: rgba(200, 208, 245, 0.55);
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+.lz-feedbtn svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+/* Al arrancar cada lanzamiento, el botón se «pulsa» (avance de la cabecera) */
+.lz-visual.is-swap .lz-feedbtn { transform: translateY(1px) scale(0.96); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 2px rgba(0, 0, 0, 0.6), 0 0 0 3px #0c0e28, 0 0 0 4px rgba(143, 160, 255, 0.12), 0 2px 4px rgba(0, 0, 0, 0.5); }
+.lz-leds { display: flex; gap: 6px; }
+.lz-leds i { width: 5px; height: 5px; border-radius: 50%; background: #20254f; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.6); }
+.lz-leds i.is-on { background: var(--lz-green); box-shadow: 0 0 6px #14c492; }
+.lz-visual.is-printing .lz-leds i.is-paper { background: #f5b84a; box-shadow: 0 0 6px #f0a23a; }
+
+/* Variantes: chips grabados en el frontal */
+.lz-sizes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-top: 12px; }
+.lz-sizes span {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  min-width: 0;
+  padding: 7px 9px;
+  border-radius: 8px;
+  background: rgba(5, 7, 22, 0.45);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.7), 0 1px 0 rgba(143, 160, 255, 0.08);
+  transition: background-color 300ms ease;
+}
+.lz-sizes em { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-style: normal; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lz-ink-3); }
+.lz-sizes b { font-size: 15px; font-weight: 700; font-stretch: 108%; letter-spacing: -0.02em; color: var(--lz-ink); font-variant-numeric: tabular-nums; transition: color 300ms ease; }
+.lz-sizes span.is-bump { background: rgba(66, 87, 255, 0.18); }
+.lz-sizes span.is-bump b { color: #fff; }
+
+/* Sombra de contacto en el «suelo» */
+.lz-floor { width: min(440px, 110%); height: 30px; margin-top: -14px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0, 0, 0, 0.7), transparent); filter: blur(6px); pointer-events: none; }
+
+@media (max-width: 960px) {
+  .lz-visual { min-height: 0; }
+  .lz-paper-win { height: 340px; }
+}
+@media (max-width: 520px) {
+  .lz-paper-win { width: 90%; height: 300px; }
+  .lz-paper { padding: 22px 14px 12px; }
+  .lz-line { font-size: 12px; gap: 6px; }
+  .lz-pr-face { padding: 12px 12px 10px; }
+  .lz-sizes span { padding: 6px 7px; }
+  .lz-lcd { padding: 8px 10px; column-gap: 8px; }
+  .lz-lcd-a { gap: 5px; letter-spacing: 0.08em; }
+  .lz-lcd-a b { font-size: 19px; }
+  .lz-pr-state { letter-spacing: 0.08em; }
+  .lz-q { display: none; }
+  .lz-ink { font-size: 21px; top: 66px; }
+}
+
+/* Bucle: al terminar un lanzamiento, el ticket se arranca (corte en zigzag abajo) y se va hacia arriba */
+.lz-paper.is-torn {
+  -webkit-mask-image: linear-gradient(#000, #000), conic-gradient(from -45deg at 50% 0, #000 90deg, transparent 0), conic-gradient(from 135deg at 50% 100%, #000 90deg, transparent 0);
+  -webkit-mask-size: 100% calc(100% - 14px), 14px 7px, 14px 7px;
+  -webkit-mask-position: 0 7px, 0 0, 0 100%;
+  -webkit-mask-repeat: no-repeat, repeat-x, repeat-x;
+  mask-image: linear-gradient(#000, #000), conic-gradient(from -45deg at 50% 0, #000 90deg, transparent 0), conic-gradient(from 135deg at 50% 100%, #000 90deg, transparent 0);
+  mask-size: 100% calc(100% - 14px), 14px 7px, 14px 7px;
+  mask-position: 0 7px, 0 0, 0 100%;
+  mask-repeat: no-repeat, repeat-x, repeat-x;
+}
+/* Mientras cambia de lanzamiento, la pantalla parpadea un instante */
+.lz-visual.is-swap .lz-lcd { animation: lzScreenSwap 700ms ease both; }
+@keyframes lzScreenSwap { 35% { filter: brightness(0.35); } }
+
+/* Bandas del cabezal: líneas horizontales muy tenues, como deja una térmica al imprimir */
+.lz-paper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(104deg, transparent 28%, rgba(255, 255, 255, 0.28) 44%, rgba(255, 255, 255, 0.08) 52%, transparent 64%),
+    repeating-linear-gradient(180deg, rgba(30, 28, 24, 0.022) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, transparent 0 38%, rgba(30, 28, 24, 0.025) 38% 39%, transparent 39% 71%, rgba(30, 28, 24, 0.02) 71% 72%, transparent 72%);
+}
+
+/* Totales y código de barras al final del lanzamiento */
+.lz-p-tot { display: flex; justify-content: space-between; align-items: baseline; width: 100%; margin-top: 2px; font-size: 12.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+.lz-p-tot b { font-size: 14px; font-weight: 900; }
+.lz-bc { display: flex; justify-content: center; align-items: stretch; gap: 1px; height: 34px; margin-top: 10px; }
+.lz-bc i { display: block; background: #1d1e24; }
+.lz-bc i.g { background: transparent; }
+.lz-bc-n { margin-top: 3px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.32em; color: #3a3d48; }
+
+/* Mientras imprime, la máquina vibra un poco */
+.lz-visual.is-printing .lz-printer { animation: lzBuzz 90ms linear infinite; }
+@keyframes lzBuzz {
+  0% { translate: 0 0; }
+  25% { translate: 0.35px 0; }
+  50% { translate: -0.3px 0; }
+  75% { translate: 0.2px 0; }
+}
+
+/* ══════════════════════════════
+   ACABADOS PREMIUM
+   Dos materiales (tapa de grafito satinado y cuerpo azul anodizado), panel frontal biselado, aro metálico en el
+   botón, serigrafías pequeñas, bandeja de variantes hundida y un zócalo oscuro como pie del aparato.
+══════════════════════════════ */
+.lz-printer { border-radius: 22px 22px 18px 18px; }
+
+/* Cara superior y tapa: grafito satinado con brillo especular en la curva */
+.lz-pr-top {
+  background:
+    radial-gradient(70% 160% at 28% -30%, rgba(255, 255, 255, 0.2), transparent 55%),
+    linear-gradient(180deg, #3b4062 0%, #30354f 45%, #2a2e48 100%);
+}
+.lz-pr-lid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+  padding: 0 18px;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0%, transparent 20%, transparent 78%, rgba(0, 0, 0, 0.28) 100%),
+    radial-gradient(90% 120% at 30% -10%, rgba(255, 255, 255, 0.14), transparent 55%),
+    linear-gradient(180deg, #2c3049 0%, #23273e 60%, #1c1f33 100%);
+  box-shadow: none;
+}
+/* Junta de la bisagra: ranura oscura con el canto de abajo iluminado */
+.lz-pr-lid::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: #05060f;
+  box-shadow: 0 1px 0 rgba(160, 175, 255, 0.22);
+}
+.lz-pr-lid::before { content: none; }
+
+/* Serigrafías: texto pequeño impreso en la carcasa */
+.lz-silk { font-size: 8.5px; font-weight: 700; font-stretch: 110%; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(205, 212, 245, 0.38); }
+.lz-model { letter-spacing: 0.24em; }
+.lz-pr-lid .lz-leds { display: flex; gap: 12px; }
+.lz-pr-lid .lz-leds > span { display: inline-flex; align-items: center; gap: 5px; font-size: 8.5px; font-weight: 700; font-stretch: 110%; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(205, 212, 245, 0.38); }
+.lz-pr-lid .lz-leds i { width: 5px; height: 5px; border-radius: 50%; background: #2a2e4a; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.6); }
+.lz-pr-lid .lz-leds i.is-on { background: var(--lz-green); box-shadow: 0 0 6px #14c492; }
+.lz-visual.is-printing .lz-pr-lid .lz-leds i.is-paper { background: #f5b84a; box-shadow: 0 0 6px #f0a23a; }
+
+/* Panel frontal hundido con canto biselado (como una pieza fresada) */
+.lz-pr-face { padding: 12px 14px 14px; }
+.lz-pr-panel {
+  padding: 8px 10px 8px 8px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.12));
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.65),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.lz-lcd { box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.85), inset 0 0 0 1px rgba(143, 160, 255, 0.14), 0 0 0 2px #06071a; }
+
+/* Botón de avance: goma oscura dentro de un aro metálico pulido */
+.lz-ctrl { gap: 5px; }
+.lz-feedring {
+  display: grid;
+  place-items: center;
+  padding: 3px;
+  border-radius: 50%;
+  background: conic-gradient(from 210deg, #8f97be, #eef0fb, #6a7196, #c7cce6, #7c84ab, #e3e6f7, #8f97be);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+.lz-feedbtn {
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(circle at 40% 30%, #2b315f 0%, #141838 75%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 -2px 3px rgba(0, 0, 0, 0.65);
+}
+.lz-visual.is-swap .lz-feedbtn { transform: scale(0.94); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -1px 2px rgba(0, 0, 0, 0.7); }
+
+/* Variantes: una bandeja hundida con separadores finos (no cuatro cajas) */
+.lz-sizes {
+  gap: 0;
+  padding: 3px;
+  border-radius: 11px;
+  background: linear-gradient(180deg, rgba(3, 4, 14, 0.62), rgba(5, 7, 22, 0.42));
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.75), 0 1px 0 rgba(143, 160, 255, 0.08);
+}
+.lz-sizes span { position: relative; background: transparent; box-shadow: none; border-radius: 8px; padding: 7px 10px; }
+.lz-sizes span + span::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 22%;
+  bottom: 22%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(143, 160, 255, 0.2), transparent);
+}
+.lz-sizes span.is-bump { background: rgba(66, 87, 255, 0.2); }
+
+/* Zócalo: el pie del aparato, más oscuro y algo más estrecho */
+.lz-pr-base {
+  width: min(372px, 91%);
+  height: 9px;
+  margin-top: -1px;
+  border-radius: 0 0 12px 12px;
+  background: linear-gradient(180deg, #06071a 0%, #020309 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 6px 12px rgba(0, 0, 0, 0.6);
+}
+.lz-floor { margin-top: -12px; }
+
+@media (max-width: 520px) {
+  .lz-pr-lid { padding: 0 14px; }
+  .lz-pr-lid .lz-leds { gap: 9px; }
+  .lz-pr-face { padding: 10px 10px 12px; }
+  .lz-pr-panel { padding: 7px 8px 7px 7px; }
+  .lz-sizes span { padding: 6px 7px; }
+}
+
+/* Serigrafía de la carcasa: pintura gris clara con algo de cuerpo (una sombra mínima de grosor) y un leve
+   desgaste; el logotipo de Tuko impreso igual que el texto */
+.lz-silk {
+  color: rgba(214, 220, 248, 0.62);
+  text-shadow: 0 0.6px 0 rgba(0, 0, 0, 0.55), 0 -0.4px 0 rgba(255, 255, 255, 0.06);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.4' numOctaves='1' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.6 2.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.4' numOctaves='1' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.6 2.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");
+  -webkit-mask-size: 60px 60px;
+  mask-size: 60px 60px;
+}
+.lz-model { display: inline-flex; align-items: center; gap: 6px; font-size: 9px; letter-spacing: 0.18em; }
+.lz-model svg { width: 9px; height: auto; fill: currentColor; filter: drop-shadow(0 0.6px 0 rgba(0, 0, 0, 0.55)); }
+.lz-model b { font-size: 11px; font-weight: 800; font-stretch: 100%; letter-spacing: -0.01em; text-transform: none; }
+.lz-model i { width: 1px; height: 9px; background: currentColor; opacity: 0.5; }
+.lz-ctrl .lz-silk { font-size: 8px; letter-spacing: 0.24em; }
+.lz-pr-lid .lz-leds > span { color: rgba(214, 220, 248, 0.62); text-shadow: 0 0.6px 0 rgba(0, 0, 0, 0.55); }
+
+/* Entrada: apagada (pantalla y luces sin encender) → se enciende con la prueba de pantalla → sale el papel */
+.lz-lcd > *, .lz-led, .lz-pr-lid .lz-leds i { transition: opacity 500ms ease, background-color 300ms ease, box-shadow 300ms ease; }
+.lz-visual.is-off .lz-lcd > * { opacity: 0.06; }
+.lz-visual.is-off .lz-led,
+.lz-visual.is-off .lz-pr-lid .lz-leds i.is-on { background: #2a2e4a; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.6); }
+.lz-visual.is-boot .lz-lcd > * { opacity: 1; filter: brightness(1.35); }
+.lz-visual.is-boot .lz-lcd-bar i { transform: scaleX(1); }

@@ -12,6 +12,7 @@ En qué se diferencia: no es un descuento para toda la tienda (solo baja el prec
 - [Página principal](https://tukoteam.com/): qué es Tuko y cómo funciona la compra en grupo
 - [Home in English](https://tukoteam.com/en/): the same page in English
 - [Tuko AI](https://tukoteam.com/tuko-ai)
+- [Lanzamientos](https://tukoteam.com/lanzamientos): drops y preventas con un objetivo de compradores (de 5 a 100 personas, de 3 a 30 días) y un precio de salida; si se llega, se completa y todos se lo llevan con el descuento; si no, se devuelve el dinero a todos (1 € por comprador)
 
 ## Blog
 

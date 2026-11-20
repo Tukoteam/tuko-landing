@@ -1,0 +1,263 @@
+/* ══════════════════════════════
+   LANZAMIENTOS · CIERRE «el siguiente es el tuyo»
+   El escenario del hero con el texto a la izquierda y, a la derecha, tu propia impresora (el mismo grafito que la
+   del hero, en pequeño): un ticket en blanco asoma de la ranura y con − / + eliges el objetivo.
+══════════════════════════════ */
+.lz-final-stage { padding: clamp(56px, 7vw, 96px) clamp(24px, 5vw, 72px); text-align: left; }
+.lz-final-in { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); align-items: center; justify-items: stretch; gap: clamp(32px, 5vw, 72px); }
+.lz-final-copy { display: grid; justify-items: start; }
+.lz-final-k { display: inline-flex; align-items: center; gap: 12px; margin: 0; font-size: 12.5px; font-weight: 700; font-stretch: 112%; letter-spacing: 0.2em; text-transform: uppercase; color: var(--lz-ink-2); }
+.lz-final-k::before { content: ''; width: 20px; height: 1px; background: currentColor; opacity: 0.55; }
+.lz-final-h { margin-top: 20px; font-size: clamp(40px, 5vw, 72px); }
+.lz-final-p { margin-top: 20px; }
+.lz-final .lz-actions { justify-content: flex-start; margin-top: 32px; }
+
+/* ── La mini impresora ── */
+.lzf { position: relative; display: grid; justify-items: center; width: min(100%, 330px); justify-self: center; }
+.lzf-clip { position: relative; z-index: 1; width: 82%; height: 214px; overflow: hidden; margin-bottom: -14px; padding: 0 6px; }
+.lzf-paper {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: 0;
+  display: grid;
+  gap: 9px;
+  padding: 18px 18px 26px;
+  background:
+    linear-gradient(90deg, rgba(40, 36, 30, 0.08) 0%, transparent 10%, transparent 90%, rgba(40, 36, 30, 0.1) 100%),
+    linear-gradient(180deg, #ebe8df 0%, #f8f6f0 45%, #f3f1ea 100%);
+  color: #2a2c35;
+  font-stretch: 86%;
+  text-shadow: 0 0 0.4px rgba(42, 44, 53, 0.5);
+  -webkit-mask: linear-gradient(#000, #000) bottom / 100% calc(100% - 6px) no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 6' preserveAspectRatio='none'%3E%3Cpath d='M0 6V3L7 1.5L12 4L19 2L26 3.8L33 1L41 3.2L48 2.1L55 4.4L63 1.6L70 3.1L78 1.2L86 4L93 2.3L101 3.6L108 1.4L116 3.9L124 2L131 4.2L139 1.8L147 3.3L154 1.1L162 3.7L170 2.4L177 4.1L185 1.5L193 3L200 2.2L208 4.3L215 1.7L223 3.4L231 1.3L238 3.9L246 2.1L254 4L261 1.6L269 3.5L277 2L284 4.2L292 1.9L300 3.2V6Z'/%3E%3C/svg%3E") top / 100% 6px no-repeat;
+  mask: linear-gradient(#000, #000) bottom / 100% calc(100% - 6px) no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 6' preserveAspectRatio='none'%3E%3Cpath d='M0 6V3L7 1.5L12 4L19 2L26 3.8L33 1L41 3.2L48 2.1L55 4.4L63 1.6L70 3.1L78 1.2L86 4L93 2.3L101 3.6L108 1.4L116 3.9L124 2L131 4.2L139 1.8L147 3.3L154 1.1L162 3.7L170 2.4L177 4.1L185 1.5L193 3L200 2.2L208 4.3L215 1.7L223 3.4L231 1.3L238 3.9L246 2.1L254 4L261 1.6L269 3.5L277 2L284 4.2L292 1.9L300 3.2V6Z'/%3E%3C/svg%3E") top / 100% 6px no-repeat;
+  transform: translateY(100%);
+  transition: transform 2200ms steps(22, end);
+}
+.lzf.is-in .lzf-paper { transform: none; }
+.lzf-k { display: flex; align-items: center; gap: 6px; padding-bottom: 9px; border-bottom: 1px solid rgba(42, 44, 53, 0.55); font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+.lzf-k svg { width: 8px; height: auto; fill: #2a2c35; }
+.lzf-name { display: flex; align-items: center; font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: #8a8d99; }
+.lzf-caret { width: 2px; height: 20px; margin-left: 3px; background: #3d50f2; animation: lzCaret 1.05s steps(2, jump-none) infinite; }
+.lzf-row { display: flex; justify-content: space-between; gap: 12px; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.lzf-row em { font-style: normal; color: #55586a; }
+.lzf-row b { font-weight: 700; }
+.lzf-row:last-child { padding-top: 8px; border-top: 1px dashed rgba(42, 44, 53, 0.35); }
+.lzf-goal { display: inline-block; }
+.lzf.is-bump .lzf-paper .lzf-goal { animation: lzfReprint 420ms steps(3, end); }
+@keyframes lzfReprint { 0% { opacity: 0.1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
+
+/* Cuerpo: tapa de grafito con la ranura, frontal con la pantalla y los botones */
+.lzf-body {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 22px 16px 16px;
+  border-radius: 22px 22px 18px 18px;
+  background:
+    radial-gradient(80% 120% at 30% -20%, rgba(255, 255, 255, 0.16), transparent 55%),
+    linear-gradient(180deg, #3b4062 0%, #2a2e48 30%, #1d2036 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.45),
+    0 30px 50px -24px rgba(0, 0, 0, 0.8);
+}
+.lzf-slot { position: absolute; left: 10%; right: 10%; top: 8px; height: 6px; border-radius: 3px; background: #02030a; box-shadow: inset 0 1px 2px #000, 0 1px 0 rgba(255, 255, 255, 0.1); }
+.lzf-face { display: flex; align-items: center; gap: 12px; padding: 8px; border-radius: 14px; background: linear-gradient(180deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.12)); box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.65), 0 1px 0 rgba(255, 255, 255, 0.07); }
+.lzf-lcd {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #0a0c22, #10143a);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.85), inset 0 0 0 1px rgba(143, 160, 255, 0.14);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(200, 208, 245, 0.55);
+  font-variant-numeric: tabular-nums;
+}
+.lzf-lcd i { align-self: center; width: 7px; height: 7px; border-radius: 50%; background: #8fa0ff; box-shadow: 0 0 8px #4257ff; animation: lzLive 1.6s ease-in-out infinite; }
+.lzf-lcd b { margin-left: 2px; font-size: 22px; letter-spacing: -0.02em; color: #eef1ff; text-shadow: 0 0 12px rgba(120, 140, 255, 0.5); }
+.lzf-lcd small { font-size: 13px; letter-spacing: 0; color: rgba(200, 208, 245, 0.7); }
+.lzf.is-bump .lzf-lcd small { animation: lzfLcd 360ms ease-out; }
+@keyframes lzfLcd { 0% { color: #fff; text-shadow: 0 0 10px #8fa0ff; } }
+.lzf-step { display: grid; justify-items: center; gap: 4px; }
+.lzf-step > span { order: 3; font-size: 8.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(205, 212, 245, 0.55); }
+.lzf-step { grid-template-columns: auto auto; column-gap: 6px; }
+.lzf-step > span { grid-column: 1 / -1; }
+.lzf-btn {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 30%, #2b315f 0%, #141838 75%);
+  box-shadow: 0 0 0 2px #8f97be, 0 0 0 3px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 3px 6px rgba(0, 0, 0, 0.5);
+  color: #dfe4ff;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+.lzf-btn:active { transform: translateY(1px) scale(0.95); box-shadow: 0 0 0 2px #8f97be, 0 0 0 3px rgba(0, 0, 0, 0.5), inset 0 2px 3px rgba(0, 0, 0, 0.6); }
+.lzf-btn:focus-visible { outline: 2px solid #8fa0ff; outline-offset: 4px; }
+.lzf-btn:disabled { opacity: 0.4; cursor: default; }
+@media (hover: hover) and (pointer: fine) { .lzf-btn:hover { color: #fff; } }
+.lzf-floor { width: 86%; height: 18px; margin-top: 10px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0, 0, 0, 0.55), transparent); filter: blur(4px); }
+
+@media (max-width: 860px) {
+  .lz-final-stage { text-align: center; }
+  .lz-final-in { grid-template-columns: minmax(0, 1fr); }
+  .lz-final-copy { justify-items: center; }
+  .lz-final .lz-actions { justify-content: center; }
+}
+
+/* ══ El papel sale de la rendija, se mece y la impresora levita ══
+   La rendija está en el canto de arriba del cuerpo y se dibuja por delante del papel (un poco más ancha que él),
+   con sombra en la salida. Cuando el ticket ha salido, se mece despacio colgando de la rendija (3D, eje abajo) y
+   toda la impresora sube y baja con su sombra en el suelo. */
+.lzf { animation: lzfFloat 6.5s ease-in-out infinite; }
+@keyframes lzfFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+.lzf-floor { animation: lzfFloor 6.5s ease-in-out infinite; }
+@keyframes lzfFloor { 0%, 100% { scale: 1; opacity: 1; } 50% { scale: 0.86; opacity: 0.55; } }
+
+.lzf-clip { width: 80%; height: 226px; margin-bottom: 0; padding: 0; overflow: visible; perspective: 700px; clip-path: inset(-40px -30px 0 -30px); }
+.lzf-paper {
+  left: 0;
+  right: 0;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.35));
+}
+/* Fibras y una curva suave (más claro arriba, sombra al salir de la rendija) */
+.lzf-paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9 .06' numOctaves='2' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .42 0 0 0 0 .36 0 0 0 -.28 .16'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+}
+.lzf-paper::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 26px;
+  pointer-events: none;
+  background: linear-gradient(0deg, rgba(10, 12, 30, 0.38), rgba(10, 12, 30, 0.08) 55%, transparent);
+}
+.lzf-paper > * { position: relative; z-index: 1; }
+.lzf.is-in .lzf-paper { animation: lzfSway 5.5s ease-in-out 2.4s infinite; }
+@keyframes lzfSway {
+  0%, 100% { transform: rotateX(0deg); }
+  30% { transform: rotateX(7deg); }
+  65% { transform: rotateX(-3deg); }
+}
+
+/* Rendija en el canto, por delante del papel */
+.lzf-body { padding-top: 26px; }
+.lzf-slot {
+  z-index: 3;
+  top: -4px;
+  left: 7%;
+  right: 7%;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #000 0%, #05060f 60%, #1b1e33 100%);
+  box-shadow: inset 0 2px 3px #000, 0 1px 0 rgba(255, 255, 255, 0.14), 0 -1px 0 rgba(255, 255, 255, 0.06);
+}
+/* El labio de la tapa, con brillo, para que el cuerpo tenga canto */
+.lzf-body::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 14px;
+  border-radius: 22px 22px 0 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent);
+  pointer-events: none;
+}
+/* La sombra del papel va aparte (la máscara del borde arrancado se comería un drop-shadow): crece con el papel */
+.lzf-paper { filter: none; }
+.lzf-clip::before {
+  content: '';
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: 18px;
+  bottom: 0;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  filter: blur(16px);
+  transform-origin: 50% 100%;
+  transform: scaleY(0);
+  transition: transform 2200ms steps(22, end);
+}
+.lzf.is-in .lzf-clip::before { transform: scaleY(1); }
+.lzf { width: min(100%, 370px); }
+.lzf-clip { height: 240px; }
+.lzf-name { font-size: 22px; }
+
+/* ══ Parte de abajo, como la impresora del hero ══
+   Franja de tapa con la serigrafía (tuko | TP-01) y las luces Power / Paper (ámbar mientras sale el papel), la
+   pantalla, y un balancín − / + de una pieza con aro metálico y «OBJETIVO» serigrafiado. */
+.lzf-body { padding: 24px 14px 14px; }
+.lzf-lid { display: flex; align-items: center; justify-content: space-between; margin: 0 4px 10px; }
+.lzf-silk {
+  font-size: 8px;
+  font-weight: 700;
+  font-stretch: 110%;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(214, 220, 248, 0.6);
+  text-shadow: 0 0.6px 0 rgba(0, 0, 0, 0.55);
+}
+.lzf-model { display: inline-flex; align-items: center; gap: 5px; letter-spacing: 0.16em; }
+.lzf-model svg { width: 8px; height: auto; fill: currentColor; }
+.lzf-model b { font-size: 10px; font-weight: 800; font-stretch: 100%; letter-spacing: -0.01em; text-transform: none; }
+.lzf-model i { width: 1px; height: 8px; background: currentColor; opacity: 0.5; }
+.lzf-leds { display: inline-flex; gap: 10px; }
+.lzf-leds > span { display: inline-flex; align-items: center; gap: 4px; font-size: 7.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(214, 220, 248, 0.6); }
+.lzf-leds i { width: 5px; height: 5px; border-radius: 50%; background: #2a2e4a; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.6); }
+.lzf-leds i.is-on { background: #3fe0b0; box-shadow: 0 0 6px #14c492; }
+.lzf.is-in .lzf-leds i.is-paper { animation: lzfPaperLed 2200ms steps(1, end) forwards; }
+@keyframes lzfPaperLed { 0% { background: #f5b84a; box-shadow: 0 0 6px #f0a23a; } 100% { background: #2a2e4a; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.6); } }
+.lzf.is-bump .lzf-leds i.is-paper { animation: lzfPaperBlink 420ms steps(2, jump-none); }
+@keyframes lzfPaperBlink { 0%, 100% { background: #f5b84a; box-shadow: 0 0 6px #f0a23a; } }
+
+/* Balancín */
+.lzf-step { display: grid; grid-template-columns: auto; justify-items: center; gap: 6px; }
+.lzf-step > .lzf-silk { grid-column: auto; order: 0; }
+.lzf-rocker {
+  display: flex;
+  padding: 3px;
+  border-radius: 999px;
+  background: conic-gradient(from 210deg, #8f97be, #eef0fb, #6a7196, #c7cce6, #7c84ab, #e3e6f7, #8f97be);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+.lzf-rocker .lzf-btn {
+  width: 38px;
+  height: 32px;
+  border-radius: 0;
+  background: linear-gradient(180deg, #2b315f 0%, #171b3d 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 -2px 3px rgba(0, 0, 0, 0.55);
+  font-size: 17px;
+}
+.lzf-rocker .lzf-btn:first-child { border-radius: 999px 0 0 999px; border-right: 1px solid #05060f; }
+.lzf-rocker .lzf-btn:last-child { border-radius: 0 999px 999px 0; border-left: 1px solid rgba(255, 255, 255, 0.08); }
+.lzf-rocker .lzf-btn:active { transform: none; background: linear-gradient(180deg, #141838 0%, #1d2250 100%); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.7); }
+.lzf-rocker .lzf-btn:disabled { opacity: 1; color: rgba(223, 228, 255, 0.3); cursor: default; }
+/* Cursor de «Tu producto» en tinta (no azul) y el punto de la pantalla a la altura de «PEDIDOS» */
+.lzf-caret { background: #2a2c35; }
+.lzf-lcd i { align-self: baseline; width: 6px; height: 6px; translate: 0 -1px; }
