@@ -127,13 +127,45 @@ setTimeout(() => {
   document.querySelectorAll('.hero .fade-up, .ia-hero .fade-up').forEach(el => el.classList.add('visible'));
 }, 80);
 
-/* ── SMOOTH SCROLL for nav ── */
+/* ── SMOOTH SCROLL for nav ──
+   Deslizamiento propio (no «behavior: smooth»): con las animaciones del sistema desactivadas, el navegador
+   convierte el smooth en un salto. Respeta el scroll-padding-top del header fijo y se corta si el usuario
+   hace scroll con la rueda o el dedo. */
+window.tukoScrollTo = (target) => {
+  const root = document.documentElement;
+  const pad = parseFloat(getComputedStyle(root).scrollPaddingTop) || 0;
+  const margin = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+  const max = root.scrollHeight - window.innerHeight;
+  const from = window.scrollY;
+  const to = Math.max(0, Math.min(max, target.getBoundingClientRect().top + from - Math.max(pad, margin)));
+  const dist = to - from;
+  if (Math.abs(dist) < 2) return;
+  const dur = Math.min(1100, Math.max(450, Math.abs(dist) * 0.35));
+  const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  const prev = root.style.scrollBehavior;
+  root.style.scrollBehavior = 'auto';
+  let stop = false;
+  const cancel = () => { stop = true; };
+  window.addEventListener('wheel', cancel, { passive: true, once: true });
+  window.addEventListener('touchstart', cancel, { passive: true, once: true });
+  const t0 = performance.now();
+  const step = (now) => {
+    const t = Math.min(1, (now - t0) / dur);
+    if (!stop) window.scrollTo(0, from + dist * ease(t));
+    if (t < 1 && !stop) { requestAnimationFrame(step); return; }
+    root.style.scrollBehavior = prev;
+    window.removeEventListener('wheel', cancel);
+    window.removeEventListener('touchstart', cancel);
+  };
+  requestAnimationFrame(step);
+};
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
+    const href = a.getAttribute('href');
+    const target = href.length > 1 && document.querySelector(href);
     if (target) {
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.tukoScrollTo(target);
     }
   });
 });

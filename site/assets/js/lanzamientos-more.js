@@ -370,7 +370,7 @@
         var t = document.querySelector(a.getAttribute('href'));
         if (!t) return;
         e.preventDefault();
-        t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (window.tukoScrollTo) window.tukoScrollTo(t); else t.scrollIntoView({ behavior: 'smooth', block: 'start' });
         setG(+a.getAttribute('data-g'));
       });
     });
