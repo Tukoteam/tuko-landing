@@ -1,0 +1,14 @@
+/* ══ Safari (Mac e iPhone) ══
+   lanzamientos.js pone la clase lz-webkit en Safari. Allí la impresora del hero iba a tirones: el papel
+   inclinado en 3D, con la textura en modo multiplicar y la tinta enmascarada con filtros SVG, se repintaba
+   entero en cada paso del motor, y las manchas de luz desenfocadas se movían a la vez. En Safari el papel va
+   en 2D (sin inclinación), la textura y la tinta van sin efectos caros y las manchas de luz se quedan quietas.
+   El resto de navegadores no cambia. */
+.lz-webkit .lz-paper-win { perspective: none; }
+.lz-webkit .lz-paper { transform: none; will-change: transform; }
+.lz-webkit .lz-paper::before { mix-blend-mode: normal; opacity: 0.3; }
+.lz-webkit .lz-p-head > span,
+.lz-webkit .lz-lines { -webkit-mask-image: none; mask-image: none; }
+.lz-webkit .lz-line.is-new { animation-name: lzInkUpLite; }
+@keyframes lzInkUpLite { from { opacity: 0.25; } to { opacity: var(--ink, 1); } }
+.lz-webkit .lz-aurora i { animation: none; }

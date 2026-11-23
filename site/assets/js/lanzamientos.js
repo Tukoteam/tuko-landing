@@ -16,6 +16,15 @@
   var paper = document.querySelector('.lz-paper');
   if (!stage || !visual || !printer || !paper) return;
 
+  // Safari (Mac e iPhone): el papel inclinado en 3D, con su textura mezclada y la tinta enmascarada, obliga a
+  // repintarlo en cada fotograma y la impresión va a tirones. Allí el papel se mueve en 2D y los efectos más
+  // caros se aligeran (lz-14-webkit.css). En el resto de navegadores no cambia nada.
+  var ua = navigator.userAgent;
+  var WEBKIT = /iPhone|iPad|iPod/.test(ua) ||
+    (/Macintosh/.test(ua) && /AppleWebKit/.test(ua) && !/Chrome|Chromium|Edg|OPR|Firefox/.test(ua));
+  if (WEBKIT) document.documentElement.classList.add('lz-webkit');
+  function paperTilt(deg) { return WEBKIT ? '' : 'rotateX(' + deg + 'deg) '; }
+
   var headEl = paper.querySelector('.lz-p-head');
   var lines = paper.querySelector('.lz-lines');
   var countEl = printer.querySelector('.lz-n');
@@ -114,7 +123,7 @@
     var frames = pts.map(function (q, i) {
       var o = i === 0 ? 0 : i === pts.length - 1 ? 1 : Math.max(last, Math.min(1, q.ms / total));
       last = o;
-      return { offset: o, transform: 'rotateX(' + q.r.toFixed(2) + 'deg) translateY(' + q.y + 'px)' };
+      return { offset: o, transform: paperTilt(q.r.toFixed(2)) + 'translateY(' + q.y + 'px)' };
     });
     feedAnim = paper.animate(frames, { duration: total, easing: 'linear' });
   }
@@ -254,9 +263,9 @@
     if (feedAnim) feedAnim.cancel();
     var a = paper.animate(
       [
-        { transform: 'rotateX(14deg) translateY(0) rotate(0deg)', opacity: 1 },
-        { transform: 'rotateX(14deg) translateY(-14px) rotate(-1.5deg)', opacity: 1, offset: 0.25 },
-        { transform: 'rotateX(14deg) translateY(-160px) rotate(-4deg)', opacity: 0 },
+        { transform: paperTilt(14) + 'translateY(0) rotate(0deg)', opacity: 1 },
+        { transform: paperTilt(14) + 'translateY(-14px) rotate(-1.5deg)', opacity: 1, offset: 0.25 },
+        { transform: paperTilt(14) + 'translateY(-160px) rotate(-4deg)', opacity: 0 },
       ],
       { duration: 900, easing: 'cubic-bezier(0.55, 0, 0.75, 0.2)', fill: 'forwards' }
     );
