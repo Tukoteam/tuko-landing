@@ -1330,9 +1330,10 @@ html[data-theme="dark"] .lz-tk-slot { box-shadow: inset 0 1px 0 rgba(255, 255, 2
 .lz-tk-slot { z-index: 3; }
 .lz-tk-clip::before { left: 14px; right: 14px; height: 22px; background: linear-gradient(180deg, rgba(10, 12, 30, 0.42), rgba(10, 12, 30, 0.1) 45%, transparent); }
 
-/* El sello tiene su propio hueco al pie del ticket, bajo el código de barras: se lee entero y no tapa cifras */
-.lz-tk { padding-bottom: 92px; }
-.lz-tk-stamp { top: auto; bottom: 26px; translate: -50% 0; font-size: 22px; }
+/* El sello cae sobre el código de barras, como en un ticket sellado de verdad: no tapa cifras y el papel no
+   necesita un hueco de más al pie (antes medía unos 70 px más) */
+.lz-tk { padding-bottom: 22px; }
+.lz-tk-stamp { top: auto; bottom: 30px; translate: -50% 0; font-size: 22px; }
 @media (max-width: 760px) { .lz-tk-stamp { font-size: 20px; } }
 /* El papel cuelga recto de la rendija: torcido, sus esquinas asomaban por los lados de la boca y los bordes
    (máscara + sombra) salían dentados. La gracia la ponen los sellos, que sí van torcidos. */
@@ -2990,3 +2991,18 @@ html:not([data-theme="dark"]) .lz-final { --hero-ground: var(--band); }
   .lz-faq-head { text-align: center; }
   .lz-faq-head .lz-rail { text-align: left; }
 }
+
+/* ══ Safari (Mac e iPhone) ══
+   lanzamientos.js pone la clase lz-webkit en Safari. Allí la impresora del hero iba a tirones: el papel
+   inclinado en 3D, con la textura en modo multiplicar y la tinta enmascarada con filtros SVG, se repintaba
+   entero en cada paso del motor, y las manchas de luz desenfocadas se movían a la vez. En Safari el papel va
+   en 2D (sin inclinación), la textura y la tinta van sin efectos caros y las manchas de luz se quedan quietas.
+   El resto de navegadores no cambia. */
+.lz-webkit .lz-paper-win { perspective: none; }
+.lz-webkit .lz-paper { transform: none; will-change: transform; }
+.lz-webkit .lz-paper::before { mix-blend-mode: normal; opacity: 0.3; }
+.lz-webkit .lz-p-head > span,
+.lz-webkit .lz-lines { -webkit-mask-image: none; mask-image: none; }
+.lz-webkit .lz-line.is-new { animation-name: lzInkUpLite; }
+@keyframes lzInkUpLite { from { opacity: 0.25; } to { opacity: var(--ink, 1); } }
+.lz-webkit .lz-aurora i { animation: none; }
