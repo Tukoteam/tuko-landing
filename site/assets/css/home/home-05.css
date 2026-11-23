@@ -443,7 +443,8 @@
   }
   .footer-top {
     display: grid;
-    grid-template-columns: minmax(200px, 1.35fr) repeat(3, minmax(120px, 0.55fr));
+    /* «Legales» lleva los enlaces más largos: más ancho para que cada uno quepa en una línea */
+    grid-template-columns: minmax(200px, 1.1fr) minmax(150px, 0.6fr) minmax(110px, 0.45fr) minmax(230px, 0.95fr);
     gap: clamp(36px, 5vw, 64px);
     align-items: start;
     padding-bottom: 48px;

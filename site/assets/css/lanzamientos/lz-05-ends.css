@@ -1,0 +1,242 @@
+/* ══════════════════════════════
+   LANZAMIENTOS · DOS FINALES
+   Dos tickets del mismo papel térmico que el hero. Al verse (.is-in) salen de una ranura oscura, el texto se
+   «imprime» y cae el sello: verde «Completado» y granate «Devuelto». Ligeramente torcidos, como dejados en
+   una mesa; al pasar el ratón se enderezan.
+══════════════════════════════ */
+.lz-ends-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(28px, 5vw, 72px);
+  max-width: 900px;
+  margin: clamp(48px, 6vw, 72px) auto 0;
+}
+.lz-end { display: grid; justify-items: center; margin: 0; }
+
+/* Ranura de la que sale el ticket */
+.lz-tk-slot {
+  position: relative;
+  z-index: 2;
+  width: min(360px, 100%);
+  height: 12px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #05060f, #1a1d33);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.9), 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+html[data-theme="dark"] .lz-tk-slot { box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.9), 0 1px 0 rgba(143, 160, 255, 0.14); }
+.lz-tk-clip { width: min(330px, 92%); margin-top: -6px; padding: 0 14px 30px; overflow: hidden; }
+
+.lz-tk {
+  position: relative;
+  display: grid;
+  gap: 9px;
+  padding: 30px 22px 22px;
+  background:
+    linear-gradient(90deg, rgba(40, 36, 30, 0.08) 0%, transparent 10%, transparent 90%, rgba(40, 36, 30, 0.1) 100%),
+    linear-gradient(180deg, #ebe8df 0%, #f8f6f0 40%, #f3f1ea 100%);
+  color: #2a2c35;
+  font-stretch: 82%;
+  text-shadow: 0 0 0.4px rgba(42, 44, 53, 0.55);
+  /* Borde de arriba arrancado (el corte anterior): irregular y fino, no dientes de sierra */
+  -webkit-mask: linear-gradient(#000, #000) bottom / 100% calc(100% - 6px) no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 6' preserveAspectRatio='none'%3E%3Cpath transform='matrix(1 0 0 -1 0 6)' d='M0 0H300V1.1L296.9 1.8L294.7 1.3L289.1 1.3L285.7 2.1L281.1 4.0L275.4 2.4L270.5 2.9L265.4 1.0L261.8 3.0L259.3 2.7L257.0 3.6L255.0 1.7L252.4 4.3L249.3 2.0L245.8 1.3L241.9 2.2L239.7 3.1L237.1 4.5L231.8 3.3L229.7 1.3L227.5 1.7L222.2 2.0L216.7 3.8L211.9 4.0L209.3 1.1L206.3 4.8L201.1 1.5L197.2 3.5L191.7 2.9L185.8 1.4L182.0 3.5L178.6 1.0L172.7 2.1L167.8 3.9L164.2 1.9L160.8 2.4L158.7 3.3L154.1 4.1L148.7 4.9L142.8 4.6L137.7 2.1L135.2 4.1L132.3 2.1L128.5 2.9L123.2 2.8L119.2 2.8L115.9 5.0L111.3 3.9L107.6 1.2L105.3 2.9L102.4 1.6L97.8 4.2L94.2 3.5L91.2 3.0L85.7 2.0L80.0 1.3L76.6 2.5L71.5 1.6L68.2 3.3L65.2 2.9L59.3 1.7L56.2 3.8L52.0 2.8L49.2 5.0L45.4 1.5L39.6 4.9L37.4 1.7L33.4 3.4L30.8 3.8L27.8 3.1L25.5 3.8L20.4 2.2L16.8 3.5L11.2 1.3L7.2 2.9L4.2 1.5L0.0 3.1Z'/%3E%3C/svg%3E") top / 100% 6px no-repeat;
+  mask: linear-gradient(#000, #000) bottom / 100% calc(100% - 6px) no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 6' preserveAspectRatio='none'%3E%3Cpath transform='matrix(1 0 0 -1 0 6)' d='M0 0H300V1.1L296.9 1.8L294.7 1.3L289.1 1.3L285.7 2.1L281.1 4.0L275.4 2.4L270.5 2.9L265.4 1.0L261.8 3.0L259.3 2.7L257.0 3.6L255.0 1.7L252.4 4.3L249.3 2.0L245.8 1.3L241.9 2.2L239.7 3.1L237.1 4.5L231.8 3.3L229.7 1.3L227.5 1.7L222.2 2.0L216.7 3.8L211.9 4.0L209.3 1.1L206.3 4.8L201.1 1.5L197.2 3.5L191.7 2.9L185.8 1.4L182.0 3.5L178.6 1.0L172.7 2.1L167.8 3.9L164.2 1.9L160.8 2.4L158.7 3.3L154.1 4.1L148.7 4.9L142.8 4.6L137.7 2.1L135.2 4.1L132.3 2.1L128.5 2.9L123.2 2.8L119.2 2.8L115.9 5.0L111.3 3.9L107.6 1.2L105.3 2.9L102.4 1.6L97.8 4.2L94.2 3.5L91.2 3.0L85.7 2.0L80.0 1.3L76.6 2.5L71.5 1.6L68.2 3.3L65.2 2.9L59.3 1.7L56.2 3.8L52.0 2.8L49.2 5.0L45.4 1.5L39.6 4.9L37.4 1.7L33.4 3.4L30.8 3.8L27.8 3.1L25.5 3.8L20.4 2.2L16.8 3.5L11.2 1.3L7.2 2.9L4.2 1.5L0.0 3.1Z'/%3E%3C/svg%3E") top / 100% 6px no-repeat;
+  filter: drop-shadow(0 18px 22px rgba(20, 24, 38, 0.22));
+  transform: translateY(-104%);
+  transition: transform 1600ms cubic-bezier(0.45, 0.05, 0.25, 1);
+}
+.lz-end-ok .lz-tk { rotate: -1.2deg; }
+.lz-end-no .lz-tk { rotate: 1.4deg; transition-delay: 350ms; }
+.lz-ends.is-in .lz-tk { transform: none; }
+@media (hover: hover) and (pointer: fine) {
+  .lz-tk { transition: transform 1600ms cubic-bezier(0.45, 0.05, 0.25, 1), rotate 400ms var(--ease-out); }
+  .lz-end:hover .lz-tk { rotate: 0deg; }
+}
+
+.lz-tk > span { display: block; }
+.lz-tk-k { font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #55586a; }
+.lz-tk-big { padding: 4px 0 8px; border-bottom: 1px dashed rgba(42, 44, 53, 0.35); font-size: 15px; font-weight: 600; }
+.lz-tk-big b { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; margin-right: 4px; }
+.lz-tk-row { display: flex !important; justify-content: space-between; gap: 12px; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+.lz-tk-row em { font-style: normal; color: #55586a; }
+.lz-tk-row b { font-weight: 700; }
+.lz-tk-fee { padding-top: 9px; border-top: 1px dashed rgba(42, 44, 53, 0.35); }
+.lz-tk-bars {
+  height: 34px;
+  margin-top: 6px;
+  background: repeating-linear-gradient(90deg, #2a2c35 0 2px, transparent 2px 4px, #2a2c35 4px 5px, transparent 5px 8px, #2a2c35 8px 11px, transparent 11px 12px, #2a2c35 12px 13px, transparent 13px 17px);
+  opacity: 0.85;
+}
+
+/* Sello de tinta: cae y se queda algo transparente, con la tinta irregular */
+.lz-tk-stamp {
+  position: absolute;
+  left: 50%;
+  top: 83%;
+  padding: 6px 14px;
+  border: 3px solid currentColor;
+  border-radius: 8px;
+  font-size: 24px;
+  font-weight: 800;
+  font-stretch: 112%;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-shadow: none;
+  white-space: nowrap;
+  opacity: 0;
+  translate: -50% -50%;
+  rotate: -10deg;
+  scale: 1.6;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 2.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 2.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  transition: opacity 120ms ease, scale 260ms cubic-bezier(0.5, 0, 0.75, 0);
+}
+.lz-end-ok .lz-tk-stamp { color: #0b8a63; }
+.lz-end-no .lz-tk-stamp { color: #a3263b; rotate: 8deg; }
+.lz-ends.is-in .lz-tk-stamp { opacity: 0.86; scale: 1; }
+.lz-ends.is-in .lz-end-ok .lz-tk-stamp { transition-delay: 1700ms; }
+.lz-ends.is-in .lz-end-no .lz-tk-stamp { transition-delay: 2050ms; }
+
+.lz-end figcaption { max-width: 22em; margin-top: 4px; font-size: 16px; line-height: 1.55; color: var(--ink-2); text-align: center; text-wrap: pretty; }
+.lz-end figcaption b { font-weight: 700; color: var(--ink); }
+.lz-end-ok figcaption b { color: var(--lz-ok); }
+.lz-end-no figcaption b { color: #c0394f; }
+html[data-theme="dark"] .lz-end-no figcaption b { color: #ff8a9b; }
+
+@media (max-width: 760px) {
+  .lz-tk-stamp { font-size: 20px; }
+  .lz-ends-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+}
+
+/* Boca de la impresora: un labio de grafito (el mismo material que la tapa del hero) con la rendija oscura;
+   el papel sale por debajo y el labio le deja una sombra en la parte de arriba */
+.lz-tk-slot {
+  width: min(352px, 100%);
+  height: 22px;
+  border-radius: 11px 11px 7px 7px;
+  background:
+    radial-gradient(70% 140% at 30% -40%, rgba(255, 255, 255, 0.2), transparent 60%),
+    linear-gradient(180deg, #3a3f60 0%, #2a2e48 45%, #1b1e33 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+    0 1px 0 rgba(0, 0, 0, 0.25),
+    0 10px 18px -10px rgba(10, 12, 40, 0.55);
+}
+html[data-theme="dark"] .lz-tk-slot { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 -1px 0 rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(143, 160, 255, 0.1), 0 10px 18px -10px rgba(0, 0, 0, 0.8); }
+.lz-tk-slot::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: 9px;
+  height: 4px;
+  border-radius: 2px;
+  background: #02030a;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 1), 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+.lz-tk-clip { position: relative; margin-top: -4px; }
+.lz-tk-clip::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  left: 14px;
+  right: 14px;
+  top: 0;
+  height: 18px;
+  background: linear-gradient(180deg, rgba(10, 12, 30, 0.3), rgba(10, 12, 30, 0.08) 50%, transparent);
+  pointer-events: none;
+}
+
+/* La boca: un labio de grafito cuyo canto de abajo ES la rendija; el papel sale justo de ella, algo más
+   estrecho que la rendija, y la rendija se dibuja por encima del papel */
+.lz-tk-slot { height: 16px; border-radius: 10px 10px 4px 4px; }
+.lz-tk-slot::before { top: auto; bottom: -2px; left: 20px; right: 20px; height: 5px; border-radius: 3px; box-shadow: inset 0 1px 2px #000, 0 1px 0 rgba(255, 255, 255, 0.1); }
+.lz-tk-clip { z-index: 1; margin-top: 0; }
+.lz-tk-slot { z-index: 3; }
+.lz-tk-clip::before { left: 14px; right: 14px; height: 22px; background: linear-gradient(180deg, rgba(10, 12, 30, 0.42), rgba(10, 12, 30, 0.1) 45%, transparent); }
+
+/* El sello tiene su propio hueco al pie del ticket, bajo el código de barras: se lee entero y no tapa cifras */
+.lz-tk { padding-bottom: 92px; }
+.lz-tk-stamp { top: auto; bottom: 26px; translate: -50% 0; font-size: 22px; }
+@media (max-width: 760px) { .lz-tk-stamp { font-size: 20px; } }
+/* El papel cuelga recto de la rendija: torcido, sus esquinas asomaban por los lados de la boca y los bordes
+   (máscara + sombra) salían dentados. La gracia la ponen los sellos, que sí van torcidos. */
+.lz-end-ok .lz-tk,
+.lz-end-no .lz-tk,
+.lz-end:hover .lz-tk { rotate: none; }
+/* Las dos figuras miden lo mismo (la fila de la rejilla se estira a la más alta): sin esto, el hueco que le
+   sobra al ticket corto se repartía entre la boca y el papel y quedaba una separación */
+.lz-end { align-content: start; }
+
+/* ══ Más papel térmico ══
+   Cabecera con el logotipo y la hora de cierre, número bajo el código de barras, fibras del papel, tinta
+   térmica algo irregular y el pie del ticket que se curva un poco hacia delante. */
+.lz-tk-head { display: flex !important; align-items: center; gap: 6px; padding-bottom: 10px; margin-bottom: 2px; border-bottom: 1px solid rgba(42, 44, 53, 0.55); }
+.lz-tk-head svg { width: 9px; height: auto; fill: #2a2c35; }
+.lz-tk-head b { font-size: 13px; font-weight: 800; font-stretch: 100%; letter-spacing: -0.01em; }
+.lz-tk-head em { margin-left: auto; font-size: 10.5px; font-style: normal; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: 0.04em; color: #55586a; }
+.lz-tk-bn { margin-top: -3px; font-size: 10px; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: 0.34em; text-align: center; color: #3a3d48; }
+.lz-tk-head, .lz-tk-k, .lz-tk-big, .lz-tk-row, .lz-tk-bars, .lz-tk-bn {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='1' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.7 1.95'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='1' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.7 1.95'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  -webkit-mask-size: 90px 90px;
+  mask-size: 90px 90px;
+}
+.lz-tk::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9 .06' numOctaves='2' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .42 0 0 0 0 .36 0 0 0 -.28 .16'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+}
+.lz-tk::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 26px; pointer-events: none; background: linear-gradient(0deg, rgba(60, 54, 40, 0.1), transparent); }
+.lz-tk > * { position: relative; }
+.lz-tk > .lz-tk-stamp { position: absolute; }
+
+/* ══ Impresión de verdad (la mueve lanzamientos-body.js) ══
+   El papel avanza a saltos de motor paso a paso, la cuchilla lo corta (un tirón), se balancea colgando y,
+   un momento después, cae el sello con un golpe que hunde el papel. */
+.lz-end { grid-template-rows: auto 1fr auto; }
+.lz-tk { transition: none; transform: translateY(-101%); transform-origin: 50% 0; }
+.lz-end.is-printed .lz-tk { transform: none; }
+.lz-ends.is-in .lz-tk-stamp,
+.lz-ends.is-in .lz-end-ok .lz-tk-stamp,
+.lz-ends.is-in .lz-end-no .lz-tk-stamp { opacity: 0; scale: 1.6; transition: none; }
+.lz-end.is-stamped .lz-tk-stamp { animation: lzThump 460ms cubic-bezier(0.3, 0, 0.2, 1) forwards; }
+@keyframes lzThump {
+  0% { opacity: 0; scale: 1.7; filter: blur(2px); }
+  55% { opacity: 0.95; scale: 0.96; filter: blur(0); }
+  100% { opacity: 0.86; scale: 1; filter: blur(0); }
+}
+/* La boca vibra mientras imprime */
+.lz-end.is-feeding .lz-tk-slot { animation: lzBuzz 90ms linear infinite; }
+.lz-tk { transform: none; clip-path: inset(0 0 100% 0); }
+.lz-end.is-printed .lz-tk { clip-path: none; }
+
+/* ══ El papel sale de la ranura ══
+   La boca está debajo: el ticket nace dentro de ella (translateY de su propio alto) y sube a saltos, con la
+   cabecera por delante. Arriba queda el borde del corte anterior (recto) y abajo, el corte de ahora (arrancado).
+   El tramo que aún está dentro lo tapa el recorte, justo en la rendija. */
+.lz-end { grid-template-rows: 1fr auto auto; }
+.lz-tk-clip { align-self: end; margin: 0; padding: 34px 14px 0; }
+.lz-tk { clip-path: none; transform: translateY(102%); transform-origin: 50% 100%; }
+.lz-end.is-printed .lz-tk { clip-path: none; transform: none; }
+.lz-tk-clip::before { top: auto; bottom: 0; height: 20px; background: linear-gradient(0deg, rgba(10, 12, 30, 0.4), rgba(10, 12, 30, 0.1) 45%, transparent); }
+/* La boca, vista desde delante: la rendija está en su canto de arriba */
+.lz-tk-slot { margin-top: -2px; border-radius: 4px 4px 12px 12px; }
+.lz-tk-slot::before { top: -2px; bottom: auto; }
+.lz-end figcaption { margin-top: 24px; }
+/* Fallo corregido: una regla antigua (.lz-ends.is-in .lz-tk { transform: none }) sacaba los tickets nada más cargar;
+   al empezar la impresión desaparecían y volvían a salir. El papel se queda dentro hasta que se imprime. */
+.lz-ends.is-in .lz-tk { transform: translateY(102%); }
+.lz-ends.is-in .lz-end.is-printed .lz-tk { transform: none; }
+/* Sello más suave: cae desde menos altura y se asienta más despacio */
+.lz-end.is-stamped .lz-tk-stamp { animation: lzThumpSoft 620ms cubic-bezier(0.25, 0.6, 0.3, 1) forwards; }
+@keyframes lzThumpSoft {
+  0% { opacity: 0; scale: 1.3; filter: blur(1.5px); }
+  60% { opacity: 0.9; scale: 0.985; filter: blur(0); }
+  100% { opacity: 0.86; scale: 1; filter: blur(0); }
+}

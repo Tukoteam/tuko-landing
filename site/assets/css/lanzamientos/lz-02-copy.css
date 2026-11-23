@@ -1,0 +1,142 @@
+/* ══════════════════════════════
+   LANZAMIENTOS · TEXTO DEL HERO
+   Misma familia que Inicio: Mona ancha y apretada, una sola palabra en serif cursiva por titular.
+══════════════════════════════ */
+/* Cabecera impresa (en lugar de la típica pastilla con punto): una línea fina y mayúsculas espaciadas,
+   como el encabezado de un ticket. La línea se «traza» al entrar. */
+.lz-kicker {
+  display: inline-flex;
+  margin: 0;
+  align-items: center;
+  gap: 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  font-stretch: 112%;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lz-ink-2);
+  animation: lzRise 700ms var(--ease-out) 80ms both;
+}
+.lz-kicker::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
+  transform-origin: left;
+  animation: lzRule 900ms var(--ease-out) 200ms both;
+}
+.lz-kicker i { margin: 0 -0.35em 0 -0.15em; font-style: normal; opacity: 0.6; }
+.lz-kicker b { font-weight: inherit; color: var(--lz-blue); transition: color 1200ms ease; }
+.lz-stage.is-made .lz-kicker b { color: var(--lz-green); }
+@keyframes lzRule { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+.lz-title {
+  margin: 24px 0 0;
+  font-size: clamp(40px, 4.1vw, 68px);
+  font-weight: 700;
+  font-stretch: 106%;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  color: var(--lz-ink);
+  text-wrap: balance;
+}
+.lz-title > span { display: block; white-space: nowrap; animation: lzFocus 1000ms var(--ease-out) both; }
+.lz-title > span:nth-child(1) { animation-delay: 140ms; }
+.lz-title > span:nth-child(2) { animation-delay: 260ms; }
+.lz-title em {
+  font-family: 'Roboto Serif', Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-stretch: 100%;
+  letter-spacing: -0.03em;
+  color: var(--lz-blue);
+  transition: color 1200ms ease;
+}
+/* Cuando la ficha llega al mínimo, «ya está vendido» pasa a verde: el titular se cumple */
+.lz-stage.is-made .lz-title em { color: var(--lz-green); }
+
+.lz-lead {
+  max-width: 31em;
+  margin: 26px 0 0;
+  font-size: clamp(17.5px, 1.45vw, 20px);
+  line-height: 1.55;
+  color: var(--lz-ink-2);
+  text-wrap: pretty;
+  animation: lzRise 800ms var(--ease-out) 380ms both;
+}
+.lz-lead b { font-weight: 600; color: var(--lz-ink); }
+
+.lz-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; animation: lzRise 800ms var(--ease-out) 480ms both; }
+.lz-cta,
+.lz-ghost {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 56px;
+  padding: 0 24px 0 28px;
+  overflow: hidden;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  font-stretch: 105%;
+  letter-spacing: -0.015em;
+  text-decoration: none;
+  transition: transform 160ms var(--ease-out), box-shadow 250ms ease, background-color 250ms ease;
+}
+.lz-cta {
+  background: #fff;
+  color: #10142e;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4), 0 14px 40px -12px rgba(120, 140, 255, 0.7);
+}
+.lz-cta svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 200ms var(--ease-out); }
+.lz-cta::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(66, 87, 255, 0.18) 50%, transparent 65%) -100% 0 / 200% 100% no-repeat;
+  animation: lzCtaShine 5s ease-in-out 2.4s infinite;
+}
+@keyframes lzCtaShine { 0%, 70% { background-position: 150% 0; } 100% { background-position: -50% 0; } }
+.lz-ghost {
+  padding: 0 26px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--lz-ink);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+.lz-cta:active, .lz-ghost:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .lz-cta:hover { box-shadow: 0 0 0 1px #fff, 0 18px 48px -12px rgba(120, 140, 255, 0.95); }
+  .lz-cta:hover svg { transform: translateX(3px); }
+  .lz-ghost:hover { background: rgba(255, 255, 255, 0.1); }
+}
+.lz-cta:focus-visible, .lz-ghost:focus-visible { outline: 2px solid var(--lz-blue); outline-offset: 3px; }
+
+.lz-note { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 20px 0 0; font-size: 14px; color: var(--lz-ink-3); animation: lzRise 800ms var(--ease-out) 560ms both; }
+.lz-note i { width: 4px; height: 4px; border-radius: 50%; background: currentColor; opacity: 0.6; }
+
+@media (max-width: 960px) {
+  .lz-copy { display: grid; justify-items: center; }
+  .lz-lead { margin-left: auto; margin-right: auto; }
+  .lz-actions, .lz-note { justify-content: center; }
+  .lz-title { font-size: clamp(38px, 9.6vw, 64px); font-stretch: 102%; letter-spacing: -0.04em; line-height: 1.02; }
+  .lz-title > span { white-space: normal; }
+}
+@media (max-width: 520px) {
+  .lz-actions { width: 100%; }
+  .lz-cta, .lz-ghost { flex: 1 1 100%; justify-content: center; }
+}
+
+/* El antetítulo lleva raya a los dos lados, como los de la home y el resto de secciones (también en escritorio). */
+.lz-kicker::after {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
+  transform-origin: right;
+  animation: lzRule 900ms var(--ease-out) 200ms both;
+}

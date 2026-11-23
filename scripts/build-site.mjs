@@ -35,7 +35,9 @@ function loadPartials() {
   for (const name of fs.readdirSync(partialsDir)) {
     if (!name.endsWith('.html')) continue;
     const key = name.replace(/\.html$/, '');
-    map.set(key, fs.readFileSync(path.join(partialsDir, name), 'utf8').trimEnd());
+    // Siempre con saltos LF: en Windows git saca los parciales con CRLF y el HTML generado no coincidiría con el
+    // de la comprobación de GitHub (Linux, LF), que exige que compilar no cambie nada.
+    map.set(key, fs.readFileSync(path.join(partialsDir, name), 'utf8').replace(/\r\n/g, '\n').trimEnd());
   }
   return map;
 }
@@ -59,8 +61,32 @@ function bustVersion(urlPath) {
   return hashCache.get(abs);
 }
 
+/* Los artículos del blog copian el header desde «<header role="banner">» (sync-blog-article-shell y el CMS),
+   así que les llega la marca de cierre del nav pero no la de inicio, y el nav nunca se actualizaba.
+   Si falta la de inicio, se pone justo antes del header. */
+function repairNavMarkers(html) {
+  // Artículos que publica el Blog CMS de la app con su copia del nav y sin ninguna marca: se envuelve todo el
+  // bloque (header + menú móvil, hasta <main>) con las marcas del idioma de la página.
+  if (!/<!--\s*\/?tuko:partial:nav-[a-z]+\s*-->/.test(html) && /class="mobile-menu"/.test(html)) {
+    const lang = /<html[^>]*\blang=["']en/i.test(html) ? 'en' : 'es';
+    return html.replace(/(?:<!-- NAV -->\s*)?<header role="banner">[\s\S]*?(?=\s*<main\b)/, (m) => `<!-- tuko:partial:nav-${lang} -->\n${m.replace(/^<!-- NAV -->\s*/, '')}\n<!-- /tuko:partial:nav-${lang} -->`);
+  }
+  const m = html.match(/<!--\s*\/tuko:partial:(nav-[a-z]+)\s*-->/);
+  if (!m || new RegExp(`<!--\\s*tuko:partial:${m[1]}\\s*-->`).test(html)) return html;
+  return html.replace(/(<!-- NAV -->\s*)?<header role="banner">/, `<!-- tuko:partial:${m[1]} -->\n<header role="banner">`);
+}
+
+/* Lo mismo con el footer: los artículos del blog lo llevan sin marcas, así que nunca se actualizaba. Si la página
+   tiene el footer de la web («<!-- FOOTER -->» + <footer>) y no tiene marcas, se envuelve en las del idioma de la
+   página; el reemplazo de abajo lo deja igual que la plantilla. */
+function repairFooterMarkers(html) {
+  if (/<!--\s*tuko:partial:footer-[a-z]+\s*-->/.test(html)) return html;
+  const lang = /<html[^>]*\blang=["']en/i.test(html) ? 'en' : 'es';
+  return html.replace(/<!-- FOOTER -->\s*<footer>[\s\S]*?<\/footer>/, (m) => `<!-- tuko:partial:footer-${lang} -->\n${m}\n<!-- /tuko:partial:footer-${lang} -->`);
+}
+
 function injectPartials(html, partials) {
-  let out = html;
+  let out = repairFooterMarkers(repairNavMarkers(html));
   out = out.replace(
     /<!--\s*tuko:include:([a-z0-9_-]+)\s*-->/gi,
     (_, name) => {
@@ -111,6 +137,7 @@ function concatCssBundles() {
     { entry: 'tuko-theme.css', folder: 'theme' },
     { entry: 'main.css', folder: 'main' },
     { entry: 'tuko-ai.css', folder: 'tuko-ai' },
+    { entry: 'lanzamientos.css', folder: 'lanzamientos' },
   ];
   let n = 0;
   for (const { entry, folder } of bundles) {

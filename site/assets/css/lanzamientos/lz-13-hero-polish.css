@@ -1,0 +1,103 @@
+/* ══════════════════════════════
+   LANZAMIENTOS · IMPRESORA DEL HERO, ÚLTIMO PULIDO
+   1 · El papel sale de dentro: la impresora va por delante del papel y la rendija está en el canto de arriba, un
+       poco más ancha que el ticket; la sombra del final del papel queda justo en la salida.
+   2 · Reacciona a la luz: mientras imprime, la pantalla ilumina un poco el panel; al completarse, un filo verde
+       recorre el canto de arriba y la pantalla da un destello.
+   3 · Levita muy despacio (papel, impresora y zócalo juntos) y la sombra del suelo respira.
+══════════════════════════════ */
+
+/* 1 · Salida del papel */
+.lz-printer { z-index: 4; }
+.lz-pr-top::before {
+  z-index: 2;
+  top: -4px;
+  height: 9px;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #000 0%, #03040c 55%, #141833 100%);
+  box-shadow:
+    inset 0 2px 3px rgba(0, 0, 0, 1),
+    0 1px 0 rgba(170, 185, 255, 0.32),
+    0 -1px 0 rgba(255, 255, 255, 0.06);
+}
+.lz-pr-top::after { display: none; }
+
+/* 2 · Luz */
+.lz-pr-top { transition: box-shadow 900ms ease; }
+.lz-lcd { transition: box-shadow 600ms ease; }
+.lz-visual.is-printing .lz-lcd {
+  box-shadow:
+    inset 0 2px 5px rgba(0, 0, 0, 0.85),
+    inset 0 0 0 1px rgba(143, 160, 255, 0.2),
+    0 0 0 2px #06071a,
+    0 0 26px -2px rgba(110, 130, 255, 0.35);
+}
+.lz-visual.is-made .lz-pr-top {
+  box-shadow:
+    inset 0 1px 0 rgba(120, 255, 210, 0.55),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+    0 -3px 22px -8px rgba(63, 224, 176, 0.65);
+}
+.lz-visual.is-made .lz-lcd { animation: lzLcdFlash 900ms ease-out; }
+@keyframes lzLcdFlash {
+  0% { box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.85), inset 0 0 0 1px rgba(63, 224, 176, 0.6), 0 0 0 2px #06071a, 0 0 30px 2px rgba(63, 224, 176, 0.55); }
+  100% { box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.85), inset 0 0 0 1px rgba(143, 160, 255, 0.14), 0 0 0 2px #06071a; }
+}
+
+/* 3 · Levitación (transform; el temblor de impresión usa translate y no choca) */
+.lz-paper-win,
+.lz-printer,
+.lz-pr-base { animation: lzHover 7s ease-in-out infinite; }
+.lz-visual.is-printing .lz-printer { animation: lzBuzz 90ms linear infinite, lzHover 7s ease-in-out infinite; }
+@keyframes lzHover {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+.lz-floor { animation: lzHoverFloor 7s ease-in-out infinite; }
+@keyframes lzHoverFloor {
+  0%, 100% { scale: 1; opacity: 1; }
+  50% { scale: 0.9; opacity: 0.7; }
+}
+
+/* Pantalla que se adapta a su propio ancho (no al de la ventana): en pantallas medianas la impresora se estrecha y
+   «QUEDAN 12 D 00 H» no cabía junto al contador. Primero se quita «Quedan»; si aún falta sitio, todo un punto más
+   pequeño. Nunca se sale del cristal. */
+.lz-lcd { container-type: inline-size; overflow: hidden; }
+.lz-pr-state { min-width: 0; white-space: nowrap; }
+@container (max-width: 300px) {
+  .lz-q { display: none; }
+}
+@container (max-width: 250px) {
+  .lz-lcd-a { gap: 5px; letter-spacing: 0.08em; }
+  .lz-lcd-a b { font-size: 19px; }
+  .lz-pr-state { font-size: 10px; letter-spacing: 0.06em; }
+}
+.lz-lcd { column-gap: 12px; }
+@container (max-width: 270px) {
+  .lz-lcd-a { gap: 5px; letter-spacing: 0.08em; }
+  .lz-lcd-a b { font-size: 19px; }
+  .lz-pr-state { font-size: 10px; letter-spacing: 0.06em; }
+}
+/* Barra de la pantalla en un solo color: azul mientras se llena, verde al completarse */
+.lz-lcd-bar i { background: #7084ff; }
+.lz-visual.is-made .lz-lcd-bar i { background: #3fe0b0; }
+
+/* Secciones fuera de pantalla: sus animaciones en bucle (aurora, levitación, puntos que laten…) se pausan.
+   La clase la pone lanzamientos-more.js con un margen generoso, así que al llegar ya están en marcha. */
+.is-away, .is-away *, .is-away *::before, .is-away *::after { animation-play-state: paused !important; }
+
+/* En una sola columna (tablet y móvil), los títulos de Para quién, Lo que ve tu cliente y Preguntas van centrados
+   como los del resto de la página. En escritorio siguen a la izquierda, junto a lo que explican. Las listas
+   (Te sirve si…, los avisos, las preguntas) se quedan alineadas a la izquierda para leerse bien. */
+@media (max-width: 900px) {
+  .lz-who .lz-head-left,
+  .lz-buyer-copy { text-align: center; }
+  .lz-who .lz-eyebrow { justify-self: center; }
+  .lz-buyer-copy .lz-sub { margin-left: auto; margin-right: auto; }
+  .lz-who .lz-fit-wrap,
+  .lz-buyer-copy .lz-mails { text-align: left; }
+}
+@media (max-width: 860px) {
+  .lz-faq-head { text-align: center; }
+  .lz-faq-head .lz-rail { text-align: left; }
+}

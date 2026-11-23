@@ -1,0 +1,434 @@
+/* ══════════════════════════════
+   LANZAMIENTOS · LO QUE VE TU CLIENTE · el móvil
+   El mismo móvil que la home pero en versión ligera (sin canto 3D, sin parte de atrás, sin giro): marco de
+   aluminio oscuro, isla, reflejo y una ficha de producto de una tienda Shopify de verdad (marca inventada).
+   El bloque y la hoja del lanzamiento usan los textos reales del widget de Tuko. La historia la mueve
+   lanzamientos-more.js: toque → hoja → pago → avisos → completado.
+══════════════════════════════ */
+.lz-phone-wrap { position: relative; display: grid; justify-items: center; perspective: 1600px; }
+.lzp {
+  --pw: 304px;
+  position: relative;
+  width: var(--pw);
+  aspect-ratio: 9 / 19.3;
+  padding: 9px;
+  border-radius: 50px;
+  background: linear-gradient(155deg, #4a4e5a 0%, #23262e 22%, #121419 55%, #0a0b0f 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 0 0 0 2.5px rgba(0, 0, 0, 0.7),
+    inset 0 1px 1px 2px rgba(255, 255, 255, 0.06),
+    0 50px 80px -40px rgba(20, 24, 70, 0.55),
+    0 18px 30px -18px rgba(20, 24, 38, 0.45);
+  transform: rotateY(-9deg) rotateX(3deg);
+  transition: transform 900ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) { .lz-phone-wrap:hover .lzp { transform: rotateY(-3deg) rotateX(1deg); } }
+/* Botones laterales */
+.lzp::before, .lzp::after { content: ''; position: absolute; width: 3px; border-radius: 2px; background: linear-gradient(90deg, #2b2e36, #4a4e5a); }
+.lzp::before { left: -2px; top: 110px; height: 34px; box-shadow: 0 50px 0 #33363f, 0 96px 0 #33363f; }
+.lzp::after { right: -2px; top: 150px; height: 64px; }
+.lzp-floor { width: 70%; height: 24px; margin-top: 18px; border-radius: 50%; background: radial-gradient(closest-side, rgba(20, 24, 50, 0.32), transparent); filter: blur(4px); }
+
+.lzp-screen {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 42px;
+  background: #fff;
+  color: #121317;
+  font-variant-numeric: tabular-nums;
+  isolation: isolate;
+}
+.lzp-island { position: absolute; z-index: 9; top: 9px; left: 50%; width: 92px; height: 27px; margin-left: -46px; border-radius: 999px; background: #000; }
+.lzp-glare { position: absolute; z-index: 8; inset: 0; pointer-events: none; background: linear-gradient(115deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 32%); mix-blend-mode: soft-light; }
+
+/* Barra de estado */
+.lzp-status { display: flex; justify-content: space-between; align-items: center; height: 46px; padding: 6px 26px 0 30px; font-size: 13px; }
+.lzp-status b { font-weight: 650; letter-spacing: -0.01em; }
+.lzp-sys { display: inline-flex; align-items: center; gap: 5px; }
+.lzp-sys svg { height: 10px; width: auto; fill: #121317; }
+.lzp-bat { position: relative; width: 22px; height: 11px; border-radius: 3px; box-shadow: inset 0 0 0 1px rgba(18, 19, 23, 0.4); }
+.lzp-bat i { position: absolute; left: 2px; top: 2px; bottom: 2px; width: 14px; border-radius: 1.5px; background: #121317; }
+.lzp-bat::after { content: ''; position: absolute; right: -3px; top: 3.5px; width: 2px; height: 4px; border-radius: 0 1px 1px 0; background: rgba(18, 19, 23, 0.4); }
+
+/* Cabecera de la tienda */
+.lzp-head { display: flex; align-items: center; justify-content: space-between; height: 40px; padding: 0 16px; border-bottom: 1px solid #eeeef1; }
+.lzp-ico { width: 18px; height: 18px; fill: none; stroke: #121317; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.lzp-icons { display: inline-flex; gap: 12px; }
+.lzp-brand { display: inline-flex; align-items: baseline; gap: 3px; font-size: 14px; font-weight: 800; letter-spacing: 0.18em; }
+.lzp-brand small { font-family: 'Roboto Serif', Georgia, serif; font-size: 11px; font-style: italic; font-weight: 500; letter-spacing: 0; color: #6b6e7a; }
+
+/* Ficha del producto (como un tema Dawn) */
+.lzp-page { padding: 0 16px; }
+.lzp-gal { position: relative; margin: 0 -16px; height: 196px; background: #ebe8e1; overflow: hidden; }
+.lzp-gal img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.lzp-dots { position: absolute; left: 50%; bottom: 9px; display: flex; gap: 5px; translate: -50% 0; }
+.lzp-dots i { width: 5px; height: 5px; border-radius: 50%; background: rgba(18, 19, 23, 0.25); }
+.lzp-dots i.is-on { background: #121317; }
+.lzp-vendor { margin: 12px 0 0; font-size: 9.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #6b6e7a; }
+.lzp-name { margin: 3px 0 0; font-size: 18px; font-weight: 650; letter-spacing: -0.02em; }
+.lzp-price { display: flex; align-items: baseline; gap: 8px; margin: 5px 0 0; font-size: 13px; }
+.lzp-price b { font-size: 15px; font-weight: 650; }
+.lzp-price s { color: #8a8d99; }
+.lzp-price span { padding: 2px 8px; border-radius: 999px; background: #121317; color: #fff; font-size: 9.5px; font-weight: 700; letter-spacing: 0.04em; }
+.lzp-tax { margin: 2px 0 0; font-size: 10px; color: #8a8d99; }
+.lzp-opt { margin: 10px 0 0; font-size: 11px; color: #4b4e5c; }
+.lzp-opt b { color: #121317; }
+.lzp-sizes { display: flex; gap: 6px; margin-top: 6px; }
+.lzp-sizes span { flex: 1; padding: 7px 0; border-radius: 999px; box-shadow: inset 0 0 0 1px #dcdde3; font-size: 11.5px; font-weight: 600; text-align: center; color: #4b4e5c; }
+.lzp-sizes .is-on { background: #121317; box-shadow: none; color: #fff; }
+
+/* Bloque del lanzamiento en la ficha */
+.lzp-launch { margin-top: 12px; padding: 10px 12px 11px; border-radius: 12px; background: #f4f5f8; box-shadow: inset 0 0 0 1px #ebecf1; }
+.lzp-l-top { display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 650; }
+.lzp-l-state { position: relative; display: inline-flex; align-items: center; gap: 6px; }
+.lzp-l-state i { width: 7px; height: 7px; border-radius: 50%; background: #3d50f2; transition: background 300ms ease; }
+.lzp-l-b { position: absolute; left: 13px; white-space: nowrap; opacity: 0; color: #0b8a63; transition: opacity 300ms ease; }
+.lzp-l-a { transition: opacity 300ms ease; }
+.lzp-time { font-weight: 600; color: #6b6e7a; }
+.lzp-l-bar { position: relative; height: 4px; margin-top: 8px; border-radius: 2px; background: #e1e3ea; overflow: hidden; }
+.lzp-l-bar i { position: absolute; inset: 0; border-radius: inherit; background: #3d50f2; transform-origin: left; transform: scaleX(var(--f, 0.567)); transition: transform 300ms var(--ease-out), background 300ms ease; }
+.lzp-l-count { margin: 6px 0 0; font-size: 11px; color: #4b4e5c; }
+.lzp-l-count b { font-size: 13px; color: #121317; }
+.lzp-btn { position: relative; display: grid; place-items: center; height: 42px; margin-top: 10px; border-radius: 999px; background: #121317; color: #fff; font-size: 13px; font-weight: 650; transition: background 300ms ease, transform 150ms ease; }
+.lzp-btn > span { grid-area: 1 / 1; transition: opacity 250ms ease; }
+.lzp-btn-b { opacity: 0; }
+.lzp-note { margin: 6px 0 0; font-size: 10px; color: #6b6e7a; text-align: center; }
+.lzp-acc { display: grid; margin-top: 10px; border-top: 1px solid #eeeef1; }
+.lzp-acc span { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eeeef1; font-size: 11.5px; font-weight: 600; }
+.lzp-acc span::after { content: '+'; font-weight: 500; color: #8a8d99; }
+
+/* Estados de la ficha */
+.lzp.is-joined .lzp-btn-a { opacity: 0; }
+.lzp.is-joined .lzp-btn-b { opacity: 1; }
+.lzp.is-done .lzp-l-state i { background: #14c492; }
+.lzp.is-done .lzp-l-a { opacity: 0; }
+.lzp.is-done .lzp-l-b { opacity: 1; }
+.lzp.is-done .lzp-l-bar i { background: #14c492; }
+.lzp.is-done .lzp-btn { background: #e7f8f1; color: #0b8a63; }
+.lzp.is-tap-btn .lzp-btn { transform: scale(0.97); }
+
+/* Toque del dedo */
+.lzp-touch { position: absolute; z-index: 7; left: var(--tx, 50%); top: var(--ty, 70%); width: 38px; height: 38px; margin: -19px 0 0 -19px; border-radius: 50%; background: rgba(18, 19, 23, 0.22); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5); opacity: 0; scale: 1.4; pointer-events: none; }
+.lzp-touch.is-on { animation: lzpTouch 520ms ease-out; }
+@keyframes lzpTouch { 0% { opacity: 0; scale: 1.4; } 30% { opacity: 1; scale: 0.85; } 100% { opacity: 0; scale: 1.2; } }
+
+/* Hoja del lanzamiento (como el popup del widget) */
+.lzp-dim { position: absolute; z-index: 4; inset: 0; background: rgba(10, 11, 18, 0.45); opacity: 0; transition: opacity 400ms ease; pointer-events: none; }
+.lzp.is-sheet .lzp-dim { opacity: 1; }
+.lzp-sheet {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 18px 22px;
+  border-radius: 24px 24px 0 0;
+  background: #fff;
+  box-shadow: 0 -10px 30px rgba(10, 11, 18, 0.18);
+  transform: translateY(102%);
+  transition: transform 520ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.lzp.is-sheet .lzp-sheet { transform: none; }
+.lzp-grab { display: block; width: 38px; height: 4px; margin: 0 auto 12px; border-radius: 2px; background: #dcdde3; }
+.lzp-s-k { display: inline-flex; align-items: center; gap: 6px; margin: 0; padding: 3px 9px; border-radius: 999px; background: #eef0ff; color: #3d50f2; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; }
+.lzp-s-k i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.lzp-s-h { margin: 8px 0 0; font-size: 16px; font-weight: 700; line-height: 1.25; letter-spacing: -0.02em; }
+.lzp-s-h s { font-size: 12px; font-weight: 500; color: #8a8d99; }
+.lzp-timer { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 12px; }
+.lzp-timer span { display: grid; justify-items: center; padding: 6px 0 5px; border-radius: 10px; background: #f4f5f8; }
+.lzp-timer b { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
+.lzp-timer em { font-size: 8.5px; font-style: normal; font-weight: 600; color: #8a8d99; }
+.lzp-s-prog { margin-top: 12px; }
+.lzp-s-prog p { margin: 0; font-size: 11.5px; color: #4b4e5c; }
+.lzp-s-prog p b { font-size: 14px; color: #121317; }
+.lzp-s-prog > span { display: block; position: relative; height: 4px; margin-top: 6px; border-radius: 2px; background: #e1e3ea; overflow: hidden; }
+.lzp-s-prog > span i { position: absolute; inset: 0; background: #3d50f2; transform-origin: left; transform: scaleX(var(--f, 0.567)); transition: transform 300ms var(--ease-out); }
+.lzp-steps { display: grid; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; counter-reset: s; }
+.lzp-steps li { position: relative; display: grid; padding-left: 26px; counter-increment: s; }
+.lzp-steps li::before { content: counter(s); position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: #121317; color: #fff; font-size: 9.5px; font-weight: 700; }
+.lzp-steps b { font-size: 11.5px; font-weight: 650; }
+.lzp-steps span { font-size: 10px; line-height: 1.35; color: #6b6e7a; }
+.lzp-s-btn { display: grid; place-items: center; height: 42px; margin-top: 14px; border-radius: 999px; background: #3d50f2; color: #fff; font-size: 13px; font-weight: 650; transition: transform 150ms ease; }
+.lzp.is-tap-pay .lzp-s-btn { transform: scale(0.97); }
+.lzp-s-join, .lzp-s-done { transition: opacity 300ms ease; }
+.lzp-s-done { position: absolute; inset: 40px 18px 22px; display: grid; align-content: center; justify-items: center; gap: 8px; text-align: center; opacity: 0; pointer-events: none; }
+.lzp-check { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: #e7f8f1; }
+.lzp-check svg { width: 26px; height: 26px; fill: none; stroke: #0b8a63; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 24; stroke-dashoffset: 24; transition: stroke-dashoffset 500ms var(--ease-out) 150ms; }
+.lzp-s-done p { margin: 4px 0 0; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
+.lzp-s-done > span:last-child { max-width: 22em; font-size: 11px; line-height: 1.4; color: #6b6e7a; }
+.lzp.is-paid .lzp-s-join { opacity: 0; }
+.lzp.is-paid .lzp-s-done { opacity: 1; }
+.lzp.is-paid .lzp-check svg { stroke-dashoffset: 0; }
+
+/* Aviso que cae (asunto real del email) */
+.lzp-notif {
+  position: absolute;
+  z-index: 10;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 20px;
+  background: rgba(246, 246, 249, 0.86);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  backdrop-filter: blur(18px) saturate(1.5);
+  box-shadow: 0 12px 30px -10px rgba(20, 24, 38, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+  transform: translateY(-140%);
+  transition: transform 520ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.lzp-notif.is-in { transform: none; }
+.lzp-app { flex: 0 0 auto; width: 30px; height: 30px; border-radius: 8px; background: #121317 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='m3 7 9 6 9-6'/%3E%3C/svg%3E") center / 16px no-repeat; }
+.lzp-txt { display: grid; min-width: 0; font-size: 11.5px; line-height: 1.3; }
+.lzp-msg { color: #2a2c35; }
+.lzp-now { align-self: start; margin-left: auto; font-size: 10.5px; color: #8a8d99; }
+
+@media (max-width: 900px) {
+  .lz-buyer-grid { grid-template-columns: minmax(0, 1fr); }
+  .lz-phone-wrap { margin-top: 12px; }
+  .lzp { transform: none; }
+}
+@media (max-width: 420px) {
+  .lzp { --pw: 286px; }
+  .lzp-gal { height: 176px; }
+}
+.lzp-gal { background: #e9e6df; }
+.lzp-gal img { object-fit: contain; }
+.lzp-s-h s { display: block; margin-top: 2px; }
+
+/* ══ Grosor y levitación ══
+   Grosor: el canto de aluminio se construye con sombras escalonadas hacia el lado que queda a la vista con el
+   giro (izquierda), del metal claro al oscuro, sin capas 3D. Levitación: sube y baja despacio con un leve
+   balanceo; la sombra del suelo se encoge y aclara cuando el móvil está arriba. */
+.lzp {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 0 0 0 2.5px rgba(0, 0, 0, 0.7),
+    inset 0 1px 1px 2px rgba(255, 255, 255, 0.06),
+    -1px 0 0 #5a5e6a,
+    -2px 1px 0 #454955,
+    -3px 1px 0 #383b45,
+    -4px 1px 0 #2f323b,
+    -5px 2px 0 #292c34,
+    -6px 2px 0 #24262d,
+    -7px 2px 0 #1e2026,
+    -8px 3px 0 #18191e,
+    -14px 40px 60px -30px rgba(20, 24, 70, 0.5),
+    0 18px 30px -18px rgba(20, 24, 38, 0.45);
+  animation: lzpFloat 6.5s ease-in-out infinite;
+}
+@keyframes lzpFloat {
+  0%, 100% { translate: 0 0; rotate: 0deg; }
+  50% { translate: 0 -12px; rotate: 0.6deg; }
+}
+.lzp-floor { animation: lzpFloor 6.5s ease-in-out infinite; }
+@keyframes lzpFloor {
+  0%, 100% { scale: 1; opacity: 1; }
+  50% { scale: 0.86; opacity: 0.6; }
+}
+/* Los botones laterales asoman por el canto */
+.lzp::before { left: -10px; width: 4px; background: linear-gradient(90deg, #1e2026, #3a3e48); }
+.lzp::after { right: -1px; }
+/* El giro tiene que coincidir con el canto que se dibuja: el lado izquierdo viene hacia nosotros (el móvil mira
+   al texto), así que se ve su canto izquierdo con los botones de volumen */
+.lzp { transform: rotateY(10deg) rotateX(3deg); }
+@media (hover: hover) and (pointer: fine) { .lz-phone-wrap:hover .lzp { transform: rotateY(4deg) rotateX(1deg); } }
+@media (max-width: 900px) { .lzp { transform: rotateY(6deg); } }
+
+/* ══ Sigue al cursor (lanzamientos-more.js pone --ry, --rx y el lado del canto --s, de −1 a 1) ══
+   --s > 0: el lado izquierdo viene hacia nosotros y se ve el canto izquierdo (botones de volumen);
+   --s < 0: se ve el derecho (botón de encendido). Sin ratón, mira un poco hacia el texto. */
+.lzp {
+  --ry: -8deg;
+  --rx: 3deg;
+  --s: -0.67;
+  --sl: 0;
+  --sr: 0.67;
+  transform: rotateY(var(--ry)) rotateX(var(--rx));
+  transition: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 0 0 0 2.5px rgba(0, 0, 0, 0.7),
+    inset 0 1px 1px 2px rgba(255, 255, 255, 0.06),
+    calc(var(--s) * -1px) 0 0 #5a5e6a,
+    calc(var(--s) * -2px) 1px 0 #454955,
+    calc(var(--s) * -3px) 1px 0 #383b45,
+    calc(var(--s) * -4px) 1px 0 #2f323b,
+    calc(var(--s) * -5px) 2px 0 #292c34,
+    calc(var(--s) * -6px) 2px 0 #24262d,
+    calc(var(--s) * -7px) 2px 0 #1e2026,
+    calc(var(--s) * -8px) 3px 0 #18191e,
+    calc(var(--s) * -14px) 40px 60px -30px rgba(20, 24, 70, 0.5),
+    0 18px 30px -18px rgba(20, 24, 38, 0.45);
+}
+@media (hover: hover) and (pointer: fine) { .lz-phone-wrap:hover .lzp { transform: rotateY(var(--ry)) rotateX(var(--rx)); } }
+.lzp::before { left: calc(-2px - var(--sl) * 8px); opacity: calc(var(--sl) * 2); }
+.lzp::after { right: calc(-2px - var(--sr) * 8px); width: 4px; opacity: calc(var(--sr) * 2); background: linear-gradient(270deg, #1e2026, #3a3e48); }
+@media (max-width: 900px) { .lzp { --ry: -5deg; --rx: 0deg; --s: -0.42; --sr: 0.42; } }
+
+/* ══ Gente uniéndose ══ Círculos superpuestos (el más reciente delante), «Tú» con aro azul al pagar y el «+N» */
+.lzp-l-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; min-height: 24px; }
+.lzp-l-row .lzp-l-count { margin: 0; }
+.lzp-faces { display: inline-flex; align-items: center; padding-left: 6px; }
+.lzp-av {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  margin-left: -6px;
+  border-radius: 50%;
+  background: var(--c, #dfe2ea);
+  box-shadow: 0 0 0 2px #f4f5f8;
+  color: rgba(18, 19, 23, 0.72);
+  font-size: 7.5px;
+  font-style: normal;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+}
+.lzp-av.is-you { position: relative; z-index: 2; background: #121317; color: #fff; box-shadow: 0 0 0 2px #f4f5f8, 0 0 0 3.5px #3d50f2; font-size: 7px; }
+.lzp-av.is-new { animation: lzpJoin 560ms cubic-bezier(0.3, 1.5, 0.5, 1); }
+@keyframes lzpJoin {
+  0% { width: 0; margin-left: 0; opacity: 0; transform: scale(0.2) translateY(6px); }
+  60% { opacity: 1; }
+  100% { width: 22px; margin-left: -6px; transform: none; }
+}
+.lzp-av.is-you.is-new { animation-duration: 700ms; }
+.lzp-more { margin-left: 5px; padding: 2px 6px; border-radius: 999px; background: #e6e8ef; color: #4b4e5c; font-size: 9.5px; font-weight: 700; }
+.lzp-more.is-bump { animation: lzpMore 380ms ease-out; }
+@keyframes lzpMore { 40% { transform: scale(1.18); background: #dfe3ff; color: #3d50f2; } }
+.lzp.is-done .lzp-av.is-you { box-shadow: 0 0 0 2px #f4f5f8, 0 0 0 3.5px #14c492; }
+.lzp.is-done .lzp-time { color: #0b8a63; }
+
+/* ══ El widget real de Tuko en la ficha y su popup ══
+   La ficha de «Tuko Store» con el bloque del drop tal como lo pinta el widget: cinta con el descuento, precio
+   especial, «Cierra en» con días/horas/min, «Faltan N compradores», botón «Reservar mi plaza» y la nota. Al
+   completarse, la cinta pasa a «Completo» en verde y el bloque a «Este drop se completó». El popup es el del
+   widget: reservar, «Ya tienes tu plaza» y, al final, «Drop completado». */
+.lzp-gal { height: 150px; }
+.lzp-sizes { margin-top: 10px; }
+.lzp-sizes span { padding: 6px 0; font-size: 11px; }
+
+.lzw { position: relative; margin-top: 12px; padding: 13px 13px 11px; border-radius: 14px; background: #fff; box-shadow: inset 0 0 0 1px #e6e7ec, 0 6px 16px -10px rgba(18, 19, 23, 0.25); }
+.lzw-a, .lzw-b { transition: opacity 300ms ease; }
+.lzw-b { opacity: 0; }
+.lzw-h, .lzw-p, .lzw-left { display: grid; }
+.lzw-h > span, .lzw-p > span { grid-area: 1 / 1; }
+.lzw-h { margin: 0; padding-right: 58px; font-size: 13.5px; font-weight: 800; letter-spacing: -0.01em; color: #111827; }
+.lzw-p { margin: 4px 0 0; }
+.lzw-p .lzw-a { display: inline-flex; align-items: baseline; gap: 6px; }
+.lzw-p .lzw-a b { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; color: #111827; }
+.lzw-p s { font-size: 11.5px; color: #6b7280; }
+.lzw-p .lzw-b { align-self: center; font-size: 12px; color: #6b7280; }
+.lzw-p .lzw-b b { font-size: 13px; font-weight: 800; color: #111827; }
+
+/* Cinta de la esquina: el descuento y, al completarse, «Completo» en verde */
+.lzw-rib { position: absolute; top: -1px; right: 12px; display: grid; place-items: center; min-width: 40px; padding: 7px 7px 11px; background: #111827; color: #fff; font-size: 11px; font-weight: 800; letter-spacing: 0.01em; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%); transition: background 400ms ease; }
+.lzw-rib > span { grid-area: 1 / 1; }
+.lzw-rib .lzw-b { font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+.lzw-cdw { max-height: 80px; overflow: hidden; transition: max-height 450ms var(--ease-out), opacity 300ms ease; }
+.lzw-k { margin: 8px 0 0; font-size: 10.5px; text-align: center; color: #6b7280; }
+.lzw-cd { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-top: 5px; overflow: hidden; }
+.lzw-cd span { display: grid; justify-items: center; padding: 5px 0 4px; border-radius: 9px; background: #eef1f7; }
+.lzw-cd b { font-size: 16px; font-weight: 800; color: #111827; }
+.lzw-cd em { font-size: 8.5px; font-style: normal; font-weight: 600; color: #4b5563; }
+
+.lzw-left { grid-template-columns: auto 1fr; align-items: center; column-gap: 7px; margin: 9px 0 0; font-size: 11.5px; font-weight: 700; color: #111827; }
+.lzw-left > .lzw-a, .lzw-left > .lzw-b { grid-area: 1 / 2; }
+.lzw-left b { font-size: 12.5px; font-weight: 800; }
+.lzw-left .lzw-b { color: #059669; }
+
+/* Las caras: personas en círculos de color, superpuestas; la que entra, con un rebote */
+.lzp-faces { display: inline-flex; padding-left: 5px; }
+.lzw-me, .lzp-faces i { display: grid; place-items: center; width: 20px; height: 20px; margin-left: -5px; border-radius: 50%; background: #f97316; box-shadow: 0 0 0 2px #fff; font-style: normal; }
+.lzw-me::before, .lzp-faces i::before { content: ''; width: 10px; height: 10px; background: #fff; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='6.5' r='3.6'/%3E%3Cpath d='M3 18c0-3.9 3.1-6.2 7-6.2s7 2.3 7 6.2z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='6.5' r='3.6'/%3E%3Cpath d='M3 18c0-3.9 3.1-6.2 7-6.2s7 2.3 7 6.2z'/%3E%3C/svg%3E") center / contain no-repeat; }
+.lzp-faces i:first-child, .lzw-me:first-child { margin-left: 0; }
+.lzp-faces i.t1, .lzw-me.t1 { background: #10b981; }
+.lzp-faces i.t2, .lzw-me.t2 { background: #6366f1; }
+.lzp-faces i.t3 { background: #ec4899; }
+.lzp-faces i.is-new { animation: lzwFace 520ms cubic-bezier(0.3, 1.5, 0.5, 1); }
+@keyframes lzwFace { 0% { transform: scale(0.2); opacity: 0; } 100% { transform: none; opacity: 1; } }
+
+.lzp-btn { height: 38px; margin-top: 10px; border-radius: 10px; background: #111827; font-size: 12.5px; font-weight: 700; }
+.lzp-btn-c { opacity: 0; }
+.lzw-note { max-height: 30px; overflow: hidden; margin: 7px 0 0; font-size: 9.5px; line-height: 1.35; text-align: center; color: #6b7280; transition: opacity 300ms ease; }
+
+/* Ya ha pagado */
+/* Completado */
+.lzp.is-done .lzw-a { opacity: 0; }
+.lzp.is-done .lzw-b { opacity: 1; }
+.lzp.is-done .lzw-rib { background: #059669; }
+.lzp.is-done .lzw-cdw { max-height: 0; opacity: 0; }
+.lzp.is-done .lzw-note { max-height: 0; margin-top: 0; opacity: 0; }
+.lzp.is-done .lzp-btn { background: #111827; color: #fff; }
+.lzp.is-done .lzp-btn-a, .lzp.is-done .lzp-btn-b { opacity: 0; }
+.lzp.is-done .lzp-btn-c { opacity: 1; }
+.lzp.is-tap-btn .lzp-btn { transform: scale(0.97); }
+
+/* Popup: tarjeta flotante con esquinas redondas (no hoja pegada al borde) */
+.lzp-sheet { left: 8px; right: 8px; bottom: 8px; padding: 20px 16px 14px; border-radius: 26px; text-align: center; transform: translateY(110%); }
+.lzp-grab { display: none; }
+.lzp-x { position: absolute; top: 12px; right: 14px; width: 18px; height: 18px; }
+.lzp-x svg { width: 100%; height: 100%; fill: none; stroke: #64748b; stroke-width: 1.8; stroke-linecap: round; }
+.lzp-s-img { display: block; width: 56px; height: 56px; margin: 0 auto; border-radius: 12px; overflow: hidden; background: #e9e6df; box-shadow: inset 0 0 0 1px #e6e7ec; }
+.lzp-s-img img { width: 100%; height: 100%; object-fit: contain; }
+.lzp-s-name { margin: 8px 0 0; font-size: 15px; font-weight: 800; letter-spacing: -0.02em; color: #111827; }
+.lzp-s-sub { margin: 2px 0 0; font-size: 10.5px; color: #64748b; }
+.lzp-s-price { display: flex; justify-content: center; align-items: baseline; gap: 6px; margin: 8px 0 0; }
+.lzp-s-price b { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; color: #111827; }
+.lzp-s-price s { font-size: 11.5px; color: #94a3b8; }
+.lzp-s-price span { align-self: center; padding: 2px 7px; border-radius: 999px; background: #e7f8f1; color: #059669; font-size: 10px; font-weight: 800; }
+.lzp-s-left { display: flex; justify-content: center; align-items: center; gap: 7px; margin: 8px 0 0; font-size: 11.5px; color: #334155; }
+.lzp-s-left b { font-size: 14px; font-weight: 800; color: #111827; }
+.lzp-s-k { margin: 10px 0 0; padding: 0; background: none; font-size: 11px; font-weight: 500; letter-spacing: 0; color: #64748b; }
+.lzp-timer { grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 6px; padding: 8px 0; border-radius: 16px; background: #f8fafc; box-shadow: inset 0 0 0 1px #e6e7ec; }
+.lzp-timer span { padding: 0; border-radius: 0; background: none; }
+.lzp-timer span + span { box-shadow: -1px 0 0 #e2e8f0; }
+.lzp-timer b { font-size: 20px; font-weight: 500; color: #111827; }
+.lzp-timer em { font-size: 9.5px; font-weight: 500; color: #64748b; }
+.lzp-s-how { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; padding: 4px 10px; border-radius: 999px; box-shadow: inset 0 0 0 1px #dfe3ff; font-size: 10.5px; color: #3d50f2; }
+.lzp-s-how svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.lzp-s-btn { height: 40px; margin-top: 10px; border-radius: 12px; background: #3d50f2; font-size: 12px; font-weight: 700; }
+.lzp-s-note { margin: 7px 0 0; font-size: 9.5px; color: #64748b; }
+
+/* Popup final: «Drop completado» */
+.lzp-s-ok { position: absolute; inset: 0; display: grid; align-content: center; justify-items: center; padding: 26px 16px 16px; text-align: center; opacity: 0; pointer-events: none; transition: opacity 300ms ease; }
+.lzp-s-tag { position: absolute; top: 0; left: 0; padding: 7px 14px; border-radius: 26px 0 14px 0; background: #059669; color: #fff; font-size: 11px; font-weight: 800; }
+.lzp-s-oh { margin: 0; font-size: 17px; font-weight: 800; letter-spacing: -0.02em; color: #111827; }
+.lzp-s-ol { display: flex; align-items: center; gap: 7px; margin: 10px 0 0; font-size: 12px; font-weight: 700; color: #059669; }
+.lzp-faces2 { display: inline-flex; padding-left: 5px; }
+.lzp-s-om { margin: 10px 0 0; font-size: 11.5px; font-weight: 600; line-height: 1.4; color: #1f2937; }
+.lzp-s-prod { display: flex; align-items: center; gap: 10px; width: 100%; margin-top: 12px; padding: 10px 0; border-top: 1px solid #eef0f4; border-bottom: 1px solid #eef0f4; text-align: left; }
+.lzp-s-prod img { width: 44px; height: 44px; border-radius: 9px; background: #e9e6df; object-fit: contain; }
+.lzp-s-prod > span { display: grid; gap: 2px; font-size: 12px; }
+.lzp-s-prod b { font-weight: 800; color: #111827; }
+.lzp-s-prod s { color: #94a3b8; }
+.lzp.is-final .lzp-s-join, .lzp.is-final .lzp-s-done { opacity: 0; }
+.lzp.is-final .lzp-s-ok { opacity: 1; }
+@media (max-width: 420px) {
+  .lzw-h { font-size: 12.5px; }
+  .lzw-rib { right: 10px; min-width: 36px; padding: 6px 6px 10px; font-size: 10px; }
+}
+
+/* «Ya tienes tu plaza»: botón negro con letra blanca */
+.lzp.is-joined .lzp-btn { background: #111827; color: #fff; }
+
+/* Hasta 4 caras y un quinto círculo con «+N» */
+.lzp-faces i.lzw-more, .lzw-me.lzw-more { background: #e5e7eb; color: #374151; font-size: 7.5px; font-weight: 800; letter-spacing: -0.02em; }
+.lzp-faces i.lzw-more::before, .lzw-me.lzw-more::before { display: none; }
+
+/* Popup final «Drop completado»: centrado en la pantalla, aparece con un leve zoom (no sube desde abajo) */
+.lzp.is-final .lzp-sheet { top: 50%; bottom: auto; opacity: 0; transform: translateY(-50%) scale(0.9); transition: transform 380ms cubic-bezier(0.3, 1.3, 0.5, 1), opacity 260ms ease; }
+.lzp.is-final.is-sheet .lzp-sheet { opacity: 1; transform: translateY(-50%) scale(1); }
+.lzp.is-final .lzp-s-join, .lzp.is-final .lzp-s-done { display: none; }
+.lzp.is-final .lzp-s-ok { position: static; padding: 28px 2px 4px; opacity: 1; }
+.lzw-me.t3 { background: #ec4899; }
+.lzp-s-ol { white-space: nowrap; font-size: 11.5px; }
+.lzp-faces2 .lzw-me { width: 18px; height: 18px; margin-left: -6px; }
+.lzp-faces2 .lzw-me:first-child { margin-left: 0; }
+.lzp-faces2 .lzw-me::before { width: 9px; height: 9px; }

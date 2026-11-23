@@ -256,6 +256,56 @@
   status = 200
   force = true
 
+# Drops (preventa con mínimo): URL limpia. La página se llamó antes «Lanzamientos»: sus direcciones viejas redirigen.
+[[redirects]]
+  from = "/drops.html"
+  to = "/drops"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/drops"
+  to = "/drops.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/lanzamientos"
+  to = "/drops"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/lanzamientos.html"
+  to = "/drops"
+  status = 301
+  force = true
+
+# Drops (EN): URL limpia
+[[redirects]]
+  from = "/en/drops.html"
+  to = "/en/drops"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/drops"
+  to = "/en/drops.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/en/launches"
+  to = "/en/drops"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/launches.html"
+  to = "/en/drops"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/en/tuko-ai"
   to = "/en/tuko-ai.html"

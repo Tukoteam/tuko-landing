@@ -234,23 +234,16 @@
           "position": 2,
           "name": "Compras Colectivas para Shopify",
           "item": "https://tukoteam.com/#how"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Registrarse en Tuko",
-          "item": "https://tukoteam.com/en/tuko-ai#cta"
         }
       ]
     }
   ]
 }
 </script>
-<link rel="preload" as="style" href="/assets/css/home.css?v=daba9bf4">
-<link rel="stylesheet" href="/assets/css/home.css?v=daba9bf4">
+<link rel="preload" as="style" href="/assets/css/home.css?v=c4960ef1">
+<link rel="stylesheet" href="/assets/css/home.css?v=c4960ef1">
 <link rel="stylesheet" href="../assets/css/tuko-theme.css?v=31135431">
 <link rel="prefetch" href="blog/" as="document">
-<link rel="prefetch" href="tuko-ai" as="document">
 </head>
 <body>
 
@@ -263,10 +256,10 @@
     <img src="/assets/images/tuko-logo-nav.webp" width="840" height="321" alt="Tuko" decoding="async" fetchpriority="high">
   </a>
   <ul class="nav-links">
-    <li><a href="/en/#como-funciona" data-i18n="nav_link_como_funciona">How it works</a></li>
+    <li><a href="/en/#inicio" data-i18n="nav_link_como_funciona">Group buying</a></li>
+    <li><a href="/en/drops" data-i18n="nav_link_lanzamientos">Drops</a></li>
     <li><a href="/en/#precios" data-i18n="nav_link_precios">Pricing</a></li>
     <li><a href="/en/blog/" data-i18n="nav_link_blog">Blog</a></li>
-    <li><a href="/en/tuko-ai" data-i18n="nav_link_ia">tuko AI</a></li>
     <li><a href="https://apps.shopify.com/tuko" class="nav-cta" target="_blank" rel="noopener" data-i18n="nav_cta">Install free</a></li>
   </ul>
   <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" aria-pressed="false">
@@ -296,10 +289,10 @@
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu" aria-hidden="true">
-  <a href="/en/#como-funciona" data-i18n="nav_link_como_funciona">How it works</a>
+  <a href="/en/#inicio" data-i18n="nav_link_como_funciona">Group buying</a>
+  <a href="/en/drops" data-i18n="nav_link_lanzamientos">Drops</a>
   <a href="/en/#precios" data-i18n="nav_link_precios">Pricing</a>
   <a href="/en/blog/" data-i18n="nav_link_blog">Blog</a>
-  <a href="/en/tuko-ai" data-i18n="nav_link_ia">tuko AI</a>
   <div class="mobile-lang">
     <p class="mobile-lang-label" data-i18n="nav_lang_label">Language</p>
     <div class="lang-switcher mobile-lang-switcher" role="group" aria-label="Language selector" data-active="en">
@@ -1610,7 +1603,7 @@
   <div class="pricing-inner">
     <div class="fade-up"><span class="s-badge" data-i18n="pricing_badge">Pricing</span></div>
     <h2 class="s-title fade-up d1" data-i18n="pricing_title">You only pay for groups that complete</h2>
-    <p class="s-sub fade-up d2" data-i18n="pricing_sub">No fixed fee and no commission on your sales. You pay €1 per completed group and, in launches, €1 per buyer. The first 5 in every 30-day cycle are free, and you never pay more than €129 per cycle.</p>
+    <p class="s-sub fade-up d2" data-i18n="pricing_sub">No fixed fee and no commission on your sales. You pay €1 per completed group and, in launches, €1 per buyer. The first 5 in every 30-day cycle are free, and you never pay more than €200 per cycle.</p>
 
     <!-- La tabla la construye home-pricing.js con las tarjetas de abajo (ocultas; las traducciones las rellenan) -->
     <div class="pr-table fade-up d3" data-pr-table></div>
@@ -1644,14 +1637,14 @@
           <span class="pricing-amount" data-i18n="pricing_p3_price">€1</span>
           <span class="pricing-period" data-i18n="pricing_p3_per">/ buyer</span>
         </div>
-        <ul class="pricing-features" data-i18n="pricing_p3_rows"><li>Usage: Only if the launch reaches its minimum</li><li>Commission on your sales: 0%</li><li>Fixed fee: €0</li><li>Products at once: Unlimited</li><li>Groups and launches: Yes</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Tuko status emails: Yes</li><li>Support: Yes</li><li>Lock-in: None</li></ul>
+        <ul class="pricing-features" data-i18n="pricing_p3_rows"><li>Usage: Only if the launch fills up</li><li>Commission on your sales: 0%</li><li>Fixed fee: €0</li><li>Products at once: Unlimited</li><li>Groups and launches: Yes</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Tuko status emails: Yes</li><li>Support: Yes</li><li>Lock-in: None</li></ul>
         <a class="pricing-cta is-secondary" aria-disabled="true" data-i18n="pricing_p3_cta">Choose plan</a>
       </article>
 
       <article class="pricing-card fade-up d4">
         <h3 class="pricing-name" data-i18n="pricing_p4_name">Maximum</h3>
         <div class="pricing-price-row">
-          <span class="pricing-amount" data-i18n="pricing_p4_price">€129</span>
+          <span class="pricing-amount" data-i18n="pricing_p4_price">€200</span>
           <span class="pricing-period" data-i18n="pricing_p4_per">/ cycle</span>
         </div>
         <ul class="pricing-features" data-i18n="pricing_p4_rows"><li>Usage: Never more in 30 days, however much you sell</li><li>Commission on your sales: 0%</li><li>Fixed fee: €0</li><li>Products at once: Unlimited</li><li>Groups and launches: Yes</li><li>Group rescue: Yes</li><li>Email marketing: Yes</li><li>Tuko status emails: Yes</li><li>Support: Yes</li><li>Lock-in: None</li></ul>
@@ -1863,7 +1856,7 @@
 </div>
 
 <script src="/assets/js/home-animations-en.js?v=84f9fb14"></script>
-<script src="/assets/js/home-ui-en.js?v=3544ac85"></script>
+<script src="/assets/js/home-ui-en.js?v=f1a38772"></script>
 <script src="../assets/js/tuko-theme.js?v=b2ef7977" defer></script>
 <script src="../assets/js/tuko-form.js?v=ebdb6073" defer></script>
 <script src="../assets/js/ga4-loader.js?v=7593ef4a" defer></script>

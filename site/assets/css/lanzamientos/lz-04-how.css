@@ -1,0 +1,344 @@
+/* ══════════════════════════════
+   LANZAMIENTOS · CUERPO (común) y CÓMO FUNCIONA
+   Fondo de página (claro u oscuro según el tema). Cabeceras como el resto de la web: rótulo fino, titular
+   Mona con una sola parte en serif cursiva.
+   «Cómo funciona»: una tarjeta oscura con la ficha, un contador con su barra y los tres pasos en una frase.
+══════════════════════════════ */
+.lz-sec {
+  --lz-acc: var(--blue, #3d50f2);
+  --lz-ok: #0f9d74;
+  --lz-card: rgba(255, 255, 255, 0.72);
+  --lz-edge: rgba(20, 24, 38, 0.08);
+  padding: clamp(80px, 11vw, 150px) 20px 0;
+  color: var(--ink);
+}
+html[data-theme="dark"] .lz-sec {
+  --lz-acc: #8fa0ff;
+  --lz-ok: #3fe0b0;
+  --lz-card: rgba(255, 255, 255, 0.035);
+  --lz-edge: rgba(255, 255, 255, 0.08);
+}
+.lz-sec:last-of-type { padding-bottom: clamp(80px, 11vw, 150px); }
+.lz-wrap { max-width: 1180px; margin: 0 auto; }
+
+.lz-head { max-width: 760px; margin: 0 auto; text-align: center; }
+.lz-head-left { margin: 0; text-align: left; }
+.lz-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 700;
+  font-stretch: 112%;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lz-acc);
+}
+.lz-eyebrow::before { content: ''; width: 20px; height: 1px; background: currentColor; opacity: 0.55; }
+.lz-h2 {
+  margin: 18px 0 0;
+  font-size: clamp(34px, 4.4vw, 58px);
+  font-weight: 700;
+  font-stretch: 106%;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.lz-h2 em { font-family: 'Roboto Serif', Georgia, serif; font-style: italic; font-weight: 500; font-stretch: 100%; letter-spacing: -0.025em; color: var(--lz-acc); }
+.lz-sub { max-width: 36em; margin: 20px auto 0; font-size: clamp(16.5px, 1.35vw, 18.5px); line-height: 1.6; color: var(--ink-2); text-wrap: pretty; }
+
+/* ══ Cómo funciona: una tarjeta, una barra y tres pasos ══
+   Lo justo para entenderlo de un vistazo: la ficha del lanzamiento, el contador con su barra (se pone verde al
+   completarse) y tres frases. Cada paso lleva arriba un tramo de línea que se enciende cuando le toca. */
+.lz-flow {
+  --i1: #f3f5ff;
+  --i2: rgba(232, 236, 255, 0.76);
+  --i3: rgba(214, 220, 245, 0.62);
+  --hl: rgba(255, 255, 255, 0.08);
+  --b: #8fa0ff;
+  --g: #3fe0b0;
+  --pad: clamp(22px, 3.4vw, 40px);
+  position: relative;
+  overflow: clip;
+  margin-top: clamp(44px, 5.5vw, 64px);
+  border-radius: clamp(22px, 2.8vw, 30px);
+  background: linear-gradient(180deg, #0d0f21 0%, #090a17 100%);
+  color: var(--i1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 30px 60px -34px rgba(12, 16, 60, 0.5);
+}
+html[data-theme="dark"] .lz-flow { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.07); }
+
+/* Ficha */
+.lz-flow-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 58px; padding: 0 var(--pad); border-bottom: 1px solid var(--hl); }
+.lz-flow-id { display: inline-flex; align-items: center; gap: 8px; min-width: 0; font-size: 13px; font-weight: 600; color: var(--i1); white-space: nowrap; }
+/* Ficha: las tres reglas en etiquetas (no una frase con puntos) */
+.lz-flow-tags { display: flex; gap: 6px; min-width: 0; margin-left: 8px; overflow: hidden; }
+.lz-flow-tags > span { display: inline-flex; align-items: baseline; gap: 5px; padding: 4px 10px; border-radius: 99px; background: rgba(255, 255, 255, 0.05); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08); font-size: 12px; font-weight: 600; color: var(--i1); white-space: nowrap; }
+.lz-flow-tags em { font-size: 11px; font-style: normal; font-weight: 500; color: var(--i3); }
+.lz-flow-id img { flex: 0 0 auto; width: 28px; height: 28px; margin-right: 2px; border-radius: 7px; object-fit: cover; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1); }
+
+/* Contador y barra */
+.lz-flow-meter { padding: clamp(28px, 4vw, 44px) var(--pad) clamp(26px, 3.4vw, 36px); }
+.lz-flow-read { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
+.lz-flow-num { display: grid; gap: 14px; }
+.lz-flow-n { display: flex; align-items: flex-end; gap: 10px; }
+.lz-flow-c { display: inline-flex; font-size: clamp(44px, 5.4vw, 64px); font-weight: 650; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; color: var(--i1); }
+.lz-flow-n > span { padding-bottom: 0.3em; font-size: 15px; color: var(--i2); }
+/* Contador de rodillo: cada cifra es una tira 0…9 (+ un 0 para pasar del 9 al 0 hacia delante) que sube */
+.lz-od { display: inline-block; height: 1em; overflow: hidden; -webkit-mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent); max-width: 1em; transition: max-width 380ms var(--ease-out), opacity 300ms ease; }
+.lz-od > span { display: flex; flex-direction: column; transform: translateY(calc(var(--d, 0) * -1em)); transition: transform 420ms cubic-bezier(0.3, 1.25, 0.5, 1); }
+.lz-od > span > i { display: block; height: 1em; font-style: normal; }
+.lz-od.is-snap > span { transition: none; }
+.lz-od.is-off { max-width: 0; opacity: 0; }
+/* El tiempo: «Día N de 12»; al completarse se queda en el día en que se llenó */
+.lz-flow-left { display: flex; align-items: center; font-size: 13.5px; font-weight: 500; white-space: nowrap; color: var(--i2); }
+.lz-flow-left b { font-weight: 650; font-variant-numeric: tabular-nums; color: var(--i1); }
+.lz-flow.is-done .lz-flow-left b { color: var(--g); }
+/* Sello «Completado»: tinta verde con grano y doble filo, torcido, que cae de golpe como los de los tickets */
+.lz-flow-stamp {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  padding: 7px 15px 6px;
+  border: 2.5px solid currentColor;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 2px #0c0e1f, inset 0 0 0 3.5px currentColor;
+  color: var(--g);
+  rotate: 6deg;
+  opacity: 0;
+  scale: 1.5;
+  pointer-events: none;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 2.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 2.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+}
+.lz-flow-stamp b { font-size: 17px; font-weight: 800; font-stretch: 112%; letter-spacing: 0.14em; line-height: 1.1; text-transform: uppercase; }
+.lz-flow-stamp small { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+.lz-flow.is-done .lz-flow-stamp { animation: lzFlowStamp 560ms cubic-bezier(0.3, 0, 0.2, 1) forwards; }
+.lz-flow.is-done .lz-flow-read { animation: lzFlowThud 260ms ease-out 300ms; }
+@keyframes lzFlowStamp { 0% { opacity: 0; scale: 1.5; filter: blur(2px); } 55% { opacity: 1; scale: 0.96; filter: blur(0); } 78% { scale: 1.02; } 100% { opacity: 0.95; scale: 1; } }
+@keyframes lzFlowThud { 40% { transform: translateY(1.5px); } }
+
+/* La fila de 30 huecos (uno por persona) con la meta al final. Cada persona cae desde arriba a su hueco, que se
+   enciende con su color y suelta un aro de luz. Al llegar a 30, una ola verde recorre la fila hasta la meta,
+   que pasa del 30 a ✓. Debajo, un brillo suave que crece según se llena (--j). */
+.lz-flow-meter { position: relative; isolation: isolate; }
+.lz-flow-meter::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 6%;
+  right: 6%;
+  bottom: -64px;
+  height: 230px;
+  background: radial-gradient(closest-side, rgba(112, 132, 255, 0.26), transparent);
+  opacity: var(--j, 0);
+  pointer-events: none;
+}
+.lz-flow-meter::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 6%;
+  right: 6%;
+  bottom: -64px;
+  height: 230px;
+  background: radial-gradient(closest-side, rgba(63, 224, 176, 0.28), transparent);
+  opacity: 0;
+  transition: opacity 900ms ease;
+  pointer-events: none;
+}
+.lz-flow.is-done .lz-flow-meter::after { opacity: 1; }
+
+.lz-flow-run { --goal: 34px; position: relative; height: 34px; margin-top: 62px; }
+.lz-flow-slots { position: absolute; left: 0; right: calc(var(--goal) + 12px); top: 11px; display: flex; gap: clamp(3px, 0.45vw, 6px); height: 12px; }
+.lz-flow-slots i { position: relative; flex: 1 1 0; border-radius: 99px; background: rgba(255, 255, 255, 0.07); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04); transition: background 500ms ease, box-shadow 600ms ease; }
+.lz-flow-slots i::after { content: ''; position: absolute; inset: -3px; border-radius: 99px; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.55); opacity: 0; pointer-events: none; }
+/* Al caer, el hueco toma su color al instante (sin fundido: si no, el último no llegaba a pintarse antes de la ola) */
+.lz-flow-slots i.is-in { animation: lzSlot 560ms var(--ease-out); transition: box-shadow 600ms ease; }
+.lz-flow-slots i.is-in::after { animation: lzRing 700ms var(--ease-out); }
+@keyframes lzSlot { 0% { transform: scaleY(0.3); } 45% { transform: scaleY(1.45); } 100% { transform: none; } }
+@keyframes lzRing { 0% { opacity: 0.8; transform: scale(0.7); } 100% { opacity: 0; transform: scale(1.35, 1.9); } }
+@keyframes lzRingG { 0% { opacity: 0.8; transform: scale(0.7); } 100% { opacity: 0; transform: scale(1.35, 1.9); } }
+
+/* Colores de cada persona (la cara que cae y su hueco) */
+.lz-flow-run .t0 { background: #c9d1ff; }
+.lz-flow-run .t1 { background: #f2d7c4; }
+.lz-flow-run .t2 { background: #bfe9da; }
+.lz-flow-run .t3 { background: #e6d3f5; }
+.lz-flow-run .t4 { background: #f5e6b8; }
+
+/* La ola verde final, hueco a hueco, con un destello que la acompaña */
+.lz-flow.is-wave .lz-flow-slots i { background: var(--g); box-shadow: 0 0 14px -3px rgba(63, 224, 176, 0.75); transition: background 500ms ease, box-shadow 600ms ease; transition-delay: calc(var(--i) * 24ms); }
+.lz-flow.is-wave .lz-flow-slots i::after { animation: lzRingG 800ms var(--ease-out) both; animation-delay: calc(var(--i) * 24ms); box-shadow: 0 0 0 1.5px rgba(63, 224, 176, 0.8); }
+
+/* La cara que cae */
+.lz-flow-drop {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #0b0c1c, 0 10px 20px -8px rgba(0, 0, 0, 0.8);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 650;
+  color: #0b0d1c;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.lz-flow-goal { position: absolute; right: 0; top: 0; display: grid; place-items: center; width: var(--goal); height: var(--goal); border-radius: 50%; box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.22); transition: background 400ms ease, box-shadow 400ms ease, transform 500ms var(--ease-out); }
+.lz-flow-goal b { font-size: 12px; font-weight: 650; font-variant-numeric: tabular-nums; color: var(--i2); transition: opacity 250ms ease, transform 350ms var(--ease-out); }
+.lz-flow-goal svg { position: absolute; width: 16px; height: 16px; fill: none; stroke: #03140e; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 24; stroke-dashoffset: 24; transition: stroke-dashoffset 450ms var(--ease-out) 200ms; }
+.lz-flow.is-done .lz-flow-goal { background: var(--g); box-shadow: 0 0 0 6px rgba(63, 224, 176, 0.16), 0 0 26px rgba(63, 224, 176, 0.45); animation: lzGoal 650ms var(--ease-out); }
+.lz-flow.is-done .lz-flow-goal b { opacity: 0; transform: scale(0.6); }
+.lz-flow.is-done .lz-flow-goal svg { stroke-dashoffset: 0; }
+@keyframes lzGoal { 0% { transform: scale(0.8); } 55% { transform: scale(1.18); } 100% { transform: none; } }
+
+/* «Hugo se ha unido»: un globito junto a la cara que cae, que aparece y se va */
+.lz-flow-toast { position: absolute; z-index: 4; left: 0; top: 0; width: max-content; padding: 5px 9px; border-radius: 8px; background: #1b1e36; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12), 0 6px 16px -6px rgba(0, 0, 0, 0.6); color: var(--i1); font-size: 12px; font-weight: 500; white-space: nowrap; opacity: 0; pointer-events: none; }
+.lz-flow-toast.is-in { animation: lzToast 950ms var(--ease-out) both; }
+@keyframes lzToast { 0% { opacity: 0; transform: translateY(4px); } 15%, 75% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-2px); } }
+
+@media (max-width: 520px) {
+  .lz-flow-slots { height: 10px; top: 12px; gap: 2px; }
+  .lz-flow-drop { width: 26px; height: 26px; font-size: 11px; }
+}
+
+/* Tres pasos en una línea de tiempo, cada uno con su icono en un círculo. La línea avanza con el lanzamiento
+   (hasta el paso 2 al abrirse y de ahí al 3 según se apunta la gente; la coloca el JS) y el paso activo late. */
+.lz-flow-steps { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 36px); margin: 0; padding: 6px var(--pad) clamp(30px, 3.6vw, 40px); list-style: none; }
+.lz-flow-steps::before,
+.lz-flow-steps::after { content: ''; position: absolute; top: 24px; left: var(--r0, 0); height: 2px; border-radius: 2px; }
+.lz-flow-steps::before { width: var(--rw, 0); background: rgba(255, 255, 255, 0.08); }
+.lz-flow-steps::after { width: var(--rf, 0); background: linear-gradient(90deg, rgba(143, 160, 255, 0.3), var(--b)); transition: width 500ms var(--ease-out); }
+.lz-flow.is-done .lz-flow-steps::after { background: linear-gradient(90deg, rgba(63, 224, 176, 0.3), var(--g)); }
+.lz-flow-step { position: relative; z-index: 1; }
+.lz-flow-node { position: relative; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: #0f1124; box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.12); color: var(--i3); transition: background 500ms ease, box-shadow 500ms ease, color 500ms ease; }
+.lz-flow-node svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.lz-flow-node::after { content: ''; position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 0 0 1.5px var(--b); opacity: 0; pointer-events: none; }
+/* Los pasos ya hechos se quedan encendidos (azul liso, sin brillo: el que late es el activo) */
+.lz-flow-step.is-past .lz-flow-node { background: var(--b); box-shadow: none; color: #0b0d1c; }
+.lz-flow-step.is-on .lz-flow-node { background: var(--b); box-shadow: 0 0 0 5px rgba(143, 160, 255, 0.14), 0 0 22px rgba(112, 132, 255, 0.45); color: #0b0d1c; }
+.lz-flow-step.is-on .lz-flow-node::after { animation: lzNode 1.8s ease-out infinite; }
+@keyframes lzNode { 0% { opacity: 0.7; transform: scale(1); } 100% { opacity: 0; transform: scale(1.7); } }
+.lz-flow.is-done .lz-flow-step.is-on .lz-flow-node { background: var(--g); box-shadow: 0 0 0 5px rgba(63, 224, 176, 0.16), 0 0 24px rgba(63, 224, 176, 0.5); }
+/* Al completarse, los tres pasan a verde uno detrás de otro: el camino entero hecho */
+.lz-flow.is-done .lz-flow-step.is-past .lz-flow-node { background: var(--g); color: #03140e; }
+.lz-flow.is-done .lz-flow-step .lz-flow-node { transition-delay: calc((var(--s, 1) - 1) * 140ms); }
+.lz-flow.is-done .lz-flow-step[data-step="2"] { --s: 2; }
+.lz-flow.is-done .lz-flow-step[data-step="3"] { --s: 3; }
+.lz-flow.is-done .lz-flow-step .lz-flow-k { color: var(--g); }
+.lz-flow.is-done .lz-flow-step.is-on .lz-flow-node::after { animation: none; }
+.lz-flow-k { display: block; margin-top: 18px; font-size: 12.5px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--i3); transition: color 400ms ease; }
+.lz-flow-step.is-on .lz-flow-k, .lz-flow-step.is-past .lz-flow-k { color: var(--i1); }
+.lz-flow.is-done .lz-flow-step.is-on .lz-flow-k { color: var(--g); }
+.lz-flow-step h3 { margin: 8px 0 0; font-size: clamp(19px, 1.7vw, 22px); font-weight: 650; letter-spacing: -0.025em; color: var(--i1); }
+.lz-flow-step p { margin: 8px 0 0; font-size: 15px; line-height: 1.55; color: var(--i2); text-wrap: pretty; }
+
+@media (max-width: 760px) {
+  /* En columna: el icono a la izquierda y un tramo de línea que baja hasta el siguiente */
+  .lz-flow-steps { grid-template-columns: minmax(0, 1fr); gap: 26px; padding-top: 4px; }
+  .lz-flow-steps::before, .lz-flow-steps::after { display: none; }
+  .lz-flow-step { display: grid; grid-template-columns: 38px minmax(0, 1fr); column-gap: 16px; }
+  .lz-flow-node { grid-row: 1 / span 3; }
+  .lz-flow-step > :not(.lz-flow-node) { grid-column: 2; }
+  .lz-flow-k { margin-top: 2px; }
+  .lz-flow-step h3 { margin-top: 4px; }
+  .lz-flow-step:not(:last-child)::before { content: ''; position: absolute; left: 18px; top: 46px; bottom: -20px; width: 2px; border-radius: 2px; background: rgba(255, 255, 255, 0.08); transition: background 500ms ease; }
+  .lz-flow-step.is-past:not(:last-child)::before { background: rgba(143, 160, 255, 0.5); }
+  .lz-flow.is-done .lz-flow-step:not(:last-child)::before { background: rgba(63, 224, 176, 0.55); }
+}
+@media (max-width: 520px) {
+  .lz-flow-id > span { display: none; }
+  .lz-flow-read { flex-direction: column; align-items: flex-start; gap: 10px; }
+  /* A la derecha, junto a «Día N de 12» (que es corto), bajando un poco por debajo */
+  .lz-flow-stamp { top: auto; transform: none; right: 2px; bottom: -34px; padding: 5px 11px 4px; }
+  .lz-flow-run { margin-top: 70px; }
+  .lz-flow-stamp b { font-size: 14px; }
+  .lz-flow-stamp small { font-size: 9px; }
+}
+
+/* El ticket que sale por debajo al completarse: papel térmico como los de «Al cerrar», sale de una rendija en el
+   canto de abajo de la tarjeta a saltos de motor y se queda colgando. */
+.lz-how { padding-bottom: 84px; }
+.lz-flow-stage { position: relative; }
+.lz-flow-print { position: absolute; z-index: 2; left: 50%; top: 100%; width: 290px; height: 158px; translate: -50% -3px; overflow: hidden; pointer-events: none; }
+.lz-flow-print::before { content: ''; position: absolute; z-index: 2; left: 0; right: 0; top: 0; height: 6px; border-radius: 0 0 6px 6px; background: #05060f; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06); opacity: 0; transition: opacity 300ms ease; }
+.lz-flow-stage.is-printed .lz-flow-print::before { opacity: 1; }
+.lz-flow-tk { position: absolute; left: 25px; right: 25px; top: 2px; filter: drop-shadow(0 6px 9px rgba(12, 16, 60, 0.18)); transform: translateY(-105%); }
+.lz-flow-stage.is-printed .lz-flow-tk { animation: lzTkFeed 1500ms linear forwards; }
+@keyframes lzTkFeed {
+  0% { transform: translateY(-105%); }
+  14% { transform: translateY(-78%); } 22% { transform: translateY(-78%); }
+  38% { transform: translateY(-50%); } 46% { transform: translateY(-50%); }
+  62% { transform: translateY(-22%); } 70% { transform: translateY(-22%); }
+  88% { transform: translateY(1.5%); } 100% { transform: translateY(0); }
+}
+.lz-flow-tk-p {
+  display: grid;
+  gap: 7px;
+  padding: 18px 18px 22px;
+  background:
+    linear-gradient(90deg, rgba(40, 36, 30, 0.08) 0%, transparent 10%, transparent 90%, rgba(40, 36, 30, 0.1) 100%),
+    linear-gradient(180deg, #ebe8df 0%, #f8f6f0 40%, #f3f1ea 100%);
+  color: #2a2c35;
+  font-stretch: 82%;
+  text-shadow: 0 0 0.4px rgba(42, 44, 53, 0.55);
+  -webkit-mask: linear-gradient(#000, #000) top / 100% calc(100% - 5px) no-repeat, radial-gradient(circle at 50% 0, #000 3.5px, transparent 4px) bottom / 9px 5px repeat-x;
+  mask: linear-gradient(#000, #000) top / 100% calc(100% - 5px) no-repeat, radial-gradient(circle at 50% 0, #000 3.5px, transparent 4px) bottom / 9px 5px repeat-x;
+}
+.lz-flow-tk-k { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #6b6d76; }
+.lz-flow-tk-row { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-top: 1px dashed rgba(42, 44, 53, 0.3); border-bottom: 1px dashed rgba(42, 44, 53, 0.3); font-size: 13.5px; }
+.lz-flow-tk-row em { font-style: normal; }
+.lz-flow-tk-row b { font-weight: 800; }
+.lz-flow-tk-f { font-size: 11.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #0b8a63; }
+@media (max-width: 520px) {
+  .lz-flow-print { width: 260px; }
+  .lz-how { padding-bottom: 104px; }
+}
+
+/* Botón de repetir (también en la tarjeta) */
+.lz-replay {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 30px;
+  padding: 0 14px 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--i2);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px var(--hl);
+  transition: background-color 200ms ease, transform 160ms var(--ease-out), opacity 300ms ease;
+}
+.lz-replay[hidden] { display: inline-flex; visibility: hidden; opacity: 0; }
+.lz-replay svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.lz-replay:active { transform: scale(0.96); }
+.lz-replay:focus-visible { outline: 2px solid var(--b); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) { .lz-replay:hover { background: rgba(255, 255, 255, 0.08); } }
+
+/* Todos los antetítulos con raya a los dos lados, como el de Drops arriba y los de la home (también los que van
+   alineados a la izquierda y el «Tu turno» del final). */
+.lz-eyebrow::after,
+.lz-final-k::after {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
+}

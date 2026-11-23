@@ -1,0 +1,145 @@
+/* ══════════════════════════════
+   LANZAMIENTOS · FRENTE A UNA PREVENTA (versión con mini-diagramas)
+   Cada fila se ve antes de leerse: a la izquierda un dibujo gris y quieto (la preventa normal), a la derecha el
+   mismo concepto vivo dentro de la franja oscura (stock que sobra → 100 % devuelto; hoja de cálculo → tallas en
+   directo; «en unas semanas» → contador; tú solo → tú y tus compradores). Se animan al verse (.is-in).
+══════════════════════════════ */
+.lz-vs-row > span { display: flex; flex-direction: column; gap: 14px; padding: 26px 26px 24px; }
+.lz-vs-row > span[role="rowheader"] { gap: 6px; padding-left: 0; font-size: 16.5px; letter-spacing: -0.01em; }
+.lz-vs-row > span[role="rowheader"] em { font-size: 12px; font-style: normal; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: 0.04em; color: var(--ink-3); }
+.lz-vs-txt { font-size: 15px; line-height: 1.5; }
+.lz-vs-hrow > span { padding-top: 0; padding-bottom: 16px; }
+.lz-vs-hrow > .is-us { padding-top: 24px; }
+.lz-vs-row { transition: background-color 300ms ease; }
+@media (hover: hover) and (pointer: fine) {
+  .lz-vs-row:not(.lz-vs-hrow):hover > span:not(.is-us) { background: color-mix(in srgb, var(--ink) 2.5%, transparent); }
+  .lz-vs-row:not(.lz-vs-hrow):hover > .is-us { background: #11132a; }
+}
+
+/* ── Mini-diagramas: una tira de 40 px de alto ── */
+.mv { position: relative; display: flex; align-items: center; gap: 10px; height: 40px; font-variant-numeric: tabular-nums; }
+.mv small { font-size: 12px; font-weight: 600; color: var(--ink-3); }
+.is-us .mv small { color: rgba(214, 220, 245, 0.62); }
+
+/* 01 · Cajas que sobran / 100 % devuelto */
+.mv-boxes { display: grid; grid-template-columns: repeat(8, 14px); gap: 4px; }
+.mv-boxes i { height: 14px; border-radius: 3px; background: color-mix(in srgb, var(--ink) 22%, transparent); }
+.mv-boxes i.is-left { background: none; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, #c0394f 70%, transparent); }
+.mv-stock small { color: #c0394f; }
+html[data-theme="dark"] .mv-stock small { color: #ff8a9b; }
+.mv-refund svg { width: 26px; height: 26px; fill: none; stroke: #3fe0b0; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transform: rotate(-90deg); transition: transform 900ms var(--ease-out); }
+.lz-vs.is-in .mv-refund svg { transform: none; }
+.mv-refund b { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: #f3f5ff; }
+
+/* 02 · Hoja de cálculo con «?» / tallas en directo */
+.mv-grid { display: grid; grid-template-columns: repeat(3, 22px); grid-auto-rows: 10px; gap: 2px; padding: 2px; border-radius: 4px; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 16%, transparent); }
+.mv-grid i { background: color-mix(in srgb, var(--ink) 10%, transparent); border-radius: 1px; }
+.mv-sheet b { font-size: 22px; font-weight: 700; color: var(--ink-3); }
+.mv-sizes { align-items: flex-end; gap: 7px; }
+.mv-sizes > span { display: grid; justify-items: center; gap: 3px; width: 20px; }
+.mv-sizes > span i { width: 100%; height: 26px; border-radius: 3px; background: linear-gradient(180deg, #8fa0ff, #4257ff); transform-origin: bottom; transform: scaleY(0.08); transition: transform 900ms var(--ease-out); }
+.mv-sizes > span:nth-child(2) i { transition-delay: 120ms; }
+.mv-sizes > span:nth-child(3) i { transition-delay: 240ms; }
+.mv-sizes > span:nth-child(4) i { transition-delay: 360ms; }
+.lz-vs.is-in .mv-sizes > span i { transform: scaleY(var(--h)); }
+.mv-sizes em { font-size: 9.5px; font-style: normal; font-weight: 700; color: rgba(214, 220, 245, 0.62); line-height: 1; }
+.mv-sizes small { align-self: center; margin-left: 4px; display: inline-flex; align-items: center; gap: 6px; }
+.mv-sizes small::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #3fe0b0; animation: lzLive 1.6s ease-in-out infinite; }
+
+/* 03 · «En unas semanas» / contador con cuenta atrás */
+.mv-wait svg { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: var(--ink-3); stroke-width: 1.8; stroke-linecap: round; }
+.mv-wait span { padding: 5px 10px; border-radius: 7px; background: color-mix(in srgb, var(--ink) 6%, transparent); font-size: 12.5px; font-weight: 600; color: var(--ink-3); }
+.mv-count { gap: 8px; }
+.mv-count b { min-width: 1.2em; font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: #f3f5ff; }
+.mv-of { font-size: 12.5px; color: rgba(214, 220, 245, 0.62); }
+.mv-bar { position: relative; flex: 0 1 90px; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, 0.1); overflow: hidden; }
+.mv-bar i { position: absolute; inset: 0; background: #8fa0ff; transform-origin: left; transform: scaleX(var(--f, 0.4)); transition: transform 300ms var(--ease-out); }
+.mv-t { padding: 3px 7px; border-radius: 6px; background: rgba(255, 255, 255, 0.07); font-size: 11.5px; font-weight: 600; color: rgba(232, 236, 255, 0.8); }
+
+/* 04 · Tú solo / tú y tus compradores (la red se dibuja y aparecen las personas) */
+.mv-people { position: relative; width: 150px; }
+.mv-people i {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ink) 12%, transparent);
+  font-size: 9.5px;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--ink-2);
+}
+.mv-people i.is-you { width: 28px; height: 28px; font-size: 10.5px; background: var(--ink); color: var(--hero-ground, #fff); }
+.mv-net i { position: absolute; left: var(--x); top: var(--y); translate: -50% -50%; background: rgba(143, 160, 255, 0.22); color: #dfe4ff; scale: 0; transition: scale 360ms cubic-bezier(0.3, 1.6, 0.5, 1); transition-delay: calc(var(--d, 0) * 110ms + 300ms); }
+.mv-net i.is-you { background: #f3f5ff; color: #0b0d1c; scale: 1; }
+.lz-vs.is-in .mv-net i { scale: 1; }
+.mv-lines { position: absolute; inset: 0; width: 150px; height: 40px; overflow: visible; }
+.mv-lines path { fill: none; stroke: rgba(143, 160, 255, 0.45); stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1200ms var(--ease-out) 200ms; }
+.lz-vs.is-in .mv-lines path { stroke-dashoffset: 0; }
+
+@media (max-width: 760px) {
+  .lz-vs-row > span { padding: 14px 18px; gap: 10px; }
+  .lz-vs-row > span[role="rowheader"] { padding: 0 0 8px; flex-direction: row; align-items: baseline; gap: 10px; }
+  .lz-vs-row > span[role="cell"]:not(.is-us)::before,
+  .lz-vs-row > .is-us::before { display: block; font-size: 12px; }
+  .mv-boxes { grid-template-columns: repeat(8, 12px); }
+  .mv-boxes i { height: 12px; }
+}
+.lz-vs-hrow > span { flex-direction: row; align-items: flex-end; }
+.lz-vs-hrow > .is-us { align-items: center; gap: 9px; }
+/* Red más abierta: las personas no se pisan */
+.mv-net { width: 165px; height: 44px; }
+.mv-net i { width: 20px; height: 20px; }
+.mv-net i.is-you { width: 26px; height: 26px; }
+.mv-lines { width: 165px; height: 44px; }
+/* En móvil la etiqueta va en su propia línea: sin el punto separador */
+@media (max-width: 760px) {
+  .lz-vs-row > span[role="cell"]:not(.is-us)::before { content: 'Preventa normal'; }
+  .lz-vs-row > .is-us::before { content: 'Con Tuko'; }
+  :root:lang(en) .lz-vs-row > span[role="cell"]:not(.is-us)::before { content: 'Regular pre-order'; }
+  :root:lang(en) .lz-vs-row > .is-us::before { content: 'With Tuko'; }
+}
+
+/* ══ Entrada al llegar con el scroll ══
+   Las filas suben una tras otra; la franja oscura de Tuko «cae» de arriba abajo (cada celda se descubre con un
+   recorte desde arriba, en cascada), y el texto de la columna gris llega un instante antes que el de Tuko. */
+.lz-vs.is-ready .lz-vs-row > span { opacity: 0; transform: translateY(14px); transition: opacity 600ms ease, transform 800ms var(--ease-out); }
+.lz-vs.is-ready .lz-vs-row > .is-us { clip-path: inset(0 0 100% 0); transform: none; transition: opacity 300ms ease, clip-path 700ms cubic-bezier(0.65, 0, 0.35, 1); }
+.lz-vs.is-in .lz-vs-row > span { opacity: 1; transform: none; }
+.lz-vs.is-in .lz-vs-row > .is-us { clip-path: inset(0 0 -2px 0); }
+.lz-vs.is-in .lz-vs-row:nth-child(1) > * { transition-delay: 0ms; }
+.lz-vs.is-in .lz-vs-row:nth-child(2) > * { transition-delay: 120ms; }
+.lz-vs.is-in .lz-vs-row:nth-child(3) > * { transition-delay: 240ms; }
+.lz-vs.is-in .lz-vs-row:nth-child(4) > * { transition-delay: 360ms; }
+.lz-vs.is-in .lz-vs-row:nth-child(5) > * { transition-delay: 480ms; }
+.lz-vs.is-in .lz-vs-row > .is-us { transition-delay: calc(var(--row, 0) * 1ms); }
+.lz-vs.is-in .lz-vs-row:nth-child(1) > .is-us { transition-delay: 150ms; }
+.lz-vs.is-in .lz-vs-row:nth-child(2) > .is-us { transition-delay: 330ms; }
+.lz-vs.is-in .lz-vs-row:nth-child(3) > .is-us { transition-delay: 510ms; }
+.lz-vs.is-in .lz-vs-row:nth-child(4) > .is-us { transition-delay: 690ms; }
+.lz-vs.is-in .lz-vs-row:nth-child(5) > .is-us { transition-delay: 870ms; }
+/* Los dibujos de Tuko empiezan cuando su celda ya ha caído */
+.lz-vs.is-ready .mv-refund svg { transition-delay: 500ms; }
+.lz-vs.is-ready .mv-sizes > span i { transition-delay: 700ms; }
+.lz-vs.is-ready .mv-lines path { transition-delay: 1100ms; }
+.lz-vs.is-ready .mv-net i { transition-delay: calc(var(--d, 0) * 110ms + 1200ms); }
+
+/* ══ Latido en directo ══ La talla que se compra crece y se ilumina un instante; al llegar a 30, todo en verde */
+.mv-sizes > span i { transition: transform 600ms var(--ease-out), filter 400ms ease; }
+.mv-sizes > span.is-bump i { animation: lzSizeBump 700ms ease-out; }
+@keyframes lzSizeBump { 0% { filter: brightness(1.7) drop-shadow(0 0 6px rgba(143, 160, 255, 0.9)); } 100% { filter: none; } }
+.mv-sizes > span.is-bump em { color: #f3f5ff; }
+.mv-count b { transition: color 300ms ease; }
+.lz-vs.is-full .mv-bar i { background: #3fe0b0; }
+.lz-vs.is-full .mv-t { background: rgba(63, 224, 176, 0.16); color: #3fe0b0; }
+.lz-vs.is-full .mv-count b { color: #dffaf0; }
+/* Tras la entrada, los cambios del latido van sin retraso */
+.lz-vs.is-live .mv-sizes > span i { transition-delay: 0ms; }
+.mv-wait { min-width: 0; }
+.mv-wait span { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+/* La primera columna con aire a la izquierda: al pasar el ratón, el fondo gris ya no queda pegado al texto */
+@media (min-width: 761px) {
+  .lz-vs-row > span[role="rowheader"],
+  .lz-vs-hrow > span:first-child { padding-left: 22px; }
+}
