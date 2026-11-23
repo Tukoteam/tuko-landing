@@ -100,6 +100,12 @@ html:not([data-theme="dark"]) header > nav:not(.is-scrolled) .lang-opt.active { 
 @keyframes lzRise { from { opacity: 0.01; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 @keyframes lzFocus { from { opacity: 0.01; filter: blur(12px); transform: translateY(0.06em); } to { opacity: 1; filter: blur(0); transform: none; } }
 
+/* Pantallas altas (ordenador): centro óptico. El bloque sube un poco por encima del centro real, más cuanto más
+   alta es la pantalla (0 px hasta 800 px de alto, ~65 px a 1015 px, tope ~85 px); en portátiles bajos no cambia. */
+@media (min-width: 961px) and (min-height: 820px) {
+  .lz-grid { padding-bottom: clamp(88px, calc(88px + (100svh - 800px) * 0.6), 260px); }
+}
+
 @media (max-width: 960px) {
   .lz-grid { grid-template-columns: minmax(0, 1fr); gap: 44px; padding: calc(var(--nav-h, 64px) + 32px) 20px 48px; text-align: center; }
 }
