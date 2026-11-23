@@ -35,7 +35,9 @@ function loadPartials() {
   for (const name of fs.readdirSync(partialsDir)) {
     if (!name.endsWith('.html')) continue;
     const key = name.replace(/\.html$/, '');
-    map.set(key, fs.readFileSync(path.join(partialsDir, name), 'utf8').trimEnd());
+    // Siempre con saltos LF: en Windows git saca los parciales con CRLF y el HTML generado no coincidiría con el
+    // de la comprobación de GitHub (Linux, LF), que exige que compilar no cambie nada.
+    map.set(key, fs.readFileSync(path.join(partialsDir, name), 'utf8').replace(/\r\n/g, '\n').trimEnd());
   }
   return map;
 }
