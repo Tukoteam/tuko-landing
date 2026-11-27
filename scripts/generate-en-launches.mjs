@@ -20,7 +20,7 @@ const EN_URL = 'https://tukoteam.com/en/drops';
 
 const SEO = {
   title: 'Drops and pre-orders on Shopify · Tuko',
-  desc: 'Open a launch with a buyer goal and a launch price. Hit it and it completes; miss it and everyone is refunded. €1 per buyer.',
+  desc: 'Open a launch with a buyer goal and a launch price. Hit it and it completes; miss it and everyone is refunded. From $9.90 every 30 days.',
   keywords: 'shopify pre-order, launch a drop, clothing drop, pre-order with goal, shopify crowdfunding, shopify limited edition, sell before you make, shopify product launch, group buying',
   ogTitle: 'Tuko Drops: launch only what already has buyers',
   ogDesc: 'Drops and pre-orders with a buyer goal for your Shopify store. Hit it and it completes. Miss it and everyone is refunded.',
@@ -38,8 +38,8 @@ const T = [
   [' y todos se lo llevan con descuento. Si no, se devuelve el dinero a todos.', ' and everyone gets the discount. Miss it and everyone is refunded.'],
   ['Instalar gratis en Shopify', 'Install free on Shopify'],
   ['Ver cómo funciona', 'See how it works'],
-  ['Pagas 1 € por comprador, solo si se completa', 'You pay €1 per buyer, only if it completes'],
-  ['De 5 a 100 personas · de 3 a 30 días', '5 to 100 people · 3 to 30 days'],
+  ['Solo pagas si se completa, desde 9,90 $', 'You only pay if it completes, from $9.90'],
+  ['Desde 3 unidades · de 3 a 60 días', 'From 3 units · 3 to 60 days'],
   ['Lanzamiento · Sudadera Ed. 01', 'Launch · Hoodie Ed. 01'],
   ['30 personas · Cierra el 15 nov', '30 people · Closes Nov 15'],
   ['>Pedidos ', '>Orders '],
@@ -82,7 +82,7 @@ const T = [
   ['<em>Precio de lanzamiento</em><b>39 € × 30</b>', '<em>Launch price</em><b>€39 × 30</b>'],
   ['<em>Ventas</em><b>1.170 €</b>', '<em>Sales</em><b>€1,170</b>'],
   ['<em>Ahorro de tus clientes</em><b>300 €</b>', '<em>Your customers save</em><b>€300</b>'],
-  ['<em>Tuko · 1 € × 25 (5 gratis)</em><b>25 €</b>', '<em>Tuko · €1 × 25 (5 free)</em><b>€25</b>'],
+  ['<em>Tuko · hasta 30 unidades</em><b>9,90 $</b>', '<em>Tuko · up to 30 units</em><b>$9.90</b>'],
   ['<em>Devuelto a 26 personas</em><b>468 €</b>', '<em>Refunded to 26 people</em><b>€468</b>'],
   ['<em>Stock que nadie ha pedido</em>', '<em>Stock nobody ordered</em>'],
   ['<em>Tuko</em><b>0 €</b>', '<em>Tuko</em><b>€0</b>'],
@@ -195,26 +195,26 @@ const T = [
   // Precio
   ['<p class="lz-eyebrow">Precio</p>', '<p class="lz-eyebrow">Pricing</p>'],
   ['Pagas cuando vendes.', 'You pay when you sell.'],
-  ['Ni un euro antes.', 'Not a cent before.'],
-  ['<b>1 €</b><span>por comprador</span>', '<b>€1</b><span>per buyer</span>'],
-  ['Solo si el lanzamiento se completa. Si no se llega, <b>no le pagas nada a Tuko</b>.', 'Only if the launch completes. If it falls short, <b>you pay Tuko nothing</b>.'],
-  ['Los 5 primeros compradores de cada ciclo de 30 días, gratis', 'The first 5 buyers in every 30-day cycle are free'],
-  ['Nunca más de 200 € por ciclo, vendas lo que vendas', 'Never more than €200 per cycle, however much you sell'],
+  ['Ni un céntimo antes.', 'Not a cent before.'],
+  ['<b>9,90 $</b><span>cada 30 días, hasta 30 unidades</span>', '<b>$9.90</b><span>every 30 days, up to 30 units</span>'],
+  ['Solo cuentan los drops que se completan. Si no se llega, <b>no le pagas nada a Tuko</b>.', 'Only drops that complete count. If it falls short, <b>you pay Tuko nothing</b>.'],
+  ['Tu primer drop es gratis. Después, un tramo cada 30 días: hasta 60 unidades, 19,80 $; hasta 100, 35,20 $; hasta 200, 59,40 $', 'Your first drop is free. After that, one tier every 30 days: up to 60 units, $19.80; up to 100, $35.20; up to 200, $59.40'],
+  ['Nunca más de 89,10 $ cada 30 días, vendas lo que vendas', 'Never more than $89.10 every 30 days, however much you sell'],
   ['Sin cuota fija y sin comisión sobre tus ventas', 'No fixed fee and no commission on your sales'],
   ['Haz la cuenta', 'Run the numbers'],
-  ['Personas del lanzamiento', 'People in the launch'],
+  ['Unidades vendidas en el drop', 'Units sold in the drop'],
   ['<em>Precio con tu descuento</em>', '<em>Price with your discount</em>'],
-  ['Lo que paga cada persona, ya con el descuento que eliges.', 'What each person pays, with the discount you choose already applied.'],
+  ['Lo que paga cada unidad, ya con el descuento que eliges.', 'What each unit costs, with the discount you choose already applied.'],
   ['Precio con tu descuento, en euros', 'Price with your discount, in euros'],
   ['<b class="lz-calc-p">39 €</b>', '<b class="lz-calc-p">€39</b>'],
   ['<em>Vendes</em><b class="lz-calc-sales">1.170 €</b>', '<em>You sell</em><b class="lz-calc-sales">€1,170</b>'],
-  ['<em>Pagas a Tuko</em><b class="lz-calc-fee">25 €</b>', '<em>You pay Tuko</em><b class="lz-calc-fee">€25</b>'],
-  ['<em>Te quedas</em><b class="lz-calc-keep">1.145 €</b>', '<em>You keep</em><b class="lz-calc-keep">€1,145</b>'],
+  ['<em>Pagas a Tuko</em><b class="lz-calc-fee">9,90 $</b>', '<em>You pay Tuko</em><b class="lz-calc-fee">$9.90</b>'],
+  ['<em>Te quedas</em><b class="lz-calc-keep">≈ 1.161 €</b>', '<em>You keep</em><b class="lz-calc-keep">≈ €1,161</b>'],
   ['<em>Tú</em>', '<em>You</em>'],
-  ['De cada 100 € que vendes, Tuko se lleva <b class="lz-calc-pct">2,1 €</b>', 'Out of every €100 you sell, Tuko takes <b class="lz-calc-pct">€2.1</b>'],
+  ['De cada 100 € que vendes, Tuko se lleva <b class="lz-calc-pct">≈ 0,8 €</b>', 'Out of every €100 you sell, Tuko takes <b class="lz-calc-pct">≈ €0.8</b>'],
   ['Se devuelve el dinero a todos. Tuko: <b>0 €</b>', 'Everyone is refunded. Tuko: <b>€0</b>'],
   ['¿Y si no se completa?', 'What if it doesn’t complete?'],
-  ['Con un solo lanzamiento en el ciclo: los 5 gratis se comparten con tus grupos y otros lanzamientos. Sin IVA ni la comisión de tu pasarela de pago.', 'With a single launch in the cycle: the 5 free are shared with your groups and other launches. Excludes VAT and your payment provider’s fee.'],
+  ['Con un solo drop en los 30 días (el tramo suma lo que vendes con grupos y drops). Si es tu primer drop, es gratis. Tuko cobra en dólares; el resto, cambio aproximado en euros. Sin IVA ni la comisión de tu pasarela de pago.', 'With a single drop in the 30 days (the tier adds up what you sell with groups and drops). If it’s your first drop, it’s free. Tuko bills in US dollars; the rest is an approximate conversion to euros. Excludes VAT and your payment provider’s fee.'],
   ['Precio de lanzamiento', 'Launch price'],
 
   // Preguntas
@@ -240,7 +240,7 @@ const T = [
   ['Sí, mientras el lanzamiento siga abierto. Se le devuelve el 100 % y su plaza queda libre para otra persona.',
     'Yes, while the launch is still open. They get 100% back and their spot opens up for someone else.'],
   ['¿Qué límites tiene?', 'What are the limits?'],
-  ['De 5 a 100 personas, de 3 a 30 días y un descuento de 0 a 90 % sobre tu precio normal (puedes no poner ninguno).', '5 to 100 people, 3 to 30 days and a discount of 0 to 90% off your regular price (you can leave it at zero).'],
+  ['Desde 3 unidades, con un máximo o sin límite, de 3 a 60 días y un descuento de 0 a 90 % sobre tu precio normal (puedes no poner ninguno).', 'From 3 units, with a maximum or no limit, 3 to 60 days and a discount of 0 to 90% off your regular price (you can leave it at zero).'],
 
   // Preguntas por momento
   ['Preguntas por momento del lanzamiento', 'Questions by launch moment'],
@@ -279,6 +279,8 @@ const T = [
 
   // Palabras sueltas (al final por ser las más cortas)
   ['>Completado<', '>Complete<'],
+  // Precios por tramos (términos 9.6)
+  ['<em>Unidades</em>', '<em>Units</em>'],
 ];
 
 function translate(html) {

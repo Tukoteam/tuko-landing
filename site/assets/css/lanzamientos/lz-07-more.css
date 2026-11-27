@@ -85,8 +85,8 @@ html[data-theme="dark"] .lz-vs-row > .is-us { background: rgba(255, 255, 255, 0.
 }
 .lz-price-main, .lz-calc { padding: clamp(28px, 4vw, 48px); }
 .lz-calc { border-left: 1px solid var(--lz-edge); background: color-mix(in srgb, var(--ink) 2.5%, transparent); }
-.lz-price-big { display: flex; align-items: baseline; gap: 14px; margin: 0; }
-.lz-price-big b { font-size: clamp(64px, 8vw, 104px); font-weight: 700; font-stretch: 106%; line-height: 0.9; letter-spacing: -0.05em; color: var(--ink); }
+.lz-price-big { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin: 0; }
+.lz-price-big b { white-space: nowrap; font-size: clamp(52px, 6.2vw, 84px); font-weight: 700; font-stretch: 106%; line-height: 0.9; letter-spacing: -0.05em; color: var(--ink); }
 .lz-price-big span { font-family: 'Roboto Serif', Georgia, serif; font-size: clamp(20px, 2vw, 26px); font-style: italic; color: var(--lz-acc); }
 .lz-price-lead { margin: 18px 0 0; font-size: 17px; line-height: 1.5; color: var(--ink-2); }
 .lz-price-lead b { color: var(--ink); font-weight: 650; }

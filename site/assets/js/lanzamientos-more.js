@@ -2,7 +2,8 @@
  * Página Lanzamientos · «Lo que ve tu cliente» y el cálculo del precio.
  * - El móvil: el contador sube de 17 a 30 y van cayendo los avisos (asuntos reales de los emails de Tuko);
  *   la lista de la izquierda marca el aviso de cada momento. En bucle mientras se ve; se pausa fuera de pantalla.
- * - La calculadora: 1 € por comprador si se completa, los 5 primeros del ciclo gratis y como mucho 200 €.
+ * - La calculadora: un tramo cada 30 días según las unidades vendidas (9,90 $ hasta 30 … 89,10 $ como máximo),
+ *   solo si se completa; lo que te quedas, con un cambio aproximado de dólar a euro.
  * Datos de ejemplo.
  */
 (function () {
@@ -449,6 +450,9 @@
       return v.toLocaleString(EN ? 'en-GB' : 'es-ES', { minimumFractionDigits: dec || 0, maximumFractionDigits: dec || 0, useGrouping: 'always' });
     };
     var eur = function (v, dec) { return EN ? '€' + fmt(v, dec) : fmt(v, dec) + ' €'; };
+    var usd = function (v) { return EN ? '$' + fmt(v, 2) : fmt(v, 2) + ' $'; };
+    // Cambio aproximado dólar → euro (solo para «Te quedas» y el % de la calculadora)
+    var USD_EUR = 0.92;
     var paintRange = function (input) {
       var pct = (input.value - input.min) / (input.max - input.min) * 100;
       input.style.setProperty('--v', pct + '%');
@@ -466,7 +470,10 @@
         var k = Math.min(1, (now - t0) / 420);
         var e = 1 - Math.pow(1 - k, 3);
         st.v = from + (to - from) * e;
-        el.textContent = suffix ? fmt(st.v, dec) + suffix : eur(Math.round(st.v * Math.pow(10, dec || 0)) / Math.pow(10, dec || 0), dec);
+        var r = Math.round(st.v * Math.pow(10, dec || 0)) / Math.pow(10, dec || 0);
+        el.textContent = suffix === 'usd' ? (r === 0 ? (EN ? '$0' : '0 $') : usd(r))
+          : suffix === 'approx' ? '≈ ' + eur(r, dec)
+          : suffix ? fmt(st.v, dec) + suffix : eur(r, dec);
         if (k < 1) st.raf = requestAnimationFrame(step);
       };
       st.raf = requestAnimationFrame(step);
@@ -476,15 +483,18 @@
       var p = +inP.value;
       var off = fail && fail.checked;
       var sales = n * p;
-      var fee = off ? 0 : Math.min(200, Math.max(0, n - 5));
-      var keep = off ? 0 : sales - fee;
+      // Tramo del periodo de 30 días (términos 9.6), en dólares como lo cobra Shopify
+      var tierUSD = n <= 30 ? 9.9 : n <= 60 ? 19.8 : n <= 100 ? 35.2 : n <= 200 ? 59.4 : 89.1;
+      var fee = off ? 0 : tierUSD;
+      var feeEUR = fee * USD_EUR;
+      var keep = off ? 0 : sales - feeEUR;
       calc.querySelector('.lz-calc-n').textContent = n;
       calc.querySelector('.lz-calc-p').textContent = eur(p);
       roll('.lz-calc-sales', off ? 0 : sales, 0);
-      roll('.lz-calc-fee', fee, 0);
-      roll('.lz-calc-keep', keep, 0);
-      var pct = sales ? fee / sales * 100 : 0;
-      calc.querySelector('.lz-calc-pct').textContent = eur(Math.round(pct * 10) / 10, 1);
+      roll('.lz-calc-fee', fee, 2, 'usd');
+      roll('.lz-calc-keep', keep, 0, 'approx');
+      var pct = sales ? feeEUR / sales * 100 : 0;
+      calc.querySelector('.lz-calc-pct').textContent = '≈ ' + eur(Math.round(pct * 10) / 10, 1);
       calc.classList.toggle('is-fail', !!off);
       if (split) split.style.setProperty('--t', Math.max(pct, fee > 0 ? 0.8 : 0).toFixed(2) + '%');
       paintRange(inN);

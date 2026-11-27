@@ -11,7 +11,8 @@ En qué se diferencia: no es un descuento para toda la tienda (solo baja el prec
 - [Tuko en la Shopify App Store](https://apps.shopify.com/tuko): instalación y condiciones actuales
 - [Página principal](https://tukoteam.com/): qué es Tuko y cómo funciona la compra en grupo
 - [Home in English](https://tukoteam.com/en/): the same page in English
-- [Drops](https://tukoteam.com/drops): drops y preventas con un objetivo de compradores (de 5 a 100 personas, de 3 a 30 días) y un precio de salida; si se llega, se completa y todos se lo llevan con el descuento; si no, se devuelve el dinero a todos (1 € por comprador)
+- Precio: sin cuota fija ni comisión. Los 5 primeros grupos y el primer drop son gratis; después, un tramo cada 30 días según lo vendido con Tuko (cada grupo completado cuenta 1 y, en los drops, cada unidad vendida): hasta 30, 9,90 USD; hasta 60, 19,80 USD; hasta 100, 35,20 USD; hasta 200, 59,40 USD; y como máximo 89,10 USD.
+- [Drops](https://tukoteam.com/drops): drops y preventas con un mínimo de unidades (desde 3, con un máximo o sin límite, de 3 a 60 días) y un precio de salida; si se llega al mínimo, se completa y todos se lo llevan; si no, se devuelve el dinero a todos
 
 ## Blog
 
