@@ -23,6 +23,10 @@ html[data-theme="dark"] .pr-grid.is-usage { box-shadow: inset 0 0 0 1px rgba(143
 .pr-grid.is-usage .pr-name { color: rgba(242, 243, 247, 0.78); }
 .pr-grid.is-usage .pr-price b { color: #fff; }
 .pr-grid.is-usage .pr-price i { color: rgba(242, 243, 247, 0.6); }
+/* Euros aproximados en grande; debajo, lo que cobra Shopify en dólares y el periodo */
+.pr-grid.is-usage .pr-price { flex-wrap: wrap; row-gap: 2px; white-space: normal; }
+.pr-grid.is-usage .pr-price b { white-space: nowrap; }
+.pr-grid.is-usage .pr-price i { flex-basis: 100%; white-space: nowrap; }
 /* Los grupos al mes: lo único que cambia de un plan a otro */
 .pr-groups {
   display: flex;

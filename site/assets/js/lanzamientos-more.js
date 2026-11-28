@@ -471,7 +471,7 @@
         var e = 1 - Math.pow(1 - k, 3);
         st.v = from + (to - from) * e;
         var r = Math.round(st.v * Math.pow(10, dec || 0)) / Math.pow(10, dec || 0);
-        el.textContent = suffix === 'usd' ? (r === 0 ? (EN ? '$0' : '0 $') : usd(r))
+        el.textContent = suffix === 'usd' ? (r === 0 ? eur(0) : '≈ ' + eur(Math.round(r * USD_EUR)) + ' · ' + usd(r))
           : suffix === 'approx' ? '≈ ' + eur(r, dec)
           : suffix ? fmt(st.v, dec) + suffix : eur(r, dec);
         if (k < 1) st.raf = requestAnimationFrame(step);
