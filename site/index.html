@@ -240,8 +240,8 @@
   ]
 }
 </script>
-<link rel="preload" as="style" href="/assets/css/home.css?v=c4960ef1">
-<link rel="stylesheet" href="/assets/css/home.css?v=c4960ef1">
+<link rel="preload" as="style" href="/assets/css/home.css?v=a63411ab">
+<link rel="stylesheet" href="/assets/css/home.css?v=a63411ab">
 <link rel="stylesheet" href="/assets/css/tuko-theme.css?v=31135431">
 <link rel="prefetch" href="blog/" as="document">
 </head>
@@ -1604,8 +1604,8 @@
 <section class="pricing pr" id="precios">
   <div class="pricing-inner">
     <div class="fade-up"><span class="s-badge" data-i18n="pricing_badge">Precios</span></div>
-    <h2 class="s-title fade-up d1" data-i18n="pricing_title">Pagas solo por los grupos que se completan</h2>
-    <p class="s-sub fade-up d2" data-i18n="pricing_sub">Sin cuota fija y sin comisión sobre tus ventas. Pagas 1 € por grupo completado y, en los lanzamientos, 1 € por comprador. Los 5 primeros de cada ciclo de 30 días son gratis y nunca pagas más de 200 € por ciclo.</p>
+    <h2 class="s-title fade-up d1" data-i18n="pricing_title">Pagas según lo que vendes con Tuko</h2>
+    <p class="s-sub fade-up d2" data-i18n="pricing_sub">Sin cuota fija y sin comisión sobre tus ventas. Tus 5 primeros grupos y tu primer drop son gratis. Después, cada 30 días pagas un tramo según lo que vendas con Tuko: cada grupo completado cuenta 1 y, en los drops, cada unidad vendida. Si no vendes nada, no pagas nada.</p>
 
     <!-- La tabla la construye home-pricing.js con las tarjetas de abajo (ocultas; las traducciones las rellenan) -->
     <div class="pr-table fade-up d3" data-pr-table></div>
@@ -1613,55 +1613,70 @@
     <div class="pr-src" hidden>
       <p data-i18n="pricing_all_title">Siempre incluido</p>
     <div class="pricing-grid">
-      <article class="pricing-card is-soon fade-up d1">
+      <article class="pricing-card fade-up d1">
         <h3 class="pricing-name" data-i18n="pricing_p1_name">Para empezar</h3>
         <div class="pricing-price-row">
           <span class="pricing-amount" data-i18n="pricing_p1_price">0 €</span>
-          <span class="pricing-period" data-i18n="pricing_p1_per">/ grupo</span>
+          <span class="pricing-period" data-i18n="pricing_p1_per">/ una vez</span>
         </div>
-        <ul class="pricing-features" data-i18n="pricing_p1_rows"><li>Uso: Los 5 primeros grupos o compradores de cada ciclo</li><li>Comisión sobre tus ventas: 0 %</li><li>Cuota fija: 0 €</li><li>Productos a la vez: Ilimitados</li><li>Grupos y lanzamientos: Sí</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li>Soporte: Sí</li><li>Permanencia: Ninguna</li></ul>
+        <ul class="pricing-features" data-i18n="pricing_p1_rows"><li>Uso: 5 grupos y 1 drop gratis, una sola vez</li><li>Comisión sobre tus ventas: 0 %</li><li>Cuota fija: 0 €</li><li>Productos a la vez: Ilimitados</li><li>Grupos y drops: Sí</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li>Soporte: Sí</li><li>Permanencia: Ninguna</li></ul>
         <a class="pricing-cta is-secondary" aria-disabled="true" data-i18n="pricing_p1_cta">Empezar gratis</a>
       </article>
-
-      <article class="pricing-card is-soon fade-up d2">
-        <h3 class="pricing-name" data-i18n="pricing_p2_name">Grupos</h3>
+      <article class="pricing-card fade-up d2">
+        <h3 class="pricing-name" data-i18n="pricing_p2_name">Hasta 30</h3>
         <div class="pricing-price-row">
-          <span class="pricing-amount" data-i18n="pricing_p2_price">1 €</span>
-          <span class="pricing-period" data-i18n="pricing_p2_per">/ grupo</span>
+          <span class="pricing-amount" data-i18n="pricing_p2_price">≈ 9 €</span>
+          <span class="pricing-period" data-i18n="pricing_p2_per">9,90 $ / 30 días</span>
         </div>
-        <ul class="pricing-features" data-i18n="pricing_p2_rows"><li>Uso: Solo cuando el grupo se completa</li><li>Comisión sobre tus ventas: 0 %</li><li>Cuota fija: 0 €</li><li>Productos a la vez: Ilimitados</li><li>Grupos y lanzamientos: Sí</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li>Soporte: Sí</li><li>Permanencia: Ninguna</li></ul>
+        <ul class="pricing-features" data-i18n="pricing_p2_rows"><li>Uso: De 1 a 30 ventas</li><li>Comisión sobre tus ventas: 0 %</li><li>Cuota fija: 0 €</li><li>Productos a la vez: Ilimitados</li><li>Grupos y drops: Sí</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li>Soporte: Sí</li><li>Permanencia: Ninguna</li></ul>
         <a class="pricing-cta is-secondary" aria-disabled="true" data-i18n="pricing_p2_cta">Elegir plan</a>
       </article>
-
-      <article class="pricing-card is-soon fade-up d3">
-        <h3 class="pricing-name" data-i18n="pricing_p3_name">Lanzamientos</h3>
+      <article class="pricing-card fade-up d3">
+        <h3 class="pricing-name" data-i18n="pricing_p3_name">Hasta 60</h3>
         <div class="pricing-price-row">
-          <span class="pricing-amount" data-i18n="pricing_p3_price">1 €</span>
-          <span class="pricing-period" data-i18n="pricing_p3_per">/ comprador</span>
+          <span class="pricing-amount" data-i18n="pricing_p3_price">≈ 18 €</span>
+          <span class="pricing-period" data-i18n="pricing_p3_per">19,80 $ / 30 días</span>
         </div>
-        <ul class="pricing-features" data-i18n="pricing_p3_rows"><li>Uso: Solo si el lanzamiento se completa</li><li>Comisión sobre tus ventas: 0 %</li><li>Cuota fija: 0 €</li><li>Productos a la vez: Ilimitados</li><li>Grupos y lanzamientos: Sí</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li>Soporte: Sí</li><li>Permanencia: Ninguna</li></ul>
+        <ul class="pricing-features" data-i18n="pricing_p3_rows"><li>Uso: De 31 a 60 ventas</li><li>Comisión sobre tus ventas: 0 %</li><li>Cuota fija: 0 €</li><li>Productos a la vez: Ilimitados</li><li>Grupos y drops: Sí</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li>Soporte: Sí</li><li>Permanencia: Ninguna</li></ul>
         <a class="pricing-cta is-secondary" aria-disabled="true" data-i18n="pricing_p3_cta">Elegir plan</a>
       </article>
-
       <article class="pricing-card fade-up d4">
-        <h3 class="pricing-name" data-i18n="pricing_p4_name">Máximo</h3>
+        <h3 class="pricing-name" data-i18n="pricing_p4_name">Hasta 100</h3>
         <div class="pricing-price-row">
-          <span class="pricing-amount" data-i18n="pricing_p4_price">200 €</span>
-          <span class="pricing-period" data-i18n="pricing_p4_per">/ ciclo</span>
+          <span class="pricing-amount" data-i18n="pricing_p4_price">≈ 32 €</span>
+          <span class="pricing-period" data-i18n="pricing_p4_per">35,20 $ / 30 días</span>
         </div>
-        <ul class="pricing-features" data-i18n="pricing_p4_rows"><li>Uso: Nunca pagas más en 30 días, vendas lo que vendas</li><li>Comisión sobre tus ventas: 0 %</li><li>Cuota fija: 0 €</li><li>Productos a la vez: Ilimitados</li><li>Grupos y lanzamientos: Sí</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li>Soporte: Sí</li><li>Permanencia: Ninguna</li></ul>
-        <a href="#solicitud" class="pricing-cta is-secondary" data-i18n="pricing_p4_cta">Elegir plan</a>
+        <ul class="pricing-features" data-i18n="pricing_p4_rows"><li>Uso: De 61 a 100 ventas</li><li>Comisión sobre tus ventas: 0 %</li><li>Cuota fija: 0 €</li><li>Productos a la vez: Ilimitados</li><li>Grupos y drops: Sí</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li>Soporte: Sí</li><li>Permanencia: Ninguna</li></ul>
+        <a class="pricing-cta is-secondary" aria-disabled="true" data-i18n="pricing_p4_cta">Elegir plan</a>
+      </article>
+      <article class="pricing-card fade-up d1">
+        <h3 class="pricing-name" data-i18n="pricing_p5_name">Hasta 200</h3>
+        <div class="pricing-price-row">
+          <span class="pricing-amount" data-i18n="pricing_p5_price">≈ 55 €</span>
+          <span class="pricing-period" data-i18n="pricing_p5_per">59,40 $ / 30 días</span>
+        </div>
+        <ul class="pricing-features" data-i18n="pricing_p5_rows"><li>Uso: De 101 a 200 ventas</li><li>Comisión sobre tus ventas: 0 %</li><li>Cuota fija: 0 €</li><li>Productos a la vez: Ilimitados</li><li>Grupos y drops: Sí</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li>Soporte: Sí</li><li>Permanencia: Ninguna</li></ul>
+        <a class="pricing-cta is-secondary" aria-disabled="true" data-i18n="pricing_p5_cta">Elegir plan</a>
+      </article>
+      <article class="pricing-card fade-up d2">
+        <h3 class="pricing-name" data-i18n="pricing_p6_name">Máximo</h3>
+        <div class="pricing-price-row">
+          <span class="pricing-amount" data-i18n="pricing_p6_price">≈ 82 €</span>
+          <span class="pricing-period" data-i18n="pricing_p6_per">89,10 $ / 30 días</span>
+        </div>
+        <ul class="pricing-features" data-i18n="pricing_p6_rows"><li>Uso: Más de 200, nunca pagas más</li><li>Comisión sobre tus ventas: 0 %</li><li>Cuota fija: 0 €</li><li>Productos a la vez: Ilimitados</li><li>Grupos y drops: Sí</li><li>Rescate de grupos: Sí</li><li>Email marketing: Sí</li><li>Emails de estado de Tuko: Sí</li><li>Soporte: Sí</li><li>Permanencia: Ninguna</li></ul>
+        <a class="pricing-cta is-secondary" aria-disabled="true" data-i18n="pricing_p6_cta">Elegir plan</a>
       </article>
     </div>
     </div>
 
-    <p class="pricing-legal fade-up" data-i18n="pricing_note_groups">Precios sin IVA. Si un grupo o un lanzamiento no se completa, no se cobra. Sin permanencia.</p>
+    <p class="pricing-legal fade-up" data-i18n="pricing_note_groups">Precios sin IVA. Shopify cobra en dólares (lo que ves al lado); los euros son aproximados y dependen del cambio. Si un grupo o un drop no se completa, no cuenta. Al subir de tramo solo pagas la diferencia. Sin permanencia.</p>
     <div class="pricing-links fade-up d1">
       <a href="#faq" data-i18n="pricing_link_faq">¿Te quedan dudas? Mira las preguntas frecuentes</a>
     </div>
   </div>
 </section>
-<script src="/assets/js/home-pricing.js?v=273b183f" defer></script>
+<script src="/assets/js/home-pricing.js?v=84bb4c46" defer></script>
 
 <!-- FAQ -->
 <!-- tuko:partial:home-faq-es -->
@@ -1858,7 +1873,7 @@
 </div>
 
 <script src="/assets/js/home-animations.js?v=2a1f5080"></script>
-<script src="/assets/js/home-ui.js?v=aa562158"></script>
+<script src="/assets/js/home-ui.js?v=5db0a246"></script>
 <script src="/assets/js/tuko-theme.js?v=b2ef7977" defer></script>
 <script src="/assets/js/tuko-form.js?v=ebdb6073" defer></script>
 <script src="/assets/js/ga4-loader.js?v=7593ef4a" defer></script>

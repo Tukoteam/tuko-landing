@@ -40,7 +40,7 @@
     var groups = function (v) { return esc(v); };
     var allTitle = (src.querySelector('[data-i18n="pricing_all_title"]') || {}).textContent || (en ? 'Always included' : 'Siempre incluido');
 
-    var html = '<div class="pr-grid is-usage">';
+    var html = '<div class="pr-grid is-usage is-' + plans.length + '">';
     plans.forEach(function (p, i) {
       html += '<div class="pr-col" style="--i:' + i + '">' +
         '<div class="pr-head">' +

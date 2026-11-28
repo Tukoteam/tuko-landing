@@ -150,7 +150,7 @@
       logoHtml +
       '<canvas class="lz-p-photo" aria-hidden="true"></canvas>' +
       '<span class="lz-p-title">' + (EN ? 'Launch No. ' : 'Lanzamiento Nº ') + pad(launchNo) + ' · ' + L.name + '</span>' +
-      '<span class="lz-p-sub">' + L.goal + (EN ? ' people · Closes ' : ' personas · Cierra el ') + dayLabel(closeDay) + '</span>' +
+      '<span class="lz-p-sub">' + L.goal + (EN ? ' units · Closes ' : ' unidades · Cierra el ') + dayLabel(closeDay) + '</span>' +
       '<span class="lz-p-price">' + (EN ? 'Launch price' : 'Precio de lanzamiento') + ' <b>' + eur(L.price) + '</b> <s>' + eur(L.was) + '</s> · −' + off() + (EN ? '%' : ' %') + '</span>' +
       '<span class="lz-p-note">' + (EN ? 'If it doesn’t fill up, 100% is refunded' : 'Si no se llega, se devuelve el 100 %') + '</span>';
     lines.innerHTML = '';
@@ -227,7 +227,7 @@
     row.className = 'lz-p-made is-new';
     row.innerHTML =
       '<div class="lz-p-rule" style="width:100%"></div>' +
-      '<strong>' + L.goal + (EN ? ' of ' : ' de ') + L.goal + (EN ? ' people' : ' personas') + '</strong>' +
+      '<strong>' + L.goal + (EN ? ' of ' : ' de ') + L.goal + (EN ? ' units' : ' unidades') + '</strong>' +
       '<span>' + (EN ? 'Launch complete · Everyone gets −' + off() + '%' : 'Lanzamiento completado · Todos con −' + off() + ' %') + '</span>' +
       '<div class="lz-p-rule" style="width:100%"></div>' +
       '<div class="lz-p-tot"><span>' + L.goal + ' × ' + eur(L.price) + '</span><b>Total ' + eur(L.goal * L.price) + '</b></div>' +
@@ -284,14 +284,11 @@
     if (!visible) return;
     switch (phase) {
       case 'boot':
-        // Entrada: la impresora se enciende (luz de encendido, prueba de la pantalla «88») y se queda lista
+        // Entrada: la impresora se enciende (luz de encendido) y se queda lista, con el contador a 00
         visual.classList.remove('is-off');
         visual.classList.add('is-boot');
-        countEl.textContent = '88';
-        setTimeout(function () {
-          countEl.textContent = pad(0);
-          visual.classList.remove('is-boot');
-        }, 700);
+        countEl.textContent = pad(0);
+        setTimeout(function () { visual.classList.remove('is-boot'); }, 700);
         phase = 'wake';
         schedule(1500);
         return;

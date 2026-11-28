@@ -1695,8 +1695,8 @@ html[data-theme="dark"] .lz-vs-row > .is-us { background: rgba(255, 255, 255, 0.
 }
 .lz-price-main, .lz-calc { padding: clamp(28px, 4vw, 48px); }
 .lz-calc { border-left: 1px solid var(--lz-edge); background: color-mix(in srgb, var(--ink) 2.5%, transparent); }
-.lz-price-big { display: flex; align-items: baseline; gap: 14px; margin: 0; }
-.lz-price-big b { font-size: clamp(64px, 8vw, 104px); font-weight: 700; font-stretch: 106%; line-height: 0.9; letter-spacing: -0.05em; color: var(--ink); }
+.lz-price-big { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin: 0; }
+.lz-price-big b { white-space: nowrap; font-size: clamp(52px, 6.2vw, 84px); font-weight: 700; font-stretch: 106%; line-height: 0.9; letter-spacing: -0.05em; color: var(--ink); }
 .lz-price-big span { font-family: 'Roboto Serif', Georgia, serif; font-size: clamp(20px, 2vw, 26px); font-style: italic; color: var(--lz-acc); }
 .lz-price-lead { margin: 18px 0 0; font-size: 17px; line-height: 1.5; color: var(--ink-2); }
 .lz-price-lead b { color: var(--ink); font-weight: 650; }
@@ -2406,6 +2406,50 @@ html[data-theme="dark"] .mv-stock small { color: #ff8a9b; }
 .lzp-faces2 .lzw-me { width: 18px; height: 18px; margin-left: -6px; }
 .lzp-faces2 .lzw-me:first-child { margin-left: 0; }
 .lzp-faces2 .lzw-me::before { width: 9px; height: 9px; }
+
+/* ── Tarjeta con la estructura real del drop y el checkout ── */
+.lzw-cdw { margin-top: 2px; }
+.lzw-p { margin-top: 10px; }
+.lzw-ship { max-height: 20px; overflow: hidden; margin: 3px 0 0; font-size: 9.5px; font-weight: 600; color: #4b5563; transition: max-height 400ms var(--ease-out), opacity 300ms ease; }
+.lzw-rem { display: none; }
+.lzp.is-reveal .lzw-rem { display: inline; }
+.lzp.is-reveal .lzw-lim { display: none; }
+.lzp:not(.is-reveal):not(.is-done) .lzp-faces { display: none; }
+.lzp:not(.is-reveal):not(.is-done) .lzw-left { column-gap: 0; }
+.lzw-buy { display: flex; gap: 7px; margin-top: 10px; }
+.lzw-qty { display: flex; flex: 0 0 31%; align-items: center; justify-content: space-between; box-sizing: border-box; height: 38px; padding: 0 9px; overflow: hidden; border-radius: 10px; background: #eef1f7; box-shadow: inset 0 0 0 1px #e2e5ec; color: #111827; font-size: 12px; white-space: nowrap; transition: flex-basis 400ms var(--ease-out), padding 400ms var(--ease-out), opacity 250ms ease, margin 400ms var(--ease-out); }
+.lzw-qty i { font-style: normal; color: #9ca3af; }
+.lzw-qty b { font-weight: 800; }
+.lzw-buy .lzp-btn { flex: 1 1 auto; margin-top: 0; }
+.lzp.is-joined .lzw-qty, .lzp.is-done .lzw-qty { flex-basis: 0; padding: 0; margin-right: -7px; opacity: 0; }
+.lzw-note u { text-decoration: underline; text-underline-offset: 2px; }
+.lzp.is-done .lzw-ship { max-height: 0; opacity: 0; }
+
+.lzp-co { position: absolute; z-index: 4; inset: 0; display: flex; flex-direction: column; padding: 46px 14px 14px; background: #fff; text-align: left; transform: translateX(104%); transition: transform 460ms var(--ease-out); }
+.lzp.is-co .lzp-co { transform: none; }
+.lzp-co-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 10px; border-bottom: 1px solid #eef0f4; }
+.lzp-co-lock { font-size: 9.5px; font-weight: 600; color: #64748b; }
+.lzp-co-item { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 9px; padding: 12px 0; border-bottom: 1px solid #eef0f4; }
+.lzp-co-img { position: relative; display: block; width: 40px; height: 40px; border-radius: 8px; background: #e9e6df; box-shadow: inset 0 0 0 1px #e6e7ec; }
+.lzp-co-img img { width: 100%; height: 100%; object-fit: contain; }
+.lzp-co-img i { position: absolute; top: -6px; right: -6px; display: grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: #6b7280; color: #fff; font-size: 9px; font-style: normal; font-weight: 700; }
+.lzp-co-txt { display: grid; gap: 2px; min-width: 0; }
+.lzp-co-txt b { font-size: 11.5px; font-weight: 700; color: #111827; }
+.lzp-co-txt em { font-size: 9px; font-style: normal; line-height: 1.3; color: #6b7280; }
+.lzp-co-amt { font-size: 11.5px; font-weight: 700; color: #111827; }
+.lzp-co-rows { display: grid; gap: 5px; padding: 10px 0; font-size: 10.5px; color: #4b5563; }
+.lzp-co-rows span { display: flex; justify-content: space-between; }
+.lzp-co-rows em { font-style: normal; }
+.lzp-co-rows .is-tot { font-size: 12.5px; font-weight: 800; color: #111827; }
+.lzp-co-k { margin: 8px 0 5px; font-size: 10.5px; font-weight: 700; color: #111827; }
+.lzp-co-field { display: flex; align-items: center; justify-content: space-between; height: 30px; padding: 0 10px; border-radius: 7px; box-shadow: inset 0 0 0 1px #d9dce3; }
+.lzp-co-field i { display: block; width: var(--w); height: 6px; border-radius: 3px; background: #e3e6ec; }
+.lzp-co-field em { font-size: 10px; font-style: normal; color: #4b5563; }
+.lzp-co-btn { display: grid; place-items: center; height: 38px; margin-top: auto; border-radius: 8px; background: #111827; color: #fff; font-size: 12px; font-weight: 700; transition: transform 150ms ease; }
+.lzp.is-tap-co .lzp-co-btn { transform: scale(0.97); }
+
+/* El popup ya solo dice «Precompra hecha» (y al final, «Drop completado») */
+.lzp-s-done { position: static; padding: 12px 6px 6px; opacity: 1; pointer-events: auto; }
 
 /* ══════════════════════════════
    LANZAMIENTOS · PREGUNTAS (por momento del lanzamiento)
