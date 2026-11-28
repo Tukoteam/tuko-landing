@@ -13,7 +13,7 @@
   var EN = document.documentElement.lang === 'en';
 
   /* ── El móvil: una tienda de verdad ──
-     Historia en bucle: el dedo toca «Reservar mi plaza», sale el popup del widget (precio, faltan, cuenta atrás), se paga,
+     Historia en bucle: el dedo toca «Precomprar», va al checkout de la tienda, se paga, vuelve con el popup «Precompra hecha»,
      la ficha queda «Ya estás dentro» y caen los avisos (asuntos reales de los emails de Tuko) mientras el contador
      sube hasta 30 y el lanzamiento se completa. La lista de la izquierda marca el aviso de cada momento. */
   var phone = document.querySelector('.lzp');
@@ -31,20 +31,10 @@
     var secEl = null;
     var touch = phone.querySelector('.lzp-touch');
     var btn = phone.querySelector('.lzp-btn');
-    var payBtn = phone.querySelector('.lzp-s-btn');
+    var coBtn = phone.querySelector('.lzp-co-btn');
     var screen = phone.querySelector('.lzp-screen');
-    // Asuntos reales de los emails de Tuko (launchI18n en tuko-platform)
-    var MSGS = EN ? [
-      'Purchase confirmed. 12 more people needed',
-      '12 hours left to complete the drop',
-      '1 more person to fill the drop',
-      'Drop complete',
-    ] : [
-      'Compra confirmada. Faltan 12 personas',
-      'Quedan 12 horas para completar el drop',
-      'Falta 1 persona para completar el drop',
-      'Drop completado',
-    ];
+    // En los drops Tuko no manda emails: solo cae el pedido confirmado de la tienda (Shopify); el resto lo dice la tarjeta
+    var MSGS = EN ? ['Order #1043 confirmed', '', '', ''] : ['Pedido #1043 confirmado', '', '', ''];
     var timers = [];
     var running = false;
     var sec = 48;
@@ -77,6 +67,8 @@
       Array.prototype.forEach.call(leftEls, function (el) { el.textContent = Math.max(0, GOAL - n); });
       Array.prototype.forEach.call(bars, function (b) { b.style.setProperty('--f', (n / GOAL).toFixed(3)); });
       renderFaces(n);
+      // Como la tarjeta: «Solo 30 unidades» hasta el 80 % vendido; desde ahí, las que quedan con caras
+      phone.classList.toggle('is-reveal', n >= Math.ceil(GOAL * 0.8));
       // El reloj corre a la vez que sube la gente: de 3 d 14 h (17 personas) a 12 h (26) y a 9 h al completarse
       timeTarget = n <= 26 ? 5182 - (n - 17) / 9 * (5182 - 720) : 720 - (n - 26) / 4 * 180;
     };
@@ -109,6 +101,7 @@
       });
     };
     var notify = function (k) {
+      if (!MSGS[k]) { mark(k); return; }
       notif.classList.remove('is-in');
       later(function () {
         msg.textContent = MSGS[k];
@@ -140,24 +133,26 @@
     var cycle = function () {
       timers.forEach(clearTimeout);
       timers = [];
-      phone.classList.remove('is-done', 'is-joined', 'is-sheet', 'is-paid', 'is-final', 'is-tap-btn', 'is-tap-pay');
+      phone.classList.remove('is-done', 'is-joined', 'is-sheet', 'is-paid', 'is-final', 'is-tap-btn', 'is-tap-co', 'is-co', 'is-reveal');
       joined = false;
       lastN = 0;
       setN(17);
       timeShown = timeTarget;
       mark(-1);
-      // 1 · toca «Únete al lanzamiento» y sube la hoja
+      // 1 · toca «Precomprar» y va directo al checkout de la tienda
       later(function () { tap(btn, 'is-tap-btn'); }, 1000);
-      later(function () { phone.classList.add('is-sheet'); }, 1300);
-      // 2 · toca «Ir al pago» → pagado
-      later(function () { tap(payBtn, 'is-tap-pay'); }, 3600);
+      later(function () { phone.classList.add('is-co'); }, 1250);
+      // 2 · paga en el checkout, vuelve a la ficha y sale el popup «Precompra hecha»
+      later(function () { tap(coBtn, 'is-tap-co'); }, 3500);
       later(function () {
+        phone.classList.remove('is-co');
         phone.classList.add('is-paid', 'is-joined');
         joined = true;
         setN(18);
         notify(0);
-      }, 3900);
-      // 3 · se cierra la hoja y el lanzamiento sigue sumando
+      }, 3800);
+      later(function () { phone.classList.add('is-sheet'); }, 4200);
+      // 3 · se cierra el popup y el drop sigue sumando
       later(function () { phone.classList.remove('is-sheet'); }, 6200);
       later(function () { phone.classList.remove('is-paid'); }, 6800);
       var t = climb(18, 26, 7200, 420);
@@ -437,7 +432,7 @@
   }
 
   /* ── Calculadora del precio ──
-     1 € por comprador si se completa, los 5 primeros del ciclo gratis y como mucho 200 €. Las cifras ruedan hasta
+     Un tramo cada 30 días según las unidades (9,90 $ hasta 30 … 89,10 $ como máximo). Las cifras ruedan hasta
      su valor, la barra muestra lo que es tuyo y la astilla de Tuko, y el interruptor «¿Y si no se completa?» lo
      pone todo a 0 € (se devuelve el dinero a todos). */
   var calc = document.querySelector('.lz-calc');
